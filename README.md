@@ -1,4 +1,7 @@
 # container
-R-package providing R6 container classes: Collection, Queue, Deque, and Dict
+Deque, Set, and Dict - R6 based container classes with iterators
 
-Soon be on CRAN.
+Common container data structures Deque, Set and Dict (resembling Python's dict type) with typical member functions to insert, delete and
+access objects from the container and support of iterators. 
+
+Soon on CRAN.
