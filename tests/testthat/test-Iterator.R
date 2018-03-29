@@ -14,12 +14,9 @@ test_that("Iterator", {
     v <- 1:5
     co <- Container$new(v)
     it <- co$iter()
-    vSum <- 0
-    while(it$has_next()) vSum <- vSum + it$get_next()
-    expect_equal(vSum, sum(v))
-
-    # Apply
-    co <- Container$new(as.numeric(v))
-    expect_equal(unlist(co$apply(f = base::log)), log(v))
+    itSum <- 0
+    while(it$has_next()) itSum <- itSum + it$get_next()
+    expect_equal(sum(v), sum(co$values()))
+    expect_equal(itSum, sum(co$values()))
 })
 

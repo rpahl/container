@@ -70,19 +70,15 @@ Iterator <- R6::R6Class("Iterator",
             stopifnot(is.vector(private$elems))
             invisible(self)
         },
-        get_next = function() {
-            if (self$has_next()) {
-                i <- private$i <- private$i + 1
-                private$elems[[i]]
-            } else {
-                stop("Iterator has no more element.")
-            }
-        },
-        has_next = function() {
-            private$i < length(private$elems)
+        get_next = function() private$elems[[private$`i++`()]],
+        has_next = function() private$i < length(private$elems)
+    ),
+    private = list(elems = vector(mode="list"), i=0,
+        `i++` = function() {
+            if (!self$has_next()) stop("Iterator has no more elements.")
+            private$i <- private$i + 1
         }
     ),
-    private = list(elems = vector(mode="list"), i=0),
     lock_class = TRUE
 )
 

@@ -74,5 +74,9 @@ test_that("Container", {
     expect_equal(cint$values(), as.integer(1:2))
     expect_warning(cint$add("a"), "NAs introduced by coercion")
     expect_equal(Container$new(0L)$add(1:3)$values(), as.integer(0:3))
+
+    # Apply
+    co <- Container$new(as.numeric(v))
+    expect_equal(unlist(co$apply(f = base::log)), log(v))
 })
 
