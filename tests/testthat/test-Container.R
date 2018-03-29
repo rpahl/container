@@ -67,13 +67,23 @@ test_that("Container", {
     expect_equal(c1$size(), length(collection))
 
     # Basic types, type safety and vectorized adding
-    cint <- Container$new(integer(0))
-    expect_equal(cint$type(), "integer")
-    expect_equal(cint$add(1)$type(), "integer")
-    expect_equal(cint$add(2.3)$type(), "integer")
-    expect_equal(cint$values(), as.integer(1:2))
-    expect_warning(cint$add("a"), "NAs introduced by coercion")
+    ints <- Container$new(integer(0))
+    expect_equal(ints$type(), "integer")
+    expect_equal(ints$add(1)$type(), "integer")
+    expect_equal(ints$add(2.3)$type(), "integer")
+    expect_equal(ints$values(), as.integer(1:2))
+    expect_warning(ints$add("a"), "NAs introduced by coercion")
     expect_equal(Container$new(0L)$add(1:3)$values(), as.integer(0:3))
+
+    # Other types
+    expect_error(Container$new(new.env()),
+                 "cannot coerce type 'environment' to vector of type 'any'")
+    expect_equal(Container$new(TRUE)$type(), "logical")
+    expect_error(Container$new(function(){}),
+                 "cannot coerce type 'closure' to vector of type 'any'")
+    expect_equal(Container$new(raw())$type(), "raw")
+    expect_equal(Container$new(0+0i)$type(), "complex")
+    expect_equal(Container$new(letters[1:10])$type(), "character")
 
     # Apply
     co <- Container$new(as.numeric(v))
