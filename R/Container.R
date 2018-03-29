@@ -1,13 +1,13 @@
-#' @title A vector-based container
+#' @title A sequence container
 #' @description This class implements a container data structure with typical
 #' member functions to insert, delete and access objects from the container. It
 #' also serves as the base class for \code{\link[container]{Deque}},
 #' \code{\link[container]{Set}}, and \code{\link[container]{Dict}}.
 #' @details
-#' The underlying data structure is based on R vectors. The mode of the vector
-#' is set to the mode (or type) of the value passed to the initialize function,
-#' which by default is an empty list, in which case the \code{Container} object
-#' can store objects of mixed and arbitrary types.
+#' The underlying data structure is based on R vectors (or lists), with the mode
+#' being set to the mode (or type) of the value passed to the initialize 
+#' function, which by default is an empty list, in which case the 
+#' \code{Container} object can store objects of mixed and arbitrary types.
 #' If the container will only contain objects of one particular type, for
 #' example, double values, it will be both more efficient and type safe to
 #' initialize the container using this particular type (see Examples section).

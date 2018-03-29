@@ -13,7 +13,7 @@
 #'
 #' @section Iterable method/interface:
 #' \describe{
-#'  \item{\code{iter()}}{Return \code{Iterator} object.}
+#'  \item{\code{iter()}}{Return \code{\link[container]{Iterator}} object.}
 #' }
 Iterable <- R6::R6Class("Iterable",
     public = list(
@@ -30,15 +30,15 @@ Iterable <- R6::R6Class("Iterable",
 )
 
 #' @title Iterator
-#' @description An \code{Iterator} is an object that implements
-#' \code{get_next}, which is expected to return the next element of the
-#' iterable object that it was created from.
+#' @description An \code{\link[container]{Iterator}} is an object that
+#' implements \code{get_next}, which is expected to return the next
+#' element of the iterable object that it was created from.
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
-#' @seealso \code{\link[container]{Iterable}}, \code{\link[container]{Container}},
-#' \code{\link[container]{Deque}}, \code{\link[container]{Set}}, and
-#' \code{\link[container]{Dict}}
+#' @seealso \code{\link[container]{Iterable}}, 
+#' \code{\link[container]{Container}}, \code{\link[container]{Deque}}, 
+#' \code{\link[container]{Set}}, and \code{\link[container]{Dict}}
 #'
 #' @section Iterator method/interface:
 #' \describe{
@@ -46,14 +46,14 @@ Iterable <- R6::R6Class("Iterable",
 #'  \item{\code{has_next()}}{Return TRUE if there is a next element.}
 #' }
 #' @examples
-#' # Iterator on primitive \code{\link[base]{list}}
+#' # Iterator on primitive list
 #' it <- Iterator$new(list("A", 1, 2))
 #' while(it$has_next()) {
 #'     print(it$get_next())
 #' }
 #' it$has_next()   # FALSE
 #'
-#' # Iterator from \code{\link[container]{Container}}
+#' # Iterator from Container object
 #' d <- Deque$new(1:3)
 #' it <- d$iter()
 #' sum <- 0
