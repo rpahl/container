@@ -1,5 +1,5 @@
 ---
-title: "Container examples and methods overview"
+title: "Overview and examples"
 author: "Roman Pahl"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -16,19 +16,55 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Overview
+The `Container` class serves as the base class for `Deque`, `Set` and `Dict`, which inherit all methods from `Container`, except those that are overwritten (see below). In addition, the `Container` and all its subclasses are iterable, that is, they provide a method returning an `Iterator` to iterate through the elements of the container object.
+```{r out.width = '40%', echo = FALSE, fig.cap="Class diagram with basic class hierarchy."}
+knitr::include_graphics("class-diagram-bare.png")
+```
+
+
+The following table shows member methods divided by class. The top half contains all `Container` methods, each derived by the subclasses to the right unless there is a new entry in a sub-class column, meaning the method is overwritten by the subclass.
+The bottom half contains methods unique to each subclass.
+
+|Iterable | Container                | Deque           | Set              | Dict                      |
+|---------|--------------------------|-----------------|------------------|---------------------------|
+|`iter()` |                          |                 |                  |                           |
+|         | `add(elem)`              |                 | `add(elem)`      | `add(key, value)`         |
+|         | `apply(f)`               |                 |                  |                           |
+|         | `clear()`                |                 |                  |                           |
+|         | `discard(elem, right=F)` |                 |                  | `discard(key)`            |
+|         | `empty()`                |                 |                  |                           |
+|         | `has(elem)`              |                 |                  |  `has(key)`               |
+|         | `remove(elem, right=F)`  |                 |                  |  `remove(key)`            |
+|         | `size()`                 |                 |                  |                           |
+|         | `type()`                 |                 |                  |                           |
+|         | `values()`               |                 |                  |                           |
+|         |                          |-----------------|------------------|---------------------------|
+|         |                          | `addleft(elem)` | `union(s)`       | `keys()`                  |
+|         |                          | `count(elem)`   | `intersect(s)`   | `peek(key, default=NULL)` |
+|         |                          | `peek()`        | `diff(s)`        | `pop(key)`                |
+|         |                          | `peekleft()`    | `is.equal(s)`    | `popitem()`               |
+|         |                          | `pop()`         | `is.subset(s)`   | `set(key, value)`         |
+|         |                          | `popleft()`     | `is.superset(s)` |                           |
+|         |                          | `reverse()`     |                  |                           |
+|         |                          | `rotate(n=1L)`  |                  |                           |
+
+
+Method descriptions are found in the respective online helps (see `?Container`, `?Deque`, `?Set`, and `?Dict`).
+
 ## Container examples
-### Initialize, add elements
+The base `Container` is ready to be used by itself. Examples of `Deque`, `Set`, and `Dict`, follow below.
 ```{r lib-setup}
 library(container)
 ```
 
-In principle, the base `Container` is ready to be used by itself. 
 ```{r}
 collection <-  Container$new()
 collection$empty()
 ```
 
-By default, the elements can be of any type:
+#### add
+By default, elements internally are stored in a basic `list` and therefore can be of any type.
 ```{r}
 collection$add(1)
 collection$add("A")
@@ -36,140 +72,245 @@ collection$add(data.frame(B=1, C=2))
 collection$type()
 ```
 
-Values can be always retrieved as standard R `list` (or `vector`, see further below)
+The internal representation can be retrieved via the `values` function.
 ```{r}
 collection$values()
 ```
 
-If initialized with an R object, it will adapt the type of the object:
+If initialized with an R object, the type of the objected is adopted for the internal representation, which allows to use more efficient internal representations, if required.
 ```{r}
 ints <- Container$new(integer())
 ints$type()
 ```
 
-The `add` method supports chaining:
+The `add` method supports chaining.
 ```{r}
 ints$add(1)$add(2)$add(3.7)$values()
 ```
 
-Initialization also works with vectors:
+Initialization also works with vectors.
 ```{r}
 ints <- Container$new(1:10)
 ints$type()
-```
-```{r}
+
 ints$values()
-```
-```{r}
+
 ints$size()
 ```
 
-### Discard and remove
+#### discard, remove
 ```{r}
 ints$has(11)
-```
-```{r}
+
 ints$has(7)
-```
-```{r}
-ints$discard(7)
-```
-```{r}
-ints$has(7)
-```
-```{r}
+
+ints$discard(7)$has(7)
+
 ints$remove(8)$has(8)
 ```
 
-Using `remove` on non-existent elements throws an error
+Using `remove` on non-existent elements throws an error,
 ```{r}
 tryCatch(ints$remove(8), error = function(e) e$message)
 ```
 
-but discard does not
+but discard does not.
 ```{r}
 ints$discard(8) # ok
 ```
 
 
-Discard and remove work also from the right:
+Discard and remove work also from the right.
 ```{r}
 ints$add(1:3)$values()
-```
 
-```{r}
 ints$discard(1)$values()
-```
-```{r}
+
 ints$discard(2, right=TRUE)$values()
 ```
 
-### Apply and clear
+#### apply
 ```{r}
 unlist(ints$apply(f = function(x) x^2))
-```
 
-```{r}
 ints$clear()$empty()
 ```
 
+More examples are found in the online help (see `?Container`).
+
+
 ### Reference semantics
-Being based on R6 classes, any `Container` object provides reference semantics:
+Being based on R6 classes, any `Container` object provides reference semantics.
 ```{r}
 members <- Container$new(c("Lisa", "Bob", "Joe"))
 members$values()
-```
 
-```{r}
 remove_Joe <- function(cont) cont$discard("Joe")
 remove_Joe(members)
 members$values()
 ```
 
-### Iterator functionality
+#### Iterator
 ```{r}
 it <- members$iter()
 while(it$has_next()) print(it$get_next())
 ```
 
-Once iterated to the last element, trying to iterate further will yield an error:
+Once iterated to the last element, trying to iterate further leads to an error.
 ```{r}
 tryCatch(it$get_next(), error = function(e) e$message)
 ```
 
-## Methods overview
-The `Container` class serves as the base class for `Deque`, `Set` and `Dict`, which inherit all methods from `Container`.
-```{r out.width = '40%', echo = FALSE, fig.cap="Class diagram with basic class hierarchy."}
-knitr::include_graphics("class-diagram-bare.png")
+
+## Deque
+```{r}
+d <- Deque$new(0L)
+d$type()
+
+d$values()
 ```
 
 
-The following table shows member methods divided by class. The top half contains all `Container` methods, each derived by the subclasses to the right unless there is a new entry in a sub-class column, in which case the method is overwritten by the subclass.
-The bottom half contains methods unique to each subclass.
+#### addleft, count
+```{r}
+d$add(1)$add(2)$addleft(1)$addleft(2)$values()
 
-| Container                | Deque           | Set              | Dict                      |
-|--------------------------|-----------------|------------------|---------------------------|
-| `iter()`                 |                 |                  |                           |
-| `add(elem)`              |                 |                  | `add(key, value)`         |
-| `apply(f)`               |                 |                  |                           |
-| `clear()`                |                 |                  |                           |
-| `discard(elem, right=F)` |                 |                  | `discard(key)`            |
-| `empty()`                |                 |                  |                           |
-| `has(elem)`              |                 |                  |  `has(key)`               |
-| `remove(elem, right=F)`  |                 |                  |  `remove(key)`            |
-| `size()`                 |                 |                  |                           |
-| `type()`                 |                 |                  |                           |
-| `values()`               |                 |                  |                           |
-|                          |-----------------|------------------|---------------------------|
-|                          | `addleft(elem)` | `union(s)`       | `keys()`                  |
-|                          | `count(elem)`   | `intersect(s)`   | `peek(key, default=NULL)` |
-|                          | `peek()`        | `diff(s)`        | `pop(key)`                |
-|                          | `peekleft()`    | `is.equal(s)`    | `popitem()`               |
-|                          | `pop()`         | `is.subset(s)`   | `set(key, value)`         |
-|                          | `popleft()`     | `is.superset(s)` |                           |
-|                          | `reverse()`     |                  |                           |
-|                          | `rotate(n=1L)`  |                  |                           |
+d$count(0)
 
+d$count(1)
+```
 
+#### peek, pop
+A `peek` shows the last value, while `pop` shows and removes it afterwards. 
+```{r}
+d$peek()
+
+d$pop()
+
+d$pop()
+
+d$values()
+```
+
+Being a double-ended queue, both methods are also defined for the left side.
+```{r}
+d$peekleft()
+
+d$popleft()
+
+d$values()
+
+d$count(2)
+```
+
+Invoking `peek` on an empty `Deque` gives `NULL` while `pop` stops with an error.
+```{r}
+Deque$new()$peek()
+
+tryCatch(Deque$new()$pop(), error = function(e) e$message)
+```
+
+#### rotate, reverse
+```{r}
+d$add(rep(0, 3))$values()
+
+d$rotate()$values()    # rotate 1 to the right
+
+d$rotate(2)$values()   # rotate 2 to the right
+
+d$rotate(-3)$values()  # rotate 3 to the left
+
+d$addleft(4:2)$values()
+
+d$reverse()$values()
+```
+
+#### Deque iterator
+Use iterator to re-add elements left and right into second `Deque` object.
+```{r}
+d2 <- Deque$new(integer())
+it <- d$iter()
+while(it$has_next()) {
+    d2$add(it$get_next())
+    if (it$has_next()) d2$addleft(it$get_next())
+}
+d2$values()
+```
+
+## Set
+```{r}
+s1 <- Set$new(1:3)
+s1$values()
+
+s1$add(1)
+# Since already in the Set, it must not be added again
+s1$values()
+```
+
+#### Set operations
+```{r}
+s1 <- Set$new(c(1, 2,    4, 5))
+s2 <- Set$new(c(   2, 3,    5, 6))
+
+s1$union(s2)$values()
+
+s1$intersect(s2)$values()
+
+s1$diff(s2)$values()
+
+s1$is.subset(s2)
+s1$is.subset(s1$union(s2))
+s1$intersect(s2)$is.subset(s1)
+
+s1$is.equal(s2)
+s1$is.equal(s1)
+
+s1$is.superset(s2)
+s1$union(s2)$is.superset(s2)
+```
+
+## Dict
+Due to the key-value semantic, several `Container ` methods are overwritten to take the key argument.
+```{r}
+ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))
+ages$add("Albert", 139)$values()
+
+tryCatch(ages$add("Bob", 40), error = function(e) e$message)
+
+ages$has("Peter")
+
+ages$discard("Albert")$values()
+
+# Trying to discard a non-existing key has no effect
+ages$discard("Albert")$values()
+
+# Trying to remove a non-existing key throws an error
+tryCatch(ages$remove("Albert"), error = function(e) e$message)
+```
+
+#### Dict methods
+```{r}
+ages$keys()
+
+ages$peek("Lisa")
+
+ages$peek("Albert")
+
+ages$set("Lisa", 11)$values()
+
+ages$pop("Lisa")
+
+ages$values()
+
+tryCatch(ages$pop("Lisa"), error = function(e) e$message)
+
+# popitem() removes a random key-value pair from the Dict
+set.seed(123)
+ages$popitem()
+
+ages$popitem()
+
+tryCatch(ages$popitem("Lisa"), error = function(e) e$message)
+```
 
 
