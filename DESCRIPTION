@@ -1,6 +1,6 @@
 Package: container
 Type: Package
-Title: Deque, Set, and Dict - R6 based container classes with iterators
+Title: Deque, Set, and Dict - R6 Based Container Classes with Iterators
 Version: 0.1.0
 Date: 2018-03-12
 Authors@R:
