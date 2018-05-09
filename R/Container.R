@@ -20,6 +20,8 @@
 #' @section Container methods:
 #' \describe{
 #'  \item{\code{add(elem)}}{Add \code{elem} to \code{Container}.}
+#'  \item{\code{apply(f)}}{Apply function f to all elements and return results
+#'  in a list)}
 #'  \item{\code{clear()}}{Remove all elements from the \code{Container}.}
 #'  \item{\code{discard(elem, right=FALSE)}}{Search for first \code{elem} in
 #'      \code{Container} and, if found, remove it. If \code{right} is

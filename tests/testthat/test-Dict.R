@@ -5,6 +5,7 @@ test_that("Dict", {
     expect_error(Dict$new(1:2), "all elems must be named")
     expect_equal(Dict$new()$keys(), character(0))
     d <- Dict$new(c(x=1L, y=2L))
+    expect_error(d$get("z"), "key 'z' not in Dict")
     expect_error(d$add(key="", 3L, "zero-length key"))
     expect_equal(as.integer(d$values()), 1:2)
     expect_equal(d$type(), "integer")

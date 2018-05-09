@@ -14,6 +14,8 @@
 #'  \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, set
 #'      \code{key} to \code{elem}, otherwise raise an error.}
 #'  \item{\code{discard(key)}}{If \code{key} in \code{Dict}, remove it.}
+#'  \item{\code{get(key)}}{If \code{key} in \code{Dict}, return value, else
+#'  throw key-error.}
 #'  \item{\code{has(key)}}{TRUE if \code{key} in \code{Dict} else FALSE.}
 #'  \item{\code{remove(key)}}{If \code{key} in \code{Dict}, remove it, otherwise
 #'      raise an error.}
@@ -71,6 +73,13 @@ Dict <- R6::R6Class("Dict",
                 private$elems <- private$elems[-pos]
             }
             invisible(self)
+        },
+        get = function(key) {
+            if (self$has(key)) {
+                self$peek(key)
+            } else {
+                stop("key '", key, "' not in Dict")
+            }
         },
         has = function(key) key %in% self$keys(),
         keys = function() as.character(names(private$elems)),
