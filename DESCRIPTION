@@ -1,8 +1,8 @@
 Package: container
 Type: Package
 Title: Deque, Set, and Dict - R6 Based Container Classes with Iterators
-Version: 0.1.0
-Date: 2018-03-12
+Version: 0.2.0
+Date: 2018-06-08
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
@@ -10,7 +10,7 @@ Description: Common container data structures Deque, Set and Dict (resembling
     Python's dict type) with typical member functions to insert, delete and
     access objects from the container as well as providing iterators for them.
 Depends: R (>= 3.0)
-License: GPL-3 + file LICENSE
+License: GPL-3
 LazyData: TRUE
 Encoding: UTF-8
 Imports: R6
