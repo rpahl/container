@@ -55,3 +55,9 @@ test_that("Dict", {
     expect_equal(names(sort(v)), names(sort(v2)))
 })
 
+test_that("Dict sort", {
+    d <- Dict$new()
+    d$add("b", 1)$add("a", 2)
+    expect_equal(d$keys(), c("b", "a"))
+    expect_equal(d$sort()$keys(), c("a", "b"))
+})

@@ -51,66 +51,111 @@
 Dict <- R6::R6Class("Dict",
     inherit = Container,
     public = list(
-        initialize = function(x=list()) {
-            name_len <- sapply(names(x), nchar)
-            if (length(x) != length(name_len) || any(name_len == 0)) {
-                stop("all elems must be named")
-            }
-            super$initialize(x)
-            if (any(duplicated(self$keys()))) stop("duplicated keys")
-            invisible(self)
-        },
-        add = function(key, value) {
-            if (!is.character(key)) stop("key must be character")
-            if (length(key) != 1) stop("key must be single character string")
-            if (nchar(key) == 0) stop("zero-length key")
-            if (self$has(key)) stop("key '", key, "' already in Dict")
-            self$set(key, value)
-        },
-        discard = function(key) {
-            if (self$has(key)) {
-                pos <- match(key, self$keys())
-                private$elems <- private$elems[-pos]
-            }
-            invisible(self)
-        },
-        get = function(key) {
-            if (self$has(key)) {
-                self$peek(key)
-            } else {
-                stop("key '", key, "' not in Dict")
-            }
-        },
+        initialize = function(x=list()) {},
+        add = function(key, value) {},
+        discard = function(key) {},
+        get = function(key) {},
         has = function(key) key %in% self$keys(),
         keys = function() as.character(names(private$elems)),
-        peek = function(key, default=NULL) {
-            if (self$has(key)) private$elems[[key]] else default
-        },
-        pop = function(key) {
-            elem <- self$peek(key)
-            self$remove(key)
-            elem
-        },
-        popitem = function() {
-            if (self$empty()) {
-                stop("pop at empty ", data.class(self))
-            } else {
-                key <- sample(self$keys(), 1)
-                key_value_pair <- private$elems[key]
-                self$remove(key)
-                return(key_value_pair)
-            }
-        },
-        remove = function(key) {
-            if (!self$has(key)) stop("key '", key, "' not in Dict")
-            self$discard(key)
-        },
-        set = function(key, value) {
-            private$elems[[key]] <- value
-            invisible(self)
-        }
+        peek = function(key, default=NULL) {},
+        pop = function(key) {},
+        popitem = function() {},
+        remove = function(key) {},
+        set = function(key, value) {},
+        sort = function(decr=FALSE) {}
     ),
-    lock_class=TRUE
 )
 
+# Dict method implementations
+Dict$set("public", "initialize", overwrite=TRUE,
+    function(x=list()) {
+        name_len <- sapply(names(x), nchar)
+        if (length(x) != length(name_len) || any(name_len == 0)) {
+            stop("all elems must be named")
+        }
+        super$initialize(x)
+        if (any(duplicated(self$keys()))) stop("duplicated keys")
+        invisible(self)
+    }
+)
+
+Dict$set("public", "add", overwrite=TRUE,
+    function(key, value) {
+        if (!is.character(key)) stop("key must be character")
+        if (length(key) != 1) stop("key must be single character string")
+        if (nchar(key) == 0) stop("zero-length key")
+        if (self$has(key)) stop("key '", key, "' already in Dict")
+        self$set(key, value)
+    }
+)
+
+Dict$set("public", "discard", overwrite=TRUE,
+    function(key) {
+        if (self$has(key)) {
+            pos <- match(key, self$keys())
+            private$elems <- private$elems[-pos]
+        }
+        invisible(self)
+    }
+)
+
+Dict$set("public", "get", overwrite=TRUE,
+    function(key) {
+        if (self$has(key)) {
+            self$peek(key)
+        } else {
+            stop("key '", key, "' not in Dict")
+        }
+    }
+)
+
+Dict$set("public", "peek", overwrite=TRUE,
+    function(key, default=NULL) {
+        if (self$has(key)) private$elems[[key]] else default
+    }
+)
+
+Dict$set("public", "pop", overwrite=TRUE,
+    function(key) {
+        elem <- self$peek(key)
+        self$remove(key)
+        elem
+    }
+)
+
+Dict$set("public", "popitem", overwrite=TRUE,
+    function() {
+        if (self$empty()) {
+            stop("pop at empty ", data.class(self))
+        } else {
+            key <- sample(self$keys(), 1)
+            key_value_pair <- private$elems[key]
+            self$remove(key)
+            return(key_value_pair)
+        }
+    }
+)
+
+Dict$set("public", "remove", overwrite=TRUE,
+    function(key) {
+        if (!self$has(key)) stop("key '", key, "' not in Dict")
+        self$discard(key)
+    }
+)
+
+Dict$set("public", "set", overwrite=TRUE,
+    function(key, value) {
+        private$elems[[key]] <- value
+        invisible(self)
+    }
+)
+
+Dict$set("public", "sort", overwrite=TRUE,
+    # Re-order elements according to key-order
+    function(decr=FALSE) {
+        private$elems <- private$elems[order(self$keys(), decreasing=decr)]
+        invisible(self)
+    }
+)
+Dict$lock()
 
