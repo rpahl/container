@@ -28,8 +28,11 @@
 #'      \code{TRUE}, search from right to left.}
 #'  \item{\code{empty()}}{Return \code{TRUE} if the \code{Container} is empty,
 #'      else \code{FALSE}.}
+#'  \item{\code{get_name()}}{Return class name of the container object.}
 #'  \item{\code{has(elem)}}{Return \code{TRUE} if \code{Container} contains
 #'      \code{elem} else \code{FALSE}.}
+#'  \item{\code{print(list.len)}}{Print object representation similar to
+#'      \code{\link[utils]{str}}}
 #'  \item{\code{remove(elem, right=FALSE)}}{Same as \code{discard}, but throw an
 #'      error if not found.}
 #'  \item{\code{size()}}{Return size of the \code{Container}.}
@@ -63,44 +66,16 @@
 Container <- R6::R6Class("Container",
     inherit = container:::Iterable,
     public = list(
-        initialize = function(x=list()) {
-            private$elems <- as.vector(x)
-            names(private$elems) <- names(x)
-            stopifnot(is.vector(private$elems))
-            attr(self, "name") <- paste0("<", data.class(self), ">")
-            invisible(self)
-        },
-        add = function(elem) {
-            if (self$type() == "list") {
-                private$elems <- c(private$elems, list(elem))
-            } else {
-                v <- Reduce(f=c, x=elem, init=private$elems)
-                private$elems <- as.vector(v, mode=self$type())
-            }
-            invisible(self)
-        },
-        apply = function(f) {
-            if (!is.function(f)) stop("f must be a function")
-            lapply(private$elems, FUN=f)
-        },
+        initialize = function(x=list()) {},
+        add = function(elem) {},
+        apply = function(f) {},
         clear = function() self$initialize(vector(typeof(private$elems))),
-        discard = function(elem, right=FALSE) {
-            comp <- function(x) isTRUE(all.equal(x, elem))
-            pos <- Position(f=comp, x=private$elems, right=right, nomatch=0)
-            if (pos > 0) private$elems <- private$elems[-pos]
-            invisible(self)
-        },
+        discard = function(elem, right=FALSE) {},
         empty = function() self$size() == 0,
-        has = function(elem) {
-            comp <- function(x) isTRUE(all.equal(x, elem))
-            any(sapply(private$elems, FUN=comp))
-        },
-        remove = function(elem, right=FALSE) {
-            class <- data.class(self)
-            hasElem <- self$has(elem)
-            if (hasElem) self$discard(elem, right) else stop(elem, " not in ", class)
-            invisible(self)
-        },
+        get_name = function() paste0("<", data.class(self), ">"),
+        has = function(elem) {},
+        print = function(list.len=10L, ...) {},
+        remove = function(elem, right=FALSE) {},
         size = function() length(private$elems),
         type = function() typeof(private$elems),
         values = function() private$elems
@@ -108,6 +83,73 @@ Container <- R6::R6Class("Container",
     private = list(elems = vector(mode="list"),
         create_iter = function() Iterator$new(private$elems)
     ),
-    lock_class = TRUE
 )
 
+
+# Container method implementations
+Container$set("public", "initialize", overwrite=TRUE,
+    function(x=list()) {
+        private$elems <- as.vector(x)
+        names(private$elems) <- names(x)
+        stopifnot(is.vector(private$elems))
+        attr(self, "name") <- self$get_name()
+        invisible(self)
+    }
+)
+
+Container$set("public", "add", overwrite=TRUE,
+    function(elem) {
+        if (self$type() == "list") {
+            private$elems <- c(private$elems, list(elem))
+        } else {
+            v <- Reduce(f=c, x=elem, init=private$elems)
+            private$elems <- as.vector(v, mode=self$type())
+        }
+        invisible(self)
+    }
+)
+
+Container$set("public", "apply", overwrite=TRUE,
+    function(f) {
+        if (!is.function(f)) stop("f must be a function")
+        lapply(private$elems, FUN=f)
+    }
+)
+
+Container$set("public", "discard", overwrite=TRUE,
+    function(elem, right=FALSE) {
+        comp <- function(x) isTRUE(all.equal(x, elem))
+        pos <- Position(f=comp, x=private$elems, right=right, nomatch=0)
+        if (pos > 0) private$elems <- private$elems[-pos]
+        invisible(self)
+    }
+)
+
+Container$set("public", "has", overwrite=TRUE,
+    function(elem) {
+        comp <- function(x) isTRUE(all.equal(x, elem))
+        any(sapply(private$elems, FUN=comp))
+    }
+)
+
+Container$set("public", "print", overwrite=TRUE,
+    function(list.len=10, ...) {
+        cout <- if (interactive()) message else function(...) cat(..., sep="")
+        cout(self$get_name(), " of ", self$size(), " elements")
+        utils::str(self$values(), list.len=list.len, ...)
+        if (list.len < self$size()) {
+            cout("... with ", self$size() - list.len, " more elements")
+        }
+        invisible(self)
+    }
+)
+
+Container$set("public", "remove", overwrite=TRUE,
+    function(elem, right=FALSE) {
+        class <- data.class(self)
+        hasElem <- self$has(elem)
+        if (hasElem) self$discard(elem, right) else stop(elem, " not in ", class)
+        invisible(self)
+    }
+)
+Container$lock()

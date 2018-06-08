@@ -36,6 +36,7 @@ test_that("Dict", {
 
     # keys, discard, remove, popitem
     d <- Dict$new(integer())$add("x", 1)$add("y", 2)$add("z", 3)
+    expect_output(print(d), 'Named num [1:3] 1 2 3', fixed=TRUE)
     expect_true(d$has("y"))
     expect_equal(d$keys(), c("x", "y", "z"))
     expect_false(d$discard("y")$has("y"))

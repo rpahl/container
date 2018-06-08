@@ -3,6 +3,7 @@ context("Deque")
 test_that("Deque", {
     # addleft
     d <- Deque$new(1L)
+    expect_equal(attr(d, "name"), "<Deque>")
     expect_equal(d$type(), "integer")
     d$addleft(2.2)
     expect_equal(d$type(), "integer")
@@ -20,6 +21,7 @@ test_that("Deque", {
     # peek and pop
     v <- 1:3
     d <- Deque$new(v)
+    expect_output(print(d), " int [1:3] 1 2 3", fixed=TRUE)
     expect_equal(d$type(), "integer")
     expect_equal(d$size(), length(v))
     expect_equal(d$peek(), tail(v, 1))
