@@ -5,6 +5,7 @@ test_that("Set", {
     expect_true(Set$new()$empty())
     expect_equal(Set$new()$size(), 0)
     s1 <- Set$new()
+    expect_equal(attr(s1, "name"), "<Set>")
     expect_true(s1$empty())
     expect_equal(s1$size(), 0)
     expect_false(s1$has(NULL))

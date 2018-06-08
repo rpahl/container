@@ -7,6 +7,7 @@ test_that("Container", {
 
     # add, has, empty, size
     c1 <- Container$new()
+    expect_equal(attr(c1, "name"), "<Container>")
     expect_equal(c1$type(), "list")
     expect_true(c1$empty())
     expect_equal(c1$size(), 0)

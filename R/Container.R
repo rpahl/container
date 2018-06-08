@@ -67,6 +67,7 @@ Container <- R6::R6Class("Container",
             private$elems <- as.vector(x)
             names(private$elems) <- names(x)
             stopifnot(is.vector(private$elems))
+            attr(self, "name") <- paste0("<", data.class(self), ">")
             invisible(self)
         },
         add = function(elem) {

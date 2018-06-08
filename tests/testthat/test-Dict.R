@@ -14,6 +14,7 @@ test_that("Dict", {
 
     # empty, size, has, add and peek
     d <- Dict$new()
+    expect_equal(attr(d, "name"), "<Dict>")
     expect_true(d$empty())
     expect_error(d$add(key=1, 1), "key must be character")
     expect_error(d$add(c("x", "y"), 1), "key must be single character string")
