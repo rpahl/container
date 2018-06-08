@@ -34,19 +34,20 @@ The bottom half contains methods unique to each subclass.
 |         | `clear()`                |                 |                  |                           |
 |         | `discard(elem, right=F)` |                 |                  | `discard(key)`            |
 |         | `empty()`                |                 |                  |                           |
-|         | `has(elem)`              |                 |                  |  `has(key)`               |
-|         | `remove(elem, right=F)`  |                 |                  |  `remove(key)`            |
+|         | `has(elem)`              |                 |                  | `has(key)`                |
+|         | `print(list.len=10)`     |                 |                  |                           |
+|         | `remove(elem, right=F)`  |                 |                  | `remove(key)`             |
 |         | `size()`                 |                 |                  |                           |
 |         | `type()`                 |                 |                  |                           |
 |         | `values()`               |                 |                  |                           |
 |         |                          |-----------------|------------------|---------------------------|
-|         |                          | `addleft(elem)` | `union(s)`       | `keys()`                  |
-|         |                          | `count(elem)`   | `intersect(s)`   | `peek(key, default=NULL)` |
-|         |                          | `peek()`        | `diff(s)`        | `pop(key)`                |
-|         |                          | `peekleft()`    | `is.equal(s)`    | `popitem()`               |
-|         |                          | `pop()`         | `is.subset(s)`   | `set(key, value)`         |
-|         |                          | `popleft()`     | `is.superset(s)` |                           |
-|         |                          | `reverse()`     |                  |                           |
+|         |                          | `addleft(elem)` | `union(s)`       | `get(key)`                |
+|         |                          | `count(elem)`   | `intersect(s)`   | `keys()`                  |
+|         |                          | `peek()`        | `diff(s)`        | `peek(key, default=NULL)` |
+|         |                          | `peekleft()`    | `is.equal(s)`    | `pop(key)`                |
+|         |                          | `pop()`         | `is.subset(s)`   | `popitem()`               |
+|         |                          | `popleft()`     | `is.superset(s)` | `set(key, value)`         |
+|         |                          | `reverse()`     |                  | `sort(decr=FALSE)`        |
 |         |                          | `rotate(n=1L)`  |                  |                           |
 
 
@@ -72,12 +73,17 @@ collection$add(data.frame(B=1, C=2))
 collection$type()
 ```
 
-The internal representation can be retrieved via the `values` function.
+The container has a print method
+```{r}
+print(collection)
+```
+
+Alternatively, the internal representation can be retrieved directly using the `values` function.
 ```{r}
 collection$values()
 ```
 
-If initialized with an R object, the type of the objected is adopted for the internal representation, which allows to use more efficient internal representations, if required.
+If initialized with an R object, the type of the objected is adopted to allow for efficient internal representations, if required.
 ```{r}
 ints <- Container$new(integer())
 ints$type()
@@ -85,13 +91,12 @@ ints$type()
 
 The `add` method supports chaining.
 ```{r}
-ints$add(1)$add(2)$add(3.7)$values()
+ints$add(1)$add(2)$add(3.7)$print()
 ```
 
 Initialization also works with vectors.
 ```{r}
-ints <- Container$new(1:10)
-ints$type()
+ints <- Container$new(1:10)$print()
 
 ints$values()
 
@@ -142,12 +147,11 @@ More examples are found in the online help (see `?Container`).
 ### Reference semantics
 Being based on R6 classes, any `Container` object provides reference semantics.
 ```{r}
-members <- Container$new(c("Lisa", "Bob", "Joe"))
-members$values()
+members <- Container$new(c("Lisa", "Bob", "Joe"))$print()
 
 remove_Joe <- function(cont) cont$discard("Joe")
 remove_Joe(members)
-members$values()
+members
 ```
 
 #### Iterator
@@ -166,8 +170,7 @@ tryCatch(it$get_next(), error = function(e) e$message)
 ```{r}
 d <- Deque$new(0L)
 d$type()
-
-d$values()
+d
 ```
 
 
@@ -239,8 +242,7 @@ d2$values()
 
 ## Set
 ```{r}
-s1 <- Set$new(1:3)
-s1$values()
+s1 <- Set$new(1:3)$print()
 
 s1$add(1)
 # Since already in the Set, it must not be added again
@@ -252,11 +254,11 @@ s1$values()
 s1 <- Set$new(c(1, 2,    4, 5))
 s2 <- Set$new(c(   2, 3,    5, 6))
 
-s1$union(s2)$values()
+s1$union(s2)$print()
 
-s1$intersect(s2)$values()
+s1$intersect(s2)$print()
 
-s1$diff(s2)$values()
+s1$diff(s2)$print()
 
 s1$is.subset(s2)
 s1$is.subset(s1$union(s2))
@@ -272,7 +274,8 @@ s1$union(s2)$is.superset(s2)
 ## Dict
 Due to the key-value semantic, several `Container ` methods are overwritten to take the key argument.
 ```{r}
-ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))
+ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))$print()
+
 ages$add("Albert", 139)$values()
 
 tryCatch(ages$add("Bob", 40), error = function(e) e$message)
@@ -310,7 +313,7 @@ ages$popitem()
 
 ages$popitem()
 
-tryCatch(ages$popitem("Lisa"), error = function(e) e$message)
+tryCatch(ages$popitem(), error = function(e) e$message)
 ```
 
 

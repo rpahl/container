@@ -28,7 +28,6 @@
 #'      \code{TRUE}, search from right to left.}
 #'  \item{\code{empty()}}{Return \code{TRUE} if the \code{Container} is empty,
 #'      else \code{FALSE}.}
-#'  \item{\code{get_name()}}{Return class name of the container object.}
 #'  \item{\code{has(elem)}}{Return \code{TRUE} if \code{Container} contains
 #'      \code{elem} else \code{FALSE}.}
 #'  \item{\code{print(list.len)}}{Print object representation similar to
@@ -72,7 +71,6 @@ Container <- R6::R6Class("Container",
         clear = function() self$initialize(vector(typeof(private$elems))),
         discard = function(elem, right=FALSE) {},
         empty = function() self$size() == 0,
-        get_name = function() paste0("<", data.class(self), ">"),
         has = function(elem) {},
         print = function(list.len=10L, ...) {},
         remove = function(elem, right=FALSE) {},
@@ -92,7 +90,7 @@ Container$set("public", "initialize", overwrite=TRUE,
         private$elems <- as.vector(x)
         names(private$elems) <- names(x)
         stopifnot(is.vector(private$elems))
-        attr(self, "name") <- self$get_name()
+        attr(self, "name") <- paste0("<", data.class(self), ">")
         invisible(self)
     }
 )
@@ -135,7 +133,8 @@ Container$set("public", "has", overwrite=TRUE,
 Container$set("public", "print", overwrite=TRUE,
     function(list.len=10, ...) {
         cout <- if (interactive()) message else function(...) cat(..., sep="")
-        cout(self$get_name(), " of ", self$size(), " elements")
+        class_name <- paste0("<", data.class(self), ">")
+        cout(class_name, " of ", self$size(), " elements: ")
         utils::str(self$values(), list.len=list.len, ...)
         if (list.len < self$size()) {
             cout("... with ", self$size() - list.len, " more elements")

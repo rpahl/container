@@ -14,8 +14,6 @@
 #'  \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, set
 #'      \code{key} to \code{elem}, otherwise raise an error.}
 #'  \item{\code{discard(key)}}{If \code{key} in \code{Dict}, remove it.}
-#'  \item{\code{get(key)}}{If \code{key} in \code{Dict}, return value, else
-#'  throw key-error.}
 #'  \item{\code{has(key)}}{TRUE if \code{key} in \code{Dict} else FALSE.}
 #'  \item{\code{remove(key)}}{If \code{key} in \code{Dict}, remove it, otherwise
 #'      raise an error.}
@@ -23,16 +21,19 @@
 #'
 #' @section Dict methods:
 #' \describe{
+#'  \item{\code{get(key)}}{If \code{key} in \code{Dict}, return value, else
+#'  throw key-error.}
 #'  \item{\code{keys()}}{Return a character vector of all keys.}
+#'  \item{\code{peek(key, default=NULL)}}{Return the value for \code{key} if
+#'      \code{key} is in the \code{Dict}, else \code{default}.}
 #'  \item{\code{pop(key)}}{If \code{key} in \code{Dict}, return a copy of its
 #'      value and discard it afterwards.}
 #'  \item{\code{popitem()}}{Remove and return an arbitrary (key, value) pair
 #'  from the dictionary. \code{popitem()} is useful to destructively iterate
 #'  over a \code{Dict}, as often used in set algorithms.}
-#'  \item{\code{peek(key, default=NULL)}}{Return the value for \code{key} if
-#'      \code{key} is in the \code{Dict}, else \code{default}.}
 #'  \item{\code{set(key, value)}}{Like \code{add} but overwrites value if
 #'      \code{key} is already in the \code{Dict}.}
+#'  \item{\code{sort(decr=FALSE)}}{Sort values in dictionary according to keys.}
 #' }
 #' @examples
 #' ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))
@@ -42,6 +43,7 @@
 #' ages$add("Mike", 18)
 #' ages$peek("Mike")   # 18
 #' ages$keys()
+#' print(ages)
 #'
 #' \dontrun{
 #' Dict$new(list(Peter=20))$add("Peter", 22)         # key already in Dict
