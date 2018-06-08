@@ -39,47 +39,68 @@
 Set <- R6::R6Class("Set",
     inherit = Container,
     public = list(
-        initialize = function(x=list()) {
-            super$initialize(unique(x))
-        },
-        add = function(elem) {
-            if (self$type() == "list") {
-                if (!self$has(elem)) super$add(elem)
-            } else {
-                if (length(elem) > 1) {
-                    # Perform element-wise adding to catch duplicates
-                    lapply(elem, FUN=function(x) self$add(x))
-                } else {
-                    if (!self$has(elem)) super$add(elem)
-                }
-            }
-            invisible(self)
-        },
-        union = function(s) {
-            if (!inherits(s, "Set")) stop("s must be a Set")
-            union <- base::union(self$values(), s$values())
-            Set$new(union)
-        },
-        intersect = function(s) {
-            if (!inherits(s, "Set")) stop("s must be a Set")
-            intersection <- base::intersect(self$values(), s$values())
-            Set$new(intersection)
-        },
-        diff = function(s) {
-            if (!inherits(s, "Set")) stop("s must be a Set")
-            diff <- base::setdiff(self$values(), s$values())
-            Set$new(diff)
-        },
-        is.equal = function(s) {
-            base::setequal(self$values(), s$values())
-        },
-        is.subset = function(s) {
-            length(base::setdiff(self$values(), s$values())) == 0
-        },
-        is.superset = function(s) {
-            length(base::setdiff(s$values(), self$values())) == 0
-        }
-    ),
-    lock_class=TRUE
+        initialize = function(x=list()) super$initialize(unique(x)),
+        add = function(elem) {},
+        union = function(s) {},
+        intersect = function(s) {},
+        diff = function(s) {},
+        is.equal = function(s) setequal(self$values(), s$values()),
+        is.subset = function(s) {},
+        is.superset = function(s) {}
+    )
 )
 
+
+# Set method implementations
+Set$set("public", "add", overwrite=TRUE,
+    function(elem) {
+        if (self$type() == "list") {
+            if (!self$has(elem)) super$add(elem)
+        } else {
+            if (length(elem) > 1) {
+                # Perform element-wise adding to catch duplicates
+                lapply(elem, FUN=function(x) self$add(x))
+            } else {
+                if (!self$has(elem)) super$add(elem)
+            }
+        }
+        invisible(self)
+    }
+)
+
+Set$set("public", "union", overwrite=TRUE,
+    function(s) {
+        if (!inherits(s, "Set")) stop("s must be a Set")
+        union <- base::union(self$values(), s$values())
+        Set$new(union)
+    }
+)
+
+Set$set("public", "intersect", overwrite=TRUE,
+    function(s) {
+        if (!inherits(s, "Set")) stop("s must be a Set")
+        intersection <- base::intersect(self$values(), s$values())
+        Set$new(intersection)
+    }
+)
+
+Set$set("public", "diff", overwrite=TRUE,
+    function(s) {
+        if (!inherits(s, "Set")) stop("s must be a Set")
+        diff <- base::setdiff(self$values(), s$values())
+        Set$new(diff)
+    }
+)
+
+Set$set("public", "is.subset", overwrite=TRUE,
+    function(s) {
+        length(base::setdiff(self$values(), s$values())) == 0
+    }
+)
+
+Set$set("public", "is.superset", overwrite=TRUE,
+    function(s) {
+        length(base::setdiff(s$values(), self$values())) == 0
+    }
+)
+Set$lock()
