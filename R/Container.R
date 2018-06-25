@@ -56,8 +56,8 @@
 #' # Container types
 #' Container$new(list("A", 1))$type()   # "list"
 #' Container$new(numeric(0))$type()     # "double"
-#' Container$new(0+0i)$type()           # complex
-#' Container$new(letters[1:3])$type()   # character
+#' Container$new(0+0i)$type()           # "complex"
+#' Container$new(letters[1:3])$type()   # "character"
 #' Container$new(letters[1:3])$values() # "a" "b" "c"
 #' Container$new(1L)$type()             # "integer"
 #' Container$new(1L)$add(2.3)$values()  # since integer type, equals c(1, 2)

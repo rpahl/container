@@ -26,29 +26,29 @@ knitr::include_graphics("class-diagram-bare.png")
 The following table shows member methods divided by class. The top half contains all `Container` methods, each derived by the subclasses to the right unless there is a new entry in a sub-class column, meaning the method is overwritten by the subclass.
 The bottom half contains methods unique to each subclass.
 
-|Iterable | Container                | Deque           | Set              | Dict                      |
-|---------|--------------------------|-----------------|------------------|---------------------------|
-|`iter()` |                          |                 |                  |                           |
-|         | `add(elem)`              |                 | `add(elem)`      | `add(key, value)`         |
-|         | `apply(f)`               |                 |                  |                           |
-|         | `clear()`                |                 |                  |                           |
-|         | `discard(elem, right=F)` |                 |                  | `discard(key)`            |
-|         | `empty()`                |                 |                  |                           |
-|         | `has(elem)`              |                 |                  | `has(key)`                |
-|         | `print(list.len=10)`     |                 |                  |                           |
-|         | `remove(elem, right=F)`  |                 |                  | `remove(key)`             |
-|         | `size()`                 |                 |                  |                           |
-|         | `type()`                 |                 |                  |                           |
-|         | `values()`               |                 |                  |                           |
-|         |                          |-----------------|------------------|---------------------------|
-|         |                          | `addleft(elem)` | `union(s)`       | `get(key)`                |
-|         |                          | `count(elem)`   | `intersect(s)`   | `keys()`                  |
-|         |                          | `peek()`        | `diff(s)`        | `peek(key, default=NULL)` |
-|         |                          | `peekleft()`    | `is.equal(s)`    | `pop(key)`                |
-|         |                          | `pop()`         | `is.subset(s)`   | `popitem()`               |
-|         |                          | `popleft()`     | `is.superset(s)` | `set(key, value)`         |
-|         |                          | `reverse()`     |                  | `sort(decr=FALSE)`        |
-|         |                          | `rotate(n=1L)`  |                  |                           |
+|Iterable | Container                | Deque           | Set              | Dict                         |
+|---------|--------------------------|-----------------|------------------|------------------------------|
+|`iter()` |                          |                 |                  |                              |
+|         | `add(elem)`              |                 | `add(elem)`      | `add(key, value)`            |
+|         | `apply(f)`               |                 |                  |                              |
+|         | `clear()`                |                 |                  |                              |
+|         | `discard(elem, right=F)` |                 |                  | `discard(key)`               |
+|         | `empty()`                |                 |                  |                              |
+|         | `has(elem)`              |                 |                  | `has(key)`                   |
+|         | `print(list.len=10)`     |                 |                  |                              |
+|         | `remove(elem, right=F)`  |                 |                  | `remove(key)`                |
+|         | `size()`                 |                 |                  |                              |
+|         | `type()`                 |                 |                  |                              |
+|         | `values()`               |                 |                  |                              |
+|         |                          |-----------------|------------------|------------------------------|
+|         |                          | `addleft(elem)` | `union(s)`       | `get(key)`                   |
+|         |                          | `count(elem)`   | `intersect(s)`   | `keys()`                     |
+|         |                          | `peek()`        | `diff(s)`        | `peek(key, default=NULL)`    |
+|         |                          | `peekleft()`    | `is.equal(s)`    | `pop(key)`                   |
+|         |                          | `pop()`         | `is.subset(s)`   | `popitem()`                  |
+|         |                          | `popleft()`     | `is.superset(s)` | `set(key, value, add=FALSE)` |
+|         |                          | `reverse()`     |                  | `sort(decr=FALSE)`           |
+|         |                          | `rotate(n=1L)`  |                  |                              |
 
 
 Method descriptions are found in the respective online helps (see `?Container`, `?Deque`, `?Set`, and `?Dict`).
