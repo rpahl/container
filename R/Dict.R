@@ -31,8 +31,10 @@
 #'  \item{\code{popitem()}}{Remove and return an arbitrary (key, value) pair
 #'  from the dictionary. \code{popitem()} is useful to destructively iterate
 #'  over a \code{Dict}, as often used in set algorithms.}
-#'  \item{\code{set(key, value)}}{Like \code{add} but overwrites value if
-#'      \code{key} is already in the \code{Dict}.}
+#'  \item{\code{set(key, value, add=FALSE)}}{Like \code{add} but overwrites
+#'      value if \code{key} is already in the \code{Dict}. If \code{key} not in
+#'      \code{Dict}, an error is thrown unless \code{add} was set to
+#'      \code{TRUE}}
 #'  \item{\code{sort(decr=FALSE)}}{Sort values in dictionary according to keys.}
 #' }
 #' @examples
@@ -63,7 +65,7 @@ Dict <- R6::R6Class("Dict",
         pop = function(key) {},
         popitem = function() {},
         remove = function(key) {},
-        set = function(key, value) {},
+        set = function(key, value, add=FALSE) {},
         sort = function(decr=FALSE) {}
     ),
 )
@@ -87,7 +89,7 @@ Dict$set("public", "add", overwrite=TRUE,
         if (length(key) != 1) stop("key must be single character string")
         if (nchar(key) == 0) stop("zero-length key")
         if (self$has(key)) stop("key '", key, "' already in Dict")
-        self$set(key, value)
+        self$set(key, value, add=TRUE)
     }
 )
 
@@ -146,7 +148,10 @@ Dict$set("public", "remove", overwrite=TRUE,
 )
 
 Dict$set("public", "set", overwrite=TRUE,
-    function(key, value) {
+    function(key, value, add=FALSE) {
+        if (!add) {
+            if (!self$has(key)) stop("key '", key, "' not in Dict")
+        }
         private$elems[[key]] <- value
         invisible(self)
     }

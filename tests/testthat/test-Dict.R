@@ -42,7 +42,8 @@ test_that("Dict", {
     expect_false(d$discard("y")$has("y"))
     expect_error(d$remove("y"), "key 'y' not in Dict")
     expect_false(d$discard("y")$has("y")) # no error although not in Dict
-    expect_true(d$set("y", 10)$has("y"))
+    expect_error(d$set("y", 10), "key 'y' not in Dict")
+    expect_true(d$set("y", 10, add=TRUE)$has("y"))
 
     v <- d$values() # x=1, z=3, y=10
     v2 <- vector(mode = d$type())
