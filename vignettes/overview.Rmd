@@ -73,17 +73,17 @@ collection$add(data.frame(B=1, C=2))
 collection$type()
 ```
 
-The container has a print method
-```{r}
-print(collection)
-```
-
-Alternatively, the internal representation can be retrieved directly using the `values` function.
+The internal representation can always be retrieved directly using the `values` function.
 ```{r}
 collection$values()
 ```
 
-If initialized with an R object, the type of the objected is adopted to allow for efficient internal representations, if required.
+The container's print method presents the content more compact similar to `utils::str`
+```{r}
+collection$print()  # alternatively: print(collection)
+```
+
+If initialized with an R object, the type of the object is adopted to allow for efficient internal representations, if required.
 ```{r}
 ints <- Container$new(integer())
 ints$type()
@@ -178,9 +178,9 @@ d
 ```{r}
 d$add(1)$add(2)$addleft(1)$addleft(2)$values()
 
-d$count(0)
+d$count(0)  # count number of 0s
 
-d$count(1)
+d$count(1)  # count number of 1s
 ```
 
 #### peek, pop
@@ -244,9 +244,8 @@ d2$values()
 ```{r}
 s1 <- Set$new(1:3)$print()
 
-s1$add(1)
-# Since already in the Set, it must not be added again
-s1$values()
+s1$add(1)  # does not change the set 
+s1
 ```
 
 #### Set operations
@@ -272,7 +271,7 @@ s1$union(s2)$is.superset(s2)
 ```
 
 ## Dict
-Due to the key-value semantic, several `Container ` methods are overwritten to take the key argument.
+Due to the key-value semantic, several `Container ` methods are extended to take the key argument.
 ```{r}
 ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))$print()
 
@@ -291,29 +290,47 @@ ages$discard("Albert")$values()
 tryCatch(ages$remove("Albert"), error = function(e) e$message)
 ```
 
-#### Dict methods
+#### More Dict-specific methods
 ```{r}
 ages$keys()
 
 ages$peek("Lisa")
 
-ages$peek("Albert")
+ages$peek("Anna")
+```
 
+Trying to `set` a value at a non-existing key throws an error unless the `set` method is explicitly told to add it to the `Dict`.
+```{r}
+tryCatch(ages$set("Anna"), error = function(e) e$message)
+
+ages$set("Anna", 23, add=TRUE)  # alternatively ages$add("Anna", 23)
+ages
+```
+
+This allows fine control over the insert-behaviour of the `Dict`. If already existing, the value is overwritten.
+```{r}
 ages$set("Lisa", 11)$values()
+```
 
+A similar control is provided via the different methods to retrieve elements.
+```{r}
 ages$pop("Lisa")
 
 ages$values()
 
 tryCatch(ages$pop("Lisa"), error = function(e) e$message)
 
-# popitem() removes a random key-value pair from the Dict
+tryCatch(ages$get("Lisa"), error = function(e) e$message)
+
+ages$peek("Lisa")
+```
+
+Finally, the `Dict` could also be used as a sampler (without replacement).
+```{r}
 set.seed(123)
-ages$popitem()
-
-ages$popitem()
-
-tryCatch(ages$popitem(), error = function(e) e$message)
+while(!ages$empty()) {
+    print(ages$popitem())
+}
 ```
 
 
