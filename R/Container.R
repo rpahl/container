@@ -132,12 +132,13 @@ Container$set("public", "has", overwrite=TRUE,
 
 Container$set("public", "print", overwrite=TRUE,
     function(list.len=10, ...) {
-        cout <- if (interactive()) message else function(...) cat(..., sep="")
+        cat0 <- function(...) cat(..., sep="")
         class_name <- paste0("<", data.class(self), ">")
-        cout(class_name, " of ", self$size(), " elements: ")
+
+        cat0(class_name, " of ", self$size(), " elements: ")
         utils::str(self$values(), list.len=list.len, ...)
         if (list.len < self$size()) {
-            cout("... with ", self$size() - list.len, " more elements")
+            cat0("... with ", self$size() - list.len, " more elements")
         }
         invisible(self)
     }
