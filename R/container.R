@@ -98,7 +98,7 @@ Container$set("public", "initialize", overwrite=TRUE,
 
 Container$set("public", "add", overwrite=TRUE,
     function(elem) {
-        if (is.Container(elem)) {
+        if (inherits(elem, "Container")) {
             lapply(elem$values(), self$add)
         } else {
             if (self$type() == "list") {
@@ -158,3 +158,42 @@ Container$set("public", "remove", overwrite=TRUE,
     }
 )
 Container$lock()
+
+
+# S3 methods
+
+#' @export
+container <- function(x=list())
+{
+    Container$new(x)
+}
+
+#' @export
+is.container <- function(x) inherits(x, "Container")
+
+#' @export
+`as.vector.Container` <- function(x, mode="any")
+{
+    as.vector(x$values(), mode=mode)
+}
+
+#' @export
+`as.list.Container` <- function(x)
+{
+    as.list(x$values())
+}
+
+#' @export
+`print.Container` <- function(cont, list.len=10, ...)
+{
+    cont$print(list.len, ...)
+}
+
+#' @export
+`+.Container` <- function(c1, c2)
+{
+    c1$clone()$add(c2)
+}
+
+
+
