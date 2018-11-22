@@ -86,6 +86,12 @@ test_that("Container", {
     expect_equal(Container$new(0+0i)$type(), "complex")
     expect_equal(Container$new(letters[1:10])$type(), "character")
 
+    # Adding other containers
+    v <- 1:10
+    co <- Container$new(v)
+    co$add(co)
+    expect_equal(co$values(), rep(v, 2))
+
     # Apply
     co <- Container$new(as.numeric(v))
     expect_equal(unlist(co$apply(f = base::log)), log(v))

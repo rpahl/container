@@ -36,8 +36,8 @@ Iterable <- R6::R6Class("Iterable",
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
-#' @seealso \code{\link[container]{Iterable}}, 
-#' \code{\link[container]{Container}}, \code{\link[container]{Deque}}, 
+#' @seealso \code{\link[container]{Iterable}},
+#' \code{\link[container]{Container}}, \code{\link[container]{Deque}},
 #' \code{\link[container]{Set}}, and \code{\link[container]{Dict}}
 #'
 #' @section Iterator method/interface:

@@ -5,8 +5,8 @@
 #' \code{\link[container]{Set}}, and \code{\link[container]{Dict}}.
 #' @details
 #' The underlying data structure is based on R vectors (or lists), with the mode
-#' being set to the mode (or type) of the value passed to the initialize 
-#' function, which by default is an empty list, in which case the 
+#' being set to the mode (or type) of the value passed to the initialize
+#' function, which by default is an empty list, in which case the
 #' \code{Container} object can store objects of mixed and arbitrary types.
 #' If the container will only contain objects of one particular type, for
 #' example, double values, it will be both more efficient and type safe to
@@ -91,17 +91,22 @@ Container$set("public", "initialize", overwrite=TRUE,
         names(private$elems) <- names(x)
         stopifnot(is.vector(private$elems))
         attr(self, "name") <- paste0("<", data.class(self), ">")
+        attr(self, "class") <- unique(c(data.class(self), "Container"))
         invisible(self)
     }
 )
 
 Container$set("public", "add", overwrite=TRUE,
     function(elem) {
-        if (self$type() == "list") {
-            private$elems <- c(private$elems, list(elem))
+        if (is.Container(elem)) {
+            lapply(elem$values(), self$add)
         } else {
-            v <- Reduce(f=c, x=elem, init=private$elems)
-            private$elems <- as.vector(v, mode=self$type())
+            if (self$type() == "list") {
+                private$elems <- c(private$elems, list(elem))
+            } else {
+                v <- Reduce(f=c, x=elem, init=private$elems)
+                private$elems <- as.vector(v, mode=self$type())
+            }
         }
         invisible(self)
     }
