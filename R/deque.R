@@ -150,3 +150,14 @@ Deque$set("public", "rotate", overwrite=TRUE,
 )
 Deque$lock()
 
+
+# S3 methods
+
+#' @export
+deque <- function(x=list()) 
+{
+    Deque$new(x)
+}
+
+#' @export
+is.deque <- function(x) inherits(x, "Deque")
