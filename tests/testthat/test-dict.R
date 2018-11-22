@@ -5,6 +5,8 @@ test_that("Dict", {
     expect_error(Dict$new(1:2), "all elems must be named")
     expect_equal(Dict$new()$keys(), character(0))
     d <- Dict$new(c(x=1L, y=2L))
+    expect_is(d, "Dict")
+    expect_is(d, "Container")
     expect_error(d$get("z"), "key 'z' not in Dict")
     expect_error(d$add(key="", 3L, "zero-length key"))
     expect_equal(as.integer(d$values()), 1:2)
@@ -57,9 +59,67 @@ test_that("Dict", {
     expect_equal(names(sort(v)), names(sort(v2)))
 })
 
+
 test_that("Dict sort", {
     d <- Dict$new()
     d$add("b", 1)$add("a", 2)
     expect_equal(d$keys(), c("b", "a"))
     expect_equal(d$sort()$keys(), c("a", "b"))
 })
+
+test_that("Dict update", {
+    d1 <- Dict$new(list(A=1, B=2, C=12))
+    expect_error(d1$update(list()), "arg must be a Dict")
+    d2 <- Dict$new(list(          C=3, D=4))
+    expect_equal(d1$update(Dict$new()), d1)
+    expect_equal(d1$update(d2)$values(), list(A=1, B=2, C=3, D=4))
+    expect_equal(Dict$new()$update(d2), d2)
+})
+
+
+test_that("Dict S3 methods", {
+    d <- Dict$new()
+    expect_true(is.dict(d))
+
+    expect_error(d["a"] <- 1, "key 'a' not in Dict")
+    d["a", add=TRUE] <- 1
+    expect_equal(d$get("a"), 1)
+    expect_equal(d$get("a"), d["a"])
+    d["a"] <- 3
+    expect_equal(d$get("a"), 3)
+    d["b", add=TRUE] <- d["a"]
+    expect_equal(d$get("a"), d$get("b"))
+
+    # `+` operator
+    d2 <- dict(list(b=2, c=1))
+    dd <- d + d2
+    expect_equal(d$size(), 2)
+    expect_equal(d2$size(), 2)
+    expect_equal(dd$size(), 3)
+    expect_equal(dd$values(), d$update(d2)$values())
+
+    # `-` operator
+    d1 <- dict(list(A=1, B=2, C=3))
+    d2 <- dict(list(A=1, B=2))
+    expect_equal(d1 - d2, dict(list(C=3)))
+    expect_equivalent(d2 - d1, dict())
+    expect_equivalent(d1 - d1, dict())
+    expect_equivalent(dict() - d1, dict())
+    expect_equivalent(d1 - d1$keys(), dict())
+    expect_equal(d1 - d2$keys(), d1 - d2)
+
+    # as.data.frame
+    df <- data.frame(A=1:5, B=1:5)
+    d <- dict(df)
+    expect_equal(as.data.frame(d), df)
+    expect_equal(as.data.frame(dict()), data.frame())
+
+    # Container S3 methods
+    d <- Dict$new(list(A=1, B=2))
+    expect_true(is.container(d))
+    expect_output(print(d), "<Dict> of 2 elements: List of 2")
+    expect_equal(as.list(d), d$values())
+    expect_equal(as.vector(d), d$values())
+})
+
+

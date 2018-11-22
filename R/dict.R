@@ -36,6 +36,9 @@
 #'      \code{Dict}, an error is thrown unless \code{add} was set to
 #'      \code{TRUE}}
 #'  \item{\code{sort(decr=FALSE)}}{Sort values in dictionary according to keys.}
+#'  \item{\code{update(other=Dict$new())}}{Adds element(s) of other to the 
+#'      dictionary if the key is not in the dictionary and updates the key with
+#'      the new value otherwise.}
 #' }
 #' @examples
 #' ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))
@@ -66,7 +69,8 @@ Dict <- R6::R6Class("Dict",
         popitem = function() {},
         remove = function(key) {},
         set = function(key, value, add=FALSE) {},
-        sort = function(decr=FALSE) {}
+        sort = function(decr=FALSE) {},
+        update = function(other) {}
     ),
 )
 
@@ -164,5 +168,65 @@ Dict$set("public", "sort", overwrite=TRUE,
         invisible(self)
     }
 )
+
+Dict$set("public", "update", overwrite=TRUE,
+    # Add elements of other dict to the dictionary if the key is not in the
+    # dictionary and update the key with the new value otherwise.
+    function(other=Dict$new()) {
+        if (!inherits(other, "Dict")) stop("arg must be a Dict")
+        for (key in other$keys()) {
+            self$set(key, other$get(key), add=TRUE)
+        }
+        invisible(self)
+    }
+)
 Dict$lock()
+
+
+# S3 methods
+
+#' @export
+dict <- function(x=list()) 
+{
+    if (is.data.frame(x)) x <- as.list(x)
+    Dict$new(x)
+}
+
+#' @export
+is.dict <- function(x) inherits(x, "Dict")
+
+#' @export
+`as.data.frame.Dict` <- function(x) 
+{
+    as.data.frame(x$values())
+}
+
+#' @export
+`+.Dict` <- function(d1, d2)
+{
+    d1$clone()$update(d2)
+}
+
+#' @export
+`-.Dict` <- function(d, keys)
+{
+    if (!is.dict(d)) stop("d must be a Dict")
+    if (is.dict(keys)) keys <- keys$keys()
+    if (!is.character(keys)) stop("keys must be character")
+    dc <- d$clone()
+    lapply(keys, FUN = function(k) dc$discard(k))
+    dc
+}
+
+#' @export
+`[<-.Dict` <- function(dict, key, add=FALSE, value)
+{
+    dict$set(key, value, add)
+}
+
+#' @export
+`[.Dict` <- function(dict, key)
+{
+    dict$get(key)
+}
 
