@@ -79,7 +79,7 @@ Dict$set("public", "initialize", overwrite=TRUE,
     function(x=list()) {
         name_len <- sapply(names(x), nchar)
         if (length(x) != length(name_len) || any(name_len == 0)) {
-            stop("all elems must be named")
+            stop("all items must be named")
         }
         super$initialize(x)
         if (any(duplicated(self$keys()))) stop("duplicated keys")
@@ -182,51 +182,4 @@ Dict$set("public", "update", overwrite=TRUE,
 )
 Dict$lock()
 
-
-# S3 methods
-
-#' @export
-dict <- function(x=list()) 
-{
-    if (is.data.frame(x)) x <- as.list(x)
-    Dict$new(x)
-}
-
-#' @export
-is.dict <- function(x) inherits(x, "Dict")
-
-#' @export
-`as.data.frame.Dict` <- function(x) 
-{
-    as.data.frame(x$values())
-}
-
-#' @export
-`+.Dict` <- function(d1, d2)
-{
-    d1$clone()$update(d2)
-}
-
-#' @export
-`-.Dict` <- function(d, keys)
-{
-    if (!is.dict(d)) stop("d must be a Dict")
-    if (is.dict(keys)) keys <- keys$keys()
-    if (!is.character(keys)) stop("keys must be character")
-    dc <- d$clone()
-    lapply(keys, FUN = function(k) dc$discard(k))
-    dc
-}
-
-#' @export
-`[<-.Dict` <- function(dict, key, add=FALSE, value)
-{
-    dict$set(key, value, add)
-}
-
-#' @export
-`[.Dict` <- function(dict, key)
-{
-    dict$get(key)
-}
 
