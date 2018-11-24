@@ -12,7 +12,7 @@
 #' internal initialize function and the following member functions:
 #' \describe{
 #'  \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, set
-#'      \code{key} to \code{elem}, otherwise raise an error.}
+#'      \code{value} at \code{key}, otherwise signal an error.}
 #'  \item{\code{discard(key)}}{If \code{key} in \code{Dict}, remove it.}
 #'  \item{\code{has(key)}}{TRUE if \code{key} in \code{Dict} else FALSE.}
 #'  \item{\code{remove(key)}}{If \code{key} in \code{Dict}, remove it, otherwise

@@ -1,8 +1,8 @@
 Package: container
 Type: Package
 Title: Deque, Set, and Dict - R6 Based Container Classes with Iterators
-Version: 0.2.1
-Date: 2018-06-25
+Version: 0.3.0
+Date: 2018-11-24
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))

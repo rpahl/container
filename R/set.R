@@ -109,7 +109,7 @@ Set$lock()
 # S3 methods
 
 #' @export
-set <- function(x=list()) 
+set.default <- function(x=list()) 
 {
     Set$new(x)
 }
