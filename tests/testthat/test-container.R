@@ -98,17 +98,3 @@ test_that("Container", {
 })
 
 
-test_that("S3 methods", {
-    expect_true(is.container(container()))
-    expect_equal(container(), Container$new())
-    expect_equal(as.vector(container()), list())
-    ints <- container(1:3)
-    expect_output(print(ints),
-                  "<Container> of 3 elements:  int \\[1:3\\] 1 2 3")
-    expect_equal(as.vector(ints), as.integer(1:3))
-    expect_equal(as.list(ints), as.list(1:3))
-    ints2 <- ints + ints
-    expect_equal(ints$size(), 3)
-    expect_equal(ints2$values(), c(ints$values(), ints$values()))
-})
-
