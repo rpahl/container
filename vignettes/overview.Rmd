@@ -1,10 +1,10 @@
 ---
-title: "Overview and examples"
+title: "Container class - overview and examples"
 author: "Roman Pahl"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Container examples and methods overview}
+  %\VignetteIndexEntry{Container class - overview and examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,7 +28,7 @@ The bottom half contains methods unique to each subclass.
 
 |Iterable | Container                | Deque           | Set              | Dict                         |
 |---------|--------------------------|-----------------|------------------|------------------------------|
-|`iter()` |                          |                 |                  |                              |
+|`iterator()` |                          |                 |                  |                              |
 |         | `add(elem)`              |                 | `add(elem)`      | `add(key, value)`            |
 |         | `apply(f)`               |                 |                  |                              |
 |         | `clear()`                |                 |                  |                              |
@@ -60,7 +60,7 @@ library(container)
 ```
 
 ```{r}
-collection <-  Container$new()
+collection <- Container$new()
 collection$empty()
 ```
 
@@ -80,7 +80,7 @@ collection$values()
 
 The container's print method presents the content more compact similar to `utils::str`
 ```{r}
-collection$print()  # alternatively: print(collection)
+collection$print()
 ```
 
 If initialized with an R object, the type of the object is adopted to allow for efficient internal representations, if required.
@@ -115,8 +115,8 @@ ints$remove(8)$has(8)
 ```
 
 Using `remove` on non-existent elements throws an error,
-```{r}
-tryCatch(ints$remove(8), error = function(e) e$message)
+```{r, error=TRUE}
+ints$remove(8)
 ```
 
 but discard does not.
@@ -156,13 +156,13 @@ members
 
 #### Iterator
 ```{r}
-it <- members$iter()
-while(it$has_next()) print(it$get_next())
+it <- members$iterator()
+while(it$has.next()) print(it$get.next())
 ```
 
 Once iterated to the last element, trying to iterate further leads to an error.
-```{r}
-tryCatch(it$get_next(), error = function(e) e$message)
+```{r, error=TRUE}
+it$get.next()
 ```
 
 
@@ -207,10 +207,10 @@ d$count(2)
 ```
 
 Invoking `peek` on an empty `Deque` gives `NULL` while `pop` stops with an error.
-```{r}
+```{r, error=TRUE}
 Deque$new()$peek()
 
-tryCatch(Deque$new()$pop(), error = function(e) e$message)
+Deque$new()$pop()
 ```
 
 #### rotate, reverse
@@ -232,9 +232,10 @@ d$reverse()$values()
 Use iterator to re-add elements left and right into second `Deque` object.
 ```{r}
 d2 <- Deque$new(integer())
-it <- d$iter()
-while(it$has_next()) {
-    d2$add(it$get_next())
+it <- d2$iterator()
+while(it$has.next()) {
+    it$.next()
+    d2$add(it$get())
     if (it$has_next()) d2$addleft(it$get_next())
 }
 d2$values()
@@ -272,12 +273,12 @@ s1$union(s2)$is.superset(s2)
 
 ## Dict
 Due to the key-value semantic, several `Container ` methods are extended to take the key argument.
-```{r}
+```{r, error=TRUE}
 ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))$print()
 
 ages$add("Albert", 139)$values()
 
-tryCatch(ages$add("Bob", 40), error = function(e) e$message)
+ages$add("Bob", 40)
 
 ages$has("Peter")
 
@@ -287,7 +288,7 @@ ages$discard("Albert")$values()
 ages$discard("Albert")$values()
 
 # Trying to remove a non-existing key throws an error
-tryCatch(ages$remove("Albert"), error = function(e) e$message)
+ages$remove("Albert")
 ```
 
 #### More Dict-specific methods
@@ -300,8 +301,8 @@ ages$peek("Anna")
 ```
 
 Trying to `set` a value at a non-existing key throws an error unless the `set` method is explicitly told to add it to the `Dict`.
-```{r}
-tryCatch(ages$set("Anna"), error = function(e) e$message)
+```{r, error=TRUE}
+ages$set("Anna")
 
 ages$set("Anna", 23, add=TRUE)  # alternatively ages$add("Anna", 23)
 ages
@@ -313,14 +314,14 @@ ages$set("Lisa", 11)$values()
 ```
 
 A similar control is provided via the different methods to retrieve elements.
-```{r}
+```{r, error=TRUE}
 ages$pop("Lisa")
 
 ages$values()
 
-tryCatch(ages$pop("Lisa"), error = function(e) e$message)
+ages$pop("Lisa")
 
-tryCatch(ages$get("Lisa"), error = function(e) e$message)
+ages$get("Lisa")
 
 ages$peek("Lisa")
 ```
@@ -328,9 +329,7 @@ ages$peek("Lisa")
 Finally, the `Dict` could also be used as a sampler (without replacement).
 ```{r}
 set.seed(123)
-while(!ages$empty()) {
-    print(ages$popitem())
-}
+while(!ages$empty()) print(ages$popitem())
 ```
 
 
