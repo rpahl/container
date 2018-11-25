@@ -106,26 +106,18 @@ Set$set("public", "is.superset", overwrite=TRUE,
 Set$lock()
 
 
-# S3 methods
+#' @export
+set <- function(x=list()) Set$new(x)
 
 #' @export
-set.default <- function(x=list()) 
-{
-    Set$new(x)
-}
+as.set <- function(x) Set$new(x)
 
 #' @export
 is.set <- function(x) inherits(x, "Set")
 
 #' @export
-`+.Set` <- function(s1, s2)
-{
-    s1$union(s2)
-}
+`+.Set` <- function(s1, s2) s1$union(s2)
 
 #' @export
-`-.Set` <- function(s1, s2)
-{
-    s1$diff(s2)
-}
+`-.Set` <- function(s1, s2) s1$diff(s2)
 

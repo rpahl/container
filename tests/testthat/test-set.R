@@ -59,6 +59,7 @@ test_that("Set", {
 test_that("S3 methods", {
     expect_equal(set(), Set$new())
     expect_true(is.set(set()))
+    expect_equal(set(1:3), as.set(1:3))
     s1 <- set(1:3)
     s2 <- set(3:5)
     expect_equal(s1 - s2, s1$diff(s2))

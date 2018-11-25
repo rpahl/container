@@ -69,8 +69,10 @@ test_that("S3 methods", {
     expect_equal(deque(), Deque$new())
     expect_true(is.deque(deque()))
     d <- deque(as.numeric(1:3))
+    expect_equal(deque(1:3), as.deque(1:3))
 
     expect_output(print(d), "<Deque> of 3 elements:  num \\[1:3\\] 1 2 3")
     expect_equal(as.list(d), as.list(d$values()))
     expect_equal(as.vector(d), d$values())
 })
+
