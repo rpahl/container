@@ -6,15 +6,39 @@
 #' @name dictS3
 #' @param x (named list or data.frame) initial elements of the \code{dict}
 #' @return \code{\link[container]{Dict}} object
-#' @seealso \code{\link[container]{container}}, \code{\link[container]{Dict}}
-#' @export dict as.dict is.dict
+#' @seealso \code{\link[container]{container}}, \code{\link[container]{Dict}},
+#'  \code{\link[container]{+.Dict}}, 
+#'  \code{\link[container]{[<-.Dict}},
+#'  \code{\link[container]{[[<-.Dict}},
+#'  \code{\link[container]{[[.Dict}},
+#'  \code{\link[container]{[.Dict}}
+#' @export dict as.dict is.dict keys popitem 
+#' 
+#' @section S3 methods for Dict objects:
+#' \describe{
+#'  \item{\code{add(dic, key, value)}}{If \code{key} not yet in \code{dic},
+#'      insert \code{value} at \code{key}, otherwise signal an error.}
+#'  \item{\code{discard(dic, key)}}{If \code{key} in \code{dic}, remove it.}
+#'  \item{\code{has(dic, key)}}{TRUE if \code{key} in \code{dic} else FALSE.}
+#'  \item{\code{remove(dic, key)}}{If \code{key} in \code{dic}, remove it,
+#'      otherwise raise an error.}
+#'  \item{\code{keys(dic)}}{Return a character vector of all keys.}
+#'  \item{\code{peek(dic, key, default=NULL)}}{Return the value for \code{key} if
+#'      \code{key} is in the \code{dic}, else \code{default}.}
+#'  \item{\code{pop(dic, key)}}{If \code{key} in \code{dic}, return a copy of its
+#'      value and discard it afterwards.}
+#'  \item{\code{popitem(dic)}}{Remove and return an arbitrary (key, value) pair
+#'  from the dictionary. \code{popitem()} is useful to destructively iterate
+#'  over a \code{dic}, as often used in set algorithms.}
+#' }
+#' 
 #' @examples
 #' ages <- dict(c(Peter=24, Lisa=23, Bob=32))
 #' has(ages, "Peter")   # TRUE
-#' ages["Lisa"]   # 23
-#' ages["Mike"]   # NULL
+#' ages["Lisa"]         # 23
+#' ages["Mike"]         # NULL
 #' ages["Mike"] <- 18
-#' ages["Mike"]   # 18
+#' ages["Mike"]         # 18
 #' keys(ages)
 #' print(ages)
 #' 
@@ -41,56 +65,37 @@ is.dict <- function(x) inherits(x, "Dict")
 `as.data.frame.Dict` <- function(d1) as.data.frame(as.list(d1))
 
 
-#' @title Dict S3 member functions
-#' @name DictS3funcs
+#' @rdname dictS3 
+keys <- function(x) UseMethod("keys")
+
+#' @rdname dictS3 
+popitem <- function(x) UseMethod("popitem")
+
+#' @rdname dictS3 
 #' @param dict The dict object.
 #' @param key (character) The key in the dictionary.
 #' @param value The value associated with the key.
-#' @export keys popitem 
-NULL
-
-#' @rdname DictS3funcs
-keys <- function(x) UseMethod("keys")
-#' @rdname DictS3funcs
-popitem <- function(x) UseMethod("popitem")
-
-#' @rdname DictS3funcs
-#' @details add(dic, key, value): If \code{key} not yet in \code{dic}, insert
-#'  \code{value} at \code{key}, otherwise raise an error.
 add.Dict <- function(dic, key, value) dic$add(key, value)
 
-#' @rdname DictS3funcs
-#' @details discard(dic, key): If \code{key} in \code{dic}, return a copy of
-#'  its value and discard it afterwards.
+#' @rdname dictS3 
 discard.Dict <- function(dic, key) dic$discard(key)
 
-#' @rdname DictS3funcs
-#' @details has(dic, key): TRUE if \code{key} in \code{dic} else FALSE.
+#' @rdname dictS3 
 has.Dict <- function(dic, key) dic$has(key)
 
-#' @rdname DictS3funcs
-#' @details remove(dic, key): Same as \code{discard}, except that an error is
-#'  thrown if \code{key} is not found in \code{dic}.
+#' @rdname dictS3 
 remove.Dict <- function(dic, key) dic$remove(key)
 
-#' @rdname DictS3funcs
-#' @details keys(dic): Return all keys.
+#' @rdname dictS3 
 keys.Dict <- function(dic) dic$keys()
 
-#' @rdname DictS3funcs
-#' @details peek(dic, key, default=NULL): Return the value for \code{key} if
-#'  \code{key} is in \code{dic}, else \code{default}.
+#' @rdname dictS3 
 peek.Dict <- function(dic, key, default=NULL) dic$peek(key, default)
 
-#' @rdname DictS3funcs
-#' @details pop(dic, key): If \code{key} in \code{dic}, return a copy of its
-#'  associated value and remove it from the \code{dic}.
+#' @rdname dictS3 
 pop.Dict <- function(dic, key) dic$pop(key)
 
-#' @rdname DictS3funcs
-#' @details popitem(dic): Remove and return an arbitrary (key, value) pair
-#'  from the dictionary. \code{popitem()} is useful to destructively iterate
-#'  over a \code{dic}, as often used in set algorithms.
+#' @rdname dictS3 
 popitem.Dict <- function(dic) dic$popitem()
 
 
@@ -117,7 +122,8 @@ NULL
     d1.clone
 }
 
-#' @title Set value at key
+#' @title Extract or replace \code{Dict} values
+#' @name dictS3replace
 #' @param dic \code{\link[container]{Dict}} object
 #' @param key (character) the key
 #' @param add (logical) if TRUE, value is added if not yet in dict. If FALSE
@@ -126,20 +132,20 @@ NULL
 #' @export
 `[[<-.Dict` <- function(dic, key, add=FALSE, value) dic$set(key, value, add)
 
-#' @title Get value at key
+#' @rdname dictS3replace
 #' @details \code{dic[key]}: If \code{key} in \code{dic}, return value, else
 #'  throw key-error.
 #' @return value at key
 #' @export
 `[[.Dict` <- function(dic, key) dic$get(key)
 
-#' @title Add value at key
+#' @rdname dictS3replace
 #' @details \code{dic[key] <- value}: If \code{key} not yet in \code{dic}, insert
 #'  \code{value} at \code{key}, otherwise raise an error.
 #' @export
 `[<-.Dict` <- function(dic, key, value) dic$add(key, value)
 
-#' @title Peek value at key
+#' @rdname dictS3replace
 #' @details \code{dic[key, default=NULL]}: Return the value for \code{key} if
 #'  \code{key} is in \code{dic}, else \code{default}.
 #' @return element found at key, or \code{default} if not found.

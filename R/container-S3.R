@@ -1,4 +1,4 @@
-#' @title Container constructors 
+#' @title Container S3 interface 
 #' @description This function creates a container data structure with typical
 #' member functions to insert, delete and access objects from the container. It
 #' also serves as the base class for objects created with 
@@ -14,9 +14,36 @@
 #' initialize the container using this particular type (see Examples section).
 #' @name ContainerS3
 #' @param x (vector or list) initial elements of the container
+#' @param cont the container object
+#' @param elem a container element
 #' @return \code{\link[container]{Container}} object
-#' @seealso \code{\link[container]{Container}}
+#' @seealso \code{\link[container]{Container}}, \code{\link[container]{+.Container}}, 
 #' @export container as.container is.container
+#' @export add clear discard empty has remove size type values
+#'
+#' @section S3 methods for Container objects:
+#' \describe{
+#'  \item{\code{add(cont, elem)}}{Add \code{elem} to \code{cont}.}
+#'  \item{\code{clear(cont)}}{Remove all elements from the \code{cont}.}
+#'  \item{\code{clone(cont)}}{Create a copy of \code{cont} object. For
+#'  more details see documentation of \code{\link[R6]{R6Class}}.}
+#'  \item{\code{discard(cont, elem, right=FALSE)}}{Search for first \code{elem} in
+#'      \code{cont} and, if found, remove it. If \code{right} is
+#'      \code{TRUE}, search from right to left.}
+#'  \item{\code{empty(cont)}}{Return \code{TRUE} if the \code{cont} is empty,
+#'      else \code{FALSE}.}
+#'  \item{\code{has(cont, elem)}}{Return \code{TRUE} if \code{cont} contains
+#'      \code{elem} else \code{FALSE}.}
+#'  \item{\code{print(cont, list.len, ...)}}{Print container object representation
+#'      similar to \code{\link[utils]{str}}}
+#'  \item{\code{remove(cont, elem, right=FALSE)}}{Same as \code{discard}, but throw an
+#'      error if \code{elem} does not exist.}
+#'  \item{\code{size(cont)}}{Return size of the \code{cont}.}
+#'  \item{\code{type(cont)}}{Return type (or mode) of internal vector containing
+#'  the elements of the container.}
+#'  \item{\code{values(cont)}}{Return a copy of all elements in the same format
+#'  as they are stored in the object.}
+#' }
 #' @examples
 #' c0 <- container(list(2, "A"))
 #' size(c0)                         # 2
@@ -53,99 +80,70 @@ as.container <- function(x) container(x)
 #' @details \code{is.container(x)}: check for \code{Container} class
 is.container <- function(x) inherits(x, "Container")
 
-
-#' @title Container S3 member functions
-#' @name ContainerS3funcs
-#' @param cont the container object
-#' @param elem a container element
-#' @export add clear discard empty has remove size type values
-NULL
-
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 add <- function(x, ...) UseMethod("add")   
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 clear <- function(x) UseMethod("clear")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 clone <- function(x, ...) UseMethod("clone")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 discard <- function(x, ...) UseMethod("discard")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 empty <- function(x) UseMethod("empty")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 has <- function(x, ...) UseMethod("has")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 remove <- function(x, ...) UseMethod("remove")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 size <- function(x) UseMethod("size")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 type <- function(x) UseMethod("type")
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3 
 values <- function(x) UseMethod("values")
 
-
-#' @rdname ContainerS3funcs
-#' @details add(cont, elem): Add \code{elem} to \code{cont}.
+#' @rdname ContainerS3
 add.Container <- function(cont, elem) cont$add(elem)
 
-#' @rdname ContainerS3funcs
-#' @details clear(cont): Remove all elements from \code{cont}.
-clear.Container <- function(cont, clear) cont$clear()
+#' @rdname ContainerS3
+clear.Container <- function(cont) cont$clear()
 
-#' @rdname ContainerS3funcs
-#' @details clone(cont, deep=FALSE): Create a copy of \code{cont} object. For
-#'  more details see documentation of \code{\link[R6]{R6Class}}. 
+#' @rdname ContainerS3
 clone.Container <- function(cont, deep=FALSE) cont$clone(deep)
 
-#' @rdname ContainerS3funcs
-#' @details discard(cont, elem, right=FALSE): Search for first \code{elem} in
-#'  \code{cont} and, if found, remove it. If \code{right} is \code{TRUE},
-#'  search from right to left.
-#' @param right (logical) if TRUE, search from right to left
+#' @rdname ContainerS3
 discard.Container <- function(cont, elem, right=FALSE) cont$discard(elem, right)
 
-#' @rdname ContainerS3funcs
-#' @details empty(cont): Return \code{TRUE} if \code{container} is empty, else
-#'  \code{FALSE}.
-empty.Container <- function(cont, empty) cont$empty()
+#' @rdname ContainerS3
+empty.Container <- function(cont) cont$empty()
 
-#' @rdname ContainerS3funcs
-#' @details has(cont, elem): Return \code{TRUE} if \code{Container} contains
-#'  \code{elem} else \code{FALSE}.
+#' @rdname ContainerS3
 has.Container <- function(cont, elem) cont$has(elem)
 
-#' @rdname ContainerS3funcs
+#' @rdname ContainerS3
 #' @param list.len (integer) maximum number of list elements to display within
 #'  a level.
 #' @param ... (list) further arguments passed to \code{\link[utils]{str}}
-#' @details print(cont, list.len=10L, ...): 
 print.Container <- function(cont, list.len=10, ...) cont$print(list.len, ...)
 
-#' @rdname ContainerS3funcs
-#' @details remove(cont, elem, right=FALSE): Same as \code{discard}, but throw
-#'  an error if \code{elem} is not found.
+#' @rdname ContainerS3
 remove.Container <- function(cont, elem, right=FALSE) cont$remove(elem, right)
 
-#' @rdname ContainerS3funcs
-#' @details size(cont): Return size of the \code{cont}.
+#' @rdname ContainerS3
 size.Container <- function(cont) cont$size()
 
-#' @rdname ContainerS3funcs
-#' @details type(cont): Return type (or mode) of internal vector containing
-#'  the elements.
+#' @rdname ContainerS3
 type.Container <- function(cont) cont$type()
 
-#' @rdname ContainerS3funcs
-#' @details values(cont): Return a copy of all elements in the same format as
-#'  they are stored in the object.
+#' @rdname ContainerS3
 values.Container <- function(cont) cont$values()
 
 

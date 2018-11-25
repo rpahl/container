@@ -5,10 +5,22 @@
 #'  \code{intersect (/)}.
 #' @author Roman Pahl
 #' @name setS3
-#' @seealso \code{\link[container]{container}}, \code{\link[container]{Set}}
+#' @seealso \code{\link[container]{container}}, \code{\link[container]{Set}},
+#'  \code{\link[container]{+.Set}},
+#'  \code{\link[container]{/.Set}},
+#'  \code{\link[container]{-.Set}},
+#'  \code{\link[container]{<.Set}},
+#'  \code{\link[container]{>.Set}}
+#' 
 #' @param x (vector or list) initial elements of the set
 #' @return \code{\link[container]{Set}} object
 #' @export set as.set is.set
+#' 
+#' @section S3 methods for Set objects:
+#' \describe{
+#'  \item{\code{add(s, elem)}}{If not already in set, add \code{elem}.}
+#' }
+#' 
 #' @examples
 #' s1 <- set(list(1, 2, "A", "B"))
 #' s2 <- set(values(s1))
@@ -38,9 +50,7 @@ as.set <- function(x) Set$new(x)
 #' @details \code{is.set(x)}: check for \code{Set} class
 is.set <- function(x) inherits(x, "Set")
 
-
-#' @title Set S3 member functions
-#' @name SetS3funcs
+#' @name setS3
 #' @param s The set object
 #' @param elem A set element
 add.Set <- function(s, elem) s$add(elem)
