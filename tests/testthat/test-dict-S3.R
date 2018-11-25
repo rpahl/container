@@ -1,39 +1,91 @@
-context("dict S3 methods")
+context("dict S3")
 
-test_that("General", {
-    d <- Dict$new(list(A=1, B=2))
+
+test_that("dict", {
+    # initialize
+    expect_error(dict(1:2), "all items must be named")
+    expect_equal(keys(dict()), character(0))
+    d <- dict(c(x=1L, y=2L))
     expect_true(is.dict(d))
-    expect_true(is.dict(as.dict(list())))
     expect_true(is.container(d))
-    expect_output(print(d), "<Dict> of 2 elements: List of 2")
-    expect_equal(as.list(d), d$values())
-    expect_equal(as.vector(d), d$values())
+    expect_error(d[["z"]], "key 'z' not in Dict")
+    expect_error(add(d, key="", 3L, "zero-length key"))
+    expect_equal(as.integer(values(d)), 1:2)
+    expect_equal(type(d), "integer")
+    expect_equal(type(dict()), "list")
+    expect_error(dict(list(x=1, y=2, x=3)), "duplicated keys")
 
-    # as.data.frame
-    df <- data.frame(A=1:5, B=1:5)
-    d <- dict(df)
-    expect_equal(as.data.frame(d), df)
-    expect_equal(as.data.frame(dict()), data.frame())
+    # empty, size, has, add and peek
+    d <- dict()
+    expect_equal(attr(d, "name"), "<Dict>")
+    expect_true(empty(d))
+    expect_error(add(d, key=1, 1), "key must be character")
+    expect_error(add(d, c("x", "y"), 1), "key must be single character string")
+    add(d, "x", 1)
+    expect_false(empty(d))
+    expect_equal(size(d), 1)
+    expect_true(has(d, "x"))
+    expect_equal(peek(d, "x"), 1)
+    expect_equal(peek(d, "foo"), NULL)
+    expect_equal(peek(d, "foo"), d["foo"])
+    expect_equal(peek(d, "foo", default=0), 0)
+    expect_equal(peek(d, "foo", default=0), d["foo", default=0])
+
+    # set and pop
+    expect_error(d["x"] <- 2, "key 'x' already in Dict")
+    d[["x"]] <- 2
+    d[["x"]] <- 3
+    expect_equal(size(d), 1)
+    expect_equal(d["x"], 3)
+    expect_equal(pop(d, "x"), 3)
+    expect_false(has(d, "x"))
+
+    # keys, discard, remove, popitem
+    d <- dict(c(x=1L, y=2L, z=3L))
+    expect_output(print(d),
+                  '<Dict> of 3 elements:  Named int [1:3] 1 2 3', fixed=TRUE)
+    expect_true(has(d, "y"))
+    expect_equal(keys(d), c("x", "y", "z"))
+    expect_false(has(discard(d, "y"), "y"))
+    expect_error(remove(d, "y"), "key 'y' not in Dict")
+    expect_false(has(discard(d, "y"), "y")) # no error although not in Dict
+    expect_error(d[["y"]] <- 10, "key 'y' not in Dict")
+    d[["y", add=TRUE]] <- 10
+    expect_true(has(d, "y"))
+
+    v <- values(d) # x=1, z=3, y=10
+    v2 <- vector(mode = type(d))
+    set.seed(123)
+    for(i in seq_len(size(d))) {
+        v2 <- c(v2, popitem(d))
+    }
+
+    expect_true(empty(d))
+    expect_error(popitem(d), "pop at empty Dict")
+    expect_true(setequal(v, v2))
+    expect_equal(names(sort(v)), names(sort(v2)))
 })
 
-test_that("Operators", {
-    d <- Dict$new()
 
-    # `[<-` operator
-    expect_error(d["a"] <- 1, "key 'a' not in Dict")
-    d["a", add=TRUE] <- 1
+test_that("Operators", {
+    d <- dict()
+
+    # `[[<-` operator
+    expect_error(d[["a"]] <- 1, "key 'a' not in Dict")
+    d[["a", add=TRUE]] <- 1
     expect_equal(d$get("a"), 1)
-    d["a"] <- 3
+    d[["a"]] <- 3
     expect_equal(d$get("a"), 3)
-    d["b", add=TRUE] <- d["a"]
-    expect_equal(d$get("a"), d$get("b"))
+    d["b"] <- 3
+    expect_equal(d$get("b"), 3)
+    expect_error(d["b"] <- 3, "key 'b' already in Dict")
 
     # `[` and `[[` operators
     expect_equal(d$get("a"), d["a"])
-    expect_equal(d$peek("a"), d[["a"]])
-    expect_error(d["z"], "key 'z' not in Dict")
-    expect_true(is.null(d[["z"]]))
-    expect_equal(d$peek("z", default=1), d[["z", default=1]])
+    expect_equal(d$peek("a"), d["a"])
+    expect_error(d[["z"]], "key 'z' not in Dict")
+    expect_true(is.null(d["z"]))
+    expect_equal(d$peek("z", default=1), d["z", default=1])
 
     # `+` operator
     d2 <- dict(list(b=2, c=1))
@@ -50,21 +102,15 @@ test_that("Operators", {
     expect_equivalent(d2 - d1, dict())
     expect_equivalent(d1 - d1, dict())
     expect_equivalent(dict() - d1, dict())
-
 })
 
 
-test_that("Member functions", {
-    expect_equal(add(dict(), "a", 1), Dict$new()$add("a", 1))
-    ll <- list(A=1, B=2, C=3)
-    d <- dict(ll)
-    discard(d, "A")
-    expect_false(has(d, "A"))
-    expect_true(has(d, "B"))
-    expect_equal(as.list(d), ll[-1])
-    expect_equal(as.list(discard(d, "D")), ll[-1])
-    expect_error(remove(d, "A"), "key 'A' not in Dict")
-    expect_error(set(d, "A", 7), "key 'A' not in Dict")
-    expect_equal(as.list(set(d, "A", 1, add=TRUE)$sort()), ll)
+test_that("Conversion", {
+    # as.data.frame
+    df <- data.frame(A=1:5, B=1:5)
+    d <- dict(df)
+    expect_equal(as.data.frame(d), df)
+    expect_equal(as.data.frame(dict()), data.frame())
+    expect_equal(as.vector(container()), list())
 })
 

@@ -1,9 +1,3 @@
-#' @title Container constructors 
-#' @name ContainerS3
-#' @param x vector or list 
-#' @return \code{\link[container]{Container}} object
-NULL
-
 #' @export add clear discard empty has remove size type values
 add <- function(x, ...) UseMethod("add")
 clear <- function(x) UseMethod("clear")
@@ -16,10 +10,14 @@ size <- function(x) UseMethod("size")
 type <- function(x) UseMethod("type")
 values <- function(x) UseMethod("values")
 
+#' @title Container constructors 
+#' @name ContainerS3
+#' @param x (vector or list) initial elements of the container
+NULL
 
 #' @rdname ContainerS3 
-#' @details \code{container(x)}: initializes a \code{\link[container]{Container}}
-#'  object with all list elements inserted in the container.
+#' @details \code{container(x)}: initialize \code{\link[container]{Container}}
+#'  object. The type of \code{x} determines the internal storage mode.
 #' @export
 container <- function(x=list()) Container$new(x)
 
@@ -38,7 +36,7 @@ is.container <- function(x) inherits(x, "Container")
 #' @name ContainerS3funcs
 #' @param cont the container object
 #' @param elem a container element
-
+NULL
 
 #' @rdname ContainerS3funcs
 #' @details add(cont, elem): Add \code{elem} to \code{cont}.

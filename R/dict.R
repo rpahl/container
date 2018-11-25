@@ -11,7 +11,7 @@
 #' Inherits all methods from \code{\link[container]{Container}} but overrides the
 #' internal initialize function and the following member functions:
 #' \describe{
-#'  \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, set
+#'  \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, insert
 #'      \code{value} at \code{key}, otherwise signal an error.}
 #'  \item{\code{discard(key)}}{If \code{key} in \code{Dict}, remove it.}
 #'  \item{\code{has(key)}}{TRUE if \code{key} in \code{Dict} else FALSE.}
@@ -77,6 +77,7 @@ Dict <- R6::R6Class("Dict",
 # Dict method implementations
 Dict$set("public", "initialize", overwrite=TRUE,
     function(x=list()) {
+        if (is.data.frame(x)) x <- as.list(x)
         name_len <- sapply(names(x), nchar)
         if (length(x) != length(name_len) || any(name_len == 0)) {
             stop("all items must be named")

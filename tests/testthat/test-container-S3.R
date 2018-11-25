@@ -39,6 +39,7 @@ test_that("container", {
     expect_true(empty(clear(c1)))
 
     # print
+    ints <- container(1:3)
     expect_output(print(ints),
                   "<Container> of 3 elements:  int \\[1:3\\] 1 2 3")
 
@@ -110,6 +111,7 @@ test_that("Operator", {
 })
 
 test_that("Conversion", {
+    ints <- container(1:3)
     expect_equal(as.vector(container()), list())
     expect_equal(as.vector(ints), as.integer(1:3))
     expect_equal(as.list(ints), as.list(1:3))
