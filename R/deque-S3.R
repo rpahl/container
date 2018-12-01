@@ -107,28 +107,36 @@ rotate <- function(x, ...) UseMethod("rotate")
 #' @rdname dequeS3
 #' @param deq The deque object.
 #' @param elem an element of the deque 
+#' @export
 addleft.Deque <- function(deq, elem) deq$addleft(elem)
 
 #' @rdname dequeS3
+#' @export
 count.Deque <- function(deq, elem) deq$count(elem)
 
 #' @rdname dequeS3
+#' @export
 peek.Deque <- function(deq) deq$peek()
 
 #' @rdname dequeS3
+#' @export
 peekleft.Deque <- function(deq) deq$peekleft()
 
 #' @rdname dequeS3
+#' @export
 pop.Deque <- function(deq) deq$pop()
 
 #' @rdname dequeS3
+#' @export
 popleft.Deque <- function(deq) deq$popleft()
 
 #' @rdname dequeS3
+#' @export
 reverse.Deque <- function(deq) deq$reverse()
 
 #' @rdname dequeS3
 #' @param n (integer) the number of positions to rotate
+#' @export
 rotate.Deque <- function(deq, n=1L) deq$rotate(n)
 
 

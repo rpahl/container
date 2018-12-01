@@ -2,7 +2,10 @@
 title: "Container class - overview and examples"
 author: "Roman Pahl"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: yes
+    toc_depth: 4
 vignette: >
   %\VignetteIndexEntry{Container class - overview and examples}
   %\VignetteEngine{knitr::rmarkdown}
@@ -23,12 +26,13 @@ knitr::include_graphics("class-diagram-bare.png")
 ```
 
 
-The following table shows member methods divided by class. The top half contains all `Container` methods, each derived by the subclasses to the right unless there is a new entry in a sub-class column, meaning the method is overwritten by the subclass.
-The bottom half contains methods unique to each subclass.
+The following table shows member methods divided by class. The top half contains all `Container` methods, each derived by the subclasses to the right unless there is a new entry in a sub-class column, meaning the method is overwritten by the subclass. The bottom half contains methods unique to each subclass.
 
 |Iterable | Container                | Deque           | Set              | Dict                         |
 |---------|--------------------------|-----------------|------------------|------------------------------|
-|`iterator()` |                          |                 |                  |                              |
+|         | `Container$new()`        | `Deque$new()`   | `s <- Set$new()` | `Dict$new()`                 |
+|         |                          |                 |                  |                              |
+|`iter()` |                          |                 |                  |                              |
 |         | `add(elem)`              |                 | `add(elem)`      | `add(key, value)`            |
 |         | `apply(f)`               |                 |                  |                              |
 |         | `clear()`                |                 |                  |                              |
@@ -40,7 +44,7 @@ The bottom half contains methods unique to each subclass.
 |         | `size()`                 |                 |                  |                              |
 |         | `type()`                 |                 |                  |                              |
 |         | `values()`               |                 |                  |                              |
-|         |                          |-----------------|------------------|------------------------------|
+|         |                          |                 |                  |                              |
 |         |                          | `addleft(elem)` | `union(s)`       | `get(key)`                   |
 |         |                          | `count(elem)`   | `intersect(s)`   | `keys()`                     |
 |         |                          | `peek()`        | `diff(s)`        | `peek(key, default=NULL)`    |
@@ -48,12 +52,12 @@ The bottom half contains methods unique to each subclass.
 |         |                          | `pop()`         | `is.subset(s)`   | `popitem()`                  |
 |         |                          | `popleft()`     | `is.superset(s)` | `set(key, value, add=FALSE)` |
 |         |                          | `reverse()`     |                  | `sort(decr=FALSE)`           |
-|         |                          | `rotate(n=1L)`  |                  |                              |
+|         |                          | `rotate(n=1L)`  |                  | `update(other)`              |
 
 
-Method descriptions are found in the respective online helps (see `?Container`, `?Deque`, `?Set`, and `?Dict`).
+More details about the methods are found in the respective online helps (see `?Container`, `?Deque`, `?Set`, and `?Dict`).
 
-## Container examples
+## Container
 The base `Container` is ready to be used by itself. Examples of `Deque`, `Set`, and `Dict`, follow below.
 ```{r lib-setup}
 library(container)
@@ -111,7 +115,7 @@ ints$has(7)
 
 ints$discard(7)$has(7)
 
-ints$remove(8)$has(8)
+ints$remove(8)$values()
 ```
 
 Using `remove` on non-existent elements throws an error,
@@ -134,17 +138,16 @@ ints$discard(1)$values()
 ints$discard(2, right=TRUE)$values()
 ```
 
-#### apply
+There is also an apply method, which applies a function to all elements and returns a copy of the result.
 ```{r}
 unlist(ints$apply(f = function(x) x^2))
 
 ints$clear()$empty()
 ```
+More details and examples are found in the online help (see `?Container`).
 
-More examples are found in the online help (see `?Container`).
 
-
-### Reference semantics
+### Reference semantics and iterator
 Being based on R6 classes, any `Container` object provides reference semantics.
 ```{r}
 members <- Container$new(c("Lisa", "Bob", "Joe"))$print()
@@ -154,15 +157,19 @@ remove_Joe(members)
 members
 ```
 
-#### Iterator
 ```{r}
-it <- members$iterator()
-while(it$has.next()) print(it$get.next())
+it <- members$iter()
+print(it)
+
+while(it$has_next()) {
+    print(it$get_next())
+    print(it)
+}
 ```
 
 Once iterated to the last element, trying to iterate further leads to an error.
 ```{r, error=TRUE}
-it$get.next()
+it$get_next()
 ```
 
 
@@ -229,16 +236,24 @@ d$reverse()$values()
 ```
 
 #### Deque iterator
-Use iterator to re-add elements left and right into second `Deque` object.
+As a silly example, define a reverse perfect shuffler.
 ```{r}
-d2 <- Deque$new(integer())
-it <- d2$iterator()
-while(it$has.next()) {
-    it$.next()
-    d2$add(it$get())
-    if (it$has_next()) d2$addleft(it$get_next())
+reverse_ps <- function(x)
+{
+    it <- Iterator$new(seq_along(x))
+    d <- Deque$new(integer())
+    
+    while(it$has_next()) {
+        it$.next()
+        d$add(it$get())
+        if (it$has_next()) d$addleft(it$get_next())
+    }
+    x[d$values()]
 }
-d2$values()
+
+(zz <- rep(c(0, 1), 10))
+
+reverse_ps(zz)
 ```
 
 ## Set
@@ -249,7 +264,7 @@ s1$add(1)  # does not change the set
 s1
 ```
 
-#### Set operations
+#### set operators
 ```{r}
 s1 <- Set$new(c(1, 2,    4, 5))
 s2 <- Set$new(c(   2, 3,    5, 6))
@@ -272,10 +287,19 @@ s1$union(s2)$is.superset(s2)
 ```
 
 ## Dict
-Due to the key-value semantic, several `Container ` methods are extended to take the key argument.
-```{r, error=TRUE}
+```{r}
 ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))$print()
 
+ages$keys()
+
+ages$peek("Lisa")
+
+ages$peek("Anna")
+```
+
+#### add, discard, remove
+Due to the key-value semantic, several `Container ` methods are modified/extended to take the key argument.
+```{r, error=TRUE}
 ages$add("Albert", 139)$values()
 
 ages$add("Bob", 40)
@@ -291,18 +315,10 @@ ages$discard("Albert")$values()
 ages$remove("Albert")
 ```
 
-#### More Dict-specific methods
-```{r}
-ages$keys()
-
-ages$peek("Lisa")
-
-ages$peek("Anna")
-```
-
+#### add vs set
 Trying to `set` a value at a non-existing key throws an error unless the `set` method is explicitly told to add it to the `Dict`.
 ```{r, error=TRUE}
-ages$set("Anna")
+ages$set("Anna", 23)
 
 ages$set("Anna", 23, add=TRUE)  # alternatively ages$add("Anna", 23)
 ages
@@ -313,6 +329,7 @@ This allows fine control over the insert-behaviour of the `Dict`. If already exi
 ages$set("Lisa", 11)$values()
 ```
 
+#### peek, pop, and popitem
 A similar control is provided via the different methods to retrieve elements.
 ```{r, error=TRUE}
 ages$pop("Lisa")
@@ -326,10 +343,18 @@ ages$get("Lisa")
 ages$peek("Lisa")
 ```
 
-Finally, the `Dict` could also be used as a sampler (without replacement).
+The `Dict` can also be used as a sampler (without replacement).
 ```{r}
 set.seed(123)
 while(!ages$empty()) print(ages$popitem())
 ```
 
+#### update
+```{r}
+shoplist <- Dict$new(list(eggs=10, potatoes=10, bananas=5, apples=4))
+
+shoplist2 <- Dict$new(list(eggs=6, broccoli=4))
+
+shoplist$update(shoplist2)$values()
+```
 

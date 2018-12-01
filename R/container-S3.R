@@ -81,6 +81,7 @@ as.container <- function(x) container(x)
 is.container <- function(x) inherits(x, "Container")
 
 #' @rdname ContainerS3 
+#' @export
 add <- function(x, ...) UseMethod("add")   
 
 #' @rdname ContainerS3 
@@ -111,39 +112,50 @@ type <- function(x) UseMethod("type")
 values <- function(x) UseMethod("values")
 
 #' @rdname ContainerS3
+#' @export
 add.Container <- function(cont, elem) cont$add(elem)
 
 #' @rdname ContainerS3
+#' @export
 clear.Container <- function(cont) cont$clear()
 
 #' @rdname ContainerS3
+#' @export
 clone.Container <- function(cont, deep=FALSE) cont$clone(deep)
 
 #' @rdname ContainerS3
+#' @export
 discard.Container <- function(cont, elem, right=FALSE) cont$discard(elem, right)
 
 #' @rdname ContainerS3
+#' @export
 empty.Container <- function(cont) cont$empty()
 
 #' @rdname ContainerS3
+#' @export
 has.Container <- function(cont, elem) cont$has(elem)
 
 #' @rdname ContainerS3
 #' @param list.len (integer) maximum number of list elements to display within
 #'  a level.
 #' @param ... (list) further arguments passed to \code{\link[utils]{str}}
+#' @export
 print.Container <- function(cont, list.len=10, ...) cont$print(list.len, ...)
 
 #' @rdname ContainerS3
+#' @export
 remove.Container <- function(cont, elem, right=FALSE) cont$remove(elem, right)
 
 #' @rdname ContainerS3
+#' @export
 size.Container <- function(cont) cont$size()
 
 #' @rdname ContainerS3
+#' @export
 type.Container <- function(cont) cont$type()
 
 #' @rdname ContainerS3
+#' @export
 values.Container <- function(cont) cont$values()
 
 

@@ -15,7 +15,7 @@ test_that("dict", {
     expect_equal(type(dict()), "list")
     expect_error(dict(list(x=1, y=2, x=3)), "duplicated keys")
 
-    # empty, size, has, add and peek
+    # empty, size, has, add, peek and getval
     d <- dict()
     expect_equal(attr(d, "name"), "<Dict>")
     expect_true(empty(d))
@@ -25,6 +25,7 @@ test_that("dict", {
     expect_false(empty(d))
     expect_equal(size(d), 1)
     expect_true(has(d, "x"))
+    expect_error(getval(d, "foo"))
     expect_equal(peek(d, "x"), 1)
     expect_equal(peek(d, "foo"), NULL)
     expect_equal(peek(d, "foo"), d["foo"])
@@ -32,9 +33,7 @@ test_that("dict", {
     expect_equal(peek(d, "foo", default=0), d["foo", default=0])
 
     # set and pop
-    expect_error(d["x"] <- 2, "key 'x' already in Dict")
-    d[["x"]] <- 2
-    d[["x"]] <- 3
+    setval(d, "x", 3)
     expect_equal(size(d), 1)
     expect_equal(d["x"], 3)
     expect_equal(pop(d, "x"), 3)
@@ -49,8 +48,8 @@ test_that("dict", {
     expect_false(has(discard(d, "y"), "y"))
     expect_error(remove(d, "y"), "key 'y' not in Dict")
     expect_false(has(discard(d, "y"), "y")) # no error although not in Dict
-    expect_error(d[["y"]] <- 10, "key 'y' not in Dict")
-    d[["y", add=TRUE]] <- 10
+    expect_error(setval(d, "y", 10), "key 'y' not in Dict")
+    setval(d, "y", 10, add=TRUE)
     expect_true(has(d, "y"))
 
     v <- values(d) # x=1, z=3, y=10
@@ -64,21 +63,28 @@ test_that("dict", {
     expect_error(popitem(d), "pop at empty Dict")
     expect_true(setequal(v, v2))
     expect_equal(names(sort(v)), names(sort(v2)))
+
+    d1 <- dict(list(A=1, B=2))
+    d2 <- dict(list(     B=7, C=3))
+    update(d1, d2)
+    expect_equal(d1, dict(list(A=1, B=7, C=3)))
+
+    sortkey(d1, decr=TRUE)
+    expect_equal(keys(d1), c("C", "B", "A"))
 })
 
 
 test_that("Operators", {
     d <- dict()
 
-    # `[[<-` operator
+    # `[[<-` and `[<-` operator
     expect_error(d[["a"]] <- 1, "key 'a' not in Dict")
     d[["a", add=TRUE]] <- 1
     expect_equal(d$get("a"), 1)
     d[["a"]] <- 3
     expect_equal(d$get("a"), 3)
     d["b"] <- 3
-    expect_equal(d$get("b"), 3)
-    expect_error(d["b"] <- 3, "key 'b' already in Dict")
+    expect_equal(d[["b"]], 3)
 
     # `[` and `[[` operators
     expect_equal(d$get("a"), d["a"])

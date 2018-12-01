@@ -106,18 +106,3 @@ Set$set("public", "is.superset", overwrite=TRUE,
 Set$lock()
 
 
-#' @export
-set <- function(x=list()) Set$new(x)
-
-#' @export
-as.set <- function(x) Set$new(x)
-
-#' @export
-is.set <- function(x) inherits(x, "Set")
-
-#' @export
-`+.Set` <- function(s1, s2) s1$union(s2)
-
-#' @export
-`-.Set` <- function(s1, s2) s1$diff(s2)
-
