@@ -1,5 +1,5 @@
 ---
-title: "Container class - overview and examples"
+title: "S3 methods overview and examples"
 author: "Roman Pahl"
 date: "`r Sys.Date()`"
 output: 
@@ -7,7 +7,7 @@ output:
     toc: yes
     toc_depth: 4
 vignette: >
-  %\VignetteIndexEntry{Container class - overview and examples}
+  %\VignetteIndexEntry{S3 methods overview and examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
