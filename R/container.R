@@ -11,13 +11,14 @@
 #' If the container will only contain objects of one particular type, for
 #' example, double values, it will be both more efficient and type safe to
 #' initialize the container using this particular type (see Examples section).
-#' @usage Container$new(x=list(x))
-#' @param x (vector or list) initial elements of the container
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
 #' @seealso \code{\link[container]{Iterable}}, \code{\link[container]{Deque}},
 #' \code{\link[container]{Set}}, and \code{\link[container]{Dict}}
+#' 
+#' @section R6 constructor:
+#' \code{Container$new(x=list())}
 #'
 #' @section Container methods:
 #' \describe{

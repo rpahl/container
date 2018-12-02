@@ -13,12 +13,11 @@
 #'  \code{\link[container]{>.Set}}
 #' 
 #' @param x (vector or list) initial elements of the set
-#' @return \code{\link[container]{Set}} object
 #' @export set as.set is.set
-#' 
-#' @section S3 methods for Set objects:
+#'
+#' @section S3 methods for class \code{Set}:
 #' \describe{
-#'  \item{\code{add(s, elem)}}{If not already in set, add \code{elem}.}
+#'  \item{\code{add(x, elem)}}{If not already in set \code{x}, add \code{elem}.}
 #' }
 #' 
 #' @examples
@@ -39,24 +38,20 @@
 NULL
 
 #' @rdname setS3
-#' @details \code{set(x=list())}: create a \code{\link[container]{Set}} object
 set <- function(x=list()) Set$new(x)
 
 #' @rdname setS3
-#' @details \code{as.set(x)}: convert x to \code{Set} object
 as.set <- function(x) Set$new(x)
 
 #' @rdname setS3
-#' @details \code{is.set(x)}: check for \code{Set} class
 is.set <- function(x) inherits(x, "Set")
 
-#' @name setS3
-#' @param s The set object
-#' @param elem A set element
-add.Set <- function(s, elem) s$add(elem)
+#' @export
+add.Set <- function(x, elem, ...) x$add(elem)
 
 
 #' @title Binary set operators
+#' @description Binary operators for \code{Set} objects.
 #' @name setS3binOp
 #' @param s1 \code{\link[container]{Set}} object
 #' @param s2 \code{\link[container]{Set}} object

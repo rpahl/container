@@ -69,7 +69,7 @@ test_that("container", {
     collection <- c(list(v), list(env), list(ll))
 
     c1 <- container()
-    lapply(collection, add.Container, cont=c1)
+    lapply(collection, add.Container, x=c1)
     expect_equal(values(c1), collection)
     expect_equal(size(c1), length(collection))
 

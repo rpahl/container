@@ -8,8 +8,9 @@
 #' \code{\link[container]{count}}ing, and \code{\link[container]{reverse}} and
 #'  \code{\link[container]{rotate}} functionality.
 #' @name dequeS3
-#' @param x (vector or list) initial elements of the deque
-#' @return \code{\link[container]{Deque}} object
+#' @param x initial elements passed to constructor or object of class \code{Deque}
+#'  passed to member methods.
+#' @param ... further arguments
 #' @seealso \code{\link[container]{container}}, \code{\link[container]{Deque}},
 #' \code{\link[container]{+.Deque}}
 #' @export deque as.deque is.deque
@@ -63,20 +64,20 @@
 NULL
 
 #' @rdname dequeS3
-#' @details \code{deque(x=list())}: create \code{\link[container]{Deque}} object
 deque <- function(x=list()) Deque$new(x)
 
 #' @rdname dequeS3
-#' @details \code{as.deque(x)}: convert x to \code{Deque} object
 as.deque <- function(x) Deque$new(x)
 
 #' @rdname dequeS3
-#' @details \code{is.deque(x)}: check for \code{Deque} class
 is.deque <- function(x) inherits(x, "Deque")
 
 
 #' @title Deque and Dict S3 member functions
 #' @name DequeDictS3funcs
+#' @description Access elements from \code{Deque} or \code{Dict} objects.
+#' @param x object of class \code{Deque} or \code{Dict}
+#' @param ... further arguments 
 #' @export peek pop
 NULL
 
@@ -104,43 +105,33 @@ reverse <- function(x) UseMethod("reverse")
 #' @rdname dequeS3
 rotate <- function(x, ...) UseMethod("rotate")
 
-#' @rdname dequeS3
-#' @param deq The deque object.
-#' @param elem an element of the deque 
 #' @export
-addleft.Deque <- function(deq, elem) deq$addleft(elem)
+addleft.Deque <- function(x, elem, ...) x$addleft(elem)
 
-#' @rdname dequeS3
 #' @export
-count.Deque <- function(deq, elem) deq$count(elem)
+count.Deque <- function(x, elem, ...) x$count(elem)
 
-#' @rdname dequeS3
 #' @export
-peek.Deque <- function(deq) deq$peek()
+peek.Deque <- function(x, ...) x$peek()
 
-#' @rdname dequeS3
 #' @export
-peekleft.Deque <- function(deq) deq$peekleft()
+peekleft.Deque <- function(x) x$peekleft()
 
-#' @rdname dequeS3
 #' @export
-pop.Deque <- function(deq) deq$pop()
+pop.Deque <- function(x, ...) x$pop()
 
-#' @rdname dequeS3
 #' @export
-popleft.Deque <- function(deq) deq$popleft()
+popleft.Deque <- function(x) x$popleft()
 
-#' @rdname dequeS3
 #' @export
-reverse.Deque <- function(deq) deq$reverse()
+reverse.Deque <- function(x) x$reverse()
 
-#' @rdname dequeS3
-#' @param n (integer) the number of positions to rotate
 #' @export
-rotate.Deque <- function(deq, n=1L) deq$rotate(n)
+rotate.Deque <- function(x, n=1L, ...) x$rotate(n)
 
 
 #' @title Binary deque operators
+#' @description Binary operators for \code{Deque} objects.
 #' @name dequeS3binOp
 #' @param x1 primitive or \code{\link[container]{Deque}} object
 #' @param x2 primitive or \code{\link[container]{Deque}} object
@@ -148,7 +139,7 @@ rotate.Deque <- function(deq, n=1L) deq$rotate(n)
 NULL
 
 #' @rdname dequeS3binOp 
-#' @details \code{x + deq}:
+#' @details \code{x1 + x2}:
 #' @export
 `+.Deque` <- function(x1, x2)
 {

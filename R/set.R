@@ -8,6 +8,9 @@
 #' @importFrom R6 R6Class
 #' @seealso \code{\link[container]{Container}}
 #'
+#' @section R6 constructor:
+#' \code{Set$new(x=list())}
+#'
 #' @section Inherited methods:
 #' Inherits all methods from \code{\link[container]{Container}}, but overrides
 #' \code{add}:

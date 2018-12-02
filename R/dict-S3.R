@@ -4,8 +4,9 @@
 #' sharing all \code{\link[container]{container}} methods with some of them being
 #' overriden to account for the associative key-value pair semantic.
 #' @name dictS3
-#' @param x (named list or data.frame) initial elements of the \code{dict}
-#' @return \code{\link[container]{Dict}} object
+#' @param x initial elements passed to constructor or object of class
+#' \code{Dict} passed to member methods.
+#' @param ... further arguments
 #' @seealso \code{\link[container]{container}}, \code{\link[container]{Dict}},
 #'  \code{\link[container]{+.Dict}}, 
 #'  \code{\link[container]{[<-.Dict}},
@@ -14,7 +15,7 @@
 #'  \code{\link[container]{[.Dict}}
 #' @export dict as.dict is.dict getval keys popitem setval sortkey
 #' 
-#' @section S3 methods for Dict objects:
+#' @section S3 methods for class \code{Dict}:
 #' \describe{
 #'  \item{\code{add(dic, key, value)}}{If \code{key} not yet in \code{dic},
 #'      insert \code{value} at \code{key}, otherwise signal an error.}
@@ -36,8 +37,8 @@
 #'      value if \code{key} is already in the \code{dic}. If \code{key} not in
 #'      \code{dic}, an error is thrown unless \code{add} was set to
 #'      \code{TRUE}.}
-#'  \item{\code{sortkey(decr=FALSE)}}{Sort values in dictionary according to keys.}
-#'  \item{\code{update(other=dict())}}{Adds element(s) of other to the 
+#'  \item{\code{sortkey(dic, decr=FALSE)}}{Sort values in dictionary according to keys.}
+#'  \item{\code{update(dic, other=dict())}}{Adds element(s) of other to the 
 #'      dictionary if the key(s) are not in the dictionary and updates all keys with
 #'      the new value(s) otherwise.}
 #' }
@@ -59,20 +60,16 @@
 NULL
 
 #' @rdname dictS3 
-#' @details \code{dict(x=list())}: create a \code{\link[container]{Dict}} object
 dict <- function(x=list()) Dict$new(x)
 
 #' @rdname dictS3 
-#' @details \code{as.dict(x)}: convert x to \code{Dict} object
 as.dict <- function(x) dict(x)
 
 #' @rdname dictS3 
-#' @details \code{is.dict(x)}: check for \code{Dict} class
 is.dict <- function(x) inherits(x, "Dict")
 
-
 #' @export
-`as.data.frame.Dict` <- function(d1) as.data.frame(as.list(d1))
+`as.data.frame.Dict` <- function(x, ...) as.data.frame(as.list(x))
 
 #' @rdname dictS3 
 getval <- function(x, ...) UseMethod("getval")
@@ -89,59 +86,46 @@ setval <- function(x, ...) UseMethod("setval")
 #' @rdname dictS3 
 sortkey <- function(x, ...) UseMethod("sortkey")
 
-#' @rdname dictS3 
-#' @param dict The dict object.
-#' @param key (character) The key in the dictionary.
-#' @param value The value associated with the key.
-#' @export
-add.Dict <- function(dic, key, value) dic$add(key, value)
 
-#' @rdname dictS3 
 #' @export
-discard.Dict <- function(dic, key) dic$discard(key)
+add.Dict <- function(x, key, value, ...) x$add(key, value)
 
-#' @rdname dictS3 
 #' @export
-has.Dict <- function(dic, key) dic$has(key)
+discard.Dict <- function(x, key, ...) x$discard(key)
 
-#' @rdname dictS3 
 #' @export
-remove.Dict <- function(dic, key) dic$remove(key)
+has.Dict <- function(x, key, ...) x$has(key)
 
-#' @rdname dictS3 
 #' @export
-getval.Dict <- function(dic, key) dic$get(key)
+remove.Dict <- function(x, key, ...) x$remove(key)
 
-#' @rdname dictS3 
 #' @export
-keys.Dict <- function(dic) dic$keys()
+getval.Dict <- function(x, key, ...) x$get(key)
 
-#' @rdname dictS3 
 #' @export
-peek.Dict <- function(dic, key, default=NULL) dic$peek(key, default)
+keys.Dict <- function(x) x$keys()
 
-#' @rdname dictS3 
 #' @export
-pop.Dict <- function(dic, key) dic$pop(key)
+peek.Dict <- function(x, key, default=NULL, ...) x$peek(key, default)
 
-#' @rdname dictS3 
 #' @export
-popitem.Dict <- function(dic) dic$popitem()
+pop.Dict <- function(x, key, ...) x$pop(key)
 
-#' @rdname dictS3 
 #' @export
-setval.Dict <- function(dic, key, value, add=FALSE) dic$set(key, value, add)
+popitem.Dict <- function(x) x$popitem()
 
-#' @rdname dictS3 
 #' @export
-sortkey.Dict <- function(dic, decr=FALSE) dic$sort(decr)
+setval.Dict <- function(x, key, value, add=FALSE, ...) x$set(key, value, add)
 
-#' @rdname dictS3 
 #' @export
-update.Dict <- function(dic, other=dict()) dic$update(other)
+sortkey.Dict <- function(x, decr=FALSE, ...) x$sort(decr)
+
+#' @export
+update.Dict <- function(object, other=dict(), ...) object$update(other)
 
 
 #' @title Binary dict operators
+#' @description Binary operators for \code{Dict} objects.
 #' @name dictS3binOp
 #' @param d1 \code{\link[container]{Dict}} object
 #' @param d2 \code{\link[container]{Dict}} object
@@ -165,11 +149,13 @@ NULL
 }
 
 #' @title Extract or replace \code{Dict} values
+#' @description Access and assignment operators for \code{Dict} objects.
 #' @name dictS3replace
 #' @param dic \code{\link[container]{Dict}} object
 #' @param key (character) the key
 #' @param add (logical) if TRUE, value is added if not yet in dict. If FALSE
 #'  and value not yet in dict, an error is signaled.
+#' @param value the value associated with the \code{key}
 #' @return updated \code{\link[container]{Dict}} object
 #' @export
 `[[<-.Dict` <- function(dic, key, add=FALSE, value) dic$set(key, value, add)
@@ -188,6 +174,7 @@ NULL
 `[[.Dict` <- function(dic, key) dic$get(key)
 
 #' @rdname dictS3replace
+#' @param default the default value
 #' @details \code{dic[key, default=NULL]}: Return the value for \code{key} if
 #'  \code{key} is in \code{dic}, else \code{default}.
 #' @return element found at key, or \code{default} if not found.

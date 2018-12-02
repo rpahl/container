@@ -35,12 +35,14 @@ Iterable <- R6::R6Class("Iterable",
 #' iterate and retrieve the value of the sequence it is associated with.
 #' @param x iterable object, e.g., \code{\link[base]{list}},
 #'  \code{\link[base]{vector}}, \code{\link[container]{Container}}
-#' @usage Iterator$new(x)
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
 #' @seealso \code{\link[container]{Iterable}},
 #' \code{\link[container]{Container}}, \code{\link[container]{container}}
+#'
+#' @section Constructor:
+#' \code{Iterator$new(x)}
 #'
 #' @section Iterator interface:
 #' \describe{
@@ -115,7 +117,7 @@ Iterator <- R6::R6Class("Iterator",
 
 #' @rdname Iterator
 #' @param it \code{\link[container]{Iterator}} object
-#' @export iter iter.default iter.Container is.iterator
+#' @export iter is.iterator
 #' @examples
 #' 
 #' # S3 method interface
@@ -127,14 +129,10 @@ Iterator <- R6::R6Class("Iterator",
 #' print(it)       # <Iterator> at position 3
 #' itbegin(it)
 #' print(it)       # <Iterator> at position 0
-#' @rdname Iterator
 iter <- function(x) UseMethod("iter")
 
-#' @rdname Iterator
+#' @export
 iter.default <- function(x) Iterator$new(x)
-
-#' @rdname Iterator
-iter.Container <- function(cont) cont$iter()
 
 #' @rdname Iterator
 is.iterator <- function(x) inherits(x, "Iterator")

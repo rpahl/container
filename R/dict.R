@@ -19,6 +19,9 @@
 #'      raise an error.}
 #' }
 #'
+#' @section R6 constructor:
+#' \code{Dict$new(x=list())}
+#'
 #' @section Dict methods:
 #' \describe{
 #'  \item{\code{get(key)}}{If \code{key} in \code{Dict}, return value, else

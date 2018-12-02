@@ -13,16 +13,16 @@
 #' example, double values, it will be both more efficient and type safe to
 #' initialize the container using this particular type (see Examples section).
 #' @name ContainerS3
-#' @param x (vector or list) initial elements of the container
-#' @param cont the container object
-#' @param elem a container element
-#' @return \code{\link[container]{Container}} object
+#' @param x initial elements passed to constructor or object of class
+#'  \code{Container} passed to member methods.
+#' @param ... further arguments
 #' @seealso \code{\link[container]{Container}}, \code{\link[container]{+.Container}}, 
 #' @export container as.container is.container
 #' @export add clear discard empty has remove size type values
 #'
-#' @section S3 methods for Container objects:
+#' @section S3 methods for class \code{Container}:
 #' \describe{
+#'  \item{\code{iter(cont)}}{Create iterator from \code{cont}.}
 #'  \item{\code{add(cont, elem)}}{Add \code{elem} to \code{cont}.}
 #'  \item{\code{clear(cont)}}{Remove all elements from the \code{cont}.}
 #'  \item{\code{clone(cont)}}{Create a copy of \code{cont} object. For
@@ -68,20 +68,15 @@
 NULL
 
 #' @rdname ContainerS3 
-#' @details \code{container(x)}: initialize \code{\link[container]{Container}}
-#'  object. The type of \code{x} determines the internal storage mode.
 container <- function(x=list()) Container$new(x)
 
 #' @rdname ContainerS3 
-#' @details \code{as.container(x)}: convert x to \code{Container} object
 as.container <- function(x) container(x)
 
 #' @rdname ContainerS3 
-#' @details \code{is.container(x)}: check for \code{Container} class
 is.container <- function(x) inherits(x, "Container")
 
 #' @rdname ContainerS3 
-#' @export
 add <- function(x, ...) UseMethod("add")   
 
 #' @rdname ContainerS3 
@@ -111,55 +106,45 @@ type <- function(x) UseMethod("type")
 #' @rdname ContainerS3 
 values <- function(x) UseMethod("values")
 
-#' @rdname ContainerS3
 #' @export
-add.Container <- function(cont, elem) cont$add(elem)
+iter.Container <- function(x) x$iter()
 
-#' @rdname ContainerS3
 #' @export
-clear.Container <- function(cont) cont$clear()
+add.Container <- function(x, elem, ...) x$add(elem)
 
-#' @rdname ContainerS3
 #' @export
-clone.Container <- function(cont, deep=FALSE) cont$clone(deep)
+clear.Container <- function(x) x$clear()
 
-#' @rdname ContainerS3
 #' @export
-discard.Container <- function(cont, elem, right=FALSE) cont$discard(elem, right)
+clone.Container <- function(x, deep=FALSE, ...) x$clone(deep)
 
-#' @rdname ContainerS3
 #' @export
-empty.Container <- function(cont) cont$empty()
+discard.Container <- function(x, elem, right=FALSE, ...) x$discard(elem, right)
 
-#' @rdname ContainerS3
 #' @export
-has.Container <- function(cont, elem) cont$has(elem)
+empty.Container <- function(x) x$empty()
 
-#' @rdname ContainerS3
-#' @param list.len (integer) maximum number of list elements to display within
-#'  a level.
-#' @param ... (list) further arguments passed to \code{\link[utils]{str}}
 #' @export
-print.Container <- function(cont, list.len=10, ...) cont$print(list.len, ...)
+has.Container <- function(x, elem, ...) x$has(elem)
 
-#' @rdname ContainerS3
 #' @export
-remove.Container <- function(cont, elem, right=FALSE) cont$remove(elem, right)
+print.Container <- function(x, list.len=10, ...) x$print(list.len, ...)
 
-#' @rdname ContainerS3
 #' @export
-size.Container <- function(cont) cont$size()
+remove.Container <- function(x, elem, right=FALSE, ...) x$remove(elem, right)
 
-#' @rdname ContainerS3
 #' @export
-type.Container <- function(cont) cont$type()
+size.Container <- function(x) x$size()
 
-#' @rdname ContainerS3
 #' @export
-values.Container <- function(cont) cont$values()
+type.Container <- function(x) x$type()
+
+#' @export
+values.Container <- function(x) x$values()
 
 
 #' @title Container operators
+#' @description Binary operators for \code{Container} objects.
 #' @name ContainerS3op
 #' @param c1 \code{\link[container]{Container}} object
 #' @param c2 \code{\link[container]{Container}} object
@@ -178,5 +163,5 @@ NULL
 `as.vector.Container` <- function(x, mode="any") as.vector(x$values(), mode=mode)
 
 #' @export
-`as.list.Container` <- function(x) as.list(x$values())
+`as.list.Container` <- function(x, ...) as.list(x$values())
 
