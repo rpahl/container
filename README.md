@@ -1,7 +1,6 @@
 # container
 Deque, Set, and Dict - R6 based container classes with iterators
 
-Common container data structures Deque, Set and Dict (resembling Python's dict type) with typical member functions to insert, delete and
-access objects from the container and support of iterators. 
+Common container data structures deque, set and dict (resembling 'Python's dict type) with typical member functions to insert, delete and access container elements. Provides iterators and reference semantics.
 
-Soon on CRAN.
+Available on CRAN: https://CRAN.R-project.org/package=container
