@@ -8,6 +8,8 @@
 #' dict type). Supports iterators and, being R6 classes, reference semantics.
 #' The focus of implementation was not on speed but to define consistent class
 #' interfaces based on a meaningful class hierarchy.
+#'
+#' @author Roman Pahl, \email{roman.pahl@gmail.com}
 #' @docType package
 #' @name container.pkg
 NULL

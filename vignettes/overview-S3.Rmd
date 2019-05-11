@@ -386,9 +386,9 @@ d["A"] <- 2             # add(d, "A", 2)
 
 d[["A"]] <- 2           # setval(d, "A", 2)
 
-d[["B"]] <- 3           # setval(d, "A", 3)
+d[["B"]] <- 3           # setval(d, "B", 3)
 
-d[["B", add=T]] <- 3    # setval(d, "A", 3, add=T)
+d[["B", add=T]] <- 3    # setval(d, "B", 3, add=T)
 
 d
 

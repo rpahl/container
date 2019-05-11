@@ -15,8 +15,7 @@ LazyData: TRUE
 Encoding: UTF-8
 Imports: R6
 VignetteBuilder: knitr
-Suggests: knitr, testthat,
-    rmarkdown
+Suggests: knitr, testthat, rmarkdown
 URL: https://github.com/rpahl/container
 BugReports: https://github.com/rpahl/container/issues
 NeedsCompilation: no
