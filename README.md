@@ -1,4 +1,6 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
+[![Build Status](https://travis-ci.org/rpahl/container.png?branch=master)](https://travis-ci.org/rpahl/container)
+[![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
 [![status](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
 [![Downloads](http://cranlogs.r-pkg.org/badges/container)](http://www.r-pkg.org/pkg/container)
 
