@@ -1,2 +1,5 @@
+^\.travis\.yml$
 .git
 TODO
+^.*\.Rproj$
+^\.Rproj\.user$
