@@ -4,59 +4,12 @@
 \name{Dict}
 \alias{Dict}
 \title{A Dict class}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Dict
-}
 \description{
 The \code{Dict} resembles Python's dict type, and is implemented
-as a specialized associative (or mapping) \code{\link[container]{Container}} thus
-sharing all \code{\link[container]{Container}} methods with some of them being
-overriden to account for the associative key-value pair semantic.
+as a specialized associative \code{Container} thus sharing all \code{Container} methods
+with some of them being overriden to account for the associative key-value
+pair semantic.
 }
-\section{Inherited methods}{
-
-Inherits all methods from \code{\link[container]{Container}} but overrides the
-internal initialize function and the following member functions:
-\describe{
- \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, insert
-     \code{value} at \code{key}, otherwise signal an error.}
- \item{\code{discard(key)}}{If \code{key} in \code{Dict}, remove it.}
- \item{\code{has(key)}}{TRUE if \code{key} in \code{Dict} else FALSE.}
- \item{\code{remove(key)}}{If \code{key} in \code{Dict}, remove it, otherwise
-     raise an error.}
-}
-}
-
-\section{R6 constructor}{
-
-\code{Dict$new(x=list())}
-}
-
-\section{Dict methods}{
-
-\describe{
- \item{\code{get(key)}}{If \code{key} in \code{Dict}, return value, else
- throw key-error.}
- \item{\code{keys()}}{Return a character vector of all keys.}
- \item{\code{peek(key, default=NULL)}}{Return the value for \code{key} if
-     \code{key} is in the \code{Dict}, else \code{default}.}
- \item{\code{pop(key)}}{If \code{key} in \code{Dict}, return a copy of its
-     value and discard it afterwards.}
- \item{\code{popitem()}}{Remove and return an arbitrary (key, value) pair
- from the dictionary. \code{popitem()} is useful to destructively iterate
- over a \code{Dict}, as often used in set algorithms.}
- \item{\code{set(key, value, add=FALSE)}}{Like \code{add} but overwrites
-     value if \code{key} is already in the \code{Dict}. If \code{key} not in
-     \code{Dict}, an error is thrown unless \code{add} was set to
-     \code{TRUE}}
- \item{\code{sort(decr=FALSE)}}{Sort values in dictionary according to keys.}
- \item{\code{update(other=Dict$new())}}{Adds element(s) of other to the 
-     dictionary if the key is not in the dictionary and updates the key with
-     the new value otherwise.}
-}
-}
-
 \examples{
 ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))
 ages$has("Peter")   # TRUE
@@ -73,9 +26,329 @@ Dict$new(c(Peter=24, Lisa=23, Bob=32, Peter=20))  # Error: duplicated keys
 }
 }
 \seealso{
-\code{\link[container]{Container}}
+\code{\link[=keys]{keys()}}
 }
 \author{
 Roman Pahl
 }
-\keyword{datasets}
+\section{Super classes}{
+\code{\link[container:Iterable]{container::Iterable}} -> \code{\link[container:Container]{container::Container}} -> \code{Dict}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Dict$new()}}
+\item \href{#method-add}{\code{Dict$add()}}
+\item \href{#method-discard}{\code{Dict$discard()}}
+\item \href{#method-get}{\code{Dict$get()}}
+\item \href{#method-has}{\code{Dict$has()}}
+\item \href{#method-keys}{\code{Dict$keys()}}
+\item \href{#method-names}{\code{Dict$names()}}
+\item \href{#method-peek}{\code{Dict$peek()}}
+\item \href{#method-pop}{\code{Dict$pop()}}
+\item \href{#method-popitem}{\code{Dict$popitem()}}
+\item \href{#method-remove}{\code{Dict$remove()}}
+\item \href{#method-set}{\code{Dict$set()}}
+\item \href{#method-sort}{\code{Dict$sort()}}
+\item \href{#method-update}{\code{Dict$update()}}
+\item \href{#method-clone}{\code{Dict$clone()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="apply">}\href{../../container/html/Container.html#method-apply}{\code{container::Container$apply()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\code{Dict} constructor
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$new(x = list())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{initial elements put into the \code{Dict}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add"></a>}}
+\if{latex}{\out{\hypertarget{method-add}{}}}
+\subsection{Method \code{add()}}{
+If \code{key} not yet in \code{Dict}, insert \code{value} at \code{key},
+otherwise signal an error.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$add(key, value)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+
+\item{\code{value}}{the value to be added to the \code{Dict}.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-discard"></a>}}
+\if{latex}{\out{\hypertarget{method-discard}{}}}
+\subsection{Method \code{discard()}}{
+If key in \code{Dict}, remove it.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$discard(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} key of value to discard}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get"></a>}}
+\if{latex}{\out{\hypertarget{method-get}{}}}
+\subsection{Method \code{get()}}{
+Access value.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$get(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has"></a>}}
+\if{latex}{\out{\hypertarget{method-has}{}}}
+\subsection{Method \code{has()}}{
+Determine if \code{Dict} has a \code{key}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$has(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if \code{key} in \code{Dict}, otherwise \code{FALSE}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-keys"></a>}}
+\if{latex}{\out{\hypertarget{method-keys}{}}}
+\subsection{Method \code{keys()}}{
+Get all keys.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$keys()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{character} vector of all keys.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-names"></a>}}
+\if{latex}{\out{\hypertarget{method-names}{}}}
+\subsection{Method \code{names()}}{
+An alias for \code{\link[=keys]{keys()}}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$names()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-peek"></a>}}
+\if{latex}{\out{\hypertarget{method-peek}{}}}
+\subsection{Method \code{peek()}}{
+Peek for value in \code{Dict}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$peek(key, default = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+
+\item{\code{default}}{returned default value.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+value for \code{key} if \code{key} is in the \code{Dict} else \code{default}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pop"></a>}}
+\if{latex}{\out{\hypertarget{method-pop}{}}}
+\subsection{Method \code{pop()}}{
+Get value and remove key-value pair from \code{Dict}.
+it afterwards. If \code{key} not found, raise an error.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$pop(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If \code{key} in \code{Dict}, return its value.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-popitem"></a>}}
+\if{latex}{\out{\hypertarget{method-popitem}{}}}
+\subsection{Method \code{popitem()}}{
+Remove and return an arbitrary (key, value) pair
+from the \code{Dict}. This function can be used to destructively iterate
+over a \code{Dict} as often used in set algorithms.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$popitem()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+random key-value pair from the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove"></a>}}
+\if{latex}{\out{\hypertarget{method-remove}{}}}
+\subsection{Method \code{remove()}}{
+Remove value
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$remove(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If \code{key} in \code{Dict}, remove it, otherwise raise an error.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set"></a>}}
+\if{latex}{\out{\hypertarget{method-set}{}}}
+\subsection{Method \code{set()}}{
+Overrides \code{value} at \code{key} if \code{key} is already in the
+\code{Dict}. If \code{key} not in \code{Dict}, an error is thrown unless \code{add} was
+set to \code{TRUE}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$set(key, value, add = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+
+\item{\code{value}}{the value to be set}
+
+\item{\code{add}}{\code{logical} if \code{TRUE} the value is set regardless whether
+\code{key} already exists in \code{Dict}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sort"></a>}}
+\if{latex}{\out{\hypertarget{method-sort}{}}}
+\subsection{Method \code{sort()}}{
+Re-order elements according to key-order
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$sort(decr = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{decr}}{\code{logical} if \code{TRUE} sort in decreasing order.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-update"></a>}}
+\if{latex}{\out{\hypertarget{method-update}{}}}
+\subsection{Method \code{update()}}{
+Add elements of other dict to the \code{Dict} if the key is
+not in the \code{Dict} and update the key with the new value otherwise.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$update(other = Dict$new())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{other}}{\code{Dict} dictionary used to update the \code{Dict}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

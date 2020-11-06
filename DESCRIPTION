@@ -22,5 +22,5 @@ NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
