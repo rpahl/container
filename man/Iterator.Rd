@@ -3,75 +3,12 @@
 \docType{class}
 \name{Iterator}
 \alias{Iterator}
-\alias{iter}
-\alias{is.iterator}
-\alias{itbegin}
-\alias{itget}
-\alias{itget_next}
-\alias{itpos}
-\alias{ithas_next}
-\alias{itnext}
 \title{Iterator}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Iterator
-
-iter(x)
-
-is.iterator(x)
-
-itbegin(it)
-
-itget(it)
-
-itget_next(it)
-
-itpos(it)
-
-ithas_next(it)
-
-itnext(it)
-}
-\arguments{
-\item{x}{iterable object, e.g., \code{\link[base]{list}},
-\code{\link[base]{vector}}, \code{\link[container]{Container}}}
-
-\item{it}{\code{\link[container]{Iterator}} object}
-}
 \description{
-An \code{\link[container]{Iterator}} is an object that allows
-to iterate over sequences. It implements \code{_next} and \code{get} to
-iterate and retrieve the value of the sequence it is associated with.
+An \code{Iterator} is an object that allows to iterate over
+sequences. It implements \code{.next} and \code{get} to iterate and retrieve the
+value of the sequence it is associated with.
 }
-\section{Constructor}{
-
-\code{Iterator$new(x)}
-}
-
-\section{Iterator interface}{
-
-\describe{
- \item{\code{begin()}}{Reset iterator position to 1.}
- \item{\code{get()}}{Get value at current iterator position.}
- \item{\code{get_next()}}{Get value after incrementing by one.}
- \item{\code{pos()}}{Return current iterator position.}
- \item{\code{has_next()}}{Return TRUE if there is a next element.}
- \item{\code{next()}}{Increment iterator to point at next element.}
-}
-}
-
-\section{S3 method interface}{
-
-\describe{
- \item{\code{itbegin(it)}}{Reset iterator position to 1.}
- \item{\code{itget(it)}}{Get value at current iterator position.}
- \item{\code{itget_next()}}{Get value after incrementing by one.}
- \item{\code{itpos()}}{Return current iterator position.}
- \item{\code{ithas_next(it)}}{Return TRUE if there is a next element.}
- \item{\code{itnext(it)}}{Increment iterator to point at next element.}
-}
-}
-
 \examples{
 # Iterator on primitive list
 it <- Iterator$new(list("A", 1, 2))
@@ -91,22 +28,132 @@ while(it$has_next()) {
 sum <- sum + it$get_next()
 }
 print(sum)
-
-# S3 method interface
-it <- iter(list("A", 1, 2))
-while(ithas_next(it)) {
-print(itget_next(it))
-}
-ithas_next(it)   # FALSE
-print(it)       # <Iterator> at position 3
-itbegin(it)
-print(it)       # <Iterator> at position 0
-}
-\seealso{
-\code{\link[container]{Iterable}},
-\code{\link[container]{Container}}, \code{\link[container]{container}}
 }
 \author{
 Roman Pahl
 }
-\keyword{datasets}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Iterator$new()}}
+\item \href{#method-begin}{\code{Iterator$begin()}}
+\item \href{#method-get}{\code{Iterator$get()}}
+\item \href{#method-get_next}{\code{Iterator$get_next()}}
+\item \href{#method-pos}{\code{Iterator$pos()}}
+\item \href{#method-has_next}{\code{Iterator$has_next()}}
+\item \href{#method-.next}{\code{Iterator$.next()}}
+\item \href{#method-print}{\code{Iterator$print()}}
+\item \href{#method-clone}{\code{Iterator$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\code{Iterator} constructor
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$new(x = list())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{sequence to iterate over}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns \code{Iterator} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-begin"></a>}}
+\if{latex}{\out{\hypertarget{method-begin}{}}}
+\subsection{Method \code{begin()}}{
+set iterator to start of sequence
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$begin()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get"></a>}}
+\if{latex}{\out{\hypertarget{method-get}{}}}
+\subsection{Method \code{get()}}{
+get element where the iterator points to
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$get()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_next"></a>}}
+\if{latex}{\out{\hypertarget{method-get_next}{}}}
+\subsection{Method \code{get_next()}}{
+get next element
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$get_next()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pos"></a>}}
+\if{latex}{\out{\hypertarget{method-pos}{}}}
+\subsection{Method \code{pos()}}{
+get iterator position
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$pos()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_next"></a>}}
+\if{latex}{\out{\hypertarget{method-has_next}{}}}
+\subsection{Method \code{has_next()}}{
+check if \code{iterator} has more elements
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$has_next()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{TRUE} if \code{iterator} has next element else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-.next"></a>}}
+\if{latex}{\out{\hypertarget{method-.next}{}}}
+\subsection{Method \code{.next()}}{
+increment \code{iterator}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$.next()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+print method
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$print()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

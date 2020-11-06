@@ -4,33 +4,65 @@
 \name{Iterable}
 \alias{Iterable}
 \title{Iterable abstract class interface}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Iterable
-}
 \description{
-An \code{Iterable} is an object that provides an \code{iter()}
-method, which is expected to return an \code{Iterator} object. This class
-defines the abstract class interface such that each class inheriting this
-class provides an \code{iter()} method and must implement a private method
-\code{create_iter}, which must return an \code{\link[container]{Iterator}} object.
+An \code{Iterable} is an object that provides an \code{\link[=iter]{iter()}} method,
+which is expected to return an \code{Iterator} object. This class defines the
+abstract class interface such that each class inheriting this class provides
+an \code{\link[=iter]{iter()}} method and must implement a private method \code{\link[=create_iter]{create_iter()}},
+which must return an \code{Iterator} object.
 }
-\section{Inherited methods}{
-
-Inherits method \code{iter} from abstract \code{\link[container]{Iterable}} class.
-}
-
-\section{Iterable method/interface}{
-
-\describe{
- \item{\code{iter()}}{Return \code{\link[container]{Iterator}} object.}
-}
-}
-
 \seealso{
-\code{\link[container]{Iterator}} and \code{\link[container]{Container}}
+\code{Iterator} and \code{Container}
 }
 \author{
 Roman Pahl
 }
-\keyword{datasets}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Iterable$new()}}
+\item \href{#method-iter}{\code{Iterable$iter()}}
+\item \href{#method-clone}{\code{Iterable$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\code{Iterable} is an abstract class and thus cannot be instantiated.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterable$new()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-iter"></a>}}
+\if{latex}{\out{\hypertarget{method-iter}{}}}
+\subsection{Method \code{iter()}}{
+Create iterator
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterable$iter()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+invisibly returns the \code{Iterator} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterable$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}
