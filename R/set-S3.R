@@ -1,4 +1,4 @@
-#' @title Set constructors 
+#' @title Set constructors
 #' @description The \code{set} is considered and implemented as a specialized
 #'  \code{\link[container]{container}} in which elements are always unique. It
 #'  provides typical set operations such as \code{union (+)} and
@@ -11,7 +11,7 @@
 #'  \code{\link[container]{-.Set}},
 #'  \code{\link[container]{<.Set}},
 #'  \code{\link[container]{>.Set}}
-#' 
+#'
 #' @param x (vector or list) initial elements of the set
 #' @export set as.set is.set
 #'
@@ -19,7 +19,7 @@
 #' \describe{
 #'  \item{\code{add(x, elem)}}{If not already in set \code{x}, add \code{elem}.}
 #' }
-#' 
+#'
 #' @examples
 #' s1 <- set(list(1, 2, "A", "B"))
 #' s2 <- set(values(s1))

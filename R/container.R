@@ -16,7 +16,7 @@
 #' @importFrom R6 R6Class
 #' @seealso \code{\link[container]{Iterable}}, \code{\link[container]{Deque}},
 #' \code{\link[container]{Set}}, and \code{\link[container]{Dict}}
-#' 
+#'
 #' @section R6 constructor:
 #' \code{Container$new(x=list())}
 #'

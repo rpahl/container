@@ -1,4 +1,4 @@
-#' @title Dict constructors 
+#' @title Dict constructors
 #' @description The \code{dict} resembles Python's dict type, and is implemented
 #' as a specialized associative (or mapping) \code{\link[container]{container}} thus
 #' sharing all \code{\link[container]{container}} methods with some of them being
@@ -8,13 +8,13 @@
 #' \code{Dict} passed to member methods.
 #' @param ... further arguments
 #' @seealso \code{\link[container]{container}}, \code{\link[container]{Dict}},
-#'  \code{\link[container]{+.Dict}}, 
+#'  \code{\link[container]{+.Dict}},
 #'  \code{\link[container]{[<-.Dict}},
 #'  \code{\link[container]{[[<-.Dict}},
 #'  \code{\link[container]{[[.Dict}},
 #'  \code{\link[container]{[.Dict}}
 #' @export dict as.dict is.dict getval keys popitem setval sortkey
-#' 
+#'
 #' @section S3 methods for class \code{Dict}:
 #' \describe{
 #'  \item{\code{add(dic, key, value)}}{If \code{key} not yet in \code{dic},
@@ -38,11 +38,11 @@
 #'      \code{dic}, an error is thrown unless \code{add} was set to
 #'      \code{TRUE}.}
 #'  \item{\code{sortkey(dic, decr=FALSE)}}{Sort values in dictionary according to keys.}
-#'  \item{\code{update(dic, other=dict())}}{Adds element(s) of other to the 
+#'  \item{\code{update(dic, other=dict())}}{Adds element(s) of other to the
 #'      dictionary if the key(s) are not in the dictionary and updates all keys with
 #'      the new value(s) otherwise.}
 #' }
-#' 
+#'
 #' @examples
 #' ages <- dict(c(Peter=24, Lisa=23, Bob=32))
 #' has(ages, "Peter")   # TRUE
@@ -52,38 +52,38 @@
 #' ages["Mike"]         # 18
 #' keys(ages)
 #' print(ages)
-#' 
+#'
 #' \dontrun{
 #' ages["Peter"] <- 24 + 1     # key 'Peter' already in Dict
 #' dict(c(Peter=24, Peter=20)) # Error: duplicated keys
 #' }
 NULL
 
-#' @rdname dictS3 
+#' @rdname dictS3
 dict <- function(x=list()) Dict$new(x)
 
-#' @rdname dictS3 
+#' @rdname dictS3
 as.dict <- function(x) dict(x)
 
-#' @rdname dictS3 
+#' @rdname dictS3
 is.dict <- function(x) inherits(x, "Dict")
 
 #' @export
 `as.data.frame.Dict` <- function(x, ...) as.data.frame(as.list(x))
 
-#' @rdname dictS3 
+#' @rdname dictS3
 getval <- function(x, ...) UseMethod("getval")
 
-#' @rdname dictS3 
+#' @rdname dictS3
 keys <- function(x) UseMethod("keys")
 
-#' @rdname dictS3 
+#' @rdname dictS3
 popitem <- function(x) UseMethod("popitem")
 
-#' @rdname dictS3 
+#' @rdname dictS3
 setval <- function(x, ...) UseMethod("setval")
 
-#' @rdname dictS3 
+#' @rdname dictS3
 sortkey <- function(x, ...) UseMethod("sortkey")
 
 
@@ -132,12 +132,12 @@ update.Dict <- function(object, other=dict(), ...) object$update(other)
 #' @return \code{\link[container]{Dict}} object
 NULL
 
-#' @rdname dictS3binOp 
-#' @details \code{d1 + d2}: return a copy of \code{d1} updated by \code{d2}. 
+#' @rdname dictS3binOp
+#' @details \code{d1 + d2}: return a copy of \code{d1} updated by \code{d2}.
 #' @export
 `+.Dict` <- function(d1, d2) d1$clone()$update(d2)
 
-#' @rdname dictS3binOp 
+#' @rdname dictS3binOp
 #' @details \code{d1 - d2}: return a copy of \code{d1} with all keys being
 #'  removed that occured in \code{d2}.
 #' @export
