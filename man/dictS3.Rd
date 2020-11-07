@@ -5,18 +5,21 @@
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
+\alias{as.data.frame.Dict}
 \alias{getval}
 \alias{keys}
 \alias{popitem}
 \alias{setval}
 \alias{sortkey}
-\title{Dict constructors}
+\title{Dict S3 methods}
 \usage{
 dict(x = list())
 
 as.dict(x)
 
 is.dict(x)
+
+\method{as.data.frame}{Dict}(x, ...)
 
 getval(x, ...)
 
@@ -29,44 +32,42 @@ setval(x, ...)
 sortkey(x, ...)
 }
 \arguments{
-\item{x}{initial elements passed to constructor or object of class
-\code{Dict} passed to member methods.}
+\item{x}{initial elements passed to constructor or object of class \code{Dict}
+passed to member methods.}
 
 \item{...}{further arguments}
 }
 \description{
-The \code{dict} resembles Python's dict type, and is implemented
-as a specialized associative (or mapping) \code{\link[container]{container}} thus
-sharing all \code{\link[container]{container}} methods with some of them being
-overriden to account for the associative key-value pair semantic.
+The \code{Dict} resembles Python's dict type, and is implemented
+as a specialized associative \code{Container} thus sharing all \code{Container} methods
+with some of them being overriden to account for the associative key-value
+pair semantic.
 }
 \section{S3 methods for class \code{Dict}}{
 
-\describe{
- \item{\code{add(dic, key, value)}}{If \code{key} not yet in \code{dic},
-     insert \code{value} at \code{key}, otherwise signal an error.}
- \item{\code{discard(dic, key)}}{If \code{key} in \code{dic}, remove it.}
- \item{\code{has(dic, key)}}{TRUE if \code{key} in \code{dic} else FALSE.}
- \item{\code{remove(dic, key)}}{If \code{key} in \code{dic}, remove it,
-     otherwise raise an error.}
- \item{\code{getval(dic)}}{If \code{key} in \code{dic}, return value, else
-     throw key-error.}
- \item{\code{keys(dic)}}{Return a character vector of all keys.}
- \item{\code{peek(dic, key, default=NULL)}}{Return the value for \code{key} if
-     \code{key} is in the \code{dic}, else \code{default}.}
- \item{\code{pop(dic, key)}}{If \code{key} in \code{dic}, return a copy of its
-     value and discard it afterwards.}
- \item{\code{popitem(dic)}}{Remove and return an arbitrary (key, value) pair
- from the dictionary. \code{popitem()} is useful to destructively iterate
- over a \code{dic}, as often used in set algorithms.}
- \item{\code{setval(dic, key, value, add=FALSE)}}{Like \code{add} but overwrites
-     value if \code{key} is already in the \code{dic}. If \code{key} not in
-     \code{dic}, an error is thrown unless \code{add} was set to
-     \code{TRUE}.}
- \item{\code{sortkey(dic, decr=FALSE)}}{Sort values in dictionary according to keys.}
- \item{\code{update(dic, other=dict())}}{Adds element(s) of other to the 
-     dictionary if the key(s) are not in the dictionary and updates all keys with
-     the new value(s) otherwise.}
+\itemize{
+\item \code{add(x, key, value)} if \code{key} not yet in \code{x}, insert \code{value} at \code{key},
+otherwise signal an error.
+\item \code{discard(x, key)} if \code{key} in \code{x}, remove it.
+\item \code{getval(x)} if \code{key} in \code{x}, return \code{value}, else throw key-error.
+\item \code{has(x, key)} \code{TRUE} if \code{key} in \code{x} else \code{FALSE}.
+\item \code{keys(x)} return a character vector of all keys.
+\item \code{names(x)} alias for \code{keys()}
+\item \code{peek(x, key, default = NULL)} return the value for \code{key} if \code{key} is in
+the \code{x}, else \code{default}.
+\item \code{pop(x, key)} if \code{key} in \code{x}, return a copy of its value and discard it
+afterwards.
+\item \code{popitem(x)} remove and return an arbitrary (key, value) pair
+from the dictionary. This function can be useful to destructively iterate
+over the dictionary as often used in set algorithms.
+\item \code{remove(x, key)} if \code{key} in \code{x}, remove it, otherwise raise an error.
+\item \code{setval(x, key, value, add = FALSE)} Overrides \code{value} at \code{key} if \code{key}
+is already in the \code{Dict}. If \code{key} not in \code{Dict}, an error is thrown
+unless \code{add} was set to \code{TRUE}.
+\item \code{sortkey(x, decr = FALSE)} re-order elements according to key-order.
+\item \code{update(x, other = dict())} add elements of other dict to the \code{Dict}
+if the key is not in the \code{Dict} and update the key with the new value
+otherwise.
 }
 }
 
@@ -84,12 +85,4 @@ print(ages)
 ages["Peter"] <- 24 + 1     # key 'Peter' already in Dict
 dict(c(Peter=24, Peter=20)) # Error: duplicated keys
 }
-}
-\seealso{
-\code{\link[container]{container}}, \code{\link[container]{Dict}},
- \code{\link[container]{+.Dict}}, 
- \code{\link[container]{[<-.Dict}},
- \code{\link[container]{[[<-.Dict}},
- \code{\link[container]{[[.Dict}},
- \code{\link[container]{[.Dict}}
 }

@@ -1,47 +1,37 @@
-#' @title Dict constructors
-#' @description The \code{dict} resembles Python's dict type, and is implemented
-#' as a specialized associative (or mapping) \code{\link[container]{container}} thus
-#' sharing all \code{\link[container]{container}} methods with some of them being
-#' overriden to account for the associative key-value pair semantic.
-#' @name dictS3
-#' @param x initial elements passed to constructor or object of class
-#' \code{Dict} passed to member methods.
-#' @param ... further arguments
-#' @seealso \code{\link[container]{container}}, \code{\link[container]{Dict}},
-#'  \code{\link[container]{+.Dict}},
-#'  \code{\link[container]{[<-.Dict}},
-#'  \code{\link[container]{[[<-.Dict}},
-#'  \code{\link[container]{[[.Dict}},
-#'  \code{\link[container]{[.Dict}}
-#' @export dict as.dict is.dict getval keys popitem setval sortkey
+#' Dict S3 methods
 #'
-#' @section S3 methods for class \code{Dict}:
-#' \describe{
-#'  \item{\code{add(dic, key, value)}}{If \code{key} not yet in \code{dic},
-#'      insert \code{value} at \code{key}, otherwise signal an error.}
-#'  \item{\code{discard(dic, key)}}{If \code{key} in \code{dic}, remove it.}
-#'  \item{\code{has(dic, key)}}{TRUE if \code{key} in \code{dic} else FALSE.}
-#'  \item{\code{remove(dic, key)}}{If \code{key} in \code{dic}, remove it,
-#'      otherwise raise an error.}
-#'  \item{\code{getval(dic)}}{If \code{key} in \code{dic}, return value, else
-#'      throw key-error.}
-#'  \item{\code{keys(dic)}}{Return a character vector of all keys.}
-#'  \item{\code{peek(dic, key, default=NULL)}}{Return the value for \code{key} if
-#'      \code{key} is in the \code{dic}, else \code{default}.}
-#'  \item{\code{pop(dic, key)}}{If \code{key} in \code{dic}, return a copy of its
-#'      value and discard it afterwards.}
-#'  \item{\code{popitem(dic)}}{Remove and return an arbitrary (key, value) pair
-#'  from the dictionary. \code{popitem()} is useful to destructively iterate
-#'  over a \code{dic}, as often used in set algorithms.}
-#'  \item{\code{setval(dic, key, value, add=FALSE)}}{Like \code{add} but overwrites
-#'      value if \code{key} is already in the \code{dic}. If \code{key} not in
-#'      \code{dic}, an error is thrown unless \code{add} was set to
-#'      \code{TRUE}.}
-#'  \item{\code{sortkey(dic, decr=FALSE)}}{Sort values in dictionary according to keys.}
-#'  \item{\code{update(dic, other=dict())}}{Adds element(s) of other to the
-#'      dictionary if the key(s) are not in the dictionary and updates all keys with
-#'      the new value(s) otherwise.}
-#' }
+#' @description The `Dict` resembles Python's dict type, and is implemented
+#' as a specialized associative `Container` thus sharing all `Container` methods
+#' with some of them being overriden to account for the associative key-value
+#' pair semantic.
+#' @name dictS3
+#' @param x initial elements passed to constructor or object of class `Dict`
+#' passed to member methods.
+#' @param ... further arguments
+#'
+#' @section S3 methods for class `Dict`:
+#'  * `add(x, key, value)` if `key` not yet in `x`, insert `value` at `key`,
+#'    otherwise signal an error.
+#'  * `discard(x, key)` if `key` in `x`, remove it.
+#'  * `getval(x)` if `key` in `x`, return `value`, else throw key-error.
+#'  * `has(x, key)` `TRUE` if `key` in `x` else `FALSE`.
+#'  * `keys(x)` return a character vector of all keys.
+#'  * `names(x)` alias for `keys()`
+#'  * `peek(x, key, default = NULL)` return the value for `key` if `key` is in
+#'     the `x`, else `default`.
+#'  * `pop(x, key)` if `key` in `x`, return a copy of its value and discard it
+#'     afterwards.
+#'  * `popitem(x)` remove and return an arbitrary (key, value) pair
+#'    from the dictionary. This function can be useful to destructively iterate
+#'    over the dictionary as often used in set algorithms.
+#'  * `remove(x, key)` if `key` in `x`, remove it, otherwise raise an error.
+#'  * `setval(x, key, value, add = FALSE)` Overrides `value` at `key` if `key`
+#'     is already in the `Dict`. If `key` not in `Dict`, an error is thrown
+#'     unless `add` was set to `TRUE`.
+#'  *  `sortkey(x, decr = FALSE)` re-order elements according to key-order.
+#'  *  `update(x, other = dict())` add elements of other dict to the `Dict`
+#'     if the key is not in the `Dict` and update the key with the new value
+#'     otherwise.
 #'
 #' @examples
 #' ages <- dict(c(Peter=24, Lisa=23, Bob=32))
@@ -60,30 +50,42 @@
 NULL
 
 #' @rdname dictS3
-dict <- function(x=list()) Dict$new(x)
+#' @export
+dict <- function(x = list())
+{
+    d <- Dict$new(x)
+    if (is.data.frame(x)) {
+        attr(d, "row.names") <- attr(x, "row.names")
+    }
+    d
+}
 
 #' @rdname dictS3
+#' @export
 as.dict <- function(x) dict(x)
 
 #' @rdname dictS3
+#' @export
 is.dict <- function(x) inherits(x, "Dict")
 
-#' @export
-`as.data.frame.Dict` <- function(x, ...) as.data.frame(as.list(x))
-
 #' @rdname dictS3
+#' @export
 getval <- function(x, ...) UseMethod("getval")
 
 #' @rdname dictS3
+#' @export
 keys <- function(x) UseMethod("keys")
 
 #' @rdname dictS3
+#' @export
 popitem <- function(x) UseMethod("popitem")
 
 #' @rdname dictS3
+#' @export
 setval <- function(x, ...) UseMethod("setval")
 
 #' @rdname dictS3
+#' @export
 sortkey <- function(x, ...) UseMethod("sortkey")
 
 
@@ -94,16 +96,16 @@ add.Dict <- function(x, key, value, ...) x$add(key, value)
 discard.Dict <- function(x, key, ...) x$discard(key)
 
 #' @export
-has.Dict <- function(x, key, ...) x$has(key)
-
-#' @export
-remove.Dict <- function(x, key, ...) x$remove(key)
-
-#' @export
 getval.Dict <- function(x, key, ...) x$get(key)
 
 #' @export
+has.Dict <- function(x, key, ...) x$has(key)
+
+#' @export
 keys.Dict <- function(x) x$keys()
+
+#' @export
+names.Dict <- function(x) keys(x)
 
 #' @export
 peek.Dict <- function(x, key, default=NULL, ...) x$peek(key, default)
@@ -113,6 +115,9 @@ pop.Dict <- function(x, key, ...) x$pop(key)
 
 #' @export
 popitem.Dict <- function(x) x$popitem()
+
+#' @export
+remove.Dict <- function(x, key, ...) x$remove(key)
 
 #' @export
 setval.Dict <- function(x, key, value, add=FALSE, ...) x$set(key, value, add)
@@ -148,37 +153,76 @@ NULL
     d1.clone
 }
 
+
 #' @title Extract or replace \code{Dict} values
 #' @description Access and assignment operators for \code{Dict} objects.
 #' @name dictS3replace
-#' @param dic \code{\link[container]{Dict}} object
+#' @param x \code{\link[container]{Dict}} object
 #' @param key (character) the key
 #' @param add (logical) if TRUE, value is added if not yet in dict. If FALSE
 #'  and value not yet in dict, an error is signaled.
 #' @param value the value associated with the \code{key}
 #' @return updated \code{\link[container]{Dict}} object
 #' @export
-`[[<-.Dict` <- function(dic, key, add=FALSE, value) dic$set(key, value, add)
+`[[<-.Dict` <- function(x, key, add=FALSE, value) x$set(key, value, add)
 
-#' @rdname dictS3replace
-#' @details \code{dic[key] <- value}: If \code{key} not yet in \code{dic}, insert
-#'  \code{value} at \code{key}, otherwise raise an error.
-#' @export
-`[<-.Dict` <- function(dic, key, value) dic$add(key, value)
-
-#' @rdname dictS3replace
-#' @details \code{dic[key]}: If \code{key} in \code{dic}, return value, else
-#'  throw key-error.
-#' @return value at key
-#' @export
-`[[.Dict` <- function(dic, key) dic$get(key)
 
 #' @rdname dictS3replace
 #' @param default the default value
-#' @details \code{dic[key, default=NULL]}: Return the value for \code{key} if
-#'  \code{key} is in \code{dic}, else \code{default}.
-#' @return element found at key, or \code{default} if not found.
+#' @details `x[[key, default=NULL]]`: return the value for `key` if
+#'  `key` is in `x`, else `default`.
+#' @return element found at key, or `default` if not found.
 #' @export
-`[.Dict` <- function(dic, key, default=NULL) dic$peek(key, default)
+`[[.Dict` <- function(x, key, default=NULL) x$peek(key, default)
 
+
+#' @rdname dictS3replace
+#' @details `x[key] <- value`: if `key` not yet in `x`,
+#'  insert `value` at `key`, otherwise raise an error.
+#' @export
+`[<-.Dict` <- function(x, key, value)
+{
+    x$add(key, value)
+}
+
+
+#' @rdname dictS3replace
+#' @param i
+#' @param j
+#' @details `x[i, j]`:
+#' @return
+#' @export
+`[.Dict` <- function(x, i, j)
+{
+    has.i <- !missing(i)
+    has.j <- !missing(j)
+    hasComma <- nargs() == 3
+    hasRownames = !is.null(attr(x, "row.names"))
+
+    if (has.i) {
+        if (!hasComma) {
+            # x[i]
+            if (hasRownames && is.numeric(i)) {
+                return(as.data.frame(x$values())[i])
+            } else {
+                return(x$get(i))
+            }
+        }
+        # x[i, j]
+        if (!hasRownames) {
+            stop("Rows may only be selected if dict was initialized with a ",
+                 "data.frame")
+        }
+        # Behave like a data.frame with selected rows (and optionally) columns
+        as.data.frame(x$values())[i, j]
+    } else {
+        # x[, j]
+        if (hasRownames && is.numeric(j)) {
+            # Behave like data.frame with columns selected by index
+            as.data.frame(x$values())[, j]
+        } else {
+            x$get(j)
+        }
+    }
+}
 

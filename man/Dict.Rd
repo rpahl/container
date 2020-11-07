@@ -25,9 +25,6 @@ Dict$new(list(Peter=20))$add("Peter", 22)         # key already in Dict
 Dict$new(c(Peter=24, Lisa=23, Bob=32, Peter=20))  # Error: duplicated keys
 }
 }
-\seealso{
-\code{\link[=keys]{keys()}}
-}
 \author{
 Roman Pahl
 }
@@ -83,6 +80,9 @@ Roman Pahl
 \item{\code{x}}{initial elements put into the \code{Dict}}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}

@@ -177,7 +177,6 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         }
     ),
+    lock_class=TRUE
 )
-
-Dict$lock()
 
