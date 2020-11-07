@@ -4,56 +4,21 @@
 \name{Container}
 \alias{Container}
 \title{A sequence container}
-\format{An object of class \code{R6ClassGenerator} of length 24.}
-\usage{
-Container
-}
 \description{
 This class implements a container data structure with typical
-member functions to insert, delete and access objects from the container. It
-also serves as the base class for \code{\link[container]{Deque}},
-\code{\link[container]{Set}}, and \code{\link[container]{Dict}}.
+member functions to insert, delete and access objects from the container.
+While it can be used to create \code{\link[=Container]{Container()}} objects, it mainly serves as the
+base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}.
 }
 \details{
 The underlying data structure is based on R vectors (or lists), with the mode
 being set to the mode (or type) of the value passed to the initialize
 function, which by default is an empty list, in which case the
-\code{Container} object can store objects of mixed and arbitrary types.
+\code{\link[=Container]{Container()}} object can store objects of mixed and arbitrary types.
 If the container will only contain objects of one particular type, for
-example, double values, it will be both more efficient and type safe to
-initialize the container using this particular type (see Examples section).
+example, numeric values, it will be both more efficient and type safe to
+initialize the container with this particular type (see Examples section).
 }
-\section{R6 constructor}{
-
-\code{Container$new(x=list())}
-}
-
-\section{Container methods}{
-
-\describe{
- \item{\code{add(elem)}}{Add \code{elem} to \code{Container}.}
- \item{\code{apply(f)}}{Apply function f to all elements and return results
- in a list)}
- \item{\code{clear()}}{Remove all elements from the \code{Container}.}
- \item{\code{discard(elem, right=FALSE)}}{Search for first \code{elem} in
-     \code{Container} and, if found, remove it. If \code{right} is
-     \code{TRUE}, search from right to left.}
- \item{\code{empty()}}{Return \code{TRUE} if the \code{Container} is empty,
-     else \code{FALSE}.}
- \item{\code{has(elem)}}{Return \code{TRUE} if \code{Container} contains
-     \code{elem} else \code{FALSE}.}
- \item{\code{print(list.len)}}{Print object representation similar to
-     \code{\link[utils]{str}}}
- \item{\code{remove(elem, right=FALSE)}}{Same as \code{discard}, but throw an
-     error if not found.}
- \item{\code{size()}}{Return size of the \code{Container}.}
- \item{\code{type()}}{Return type (or mode) of internal vector containing
- the elements.}
- \item{\code{values()}}{Return a copy of all elements in the same format
- as they are stored in the object.}
-}
-}
-
 \examples{
 c0 <- Container$new()
 c0$size()                            # 0
@@ -77,10 +42,268 @@ Container$new(1L)$type()             # "integer"
 Container$new(1L)$add(2.3)$values()  # since integer type, equals c(1, 2)
 }
 \seealso{
-\code{\link[container]{Iterable}}, \code{\link[container]{Deque}},
-\code{\link[container]{Set}}, and \code{\link[container]{Dict}}
+\code{\link[=Iterable]{Iterable()}}, \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}
 }
 \author{
 Roman Pahl
 }
-\keyword{datasets}
+\section{Super class}{
+\code{\link[container:Iterable]{container::Iterable}} -> \code{Container}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{Container$new()}}
+\item \href{#method-add}{\code{Container$add()}}
+\item \href{#method-apply}{\code{Container$apply()}}
+\item \href{#method-clear}{\code{Container$clear()}}
+\item \href{#method-discard}{\code{Container$discard()}}
+\item \href{#method-empty}{\code{Container$empty()}}
+\item \href{#method-has}{\code{Container$has()}}
+\item \href{#method-print}{\code{Container$print()}}
+\item \href{#method-remove}{\code{Container$remove()}}
+\item \href{#method-size}{\code{Container$size()}}
+\item \href{#method-type}{\code{Container$type()}}
+\item \href{#method-values}{\code{Container$values()}}
+\item \href{#method-clone}{\code{Container$clone()}}
+}
+}
+\if{html}{
+\out{<details open ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+constructor
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$new(x = list())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{initial elements put into the \code{Container}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-add"></a>}}
+\if{latex}{\out{\hypertarget{method-add}{}}}
+\subsection{Method \code{add()}}{
+add element
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$add(elem)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{elem}}{element to be added to \code{Container} object}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-apply"></a>}}
+\if{latex}{\out{\hypertarget{method-apply}{}}}
+\subsection{Method \code{apply()}}{
+apply function to all \code{Container} elements
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$apply(f)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{f}}{\code{function} to apply}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{list} of results retrieved from the applied function
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clear"></a>}}
+\if{latex}{\out{\hypertarget{method-clear}{}}}
+\subsection{Method \code{clear()}}{
+Remove all elements from the \code{Container}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$clear()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+invisibly returns the cleared \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-discard"></a>}}
+\if{latex}{\out{\hypertarget{method-discard}{}}}
+\subsection{Method \code{discard()}}{
+Search for first \code{elem} in \code{Container} and, if found,
+remove it. If not found, the \code{Container} object is not altered.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$discard(elem, right = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{elem}}{element to be discarded.}
+
+\item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-empty"></a>}}
+\if{latex}{\out{\hypertarget{method-empty}{}}}
+\subsection{Method \code{empty()}}{
+Check whether \code{Container} is empty
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$empty()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{TRUE} if the \code{Container} is empty else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has"></a>}}
+\if{latex}{\out{\hypertarget{method-has}{}}}
+\subsection{Method \code{has()}}{
+Determine if \code{Container} has some element.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$has(elem)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{elem}}{element to search for}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} of \code{Container} contains \code{elem} else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-print"></a>}}
+\if{latex}{\out{\hypertarget{method-print}{}}}
+\subsection{Method \code{print()}}{
+Print object representation similar to \code{\link[utils:str]{utils::str()}}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$print(list.len = 10L, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{list.len}}{\code{integer} maximum number of elements to display}
+
+\item{\code{...}}{other arguments passed to \code{\link[utils:str]{utils::str()}}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-remove"></a>}}
+\if{latex}{\out{\hypertarget{method-remove}{}}}
+\subsection{Method \code{remove()}}{
+Find and remove element from \code{Container}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$remove(elem, right = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{elem}}{element to be removed from the \code{Container}. If element
+is not found in the \code{Container}, an error is signaled.}
+
+\item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-size"></a>}}
+\if{latex}{\out{\hypertarget{method-size}{}}}
+\subsection{Method \code{size()}}{
+Size of the \code{Container}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$size()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the \code{Container} size
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-type"></a>}}
+\if{latex}{\out{\hypertarget{method-type}{}}}
+\subsection{Method \code{type()}}{
+Underlying data type
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$type()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+type (or mode) of internal vector containing the elements
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-values"></a>}}
+\if{latex}{\out{\hypertarget{method-values}{}}}
+\subsection{Method \code{values()}}{
+Get copy of \code{Container} values
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$values()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+a copy of all elements in the same format as they are stored
+in the \code{Container} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}
