@@ -3,7 +3,6 @@
 \docType{package}
 \name{container.pkg}
 \alias{container.pkg}
-\alias{container.pkg-package}
 \title{Container, Deque, Set, and Dict (aka Map) - R6 based container classes
 with iterators and reference semantics.}
 \description{

@@ -3,21 +3,20 @@
 \name{dequeS3binOp}
 \alias{dequeS3binOp}
 \alias{+.Deque}
-\title{Binary deque operators}
+\title{Binary \code{Deque} operators}
 \usage{
 \method{+}{Deque}(x1, x2)
 }
 \arguments{
-\item{x1}{primitive or \code{\link[container]{Deque}} object}
+\item{x1}{primitive or \code{\link[=Deque]{Deque()}} object}
 
-\item{x2}{primitive or \code{\link[container]{Deque}} object}
+\item{x2}{primitive or \code{\link[=Deque]{Deque()}} object}
 }
 \value{
-\code{\link[container]{Deque}} object
+For \code{+} if left side is a \code{\link[=Deque]{Deque()}}, adds element to right side of
+the \code{\link[=Deque]{Deque()}}. If right side is a \code{\link[=Deque]{Deque()}}, adds element to left side of
+the \code{\link[=Deque]{Deque()}}.
 }
 \description{
-Binary operators for \code{Deque} objects.
-}
-\details{
-\code{x1 + x2}:
+Binary operators for \code{\link[=Deque]{Deque()}} objects.
 }

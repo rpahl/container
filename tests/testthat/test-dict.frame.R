@@ -54,9 +54,26 @@ test_that("removing columns from Dict.frame works as expected", {
     dif$remove("A")
     expect_equal(dif$ncol(), 0)
 
-    expect_equal(dif$rownames(), rownames(df))
+})
+
+test_that("added columns must match in length except if dict.frame still empty", {
+    dif <- Dict.frame$new()
+    dif$add("A", 1:2)
     expect_equal(dif$nrow(), 2)
-    expect_error(dif$add("A", 1:3), "elements must be of length 2")
+    expect_error(dif$add("B", 1:3), "elements must be of length 2")
+})
+
+test_that("dict.frame remembers number of rows even after clearance", {
+    # Note: this is consistent with base data.frame
+    df = data.frame(A = 1:3)
+    dif <- Dict.frame$new(df)
+    expect_equal(dif$nrow(), 3)
+    dif$clear()
+    expect_equal(dif$ncol(), 0)
+    expect_equal(dif$nrow(), 3)
+    df[["A"]] <- NULL
+    expect_equal(ncol(df), 0)
+    expect_equal(nrow(df), 3)
 })
 
 
@@ -72,7 +89,7 @@ test_that("Dict.frame update works as expected", {
 
     expect_error(dif1$update(data.frame(A = 1:3)), "arg must be a Dict.frame")
     expect_error(dif1$update(Dict.frame$new(data.frame(A = 1:3))),
-                 "mismatching number of rows")
+                 "elements must be of length 2")
 })
 
 

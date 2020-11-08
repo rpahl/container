@@ -1,27 +1,13 @@
 #' @title A Dict class
 #'
-#' @description The `Dict` resembles Python's dict type, and is implemented
-#' as a specialized associative `Container` thus sharing all `Container` methods
-#' with some of them being overriden to account for the associative key-value
-#' pair semantic.
+#' @description The [Dict()] resembles Python's dict type, and is implemented
+#' as a specialized associative [Container()] thus sharing all [Container()]
+#' methods with some of them being overriden to account for the associative
+#' key-value pair semantic.
+#'
 #' @author Roman Pahl
-#' @docType class
 #' @importFrom R6 R6Class
-#'
-#' @examples
-#' ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))
-#' ages$has("Peter")   # TRUE
-#' ages$peek("Lisa")   # 23
-#' ages$peek("Mike")   # NULL
-#' ages$add("Mike", 18)
-#' ages$peek("Mike")   # 18
-#' ages$keys()
-#' print(ages)
-#'
-#' \dontrun{
-#' Dict$new(list(Peter=20))$add("Peter", 22)         # key already in Dict
-#' Dict$new(c(Peter=24, Lisa=23, Bob=32, Peter=20))  # Error: duplicated keys
-#' }
+#' @seealso [Container()], [dict()]
 #' @export
 Dict <- R6::R6Class("Dict",
     inherit = Container,
@@ -30,16 +16,14 @@ Dict <- R6::R6Class("Dict",
         #' @param x initial elements put into the `Dict`
         #' @return invisibly returns the `Dict`
         initialize = function(x = list()) {
-            function(x=list()) {
-                if (is.data.frame(x)) x <- as.list(x)
-                name_len <- sapply(names(x), nchar)
-                if (length(x) != length(name_len) || any(name_len == 0)) {
-                    stop("all items must be named")
-                }
-                super$initialize(x)
-                if (any(duplicated(self$keys()))) stop("duplicated keys")
-                invisible(self)
+            if (is.data.frame(x)) x <- as.list(x)
+            name_len <- sapply(names(x), nchar)
+            if (length(x) != length(name_len) || any(name_len == 0)) {
+                stop("all items must be named")
             }
+            super$initialize(x)
+            if (any(duplicated(self$keys()))) stop("duplicated keys")
+            invisible(self)
         },
 
         #' @description If `key` not yet in `Dict`, insert `value` at `key`,
@@ -47,11 +31,10 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @param value the value to be added to the `Dict`.
         add = function(key, value) {
-            function(key, value) {
-                if (self$has(key)) stop("key '", key, "' already in ",
-                                        data.class(self))
-                self$set(key, value, add=TRUE)
+            if (self$has(key)) {
+                stop("key '", key, "' already in ", data.class(self))
             }
+            self$set(key, value, add = TRUE)
         },
 
         #' @description If key in `Dict`, remove it.
@@ -80,8 +63,8 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @return `TRUE` if `key` in `Dict`, otherwise `FALSE`.
         has = function(key) {
+            if (length(key) != 1) stop("key must be of length 1")
             if (!is.character(key)) stop("key must be character")
-            if (length(key) != 1) stop("key must be single character string")
             if (nchar(key) == 0) stop("zero-length key")
             key %in% self$keys()
         },
@@ -90,11 +73,6 @@ Dict <- R6::R6Class("Dict",
         #' @return `character` vector of all keys.
         keys = function() {
             as.character(names(private$elems))
-        },
-
-        #' @description An alias for [keys()]
-        names = function() {
-            self$keys()
         },
 
         #' @description Peek for value in `Dict`.
@@ -134,8 +112,9 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, remove it, otherwise raise an error.
         remove = function(key) {
-            if (!self$has(key)) stop("key '", key, "' not in ",
-                                     data.class(self))
+            if (!self$has(key)) {
+                stop("key '", key, "' not in ", data.class(self))
+            }
             self$discard(key)
         },
 
@@ -169,14 +148,15 @@ Dict <- R6::R6Class("Dict",
         #' @param other `Dict` dictionary used to update the `Dict`
         #' @return invisibly returns the `Dict`
         update = function(other = Dict$new()) {
-            if (!inherits(other, "Dict")) stop("arg must be a ",
-                                               data.class(self))
+            if (!inherits(other, data.class(self))) {
+                stop("arg must be a ", data.class(self))
+            }
             for (key in other$keys()) {
-                self$set(key, other$get(key), add=TRUE)
+                self$set(key, other$get(key), add = TRUE)
             }
             invisible(self)
         }
     ),
-    lock_class=TRUE
+    lock_class = TRUE
 )
 

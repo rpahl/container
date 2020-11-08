@@ -5,54 +5,25 @@
 \alias{set}
 \alias{as.set}
 \alias{is.set}
-\title{Set constructors}
+\alias{add.Set}
+\title{Set S3 interface}
 \usage{
 set(x = list())
 
 as.set(x)
 
 is.set(x)
-}
-\arguments{
-\item{x}{(vector or list) initial elements of the set}
+
+\method{add}{Set}(x, elem, ...)
 }
 \description{
-The \code{set} is considered and implemented as a specialized
- \code{\link[container]{container}} in which elements are always unique. It
- provides typical set operations such as \code{union (+)} and
- \code{intersect (/)}.
+The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
+\code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and
+it provides typical set operations such as \code{union} and \code{intersect}.
 }
-\section{S3 methods for class \code{Set}}{
-
-\describe{
- \item{\code{add(x, elem)}}{If not already in set \code{x}, add \code{elem}.}
-}
-}
-
-\examples{
-s1 <- set(list(1, 2, "A", "B"))
-s2 <- set(values(s1))
-s1 == s2     # TRUE
-s1$add(1)    # 1 was already in set, therefore ...
-s1 == s2     # ... still TRUE
-s1$add(3)
-s1 == s2     # FALSE
-s1 > s2      # TRUE
-s1 - s2      # the added element
-unlist(values(s1 / s2))
-
-\dontrun{
-s1$remove(4)              # Error: 3 not in Set
-}
+\details{
+For a detailed documentation of all methods see \code{\link[=Set]{Set()}}.
 }
 \seealso{
-\code{\link[container]{container}}, \code{\link[container]{Set}},
- \code{\link[container]{+.Set}},
- \code{\link[container]{/.Set}},
- \code{\link[container]{-.Set}},
- \code{\link[container]{<.Set}},
- \code{\link[container]{>.Set}}
-}
-\author{
-Roman Pahl
+\code{\link[=Container]{Container()}}, \code{\link[=+.Set]{+.Set()}}, \code{\link[=/.Set]{/.Set()}}, \code{\link[=-.Set]{-.Set()}}, \code{\link[=<.Set]{<.Set()}}, \code{\link[=>.Set]{>.Set()}}
 }

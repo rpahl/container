@@ -2,49 +2,46 @@
 % Please edit documentation in R/dict-S3.R
 \name{dictS3replace}
 \alias{dictS3replace}
-\alias{[[<-.Dict}
-\alias{[<-.Dict}
 \alias{[[.Dict}
 \alias{[.Dict}
-\title{Extract or replace \code{Dict} values}
+\alias{[[<-.Dict}
+\alias{[<-.Dict}
+\title{Extract or replace parts of a \code{Dict}}
 \usage{
-\method{[[}{Dict}(dic, key, add = FALSE) <- value
+\method{[[}{Dict}(x, key, default = NULL)
 
-\method{[}{Dict}(dic, key) <- value
+\method{[}{Dict}(x, key, default = NULL)
 
-\method{[[}{Dict}(dic, key)
+\method{[[}{Dict}(x, key, add = FALSE) <- value
 
-\method{[}{Dict}(dic, key, default = NULL)
+\method{[}{Dict}(x, key, add = FALSE) <- value
 }
 \arguments{
-\item{dic}{\code{\link[container]{Dict}} object}
+\item{x}{\code{\link[=Dict]{Dict()}} object.}
 
-\item{key}{(character) the key}
+\item{key}{\code{character} name of elements to extract or replace.}
 
-\item{add}{(logical) if TRUE, value is added if not yet in dict. If FALSE
-and value not yet in dict, an error is signaled.}
+\item{default}{A suitable default value.}
 
-\item{value}{the value associated with the \code{key}}
+\item{add}{\code{logical} If \code{FALSE} and key is not yet in the dictionary, an
+error is signaled. This is different from standard R lists, where instead
+just a new entry would be generated. To behave like standard R lists, set
+\code{add = TRUE}, which also sets the value at the key, but will also add a
+new key-value pair if the key is not yet in the dictionary.}
 
-\item{default}{the default value}
+\item{value}{A suitable replacement value.}
 }
 \value{
-updated \code{\link[container]{Dict}} object
+For \code{[[} returns the element found at key, or \code{default} if not found.
 
-value at key
+For \code{[} returns a dictionary containing the extracted values.
 
-element found at key, or \code{default} if not found.
+For \verb{[[<-} replaces the value associated with \code{key}. If \code{key} is not
+in the dictionary, by default, an error is raised, unless \code{add} was set to
+\code{TRUE}, in which case the value is added to the dictionary.
+
+For \verb{[<-} replaces the values at the given \code{keys}.
 }
 \description{
-Access and assignment operators for \code{Dict} objects.
-}
-\details{
-\code{dic[key] <- value}: If \code{key} not yet in \code{dic}, insert
- \code{value} at \code{key}, otherwise raise an error.
-
-\code{dic[key]}: If \code{key} in \code{dic}, return value, else
- throw key-error.
-
-\code{dic[key, default=NULL]}: Return the value for \code{key} if
- \code{key} is in \code{dic}, else \code{default}.
+Access and assignment operators for \code{\link[=Dict]{Dict()}} objects.
 }

@@ -2,44 +2,49 @@
 % Please edit documentation in R/set-S3.R
 \name{setS3binOp}
 \alias{setS3binOp}
+\alias{!=.Set}
+\alias{==.Set}
 \alias{+.Set}
 \alias{/.Set}
 \alias{-.Set}
-\alias{==.Set}
 \alias{<.Set}
 \alias{>.Set}
 \title{Binary set operators}
 \usage{
+\method{!=}{Set}(s1, s2)
+
+\method{==}{Set}(s1, s2)
+
 \method{+}{Set}(s1, s2)
 
 \method{/}{Set}(s1, s2)
 
 \method{-}{Set}(s1, s2)
 
-\method{==}{Set}(s1, s2)
-
 \method{<}{Set}(s1, s2)
 
 \method{>}{Set}(s1, s2)
 }
 \arguments{
-\item{s1}{\code{\link[container]{Set}} object}
+\item{s1}{\code{\link[=Set]{Set()}} object}
 
-\item{s2}{\code{\link[container]{Set}} object}
+\item{s2}{\code{\link[=Set]{Set()}} object}
 }
 \value{
-union of both sets
+For \code{!=} return \code{TRUE} if both sets are not equal.
 
-intersection of both sets
+For \code{==} return \code{TRUE} if both sets are equal.
 
-set-difference of both sets
+For \code{+} return union of both sets
 
-\code{TRUE} if both sets are equal, else \code{FALSE}
+For \code{/} return intersection of both sets
 
-\code{TRUE} if s1 is subset of s2, else \code{FALSE}
+For \code{-} return set-difference of both sets
 
-\code{TRUE} if s1 is superset of s2, else \code{FALSE}
+For \verb{< return }TRUE` if s1 is subset of s2.
+
+For \verb{> return }TRUE` if s1 is superset of s2.
 }
 \description{
-Binary operators for \code{Set} objects.
+Binary operators for \code{\link[=Set]{Set()}} objects.
 }

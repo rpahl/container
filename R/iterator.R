@@ -37,26 +37,6 @@ Iterable <- R6::R6Class("Iterable",
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
-#'
-#' @examples
-#' # Iterator on primitive list
-#' it <- Iterator$new(list("A", 1, 2))
-#' while(it$has_next()) {
-#' print(it$get_next())
-#' }
-#' it$has_next()   # FALSE
-#' print(it)       # <Iterator> at position 3
-#' it$begin()
-#' print(it)       # <Iterator> at position 0
-#'
-#' # Iterator from Container object
-#' d <- deque(1:3)
-#' it <- iter(d)
-#' sum <- 0
-#' while(it$has_next()) {
-#' sum <- sum + it$get_next()
-#' }
-#' print(sum)
 #' @export
 Iterator <- R6::R6Class("Iterator",
     public = list(

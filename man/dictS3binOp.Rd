@@ -4,26 +4,22 @@
 \alias{dictS3binOp}
 \alias{+.Dict}
 \alias{-.Dict}
-\title{Binary dict operators}
+\title{Binary \code{Dict} operators}
 \usage{
 \method{+}{Dict}(d1, d2)
 
 \method{-}{Dict}(d1, d2)
 }
 \arguments{
-\item{d1}{\code{\link[container]{Dict}} object}
+\item{d1}{\code{\link[=Dict]{Dict()}} object}
 
-\item{d2}{\code{\link[container]{Dict}} object}
+\item{d2}{\code{\link[=Dict]{Dict()}} object}
 }
 \value{
-\code{\link[container]{Dict}} object
+For \code{+} returns a copy of \code{d1} updated by \code{d2}.
+
+For \code{-} returns a copy of \code{d1} with all \code{d2} keys being discarded.
 }
 \description{
-Binary operators for \code{Dict} objects.
-}
-\details{
-\code{d1 + d2}: return a copy of \code{d1} updated by \code{d2}.
-
-\code{d1 - d2}: return a copy of \code{d1} with all keys being
- removed that occured in \code{d2}.
+Binary operators for \code{\link[=Dict]{Dict()}} objects.
 }

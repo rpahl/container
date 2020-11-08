@@ -17,29 +17,7 @@ function, which by default is an empty list, in which case the
 \code{\link[=Container]{Container()}} object can store objects of mixed and arbitrary types.
 If the container will only contain objects of one particular type, for
 example, numeric values, it will be both more efficient and type safe to
-initialize the container with this particular type (see Examples section).
-}
-\examples{
-c0 <- Container$new()
-c0$size()                            # 0
-c0$add(1)
-c0$add(2)$add("A")                   # chaining example
-c0$has(2)                            # TRUE
-c0$discard(2)$has(2)                 # FALSE
-
-\dontrun{
-c0$remove(2)                         # Error : 2 not in Container
-}
-c0$discard(2)$has(2)                 # still FALSE, but no error
-
-# Container types
-Container$new(list("A", 1))$type()   # "list"
-Container$new(numeric(0))$type()     # "double"
-Container$new(0+0i)$type()           # "complex"
-Container$new(letters[1:3])$type()   # "character"
-Container$new(letters[1:3])$values() # "a" "b" "c"
-Container$new(1L)$type()             # "integer"
-Container$new(1L)$add(2.3)$values()  # since integer type, equals c(1, 2)
+initialize the container with this particular type.
 }
 \seealso{
 \code{\link[=Iterable]{Iterable()}}, \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}

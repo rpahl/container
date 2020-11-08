@@ -5,17 +5,19 @@
 \alias{container}
 \alias{as.container}
 \alias{is.container}
-\alias{add}
-\alias{clear}
-\alias{clone}
-\alias{discard}
-\alias{empty}
-\alias{has}
-\alias{remove}
-\alias{size}
-\alias{type}
-\alias{values}
-\title{Container S3 interface}
+\alias{iter.Container}
+\alias{add.Container}
+\alias{clear.Container}
+\alias{clone.Container}
+\alias{discard.Container}
+\alias{empty.Container}
+\alias{has.Container}
+\alias{print.Container}
+\alias{size.Container}
+\alias{type.Container}
+\alias{values.Container}
+\title{Container S3 interface
+'}
 \usage{
 container(x = list())
 
@@ -23,96 +25,39 @@ as.container(x)
 
 is.container(x)
 
-add(x, ...)
+\method{iter}{Container}(x)
 
-clear(x)
+\method{add}{Container}(x, elem, ...)
 
-clone(x, ...)
+\method{clear}{Container}(x)
 
-discard(x, ...)
+\method{clone}{Container}(x, deep = FALSE, ...)
 
-empty(x)
+\method{discard}{Container}(x, elem, right = FALSE, ...)
 
-has(x, ...)
+\method{empty}{Container}(x)
 
-remove(x, ...)
+\method{has}{Container}(x, elem, ...)
 
-size(x)
+\method{print}{Container}(x, list.len = 10, ...)
 
-type(x)
+\method{size}{Container}(x)
 
-values(x)
-}
-\arguments{
-\item{x}{initial elements passed to constructor or object of class
-\code{Container} passed to member methods.}
+\method{type}{Container}(x)
 
-\item{...}{further arguments}
+\method{values}{Container}(x)
 }
 \description{
-This function creates a container data structure with typical
-member functions to insert, delete and access objects from the container. It
-also serves as the base class for objects created with 
- \code{\link[container]{deque}}, \code{\link[container]{set}}, and 
- \code{\link[container]{dict}}.
+This function creates a \code{\link[=Container]{Container()}} object, which is a data
+structure with typical member functions to insert, delete and access objects
+from the container. Since the \code{\link[=Container]{Container()}} class mainly serves as the
+base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}} objects, users are more
+likley to use the corresponding \link[=Deque]{deque()}, \link[=Set]{set()}, and \link[=Dict]{dict()} methods to
+create objects of the respective derived classes.
 }
 \details{
-The underlying data structure is based on R vectors (or lists), with the mode
-being set to the mode (or type) of the value passed to the initialize
-function, which by default is an empty list, in which case the
-\code{Container} object can store objects of mixed and arbitrary types.
-If the container will only contain objects of one particular type, for
-example, double values, it will be both more efficient and type safe to
-initialize the container using this particular type (see Examples section).
-}
-\section{S3 methods for class \code{Container}}{
-
-\describe{
- \item{\code{iter(cont)}}{Create iterator from \code{cont}.}
- \item{\code{add(cont, elem)}}{Add \code{elem} to \code{cont}.}
- \item{\code{clear(cont)}}{Remove all elements from the \code{cont}.}
- \item{\code{clone(cont)}}{Create a copy of \code{cont} object. For
- more details see documentation of \code{\link[R6]{R6Class}}.}
- \item{\code{discard(cont, elem, right=FALSE)}}{Search for first \code{elem} in
-     \code{cont} and, if found, remove it. If \code{right} is
-     \code{TRUE}, search from right to left.}
- \item{\code{empty(cont)}}{Return \code{TRUE} if the \code{cont} is empty,
-     else \code{FALSE}.}
- \item{\code{has(cont, elem)}}{Return \code{TRUE} if \code{cont} contains
-     \code{elem} else \code{FALSE}.}
- \item{\code{print(cont, list.len, ...)}}{Print container object representation
-     similar to \code{\link[utils]{str}}}
- \item{\code{remove(cont, elem, right=FALSE)}}{Same as \code{discard}, but throw an
-     error if \code{elem} does not exist.}
- \item{\code{size(cont)}}{Return size of the \code{cont}.}
- \item{\code{type(cont)}}{Return type (or mode) of internal vector containing
- the elements of the container.}
- \item{\code{values(cont)}}{Return a copy of all elements in the same format
- as they are stored in the object.}
-}
-}
-
-\examples{
-c0 <- container(list(2, "A"))
-size(c0)                         # 2
-add(c0, 1)
-c0$has(2)                        # TRUE
-discard(c0, 2)
-has(c0, 2)                       # FALSE
-
-\dontrun{
-c0$remove(2)                     # Error : 2 not in Container
-}
-discard(c0, 2)                   # ok (no effect)
-
-type(container(list("A", 1)))    # "list"
-type(container(numeric(0)))      # "double"
-type(container(0+0i))            # "complex"
-type(container(letters[1:3]))    # "character"
-values(container(letters[1:3]))  # "a" "b" "c"
-type(container(1L))              # "integer"
-values(add(container(1L), 2.3))  # since integer type, equals c(1, 2)
+For a detailed documentation of all methods see \code{\link[=Container]{Container()}}
 }
 \seealso{
-\code{\link[container]{Container}}, \code{\link[container]{+.Container}},
+\code{\link[=Container]{Container()}}, \code{\link[=+.Container]{+.Container()}}, \code{\link[=deque]{deque()}}, \code{\link[=set]{set()}}, \code{\link[=dict]{dict()}}
 }

@@ -1,6 +1,6 @@
 context("Dict")
 
-test_that("Dict", {
+test_that("Dict constructor works as expected", {
     # initialize
     expect_error(Dict$new(1:2), "all items must be named")
     expect_equal(Dict$new()$keys(), character(0))
@@ -13,13 +13,15 @@ test_that("Dict", {
     expect_equal(d$type(), "integer")
     expect_equal(Dict$new()$type(), "list")
     expect_error(Dict$new(list(x=1, y=2, x=3)), "duplicated keys")
+})
 
+test_that("Dict operations work as expected", {
     # empty, size, has, add and peek
     d <- Dict$new()
     expect_equal(attr(d, "name"), "<Dict>")
     expect_true(d$empty())
     expect_error(d$add(key=1, 1), "key must be character")
-    expect_error(d$add(c("x", "y"), 1), "key must be single character string")
+    expect_error(d$add(c("x", "y"), 1), "key must be of length 1")
     d$add("x", 1)
     expect_false(d$empty())
     expect_equal(d$size(), 1)

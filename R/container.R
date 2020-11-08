@@ -11,33 +11,11 @@
 #' [Container()] object can store objects of mixed and arbitrary types.
 #' If the container will only contain objects of one particular type, for
 #' example, numeric values, it will be both more efficient and type safe to
-#' initialize the container with this particular type (see Examples section).
+#' initialize the container with this particular type.
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
 #' @seealso [Iterable()], [Deque()], [Set()], and [Dict()]
-#'
-#' @examples
-#' c0 <- Container$new()
-#' c0$size()                            # 0
-#' c0$add(1)
-#' c0$add(2)$add("A")                   # chaining example
-#' c0$has(2)                            # TRUE
-#' c0$discard(2)$has(2)                 # FALSE
-#'
-#' \dontrun{
-#' c0$remove(2)                         # Error : 2 not in Container
-#' }
-#' c0$discard(2)$has(2)                 # still FALSE, but no error
-#'
-#' # Container types
-#' Container$new(list("A", 1))$type()   # "list"
-#' Container$new(numeric(0))$type()     # "double"
-#' Container$new(0+0i)$type()           # "complex"
-#' Container$new(letters[1:3])$type()   # "character"
-#' Container$new(letters[1:3])$values() # "a" "b" "c"
-#' Container$new(1L)$type()             # "integer"
-#' Container$new(1L)$add(2.3)$values()  # since integer type, equals c(1, 2)
 #' @export
 Container <- R6::R6Class("Container",
     inherit = container:::Iterable,
@@ -133,7 +111,11 @@ Container <- R6::R6Class("Container",
         remove = function(elem, right = FALSE) {
             class <- data.class(self)
             hasElem <- self$has(elem)
-            if (hasElem) self$discard(elem, right) else stop(elem, " not in ", class)
+            if (hasElem) {
+                self$discard(elem, right)
+            } else {
+                stop(elem, " not in ", class)
+            }
             invisible(self)
         },
 

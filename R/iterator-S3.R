@@ -6,26 +6,15 @@
 #' @name iterS3
 #'
 #' @section S3 methods for class `Iterator`:
-#' \describe{
-#'  \item{\code{itbegin(it)}}{Reset iterator position to 1.}
-#'  \item{\code{itget(it)}}{Get value at current iterator position.}
-#'  \item{\code{itget_next()}}{Get value after incrementing by one.}
-#'  \item{\code{itpos()}}{Return current iterator position.}
-#'  \item{\code{ithas_next(it)}}{Return TRUE if there is a next element.}
-#'  \item{\code{itnext(it)}}{Increment iterator to point at next element.}
-#' }
+#'  * `itbegin(it)` reset iterator position to 1.
+#'  * `itget(it)` get value at current iterator position.
+#'  * `itget_next()` get value after incrementing by one.
+#'  * `itpos()` return current iterator position.
+#'  * `ithas_next(it)` return `TRUE` if there is a next element.
+#'  * `itnext(it)` increment iterator to point at next element.
 #'
 #' @param it `Iterator` object
-#' @examples
-#' it <- iter(list("A", 1, 2))
-#' while(ithas_next(it)) {
-#'   print(itget_next(it))
-#' }
-#' ithas_next(it)   # FALSE
-#' print(it)       # <Iterator> at position 3
-#' itbegin(it)
-#' print(it)       # <Iterator> at position 0
-
+NULL
 
 #' @rdname iterS3
 #' @export

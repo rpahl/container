@@ -9,26 +9,6 @@ An \code{Iterator} is an object that allows to iterate over
 sequences. It implements \code{.next} and \code{get} to iterate and retrieve the
 value of the sequence it is associated with.
 }
-\examples{
-# Iterator on primitive list
-it <- Iterator$new(list("A", 1, 2))
-while(it$has_next()) {
-print(it$get_next())
-}
-it$has_next()   # FALSE
-print(it)       # <Iterator> at position 3
-it$begin()
-print(it)       # <Iterator> at position 0
-
-# Iterator from Container object
-d <- deque(1:3)
-it <- iter(d)
-sum <- 0
-while(it$has_next()) {
-sum <- sum + it$get_next()
-}
-print(sum)
-}
 \author{
 Roman Pahl
 }

@@ -3,21 +3,18 @@
 \name{ContainerS3op}
 \alias{ContainerS3op}
 \alias{+.Container}
-\title{Container operators}
+\title{Binary \code{Container} operators}
 \usage{
 \method{+}{Container}(c1, c2)
 }
 \arguments{
-\item{c1}{\code{\link[container]{Container}} object}
+\item{c1}{\code{\link[=Container]{Container()}} object}
 
-\item{c2}{\code{\link[container]{Container}} object}
+\item{c2}{\code{\link[=Container]{Container()}} object}
 }
 \value{
-\code{\link[container]{Container}} object
+For \code{+} returns \code{c1} and \code{c2} combined (as a copy)
 }
 \description{
-Binary operators for \code{Container} objects.
-}
-\details{
-\code{c1 + c2}: return \code{c1} and \code{c2} combined (as a copy)
+Binary operators for \code{\link[=Container]{Container()}} objects.
 }
