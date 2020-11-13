@@ -5,10 +5,10 @@
 \alias{Iterable}
 \title{Iterable abstract class interface}
 \description{
-An \code{Iterable} is an object that provides an \code{\link[=iter]{iter()}} method,
+An \code{Iterable} is an object that provides an \code{iter} method,
 which is expected to return an \code{Iterator} object. This class defines the
 abstract class interface such that each class inheriting this class provides
-an \code{\link[=iter]{iter()}} method and must implement a private method \code{\link[=create_iter]{create_iter()}},
+an \code{\link[=iter]{iter()}} method and must implement a private method \code{create_iter},
 which must return an \code{Iterator} object.
 }
 \seealso{

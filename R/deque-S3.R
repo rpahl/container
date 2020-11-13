@@ -6,32 +6,40 @@
 #' both stacks and queues.
 #' @details For a detailed documentation of all methods see [Deque()].
 #' @name dequeS3
-#' @seealso [Container()], [+.Deque()]
+#' @seealso [Container()], [`+.Deque()`]
 NULL
 
 # S3 generic methods not derived from container
 
+#' @rdname dequeS3
 #' @export
 addleft <- function(x, ...) UseMethod("addleft")
 
+#' @rdname dequeS3
 #' @export
 count <- function(x, ...) UseMethod("count")
 
+#' @rdname dequeS3
 #' @export
 peek <- function(x, ...) UseMethod("peek")
 
+#' @rdname dequeS3
 #' @export
 peekleft <- function(x) UseMethod("peekleft")
 
+#' @rdname dequeS3
 #' @export
 pop <- function(x, ...) UseMethod("pop")
 
+#' @rdname dequeS3
 #' @export
 popleft <- function(x) UseMethod("popleft")
 
+#' @rdname dequeS3
 #' @export
 reverse <- function(x) UseMethod("reverse")
 
+#' @rdname dequeS3
 #' @export
 rotate <- function(x, ...) UseMethod("rotate")
 

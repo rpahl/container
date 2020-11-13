@@ -2,6 +2,16 @@
 % Please edit documentation in R/container-S3.R
 \name{ContainerS3}
 \alias{ContainerS3}
+\alias{add}
+\alias{clear}
+\alias{clone}
+\alias{discard}
+\alias{empty}
+\alias{has}
+\alias{remove}
+\alias{size}
+\alias{type}
+\alias{values}
 \alias{container}
 \alias{as.container}
 \alias{is.container}
@@ -19,6 +29,26 @@
 \title{Container S3 interface
 '}
 \usage{
+add(x, ...)
+
+clear(x)
+
+clone(x, ...)
+
+discard(x, ...)
+
+empty(x)
+
+has(x, ...)
+
+remove(x, ...)
+
+size(x)
+
+type(x)
+
+values(x)
+
 container(x = list())
 
 as.container(x)

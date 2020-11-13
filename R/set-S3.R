@@ -5,7 +5,8 @@
 #' it provides typical set operations such as `union` and `intersect`.
 #' @details For a detailed documentation of all methods see [Set()].
 #' @name setS3
-#' @seealso [Container()], [+.Set()], [/.Set()], [-.Set()], [<.Set()], [>.Set()]
+#' @seealso [Container()], [`+.Set()`], [`/.Set()`], [`-.Set()`], [`<.Set()`],
+#' [`>.Set()`]
 NULL
 
 

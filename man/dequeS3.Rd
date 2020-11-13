@@ -2,6 +2,14 @@
 % Please edit documentation in R/deque-S3.R
 \name{dequeS3}
 \alias{dequeS3}
+\alias{addleft}
+\alias{count}
+\alias{peek}
+\alias{peekleft}
+\alias{pop}
+\alias{popleft}
+\alias{reverse}
+\alias{rotate}
 \alias{deque}
 \alias{as.deque}
 \alias{is.deque}
@@ -15,6 +23,22 @@
 \alias{rotate.Deque}
 \title{Deque (double-ended queue) S3 interface}
 \usage{
+addleft(x, ...)
+
+count(x, ...)
+
+peek(x, ...)
+
+peekleft(x)
+
+pop(x, ...)
+
+popleft(x)
+
+reverse(x)
+
+rotate(x, ...)
+
 deque(x = list())
 
 as.deque(x)

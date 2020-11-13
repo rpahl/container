@@ -25,5 +25,6 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 For a detailed documentation of all methods see \code{\link[=Set]{Set()}}.
 }
 \seealso{
-\code{\link[=Container]{Container()}}, \code{\link[=+.Set]{+.Set()}}, \code{\link[=/.Set]{/.Set()}}, \code{\link[=-.Set]{-.Set()}}, \code{\link[=<.Set]{<.Set()}}, \code{\link[=>.Set]{>.Set()}}
+\code{\link[=Container]{Container()}}, \code{\link[=+.Set]{+.Set()}}, \code{\link[=/.Set]{/.Set()}}, \code{\link[=-.Set]{-.Set()}}, \code{\link[=<.Set]{<.Set()}},
+\code{\link[=>.Set]{>.Set()}}
 }

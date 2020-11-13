@@ -8,41 +8,50 @@
 #' create objects of the respective derived classes.
 #' @details For a detailed documentation of all methods see [Container()]
 #' @name ContainerS3
-#' @seealso [Container()], [+.Container()], [deque()], [set()], [dict()]
+#' @seealso [Container()], [`+.Container()`], [deque()], [set()], [dict()]
 NULL
 
 # S3 generic methods
 
+#' @rdname ContainerS3
 #' @export
 add <- function(x, ...) UseMethod("add")
 
+#' @rdname ContainerS3
 #' @export
 clear <- function(x) UseMethod("clear")
 
+#' @rdname ContainerS3
 #' @export
 clone <- function(x, ...) UseMethod("clone")
 
+#' @rdname ContainerS3
 #' @export
 discard <- function(x, ...) UseMethod("discard")
 
+#' @rdname ContainerS3
 #' @export
 empty <- function(x) UseMethod("empty")
 
+#' @rdname ContainerS3
 #' @export
 has <- function(x, ...) UseMethod("has")
 
+#' @rdname ContainerS3
 #' @export
 remove <- function(x, ...) UseMethod("remove")
 
+#' @rdname ContainerS3
 #' @export
 size <- function(x) UseMethod("size")
 
+#' @rdname ContainerS3
 #' @export
 type <- function(x) UseMethod("type")
 
+#' @rdname ContainerS3
 #' @export
 values <- function(x) UseMethod("values")
-
 
 #' @rdname ContainerS3
 #' @export

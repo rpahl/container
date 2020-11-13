@@ -6,30 +6,37 @@
 #' key-value pair semantic.
 #' @details For a detailed documentation of all methods see [Dict()].
 #' @name dictS3
-#' @seealso [Container()], [+.Dict()], [-.Dict()], [[[<-.Dict()], [[[.Dict()],
-#' [[<-.Dict()], [[.Dict()]
+#' @seealso [Container()], [`+.Dict()`], [`-.Dict()`], [`[[<-.Dict()`],
+#' [`[[.Dict()`], [`[<-.Dict()`], [`[.Dict()`]
 NULL
 
 # S3 generic methods not derived from container
 
+#' @rdname dictS3
 #' @export
 getval <- function(x, ...) UseMethod("getval")
 
+#' @rdname dictS3
 #' @export
 keys <- function(x) UseMethod("keys")
 
+#' @rdname dictS3
 #' @export
 peek <- function(x, ...) UseMethod("peek")
 
+#' @rdname dictS3
 #' @export
 pop <- function(x, ...) UseMethod("pop")
 
+#' @rdname dictS3
 #' @export
 popitem <- function(x) UseMethod("popitem")
 
+#' @rdname dictS3
 #' @export
 setval <- function(x, ...) UseMethod("setval")
 
+#' @rdname dictS3
 #' @export
 sortkey <- function(x, ...) UseMethod("sortkey")
 

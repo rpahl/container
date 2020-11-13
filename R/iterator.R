@@ -1,9 +1,9 @@
 #' Iterable abstract class interface
 #'
-#' @description An `Iterable` is an object that provides an [iter()] method,
+#' @description An `Iterable` is an object that provides an `iter` method,
 #' which is expected to return an `Iterator` object. This class defines the
 #' abstract class interface such that each class inheriting this class provides
-#' an [iter()] method and must implement a private method [create_iter()],
+#' an [iter()] method and must implement a private method `create_iter`,
 #' which must return an `Iterator` object.
 #' @author Roman Pahl
 #' @docType class

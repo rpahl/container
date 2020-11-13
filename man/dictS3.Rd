@@ -2,6 +2,13 @@
 % Please edit documentation in R/dict-S3.R
 \name{dictS3}
 \alias{dictS3}
+\alias{getval}
+\alias{keys}
+\alias{peek}
+\alias{pop}
+\alias{popitem}
+\alias{setval}
+\alias{sortkey}
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
@@ -18,6 +25,20 @@
 \alias{sortkey.Dict}
 \title{Dict S3 interface}
 \usage{
+getval(x, ...)
+
+keys(x)
+
+peek(x, ...)
+
+pop(x, ...)
+
+popitem(x)
+
+setval(x, ...)
+
+sortkey(x, ...)
+
 dict(x = list())
 
 as.dict(x)
@@ -56,6 +77,6 @@ key-value pair semantic.
 For a detailed documentation of all methods see \code{\link[=Dict]{Dict()}}.
 }
 \seealso{
-\code{\link[=Container]{Container()}}, \code{\link[=+.Dict]{+.Dict()}}, \code{\link[=-.Dict]{-.Dict()}}, [[\code{\link[=<-.Dict]{<-.Dict()}}, [[\code{\link[=.Dict]{.Dict()}},
-[\code{\link[=<-.Dict]{<-.Dict()}}, [\code{\link[=.Dict]{.Dict()}}
+\code{\link[=Container]{Container()}}, \code{\link[=+.Dict]{+.Dict()}}, \code{\link[=-.Dict]{-.Dict()}}, [\verb{[[<-.Dict()}],
+[\verb{[[.Dict()}], [\verb{[<-.Dict()}], [\verb{[.Dict()}]
 }
