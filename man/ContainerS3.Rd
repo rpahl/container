@@ -77,6 +77,20 @@ is.container(x)
 
 \method{values}{Container}(x)
 }
+\arguments{
+\item{x}{a vector of 'any' type}
+
+\item{...}{further arguments depending on the method.}
+
+\item{elem}{some element of the container}
+
+\item{deep}{\code{logical} if \code{TRUE} a \code{deep} copy is done otherwise by default a
+shallow copy is performed.}
+
+\item{right}{\code{logical} if \code{TRUE} search from right to left}
+
+\item{list.len}{\code{integer} number of elements to print}
+}
 \description{
 This function creates a \code{\link[=Container]{Container()}} object, which is a data
 structure with typical member functions to insert, delete and access objects

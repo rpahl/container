@@ -5,6 +5,8 @@
 #' it provides typical set operations such as `union` and `intersect`.
 #' @details For a detailed documentation of all methods see [Set()].
 #' @name setS3
+#' @param x a vector of 'any' type
+#' @param ... further arguments depending on the method.
 #' @seealso [Container()], [`+.Set()`], [`/.Set()`], [`-.Set()`], [`<.Set()`],
 #' [`>.Set()`]
 NULL
@@ -23,6 +25,7 @@ as.set <- function(x) Set$new(x)
 is.set <- function(x) inherits(x, "Set")
 
 #' @rdname setS3
+#' @param elem some element of the set
 #' @export
 add.Set <- function(x, elem, ...) x$add(elem)
 

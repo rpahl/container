@@ -13,6 +13,10 @@ as.dict.frame(x)
 
 is.dict.frame(x)
 }
+\arguments{
+\item{x}{a named vector (or list) of 'any' type including
+\code{\link[base:data.frame]{base::data.frame()}}s.}
+}
 \description{
 The \code{\link[=Dict.frame]{Dict.frame()}} is a mix of a dictionary and a
 \code{data.frame}. In particular, it is a dictionary thereby inheriting all

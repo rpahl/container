@@ -4,8 +4,6 @@
 \alias{dictS3}
 \alias{getval}
 \alias{keys}
-\alias{peek}
-\alias{pop}
 \alias{popitem}
 \alias{setval}
 \alias{sortkey}
@@ -28,10 +26,6 @@
 getval(x, ...)
 
 keys(x)
-
-peek(x, ...)
-
-pop(x, ...)
 
 popitem(x)
 
@@ -66,6 +60,24 @@ is.dict(x)
 \method{setval}{Dict}(x, key, value, add = FALSE, ...)
 
 \method{sortkey}{Dict}(x, decr = FALSE, ...)
+}
+\arguments{
+\item{x}{a named vector (or list) of 'any' type including
+\code{\link[base:data.frame]{base::data.frame()}}s.}
+
+\item{...}{further arguments depending on the method.}
+
+\item{key}{\code{character} unique identifier to access the key-value pair.}
+
+\item{value}{value to add to the dictionary.}
+
+\item{default}{default value to return if \code{key} not in the dictionary}
+
+\item{add}{\code{logical} if FALSE and \code{key} is not in dictionary, an error is
+given, otherwise if \code{TRUE}, the key-value pair would be added if the \code{key}
+is not yet in the dict.}
+
+\item{decr}{\code{logical} if \code{TRUE} the elements are sorted decreasingly}
 }
 \description{
 The \code{\link[=dict]{dict()}} resembles Python's dict type, and is implemented

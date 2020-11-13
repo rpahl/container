@@ -6,6 +6,8 @@
 #' a [base::data.frame()], a [Dict.frame()] can contain arbitrary complex
 #' objects.
 #' @details For a detailed documentation of all methods see [Dict.frame()].
+#' @param x a named vector (or list) of 'any' type including
+#' [base::data.frame()]s.
 #' @name dict.frameS3
 #' @seealso [Dict()], [base::data.frame()]
 
@@ -28,7 +30,9 @@ is.dict.frame <- function(x) inherits(x, "Dict.frame")
 #' @name dict.frameS3replace
 #'
 #' @param x [Dict.frame()] object.
-#' @param i, j `integer` or `character` elements to extract or replace.
+#' @param i `integer` row indices of elements to extract or replace.
+#' @param j `integer` or `character` column indices of elements to extract
+#' or replace.
 NULL
 
 #' @rdname dict.frameS3replace

@@ -61,6 +61,15 @@ is.deque(x)
 
 \method{rotate}{Deque}(x, n = 1L, ...)
 }
+\arguments{
+\item{x}{a vector of 'any' type}
+
+\item{...}{further arguments depending on the method.}
+
+\item{elem}{some element of the deque}
+
+\item{n}{\code{integer} number of steps to rotate}
+}
 \description{
 Deques are a generalization of stacks and queues typically
 with methods to add, remove and access elements at both sides of the

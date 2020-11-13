@@ -6,6 +6,9 @@
 #' key-value pair semantic.
 #' @details For a detailed documentation of all methods see [Dict()].
 #' @name dictS3
+#' @param x a named vector (or list) of 'any' type including
+#' [base::data.frame()]s.
+#' @param ... further arguments depending on the method.
 #' @seealso [Container()], [`+.Dict()`], [`-.Dict()`], [`[[<-.Dict()`],
 #' [`[[.Dict()`], [`[<-.Dict()`], [`[.Dict()`]
 NULL
@@ -19,14 +22,6 @@ getval <- function(x, ...) UseMethod("getval")
 #' @rdname dictS3
 #' @export
 keys <- function(x) UseMethod("keys")
-
-#' @rdname dictS3
-#' @export
-peek <- function(x, ...) UseMethod("peek")
-
-#' @rdname dictS3
-#' @export
-pop <- function(x, ...) UseMethod("pop")
 
 #' @rdname dictS3
 #' @export
@@ -53,6 +48,8 @@ as.dict <- function(x) dict(x)
 is.dict <- function(x) inherits(x, "Dict")
 
 #' @rdname dictS3
+#' @param key `character` unique identifier to access the key-value pair.
+#' @param value value to add to the dictionary.
 #' @export
 add.Dict <- function(x, key, value, ...) x$add(key, value)
 
@@ -73,6 +70,7 @@ has.Dict <- function(x, key, ...) x$has(key)
 keys.Dict <- function(x) x$keys()
 
 #' @rdname dictS3
+#' @param default default value to return if `key` not in the dictionary
 #' @export
 peek.Dict <- function(x, key, default=NULL, ...) x$peek(key, default)
 
@@ -89,10 +87,14 @@ popitem.Dict <- function(x) x$popitem()
 remove.Dict <- function(x, key, ...) x$remove(key)
 
 #' @rdname dictS3
+#' @param add `logical` if FALSE and `key` is not in dictionary, an error is
+#' given, otherwise if `TRUE`, the key-value pair would be added if the `key`
+#' is not yet in the dict.
 #' @export
 setval.Dict <- function(x, key, value, add=FALSE, ...) x$set(key, value, add)
 
 #' @rdname dictS3
+#' @param decr `logical` if `TRUE` the elements are sorted decreasingly
 #' @export
 sortkey.Dict <- function(x, decr=FALSE, ...) x$sort(decr)
 

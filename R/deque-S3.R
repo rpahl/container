@@ -6,6 +6,8 @@
 #' both stacks and queues.
 #' @details For a detailed documentation of all methods see [Deque()].
 #' @name dequeS3
+#' @param x a vector of 'any' type
+#' @param ... further arguments depending on the method.
 #' @seealso [Container()], [`+.Deque()`]
 NULL
 
@@ -57,6 +59,7 @@ as.deque <- function(x) Deque$new(x)
 is.deque <- function(x) inherits(x, "Deque")
 
 #' @rdname dequeS3
+#' @param elem some element of the deque
 #' @export
 addleft.Deque <- function(x, elem, ...) x$addleft(elem)
 
@@ -85,6 +88,7 @@ popleft.Deque <- function(x) x$popleft()
 reverse.Deque <- function(x) x$reverse()
 
 #' @rdname dequeS3
+#' @param n `integer` number of steps to rotate
 #' @export
 rotate.Deque <- function(x, n = 1L, ...) x$rotate(n)
 

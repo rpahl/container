@@ -7,6 +7,8 @@
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of the respective derived classes.
 #' @details For a detailed documentation of all methods see [Container()]
+#' @param x a vector of 'any' type
+#' @param ... further arguments depending on the method.
 #' @name ContainerS3
 #' @seealso [Container()], [`+.Container()`], [deque()], [set()], [dict()]
 NULL
@@ -70,6 +72,7 @@ is.container <- function(x) inherits(x, "Container")
 iter.Container <- function(x) x$iter()
 
 #' @rdname ContainerS3
+#' @param elem some element of the container
 #' @export
 add.Container <- function(x, elem, ...) x$add(elem)
 
@@ -78,10 +81,13 @@ add.Container <- function(x, elem, ...) x$add(elem)
 clear.Container <- function(x) x$clear()
 
 #' @rdname ContainerS3
+#' @param deep `logical` if `TRUE` a `deep` copy is done otherwise by default a
+#' shallow copy is performed.
 #' @export
 clone.Container <- function(x, deep=FALSE, ...) x$clone(deep)
 
 #' @rdname ContainerS3
+#' @param right `logical` if `TRUE` search from right to left
 #' @export
 discard.Container <- function(x, elem, right=FALSE, ...) x$discard(elem, right)
 
@@ -94,6 +100,7 @@ empty.Container <- function(x) x$empty()
 has.Container <- function(x, elem, ...) x$has(elem)
 
 #' @rdname ContainerS3
+#' @param list.len `integer` number of elements to print
 #' @export
 print.Container <- function(x, list.len=10, ...) x$print(list.len, ...)
 

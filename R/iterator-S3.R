@@ -13,6 +13,7 @@
 #'  * `ithas_next(it)` return `TRUE` if there is a next element.
 #'  * `itnext(it)` increment iterator to point at next element.
 #'
+#' @param x an iterable object
 #' @param it `Iterator` object
 NULL
 

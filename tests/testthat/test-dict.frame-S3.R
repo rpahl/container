@@ -1,5 +1,9 @@
 context("dict.frame S3")
 
+test_that("dict.frame() object creation works as expected", {
+    dif = dict.frame(c(a=1, b=2))
+})
+
 test_that("[[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6)
     dif = dict.frame(list(A = 1:3, B = 4:6))

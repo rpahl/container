@@ -16,6 +16,13 @@ is.set(x)
 
 \method{add}{Set}(x, elem, ...)
 }
+\arguments{
+\item{x}{a vector of 'any' type}
+
+\item{elem}{some element of the set}
+
+\item{...}{further arguments depending on the method.}
+}
 \description{
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 \code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and

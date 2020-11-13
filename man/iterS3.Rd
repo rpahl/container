@@ -32,6 +32,8 @@ ithas_next(it)
 itnext(it)
 }
 \arguments{
+\item{x}{an iterable object}
+
 \item{it}{\code{Iterator} object}
 }
 \description{

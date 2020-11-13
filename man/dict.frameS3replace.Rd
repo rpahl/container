@@ -13,7 +13,10 @@
 \arguments{
 \item{x}{\code{\link[=Dict.frame]{Dict.frame()}} object.}
 
-\item{i, }{j \code{integer} or \code{character} elements to extract or replace.}
+\item{i}{\code{integer} row indices of elements to extract or replace.}
+
+\item{j}{\code{integer} or \code{character} column indices of elements to extract
+or replace.}
 
 \item{default}{A suitable default value.}
 }
