@@ -48,7 +48,15 @@ NULL
 
     hasDefault <- !missing(default)
     if (hasDefault && !is.null(default)) {
-        stopifnot(length(default) == nrow(x))
+        if (length(default) > nrow(x)) {
+            stop("default value cannot exceed number of rows")
+        }
+        rest = nrow(x) %% length(default)
+        if (rest != 0) {
+            stop("number of default values must be a multiple of ",
+                 "the number of rows (", nrow(x), ")")
+        }
+        default = rep(default, times = nrow(x) %/% length(default))
     }
     hasComma <- nargs() - hasDefault == 3
 
@@ -82,7 +90,15 @@ NULL
     if (missing(i) && missing(j)) return(x)
     hasDefault <- !missing(default)
     if (hasDefault && !is.null(default)) {
-        stopifnot(length(default) == nrow(x))
+        if (length(default) > nrow(x)) {
+            stop("default value cannot exceed number of rows")
+        }
+        rest = nrow(x) %% length(default)
+        if (rest != 0) {
+            stop("number of default values must be a multiple of ",
+                 "the number of rows (", nrow(x), ")")
+        }
+        default = rep(default, times = nrow(x) %/% length(default))
     }
     hasComma <- nargs() - hasDefault == 3
 
@@ -105,6 +121,9 @@ NULL
                 key = as.integer(key)
                 if (key > x$size()) stop(key, " - subscript out of bounds")
                 key = keys(x)[key]
+            }
+            if (!x$has(key) && !hasDefault) {
+                stop("column '", key, "' not found")
             }
             value = x$peek(key, default = default)
             d$add(key, value)

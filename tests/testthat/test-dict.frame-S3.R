@@ -1,9 +1,5 @@
 context("dict.frame S3")
 
-test_that("dict.frame() object creation works as expected", {
-    dif = dict.frame(c(a=1, b=2))
-})
-
 test_that("[[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6)
     dif = dict.frame(list(A = 1:3, B = 4:6))
@@ -14,10 +10,17 @@ test_that("[[.Dict.frame operator extracts values as expected", {
     expect_error(dif[[3]], "subscript out of bounds")
     expect_error(df[[3]], "subscript out of bounds")
 
-    expect_equal(dif[["C"]], df[["C"]])
+    expect_equal(dif[["X"]], df[["X"]])
+    expect_equal(dif[[1, "X"]], df[[1, "X"]])
+    expect_true(is.null(dif[[1, "X"]]))
+})
 
-    expect_error(dif[["C", default = 0]],
-                 "length(default) == nrow(x) is not TRUE", fixed = TRUE)
+test_that("[[.Dict.frame operator can provide default values", {
+    df = data.frame(A = 1:3, B = 4:6)
+    dif = dict.frame(list(A = 1:3, B = 4:6))
+    expect_equal(dif[["C", default = 0]], rep(0, nrow(df)))
+
+    expect_error(dif[["C", default = 1:2]], "must be a multiple")
 
     expect_equal(dif[["C", default = 7:9]], 7:9)
     expect_equal(dif[[1, "C", default = 7:9]], 7)
@@ -31,6 +34,7 @@ test_that("[[.Dict.frame operator extracts values as expected", {
 test_that("[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6, C = 7:9)
     dif = dict.frame(df)
+
     expect_equal(as.data.frame(dif[, 1]), df[, 1, drop = FALSE])
     expect_equal(as.data.frame(dif[, "A"]), df[, "A", drop = FALSE])
 
@@ -38,8 +42,12 @@ test_that("[.Dict.frame operator extracts values as expected", {
     expect_equal(as.data.frame(dif[c(1, 3), c("A", "B")]),
                  df[c(1, 3), c("A", "B")])
 
+    # dict.frame keeps indices even if undefined
     df.expected = df[c(3, 7), 2, drop = FALSE]
+    expect_equal(rownames(df.expected), c("3", "NA"))
     attr(df.expected, "row.names") = as.integer(c(3, 7))
+    dif.sub = dif[c(3, 7), 2]
+    expect_equal(rownames(dif.sub), c(3, 7))
     expect_equal(df.expected, as.data.frame(dif[c(3, 7), 2]))
 
     # Inconsistent data.frame behaviour
@@ -47,17 +55,37 @@ test_that("[.Dict.frame operator extracts values as expected", {
     expect_error(df[, 4], "undefined columns selected")
 
     expect_error(dif[1:2, 4],                "4 - subscript out of bounds")
-    expect_error(dif[1:2, 4, default = 7:9], "4 - subscript out of bounds")
     expect_error(dif[ , 4],                  "4 - subscript out of bounds")
-    expect_error(dif[ , 4, default = 7:9],   "4 - subscript out of bounds")
+})
 
+test_that("[.Dict.frame operator signals if undefined columns are selected", {
+    df = data.frame(A = 1:3, B = 4:6, C = 7:9)
+    dif = dict.frame(df)
+    expect_error(df[, c("B", "X")], "undefined columns selected")
+
+    expect_error(dif["X"], "column 'X' not found")
+    expect_error(dif[, "X"], "column 'X' not found")
+    expect_error(dif[, c("B", "X")], "column 'X' not found")
+    expect_error(dif[1:2, c("B", "X")], "column 'X' not found")
+})
+
+
+test_that("[.Dict.frame operator can provide default values", {
+    df = data.frame(A = 1:3, B = 4:6, C = 7:9)
+    dif = dict.frame(df)
+
+    expect_equal(as.data.frame(dif[1:2, c("B", "X"), default = 0]),
+                 data.frame(B = 4:5, X = 0))
     expect_equal(as.data.frame(dif[1:2, c("B", "X"), default = 7:9]),
                  data.frame(B = 4:5, X = 7:8))
 
-    expect_equal(df[1, "X"], NULL)
-    expect_equal(as.data.frame(dif[1, "X"]), data.frame())
-    expect_equal(as.data.frame(dif[1:2, "X"]), data.frame())
-    expect_equal(as.data.frame(dif[1:2, c("X", "Y")]), data.frame())
+    expect_error(dif[1:2, 4, default = 7:9], "4 - subscript out of bounds")
+    expect_error(dif[ , 4, default = 7:9],   "4 - subscript out of bounds")
+
+    expect_error(dif[1:2, c("A", "B", "f"), default = base::mean])
+    dd = dif[1:2, c("A", "B", "f"), default = list(base::mean)]
+    expect_equal(as.list(dd),
+                 list(A = 1:2, B = 4:5, f = list(mean, mean)))
 })
 
 
@@ -69,5 +97,17 @@ test_that("[.Dict.frame operator can be used with list subscript", {
     expect_equal(dif[1, list("B", 1)], dif[1, 2:1])
 
     expect_error(dif[, list(1, "A")], "key 'A' already in Dict.frame")
+})
+
+test_that("[.Dict.frame can be converted to data.frame", {
+    df = data.frame(A = 1:3, B = 4:6, C = 7:9)
+    dif = dict.frame(df)
+    expect_equal(as.data.frame(dif), df)
+})
+
+test_that("[.Dict.frame will signal if conversion to data.frame is not possible", {
+    dif = dict.frame(list(i = identity, m = base::mean))
+    expect_error(as.data.frame(dif),
+                 "must consist of atomic columns")
 })
 
