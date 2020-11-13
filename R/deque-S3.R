@@ -10,13 +10,29 @@
 NULL
 
 # S3 generic methods not derived from container
+
+#' @export
 addleft <- function(x, ...) UseMethod("addleft")
+
+#' @export
 count <- function(x, ...) UseMethod("count")
+
+#' @export
 peek <- function(x, ...) UseMethod("peek")
+
+#' @export
 peekleft <- function(x) UseMethod("peekleft")
+
+#' @export
 pop <- function(x, ...) UseMethod("pop")
+
+#' @export
 popleft <- function(x) UseMethod("popleft")
+
+#' @export
 reverse <- function(x) UseMethod("reverse")
+
+#' @export
 rotate <- function(x, ...) UseMethod("rotate")
 
 

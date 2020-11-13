@@ -12,15 +12,35 @@
 NULL
 
 # S3 generic methods
+
+#' @export
 add <- function(x, ...) UseMethod("add")
+
+#' @export
 clear <- function(x) UseMethod("clear")
+
+#' @export
 clone <- function(x, ...) UseMethod("clone")
+
+#' @export
 discard <- function(x, ...) UseMethod("discard")
+
+#' @export
 empty <- function(x) UseMethod("empty")
+
+#' @export
 has <- function(x, ...) UseMethod("has")
+
+#' @export
 remove <- function(x, ...) UseMethod("remove")
+
+#' @export
 size <- function(x) UseMethod("size")
+
+#' @export
 type <- function(x) UseMethod("type")
+
+#' @export
 values <- function(x) UseMethod("values")
 
 

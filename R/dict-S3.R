@@ -11,12 +11,26 @@
 NULL
 
 # S3 generic methods not derived from container
+
+#' @export
 getval <- function(x, ...) UseMethod("getval")
+
+#' @export
 keys <- function(x) UseMethod("keys")
+
+#' @export
 peek <- function(x, ...) UseMethod("peek")
+
+#' @export
 pop <- function(x, ...) UseMethod("pop")
+
+#' @export
 popitem <- function(x) UseMethod("popitem")
+
+#' @export
 setval <- function(x, ...) UseMethod("setval")
+
+#' @export
 sortkey <- function(x, ...) UseMethod("sortkey")
 
 #' @rdname dictS3
