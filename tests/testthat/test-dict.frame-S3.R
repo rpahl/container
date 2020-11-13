@@ -3,6 +3,9 @@ context("dict.frame S3")
 test_that("[[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6)
     dif = dict.frame(list(A = 1:3, B = 4:6))
+    expect_error(dif[[1, ]], '"j" is missing')
+    expect_error(dif[[, 1]], '"i" is missing')
+
     expect_equal(dif[[1, 2]], df[[1, 2]])
     expect_equal(dif[[2, "A"]], df[[2, "A"]])
     expect_equal(dif[[1]], df[[1]])
@@ -14,6 +17,14 @@ test_that("[[.Dict.frame operator extracts values as expected", {
     expect_equal(dif[[1, "X"]], df[[1, "X"]])
     expect_true(is.null(dif[[1, "X"]]))
 })
+
+test_that("[[.Dict.frame operator never returns a dict.frame", {
+    df = data.frame(A = 1:3, B = 4:6, C = 7:9)
+    dif = dict.frame(df)
+    expect_false(is.dict.frame(dif[[2]]))
+    expect_false(is.dict.frame(dif[[1, 1]]))
+})
+
 
 test_that("[[.Dict.frame operator can provide default values", {
     df = data.frame(A = 1:3, B = 4:6)
@@ -31,10 +42,21 @@ test_that("[[.Dict.frame operator can provide default values", {
 })
 
 
+test_that("[.Dict.frame operator returns always a dict.frame", {
+    df = data.frame(A = 1:3, B = 4:6, C = 7:9)
+    dif = dict.frame(df)
+
+    expect_true(is.dict.frame(dif[, 1]))
+    expect_true(is.dict.frame(dif[, "B"]))
+    expect_true(is.dict.frame(dif[1, ]))
+    expect_true(is.dict.frame(dif[, ]))
+})
+
 test_that("[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6, C = 7:9)
     dif = dict.frame(df)
 
+    expect_equal(dif[, "B"], dif["B"])
     expect_equal(as.data.frame(dif[, 1]), df[, 1, drop = FALSE])
     expect_equal(as.data.frame(dif[, "A"]), df[, "A", drop = FALSE])
 
@@ -82,6 +104,7 @@ test_that("[.Dict.frame operator can provide default values", {
     expect_error(dif[1:2, 4, default = 7:9], "4 - subscript out of bounds")
     expect_error(dif[ , 4, default = 7:9],   "4 - subscript out of bounds")
 
+    # non-trivial default value
     expect_error(dif[1:2, c("A", "B", "f"), default = base::mean])
     dd = dif[1:2, c("A", "B", "f"), default = list(base::mean)]
     expect_equal(as.list(dd),
