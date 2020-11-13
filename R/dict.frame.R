@@ -56,7 +56,8 @@ Dict.frame <- R6::R6Class("Dict.frame",
                 rows = seq_len(self$nrow())
                 half = min(length(rows), as.integer(len / 2))
                 top = head(rows, n = half)
-                df = as.data.frame(self)
+                df = as.data.frame(Reduce(self$values(), f = cbind))
+                colnames(df) = self$keys()
                 print.data.frame(df[top, , drop = FALSE], ...)
                 bottom = setdiff(tail(rows, n = half), top)
                 if (length(bottom)) {
