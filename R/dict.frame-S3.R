@@ -42,9 +42,12 @@ NULL
 #' @rdname dict.frameS3replace
 #'
 #' @param default A suitable default value.
-#' @return For `[[` returns the value at row `i` and column `j` or `default` if
-#' the column does not exist. If `i` is not specified (or only one index
-#' given), the full column is returned, if it exists or `default` if not.
+#' @return For `[[` returns the value at row `i` and column `j`. If the column
+#' is specified as an integer and does not exist, an out of bounds error is
+#' raised. If specified as character, `NULL` is returned unless `default` was
+#' specified, in which case the `default` value is returned.
+#' If `i` is not specified (or only one index given), the full column is
+#' returned, again, following the above rules in case of missing column.
 #' @export
 `[[.Dict.frame` <- function(x, i, j, default = NULL)
 {
@@ -84,7 +87,15 @@ NULL
 
 #' @rdname dict.frameS3replace
 #'
-#' @return For `[` returns a `Dict.frame` containing the extracted values.
+#' @return For `[` returns the values at rows `i` and columns `j`. For any of
+#' the columns being specified as an integer that do not exist, an out of
+#' bounds error is raised. If specified as character, an error is raised
+#' unless `default` was specified, in which case the `default` value is
+#' returned. In this case, the `default` values must be a multiple of the
+#' number of rows. Note that it is possible to use a mixed
+#' `integer`/`character` specification of columns passed as a list.
+#' If `i` is not specified (or only one index given), the full columns are
+#' returned, again, following the above rules in case of missing columns.
 #' @export
 `[.Dict.frame` <- function(x, i, j, default = NULL)
 {
@@ -158,40 +169,38 @@ NULL
 #' is generated, the value is replicated in each row.
 `[[<-.Dict.frame` <- function(x, i, j, add = FALSE, value)
 {
-    #browser()
     if (length(i) != 1) stop("i must be of length 1")
     hasAdd <- !missing(add)
     hasComma <- nargs() - hasAdd == 4
 
     if (hasComma) {
         # x[[i, j]] <- value
+        if (length(value) != 1) stop("value must be of length 1")
         if (length(j) != 1) stop("j must be of length 1")
 
-        current = x[[i, j]]
+        # Try to access element and get key
+        current = x[i, j]
+        key = if (is.numeric(j)) x$keys()[as.integer(j)] else j
 
-
-        x[[j, add = add]][[i]] <- value
+        xj = x[[key]]
+        xj[[i]] <- value
+        x$set(key, xj)
     } else {
         # x[[i]] <- value
-        if (nrow(x) > 1) {
-            if (!is.atomic(value)) {
-                stop("if only 'i' is defined, value must be atomic ",
-                     "unless dict.fram consists of just one row")
+        # Try to access element and get key
+        current = if (add) x[[i]] else x[i]
+        key = if (is.numeric(i)) x$keys()[as.integer(i)] else i
+
+        if (nrow(x) > 0) {
+            rest = nrow(x) %% length(value)
+            if (rest != 0) {
+                stop("number of values must be a multiple of ",
+                     "the number of rows (", nrow(x), ")")
             }
-            value =  rep(value, nrow(x))
+            value = rep(value, times = nrow(x) %/% length(value))
         }
-        x$set(i, value, add = TRUE)
+        x$set(key, value, add = add)
     }
-
-
-    if (is.numeric(i)) {
-        i = as.integer(i)
-        if (i > x$size()) stop(i, ": subscript out of bounds")
-        i = x$keys()[i]
-    }
-    if (!x$has(i) && !add) stop("column '", i, "' not found")
-
-
 }
 
 
