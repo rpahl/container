@@ -183,9 +183,9 @@ NULL
 #' @export
 `[[<-.Dict` <- function(x, key, add = FALSE, value)
 {
-    if (!is.character(key) || length(key) != 1) {
-        stop("cannot set more than one element")
-    }
+    if (is.dict.frame(x))
+    stopifnot(is.character(key))
+    stopifnot(length(key) == 1)
     x$set(key, value, add)
 }
 

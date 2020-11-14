@@ -13,7 +13,9 @@
 
 #' @rdname dict.frameS3
 #' @export
-dict.frame <- function(x = list()) Dict.frame$new(x)
+dict.frame <- function(x = list()) {
+    Dict.frame$new(x)
+}
 
 #' @name dict.frameS3
 #' @export
@@ -63,15 +65,14 @@ NULL
     if (hasComma) {
         # x[[i, j]]
         if (length(j) != 1) stop("j must be of length 1")
-        x[[j, default = default]][[i]]
+        xj = if (hasDefault) x[[j, default = default]] else x = x[[j]]
+        tryCatch(xj[[i]],
+                 error = function(e) stop(i, ": row index out of bounds"))
     } else {
         # x[[i]]
         if (is.numeric(i)) {
             i = as.integer(i)
-            if (i > x$size()) {
-                if (hasDefault) return(default)
-                stop("subscript out of bounds")
-            }
+            if (i > x$size()) stop(i, ": column index out of bounds")
             i = x$keys()[i]
         }
         x$peek(i, default = default)
@@ -112,6 +113,7 @@ NULL
             }
             d$set_rownames(as.integer(i))
         } else {
+            # x[, j]
             d = dj
         }
     } else {
@@ -119,7 +121,7 @@ NULL
         for (key in unique(i)) {
             if (is.numeric(key)) {
                 key = as.integer(key)
-                if (key > x$size()) stop(key, " - subscript out of bounds")
+                if (key > x$size()) stop(key, ": column index out of bounds")
                 key = keys(x)[key]
             }
             if (!x$has(key) && !hasDefault) {
@@ -130,6 +132,60 @@ NULL
         }
     }
     d
+}
+
+
+#' @rdname dict.frameS3replace
+#'
+#' @param add `logical` If `FALSE` and column does not exist, an error is
+#' signaled. This is different from [base::data.frame()]s, where instead a new
+#' column would be generated. To behave like standard [base::data.frame()]s in
+#' this scenario, set `add = TRUE`, which replaces the value at position i, j,
+#' but will also add a new column if the column is not yet in the
+#' [dict.frame()]. To be consistent with the access operators, this 'add'
+#' operation is only defined if `j` is a `character` index.
+#' Similarly and also in contrast to [base::data.frame()]s, a new row may never
+#' by substituted, that is, if the row index exceeds the number of rows, the
+#' function will always give an error.
+#' @param value A suitable replacement value.
+#' @return For `[[<-` replaces the value at position `[i, j]`. If a new column
+#' is generated, the value is replicated in each row.
+`[[<-.Dict.frame` <- function(x, i, j, add = FALSE, value)
+{
+    #browser()
+    if (length(i) != 1) stop("i must be of length 1")
+    hasAdd <- !missing(add)
+    hasComma <- nargs() - hasAdd == 4
+
+    if (hasComma) {
+        # x[[i, j]] <- value
+        if (length(j) != 1) stop("j must be of length 1")
+
+        current = x[[i, j]]
+
+
+        x[[j, add = add]][[i]] <- value
+    } else {
+        # x[[i]] <- value
+        if (nrow(x) > 1) {
+            if (!is.atomic(value)) {
+                stop("if only 'i' is defined, value must be atomic ",
+                     "unless dict.fram consists of just one row")
+            }
+            value =  rep(value, nrow(x))
+        }
+        x$set(i, value, add = TRUE)
+    }
+
+
+    if (is.numeric(i)) {
+        i = as.integer(i)
+        if (i > x$size()) stop(i, ": subscript out of bounds")
+        i = x$keys()[i]
+    }
+    if (!x$has(i) && !add) stop("column '", i, "' not found")
+
+
 }
 
 
@@ -161,3 +217,5 @@ NULL
     c(length(x$rownames()), length(x$keys()))
 }
 
+
+# TODO: rowbind.Dict.frame

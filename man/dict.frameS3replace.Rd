@@ -4,11 +4,14 @@
 \alias{dict.frameS3replace}
 \alias{[[.Dict.frame}
 \alias{[.Dict.frame}
+\alias{[[<-.Dict.frame}
 \title{Extract or replace parts of a \code{Dict.frame}}
 \usage{
 \method{[[}{Dict.frame}(x, i, j, default = NULL)
 
 \method{[}{Dict.frame}(x, i, j, default = NULL)
+
+\method{[[}{Dict.frame}(x, i, j, add = FALSE) <- value
 }
 \arguments{
 \item{x}{\code{\link[=Dict.frame]{Dict.frame()}} object.}
@@ -19,6 +22,19 @@
 or replace.}
 
 \item{default}{A suitable default value.}
+
+\item{add}{\code{logical} If \code{FALSE} and column does not exist, an error is
+signaled. This is different from \code{\link[base:data.frame]{base::data.frame()}}s, where instead a new
+column would be generated. To behave like standard \code{\link[base:data.frame]{base::data.frame()}}s in
+this scenario, set \code{add = TRUE}, which replaces the value at position i, j,
+but will also add a new column if the column is not yet in the
+\code{\link[=dict.frame]{dict.frame()}}. To be consistent with the access operators, this 'add'
+operation is only defined if \code{j} is a \code{character} index.
+Similarly and also in contrast to \code{\link[base:data.frame]{base::data.frame()}}s, a new row may never
+by substituted, that is, if the row index exceeds the number of rows, the
+function will always give an error.}
+
+\item{value}{A suitable replacement value.}
 }
 \value{
 For \code{[[} returns the value at row \code{i} and column \code{j} or \code{default} if
@@ -26,6 +42,9 @@ the column does not exist. If \code{i} is not specified (or only one index
 given), the full column is returned, if it exists or \code{default} if not.
 
 For \code{[} returns a \code{Dict.frame} containing the extracted values.
+
+For \verb{[[<-} replaces the value at position \verb{[i, j]}. If a new column
+is generated, the value is replicated in each row.
 }
 \description{
 Access and assignment operators for \code{\link[=Dict.frame]{Dict.frame()}} objects.
