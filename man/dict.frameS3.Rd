@@ -7,7 +7,7 @@
 \alias{is.dict.frame}
 \title{Dict S3 interface}
 \usage{
-dict.frame(x = list())
+dict.frame(...)
 
 as.dict.frame(x)
 

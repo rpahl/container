@@ -37,11 +37,22 @@ function will always give an error.}
 \item{value}{A suitable replacement value.}
 }
 \value{
-For \code{[[} returns the value at row \code{i} and column \code{j} or \code{default} if
-the column does not exist. If \code{i} is not specified (or only one index
-given), the full column is returned, if it exists or \code{default} if not.
+For \code{[[} returns the value at row \code{i} and column \code{j}. If the column
+is specified as an integer and does not exist, an out of bounds error is
+raised. If specified as character, an error is raised unless \code{default} was
+specified, in which case the \code{default} value is returned.
+If \code{i} is not specified (or only one index given), the full column is
+returned, again, following the above rules in case of missing column.
 
-For \code{[} returns a \code{Dict.frame} containing the extracted values.
+For \code{[} returns the values at rows \code{i} and columns \code{j}. For any of
+the columns being specified as an integer that do not exist, an out of
+bounds error is raised. If specified as character, an error is raised
+unless \code{default} was specified, in which case the \code{default} value is
+returned. In this case, the \code{default} values must be a multiple of the
+number of rows. Note that it is possible to use a mixed
+\code{integer}/\code{character} specification of columns passed as a list.
+If \code{i} is not specified (or only one index given), the full columns are
+returned, again, following the above rules in case of missing columns.
 
 For \verb{[[<-} replaces the value at position \verb{[i, j]}. If a new column
 is generated, the value is replicated in each row.
