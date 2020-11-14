@@ -89,7 +89,7 @@ test_that("Extract and replace operators work as expected", {
     expect_equal(d[["a"]], 3)
 
     expect_error(d[[c("a", "b")]] <- list(7, 8),
-                 "cannot set more than one element")
+                 "length(key) == 1 is not TRUE", fixed = TRUE)
 
     expect_error(d[c("a", "b")] <- list(7, 8), "key 'b' not in Dict")
     d$add("b", 2)

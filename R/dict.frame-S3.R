@@ -67,12 +67,12 @@ NULL
         if (length(j) != 1) stop("j must be of length 1")
         xj = if (hasDefault) x[[j, default = default]] else x = x[[j]]
         tryCatch(xj[[i]],
-                 error = function(e) stop(i, ": row index out of bounds"))
+                 error = function(e) stop("row index out of bounds: ", i))
     } else {
         # x[[i]]
         if (is.numeric(i)) {
             i = as.integer(i)
-            if (i > x$size()) stop(i, ": column index out of bounds")
+            if (i > x$size()) stop("column index out of bounds: ", i)
             i = x$keys()[i]
         }
         x$peek(i, default = default)
@@ -107,7 +107,11 @@ NULL
     if (hasComma) {
         dj = if (hasDefault) x[j, default = default] else x[j]
         if (has.i && nrow(dj) > 0) {
-            # x[i, j]
+            # x[i, j] or x[i, ]
+            if (any(i > nrow(x))) {
+                iBad = setdiff(i, seq_len(nrow(x)))
+                stop("row indices out of bounds: " , toString(iBad))
+            }
             for (key in keys(dj)) {
                 d$add(key, dj[[key]][i])
             }
@@ -121,7 +125,7 @@ NULL
         for (key in unique(i)) {
             if (is.numeric(key)) {
                 key = as.integer(key)
-                if (key > x$size()) stop(key, ": column index out of bounds")
+                if (key > x$size()) stop("column index out of bounds: ", key)
                 key = keys(x)[key]
             }
             if (!x$has(key) && !hasDefault) {

@@ -3,6 +3,7 @@ context("dict.frame S3")
 test_that("[[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6)
     dif = dict.frame(list(A = 1:3, B = 4:6))
+    expect_error(dif[[]], '"i" is missing')
     expect_error(dif[[1, ]], '"j" is missing')
     expect_error(dif[[, 1]], '"i" is missing')
 
@@ -35,26 +36,26 @@ test_that("[[.Dict.frame operator behaves as expected for out of range indices",
     expect_equal(dif[[1, "X", default = 9]], 9)
 
     # Column out of range
-    expect_error(dif[[3]], "3: column index out of bounds")
-    expect_error(dif[[3, default = 1]], "3: column index out of bounds")
+    expect_error(dif[[3]], "column index out of bounds: 3")
+    expect_error(dif[[3, default = 1]], "column index out of bounds: 3")
     expect_error(df[[3]], "subscript out of bounds")
 
-    expect_error(dif[[1, 3]], "3: column index out of bounds")
-    expect_error(dif[[1, 3, default = 1]], "3: column index out of bounds")
+    expect_error(dif[[1, 3]], "column index out of bounds: 3")
+    expect_error(dif[[1, 3, default = 1]], "column index out of bounds: 3")
     expect_error(df[[1, 3]], "subscript out of bounds")
 
     # Row out of range
     expect_equal(dif[[5, "X"]], df[[5, "X"]])
     expect_true(is.null(dif[[5, "X"]]))
-    expect_error(dif[[5, "X", default = 1]], "5: row index out of bounds")
+    expect_error(dif[[5, "X", default = 1]], "row index out of bounds: 5")
 
-    expect_error(dif[[5, 1]], "5: row index out of bounds")
+    expect_error(dif[[5, 1]], "row index out of bounds: 5")
     expect_error(df[[5, 1]], "subscript out of bounds")
-    expect_error(dif[[5, 1, default = 1]], "5: row index out of bounds")
+    expect_error(dif[[5, 1, default = 1]], "row index out of bounds: 5")
 
     # Row and column out of range
-    expect_error(dif[[3, 4]], "4: column index out of bounds")
-    expect_error(dif[[3, 4, default = 9]], "4: column index out of bounds")
+    expect_error(dif[[3, 4]], "column index out of bounds: 4")
+    expect_error(dif[[3, 4, default = 9]], "column index out of bounds: 4")
 })
 
 
@@ -71,13 +72,15 @@ test_that("[[.Dict.frame operator can provide default values", {
 
 
 test_that("[.Dict.frame operator returns always a dict.frame", {
-    df = data.frame(A = 1:3, B = 4:6, C = 7:9)
+    df = data.frame(A = 1:3, B = 4:6)
     dif = dict.frame(df)
 
     expect_true(is.dict.frame(dif[, 1]))
     expect_true(is.dict.frame(dif[, "B"]))
     expect_true(is.dict.frame(dif[1, ]))
     expect_true(is.dict.frame(dif[, ]))
+    expect_equal(dif[], dif)
+    expect_equal(dif[, ], dif)
 })
 
 test_that("[.Dict.frame operator extracts values as expected", {
@@ -91,14 +94,6 @@ test_that("[.Dict.frame operator extracts values as expected", {
     expect_equal(as.data.frame(dif[1:2, ]), df[1:2, ])
     expect_equal(as.data.frame(dif[c(1, 3), c("A", "B")]),
                  df[c(1, 3), c("A", "B")])
-
-    # dict.frame keeps indices even if undefined
-    df.expected = df[c(3, 7), 2, drop = FALSE]
-    expect_equal(rownames(df.expected), c("3", "NA"))
-    attr(df.expected, "row.names") = as.integer(c(3, 7))
-    dif.sub = dif[c(3, 7), 2]
-    expect_equal(rownames(dif.sub), c(3, 7))
-    expect_equal(df.expected, as.data.frame(dif[c(3, 7), 2]))
 })
 
 
@@ -125,30 +120,34 @@ test_that("[.Dict.frame operator behaves as expected for out of range indices", 
                  dict.frame(list(A = 1:2, X = c(9, 9))))
 
     # Column out of range
-    expect_error(dif[3], "3: column index out of bounds")
+    expect_error(dif[3], "column index out of bounds: 3")
     expect_error(df[3], "undefined columns selected")
-    expect_error(dif[3, default = 1], "3: column index out of bounds")
+    expect_error(dif[3, default = 1], "column index out of bounds: 3")
 
-    expect_error(dif[1, 3], "3: column index out of bounds")
-    expect_error(dif[1, 3, default = 9], "3: column index out of bounds")
-    expect_error(dif[1:2, 3], "3: column index out of bounds")
+    expect_error(dif[1, 3], "column index out of bounds: 3")
+    expect_error(dif[1, 3, default = 9], "column index out of bounds: 3")
+    expect_error(dif[1, 3, default = 1:2], "column index out of bounds: 3")
+    expect_error(dif[1:2, 3], "column index out of bounds: 3")
     expect_equal(df[1, 3], NULL) # inconsistent data.frame behaviour
 
-    expect_error(dif[, 3], "3: column index out of bounds")
-    expect_error(dif[, 3, default = 9], "3: column index out of bounds")
+    expect_error(dif[, 3], "column index out of bounds: 3")
+    expect_error(dif[, 3, default = 9], "column index out of bounds: 3")
     expect_error(df[, 3], "undefined columns selected")
 
-    expect_error(dif[, 1:3], "3: column index out of bounds")
-    expect_error(dif[, 1:3, default = 9], "3: column index out of bounds")
+    expect_error(dif[, 1:3], "column index out of bounds: 3")
+    expect_error(dif[, 1:3, default = 9], "column index out of bounds: 3")
     expect_error(df[, 1:3], "undefined columns selected")
 
     # Row out of range
-    #dif[5, "X"]
-    #dif[5, "X", default = 1]
-    #expect_equal(df[[5, "X"]])
-    #expect_true(is.null(dif[[5, "X"]]))
-    #expect_error(dif[[5, 1]], "subscript out of bounds")
-    #expect_error(df[[5, 1]], "subscript out of bounds")
+    expect_error(dif[5, 1], "row indices out of bounds: 5")
+    expect_error(dif[1:5, 1], "row indices out of bounds: 3, 4, 5")
+    expect_error(dif[5, "X", default = 1], "row indices out of bounds: 5")
+    expect_error(dif[1:5, "X", default = 1], "row indices out of bounds: 3, 4, 5")
+
+    # Row and column out of range
+    expect_error(dif[5, "X"], "column 'X' not found")
+    expect_error(dif[5, 5], "column index out of bounds: 5")
+    expect_error(dif[5, 5, default = 1], "column index out of bounds: 5")
 })
 
 test_that("[.Dict.frame operator can provide default values", {
@@ -159,9 +158,6 @@ test_that("[.Dict.frame operator can provide default values", {
                  data.frame(B = 4:5, X = 0))
     expect_equal(as.data.frame(dif[1:2, c("B", "X"), default = 7:9]),
                  data.frame(B = 4:5, X = 7:8))
-
-    expect_error(dif[1:2, 4, default = 7:9], "4: column index out of bounds")
-    expect_error(dif[ , 4, default = 7:9],   "4: column index out of bounds")
 
     # non-trivial default value
     expect_error(dif[1:2, c("A", "B", "f"), default = base::mean])
@@ -195,13 +191,13 @@ test_that("[.Dict.frame will signal if conversion to data.frame is not possible"
 })
 
 
-test_that("[[<-.Dict.frame is consistent when trying to enter columns bad indices", {
+test_that("[[<-.Dict.frame is consistent when trying to enter columns at bad indices", {
     df = data.frame(A = 1:3, B = 4:6, C = 7:9)
     expect_error(df[, 5] <- 1, "would leave holes")
     expect_error(df[5] <- 1, "would leave holes")
     expect_error(df[[, 5]] <- 1)
-    expect_silent(df[[5]] <- 1)  # strangely this works
-    expect_warning(print(df))
+    expect_silent(df[[5]] <- 1)  # strangely enough this works
+    expect_warning(expect_output(print(df)))
     expect_equal(ncol(df), 5)
 })
 
@@ -209,6 +205,7 @@ test_that("[[<-.Dict.frame operator works as expected", {
     df = data.frame(A = 1:3, B = 4:6, C = 7:9)
     dif = dict.frame(df)
 
+    expect_true(TRUE)
 
     #dif[[2, 2]] <- 1
 
