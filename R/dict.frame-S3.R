@@ -13,7 +13,9 @@
 
 #' @rdname dict.frameS3
 #' @export
-dict.frame <- function(x = list()) {
+dict.frame <- function(...) {
+    if (nargs() == 0) return(Dict.frame$new(x = list()))
+    x = if (nargs() > 1) list(...) else as.list(...)
     Dict.frame$new(x)
 }
 

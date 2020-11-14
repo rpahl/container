@@ -2,16 +2,27 @@ context("dict.frame S3")
 
 test_that("[[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6)
-    dif = dict.frame(list(A = 1:3, B = 4:6))
+    expect_equal(dict.frame(list(A = 1:3, B = 4:6)),
+                 dict.frame(A = 1:3, B = 4:6))
+    dif = dict.frame(A = 1:3, B = 4:6)
     expect_error(dif[[]], '"i" is missing')
     expect_error(dif[[1, ]], '"j" is missing')
     expect_error(dif[[, 1]], '"i" is missing')
+
+    expect_error(dict.frame(A = 1:2, B = 1:3),
+                 "All elements must have the same length.")
 
     expect_equal(dif[[1, 2]], df[[1, 2]])
     expect_equal(dif[[2, "A"]], df[[2, "A"]])
     expect_equal(dif[[1]], df[[1]])
     expect_equal(dif[["A"]], df[["A"]])
 
+})
+
+test_that("[[.Dict.frame can be initialized from data.frame", {
+    df = data.frame(A = 1:3, B = 4:6)
+    dif = dict.frame(df)
+    expect_equal(as.data.frame(dif), df)
 })
 
 test_that("[[.Dict.frame operator never returns a dict.frame", {
