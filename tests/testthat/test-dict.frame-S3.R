@@ -218,6 +218,7 @@ test_that("[[<-.Dict.frame operator behaves as expected for out of range indices
     dif = dict.frame(A = 1:2, B = 3:4)
 
     expect_error(dif[[1, 1]] <- 1:2, "value must be of length 1")
+    expect_error(dif[[1, 1]] <- NULL, "value must be of length 1")
     expect_error(dif[[1:2, 1]] <- 1, "i must be of length 1")
     expect_error(dif[[1, 1:2]] <- 1, "j must be of length 1")
 
@@ -289,8 +290,6 @@ test_that("[[<-.Dict.frame operator behaves as expected", {
     dif[[1]] <- NULL
     expect_equal(dim(dif), c(3, 0))
 
-    # TODO: print method gives error:
-    # Error in `.rowNamesDF<-`(x, value = value) : invalid 'row.names' length
     expect_error(dif[["C", add = TRUE]] <- 1:2)
     expect_silent(dif[["C", add = TRUE]] <- 1:3)
 })
@@ -371,6 +370,7 @@ test_that("[<-.Dict.frame operator behaves as expected for out of range indices"
 test_that("[<-.Dict.frame operator works as expected", {
     dif = dict.frame(A = 1:3, B = 4:6, C = 7:9)
 
+    expect_error(dif[1, 1] <- NULL, "length of value must .* match number of rows")
     expect_error(dif[1, 1] <- 1:2, "length of value must .* match number of rows")
     expect_error(dif[, 1] <- 1:2, "number of values must be a multiple")
     expect_silent(dif[, 1] <- 9)
@@ -456,5 +456,18 @@ test_that("Dict.frame can handle complex objects ", {
 
     expect_equal(dif[[1, "f"]](c(1, 2, 10)), mean(c(1, 2, 10)))
     expect_equal(dif[[2, "f"]](c(1, 2, 10)), median(c(1, 2, 10)))
+})
+
+
+test_that("dict.frames can be row-binded", {
+    df = data.frame(A = 1:2, B = 3:4)
+    dif = dict.frame(df)
+
+    expect_equal(as.data.frame(rbind(dif, dif, dif)), rbind(df, df, df))
+
+    dif["df", add = TRUE] <- list(df)
+    dif["f", add = TRUE] <- list(base::mean)
+
+    expect_equal(dim(rbind(dif, dif)), c(4, 4))
 })
 
