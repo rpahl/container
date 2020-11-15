@@ -421,3 +421,25 @@ test_that("Dict.frame row can be converted to numeric", {
 
 })
 
+test_that("Dict.frame print works as expected", {
+    dif = dict.frame(A = 1:20, B = 20:1)
+
+    res = expect_output(print(dif))
+    expect_equal(res[["A"]], c(1:5, ".", 16:20))
+    expect_equal(res[["B"]], c(20:16, ".", 5:1))
+    expect_equal(rownames(res), c(1:5, ".", 16:20))
+
+    res = expect_output(print(dif, len = 3))
+    expect_equal(res[["A"]], c(1, ".", 20))
+    expect_equal(res[["B"]], c(20, ".", 1))
+    res2 = expect_output(print(dif, len = 2))
+    expect_equal(res, res2)
+
+    expect_error(print(dif, len = 1), "len must be > 1")
+
+    dif2 = dif[, "A"]
+    dif2[["A"]] = NULL
+    res = expect_output(print(dif2))
+    expect_equal(dim(res), c(0, 0))
+})
+

@@ -97,22 +97,7 @@ test_that("Dict.frame is printed as data.frame if possible", {
     df = data.frame(A = 1:2, B = 1:2)
     dif <- Dict.frame$new(df)
 
-    tmp1 = tempfile()
-    on.exit(file.remove(tmp1), add = TRUE)
-    sink(tmp1)
-    print(df)
-    sink()
-
-    tmp2 = tempfile()
-    on.exit(file.remove(tmp2), add = TRUE)
-    sink(tmp2)
-    dif$print()
-    sink()
-
-    out1 = readLines(tmp1)
-    out2 = readLines(tmp2)
-
-    header = out2[1]
-    expect_equal(out1, out2[-1])
-    expect_equal(header, "<Dict.frame> with 2 columns and 2 rows")
+    res = expect_output(print(dif))
+    expect_equal(res, df)
 })
+

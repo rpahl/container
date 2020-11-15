@@ -48,24 +48,42 @@ Dict.frame <- R6::R6Class("Dict.frame",
         #' @param len `integer` number of rows or elements shown
         #' @param ... other arguments passed to print method
         print = function(len = 10L, ...) {
+            if (len < 2) stop("len must be > 1")
             is_printable_as_data.frame = all(sapply(self$values(), is.atomic))
             if (is_printable_as_data.frame) {
-                cat("<Dict.frame> with ", self$ncol(), " columns and ",
-                    self$nrow(), " rows\n", sep = "")
                 if (self$nrow() == 0) return()
+                title = paste("<Dict.frame> with",
+                               self$ncol(), "columns and",
+                               self$nrow(), "rows")
+
+                types = sapply(dif$apply(typeof), abbreviate, minlength= 3)
+                types = paste0("<", types, ">")
+
                 rows = seq_len(self$nrow())
                 half = min(length(rows), as.integer(len / 2))
                 top = head(rows, n = half)
                 df = as.data.frame(Reduce(self$values(), f = cbind))
-                rownames(df) = rownames(self)
+                if (nrow(df) > 0) {
+                    rownames(df) = rownames(self)
+                }
                 colnames(df) = self$keys()
-                print.data.frame(df[top, , drop = FALSE], ...)
+                df.top = df[top, , drop = FALSE]
+                mid = NULL
+                df.bottom = NULL
                 bottom = setdiff(tail(rows, n = half), top)
                 if (length(bottom)) {
                     if (bottom[1] - tail(top, 1) > 1)
-                    cat("...\n")
-                    print.data.frame(df[bottom, , drop = FALSE], ...)
+                    mid = rep(".", ncol(df))
+                    df.bottom = df[bottom, , drop = FALSE]
                 }
+                df.print = rbind(df.top, mid, df.bottom,
+                                 stringsAsFactors = FALSE)
+                hasSplit = !is.null(mid)
+                if (nrow(df.print) > max(top) + 1) {
+                    rownames(df.print)[nrow(df.top) + 1] <- "."
+                }
+                cat(title, "\n")
+                print(df.print, ...)
             } else {
                 super$print(list.len = len, ...)
             }
