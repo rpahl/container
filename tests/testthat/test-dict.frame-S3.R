@@ -25,6 +25,14 @@ test_that("[[.Dict.frame can be initialized from data.frame", {
     expect_equal(as.data.frame(dif), df)
 })
 
+
+test_that("[[.Dict.frame can have arbitraty colum names", {
+    dif = dict.frame("Hi !" = letters[1:3], "123" = 1:3)
+    expect_equal(dif[["123"]], 1:3)
+    expect_equal(dif[["Hi !"]], c("a", "b", "c"))
+})
+
+
 test_that("[[.Dict.frame operator never returns a dict.frame", {
     df = data.frame(A = 1:3, B = 4:6, C = 7:9)
     dif = dict.frame(df)
