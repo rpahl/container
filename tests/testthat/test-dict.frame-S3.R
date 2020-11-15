@@ -399,13 +399,25 @@ test_that("[<-.Dict.frame operator works as expected", {
     expect_equal(dif[[2]][1:2], 1:2)
 
     dif[2, ] <- 11
-    expect_equal(as.numeric(dif[2, ]$values()), rep(11, 3))
+    expect_equal(as.numeric(values(dif[2, ])), rep(11, 3))
 })
 
 test_that("[<-.Dict.frame operator works with mixed subscripts", {
     dif = dict.frame(A = 1:3, B = 4:6, C = 7:9)
     expect_silent(dif[c(1, 3), list("C", 2)] <- 0)
-    expect_equal(as.numeric(dif[1, 2:3]$values()), c(0, 0))
-    expect_equal(as.numeric(dif[3, 2:3]$values()), c(0, 0))
+    expect_equal(as.numeric(values(dif[1, 2:3])), c(0, 0))
+    expect_equal(as.numeric(values(dif[3, 2:3])), c(0, 0))
+})
+
+test_that("Dict.frame row can be converted to numeric", {
+    dif = dict.frame(A = 1:3, B = 4:6, C = 7:9)
+    expect_error(as.numeric(dif), "must consist of one row or column")
+
+    v = as.numeric(dif[1, ])
+    expect_equal(names(v), c("A", "B", "C"))
+    expect_equal(as.numeric(v), c(1, 4, 7))
+
+    expect_equal(as.numeric(dif[, 2]), 4:6)
+
 })
 

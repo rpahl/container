@@ -272,7 +272,7 @@ NULL
 }
 
 
-# Conversion and functions related to data.frame
+# Conversion and properties
 
 #' @export
 `as.data.frame.Dict.frame` <- function(x, ...)
@@ -285,6 +285,16 @@ NULL
     attr(df, "row.names") <- rownames(x)
     df
 }
+
+#' @export
+`as.double.Dict.frame` <- function(x, ...)
+{
+    if (nrow(x) == 1) return(sapply(values(x), FUN = as.numeric))
+    if (ncol(x) == 1) return(as.numeric(values(x)[[1]]))
+
+    stop("must consist of one row or column to be convertible to numeric")
+}
+
 
 #' @export
 `dimnames.Dict.frame` <- function(x)
@@ -301,4 +311,5 @@ NULL
 }
 
 
+# TODO: rowbind.Dict.frame
 # TODO: rowbind.Dict.frame
