@@ -14,6 +14,8 @@ as.dict.frame(x)
 is.dict.frame(x)
 }
 \arguments{
+\item{...}{arguments of the form tag = value or a named list}
+
 \item{x}{a named vector (or list) of 'any' type including
 \code{\link[base:data.frame]{base::data.frame()}}s.}
 }

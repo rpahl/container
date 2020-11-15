@@ -26,8 +26,9 @@ or replace.}
 
 \item{default}{A suitable default value.}
 
-\item{add}{\code{logical} If only the column index was set (i.e. x\link{i} or x\link{, j}),
-and \code{add} set to \code{TRUE} and the column index is of type \code{character} then the
+\item{add}{\code{logical} If only the column index was set
+(i.e. \code{x[i]} or \code{x[, j]}), #' and \code{add} set to \code{TRUE} and the column index
+is of type \code{character} then the
 the value(s) are added as a new column to the \code{dict.frame}. In all other
 cases or if \code{add == FALSE}, an out of bounds error is signaled.}
 
@@ -41,7 +42,7 @@ specified, in which case the \code{default} value is returned.
 If \code{i} is not specified (or only one index given), the full column is
 returned, again, following the above rules in case of missing column.
 
-For \code{[} returns the values at rows \code{i} and columns \code{j}. For any of
+For '[' returns the values at rows \code{i} and columns \code{j}. For any of
 the columns being specified as an integer that do not exist, an out of
 bounds error is raised. If specified as character, an error is raised
 unless \code{default} was specified, in which case the \code{default} value is
@@ -51,7 +52,7 @@ number of rows. Note that it is possible to use a mixed
 If \code{i} is not specified (or only one index given), the full columns are
 returned, again, following the above rules in case of missing columns.
 
-For \verb{[[<-} replaces the value at position \verb{[i, j]}. If a new column
+For '[[<-' replaces the value at position i, j. If a new column
 is generated (see option \code{add}), the value is replicated if needed. Note
 that for this the value has to be a multiple of the number of rows. In
 contrast to \code{\link[base:data.frame]{base::data.frame()}}s, numerical row or column indices that
@@ -60,7 +61,7 @@ that is, new rows or columns are never substituted. The only way to attach
 a new column is to use a single character index and explicitly stating the
 intention to add the column, i.e., \code{x[["A", add = TRUE]] <- 1}.
 
-For \verb{[<-} replaces the value(s) at positions \verb{[i, j]}. In
+For '[<-' replaces the value(s) at positions i, j. In
 contrast to \code{\link[base:data.frame]{base::data.frame()}}s, numerical row or column indices that
 exceed the dimensions of the \code{\link[=dict.frame]{dict.frame()}} will always stop with an error,
 that is, new rows or columns are never substituted. The only way to attach

@@ -8,6 +8,7 @@
 #' @details For a detailed documentation of all methods see [Dict.frame()].
 #' @param x a named vector (or list) of 'any' type including
 #' [base::data.frame()]s.
+#' @param ... arguments of the form tag = value or a named list
 #' @name dict.frameS3
 #' @seealso [Dict()], [base::data.frame()]
 
@@ -87,7 +88,7 @@ NULL
 
 #' @rdname dict.frameS3replace
 #'
-#' @return For `[` returns the values at rows `i` and columns `j`. For any of
+#' @return For '[' returns the values at rows `i` and columns `j`. For any of
 #' the columns being specified as an integer that do not exist, an out of
 #' bounds error is raised. If specified as character, an error is raised
 #' unless `default` was specified, in which case the `default` value is
@@ -159,7 +160,7 @@ NULL
 #' the value(s) are added as a new column to the `dict.frame`. In all other
 #' cases or if `add == FALSE`, an out of bounds error is signaled.
 #' @param value A suitable replacement value.
-#' @return For `[[<-` replaces the value at position `[i, j]`. If a new column
+#' @return For '[[<-' replaces the value at position i, j. If a new column
 #' is generated (see option `add`), the value is replicated if needed. Note
 #' that for this the value has to be a multiple of the number of rows. In
 #' contrast to [base::data.frame()]s, numerical row or column indices that
@@ -210,12 +211,13 @@ NULL
 
 #' @rdname dict.frameS3replace
 #'
-#' @param add `logical` If only the column index was set (i.e. x[i] or x[, j]),
-#' and `add` set to `TRUE` and the column index is of type `character` then the
+#' @param add `logical` If only the column index was set
+#' (i.e. `x[i]` or `x[, j]`), #' and `add` set to `TRUE` and the column index
+#' is of type `character` then the
 #' the value(s) are added as a new column to the `dict.frame`. In all other
 #' cases or if `add == FALSE`, an out of bounds error is signaled.
 #' @param value A suitable replacement value.
-#' @return For `[<-` replaces the value(s) at positions `[i, j]`. In
+#' @return For '[<-' replaces the value(s) at positions i, j. In
 #' contrast to [base::data.frame()]s, numerical row or column indices that
 #' exceed the dimensions of the [dict.frame()] will always stop with an error,
 #' that is, new rows or columns are never substituted. The only way to attach

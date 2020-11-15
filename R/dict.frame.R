@@ -56,7 +56,7 @@ Dict.frame <- R6::R6Class("Dict.frame",
                                self$ncol(), "columns and",
                                self$nrow(), "rows")
 
-                types = sapply(dif$apply(typeof), abbreviate, minlength= 3)
+                types = sapply(self$apply(typeof), abbreviate, minlength= 3)
                 types = paste0("<", types, ">")
 
                 rows = seq_len(self$nrow())
