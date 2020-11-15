@@ -154,19 +154,20 @@ NULL
 
 #' @rdname dict.frameS3replace
 #'
-#' @param add `logical` If `FALSE` and column does not exist, an error is
-#' signaled. This is different from [base::data.frame()]s, where instead a new
-#' column would be generated. To behave like standard [base::data.frame()]s in
-#' this scenario, set `add = TRUE`, which replaces the value at position i, j,
-#' but will also add a new column if the column is not yet in the
-#' [dict.frame()]. To be consistent with the access operators, this 'add'
-#' operation is only defined if `j` is a `character` index.
-#' Similarly and also in contrast to [base::data.frame()]s, a new row may never
-#' by substituted, that is, if the row index exceeds the number of rows, the
-#' function will always give an error.
+#' @param add `logical` If only one column index was used (i.e. x[[i]], and
+#' `add` set to `TRUE` and the column index is of type `character` then the
+#' the value(s) are added as a new column to the `dict.frame`. In all other
+#' cases or if `add == FALSE`, an out of bounds error is signaled.
 #' @param value A suitable replacement value.
 #' @return For `[[<-` replaces the value at position `[i, j]`. If a new column
-#' is generated, the value is replicated in each row.
+#' is generated (see option `add`), the value is replicated if needed. Note
+#' that for this the value has to be a multiple of the number of rows. In
+#' contrast to [base::data.frame()]s, numerical row or column indices that
+#' exceed the dimensions of the [dict.frame()] will always stop with an error,
+#' that is, new rows or columns are never substituted. The only way to attach
+#' a new column is to use a single character index and explicitly stating the
+#' intention to add the column, i.e., `x[["A", add = TRUE]] <- 1`.
+#' @export
 `[[<-.Dict.frame` <- function(x, i, j, add = FALSE, value)
 {
     if (length(i) != 1) stop("i must be of length 1")
@@ -187,9 +188,11 @@ NULL
         x$set(key, xj)
     } else {
         # x[[i]] <- value
+
         # Try to access element and get key
         current = if (add) x[[i]] else x[i]
         key = if (is.numeric(i)) x$keys()[as.integer(i)] else i
+        if (is.null(value)) return(x$discard(key))
 
         if (nrow(x) > 0) {
             rest = nrow(x) %% length(value)
@@ -201,6 +204,61 @@ NULL
         }
         x$set(key, value, add = add)
     }
+    invisible(x)
+}
+
+
+#' @rdname dict.frameS3replace
+#'
+#' @param add `logical` If only the column index was set (i.e. x[i] or x[, j]),
+#' and `add` set to `TRUE` and the column index is of type `character` then the
+#' the value(s) are added as a new column to the `dict.frame`. In all other
+#' cases or if `add == FALSE`, an out of bounds error is signaled.
+#' @param value A suitable replacement value.
+#' @return For `[<-` replaces the value(s) at positions `[i, j]`. In
+#' contrast to [base::data.frame()]s, numerical row or column indices that
+#' exceed the dimensions of the [dict.frame()] will always stop with an error,
+#' that is, new rows or columns are never substituted. The only way to attach
+#' new columns is to use character indices, i.e., `x["A", add = TRUE] <- 1` or
+#' `x[, c("A", "C"), add = TRUE] <- 9` .
+#' @export
+`[<-.Dict.frame` <- function(x, i, j, add = FALSE, value)
+{
+    has.i = !missing(i)
+    has.j = !missing(j)
+    if (missing(i) && missing(j)) return(x)
+    hasAdd <- !missing(add)
+    hasComma <- nargs() - hasAdd == 4
+
+    if (hasComma) {
+        if (!has.i) {
+            # x[, j]
+            if (hasAdd) x[j, add = add] <- value else x[j] <- value
+        } else {
+            # x[i, j] <- value
+            if (length(value) != length(i) && length(value) != 1) {
+                stop("length of value must be eiter ", length(i), " or 1")
+            }
+
+            # Try to access element and get key
+            current = x[i, j]
+            key = if (is.numeric(j)) x$keys()[as.integer(j)] else j
+
+            xj = x[[key]]
+            xj[[i]] <- value
+            x$set(key, xj)
+        }
+    } else {
+        # x[i] <- value
+        for (uni in unique(i)) {
+            if (hasAdd) {
+                x[[uni, add = add]] <- value
+            } else {
+                x[[uni]] <- value
+            }
+        }
+    }
+    invisible(x)
 }
 
 

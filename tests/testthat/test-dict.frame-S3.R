@@ -293,3 +293,48 @@ test_that("[[<-.Dict.frame operator works with empty dict.frame", {
     expect_equal(dim(dif), c(10, 1))
 })
 
+
+test_that("[<-.Dict.frame operator behaves as expected for out of range indices", {
+    df = data.frame(A = 1:2, B = 3:4)
+    dif = dict.frame(A = 1:2, B = 3:4)
+
+    expect_error(dif[[1, 1]] <- 1:2, "value must be of length 1")
+    expect_error(dif[[1:2, 1]] <- 1, "i must be of length 1")
+    expect_error(dif[[1, 1:2]] <- 1, "j must be of length 1")
+
+    # Column undefined index
+    expect_error(dif[["X"]] <- 1, "column 'X' not found")
+    dif[["X", add = TRUE]] <- 1
+    df[["X"]] <- 1
+    expect_equal(df, as.data.frame(dif))
+
+    expect_error(dif[[1, "Z"]] <- 9, "column 'Z' not found")
+    expect_error(dif[[1, "Z", add = TRUE]] <- 9, "column 'Z' not found")
+    expect_error(df[[1, "Z"]] <- 9, "replacing element in non-existent column: Z")
+
+    # Column out of range
+    expect_error(dif[[4]] <- 9, "column index out of bounds: 4")
+    expect_error(dif[[4, add = TRUE]] <- 9, "column index out of bounds: 4")
+    expect_silent(df[[4]] <- 9)  # works
+    expect_silent(df[[4]] <- NULL)
+
+    expect_error(dif[[1, 4]] <- 9, "column index out of bounds: 4")
+    expect_error(dif[[1, 4, add = TRUE]] <- 9, "column index out of bounds: 4")
+    expect_error(df[[1, 4]] <- 9, "replacing element in non-existent column: 4")
+
+    # Row out of range
+    expect_error(dif[[5, "X"]] <- 1, "row indices out of bounds: 5")
+    expect_error(dif[[5, "X", add = TRUE]] <- 1, "row indices out of bounds: 5")
+    expect_silent(df[[5, "X"]] <- 1)
+
+    expect_error(dif[[5, 1]] <- 1, "row indices out of bounds: 5")
+    expect_error(dif[[5, 1, add = TRUE]] <- 1, "row indices out of bounds: 5")
+    df = data.frame(A = 1:2, B = 3:4)
+    expect_silent(df[[5, 1]] <- 1)
+
+    # Row and column out of range
+    expect_error(dif[[3, 4]] <- 1, "column index out of bounds: 4")
+    expect_error(dif[[3, 4, add = TRUE]] <- 1, "column index out of bounds: 4")
+})
+
+

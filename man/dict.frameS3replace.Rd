@@ -5,6 +5,7 @@
 \alias{[[.Dict.frame}
 \alias{[.Dict.frame}
 \alias{[[<-.Dict.frame}
+\alias{[<-.Dict.frame}
 \title{Extract or replace parts of a \code{Dict.frame}}
 \usage{
 \method{[[}{Dict.frame}(x, i, j, default = NULL)
@@ -12,6 +13,8 @@
 \method{[}{Dict.frame}(x, i, j, default = NULL)
 
 \method{[[}{Dict.frame}(x, i, j, add = FALSE) <- value
+
+\method{[}{Dict.frame}(x, i, j, add = FALSE) <- value
 }
 \arguments{
 \item{x}{\code{\link[=Dict.frame]{Dict.frame()}} object.}
@@ -23,23 +26,17 @@ or replace.}
 
 \item{default}{A suitable default value.}
 
-\item{add}{\code{logical} If \code{FALSE} and column does not exist, an error is
-signaled. This is different from \code{\link[base:data.frame]{base::data.frame()}}s, where instead a new
-column would be generated. To behave like standard \code{\link[base:data.frame]{base::data.frame()}}s in
-this scenario, set \code{add = TRUE}, which replaces the value at position i, j,
-but will also add a new column if the column is not yet in the
-\code{\link[=dict.frame]{dict.frame()}}. To be consistent with the access operators, this 'add'
-operation is only defined if \code{j} is a \code{character} index.
-Similarly and also in contrast to \code{\link[base:data.frame]{base::data.frame()}}s, a new row may never
-by substituted, that is, if the row index exceeds the number of rows, the
-function will always give an error.}
+\item{add}{\code{logical} If only the column index was set (i.e. x\link{i} or x\link{, j}),
+and \code{add} set to \code{TRUE} and the column index is of type \code{character} then the
+the value(s) are added as a new column to the \code{dict.frame}. In all other
+cases or if \code{add == FALSE}, an out of bounds error is signaled.}
 
 \item{value}{A suitable replacement value.}
 }
 \value{
 For \code{[[} returns the value at row \code{i} and column \code{j}. If the column
 is specified as an integer and does not exist, an out of bounds error is
-raised. If specified as character, an error is raised unless \code{default} was
+raised. If specified as character, \code{NULL} is returned unless \code{default} was
 specified, in which case the \code{default} value is returned.
 If \code{i} is not specified (or only one index given), the full column is
 returned, again, following the above rules in case of missing column.
@@ -55,7 +52,20 @@ If \code{i} is not specified (or only one index given), the full columns are
 returned, again, following the above rules in case of missing columns.
 
 For \verb{[[<-} replaces the value at position \verb{[i, j]}. If a new column
-is generated, the value is replicated in each row.
+is generated (see option \code{add}), the value is replicated if needed. Note
+that for this the value has to be a multiple of the number of rows. In
+contrast to \code{\link[base:data.frame]{base::data.frame()}}s, numerical row or column indices that
+exceed the dimensions of the \code{\link[=dict.frame]{dict.frame()}} will always stop with an error,
+that is, new rows or columns are never substituted. The only way to attach
+a new column is to use a single character index and explicitly stating the
+intention to add the column, i.e., \code{x[["A", add = TRUE]] <- 1}.
+
+For \verb{[<-} replaces the value(s) at positions \verb{[i, j]}. In
+contrast to \code{\link[base:data.frame]{base::data.frame()}}s, numerical row or column indices that
+exceed the dimensions of the \code{\link[=dict.frame]{dict.frame()}} will always stop with an error,
+that is, new rows or columns are never substituted. The only way to attach
+new columns is to use character indices, i.e., \code{x["A", add = TRUE] <- 1} or
+\code{x[, c("A", "C"), add = TRUE] <- 9} .
 }
 \description{
 Access and assignment operators for \code{\link[=Dict.frame]{Dict.frame()}} objects.
