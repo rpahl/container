@@ -443,3 +443,18 @@ test_that("Dict.frame print works as expected", {
     expect_equal(dim(res), c(0, 0))
 })
 
+
+test_that("Dict.frame can handle complex objects ", {
+    df = data.frame(A = 1:2)
+    dif = dict.frame(df)
+
+    dif["df", add = TRUE] <- list(df)
+    dif["f", add = TRUE] <- list(base::mean)
+    dif[2, "f"] <- stats::median
+    expect_equal(dif$apply(typeof),
+                 list("A" = "integer", "df" = "list", "f" = "list"))
+
+    expect_equal(dif[[1, "f"]](c(1, 2, 10)), mean(c(1, 2, 10)))
+    expect_equal(dif[[2, "f"]](c(1, 2, 10)), median(c(1, 2, 10)))
+})
+
