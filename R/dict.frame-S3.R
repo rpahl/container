@@ -231,30 +231,40 @@ NULL
     hasComma <- nargs() - hasAdd == 4
 
     if (hasComma) {
-        if (!has.i) {
+        if (!has.i || identical(i, seq_len(nrow(x)))) {
             # x[, j]
             if (hasAdd) x[j, add = add] <- value else x[j] <- value
         } else {
-            # x[i, j] <- value
-            if (length(value) != length(i) && length(value) != 1) {
-                stop("length of value must be eiter ", length(i), " or 1")
+            if (!has.j) {
+                j = seq_len(ncol(x))
+                if (hasAdd) x[i, j, add = add] <- value else x[i, j] <- value
+                return(invisible(x))
             }
 
-            # Try to access element and get key
-            current = x[i, j]
-            key = if (is.numeric(j)) x$keys()[as.integer(j)] else j
-
-            xj = x[[key]]
-            xj[[i]] <- value
-            x$set(key, xj)
+            # x[i, j] <- value
+            if (length(value) != length(i) && length(value) != 1) {
+                stop("length of value must either match number of rows (",
+                     length(i), ") or 1")
+            }
+            # Set values one by one
+            for (ii in unique(i)) {
+                val = if (length(value) > 1) value[[ii]] else value
+                for (jj in unique(j)) {
+                    if (hasAdd) {
+                        x[[ii, jj, add = add]] <- val
+                    } else {
+                        x[[ii, jj]] <- val
+                    }
+                }
+            }
         }
     } else {
         # x[i] <- value
-        for (uni in unique(i)) {
+        for (ii in unique(i)) {
             if (hasAdd) {
-                x[[uni, add = add]] <- value
+                x[[ii, add = add]] <- value
             } else {
-                x[[uni]] <- value
+                x[[ii]] <- value
             }
         }
     }
