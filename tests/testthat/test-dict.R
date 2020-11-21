@@ -80,8 +80,8 @@ test_that("Dict update", {
 
 test_that("A key in the Dict can be renamed", {
     d <- Dict$new(list(A=1, B=2))
-    expect_error(d$rename(1, "C"), "old must be of type character")
-    expect_error(d$rename("A", 1), "new must be of type character")
+    expect_error(d$rename(1, "C"), "key must be character")
+    expect_error(d$rename("A", 1), "key must be character")
     expect_error(d$rename("A", c("C", "D")), "must be of same length")
     expect_error(d$rename("A", "B"), "rename failed because 'B' exists already")
     expect_error(d$rename("Z", "B"), "key 'Z' not found")
@@ -101,5 +101,23 @@ test_that("A key in the Dict can be renamed", {
     # Renaming same key multiple times is possible
     d$rename(c("x", "x2"), c("x2", "x3"))
     expect_equal(d$keys(), c("x3", "y"))
+})
+
+test_that("multiple elements can be discarded at once", {
+    d <- Dict$new(list(A=1, B=2))
+    expect_equal(d$keys(), c("A", "B"))
+    d$discard(d$keys())
+    expect_true(d$empty())
+})
+
+test_that("multiple elements can be removed at once", {
+    d <- Dict$new(list(A=1, B=2))
+    expect_equal(d$keys(), c("A", "B"))
+    d$remove(d$keys())
+    expect_true(d$empty())
+
+    d <- Dict$new(list(A=1, B=2))
+    expect_error(d$remove(c("A", "C", "B")), "key 'C' not in Dict")
+    expect_equal(d$keys(), "B")
 })
 

@@ -41,6 +41,12 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` key of value to discard
         #' @return invisibly returns the `Dict`
         discard = function(key) {
+            if (length(key) > 1) {
+                for (k in key) {
+                    self$discard(k)
+                }
+                return(invisible(self))
+            }
             if (self$has(key)) {
                 pos <- match(key, self$keys())
                 private$elems <- private$elems[-pos]
@@ -84,7 +90,7 @@ Dict <- R6::R6Class("Dict",
         },
 
         #' @description Get value and remove key-value pair from `Dict`.
-        #' it afterwards. If `key` not found, raise an error.
+        #' If `key` not found, raise an error.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return its value.
         pop = function(key) {
@@ -112,6 +118,12 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, remove it, otherwise raise an error.
         remove = function(key) {
+            if (length(key) > 1) {
+                for (k in key) {
+                    self$remove(k)
+                }
+                return(invisible(self))
+            }
             if (!self$has(key)) {
                 stop("key '", key, "' not in ", data.class(self))
             }
