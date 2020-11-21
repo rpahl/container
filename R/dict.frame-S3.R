@@ -11,12 +11,15 @@
 #' @param ... arguments of the form tag = value or a named list
 #' @name dict.frameS3
 #' @seealso [Dict()], [base::data.frame()]
+NULL
 
 #' @rdname dict.frameS3
 #' @export
 dict.frame <- function(...) {
     if (nargs() == 0) return(Dict.frame$new(x = list()))
-    x = if (nargs() > 1) list(...) else as.list(...)
+
+    x = list(...)
+    if (nargs() == 1 && is.data.frame(x[[1]])) x = as.list(x[[1]])
     Dict.frame$new(x)
 }
 

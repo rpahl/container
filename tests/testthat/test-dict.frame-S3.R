@@ -1,9 +1,22 @@
 context("dict.frame S3")
 
+test_that("dict.frame creation works as expected", {
+    dif.df = as.data.frame(dict.frame())
+    attr(dif.df, "row.names") <- integer(0)
+    expect_equal(dif.df, data.frame())
+
+    df = data.frame(A = 1:2, B = 3:4)
+    expect_equal(as.data.frame(dict.frame(A = 1:2)), df["A"])
+    expect_equal(as.data.frame(dict.frame(A = 1:2, B = 3:4)), df)
+    expect_equal(as.data.frame(dict.frame(df)), df)
+})
+
+
 test_that("[[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6)
     expect_equal(dict.frame(list(A = 1:3, B = 4:6)),
                  dict.frame(A = 1:3, B = 4:6))
+
     dif = dict.frame(A = 1:3, B = 4:6)
     expect_error(dif[[]], '"i" is missing')
     expect_error(dif[[1, ]], '"j" is missing')
