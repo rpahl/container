@@ -35,6 +35,10 @@ Dict.frame <- R6::R6Class("Dict.frame",
             invisible(self)
         },
 
+        #' @description Dimensions of the `Dict.frame` object
+        #' @return `integer` number of columns
+        dim = function() c(self$nrow(), self$ncol()),
+
         #' @description Number of columns
         #' @return `integer` number of columns
         ncol = function() self$size(),
@@ -64,7 +68,7 @@ Dict.frame <- R6::R6Class("Dict.frame",
                 top = head(rows, n = half)
                 df = as.data.frame(Reduce(self$values(), f = cbind))
                 if (nrow(df) > 0) {
-                    rownames(df) = rownames(self)
+                    rownames(df) = self$rownames()
                 }
                 colnames(df) = self$keys()
                 df.top = df[top, , drop = FALSE]

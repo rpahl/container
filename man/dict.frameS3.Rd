@@ -5,6 +5,7 @@
 \alias{dict.frame}
 \alias{as.dict.frame}
 \alias{is.dict.frame}
+\alias{dimnames<-.Dict.frame}
 \title{Dict S3 interface}
 \usage{
 dict.frame(...)
@@ -12,12 +13,16 @@ dict.frame(...)
 as.dict.frame(x)
 
 is.dict.frame(x)
+
+\method{dimnames}{Dict.frame}(x) <- value
 }
 \arguments{
 \item{...}{arguments of the form tag = value or a named list}
 
 \item{x}{a named vector (or list) of 'any' type including
 \code{\link[base:data.frame]{base::data.frame()}}s.}
+
+\item{value}{a possible value for dimnames(x)}
 }
 \description{
 The \code{\link[=Dict.frame]{Dict.frame()}} is a mix of a dictionary and a

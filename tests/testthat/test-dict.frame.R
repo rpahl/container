@@ -54,7 +54,6 @@ test_that("removing columns from Dict.frame works as expected", {
     expect_equal(dif$ncol(), 1)
     dif$remove("A")
     expect_equal(dif$ncol(), 0)
-
 })
 
 test_that("added columns must match in length except if dict.frame still empty", {

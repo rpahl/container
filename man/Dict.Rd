@@ -31,6 +31,7 @@ Roman Pahl
 \item \href{#method-pop}{\code{Dict$pop()}}
 \item \href{#method-popitem}{\code{Dict$popitem()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
+\item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-set}{\code{Dict$set()}}
 \item \href{#method-sort}{\code{Dict$sort()}}
 \item \href{#method-update}{\code{Dict$update()}}
@@ -191,7 +192,7 @@ value for \code{key} if \code{key} is in the \code{Dict} else \code{default}.
 \if{latex}{\out{\hypertarget{method-pop}{}}}
 \subsection{Method \code{pop()}}{
 Get value and remove key-value pair from \code{Dict}.
-it afterwards. If \code{key} not found, raise an error.
+If \code{key} not found, raise an error.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$pop(key)}\if{html}{\out{</div>}}
 }
@@ -240,6 +241,30 @@ Remove value
 }
 \subsection{Returns}{
 If \code{key} in \code{Dict}, remove it, otherwise raise an error.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-rename"></a>}}
+\if{latex}{\out{\hypertarget{method-rename}{}}}
+\subsection{Method \code{rename()}}{
+Rename a \code{key} in the \code{Dict}. An error is signaled, if
+either the \code{old} key is not in the \code{Dict} or the \code{new} key results
+in a name-clash with an existing key.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$rename(old, new)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{old}}{\code{character} name of key to be renamed.}
+
+\item{\code{new}}{\code{character} new key name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}

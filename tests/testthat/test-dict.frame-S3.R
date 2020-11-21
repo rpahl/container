@@ -16,7 +16,6 @@ test_that("[[.Dict.frame operator extracts values as expected", {
     expect_equal(dif[[2, "A"]], df[[2, "A"]])
     expect_equal(dif[[1]], df[[1]])
     expect_equal(dif[["A"]], df[["A"]])
-
 })
 
 test_that("[[.Dict.frame can be initialized from data.frame", {
@@ -469,5 +468,31 @@ test_that("dict.frames can be row-binded", {
     dif["f", add = TRUE] <- list(base::mean)
 
     expect_equal(dim(rbind(dif, dif)), c(4, 4))
+})
+
+test_that("nrow, ncol, and dim can be called on dict.frames", {
+    df = data.frame(A = 1:10)
+    dif = dict.frame(df)
+    expect_equal(nrow(df), nrow(dif))
+    expect_equal(ncol(df), ncol(dif))
+    expect_equal(dim(df), dim(dif))
+})
+
+test_that("row and column names can be retrieved and set for dict.frames", {
+    df = data.frame(A = 1:2, B = 3:4)
+    dif = dict.frame(df)
+    expect_equal(as.character(rownames(dif)), rownames(df))
+    expect_equal(colnames(dif), colnames(df))
+
+    expect_equal(dimnames(dif), dimnames(df))
+
+    colnames(dif) <- c("x", "y")
+    expect_equal(dif$keys(), c("x", "y"))
+
+    rownames(dif) <- 3:4
+    expect_equal(rownames(dif), c("3", "4"))
+
+    row.names(dif) <- letters[1:2]
+    expect_equal(row.names(dif), letters[1:2])
 })
 

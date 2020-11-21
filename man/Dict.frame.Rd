@@ -23,6 +23,7 @@ Roman Pahl
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{Dict.frame$new()}}
+\item \href{#method-dim}{\code{Dict.frame$dim()}}
 \item \href{#method-ncol}{\code{Dict.frame$ncol()}}
 \item \href{#method-nrow}{\code{Dict.frame$nrow()}}
 \item \href{#method-print}{\code{Dict.frame$print()}}
@@ -51,6 +52,7 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="pop">}\href{../../container/html/Dict.html#method-pop}{\code{container::Dict$pop()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="popitem">}\href{../../container/html/Dict.html#method-popitem}{\code{container::Dict$popitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="remove">}\href{../../container/html/Dict.html#method-remove}{\code{container::Dict$remove()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="rename">}\href{../../container/html/Dict.html#method-rename}{\code{container::Dict$rename()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="sort">}\href{../../container/html/Dict.html#method-sort}{\code{container::Dict$sort()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="update">}\href{../../container/html/Dict.html#method-update}{\code{container::Dict$update()}}\out{</span>}
 }
@@ -74,6 +76,19 @@ Roman Pahl
 }
 \subsection{Returns}{
 invisibly returns the \code{Dict.frame}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-dim"></a>}}
+\if{latex}{\out{\hypertarget{method-dim}{}}}
+\subsection{Method \code{dim()}}{
+Dimensions of the \code{Dict.frame} object
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict.frame$dim()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{integer} number of columns
 }
 }
 \if{html}{\out{<hr>}}
