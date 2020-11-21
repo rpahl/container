@@ -5,17 +5,31 @@ test_that("dict.frame creation works as expected", {
     attr(dif.df, "row.names") <- integer(0)
     expect_equal(dif.df, data.frame())
 
+    dif.df = as.data.frame(dict.frame(data.frame()))
+    attr(dif.df, "row.names") <- integer(0)
+    expect_equal(dif.df, data.frame())
+
+    dif.df = as.data.frame(dict.frame(list()))
+    attr(dif.df, "row.names") <- integer(0)
+    expect_equal(dif.df, data.frame())
+
     df = data.frame(A = 1:2, B = 3:4)
     expect_equal(as.data.frame(dict.frame(A = 1:2)), df["A"])
     expect_equal(as.data.frame(dict.frame(A = 1:2, B = 3:4)), df)
     expect_equal(as.data.frame(dict.frame(df)), df)
+
+    expect_equal(dict.frame(list(A = 1:3, B = 4:6)),
+                 dict.frame(A = 1:3, B = 4:6))
+
+    expect_error(dict.frame(A = 1:3, 3:4), "all items must be named")
+    expect_error(dict.frame(A = 1:3, 1:10), "all items must be named")
+    expect_error(dict.frame(A = 1:3, B = 1:10),
+                 "All elements must have the same length.")
 })
 
 
 test_that("[[.Dict.frame operator extracts values as expected", {
     df = data.frame(A = 1:3, B = 4:6)
-    expect_equal(dict.frame(list(A = 1:3, B = 4:6)),
-                 dict.frame(A = 1:3, B = 4:6))
 
     dif = dict.frame(A = 1:3, B = 4:6)
     expect_error(dif[[]], '"i" is missing')

@@ -18,9 +18,11 @@ NULL
 #' @export
 dict.frame <- function(...) {
     if (nargs() == 0) return(Dict.frame$new(x = list()))
-
     x = list(...)
-    if (nargs() == 1 && is.data.frame(x[[1]])) x = as.list(x[[1]])
+    if (is.null(names(x))) {
+        if (is.data.frame(x[[1]])) return(Dict.frame$new(as.list(x[[1]])))
+        if (is.list(x[[1]])) return(Dict.frame$new(x[[1]]))
+    }
     Dict.frame$new(x)
 }
 
