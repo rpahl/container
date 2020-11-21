@@ -118,6 +118,33 @@ Dict <- R6::R6Class("Dict",
             self$discard(key)
         },
 
+        #' @description Rename a `key` in the `Dict`. An error is signaled, if
+        #' either the `old` key is not in the `Dict` or the `new` key results
+        #' in a name-clash with an existing key.
+        #' @param old `character` name of key to be renamed.
+        #' @param new `character` new key name.
+        #' @return invisibly returns the `Dict` object
+        rename = function(old, new) {
+            if (length(old) != length(new)) {
+                stop("old and new must be of same length")
+            }
+            if (length(old) > 1) {
+                for (i in seq_along(old)) {
+                    self$rename(old[i], new[i])
+                }
+                return(invisible(self))
+            }
+
+            if (identical(old, new)) return(self)
+            if (!self$has(old)) stop("key '", old, "' not found")
+            if (self$has(new)) {
+                stop("rename failed because '", new, "' exists already")
+            }
+            pos = match(old, self$keys())
+            names(private$elems)[pos] <- new
+            invisible(self)
+        },
+
         #' @description Overrides `value` at `key` if `key` is already in the
         #' `Dict`. If `key` not in `Dict`, an error is thrown unless `add` was
         #' set to `TRUE`.

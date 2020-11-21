@@ -78,4 +78,28 @@ test_that("Dict update", {
     expect_equal(Dict$new()$update(d2), d2)
 })
 
+test_that("A key in the Dict can be renamed", {
+    d <- Dict$new(list(A=1, B=2))
+    expect_error(d$rename(1, "C"), "old must be of type character")
+    expect_error(d$rename("A", 1), "new must be of type character")
+    expect_error(d$rename("A", c("C", "D")), "must be of same length")
+    expect_error(d$rename("A", "B"), "rename failed because 'B' exists already")
+    expect_error(d$rename("Z", "B"), "key 'Z' not found")
+
+    values = as.numeric(d$values())
+    d$rename("A", "a")
+    expect_true(d$has("a"))
+    expect_false(d$has("A"))
+
+    # Verify that values did not change
+    expect_equal(values, as.numeric(d$values()))
+
+    # Several keys at once
+    d$rename(c("a", "B"), c("x", "y"))
+    expect_equal(d$keys(), c("x", "y"))
+
+    # Renaming same key multiple times is possible
+    d$rename(c("x", "x2"), c("x2", "x3"))
+    expect_equal(d$keys(), c("x3", "y"))
+})
 
