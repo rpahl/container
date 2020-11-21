@@ -28,24 +28,6 @@ as.dict.frame <- function(x) dict.frame(x)
 #' @export
 is.dict.frame <- function(x) inherits(x, "Dict.frame")
 
-#' @name dict.frameS3
-#' @param value a possible value for dimnames(x)
-#' @export
-`dimnames<-.Dict.frame` = function(x, value) {
-    d <- dim(x)
-    if (!is.list(value) || length(value) != 2L)
-        stop("invalid 'dimnames' given for dict frame")
-    value[[1L]] <- as.character(value[[1L]])
-    value[[2L]] <- as.character(value[[2L]])
-    if (d[[1L]] != length(value[[1L]]) || d[[2L]] != length(value[[2L]]))
-        stop("invalid 'dimnames' given for dict frame")
-    x$set_rownames(value[[1L]])
-
-    x$rename(x$keys(), value[[2L]])
-    x
-}
-
-
 #' Extract or replace parts of a `Dict.frame`
 #'
 #' @description Access and assignment operators for [Dict.frame()] objects.
@@ -316,17 +298,36 @@ NULL
 
 
 #' @export
+`dim.Dict.frame` <- function(x)
+{
+    # This functions enables calling nrow and ncol on Dict.frame objects.
+    c(length(x$rownames()), length(x$keys()))
+}
+
+
+#' @export
 `dimnames.Dict.frame` <- function(x)
 {
     # This functions enables calling rownames and colnames on Dict.frame objects.
     list(as.character(x$rownames()), x$keys())
 }
 
+
+#' @name dict.frameS3
+#' @param value a possible value for dimnames(x)
 #' @export
-`dim.Dict.frame` <- function(x)
-{
-    # This functions enables calling nrow and ncol on Dict.frame objects.
-    c(length(x$rownames()), length(x$keys()))
+`dimnames<-.Dict.frame` = function(x, value) {
+    d <- dim(x)
+    if (!is.list(value) || length(value) != 2L)
+        stop("invalid 'dimnames' given for dict frame")
+    value[[1L]] <- as.character(value[[1L]])
+    value[[2L]] <- as.character(value[[2L]])
+    if (d[[1L]] != length(value[[1L]]) || d[[2L]] != length(value[[2L]]))
+        stop("invalid 'dimnames' given for dict frame")
+    x$set_rownames(value[[1L]])
+
+    x$rename(x$keys(), value[[2L]])
+    x
 }
 
 
