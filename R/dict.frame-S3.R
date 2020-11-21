@@ -336,15 +336,6 @@ NULL
     args <- list(...)
     stopifnot(all(sapply(args, is.dict.frame)))
 
-    rbind2 <- function(x, y) {
-        stopifnot(identical(keys(x), keys(x)))
-        d = dict.frame()
-        for (key in keys(x)) {
-            d$add(key, value = c(x$get(key), y$get(key)))
-        }
-        invisible(d)
-    }
-
-    Reduce(args, f = rbind2)
+    Reduce(args, f = function(x, y) x$rbind(y))
 }
 
