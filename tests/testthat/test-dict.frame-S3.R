@@ -496,3 +496,16 @@ test_that("row and column names can be retrieved and set for dict.frames", {
     expect_equal(row.names(dif), letters[1:2])
 })
 
+
+test_that("setval works as expected", {
+    df = data.frame(A = 1:2, B = 3:4)
+    dif = dict.frame(df)
+    expect_error(setval(dif, "C", 1:4), "elements must be of length 2")
+    expect_error(setval(dif, "C", 1:2), "key 'C' not in Dict.frame")
+    setval(dif, "C", 1:2, add = TRUE)
+    expect_equal(dif$get("C"), 1:2)
+
+    setval(dif, "B", 1:2)
+    expect_equal(dif$get("B"), 1:2)
+})
+
