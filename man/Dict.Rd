@@ -23,6 +23,7 @@ Roman Pahl
 \itemize{
 \item \href{#method-new}{\code{Dict$new()}}
 \item \href{#method-add}{\code{Dict$add()}}
+\item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
 \item \href{#method-has}{\code{Dict$has()}}
@@ -30,7 +31,7 @@ Roman Pahl
 \item \href{#method-peek}{\code{Dict$peek()}}
 \item \href{#method-pop}{\code{Dict$pop()}}
 \item \href{#method-popitem}{\code{Dict$popitem()}}
-\item \href{#method-delete}{\code{Dict$delete()}}
+\item \href{#method-remove}{\code{Dict$remove()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-set}{\code{Dict$set()}}
 \item \href{#method-sort}{\code{Dict$sort()}}
@@ -90,6 +91,26 @@ otherwise signal an error.
 \item{\code{value}}{the value to be added to the \code{Dict}.}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-delete"></a>}}
+\if{latex}{\out{\hypertarget{method-delete}{}}}
+\subsection{Method \code{delete()}}{
+delete value
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$delete(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If \code{key} in \code{Dict}, delete it, otherwise raise an error.
 }
 }
 \if{html}{\out{<hr>}}
@@ -224,12 +245,13 @@ random key-value pair from the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-delete"></a>}}
-\if{latex}{\out{\hypertarget{method-delete}{}}}
-\subsection{Method \code{delete()}}{
-delete value
+\if{html}{\out{<a id="method-remove"></a>}}
+\if{latex}{\out{\hypertarget{method-remove}{}}}
+\subsection{Method \code{remove()}}{
+Remove value associated with key. This function does
+the same as \code{delete} and is only kept for backwards compatibility.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$delete(key)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$remove(key)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -240,7 +262,7 @@ delete value
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-If \code{key} in \code{Dict}, delete it, otherwise raise an error.
+If \code{key} in \code{Dict}, remove it, otherwise raise an error.
 }
 }
 \if{html}{\out{<hr>}}

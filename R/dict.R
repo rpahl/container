@@ -37,6 +37,22 @@ Dict <- R6::R6Class("Dict",
             self$set(key, value, add = TRUE)
         },
 
+        #' @description delete value
+        #' @param key `character` name of key.
+        #' @return If `key` in `Dict`, delete it, otherwise raise an error.
+        delete = function(key) {
+            if (length(key) > 1) {
+                for (k in key) {
+                    self$delete(k)
+                }
+                return(invisible(self))
+            }
+            if (!self$has(key)) {
+                stop("key '", key, "' not in ", data.class(self))
+            }
+            self$discard(key)
+        },
+
         #' @description If key in `Dict`, delete it.
         #' @param key `character` key of value to discard
         #' @return invisibly returns the `Dict`
@@ -114,13 +130,14 @@ Dict <- R6::R6Class("Dict",
             }
         },
 
-        #' @description delete value
+        #' @description Remove value associated with key. This function does
+        #' the same as `delete` and is only kept for backwards compatibility.
         #' @param key `character` name of key.
-        #' @return If `key` in `Dict`, delete it, otherwise raise an error.
-        delete = function(key) {
+        #' @return If `key` in `Dict`, remove it, otherwise raise an error.
+        remove = function(key) {
             if (length(key) > 1) {
                 for (k in key) {
-                    self$delete(k)
+                    self$remove(k)
                 }
                 return(invisible(self))
             }

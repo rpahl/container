@@ -35,11 +35,12 @@ Roman Pahl
 \item \href{#method-add}{\code{Container$add()}}
 \item \href{#method-apply}{\code{Container$apply()}}
 \item \href{#method-clear}{\code{Container$clear()}}
+\item \href{#method-delete}{\code{Container$delete()}}
 \item \href{#method-discard}{\code{Container$discard()}}
 \item \href{#method-empty}{\code{Container$empty()}}
 \item \href{#method-has}{\code{Container$has()}}
 \item \href{#method-print}{\code{Container$print()}}
-\item \href{#method-delete}{\code{Container$delete()}}
+\item \href{#method-remove}{\code{Container$remove()}}
 \item \href{#method-size}{\code{Container$size()}}
 \item \href{#method-type}{\code{Container$type()}}
 \item \href{#method-values}{\code{Container$values()}}
@@ -127,6 +128,29 @@ invisibly returns the cleared \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-delete"></a>}}
+\if{latex}{\out{\hypertarget{method-delete}{}}}
+\subsection{Method \code{delete()}}{
+Find and delete element from \code{Container}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem, right = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{elem}}{element to be deleted from the \code{Container}. If element
+is not found in the \code{Container}, an error is signaled.}
+
+\item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-discard"></a>}}
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
@@ -205,12 +229,14 @@ invisibly returns the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-delete"></a>}}
-\if{latex}{\out{\hypertarget{method-delete}{}}}
-\subsection{Method \code{delete()}}{
-Find and delete element from \code{Container}
+\if{html}{\out{<a id="method-remove"></a>}}
+\if{latex}{\out{\hypertarget{method-remove}{}}}
+\subsection{Method \code{remove()}}{
+Find and remove element from \code{Container}. This
+function does the same as \code{delete} and is only kept for backwards
+compatibility.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem, right = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$remove(elem, right = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

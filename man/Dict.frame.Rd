@@ -53,6 +53,7 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="peek">}\href{../../container/html/Dict.html#method-peek}{\code{container::Dict$peek()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="pop">}\href{../../container/html/Dict.html#method-pop}{\code{container::Dict$pop()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="popitem">}\href{../../container/html/Dict.html#method-popitem}{\code{container::Dict$popitem()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="remove">}\href{../../container/html/Dict.html#method-remove}{\code{container::Dict$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="rename">}\href{../../container/html/Dict.html#method-rename}{\code{container::Dict$rename()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="sort">}\href{../../container/html/Dict.html#method-sort}{\code{container::Dict$sort()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="update">}\href{../../container/html/Dict.html#method-update}{\code{container::Dict$update()}}\out{</span>}

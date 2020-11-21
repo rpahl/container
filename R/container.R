@@ -63,6 +63,22 @@ Container <- R6::R6Class("Container",
             self$initialize(vector(typeof(private$elems)))
         },
 
+        #' @description Find and delete element from `Container`
+        #' @param elem element to be deleted from the `Container`. If element
+        #'  is not found in the `Container`, an error is signaled.
+        #' @param right `logical` if `TRUE`, search from right to left.
+        #' @return invisibly returns the `Container` object
+        delete = function(elem, right = FALSE) {
+            class <- data.class(self)
+            hasElem <- self$has(elem)
+            if (hasElem) {
+                self$discard(elem, right)
+            } else {
+                stop(elem, " not in ", class)
+            }
+            invisible(self)
+        },
+
         #' @description Search for first `elem` in `Container` and, if found,
         #' delete it. If not found, the `Container` object is not altered.
         #' @param elem element to be discarded.
@@ -103,12 +119,14 @@ Container <- R6::R6Class("Container",
             invisible(self)
         },
 
-        #' @description Find and delete element from `Container`
+        #' @description Find and remove element from `Container`. This
+        #' function does the same as `delete` and is only kept for backwards
+        #' compatibility.
         #' @param elem element to be deleted from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
-        delete = function(elem, right = FALSE) {
+        remove = function(elem, right = FALSE) {
             class <- data.class(self)
             hasElem <- self$has(elem)
             if (hasElem) {
