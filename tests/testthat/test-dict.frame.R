@@ -97,8 +97,14 @@ test_that("Dict.frame is printed as data.frame if possible", {
     df = data.frame(A = 1:2, B = 1:2)
     dif <- Dict.frame$new(df)
 
-    res = expect_output(print(dif))
+    res = expect_output(print(dif),
+                        "<Dict.frame> with 2 columns and 2 rows",
+                        fixed = TRUE)
     expect_equal(res, df)
+
+    expect_output(print(dict.frame()),
+                  "<Dict.frame> with 0 columns and 0 rows",
+                  fixed = TRUE)
 })
 
 test_that("rownames of Dict.frame can be retrieved and set", {

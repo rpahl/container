@@ -55,10 +55,11 @@ Dict.frame <- R6::R6Class("Dict.frame",
             if (len < 2) stop("len must be > 1")
             is_printable_as_data.frame = all(sapply(self$values(), is.atomic))
             if (is_printable_as_data.frame) {
-                if (self$nrow() == 0) return()
                 title = paste("<Dict.frame> with",
                                self$ncol(), "columns and",
                                self$nrow(), "rows")
+                cat(title, "\n")
+                if (self$nrow() == 0) return()
 
                 types = sapply(self$apply(typeof), abbreviate, minlength= 3)
                 types = paste0("<", types, ">")
@@ -86,7 +87,6 @@ Dict.frame <- R6::R6Class("Dict.frame",
                 if (nrow(df.print) > max(top) + 1) {
                     rownames(df.print)[nrow(df.top) + 1] <- "."
                 }
-                cat(title, "\n")
                 print(df.print, ...)
             } else {
                 super$print(list.len = len, ...)
