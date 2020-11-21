@@ -7,6 +7,7 @@ test_that("Dict.frame constructor works as expected", {
     d <- Dict.frame$new(c(x=1L, y=2L))
     expect_equal(d$nrow(), 1)
     expect_equal(d$ncol(), 2)
+    expect_equal(d$dim(), c(1, 2))
 
     expect_true(inherits(d, "Dict.frame"))
     expect_true(inherits(d, "Dict"))
@@ -99,5 +100,14 @@ test_that("Dict.frame is printed as data.frame if possible", {
 
     res = expect_output(print(dif))
     expect_equal(res, df)
+})
+
+test_that("rownames of Dict.frame can be retrieved and set", {
+    df = data.frame(A = 1:2, B = 1:2)
+    dif <- Dict.frame$new(df)
+
+    expect_equal(as.character(dif$rownames()), rownames(df))
+    dif$set_rownames(c("A", "B"))
+    expect_equal(dif$rownames(), c("A", "B"))
 })
 
