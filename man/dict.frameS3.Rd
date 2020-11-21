@@ -35,5 +35,6 @@ objects.
 For a detailed documentation of all methods see \code{\link[=Dict.frame]{Dict.frame()}}.
 }
 \seealso{
-\code{\link[=Dict]{Dict()}}, \code{\link[base:data.frame]{base::data.frame()}}
+\code{\link[=Dict]{Dict()}}, \code{\link[base:data.frame]{base::data.frame()}}, [\verb{[[<-.Dict.frame()}],
+[\verb{[[.Dict.frame()}], [\verb{[<-.Dict.frame()}], [\verb{[.Dict.frame()}]
 }

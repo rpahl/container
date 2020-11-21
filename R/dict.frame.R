@@ -93,8 +93,8 @@ Dict.frame <- R6::R6Class("Dict.frame",
             }
         },
 
-        #' @description combine with another [Dict.frame()] object. For this,
-        #' columns must match.
+        #' @description row-bind this with another [Dict.frame()] object.
+        #' @param other `Dict.frame` object to row-bind
         #' @return a copy of original `Dict.frame` with a copy of `other`
         #' attached at the bottom.
         rbind = function(other) {

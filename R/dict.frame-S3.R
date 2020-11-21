@@ -10,7 +10,8 @@
 #' [base::data.frame()]s.
 #' @param ... arguments of the form tag = value or a named list
 #' @name dict.frameS3
-#' @seealso [Dict()], [base::data.frame()]
+#' @seealso [Dict()], [base::data.frame()], [`[[<-.Dict.frame()`],
+#' [`[[.Dict.frame()`], [`[<-.Dict.frame()`], [`[.Dict.frame()`]
 NULL
 
 #' @rdname dict.frameS3

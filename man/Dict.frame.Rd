@@ -27,6 +27,7 @@ Roman Pahl
 \item \href{#method-ncol}{\code{Dict.frame$ncol()}}
 \item \href{#method-nrow}{\code{Dict.frame$nrow()}}
 \item \href{#method-print}{\code{Dict.frame$print()}}
+\item \href{#method-rbind}{\code{Dict.frame$rbind()}}
 \item \href{#method-rownames}{\code{Dict.frame$rownames()}}
 \item \href{#method-set}{\code{Dict.frame$set()}}
 \item \href{#method-set_rownames}{\code{Dict.frame$set_rownames()}}
@@ -135,6 +136,27 @@ with \code{len} rows, otherwise as structure using \code{\link[utils:str]{utils:
 \item{\code{...}}{other arguments passed to print method}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-rbind"></a>}}
+\if{latex}{\out{\hypertarget{method-rbind}{}}}
+\subsection{Method \code{rbind()}}{
+row-bind this with another \code{\link[=Dict.frame]{Dict.frame()}} object.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict.frame$rbind(other)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{other}}{\code{Dict.frame} object to row-bind}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a copy of original \code{Dict.frame} with a copy of \code{other}
+attached at the bottom.
 }
 }
 \if{html}{\out{<hr>}}
