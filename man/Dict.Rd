@@ -30,7 +30,7 @@ Roman Pahl
 \item \href{#method-peek}{\code{Dict$peek()}}
 \item \href{#method-pop}{\code{Dict$pop()}}
 \item \href{#method-popitem}{\code{Dict$popitem()}}
-\item \href{#method-remove}{\code{Dict$remove()}}
+\item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-set}{\code{Dict$set()}}
 \item \href{#method-sort}{\code{Dict$sort()}}
@@ -96,7 +96,7 @@ otherwise signal an error.
 \if{html}{\out{<a id="method-discard"></a>}}
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
-If key in \code{Dict}, remove it.
+If key in \code{Dict}, delete it.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$discard(key)}\if{html}{\out{</div>}}
 }
@@ -191,7 +191,7 @@ value for \code{key} if \code{key} is in the \code{Dict} else \code{default}.
 \if{html}{\out{<a id="method-pop"></a>}}
 \if{latex}{\out{\hypertarget{method-pop}{}}}
 \subsection{Method \code{pop()}}{
-Get value and remove key-value pair from \code{Dict}.
+Get value and delete key-value pair from \code{Dict}.
 If \code{key} not found, raise an error.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$pop(key)}\if{html}{\out{</div>}}
@@ -212,7 +212,7 @@ If \code{key} in \code{Dict}, return its value.
 \if{html}{\out{<a id="method-popitem"></a>}}
 \if{latex}{\out{\hypertarget{method-popitem}{}}}
 \subsection{Method \code{popitem()}}{
-Remove and return an arbitrary (key, value) pair
+delete and return an arbitrary (key, value) pair
 from the \code{Dict}. This function can be used to destructively iterate
 over a \code{Dict} as often used in set algorithms.
 \subsection{Usage}{
@@ -224,12 +224,12 @@ random key-value pair from the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-remove"></a>}}
-\if{latex}{\out{\hypertarget{method-remove}{}}}
-\subsection{Method \code{remove()}}{
-Remove value
+\if{html}{\out{<a id="method-delete"></a>}}
+\if{latex}{\out{\hypertarget{method-delete}{}}}
+\subsection{Method \code{delete()}}{
+delete value
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$remove(key)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$delete(key)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -240,7 +240,7 @@ Remove value
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-If \code{key} in \code{Dict}, remove it, otherwise raise an error.
+If \code{key} in \code{Dict}, delete it, otherwise raise an error.
 }
 }
 \if{html}{\out{<hr>}}

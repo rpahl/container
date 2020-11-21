@@ -9,7 +9,7 @@ test_that("Set", {
     expect_true(s1$empty())
     expect_equal(s1$size(), 0)
     expect_false(s1$has(NULL))
-    expect_error(s1$remove(1), "1 not in Set")
+    expect_error(s1$delete(1), "1 not in Set")
 
     # add
     s1$add(1)
@@ -17,7 +17,7 @@ test_that("Set", {
     expect_false(s1$empty())
     expect_equal(s1$size(), 1)
     expect_equal(s1$add(1)$size(), 1) # should not be added twice
-    expect_true(s1$remove(1)$empty())
+    expect_true(s1$delete(1)$empty())
 
     # Lists
     s1 <- Set$new(list(1, 2))

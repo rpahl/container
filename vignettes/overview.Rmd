@@ -32,7 +32,7 @@ knitr::include_graphics("class-diagram.png")
 
 </br>
 
-## Classes and member methods
+## R6 classes and member methods
 
 The [Container](Container.html) class as the central element serves as the base class for [Deque](Deque.html), [Set](Set.html), and [Dict](Dict.html), which inherit all methods from [Container](Container.html), with some of them being overwritten (see below). In addition, the [Container](Container.html) class inherits from the abstract *Iterable* class and therefore provides a method to create an [Iterator](Iterator.html), which can be used to iterate through the elements of any container object.
 
@@ -54,11 +54,11 @@ The following table shows member methods divided by class. The top half contains
 | add(elem)              |               | add(elem)      | add(key, value)            |                |
 | apply(f)               |               |                |                            |                |
 | clear()                |               |                |                            |                |
+| delete(elem, right=F)  |               |                | delete(key)                |                |
 | discard(elem, right=F) |               |                | discard(key)               |                |
 | empty()                |               |                |                            |                |
 | has(elem)              |               |                | has(key)                   |                |
 | print(list.len=10)     |               |                |                            |                |
-| remove(elem, right=F)  |               |                | remove(key)                |                |
 | size()                 |               |                |                            |                |
 | type()                 |               |                |                            |                |
 | values()               |               |                |                            |                |
@@ -97,11 +97,11 @@ On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/
 |                              |                     |                  |                              |                    |
 |  add(co, elem)               |                     |  add(s, elem)    |  add(d, key, val)            |                    |
 |  clear(co)                   |                     |                  |                              |                    |
+|  delete(co, elem, right=F)   |                     |                  |  delete(d, key)              |                    |
 |  discard(co, elem, right=F)  |                     |                  |  discard(d, key)             |                    |
 |  empty(co)                   |                     |                  |                              |                    |
 |  has(co, elem)               |                     |                  |  has(d, key)                 |                    |
 |  print(co, list.len=10)      |                     |                  |                              |                    |
-|  remove(co, elem, right=F)   |                     |                  |  remove(d, key)              |                    |
 |  size(co)                    |                     |                  |                              |                    |
 |  type(co)                    |                     |                  |                              |                    |
 |  values(co)                  |                     |                  |                              |                    |

@@ -38,13 +38,13 @@ test_that("Dict operations work as expected", {
     expect_equal(d$pop("x"), 3)
     expect_false(d$has("x"))
 
-    # keys, discard, remove, popitem
+    # keys, discard, delete, popitem
     d <- Dict$new(integer())$add("x", 1)$add("y", 2)$add("z", 3)
     expect_output(print(d), 'Named num [1:3] 1 2 3', fixed=TRUE)
     expect_true(d$has("y"))
     expect_equal(d$keys(), c("x", "y", "z"))
     expect_false(d$discard("y")$has("y"))
-    expect_error(d$remove("y"), "key 'y' not in Dict")
+    expect_error(d$delete("y"), "key 'y' not in Dict")
     expect_false(d$discard("y")$has("y")) # no error although not in Dict
     expect_error(d$set("y", 10), "key 'y' not in Dict")
     expect_true(d$set("y", 10, add=TRUE)$has("y"))
@@ -110,14 +110,14 @@ test_that("multiple elements can be discarded at once", {
     expect_true(d$empty())
 })
 
-test_that("multiple elements can be removed at once", {
+test_that("multiple elements can be deleted at once", {
     d <- Dict$new(list(A=1, B=2))
     expect_equal(d$keys(), c("A", "B"))
-    d$remove(d$keys())
+    d$delete(d$keys())
     expect_true(d$empty())
 
     d <- Dict$new(list(A=1, B=2))
-    expect_error(d$remove(c("A", "C", "B")), "key 'C' not in Dict")
+    expect_error(d$delete(c("A", "C", "B")), "key 'C' not in Dict")
     expect_equal(d$keys(), "B")
 })
 

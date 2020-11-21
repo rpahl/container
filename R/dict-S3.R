@@ -84,7 +84,7 @@ popitem.Dict <- function(x) x$popitem()
 
 #' @rdname dictS3
 #' @export
-remove.Dict <- function(x, key, ...) x$remove(key)
+delete.Dict <- function(x, key, ...) x$delete(key)
 
 #' @rdname dictS3
 #' @param add `logical` if FALSE and `key` is not in dictionary, an error is

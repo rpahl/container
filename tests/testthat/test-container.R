@@ -20,16 +20,16 @@ test_that("Container", {
     c1$add(1)
     expect_equal(c1$size(), 2)
 
-    # discard and remove
+    # discard and delete
     expect_error(c1$discard(), '"elem" is missing, with no default')
-    expect_error(c1$remove(), '"elem" is missing, with no default')
+    expect_error(c1$delete(), '"elem" is missing, with no default')
     c1$add(2)
     expect_equal(c1$size(), 3)
     c1$discard(2)
     expect_equal(c1$size(), 2)
     expect_false(c1$has(2))
     expect_equal(c1, c1$discard(2))
-    expect_error(c1$remove(2), "2 not in Container")
+    expect_error(c1$delete(2), "2 not in Container")
     expect_equal(c1$size(), 2)
     c1$add(2)$add(1)
     expect_equal(c1$values(), list(1, 1, 2, 1))
@@ -47,7 +47,7 @@ test_that("Container", {
     expect_equal(c1$size(), cc$size())
     expect_equal(c1, cc)
 
-    c1$remove(7)
+    c1$delete(7)
     expect_true(identical(c1, c2))
     expect_lt(c1$size(), cc$size())
 

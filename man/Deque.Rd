@@ -5,7 +5,7 @@
 \title{A Deque (double-ended queue) class}
 \description{
 Deques are a generalization of stacks and queues typically
-with methods to add, remove and access elements at both sides of the
+with methods to add, delete and access elements at both sides of the
 underlying data sequence. As such, the \code{\link[=Deque]{Deque()}} can also be used to mimic
 both stacks and queues.
 }
@@ -44,12 +44,12 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="add">}\href{../../container/html/Container.html#method-add}{\code{container::Container$add()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="apply">}\href{../../container/html/Container.html#method-apply}{\code{container::Container$apply()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="initialize">}\href{../../container/html/Container.html#method-initialize}{\code{container::Container$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}
@@ -126,7 +126,7 @@ element 'peeked' on the left
 \if{html}{\out{<a id="method-pop"></a>}}
 \if{latex}{\out{\hypertarget{method-pop}{}}}
 \subsection{Method \code{pop()}}{
-Remove and return element from the right side of the \code{\link[=Deque]{Deque()}}.
+Delete and return element from the right side of the \code{\link[=Deque]{Deque()}}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Deque$pop()}\if{html}{\out{</div>}}
 }
@@ -139,7 +139,7 @@ element 'popped' from the right side of the \code{\link[=Deque]{Deque()}}
 \if{html}{\out{<a id="method-popleft"></a>}}
 \if{latex}{\out{\hypertarget{method-popleft}{}}}
 \subsection{Method \code{popleft()}}{
-Remove and return element from the right side of the \code{\link[=Deque]{Deque()}}.
+Delete and return element from the right side of the \code{\link[=Deque]{Deque()}}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Deque$popleft()}\if{html}{\out{</div>}}
 }

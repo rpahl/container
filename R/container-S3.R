@@ -41,7 +41,7 @@ has <- function(x, ...) UseMethod("has")
 
 #' @rdname ContainerS3
 #' @export
-remove <- function(x, ...) UseMethod("remove")
+delete <- function(x, ...) UseMethod("delete")
 
 #' @rdname ContainerS3
 #' @export
@@ -105,7 +105,7 @@ has.Container <- function(x, elem, ...) x$has(elem)
 print.Container <- function(x, list.len=10, ...) x$print(list.len, ...)
 
 #' @export
-remove.Container <- function(x, elem, right=FALSE, ...) x$remove(elem, right)
+delete.Container <- function(x, elem, right=FALSE, ...) x$delete(elem, right)
 
 #' @rdname ContainerS3
 #' @export

@@ -46,13 +46,13 @@ test_that("removing columns from Dict.frame works as expected", {
     df <- data.frame(A = 1:2, B = letters[1:2])
     dif <- Dict.frame$new(df)
     expect_equal(dif$ncol(), 2)
-    expect_error(dif$remove("C"), "key 'C' not in Dict.frame")
+    expect_error(dif$delete("C"), "key 'C' not in Dict.frame")
     dif$discard("C")
     expect_equal(dif$ncol(), 2)
 
     dif$discard("B")
     expect_equal(dif$ncol(), 1)
-    dif$remove("A")
+    dif$delete("A")
     expect_equal(dif$ncol(), 0)
 })
 

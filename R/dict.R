@@ -37,7 +37,7 @@ Dict <- R6::R6Class("Dict",
             self$set(key, value, add = TRUE)
         },
 
-        #' @description If key in `Dict`, remove it.
+        #' @description If key in `Dict`, delete it.
         #' @param key `character` key of value to discard
         #' @return invisibly returns the `Dict`
         discard = function(key) {
@@ -89,17 +89,17 @@ Dict <- R6::R6Class("Dict",
             if (self$has(key)) private$elems[[key]] else default
         },
 
-        #' @description Get value and remove key-value pair from `Dict`.
+        #' @description Get value and delete key-value pair from `Dict`.
         #' If `key` not found, raise an error.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return its value.
         pop = function(key) {
             elem <- self$peek(key)
-            self$remove(key)
+            self$delete(key)
             elem
         },
 
-        #' @description Remove and return an arbitrary (key, value) pair
+        #' @description delete and return an arbitrary (key, value) pair
         #'  from the `Dict`. This function can be used to destructively iterate
         #'  over a `Dict` as often used in set algorithms.
         #' @return random key-value pair from the `Dict`
@@ -109,18 +109,18 @@ Dict <- R6::R6Class("Dict",
             } else {
                 key <- sample(self$keys(), 1)
                 key_value_pair <- private$elems[key]
-                self$remove(key)
+                self$delete(key)
                 return(key_value_pair)
             }
         },
 
-        #' @description Remove value
+        #' @description delete value
         #' @param key `character` name of key.
-        #' @return If `key` in `Dict`, remove it, otherwise raise an error.
-        remove = function(key) {
+        #' @return If `key` in `Dict`, delete it, otherwise raise an error.
+        delete = function(key) {
             if (length(key) > 1) {
                 for (k in key) {
-                    self$remove(k)
+                    self$delete(k)
                 }
                 return(invisible(self))
             }

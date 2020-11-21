@@ -36,14 +36,14 @@ test_that("basic dict functions work as expected", {
     expect_equal(pop(d, "x"), 3)
     expect_false(has(d, "x"))
 
-    # keys, discard, remove, popitem
+    # keys, discard, delete, popitem
     d <- dict(c(x=1L, y=2L, z=3L))
     expect_output(print(d),
                   '<Dict> of 3 elements:  Named int [1:3] 1 2 3', fixed=TRUE)
     expect_true(has(d, "y"))
     expect_equal(keys(d), c("x", "y", "z"))
     expect_false(has(discard(d, "y"), "y"))
-    expect_error(remove(d, "y"), "key 'y' not in Dict")
+    expect_error(delete(d, "y"), "key 'y' not in Dict")
     expect_false(has(discard(d, "y"), "y")) # no error although not in Dict
     expect_error(setval(d, "y", 10), "key 'y' not in Dict")
     setval(d, "y", 10, add=TRUE)
@@ -97,7 +97,7 @@ test_that("Extract and replace operators work as expected", {
     expect_equal(as.list(d), list(a = 7, b = 8))
 
     expect_error(d["b"] <- NULL, "length of key and value must match")
-    d["b"] <- list(NULL) # removes 'b'
+    d["b"] <- list(NULL) # deletes 'b'
     expect_equal(keys(d), "a")
 
     d[["a"]] <- NULL

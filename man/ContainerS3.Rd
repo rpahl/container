@@ -8,7 +8,7 @@
 \alias{discard}
 \alias{empty}
 \alias{has}
-\alias{remove}
+\alias{delete}
 \alias{size}
 \alias{type}
 \alias{values}
@@ -41,7 +41,7 @@ empty(x)
 
 has(x, ...)
 
-remove(x, ...)
+delete(x, ...)
 
 size(x)
 

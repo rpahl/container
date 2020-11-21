@@ -18,7 +18,7 @@
 \alias{peek.Dict}
 \alias{pop.Dict}
 \alias{popitem.Dict}
-\alias{remove.Dict}
+\alias{delete.Dict}
 \alias{setval.Dict}
 \alias{sortkey.Dict}
 \title{Dict S3 interface}
@@ -55,7 +55,7 @@ is.dict(x)
 
 \method{popitem}{Dict}(x)
 
-\method{remove}{Dict}(x, key, ...)
+\method{delete}{Dict}(x, key, ...)
 
 \method{setval}{Dict}(x, key, value, add = FALSE, ...)
 

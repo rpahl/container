@@ -1,7 +1,7 @@
 #' A Deque (double-ended queue) class
 #'
 #' @description Deques are a generalization of stacks and queues typically
-#' with methods to add, remove and access elements at both sides of the
+#' with methods to add, delete and access elements at both sides of the
 #' underlying data sequence. As such, the [Deque()] can also be used to mimic
 #' both stacks and queues.
 #' @details This class inherits from class [Container()] and extends it by
@@ -52,22 +52,22 @@ Deque <- R6::R6Class("Deque",
         },
 
         #' @description
-        #' Remove and return element from the right side of the [Deque()].
+        #' Delete and return element from the right side of the [Deque()].
         #' @return element 'popped' from the right side of the [Deque()]
         pop = function() {
             if (self$empty()) stop("pop at empty ", data.class(self))
             last <- self$peek()
-            self$remove(last, right=TRUE)
+            self$delete(last, right=TRUE)
             last
         },
 
         #' @description
-        #' Remove and return element from the right side of the [Deque()].
+        #' Delete and return element from the right side of the [Deque()].
         #' @return element 'popped' from the left side of the [Deque()]
         popleft = function() {
             if (self$empty()) stop("popleft at empty ", data.class(self))
             first <- self$peekleft()
-            self$remove(first)
+            self$delete(first)
             first
         },
 

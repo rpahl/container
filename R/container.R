@@ -57,14 +57,14 @@ Container <- R6::R6Class("Container",
             lapply(private$elems, FUN = f)
         },
 
-        #' @description Remove all elements from the `Container`
+        #' @description delete all elements from the `Container`
         #' @return invisibly returns the cleared `Container` object
         clear = function() {
             self$initialize(vector(typeof(private$elems)))
         },
 
         #' @description Search for first `elem` in `Container` and, if found,
-        #' remove it. If not found, the `Container` object is not altered.
+        #' delete it. If not found, the `Container` object is not altered.
         #' @param elem element to be discarded.
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
@@ -103,12 +103,12 @@ Container <- R6::R6Class("Container",
             invisible(self)
         },
 
-        #' @description Find and remove element from `Container`
-        #' @param elem element to be removed from the `Container`. If element
+        #' @description Find and delete element from `Container`
+        #' @param elem element to be deleted from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
-        remove = function(elem, right = FALSE) {
+        delete = function(elem, right = FALSE) {
             class <- data.class(self)
             hasElem <- self$has(elem)
             if (hasElem) {
