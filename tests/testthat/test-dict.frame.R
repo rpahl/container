@@ -110,3 +110,12 @@ test_that("rownames of Dict.frame can be retrieved and set", {
     expect_equal(dif$rownames(), c("A", "B"))
 })
 
+test_that("two Dict.frame objects can be combined", {
+    df = data.frame(A = 1:2, B = 3:4)
+    dif = dict.frame(df)
+
+    expect_equal(dif$rbind(dif), dict.frame(rbind(df, df)))
+
+    expect_equal(dif$rbind(dif)$rbind(dif), dict.frame(rbind(df, df, df)))
+})
+

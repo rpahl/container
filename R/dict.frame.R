@@ -93,6 +93,20 @@ Dict.frame <- R6::R6Class("Dict.frame",
             }
         },
 
+        #' @description combine with another [Dict.frame()] object. For this,
+        #' columns must match.
+        #' @return a copy of original `Dict.frame` with a copy of `other`
+        #' attached at the bottom.
+        rbind = function(other) {
+            stopifnot(inherits(other, "Dict.frame"))
+            stopifnot(identical(self$keys(), other$keys()))
+            d = Dict.frame$new()
+            for (key in self$keys()) {
+                d$add(key, value = c(self$get(key), other$get(key)))
+            }
+            d
+        },
+
         #' @description Row names
         #' @return the row names of the [Dict.frame()]
         rownames = function() private$row.names,
