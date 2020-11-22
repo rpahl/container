@@ -23,6 +23,7 @@
 \alias{rename.Dict}
 \alias{setval.Dict}
 \alias{sortkey.Dict}
+\alias{update.Dict}
 \title{Dict S3 interface}
 \usage{
 getval(x, ...)
@@ -68,6 +69,8 @@ is.dict(x)
 \method{setval}{Dict}(x, key, value, add = FALSE, ...)
 
 \method{sortkey}{Dict}(x, decr = FALSE, ...)
+
+\method{update}{Dict}(object, other, ...)
 }
 \arguments{
 \item{x}{a named vector (or list) of 'any' type including

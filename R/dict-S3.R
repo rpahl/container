@@ -110,6 +110,10 @@ setval.Dict <- function(x, key, value, add=FALSE, ...) x$set(key, value, add)
 #' @export
 sortkey.Dict <- function(x, decr=FALSE, ...) x$sort(decr)
 
+#' @rdname dictS3
+#' @export
+update.Dict <- function(object, other, ...) object$update(other)
+
 
 #' Binary `Dict` operators
 #'
