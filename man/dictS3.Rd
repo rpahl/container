@@ -6,11 +6,13 @@
 \alias{keys}
 \alias{popitem}
 \alias{setval}
+\alias{rename}
 \alias{sortkey}
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
 \alias{add.Dict}
+\alias{delete.Dict}
 \alias{discard.Dict}
 \alias{getval.Dict}
 \alias{has.Dict}
@@ -18,7 +20,7 @@
 \alias{peek.Dict}
 \alias{pop.Dict}
 \alias{popitem.Dict}
-\alias{delete.Dict}
+\alias{rename.Dict}
 \alias{setval.Dict}
 \alias{sortkey.Dict}
 \title{Dict S3 interface}
@@ -31,6 +33,8 @@ popitem(x)
 
 setval(x, ...)
 
+rename(x, ...)
+
 sortkey(x, ...)
 
 dict(x = list())
@@ -40,6 +44,8 @@ as.dict(x)
 is.dict(x)
 
 \method{add}{Dict}(x, key, value, ...)
+
+\method{delete}{Dict}(x, key, ...)
 
 \method{discard}{Dict}(x, key, ...)
 
@@ -55,7 +61,9 @@ is.dict(x)
 
 \method{popitem}{Dict}(x)
 
-\method{delete}{Dict}(x, key, ...)
+\method{popitem}{Dict}(x)
+
+\method{rename}{Dict}(x, old, new, ...)
 
 \method{setval}{Dict}(x, key, value, add = FALSE, ...)
 

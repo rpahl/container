@@ -33,6 +33,10 @@ setval <- function(x, ...) UseMethod("setval")
 
 #' @rdname dictS3
 #' @export
+rename <- function(x, ...) UseMethod("rename")
+
+#' @rdname dictS3
+#' @export
 sortkey <- function(x, ...) UseMethod("sortkey")
 
 #' @rdname dictS3
@@ -52,6 +56,10 @@ is.dict <- function(x) inherits(x, "Dict")
 #' @param value value to add to the dictionary.
 #' @export
 add.Dict <- function(x, key, value, ...) x$add(key, value)
+
+#' @rdname dictS3
+#' @export
+delete.Dict <- function(x, key, ...) x$delete(key)
 
 #' @rdname dictS3
 #' @export
@@ -84,7 +92,11 @@ popitem.Dict <- function(x) x$popitem()
 
 #' @rdname dictS3
 #' @export
-delete.Dict <- function(x, key, ...) x$delete(key)
+popitem.Dict <- function(x) x$popitem()
+
+#' @rdname dictS3
+#' @export
+rename.Dict <- function(x, old, new, ...) x$rename(old, new)
 
 #' @rdname dictS3
 #' @param add `logical` if FALSE and `key` is not in dictionary, an error is

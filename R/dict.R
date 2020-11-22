@@ -135,16 +135,7 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, remove it, otherwise raise an error.
         remove = function(key) {
-            if (length(key) > 1) {
-                for (k in key) {
-                    self$remove(k)
-                }
-                return(invisible(self))
-            }
-            if (!self$has(key)) {
-                stop("key '", key, "' not in ", data.class(self))
-            }
-            self$discard(key)
+            self$delete(key)
         },
 
         #' @description Rename a `key` in the `Dict`. An error is signaled, if

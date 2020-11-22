@@ -111,9 +111,9 @@ On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/
 |                              |  peek(d)            |  s1 == s2        |  peek(d, key, default=NULL)  |                    |
 |                              |  peekleft(d)        |  s1 < s2         |  pop(d, key)                 |                    |
 |                              |  pop(d)             |  s1 > s2         |  popitem(d)                  |                    |
-|                              |  popleft(d)         |  s1 + s2         |  setval(d, key, val, add=FALSE)  | setval(d, key, val, add=FALSE) |
-|                              |  reverse(d)         |                  |  sortkey(decr=FALSE)         |                    |
-|                              |  rotate(d, n=1L)    |                  |  update(d, other)            |                    |
+|                              |  popleft(d)         |  s1 + s2         |  rename(d, old, new)         |                    |
+|                              |  reverse(d)         |                  |  setval(d, key, val, add=FALSE)|setval(d, key, val, add=FALSE)    |
+|                              |  rotate(d, n=1L)    |                  |  sortkey(decr=FALSE)         |                    |
 |                              |                     |                  |                              |                    |
 |                              |                     |                  |                              |  as.data.frame(dif)|
 |                              |                     |                  |                              |  colnames(dif)     |
