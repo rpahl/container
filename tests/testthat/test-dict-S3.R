@@ -133,3 +133,21 @@ test_that("data.frame can be converted to dict", {
 })
 
 
+test_that("multiple elements can be discarded at once", {
+    d <- dict(list(A=1, B=2))
+    expect_equal(keys(d), c("A", "B"))
+    discard(d, keys(d))
+    expect_true(empty(d))
+})
+
+test_that("multiple elements can be deleted at once", {
+    d <- dict(list(A=1, B=2))
+    expect_equal(keys(d), c("A", "B"))
+    delete(d, keys(d))
+    expect_true(empty(d))
+
+    d <- dict(list(A=1, B=2))
+    expect_error(delete(d, c("A", "C", "B")), "key 'C' not in Dict")
+    expect_equal(keys(d), "B")
+})
+
