@@ -51,7 +51,7 @@ The following table shows member methods divided by class. The top half contains
 | :----------------------| :-------------| :--------------| :--------------------------| :--------------|
 | Container\$new()       | Deque\$new()  | s <- Set\$new()| Dict\$new()                | Dict.frame\$new() |
 |                        |               |                |                            |                |
-| add(elem)              |               | add(elem)      | add(key, value)            |                |
+| add(elem)              |               | add(elem)      | add(key, value)            | add(key, value)|
 | apply(f)               |               |                |                            |                |
 | clear()                |               |                |                            |                |
 | delete(elem, right=F)  |               |                | delete(key)                |                |

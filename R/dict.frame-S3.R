@@ -294,7 +294,7 @@ NULL
 }
 
 #' @export
-`as.double.Dict.frame` <- function(x, ...)
+as.double.Dict.frame <- function(x, ...)
 {
     if (nrow(x) == 1) return(sapply(values(x), FUN = as.numeric))
     if (ncol(x) == 1) return(as.numeric(values(x)[[1]]))
@@ -304,7 +304,7 @@ NULL
 
 
 #' @export
-`dim.Dict.frame` <- function(x)
+dim.Dict.frame <- function(x)
 {
     # This functions enables calling nrow and ncol on Dict.frame objects.
     c(length(x$rownames()), length(x$keys()))
@@ -312,7 +312,7 @@ NULL
 
 
 #' @export
-`dimnames.Dict.frame` <- function(x)
+dimnames.Dict.frame <- function(x)
 {
     # This functions enables calling rownames and colnames on Dict.frame objects.
     list(as.character(x$rownames()), x$keys())
@@ -336,9 +336,8 @@ NULL
     x
 }
 
-
 #' @export
-`rbind.Dict.frame` <- function(...)
+rbind.Dict.frame <- function(...)
 {
     args <- list(...)
     stopifnot(all(sapply(args, is.dict.frame)))

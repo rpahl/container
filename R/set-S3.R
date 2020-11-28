@@ -15,6 +15,8 @@ NULL
 #' @rdname setS3
 #' @export
 set <- function(x=list()) Set$new(x)
+# TODO: use alternative name, e.g.: setnew(), or Set() to avoid name collision
+# with data.table::set
 
 #' @rdname setS3
 #' @export

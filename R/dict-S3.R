@@ -114,7 +114,6 @@ sortkey.Dict <- function(x, decr=FALSE, ...) x$sort(decr)
 #' @export
 update.Dict <- function(object, other, ...) object$update(other)
 
-
 #' Binary `Dict` operators
 #'
 #' @description Binary operators for [Dict()] objects.

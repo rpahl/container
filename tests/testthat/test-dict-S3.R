@@ -151,3 +151,12 @@ test_that("multiple elements can be deleted at once", {
     expect_equal(keys(d), "B")
 })
 
+test_that("Dict update", {
+    d1 <- Dict$new(list(A=1, B=2, C=12))
+    expect_error(d1$update(list()), "arg must be a Dict")
+    d2 <- Dict$new(list(          C=3, D=4))
+    expect_equal(d1$update(Dict$new()), d1)
+    expect_equal(d1$update(d2)$values(), list(A=1, B=2, C=3, D=4))
+    expect_equal(Dict$new()$update(d2), d2)
+})
+
