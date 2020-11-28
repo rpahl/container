@@ -345,3 +345,6 @@ rbind.Dict.frame <- function(...)
     Reduce(args, f = function(x, y) x$rbind(y))
 }
 
+# TODO: use data.table as internal storage for S3 dict.frames and call it
+# dict.table?
+

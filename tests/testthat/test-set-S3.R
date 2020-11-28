@@ -1,10 +1,10 @@
 context("Set S3")
 
-test_that("set", {
+test_that("setnew", {
     # Initialization and chaining
-    expect_true(empty(set()))
-    expect_equal(size(set()), 0)
-    s1 <- set()
+    expect_true(empty(setnew()))
+    expect_equal(size(setnew()), 0)
+    s1 <- setnew()
     expect_equal(attr(s1, "name"), "<Set>")
     expect_true(empty(s1))
     expect_equal(size(s1), 0)
@@ -20,16 +20,16 @@ test_that("set", {
     expect_true(empty(delete(s1, 1)))
 
     # Lists
-    s1 <- set(list(1, 2))
+    s1 <- setnew(list(1, 2))
     expect_equal(size(s1), 2)
     expect_equal(size(add(s1, 2)), 2)
     expect_equal(size(add(s1, list(2))), 3)
     expect_equal(values(s1), list(1, 2, list(2)))
 
     # Vectors
-    expect_equal(values(set(rep(1, 10))), 1)
+    expect_equal(values(setnew(rep(1, 10))), 1)
     letters10 <- letters[1:10]
-    s1 <- set(letters10)
+    s1 <- setnew(letters10)
     expect_equal(values(s1), letters10)
     expect_equal(values(add(s1, "a")), letters10)
     expect_equal(values(add(s1, letters[3:5])), letters10)
@@ -37,8 +37,8 @@ test_that("set", {
     # set operations
     l1 <- list(1, 2, 3,    "A", "B", "C")
     l2 <- list(   2, 3, 4,      "B", "C", "D")
-    s1 <- set(l1)
-    s2 <- set(l2)
+    s1 <- setnew(l1)
+    s2 <- setnew(l2)
     expect_equal(values(s1 + s2), union(l1, l2))
     expect_true(setequal(values(s1 + s2), values(s2 + s1)))
     expect_equal(values(s1 / s2), intersect(l1, l2))
@@ -57,11 +57,11 @@ test_that("set", {
 })
 
 test_that("S3 methods", {
-    expect_equal(set(), Set$new())
-    expect_true(is.set(set()))
-    expect_equal(set(1:3), as.set(1:3))
-    s1 <- set(1:3)
-    s2 <- set(3:5)
+    expect_equal(setnew(), Set$new())
+    expect_true(is.set(setnew()))
+    expect_equal(setnew(1:3), as.set(1:3))
+    s1 <- setnew(1:3)
+    s2 <- setnew(3:5)
     expect_equal(s1 + s2, s1$union(s2))
     expect_equal(s1 / s2, s1$intersect(s2))
     expect_equal(s1 - s2, s1$diff(s2))

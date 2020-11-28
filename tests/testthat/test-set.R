@@ -56,17 +56,3 @@ test_that("Set", {
     expect_true(s1$diff(s2)$is.subset(s1))
 })
 
-test_that("S3 methods", {
-    expect_equal(set(), Set$new())
-    expect_true(is.set(set()))
-    expect_equal(set(1:3), as.set(1:3))
-    s1 <- set(1:3)
-    s2 <- set(3:5)
-    expect_equal(s1 - s2, s1$diff(s2))
-    expect_equal(s1 + s2, s1$union(s2))
-
-    expect_output(print(s1), "<Set> of 3 elements:  int \\[1:3\\] 1 2 3")
-    expect_equal(as.list(s1), as.list(s1$values()))
-    expect_equal(as.vector(s1), s1$values())
-})
-
