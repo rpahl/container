@@ -87,7 +87,8 @@ Dict <- R6::R6Class("Dict",
         has = function(key) {
             if (length(key) != 1) stop("key must be of length 1")
             if (!is.character(key)) stop("key must be character")
-            if (nchar(key) == 0) stop("zero-length key")
+            if (is.na(key)) stop("undefined key")
+            if (isTRUE(nchar(key) == 0)) stop("zero-length key")
             key %in% self$keys()
         },
 
@@ -118,16 +119,13 @@ Dict <- R6::R6Class("Dict",
         #' @description delete and return an arbitrary (key, value) pair
         #'  from the `Dict`. This function can be used to destructively iterate
         #'  over a `Dict` as often used in set algorithms.
-        #' @return random key-value pair from the `Dict`
+        #' @return random value from the `Dict`
         popitem = function() {
             if (self$empty()) {
                 stop("pop at empty ", data.class(self))
-            } else {
-                key <- sample(self$keys(), 1)
-                key_value_pair <- private$elems[key]
-                self$delete(key)
-                return(key_value_pair)
             }
+            key <- sample(self$keys(), 1)
+            self$pop(key)
         },
 
         #' @description Remove value associated with key. This function does

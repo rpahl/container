@@ -25,7 +25,9 @@ test_that("basic dict functions work as expected", {
     expect_equal(size(d), 1)
     expect_true(has(d, "x"))
     expect_error(getval(d, "foo"))
-    expect_equal(peek(d, "x"), 1)
+    x = peek(d, "x")
+    expect_true(is.null(names(x)))
+    expect_equal(x, 1)
     expect_equal(peek(d, "foo"), NULL)
     expect_equal(peek(d, "foo", default=0), 0)
 
@@ -59,7 +61,6 @@ test_that("basic dict functions work as expected", {
     expect_true(empty(d))
     expect_error(popitem(d), "pop at empty Dict")
     expect_true(setequal(v, v2))
-    expect_equal(names(sort(v)), names(sort(v2)))
 
     d1 = dict(list(A=1, B=2, C=3))
     sortkey(d1, decr=TRUE)

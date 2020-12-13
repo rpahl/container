@@ -241,7 +241,7 @@ over a \code{Dict} as often used in set algorithms.
 }
 
 \subsection{Returns}{
-random key-value pair from the \code{Dict}
+random value from the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}

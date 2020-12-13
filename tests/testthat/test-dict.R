@@ -15,8 +15,7 @@ test_that("Dict constructor works as expected", {
     expect_error(Dict$new(list(x=1, y=2, x=3)), "duplicated keys")
 })
 
-test_that("Dict operations work as expected", {
-    # empty, size, has, add and peek
+test_that("empty, size, has, add and peek operations work as expected", {
     d <- Dict$new()
     expect_equal(attr(d, "name"), "<Dict>")
     expect_true(d$empty())
@@ -30,15 +29,20 @@ test_that("Dict operations work as expected", {
     expect_equal(d$peek("foo"), NULL)
     expect_equal(d$peek("foo", default=0), 0)
     expect_error(d$add("x", 2), "key 'x' already in Dict")
+})
 
-    # set and pop
+test_that("set and pop operations work as expected", {
+    d <- Dict$new(list(x = 1))
     d$set("x", 2)$set("x", 3)
     expect_equal(d$size(), 1)
     expect_equal(d$peek("x"), 3)
-    expect_equal(d$pop("x"), 3)
+    x <- d$pop("x")
+    expect_true(is.null(names(x)))
+    expect_equal(x, 3)
     expect_false(d$has("x"))
+})
 
-    # keys, discard, delete, popitem
+test_that("keys, discard, delete, and popitem operations", {
     d <- Dict$new(integer())$add("x", 1)$add("y", 2)$add("z", 3)
     expect_output(print(d), 'Named num [1:3] 1 2 3', fixed=TRUE)
     expect_true(d$has("y"))
@@ -58,7 +62,6 @@ test_that("Dict operations work as expected", {
     expect_true(d$empty())
     expect_error(d$popitem(), "pop at empty Dict")
     expect_true(setequal(v, v2))
-    expect_equal(names(sort(v)), names(sort(v2)))
 })
 
 
