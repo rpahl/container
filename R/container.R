@@ -21,14 +21,22 @@ Container <- R6::R6Class("Container",
     inherit = container:::Iterable,
     public = list(
         #' @description constructor
-        #' @param x initial elements put into the `Container`
+        #' @param ... initial elements put into the `Container`
+        #' @param keep_names `logical` if TRUE, keeps names of passed elements
         #' @return invisibly returns the `Container` object
-        initialize = function(x = list()) {
-            private$elems <- as.vector(x)
-            names(private$elems) <- names(x)
-            stopifnot(is.vector(private$elems))
-            attr(self, "name") <- paste0("<", data.class(self), ">")
-            attr(self, "class") <- unique(c(attr(self, "class"), "Container"))
+        initialize = function(..., keep_names = FALSE) {
+            args <- list(...)
+            n.elems <- nargs() - !missing(keep_names)
+            elems <- if (n.elems == 1) args[[1]] else args
+
+            if (!is.vector(elems)) elems <- list(elems)
+
+            if (!keep_names) {
+                names(elems) <- NULL
+            }
+
+            private$elems <- elems
+
             invisible(self)
         },
 
@@ -37,30 +45,28 @@ Container <- R6::R6Class("Container",
         #' @return invisibly returns the `Container` object
         add = function(elem) {
             if (inherits(elem, "Container")) {
-                lapply(elem$values(), self$add)
+                it <- elem$iter()
+                while(it$has_next()) {
+                    self$add(it$get_next())
+                }
             } else {
                 if (self$type() == "list") {
-                    private$elems <- c(private$elems, list(elem))
+                    elem <- list(elem)
                 } else {
-                    v <- Reduce(f=c, x=elem, init=private$elems)
-                    private$elems <- as.vector(v, mode=self$type())
+                    if (self$type() != mode(elem)) {
+                        stop("type mismatch: expected '", self$type(),
+                             "' but got '", mode(elem), "'")
+                    }
                 }
+                private$elems <- c(private$elems, elem)
             }
             invisible(self)
-        },
-
-        #' @description apply function to all `Container` elements
-        #' @param f `function` to apply
-        #' @return `list` of results retrieved from the applied function
-        apply = function(f) {
-            if (!is.function(f)) stop("f must be a function")
-            lapply(private$elems, FUN = f)
         },
 
         #' @description delete all elements from the `Container`
         #' @return invisibly returns the cleared `Container` object
         clear = function() {
-            self$initialize(vector(typeof(private$elems)))
+            self$initialize(vector(mode(private$elems)))
         },
 
         #' @description Find and delete element from `Container`
@@ -69,12 +75,10 @@ Container <- R6::R6Class("Container",
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
         delete = function(elem, right = FALSE) {
-            class <- data.class(self)
-            hasElem <- self$has(elem)
-            if (hasElem) {
+            if (self$has(elem)) {
                 self$discard(elem, right)
             } else {
-                stop(elem, " not in ", class)
+                stop(elem, " not in ", data.class(self))
             }
             invisible(self)
         },
@@ -86,7 +90,10 @@ Container <- R6::R6Class("Container",
         #' @return invisibly returns the `Container` object
         discard = function(elem, right = FALSE) {
             comp <- function(x) isTRUE(all.equal(x, elem))
-            pos <- Position(f=comp, x=private$elems, right=right, nomatch=0)
+            pos <- Position(f = comp,
+                            x = private$elems,
+                            right = right,
+                            nomatch = 0)
             if (pos > 0) private$elems <- private$elems[-pos]
             invisible(self)
         },
@@ -100,7 +107,7 @@ Container <- R6::R6Class("Container",
         #' @return `TRUE` of `Container` contains `elem` else `FALSE`
         has = function(elem) {
             comp <- function(x) isTRUE(all.equal(x, elem))
-            any(sapply(private$elems, FUN=comp))
+            !is.na(Position(f = comp, x = private$elems))
         },
 
         #' @description Print object representation similar to [utils::str()]
@@ -122,19 +129,12 @@ Container <- R6::R6Class("Container",
         #' @description Find and remove element from `Container`. This
         #' function does the same as `delete` and is only kept for backwards
         #' compatibility.
-        #' @param elem element to be deleted from the `Container`. If element
+        #' @param elem element to be removed from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
         remove = function(elem, right = FALSE) {
-            class <- data.class(self)
-            hasElem <- self$has(elem)
-            if (hasElem) {
-                self$discard(elem, right)
-            } else {
-                stop(elem, " not in ", class)
-            }
-            invisible(self)
+            self$delete(elem, right)
         },
 
         #' @description Size of the `Container`
@@ -143,7 +143,7 @@ Container <- R6::R6Class("Container",
 
         #' @description Underlying data type
         #' @return type (or mode) of internal vector containing the elements
-        type = function() typeof(private$elems),
+        type = function() mode(private$elems),
 
         #' @description Get copy of `Container` values
         #' @return a copy of all elements in the same format as they are stored

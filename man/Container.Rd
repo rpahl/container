@@ -33,7 +33,6 @@ Roman Pahl
 \itemize{
 \item \href{#method-new}{\code{Container$new()}}
 \item \href{#method-add}{\code{Container$add()}}
-\item \href{#method-apply}{\code{Container$apply()}}
 \item \href{#method-clear}{\code{Container$clear()}}
 \item \href{#method-delete}{\code{Container$delete()}}
 \item \href{#method-discard}{\code{Container$discard()}}
@@ -60,13 +59,15 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$new(x = list())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$new(..., keep_names = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{initial elements put into the \code{Container}}
+\item{\code{...}}{initial elements put into the \code{Container}}
+
+\item{\code{keep_names}}{\code{logical} if TRUE, keeps names of passed elements}
 }
 \if{html}{\out{</div>}}
 }
@@ -92,26 +93,6 @@ add element
 }
 \subsection{Returns}{
 invisibly returns the \code{Container} object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-apply"></a>}}
-\if{latex}{\out{\hypertarget{method-apply}{}}}
-\subsection{Method \code{apply()}}{
-apply function to all \code{Container} elements
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$apply(f)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{f}}{\code{function} to apply}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{list} of results retrieved from the applied function
 }
 }
 \if{html}{\out{<hr>}}
@@ -242,7 +223,7 @@ compatibility.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be deleted from the \code{Container}. If element
+\item{\code{elem}}{element to be removed from the \code{Container}. If element
 is not found in the \code{Container}, an error is signaled.}
 
 \item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}

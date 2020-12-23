@@ -1,45 +1,177 @@
 context("Container")
 
-test_that("Container", {
-    # Initialization and chaining
+test_that("Container constructor works as expected", {
+    co <- Container$new()
+    expect_equal(attr(co, "class"), c("Container", "Iterable", "R6"))
+
+    co <- Container$new(1:4)
+    expect_equal(co$type(), "numeric")
+
+    co <- Container$new(environment())
+    expect_equal(co$type(), "list")
+    expect_equal(co$size(), 1)
+
+    co <- Container$new(environment(), foo = identity)
+
+    co <- Container$new(A = 1, B = 2)
+    expect_equal(co$type(), "list")
+    expect_true(is.null(names(co$values())))
+
+    co <- Container$new(A = 1, B = 2, keep_names = TRUE)
+    expect_equal(names(co$values()), c("A", "B"))
+
+    expect_equal(Container$new(keep_names = TRUE),
+                 Container$new(keep_names = FALSE))
+
+})
+
+test_that("type of Container is inialized as expected", {
+    expect_equal(Container$new()$type(), "list")
+    expect_equal(Container$new(1)$type(), "numeric")
+    expect_equal(Container$new(new.env())$type(), "list")
+    expect_equal(Container$new(TRUE)$type(), "logical")
+    expect_equal(Container$new(function(){})$type(), "list")
+    expect_equal(Container$new(raw())$type(), "raw")
+    expect_equal(Container$new(0+0i)$type(), "complex")
+    expect_equal(Container$new(letters[1:10])$type(), "character")
+})
+
+test_that("it can be checked whether the Container is empty", {
     expect_true(Container$new()$empty())
+    expect_true(Container$new(numeric())$empty())
+    expect_false(Container$new(1)$empty())
+})
+
+test_that("elements can be added to the Container", {
+    co <- Container$new()
+    expect_true(co$empty())
+    co$add(1)
+    expect_equal(co$values(), list(1))
+
+    co <- Container$new(numeric())
+    co$add(1)
+    expect_equal(co$values(), 1)
+})
+
+test_that("types of added elements must match for non-list Containers", {
+    co <- Container$new(1)
+    expect_equal(co$values(), 1)
+    co$add(2)
+    expect_equal(co$values(), 1:2)
+    expect_error(co$add("a"), "type mismatch: expected 'numeric' but got 'character'")
+    expect_equal(co$add(3:5)$values(), 1:5)
+})
+
+test_that("non-trivial objects are added correctly", {
+    v <- 1:10
+    env <- new.env()
+    ll <- list(1, 2, "A")
+    foo <- function() print("foo")
+    collection <- c(list(v), list(env), list(ll), list(foo))
+
+    co <- Container$new()
+    co$add(v)$add(env)$add(ll)$add(foo)
+    expect_equal(co$values(), collection)
+    expect_equal(co$size(), length(collection))
+})
+
+test_that("a Container can be added to a Container", {
+    v <- 1:10
+    co <- Container$new(v)
+    co$add(co)
+    expect_equal(co$values(), rep(v, 2))
+})
+
+
+test_that("a cleared Container preserves its type", {
+    expect_equal(Container$new()$clear()$type(), "list")
+    expect_equal(Container$new(1:3)$clear()$type(), "numeric")
+    expect_equal(Container$new("a")$clear()$type(), "character")
+})
+
+test_that("it can be determined whether Container contains a certain element", {
+    co <- Container$new(1:5)
+    expect_true(co$has(1))
+    expect_false(co$has(7))
+    expect_true(co$add(7)$has(7))
+
+    foo <- function() print("foo")
+    co <- Container$new(list(mean, foo, identity))
+    expect_true(co$has(identity))
+    expect_true(co$has(mean))
+    expect_false(co$has(median))
+    expect_true(co$has(function() print("foo")))
+    expect_false(co$has(function() print("bar")))
+})
+
+test_that("elements can be discarded from a Container", {
+    x <- 1:5
+    co <- Container$new(x)
+    co$discard(3)
+    expect_equal(co$values(), x[-3])
+
+    co <- Container$new(list(mean, identity))
+    expect_equal(co$discard(mean)$values(), list(identity))
+
+    expect_error(co$discard(), 'argument "elem" is missing, with no default')
+})
+
+test_that("elements can be discarded from left and from right", {
+    co <- Container$new(c(1, 2, 1))
+    expect_equal(co$discard(1)$values(), 2:1)
+
+    co <- Container$new(c(1, 2, 1))
+    expect_equal(co$discard(1, right = TRUE)$values(), 1:2)
+})
+
+test_that("discarding non-existent elements does not change Container", {
+    co <- Container$new(1:3)
+    expect_equal(co$discard(5)$values(), 1:3)
+    expect_equal(Container$new()$discard(1), Container$new())
+})
+
+test_that("elements can be deleted from a Container", {
+    x <- 1:5
+    co <- Container$new(x)
+    co$delete(3)
+    expect_equal(co$values(), x[-3])
+
+    co <- Container$new(list(mean, identity))
+    expect_equal(co$delete(mean)$values(), list(identity))
+    expect_error(co$delete(), 'argument "elem" is missing, with no default')
+})
+
+test_that("Container gives an error if trying to delete non-existing element", {
+    co <- Container$new(1:3)
+    expect_error(co$delete(5), "5 not in Container")
+})
+
+test_that("elements can be deleted from left and from right", {
+    co <- Container$new(c(1, 2, 1))
+    expect_equal(co$delete(1)$values(), 2:1)
+
+    co <- Container$new(c(1, 2, 1))
+    expect_equal(co$delete(1, right = TRUE)$values(), 1:2)
+})
+
+test_that("the size of a Container can be retrieved", {
     expect_equal(Container$new()$size(), 0)
+    x <- 1:5
+    co <- Container$new(x)
+    expect_equal(co$size(), length(x))
 
-    # add, has, empty, size
-    c1 <- Container$new()
-    expect_equal(attr(c1, "name"), "<Container>")
-    expect_equal(c1$type(), "list")
-    expect_true(c1$empty())
-    expect_equal(c1$size(), 0)
-    expect_false(c1$has(NULL))
+    ll <- list(mean, identity)
+    co <- Container$new(ll)
+    expect_equal(co$size(), length(ll))
+})
 
-    c1$add(1)
-    expect_true(c1$has(1))
-    expect_false(c1$empty())
-    expect_equal(c1$size(), 1)
-    c1$add(1)
-    expect_equal(c1$size(), 2)
+test_that("the data values of a Container can be retrieved", {
+    expect_equal(Container$new()$values(), list())
+    expect_equal(Container$new(1:5)$values(), 1:5)
+})
 
-    # discard and delete
-    expect_error(c1$discard(), '"elem" is missing, with no default')
-    expect_error(c1$delete(), '"elem" is missing, with no default')
-    c1$add(2)
-    expect_equal(c1$size(), 3)
-    c1$discard(2)
-    expect_equal(c1$size(), 2)
-    expect_false(c1$has(2))
-    expect_equal(c1, c1$discard(2))
-    expect_error(c1$delete(2), "2 not in Container")
-    expect_equal(c1$size(), 2)
-    c1$add(2)$add(1)
-    expect_equal(c1$values(), list(1, 1, 2, 1))
-    c1$discard(1, right=TRUE)
-    expect_equal(c1$values(), list(1, 1, 2))
-    expect_true(c1$clear()$empty())
-
-    # Copy semantics
+test_that("Container objects provide reference semantics but can also be cloned", {
     c1 <- Container$new(1:10)
-    expect_equal(c1$type(), "integer")
     c2 <- c1
     cc <- c1$clone()
     expect_true(identical(c1, c2))
@@ -50,51 +182,16 @@ test_that("Container", {
     c1$delete(7)
     expect_true(identical(c1, c2))
     expect_lt(c1$size(), cc$size())
-
-    # Pass list as initialize arg and check against values func
-    ll <- list(1, 2, 3, "A", 1:3)
-    cc <- Container$new(ll)
-    expect_equal(ll, cc$values())
-
-    # Non-trivial objects
-    v <- 1:10
-    env <- new.env
-    ll <- list(1, 2, "A")
-    collection <- c(list(v), list(env), list(ll))
-
-    c1 <- Container$new()
-    c1$add(v)$add(env)$add(ll)
-    expect_equal(c1$values(), collection)
-    expect_equal(c1$size(), length(collection))
-
-    # Basic types, type safety and vectorized adding
-    ints <- Container$new(integer(0))
-    expect_equal(ints$type(), "integer")
-    expect_equal(ints$add(1)$type(), "integer")
-    expect_equal(ints$add(2.3)$type(), "integer")
-    expect_equal(ints$values(), as.integer(1:2))
-    expect_warning(ints$add("a"), "NAs introduced by coercion")
-    expect_equal(Container$new(0L)$add(1:3)$values(), as.integer(0:3))
-
-    # Other types
-    expect_error(Container$new(new.env()),
-                 "cannot coerce type 'environment' to vector of type 'any'")
-    expect_equal(Container$new(TRUE)$type(), "logical")
-    expect_error(Container$new(function(){}),
-                 "cannot coerce type 'closure' to vector of type 'any'")
-    expect_equal(Container$new(raw())$type(), "raw")
-    expect_equal(Container$new(0+0i)$type(), "complex")
-    expect_equal(Container$new(letters[1:10])$type(), "character")
-
-    # Adding other containers
-    v <- 1:10
-    co <- Container$new(v)
-    co$add(co)
-    expect_equal(co$values(), rep(v, 2))
-
-    # Apply
-    co <- Container$new(as.numeric(v))
-    expect_equal(unlist(co$apply(f = base::log)), log(v))
 })
 
+
+test_that("Iterator can be constructed from Container", {
+    v <- 1:5
+    co <- Container$new(v)
+    it <- co$iter()
+    sum <- 0
+    while(it$has_next()) sum <- sum + it$get_next()
+    expect_equal(sum(v), sum(co$values()))
+    expect_equal(sum, sum(co$values()))
+})
 
