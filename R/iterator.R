@@ -44,10 +44,11 @@ Iterator <- R6::R6Class("Iterator",
         #' @description `Iterator` constructor
         #' @param x sequence to iterate over
         #' @return invisibly returns `Iterator` object
-        initialize = function(x = list()) {
-            private$elems <- as.vector(x)
-            names(private$elems) <- names(x)
-            stopifnot(is.vector(private$elems))
+        initialize = function(x) {
+            if (!is.vector(x)) {
+                stop("'x' is not iterable - make sure it is a vector")
+            }
+            private$elems <- x
             invisible(self)
         },
 
