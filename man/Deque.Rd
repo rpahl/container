@@ -42,7 +42,6 @@ Roman Pahl
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="add">}\href{../../container/html/Container.html#method-add}{\code{container::Container$add()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="apply">}\href{../../container/html/Container.html#method-apply}{\code{container::Container$apply()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}

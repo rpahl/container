@@ -19,11 +19,14 @@ Deque <- R6::R6Class("Deque",
         #' @return invisibly returns the `Deque()` object.
         addleft = function(elem) {
             if (self$type() == "list") {
-                private$elems <- c(list(elem), private$elems)
+                elem <- list(elem)
             } else {
-                v <- Reduce(f = c, x = elem, init = private$elems, right = TRUE)
-                private$elems <- as.vector(v, mode = self$type())
+                if (self$type() != mode(elem)) {
+                    stop("type mismatch: expected '", self$type(),
+                         "' but got '", mode(elem), "'")
+                }
             }
+            private$elems <- c(elem, private$elems)
             invisible(self)
         },
 
@@ -57,7 +60,7 @@ Deque <- R6::R6Class("Deque",
         pop = function() {
             if (self$empty()) stop("pop at empty ", data.class(self))
             last <- self$peek()
-            self$delete(last, right=TRUE)
+            self$delete(last, right = TRUE)
             last
         },
 
@@ -103,12 +106,3 @@ Deque <- R6::R6Class("Deque",
     lock_class = TRUE
 )
 
-
-#' @export
-deque <- function(x=list()) Deque$new(x)
-
-#' @export
-as.deque <- function(x) Deque$new(x)
-
-#' @export
-is.deque <- function(x) inherits(x, "Deque")

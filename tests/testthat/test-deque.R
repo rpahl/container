@@ -1,53 +1,60 @@
 context("Deque")
 
-test_that("Deque", {
-    # addleft
-    d <- Deque$new(1L)
-    expect_equal(attr(d, "name"), "<Deque>")
-    expect_equal(d$type(), "integer")
-    d$addleft(2.2)
-    expect_equal(d$type(), "integer")
-    expect_warning(d$add("a"), "NAs introduced by coercion")
-    expect_equal(Deque$new(0L)$addleft(3:1)$values(), as.integer(3:0))
+test_that("a Deque object can be created", {
+    d <- Deque$new()
+    expect_equal(attr(d, "class"), c("Deque", "Container", "Iterable", "R6"))
+})
 
-    # count
+test_that("an element can be added to the left of a Deque", {
+    expect_equal(Deque$new(0L)$addleft(3:1)$values(), as.integer(3:0))
+    expect_equal(Deque$new(mean)$addleft(median)$values(), list(median, mean))
+})
+
+test_that("number of element occurrences can be counted", {
     names <- Deque$new(c("Lisa", "Bob", "Bob"))
-    expect_equal(names$type(), "character")
     expect_equal(names$count("Lisa"), 1)
     expect_equal(names$count("Bob"), 2)
     expect_equal(names$count("1"), 0)
-    expect_equal(names$add(1)$count("1"), 1)
+    expect_equal(names$add("1")$count("1"), 1)
 
-    # peek and pop
+})
+
+test_that("the left and rightmost element can be peeked", {
     v <- 1:3
     d <- Deque$new(v)
-    expect_output(print(d), " int [1:3] 1 2 3", fixed=TRUE)
-    expect_equal(d$type(), "integer")
-    expect_equal(d$size(), length(v))
-    expect_equal(d$peek(), tail(v, 1))
-    expect_equal(d$pop(), tail(v, 1))
-    v <- v[-length(v)] # emulate pop
-    expect_equal(d$values(), v)
-    expect_equal(d$pop(), 2)
-    expect_equal(d$pop(), 1)
-    expect_error(d$pop(), "pop at empty Deque")
 
-    # peekleft and popleft
+    expect_equal(d$peek(), utils::tail(v, 1))
+    expect_equal(d$peekleft(), utils::head(v, 1))
+})
+
+test_that("printed Deque object looks as expected", {
+    expect_output(print(Deque$new(1:3)),
+                  "<Deque> of 3 elements:  int [1:3] 1 2 3", fixed = TRUE)
+})
+
+test_that("the left and rightmost element can be popped", {
     v <- 1:3
     d <- Deque$new(v)
-    expect_equal(d$peekleft(), head(v, 1))
-    expect_equal(d$popleft(), head(v, 1))
-    v <- v[-1] # emulate popleft
-    expect_equal(d$values(), v)
-    expect_equal(d$popleft(), 2)
-    expect_equal(d$popleft(), 3)
-    expect_error(d$popleft(), "popleft at empty Deque")
 
-    # reverse
+    expect_equal(d$pop(), utils::tail(v, 1))
+    v <- v[-length(v)]
+    expect_equal(d$values(), v)
+    expect_equal(d$popleft(), utils::head(v, 1))
+    v <- v[-1]
+    expect_equal(d$values(), v)
+})
+
+test_that("popping empty Deques gives an error", {
+    expect_error(Deque$new()$pop())
+    expect_error(Deque$new()$popleft())
+})
+
+test_that("a Deque can be reversed", {
     v <- 1:10
     expect_equal(Deque$new(v)$reverse()$values(), rev(v))
+})
 
-    # rotate
+test_that("a Deque can be rotated", {
     d <- Deque$new()
     expect_equal(d, d$rotate())
     d$add(1)

@@ -2,6 +2,9 @@
 % Please edit documentation in R/deque-S3.R
 \name{dequeS3}
 \alias{dequeS3}
+\alias{deque}
+\alias{as.deque}
+\alias{is.deque}
 \alias{addleft}
 \alias{count}
 \alias{peek}
@@ -10,9 +13,6 @@
 \alias{popleft}
 \alias{reverse}
 \alias{rotate}
-\alias{deque}
-\alias{as.deque}
-\alias{is.deque}
 \alias{addleft.Deque}
 \alias{count.Deque}
 \alias{peek.Deque}
@@ -23,6 +23,12 @@
 \alias{rotate.Deque}
 \title{Deque (double-ended queue) S3 interface}
 \usage{
+deque(...)
+
+as.deque(x)
+
+is.deque(x)
+
 addleft(x, ...)
 
 count(x, ...)
@@ -38,12 +44,6 @@ popleft(x)
 reverse(x)
 
 rotate(x, ...)
-
-deque(x = list())
-
-as.deque(x)
-
-is.deque(x)
 
 \method{addleft}{Deque}(x, elem, ...)
 
@@ -62,9 +62,9 @@ is.deque(x)
 \method{rotate}{Deque}(x, n = 1L, ...)
 }
 \arguments{
-\item{x}{a vector of 'any' type}
-
 \item{...}{further arguments depending on the method.}
+
+\item{x}{a vector of 'any' type}
 
 \item{elem}{some element of the deque}
 

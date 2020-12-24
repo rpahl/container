@@ -11,7 +11,18 @@
 #' @seealso [Container()], [`+.Deque()`]
 NULL
 
-# S3 generic methods not derived from container
+#' @rdname dequeS3
+#' @export
+deque <- function(...) Deque$new(...)
+
+#' @rdname dequeS3
+#' @export
+as.deque <- function(x) Deque$new(x)
+
+#' @rdname dequeS3
+#' @export
+is.deque <- function(x) inherits(x, "Deque")
+
 
 #' @rdname dequeS3
 #' @export
@@ -45,18 +56,6 @@ reverse <- function(x) UseMethod("reverse")
 #' @export
 rotate <- function(x, ...) UseMethod("rotate")
 
-
-#' @rdname dequeS3
-#' @export
-deque <- function(x=list()) Deque$new(x)
-
-#' @rdname dequeS3
-#' @export
-as.deque <- function(x) Deque$new(x)
-
-#' @rdname dequeS3
-#' @export
-is.deque <- function(x) inherits(x, "Deque")
 
 #' @rdname dequeS3
 #' @param elem some element of the deque

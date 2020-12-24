@@ -69,6 +69,7 @@ is.container <- function(x) inherits(x, "Container")
 #' @export
 iter.Container <- function(x) x$iter()
 
+
 #' @rdname ContainerS3
 #' @param elem some element of the container
 #' @export
