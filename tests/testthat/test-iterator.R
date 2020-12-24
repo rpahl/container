@@ -10,7 +10,16 @@ test_that("it can be checked if Iterator has next element", {
     expect_false(Iterator$new(list())$has_next())
 })
 
-test_that("the next element can be retrieved while incrementing the iterator", {
+test_that("the value behind the iterator can be retrieved", {
+    it <- Iterator$new(1:5)
+    expect_error(it$get_value())
+    it$next_iter()
+    expect_equal(it$get_value(), 1)
+    it$next_iter()
+    expect_equal(it$get_value(), 2)
+})
+
+test_that("the next value can be retrieved while incrementing the iterator", {
     it <- Iterator$new(1)
     expect_true(it$has_next())
     expect_equal(it$get_next(), 1)
@@ -40,7 +49,7 @@ test_that("Iterator can be incremented", {
     x <- 1:5
     it <- Iterator$new(x)
     for (i in x) {
-        expect_equal(it$.next()$pos(), i)
+        expect_equal(it$next_iter()$pos(), i)
     }
 })
 
@@ -54,28 +63,5 @@ test_that("Iterator works as expected", {
     expect_equal(s2, s)
     expect_false(it$has_next())
     expect_error(it$get_next())
-})
-
-
-
-
-test_that("Iterator S3 interface", {
-    s <- "Hello World!"
-    s.split <- strsplit(s, split="")[[1]]
-    it <- iter(s.split)
-    s2 <- ""
-    while(ithas_next(it)) s2 <- paste0(s2, itget_next(it))
-    expect_equal(s2, s)
-    expect_false(ithas_next(it))
-    expect_error(itget_next(it))
-
-    # Iterator from Container
-    v <- 1:5
-    co <- container(v)
-    it <- iter(co)
-    sum <- 0
-    while(ithas_next(it)) sum <- sum + itget_next(it)
-    expect_equal(sum(v), sum(values(co)))
-    expect_equal(sum, sum(values(co)))
 })
 

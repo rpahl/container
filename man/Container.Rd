@@ -223,7 +223,7 @@ compatibility.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be removed from the \code{Container}. If element
+\item{\code{elem}}{element to be deleted from the \code{Container}. If element
 is not found in the \code{Container}, an error is signaled.}
 
 \item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}

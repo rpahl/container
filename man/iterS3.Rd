@@ -5,12 +5,12 @@
 \alias{iter}
 \alias{iter.default}
 \alias{is.iterator}
-\alias{itbegin}
-\alias{itget}
-\alias{itget_next}
-\alias{itpos}
-\alias{ithas_next}
-\alias{itnext}
+\alias{begin}
+\alias{get_value}
+\alias{get_next}
+\alias{has_next}
+\alias{pos}
+\alias{next_iter}
 \title{Iterator S3 methods}
 \usage{
 iter(x)
@@ -19,17 +19,17 @@ iter(x)
 
 is.iterator(x)
 
-itbegin(it)
+begin(it)
 
-itget(it)
+get_value(it)
 
-itget_next(it)
+get_next(it)
 
-itpos(it)
+has_next(it)
 
-ithas_next(it)
+pos(it)
 
-itnext(it)
+next_iter(it)
 }
 \arguments{
 \item{x}{an iterable object}
@@ -38,18 +38,12 @@ itnext(it)
 }
 \description{
 An \code{Iterator} is an object that allows to iterate over
-sequences. It implements \code{.next} and \code{get} to iterate and retrieve the
+sequences. It implements \code{next_iter} and \code{get_value} to iterate and retrieve the
 value of the sequence it is associated with.
 }
-\section{S3 methods for class \code{Iterator}}{
-
-\itemize{
-\item \code{itbegin(it)} reset iterator position to 1.
-\item \code{itget(it)} get value at current iterator position.
-\item \code{itget_next()} get value after incrementing by one.
-\item \code{itpos()} return current iterator position.
-\item \code{ithas_next(it)} return \code{TRUE} if there is a next element.
-\item \code{itnext(it)} increment iterator to point at next element.
+\details{
+For more details on the methods see \code{\link[=Iterator]{Iterator()}}.
 }
+\seealso{
+\code{\link[=Iterator]{Iterator()}}
 }
-

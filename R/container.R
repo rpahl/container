@@ -1,3 +1,35 @@
+#' Iterable abstract class interface
+#'
+#' @description An `Iterable` is an object that provides an `iter` method,
+#' which is expected to return an `Iterator` object. This class defines the
+#' abstract class interface such that each class inheriting this class provides
+#' an [iter()] method and must implement a private method `create_iter`,
+#' which must return an `Iterator` object.
+#' @author Roman Pahl
+#' @docType class
+#' @importFrom R6 R6Class
+#' @seealso `Iterator` and `Container`
+Iterable <- R6::R6Class("Iterable",
+    public = list(
+
+        #' @description
+        #' `Iterable` is an abstract class and thus cannot be instantiated.
+        initialize = function() stop("abstract class"),
+
+        #' @description Create iterator
+        #' @return invisibly returns the `Iterator` object.
+        iter = function() {
+            it <- private$create_iter()
+            hasIterator <- inherits(it, "Iterator")
+            if (!hasIterator) stop("Iterable did not create an Iterator")
+            invisible(it)
+        }
+    ),
+    private = list(create_iter = function() stop("abstract method")),
+    lock_class=TRUE
+)
+
+
 #' @title A sequence container
 #'
 #' @description This class implements a container data structure with typical
@@ -18,7 +50,7 @@
 #' @seealso [Iterable()], [Deque()], [Set()], and [Dict()]
 #' @export
 Container <- R6::R6Class("Container",
-    inherit = container:::Iterable,
+    inherit = Iterable,
     public = list(
         #' @description constructor
         #' @param ... initial elements put into the `Container`
@@ -129,7 +161,7 @@ Container <- R6::R6Class("Container",
         #' @description Find and remove element from `Container`. This
         #' function does the same as `delete` and is only kept for backwards
         #' compatibility.
-        #' @param elem element to be removed from the `Container`. If element
+        #' @param elem element to be deleted from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object

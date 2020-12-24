@@ -1,38 +1,7 @@
-#' Iterable abstract class interface
-#'
-#' @description An `Iterable` is an object that provides an `iter` method,
-#' which is expected to return an `Iterator` object. This class defines the
-#' abstract class interface such that each class inheriting this class provides
-#' an [iter()] method and must implement a private method `create_iter`,
-#' which must return an `Iterator` object.
-#' @author Roman Pahl
-#' @docType class
-#' @importFrom R6 R6Class
-#' @seealso `Iterator` and `Container`
-Iterable <- R6::R6Class("Iterable",
-    public = list(
-
-        #' @description
-        #' `Iterable` is an abstract class and thus cannot be instantiated.
-        initialize = function() stop("abstract class"),
-
-        #' @description Create iterator
-        #' @return invisibly returns the `Iterator` object.
-        iter = function() {
-            it <- private$create_iter()
-            hasIterator <- inherits(it, "Iterator")
-            if (!hasIterator) stop("Iterable did not create an Iterator")
-            invisible(it)
-        }
-    ),
-    private = list(create_iter = function() stop("abstract method")),
-    lock_class=TRUE
-)
-
 #' @title Iterator
 #'
 #' @description An `Iterator` is an object that allows to iterate over
-#'  sequences. It implements `.next` and `get` to iterate and retrieve the
+#'  sequences. It implements `next_iter` and `get_value` to iterate and retrieve the
 #'  value of the sequence it is associated with.
 #' @author Roman Pahl
 #' @docType class
@@ -58,19 +27,14 @@ Iterator <- R6::R6Class("Iterator",
             invisible(self)
         },
 
-        #' @description get element where the iterator points to
-        get = function() {
+        #' @description get value where the iterator points to
+        get_value = function() {
             private$elems[[private$i]]
         },
 
         #' @description get next element
         get_next = function() {
-            private$`i++`()$get()
-        },
-
-        #' @description get iterator position
-        pos = function() {
-            private$i
+            private$`i++`()$get_value()
         },
 
         #' @description check if `iterator` has more elements
@@ -79,8 +43,13 @@ Iterator <- R6::R6Class("Iterator",
             private$i < length(private$elems)
         },
 
+        #' @description get iterator position
+        pos = function() {
+            private$i
+        },
+
         #' @description increment `iterator`
-        `.next` = function() {
+        next_iter = function() {
             private$`i++`()
         },
 

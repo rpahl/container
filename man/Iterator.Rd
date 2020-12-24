@@ -6,7 +6,7 @@
 \title{Iterator}
 \description{
 An \code{Iterator} is an object that allows to iterate over
-sequences. It implements \code{.next} and \code{get} to iterate and retrieve the
+sequences. It implements \code{next_iter} and \code{get_value} to iterate and retrieve the
 value of the sequence it is associated with.
 }
 \author{
@@ -17,11 +17,11 @@ Roman Pahl
 \itemize{
 \item \href{#method-new}{\code{Iterator$new()}}
 \item \href{#method-begin}{\code{Iterator$begin()}}
-\item \href{#method-get}{\code{Iterator$get()}}
+\item \href{#method-get_value}{\code{Iterator$get_value()}}
 \item \href{#method-get_next}{\code{Iterator$get_next()}}
-\item \href{#method-pos}{\code{Iterator$pos()}}
 \item \href{#method-has_next}{\code{Iterator$has_next()}}
-\item \href{#method-.next}{\code{Iterator$.next()}}
+\item \href{#method-pos}{\code{Iterator$pos()}}
+\item \href{#method-next_iter}{\code{Iterator$next_iter()}}
 \item \href{#method-print}{\code{Iterator$print()}}
 \item \href{#method-clone}{\code{Iterator$clone()}}
 }
@@ -32,7 +32,7 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 \code{Iterator} constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Iterator$new(x = list())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$new(x)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -57,12 +57,12 @@ set iterator to start of sequence
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get"></a>}}
-\if{latex}{\out{\hypertarget{method-get}{}}}
-\subsection{Method \code{get()}}{
-get element where the iterator points to
+\if{html}{\out{<a id="method-get_value"></a>}}
+\if{latex}{\out{\hypertarget{method-get_value}{}}}
+\subsection{Method \code{get_value()}}{
+get value where the iterator points to
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Iterator$get()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$get_value()}\if{html}{\out{</div>}}
 }
 
 }
@@ -73,16 +73,6 @@ get element where the iterator points to
 get next element
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Iterator$get_next()}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pos"></a>}}
-\if{latex}{\out{\hypertarget{method-pos}{}}}
-\subsection{Method \code{pos()}}{
-get iterator position
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Iterator$pos()}\if{html}{\out{</div>}}
 }
 
 }
@@ -100,12 +90,22 @@ check if \code{iterator} has more elements
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.next"></a>}}
-\if{latex}{\out{\hypertarget{method-.next}{}}}
-\subsection{Method \code{.next()}}{
+\if{html}{\out{<a id="method-pos"></a>}}
+\if{latex}{\out{\hypertarget{method-pos}{}}}
+\subsection{Method \code{pos()}}{
+get iterator position
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$pos()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-next_iter"></a>}}
+\if{latex}{\out{\hypertarget{method-next_iter}{}}}
+\subsection{Method \code{next_iter()}}{
 increment \code{iterator}
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Iterator$.next()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$next_iter()}\if{html}{\out{</div>}}
 }
 
 }
