@@ -16,8 +16,11 @@ test_that("Container initialization works as expected", {
     expect_equal(size(co), 2)
 
     co <- container(A = 1, B = 2)
-    expect_equal(type(co), "list")
     expect_true(is.null(names(values(co))))
+    co <- container(A = 1, B = 2, keep_names = TRUE)
+    expect_equal(names(values(co)), c("A", "B"))
+
+    expect_equal(container(keep_names = TRUE), container(keep_names = FALSE))
 })
 
 test_that("type of Container is inialized as expected", {
@@ -100,6 +103,20 @@ test_that("a Container can be added to a Container", {
     expect_equal(values(coco)[[1]], co)
     expect_equal(values(values(coco)[[1]]), v)
 })
+
+test_that("named elements can be added to a Container", {
+    co <- container(numeric())
+    x <- 1
+    names(x) <- "x"
+    add(co, x)
+
+    y <- 1:3
+    names(y) <- letters[1:3]
+    add(co, y)
+
+    expect_equal(values(co), c(x, y))
+})
+
 
 test_that("a cleared Container preserves its type", {
     expect_equal(type(clear(container())), "list")

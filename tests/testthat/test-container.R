@@ -15,8 +15,12 @@ test_that("Container constructor works as expected", {
     expect_equal(co$size(), 2)
 
     co <- Container$new(A = 1, B = 2)
-    expect_equal(co$type(), "list")
     expect_true(is.null(names(co$values())))
+    co <- Container$new(A = 1, B = 2, keep_names = TRUE)
+    expect_equal(names(co$values()), c("A", "B"))
+
+    expect_equal(Container$new(keep_names = TRUE),
+                 Container$new(keep_names = FALSE))
 })
 
 test_that("type of Container is inialized as expected", {
@@ -98,6 +102,19 @@ test_that("a Container can be added to a Container", {
     coco$add(co)
     expect_equal(coco$values()[[1]], co)
     expect_equal(coco$values()[[1]]$values(), v)
+})
+
+test_that("named elements can be added to a Container", {
+    co <- Container$new(numeric())
+    x <- 1
+    names(x) <- "x"
+    co$add(x)
+
+    y <- 1:3
+    names(y) <- letters[1:3]
+    co$add(y)
+
+    expect_equal(co$values(), c(x, y))
 })
 
 
