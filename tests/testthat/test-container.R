@@ -12,6 +12,7 @@ test_that("Container constructor works as expected", {
     expect_equal(co$size(), 1)
 
     co <- Container$new(environment(), foo = identity)
+    expect_equal(co$size(), 2)
 
     co <- Container$new(A = 1, B = 2)
     expect_equal(co$type(), "list")
@@ -78,8 +79,10 @@ test_that("non-trivial objects are added correctly", {
 test_that("a Container can be added to a Container", {
     v <- 1:10
     co <- Container$new(v)
-    co$add(co)
-    expect_equal(co$values(), rep(v, 2))
+    coco <- Container$new()
+    coco$add(co)
+    expect_equal(coco$values()[[1]], co)
+    expect_equal(coco$values()[[1]]$values(), v)
 })
 
 
@@ -96,7 +99,7 @@ test_that("it can be determined whether Container contains a certain element", {
     expect_true(co$add(7)$has(7))
 
     foo <- function() print("foo")
-    co <- Container$new(list(mean, foo, identity))
+    co <- Container$new(mean, foo, identity)
     expect_true(co$has(identity))
     expect_true(co$has(mean))
     expect_false(co$has(median))
@@ -110,7 +113,7 @@ test_that("elements can be discarded from a Container", {
     co$discard(3)
     expect_equal(co$values(), x[-3])
 
-    co <- Container$new(list(mean, identity))
+    co <- Container$new(mean, identity)
     expect_equal(co$discard(mean)$values(), list(identity))
 
     expect_error(co$discard(), 'argument "elem" is missing, with no default')
@@ -136,7 +139,7 @@ test_that("elements can be deleted from a Container", {
     co$delete(3)
     expect_equal(co$values(), x[-3])
 
-    co <- Container$new(list(mean, identity))
+    co <- Container$new(mean, identity)
     expect_equal(co$delete(mean)$values(), list(identity))
     expect_error(co$delete(), 'argument "elem" is missing, with no default')
 })
@@ -192,6 +195,5 @@ test_that("Iterator can be constructed from Container", {
     sum <- 0
     while(it$has_next()) sum <- sum + it$get_next()
     expect_equal(sum(v), sum(co$values()))
-    expect_equal(sum, sum(co$values()))
 })
 

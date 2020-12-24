@@ -76,22 +76,15 @@ Container <- R6::R6Class("Container",
         #' @param elem element to be added to `Container` object
         #' @return invisibly returns the `Container` object
         add = function(elem) {
-            if (inherits(elem, "Container")) {
-                it <- elem$iter()
-                while(it$has_next()) {
-                    self$add(it$get_next())
-                }
+            if (self$type() == "list") {
+                elem <- list(elem)
             } else {
-                if (self$type() == "list") {
-                    elem <- list(elem)
-                } else {
-                    if (self$type() != mode(elem)) {
-                        stop("type mismatch: expected '", self$type(),
-                             "' but got '", mode(elem), "'")
-                    }
+                if (self$type() != mode(elem)) {
+                    stop("type mismatch: expected '", self$type(),
+                         "' but got '", mode(elem), "'")
                 }
-                private$elems <- c(private$elems, elem)
             }
+            private$elems <- c(private$elems, elem)
             invisible(self)
         },
 

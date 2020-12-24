@@ -7,13 +7,11 @@
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of the respective derived classes.
 #' @details For a detailed documentation of all methods see [Container()]
-#' @param x a vector of 'any' type
+#' @param x [Container()] object
 #' @param ... further arguments depending on the method.
 #' @name ContainerS3
 #' @seealso [Container()], [`+.Container()`], [deque()], [set()], [dict()]
 NULL
-
-# S3 generic methods
 
 #' @rdname ContainerS3
 #' @export
@@ -57,7 +55,7 @@ values <- function(x) UseMethod("values")
 
 #' @rdname ContainerS3
 #' @export
-container <- function(x = list()) Container$new(x)
+container <- function(...) Container$new(...)
 
 #' @rdname ContainerS3
 #' @export
@@ -84,7 +82,7 @@ clear.Container <- function(x) x$clear()
 #' @param deep `logical` if `TRUE` a `deep` copy is done otherwise by default a
 #' shallow copy is performed.
 #' @export
-clone.Container <- function(x, deep=FALSE, ...) x$clone(deep)
+clone.Container <- function(x, deep = FALSE, ...) x$clone(deep)
 
 #' @rdname ContainerS3
 #' @param right `logical` if `TRUE` search from right to left
@@ -135,12 +133,6 @@ NULL
 
 
 # Conversion to standard R objects
-
-#' @export
-`as.vector.Container` <- function(x, mode = "any")
-{
-    as.vector(x$values(), mode = mode)
-}
 
 #' @export
 `as.list.Container` <- function(x, ...) as.list(x$values())

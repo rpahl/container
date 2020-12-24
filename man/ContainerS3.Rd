@@ -49,7 +49,7 @@ type(x)
 
 values(x)
 
-container(x = list())
+container(...)
 
 as.container(x)
 
@@ -78,7 +78,7 @@ is.container(x)
 \method{values}{Container}(x)
 }
 \arguments{
-\item{x}{a vector of 'any' type}
+\item{x}{\code{\link[=Container]{Container()}} object}
 
 \item{...}{further arguments depending on the method.}
 
