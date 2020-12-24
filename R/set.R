@@ -10,25 +10,29 @@ Set <- R6::R6Class("Set",
     inherit = Container,
     public = list(
         #' @description `Set` constructor
-        #' @param x initial elements put into the `Set`
+        #' @param ... initial elements put into the `Set`
         #' @return invisibly returns the `Set`
-        initialize = function(x = list()) {
-            super$initialize(unique(x))
+        initialize = function(...) {
+            elems <- list(...)
+            if (nargs() == 1) elems <- elems[[1]]
+            super$initialize(unique(elems))
+            invisible(self)
         },
 
         #' @description Add element
         #' @param elem If not already in set, add `elem`.
         #' @return invisibly returns [Set()] object.
         add = function(elem) {
-            if (self$type() == "list") {
-                if (!self$has(elem)) super$add(elem)
-            } else {
-                if (length(elem) > 1) {
-                    # Perform element-wise adding to catch duplicates
-                    lapply(elem, FUN=function(x) self$add(x))
-                } else {
-                    if (!self$has(elem)) super$add(elem)
+            if (length(elem) > 1 && self$type() != "list") {
+                it <- Iterator$new(elem)
+                while(it$has_next()) {
+                    self$add(it$get_next())
                 }
+                return(invisible(self))
+            }
+
+            if (!self$has(elem)) {
+                super$add(elem)
             }
             invisible(self)
         },

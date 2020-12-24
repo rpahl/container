@@ -5,9 +5,10 @@
 #' underlying data sequence. As such, the [deque()] can also be used to mimic
 #' both stacks and queues.
 #' @details For a detailed documentation of all methods see [Deque()].
+#' @param x [Deque()] object
+#' @param ... initial elements to initialize the [Deque()] object or further
+#' arguments depending on the method.
 #' @name dequeS3
-#' @param x a vector of 'any' type
-#' @param ... further arguments depending on the method.
 #' @seealso [Container()], [`+.Deque()`]
 NULL
 

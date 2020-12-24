@@ -2,6 +2,10 @@
 % Please edit documentation in R/container-S3.R
 \name{ContainerS3}
 \alias{ContainerS3}
+\alias{container}
+\alias{as.container}
+\alias{is.container}
+\alias{iter.Container}
 \alias{add}
 \alias{clear}
 \alias{clone}
@@ -12,10 +16,6 @@
 \alias{size}
 \alias{type}
 \alias{values}
-\alias{container}
-\alias{as.container}
-\alias{is.container}
-\alias{iter.Container}
 \alias{add.Container}
 \alias{clear.Container}
 \alias{clone.Container}
@@ -29,6 +29,14 @@
 \title{Container S3 interface
 '}
 \usage{
+container(...)
+
+as.container(x)
+
+is.container(x)
+
+\method{iter}{Container}(x)
+
 add(x, ...)
 
 clear(x)
@@ -48,14 +56,6 @@ size(x)
 type(x)
 
 values(x)
-
-container(...)
-
-as.container(x)
-
-is.container(x)
-
-\method{iter}{Container}(x)
 
 \method{add}{Container}(x, elem, ...)
 
@@ -78,9 +78,10 @@ is.container(x)
 \method{values}{Container}(x)
 }
 \arguments{
-\item{x}{\code{\link[=Container]{Container()}} object}
+\item{...}{initial elements to initialize the \code{\link[=Container]{Container()}} object or further
+arguments depending on the method.}
 
-\item{...}{further arguments depending on the method.}
+\item{x}{\code{\link[=Container]{Container()}} object}
 
 \item{elem}{some element of the container}
 

@@ -1,40 +1,75 @@
 context("Set S3")
 
-test_that("setnew", {
-    # Initialization and chaining
-    expect_true(empty(setnew()))
-    expect_equal(size(setnew()), 0)
-    s1 <- setnew()
-    expect_equal(attr(s1, "name"), "<Set>")
-    expect_true(empty(s1))
-    expect_equal(size(s1), 0)
-    expect_false(has(s1, NULL))
-    expect_error(delete(s1, 1), "1 not in Set")
+test_that("Set constructor works as expected", {
+    s <- setnew()
+    expect_true(is.set(s))
+    expect_true(empty(s))
+    expect_equal(size(s), 0)
+    expect_false(has(s, NULL))
+    expect_equal(attr(s, "class"), c("Set", "Container", "Iterable", "R6"))
 
-    # add
-    add(s1, 1)
-    expect_true(has(s1, 1))
-    expect_false(empty(s1))
-    expect_equal(size(s1), 1)
-    expect_equal(size(add(s1, 1)), 1) # should not be added twice
-    expect_true(empty(delete(s1, 1)))
+    s <- setnew(1, 1, 1)
+    expect_equal(s, setnew(list(1)))
+    expect_equal(type(s), "list")
+    expect_equal(setnew(mean, mean, 1, 2), setnew(mean, 1, 2))
 
-    # Lists
-    s1 <- setnew(list(1, 2))
-    expect_equal(size(s1), 2)
-    expect_equal(size(add(s1, 2)), 2)
-    expect_equal(size(add(s1, list(2))), 3)
-    expect_equal(values(s1), list(1, 2, list(2)))
+    s <- setnew(rep(1:4, 2))
+    expect_equal(type(s), "numeric")
+    expect_equal(values(s), 1:4)
+})
 
-    # Vectors
-    expect_equal(values(setnew(rep(1, 10))), 1)
+test_that("adding special elements works as expected", {
+    s <- setnew(NULL)
+    expect_equal(size(s), 1)
+    add(s, NULL) # cannot be added twice
+    expect_equal(size(s), 1)
+    expect_equal(values(s), list(NULL))
+
+    add(s, list())
+    expect_equal(values(s), list(NULL, list()))
+    add(s, list())
+    expect_equal(values(s), list(NULL, list()))
+
+    add(s, numeric(0))
+    expect_equal(values(s), list(NULL, list(), numeric(0)))
+
+    s <- setnew(0)
+    expect_equal(type(s), "numeric")
+    expect_error(add(s, NULL), "expected 'numeric' but got 'NULL'")
+    s2 <- clone(s)
+    expect_equal(add(s, numeric()), s2)
+})
+
+test_that("any element can be added to a standard list-type Set", {
+    s <- setnew()
+    expect_equal(type(s), "list")
+    add(s, 1)
+    add(s, 2)
+    expect_equal(size(s), 2)
+    expect_equal(add(s, 2)$size(), 2)
+    expect_equal(add(s, list(2))$size(), 3)
+    add(s, function(){})
+    expect_equal(values(s), list(1, 2, list(2), function(){}))
+})
+
+test_that("atomic vectors are added as expected to Sets of atomic types", {
+    v <- 1:4
+    s <- setnew(1:4)
+    expect_equal(type(s), "numeric")
+    expect_equal(v, values(s))
+    add(s, v)
+    expect_equal(v, values(s))
+
     letters10 <- letters[1:10]
-    s1 <- setnew(letters10)
-    expect_equal(values(s1), letters10)
-    expect_equal(values(add(s1, "a")), letters10)
-    expect_equal(values(add(s1, letters[3:5])), letters10)
+    s <- setnew(letters10)
+    expect_equal(type(s), "character")
+    expect_equal(values(s), letters10)
+    expect_equal(values(add(s, "a")), letters10)
+    expect_equal(values(add(s, letters[3:5])), letters10)
+})
 
-    # set operations
+
+test_that("set operations work as expected", {
     l1 <- list(1, 2, 3,    "A", "B", "C")
     l2 <- list(   2, 3, 4,      "B", "C", "D")
     s1 <- setnew(l1)
@@ -54,20 +89,5 @@ test_that("setnew", {
     expect_true((s1 + s2) > s2)
     expect_true((s1 / s2) < s1)
     expect_true((s1 - s2) < s1)
-})
-
-test_that("S3 methods", {
-    expect_equal(setnew(), Set$new())
-    expect_true(is.set(setnew()))
-    expect_equal(setnew(1:3), as.set(1:3))
-    s1 <- setnew(1:3)
-    s2 <- setnew(3:5)
-    expect_equal(s1 + s2, s1$union(s2))
-    expect_equal(s1 / s2, s1$intersect(s2))
-    expect_equal(s1 - s2, s1$diff(s2))
-
-    expect_output(print(s1), "<Set> of 3 elements:  int \\[1:3\\] 1 2 3")
-    expect_equal(as.list(s1), as.list(s1$values()))
-    expect_equal(as.vector(s1), s1$values())
 })
 

@@ -8,10 +8,29 @@
 #' create objects of the respective derived classes.
 #' @details For a detailed documentation of all methods see [Container()]
 #' @param x [Container()] object
-#' @param ... further arguments depending on the method.
+#' @param ... initial elements to initialize the [Container()] object or further
+#' arguments depending on the method.
 #' @name ContainerS3
 #' @seealso [Container()], [`+.Container()`], [deque()], [set()], [dict()]
 NULL
+
+#' @rdname ContainerS3
+#' @export
+container <- function(...) Container$new(...)
+
+#' @rdname ContainerS3
+#' @export
+as.container <- function(x) container(x)
+
+#' @rdname ContainerS3
+#' @export
+is.container <- function(x) inherits(x, "Container")
+
+#' @rdname ContainerS3
+#' @export
+iter.Container <- function(x) x$iter()
+
+
 
 #' @rdname ContainerS3
 #' @export
@@ -52,23 +71,6 @@ type <- function(x) UseMethod("type")
 #' @rdname ContainerS3
 #' @export
 values <- function(x) UseMethod("values")
-
-#' @rdname ContainerS3
-#' @export
-container <- function(...) Container$new(...)
-
-#' @rdname ContainerS3
-#' @export
-as.container <- function(x) container(x)
-
-#' @rdname ContainerS3
-#' @export
-is.container <- function(x) inherits(x, "Container")
-
-#' @rdname ContainerS3
-#' @export
-iter.Container <- function(x) x$iter()
-
 
 #' @rdname ContainerS3
 #' @param elem some element of the container

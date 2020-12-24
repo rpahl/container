@@ -35,7 +35,6 @@ Roman Pahl
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="apply">}\href{../../container/html/Container.html#method-apply}{\code{container::Container$apply()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
@@ -55,13 +54,13 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 \code{Set} constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$new(x = list())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Set$new(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{initial elements put into the \code{Set}}
+\item{\code{...}}{initial elements put into the \code{Set}}
 }
 \if{html}{\out{</div>}}
 }

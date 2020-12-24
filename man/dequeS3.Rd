@@ -62,9 +62,10 @@ rotate(x, ...)
 \method{rotate}{Deque}(x, n = 1L, ...)
 }
 \arguments{
-\item{...}{further arguments depending on the method.}
+\item{...}{initial elements to initialize the \code{\link[=Deque]{Deque()}} object or further
+arguments depending on the method.}
 
-\item{x}{a vector of 'any' type}
+\item{x}{\code{\link[=Deque]{Deque()}} object}
 
 \item{elem}{some element of the deque}
 

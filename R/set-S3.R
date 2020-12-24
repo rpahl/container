@@ -4,9 +4,10 @@
 #' [Container()], that is, elements are always unique in the [Container()] and
 #' it provides typical set operations such as `union` and `intersect`.
 #' @details For a detailed documentation of all methods see [Set()].
+#' @param x [Set()] object
+#' @param ... initial elements to initialize the [Set()] object or further
+#' arguments depending on the method.
 #' @name setS3
-#' @param x a vector of 'any' type
-#' @param ... further arguments depending on the method.
 #' @seealso [Container()], [`+.Set()`], [`/.Set()`], [`-.Set()`], [`<.Set()`],
 #' [`>.Set()`]
 NULL
@@ -14,7 +15,7 @@ NULL
 
 #' @rdname setS3
 #' @export
-setnew <- function(x=list()) Set$new(x)
+setnew <- function(...) Set$new(...)
 
 #' @rdname setS3
 #' @export
