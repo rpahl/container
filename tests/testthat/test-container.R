@@ -47,12 +47,34 @@ test_that("elements can be added to the Container", {
     expect_equal(co$values(), 1)
 })
 
+test_that("NULL and empty lists can be added to a Container", {
+    co <- Container$new()
+    co$add(NULL)
+    co$add(list())
+    co$add(0)
+    co$add(NULL)
+    co$add(list())
+
+    expect_equal(co$size(), 5)
+    co$delete(NULL)
+    co$delete(list())
+    expect_equal(co$size(), 3)
+    co$delete(list())
+    co$delete(NULL)
+    expect_equal(co$values(), list(0))
+
+    expect_true(Container$new(numeric(0))$add(numeric(0))$empty())
+})
+
 test_that("types of added elements must match for non-list Containers", {
     co <- Container$new(1)
     expect_equal(co$values(), 1)
     co$add(2)
     expect_equal(co$values(), 1:2)
     expect_error(co$add("a"), "type mismatch: expected 'numeric' but got 'character'")
+    expect_error(co$add(list(1)), "type mismatch: expected 'numeric' but got 'list'")
+    expect_error(co$add(list()), "type mismatch: expected 'numeric' but got 'list'")
+    expect_error(co$add(NULL), "type mismatch: expected 'numeric' but got 'NULL'")
     expect_equal(co$add(3:5)$values(), 1:5)
 })
 
