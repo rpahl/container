@@ -54,19 +54,13 @@ Container <- R6::R6Class("Container",
     public = list(
         #' @description constructor
         #' @param ... initial elements put into the `Container`
-        #' @param keep_names `logical` if TRUE, keeps names of passed elements
         #' @return invisibly returns the `Container` object
-        initialize = function(..., keep_names = FALSE) {
+        initialize = function(...) {
             args <- list(...)
-            n.elems <- nargs() - !missing(keep_names)
-            elems <- if (n.elems == 1) args[[1]] else args
+            elems <- if (nargs() == 1) args[[1]] else args
 
             if (!is.vector(elems)) elems <- list(elems)
-
-            if (!keep_names) {
-                names(elems) <- NULL
-            }
-
+            names(elems) <- NULL
             private$elems <- elems
 
             invisible(self)

@@ -18,12 +18,6 @@ test_that("Container initialization works as expected", {
     co <- container(A = 1, B = 2)
     expect_equal(type(co), "list")
     expect_true(is.null(names(values(co))))
-
-    co <- container(A = 1, B = 2, keep_names = TRUE)
-    expect_equal(names(values(co)), c("A", "B"))
-
-    expect_equal(container(keep_names = TRUE),
-                 container(keep_names = FALSE))
 })
 
 test_that("type of Container is inialized as expected", {
