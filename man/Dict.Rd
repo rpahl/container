@@ -26,6 +26,7 @@ Roman Pahl
 \item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
+\item \href{#method-getval}{\code{Dict$getval()}}
 \item \href{#method-has}{\code{Dict$has()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-peek}{\code{Dict$peek()}}
@@ -34,6 +35,7 @@ Roman Pahl
 \item \href{#method-remove}{\code{Dict$remove()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-set}{\code{Dict$set()}}
+\item \href{#method-setval}{\code{Dict$setval()}}
 \item \href{#method-sort}{\code{Dict$sort()}}
 \item \href{#method-update}{\code{Dict$update()}}
 \item \href{#method-clone}{\code{Dict$clone()}}
@@ -43,7 +45,6 @@ Roman Pahl
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="apply">}\href{../../container/html/Container.html#method-apply}{\code{container::Container$apply()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
@@ -59,13 +60,13 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 \code{Dict} constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$new(x = list())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$new(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{initial elements put into the \code{Dict}}
+\item{\code{...}}{initial elements put into the \code{Dict}}
 }
 \if{html}{\out{</div>}}
 }
@@ -137,9 +138,29 @@ invisibly returns the \code{Dict}
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-Access value.
+This function is deprecated. Use \code{getval} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$get(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getval"></a>}}
+\if{latex}{\out{\hypertarget{method-getval}{}}}
+\subsection{Method \code{getval()}}{
+Access value.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$getval(key)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -248,8 +269,7 @@ random value from the \code{Dict}
 \if{html}{\out{<a id="method-remove"></a>}}
 \if{latex}{\out{\hypertarget{method-remove}{}}}
 \subsection{Method \code{remove()}}{
-Remove value associated with key. This function does
-the same as \code{delete} and is only kept for backwards compatibility.
+This function is deprecated. Use \code{delete} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$remove(key)}\if{html}{\out{</div>}}
 }
@@ -293,11 +313,36 @@ invisibly returns the \code{Dict} object
 \if{html}{\out{<a id="method-set"></a>}}
 \if{latex}{\out{\hypertarget{method-set}{}}}
 \subsection{Method \code{set()}}{
+This function is deprecated. Use \code{setval} instead.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$set(key, value, add = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+
+\item{\code{value}}{the value to be set}
+
+\item{\code{add}}{\code{logical} if \code{TRUE} the value is set regardless whether
+\code{key} already exists in \code{Dict}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setval"></a>}}
+\if{latex}{\out{\hypertarget{method-setval}{}}}
+\subsection{Method \code{setval()}}{
 Overrides \code{value} at \code{key} if \code{key} is already in the
 \code{Dict}. If \code{key} not in \code{Dict}, an error is thrown unless \code{add} was
 set to \code{TRUE}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$set(key, value, add = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$setval(key, value, add = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

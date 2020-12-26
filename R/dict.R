@@ -13,17 +13,25 @@ Dict <- R6::R6Class("Dict",
     inherit = Container,
     public = list(
         #' @description `Dict` constructor
-        #' @param x initial elements put into the `Dict`
+        #' @param ... initial elements put into the `Dict`
         #' @return invisibly returns the `Dict`
-        initialize = function(x = list()) {
-            if (is.data.frame(x)) x <- as.list(x)
-            name_len <- sapply(names(x), nchar)
-            if (length(x) != length(name_len) || any(name_len == 0)) {
-                stop("all items must be named")
+        initialize = function(...) {
+            elems <- list(...)
+            if (nargs() == 1 && is.null(names(elems))) {
+                elems <- elems[[1]]
             }
-            super$initialize(x)
-            if (any(duplicated(self$keys()))) stop("duplicated keys")
-            invisible(self)
+
+            keys <- names(elems)
+            keys.len <- length(keys)
+            keys.nchars <- sapply(keys, nchar)
+            if (length(elems) != keys.len || any(keys.nchars == 0)) {
+                stop("all elems must be named")
+            }
+
+            if (any(duplicated(keys))) {
+                stop("duplicated keys")
+            }
+            super$initialize(elems, keep_names = TRUE)
         },
 
         #' @description If `key` not yet in `Dict`, insert `value` at `key`,
@@ -34,19 +42,13 @@ Dict <- R6::R6Class("Dict",
             if (self$has(key)) {
                 stop("key '", key, "' already in ", data.class(self))
             }
-            self$set(key, value, add = TRUE)
+            self$setval(key, value, add = TRUE)
         },
 
         #' @description delete value
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, delete it, otherwise raise an error.
         delete = function(key) {
-            if (length(key) > 1) {
-                for (k in key) {
-                    self$delete(k)
-                }
-                return(invisible(self))
-            }
             if (!self$has(key)) {
                 stop("key '", key, "' not in ", data.class(self))
             }
@@ -57,12 +59,6 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` key of value to discard
         #' @return invisibly returns the `Dict`
         discard = function(key) {
-            if (length(key) > 1) {
-                for (k in key) {
-                    self$discard(k)
-                }
-                return(invisible(self))
-            }
             if (self$has(key)) {
                 pos <- match(key, self$keys())
                 private$elems <- private$elems[-pos]
@@ -70,10 +66,18 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         },
 
-        #' @description Access value.
+        #' @description This function is deprecated. Use `getval` instead.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return value at `key`, else throw error.
         get = function(key) {
+            .Deprecated("getval")
+            self$getval(key)
+        },
+
+        #' @description Access value.
+        #' @param key `character` name of key.
+        #' @return If `key` in `Dict`, return value at `key`, else throw error.
+        getval = function(key) {
             if (self$has(key)) {
                 self$peek(key)
             } else {
@@ -128,11 +132,11 @@ Dict <- R6::R6Class("Dict",
             self$pop(key)
         },
 
-        #' @description Remove value associated with key. This function does
-        #' the same as `delete` and is only kept for backwards compatibility.
+        #' @description This function is deprecated. Use `delete` instead.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, remove it, otherwise raise an error.
         remove = function(key) {
+            .Deprecated("delete")
             self$delete(key)
         },
 
@@ -163,6 +167,17 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         },
 
+        #' @description This function is deprecated. Use `setval` instead.
+        #' @param key `character` name of key.
+        #' @param value the value to be set
+        #' @param add `logical` if `TRUE` the value is set regardless whether
+        #' `key` already exists in `Dict`.
+        #' @return invisibly returns the `Dict`
+        set = function(key, value, add = FALSE) {
+            .Deprecated("setval")
+            self$setval(key, value, add)
+        },
+
         #' @description Overrides `value` at `key` if `key` is already in the
         #' `Dict`. If `key` not in `Dict`, an error is thrown unless `add` was
         #' set to `TRUE`.
@@ -171,12 +186,15 @@ Dict <- R6::R6Class("Dict",
         #' @param add `logical` if `TRUE` the value is set regardless whether
         #' `key` already exists in `Dict`.
         #' @return invisibly returns the `Dict`
-        set = function(key, value, add = FALSE) {
-            if (!add) {
-                if (!self$has(key)) stop("key '", key, "' not in ",
-                                         data.class(self))
+        setval = function(key, value, add = FALSE) {
+            if (!add && !self$has(key)) {
+                stop("key '", key, "' not in ", data.class(self))
             }
-            private$elems[[key]] <- value
+            if (length(value) == 0) {
+                private$elems[key] <- list(value)
+            } else {
+                private$elems[[key]] <- value
+            }
             invisible(self)
         },
 
@@ -197,7 +215,7 @@ Dict <- R6::R6Class("Dict",
                 stop("arg must be a ", data.class(self))
             }
             for (key in other$keys()) {
-                self$set(key, other$get(key), add = TRUE)
+                self$setval(key, other$getval(key), add = TRUE)
             }
             invisible(self)
         }
