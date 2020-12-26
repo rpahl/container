@@ -213,33 +213,39 @@ test_that("a Dict can be updated by another Dict object", {
 })
 
 
-
-# ------------------------------------
-test_that("+ and - operators work as expected", {
-
-    # `+` operator
-    d1 <- dict(list(a=1, b=2))
-    d2 <- dict(list(b=2, c=1))
-    dd <- d1 + d2
-    expect_equal(size(d1), 2)
-    expect_equal(size(d2), 2)
-    expect_equal(size(dd), 3)
-    expect_equal(values(dd), values(update(d1, d2)))
-
-    # `-` operator
-    d1 <- dict(list(A=1, B=2, C=3))
-    d2 <- dict(list(A=1, B=2))
-    expect_equal(d1 - d2, dict(list(C = 3)))
-    expect_equivalent(d2 - d1, dict())
-    expect_equivalent(d1 - d1, dict())
-    expect_equivalent(dict() - d1, dict())
-})
-
-
 test_that("data.frame can be converted to dict", {
     # as.data.frame
     df <- data.frame(A = 1:5, B = 1:5)
     d <- dict(df)
     expect_equal(as.data.frame(as.list(d)), df)
+})
+
+
+context("Arithmetic dict operators")
+
+test_that("performing d1 + d2 returns a copy of d1 updated by d2", {
+    d1 <- dict(a = 1, b = 2)
+    d2 <- dict(       b = 2, c = 1)
+    dd <- d1 + d2
+    expect_equal(size(d1), 2)
+    expect_equal(size(d2), 2)
+    expect_equal(size(dd), 3)
+    expect_equal(values(dd), values(update(d1, d2)))
+})
+
+test_that("performing d1 - d2 returns a copy of d1 with all d2 keys being discarded", {
+    d1 <- dict(A = 1, B = 2, C = 3)
+    d2 <- dict(A = 1, B = 2)
+    expect_equal(d1 - d2, dict(C = 3))
+    expect_equivalent(d2 - d1, dict())
+    expect_equivalent(d1 - d1, dict())
+    expect_equivalent(dict() - d1, dict())
+})
+
+test_that("performing d1 / d2 returns a dictionary of intersected keys", {
+    d1 <- dict(a = 1, b = 2)
+    d2 <- dict(       b = 2, c = 1)
+    dd <- d1 / d2
+    expect_equal(dd, dict(b = 2))
 })
 

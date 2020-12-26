@@ -129,9 +129,9 @@ sortkey.Dict <- function(x, decr=FALSE, ...) x$sortkey(decr)
 #' @export
 update.Dict <- function(object, other, ...) object$update(other)
 
-#' Binary `Dict` operators
+#' Arithmetic binary `dict` operators
 #'
-#' @description Binary operators for [Dict()] objects.
+#' @description Arithmetic operators for [Dict()] objects.
 #' @name dictS3binOp
 #'
 #' @param d1 [Dict()] object
@@ -153,6 +153,19 @@ NULL
     d1.clone
 }
 
+#' @rdname dictS3binOp
+#' @return For `/` returns a copy of `d1` containing only keys that exist in
+#' both, that is, an intersection of the keys.
+#' @export
+`/.Dict` <- function(d1, d2)
+{
+    keys.both <- intersect(keys(d1), keys(d2))
+    d <- dict()
+    for (key in keys.both) {
+        d$add(key, d1$getval(key))
+    }
+    d
+}
 
 #' Extract or replace parts of a `Dict`
 #'
@@ -162,7 +175,6 @@ NULL
 #' @param x [Dict()] object.
 #' @param key `character` name of elements to extract or replace.
 NULL
-
 
 #' @rdname dictS3replace
 #' @param default A suitable default value.

@@ -203,7 +203,7 @@ test_that("a Dict can be updated by another Dict object", {
     expect_equal(Dict$new()$update(d2), d2)
 })
 
-context("deprecated functions")
+context("dict deprecated")
 
 test_that("Dict get is deprecated and replaced by getval", {
     d <- Dict$new(a = 1, b = 2)

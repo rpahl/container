@@ -4,11 +4,14 @@
 \alias{dictS3binOp}
 \alias{+.Dict}
 \alias{-.Dict}
-\title{Binary \code{Dict} operators}
+\alias{/.Dict}
+\title{Arithmetic binary \code{dict} operators}
 \usage{
 \method{+}{Dict}(d1, d2)
 
 \method{-}{Dict}(d1, d2)
+
+\method{/}{Dict}(d1, d2)
 }
 \arguments{
 \item{d1}{\code{\link[=Dict]{Dict()}} object}
@@ -19,7 +22,10 @@
 For \code{+} returns a copy of \code{d1} updated by \code{d2}.
 
 For \code{-} returns a copy of \code{d1} with all \code{d2} keys being discarded.
+
+For \code{/} returns a copy of \code{d1} containing only keys that exist in
+both, that is, an intersection of the keys.
 }
 \description{
-Binary operators for \code{\link[=Dict]{Dict()}} objects.
+Arithmetic operators for \code{\link[=Dict]{Dict()}} objects.
 }
