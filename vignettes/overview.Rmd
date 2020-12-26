@@ -47,81 +47,67 @@ The following table shows member methods divided by class. The top half contains
 }
 </style>
 ```
-| Container              | Deque         | Set            | Dict                       | Dict.frame     |
-| :----------------------| :-------------| :--------------| :--------------------------| :--------------|
-| Container\$new()       | Deque\$new()  | s <- Set\$new()| Dict\$new()                | Dict.frame\$new() |
-|                        |               |                |                            |                |
-| add(elem)              |               | add(elem)      | add(key, value)            | add(key, value)|
-| apply(f)               |               |                |                            |                |
-| clear()                |               |                |                            |                |
-| delete(elem, right=F)  |               |                | delete(key)                |                |
-| discard(elem, right=F) |               |                | discard(key)               |                |
-| empty()                |               |                |                            |                |
-| has(elem)              |               |                | has(key)                   |                |
-| print(list.len=10)     |               |                |                            |                |
-| size()                 |               |                |                            |                |
-| type()                 |               |                |                            |                |
-| values()               |               |                |                            |                |
-|                        |               |                |                            |                |
-|                        | addleft(elem) | diff(s)        | get(key)                   |                |
-|                        | count(elem)   | intersect(s)   | keys()                     |                |
-|                        | peek()        | is.equal(s)    | peek(key, default = NULL)  |                |
-|                        | peekleft()    | is.subset(s)   | pop(key)                   |                |
-|                        | pop()         | is.superset(s) | popitem()                  |                |
-|                        | popleft()     | union(s)       | rename(old, new)           |                |
-|                        | reverse()     |                | set(key, value, add=FALSE) | set(key, value, add=FALSE) |
-|                        | rotate(n=1L)  |                | sort(decr=FALSE)           |                |
-|                        |               |                |  update(other)             |                |
-|                        |               |                |                            |                |
-|                        |               |                |                            | dim()          |
-|                        |               |                |                            | ncol()         |
-|                        |               |                |                            | nrow()         |
-|                        |               |                |                            | rbind(other)   |
-|                        |               |                |                            | rownames()     |
-|                        |               |                |                            | set_rownames   |
+| Container              | Deque         | Set            | Dict                         |
+| :----------------------| :-------------| :--------------| :----------------------------|
+| Container\$new()       | Deque\$new()  | s <- Set\$new()| Dict\$new()                  |
+|                        |               |                |                              |
+| add(elem)              |               | add(elem)      | add(key, value)              |
+| apply(f)               |               |                |                              |
+| clear()                |               |                |                              |
+| delete(elem, right=F)  |               |                | delete(key)                  |
+| discard(elem, right=F) |               |                | discard(key)                 |
+| empty()                |               |                |                              |
+| has(elem)              |               |                | has(key)                     |
+| print(list.len=10)     |               |                |                              |
+| size()                 |               |                |                              |
+| type()                 |               |                |                              |
+| values()               |               |                |                              |
+|                        |               |                |                              |
+|                        | addleft(elem) | diff(s)        | getval(key)                  |
+|                        | count(elem)   | intersect(s)   | keys()                       |
+|                        | peek()        | is.equal(s)    | peek(key, default = NULL)    |
+|                        | peekleft()    | is.subset(s)   | pop(key)                     |
+|                        | pop()         | is.superset(s) | popitem()                    |
+|                        | popleft()     | union(s)       | rename(old, new)             |
+|                        | reverse()     |                | setval(key, value, add=FALSE)|
+|                        | rotate(n=1L)  |                | sort(decr=FALSE)             |
+|                        |               |                | update(other)                |
+
 
 Table: Overview of classes and member methods
 
 </br>
 
-For more details visit the respective online helps (see `?Container`, `?Deque`, `?Set`, `?Dict`, and `?Dict.frame`). Usage examples are found in the corresponding [Container](Container.html), [Deque](Deque.html), [Set](Set.html), [Dict](Dict.html), and [Dict.frame](Dict.frame) vignettes.
+For more details visit the respective online helps (see `?Container`, `?Deque`, `?Set`, `?Dict`. Usage examples are found in the corresponding [Container](Container.html), [Deque](Deque.html), [Set](Set.html), and [Dict](Dict.html) vignettes.
 
 
 ## S3 classes and methods
 
 On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/S3.html) interface is available, which might be more familiar to most typical R users. More importantly, it allows to provide operators, for example, to access elements in the dict.frame via `[[`. In the table below, standard `set` operators are already listed for the `set` class.
 
-| container                    | deque               | set              | dict                         | dict.frame         |
-| :----------------------------| :-------------------| :----------------| :----------------------------| :------------------|
-|  co = container()            |  d = deque()        |  s = set()       |  d = dict()                  | dif = dict.frame() |
-|                              |                     |                  |                              |                    |
-|  add(co, elem)               |                     |  add(s, elem)    |  add(d, key, val)            |                    |
-|  clear(co)                   |                     |                  |                              |                    |
-|  delete(co, elem, right=F)   |                     |                  |  delete(d, key)              |                    |
-|  discard(co, elem, right=F)  |                     |                  |  discard(d, key)             |                    |
-|  empty(co)                   |                     |                  |                              |                    |
-|  has(co, elem)               |                     |                  |  has(d, key)                 |                    |
-|  print(co, list.len=10)      |                     |                  |                              |                    |
-|  size(co)                    |                     |                  |                              |                    |
-|  type(co)                    |                     |                  |                              |                    |
-|  values(co)                  |                     |                  |                              |                    |
-|                              |                     |                  |                              |                    |
-|                              |  addleft(d, elem)   |  s1 - s2         |  getval(d, key)              |                    |
-|                              |  count(d, elem)     |  s1 / s2         |  keys(d)                     |                    |
-|                              |  peek(d)            |  s1 == s2        |  peek(d, key, default=NULL)  |                    |
-|                              |  peekleft(d)        |  s1 < s2         |  pop(d, key)                 |                    |
-|                              |  pop(d)             |  s1 > s2         |  popitem(d)                  |                    |
-|                              |  popleft(d)         |  s1 + s2         |  rename(d, old, new)         |                    |
-|                              |  reverse(d)         |                  |  setval(d, key, val, add=FALSE)|setval(d, key, val, add=FALSE)    |
-|                              |  rotate(d, n=1L)    |                  |  sortkey(decr=FALSE)         |                    |
-|                              |                     |                  |                              |                    |
-|                              |                     |                  |                              |  as.data.frame(dif)|
-|                              |                     |                  |                              |  colnames(dif)     |
-|                              |                     |                  |                              |  dim(dif)          |
-|                              |                     |                  |                              |  ncol(dif)         |
-|                              |                     |                  |                              |  nrow(dif)         |
-|                              |                     |                  |                              |  rbind(...)        |
-|                              |                     |                  |                              |  rownames(dif)     |
+| container                    | deque               | set              | dict                           |
+| :----------------------------| :-------------------| :----------------| :------------------------------|
+|  co = container()            |  d = deque()        |  s = setnew()    |  d = dict()                    |
+|                              |                     |                  |                                |
+|  add(co, elem)               |                     |  add(s, elem)    |  add(d, key, val)              |
+|  clear(co)                   |                     |                  |                                |
+|  delete(co, elem, right=F)   |                     |                  |  delete(d, key)                |
+|  discard(co, elem, right=F)  |                     |                  |  discard(d, key)               |
+|  empty(co)                   |                     |                  |                                |
+|  has(co, elem)               |                     |                  |  has(d, key)                   |
+|  print(co, list.len=10)      |                     |                  |                                |
+|  size(co)                    |                     |                  |                                |
+|  type(co)                    |                     |                  |                                |
+|  values(co)                  |                     |                  |                                |
+|                              |                     |                  |                                |
+|                              |  addleft(d, elem)   |  s1 - s2         |  getval(d, key)                |
+|                              |  count(d, elem)     |  s1 / s2         |  keys(d)                       |
+|                              |  peek(d)            |  s1 == s2        |  peek(d, key, default=NULL)    |
+|                              |  peekleft(d)        |  s1 < s2         |  pop(d, key)                   |
+|                              |  pop(d)             |  s1 > s2         |  popitem(d)                    |
+|                              |  popleft(d)         |  s1 + s2         |  rename(d, old, new)           |
+|                              |  reverse(d)         |                  |  setval(d, key, val, add=FALSE)|
+|                              |  rotate(d, n=1L)    |                  |  sortkey(decr=FALSE)           |
 
 Table: Overview of S3 classes and methods
 
