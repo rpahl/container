@@ -38,7 +38,6 @@ Roman Pahl
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="apply">}\href{../../container/html/Container.html#method-apply}{\code{container::Container$apply()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
@@ -48,6 +47,7 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="delete">}\href{../../container/html/Dict.html#method-delete}{\code{container::Dict$delete()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="discard">}\href{../../container/html/Dict.html#method-discard}{\code{container::Dict$discard()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="get">}\href{../../container/html/Dict.html#method-get}{\code{container::Dict$get()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="getval">}\href{../../container/html/Dict.html#method-getval}{\code{container::Dict$getval()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="has">}\href{../../container/html/Dict.html#method-has}{\code{container::Dict$has()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="keys">}\href{../../container/html/Dict.html#method-keys}{\code{container::Dict$keys()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="peek">}\href{../../container/html/Dict.html#method-peek}{\code{container::Dict$peek()}}\out{</span>}
@@ -55,7 +55,9 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="popitem">}\href{../../container/html/Dict.html#method-popitem}{\code{container::Dict$popitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="remove">}\href{../../container/html/Dict.html#method-remove}{\code{container::Dict$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="rename">}\href{../../container/html/Dict.html#method-rename}{\code{container::Dict$rename()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="setval">}\href{../../container/html/Dict.html#method-setval}{\code{container::Dict$setval()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="sort">}\href{../../container/html/Dict.html#method-sort}{\code{container::Dict$sort()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="sortkey">}\href{../../container/html/Dict.html#method-sortkey}{\code{container::Dict$sortkey()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Dict" data-id="update">}\href{../../container/html/Dict.html#method-update}{\code{container::Dict$update()}}\out{</span>}
 }
 \out{</details>}

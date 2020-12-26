@@ -8,7 +8,7 @@
 \alias{dimnames<-.Dict.frame}
 \title{Dict S3 interface}
 \usage{
-dict.frame(...)
+\method{dict}{frame}(...)
 
 as.dict.frame(x)
 
