@@ -12,6 +12,12 @@
 #' [`>.Set()`]
 NULL
 
+#' @rdname setS3
+#' @export
+set <- function(...) {
+    .Deprecated("setnew")
+    setnew(...)
+}
 
 #' @rdname setS3
 #' @export
@@ -73,4 +79,5 @@ NULL
 #' @return For `> return `TRUE` if s1 is superset of s2.
 #' @export
 `>.Set` <- function(s1, s2) s1$is.superset(s2)
+
 

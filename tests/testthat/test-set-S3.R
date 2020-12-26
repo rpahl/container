@@ -91,3 +91,4 @@ test_that("set operations work as expected", {
     expect_true((s1 - s2) < s1)
 })
 
+context("set S3 deprecated")

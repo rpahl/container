@@ -2,12 +2,15 @@
 % Please edit documentation in R/set-S3.R
 \name{setS3}
 \alias{setS3}
+\alias{set}
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
 \alias{add.Set}
 \title{Set S3 interface}
 \usage{
+set(...)
+
 setnew(...)
 
 as.set(x)
