@@ -121,9 +121,9 @@ test_that("it can be checked if Dict has a certain key", {
 
 test_that("all keys can be listed", {
     d <- Dict$new(a = 1, b = 2)
-    expect_equal(keys(d), c("a", "b"))
+    expect_equal(d$keys(), c("a", "b"))
     d$delete("a")
-    expect_equal(keys(d), "b")
+    expect_equal(d$keys(), "b")
 })
 
 test_that("elements can be peeked and return default value if key does not exist", {
@@ -163,13 +163,13 @@ test_that("A key in the Dict can be renamed", {
     expect_error(d$rename("A", "B"), "rename failed because 'B' exists already")
     expect_error(d$rename("Z", "B"), "key 'Z' not found")
 
-    values = as.numeric(d$values())
+    vals = as.numeric(d$values())
     d$rename("A", "a")
     expect_true(d$has("a"))
     expect_false(d$has("A"))
 
     # Verify that values did not change
-    expect_equal(values, as.numeric(d$values()))
+    expect_equal(vals, as.numeric(d$values()))
 
     # Several keys at once
     d$rename(c("a", "B"), c("x", "y"))
@@ -191,7 +191,7 @@ test_that("a Dict can be re-sorted according to its keys", {
     d <- Dict$new()
     d$add("b", 1)$add("a", 2)
     expect_equal(d$keys(), c("b", "a"))
-    expect_equal(d$sort()$keys(), c("a", "b"))
+    expect_equal(d$sortkey()$keys(), c("a", "b"))
 })
 
 test_that("a Dict can be updated by another Dict object", {
@@ -217,6 +217,12 @@ test_that("Dict set is deprecated and replaced by setval", {
 })
 
 test_that("Dict remove is deprecated and replaced by delete", {
+    d <- Dict$new(a = 1, b = 2)
+    expect_warning(d$remove("b"), "Use 'delete' instead.")
+    expect_false(d$has("b"))
+})
+
+test_that("Dict sort is deprecated and replaced by sortkey", {
     d <- Dict$new(a = 1, b = 2)
     expect_warning(d$remove("b"), "Use 'delete' instead.")
     expect_false(d$has("b"))

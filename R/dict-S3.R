@@ -13,6 +13,33 @@
 #' [`[[.Dict()`], [`[<-.Dict()`], [`[.Dict()`]
 NULL
 
+#' @rdname dictS3
+#' @export
+dict <- function(...) UseMethod("dict")
+
+#' @rdname dictS3
+#' @export
+dict.data.frame <- function(...)
+{
+    Dict$new(as.list(...))
+}
+
+#' @rdname dictS3
+#' @export
+dict.default <- function(...)
+{
+    Dict$new(...)
+}
+
+
+#' @rdname dictS3
+#' @export
+as.dict <- function(x) dict(x)
+
+#' @rdname dictS3
+#' @export
+is.dict <- function(x) inherits(x, "Dict")
+
 # S3 generic methods not derived from container
 
 #' @rdname dictS3
@@ -40,18 +67,6 @@ rename <- function(x, ...) UseMethod("rename")
 sortkey <- function(x, ...) UseMethod("sortkey")
 
 #' @rdname dictS3
-#' @export
-dict <- function(x = list()) Dict$new(x)
-
-#' @rdname dictS3
-#' @export
-as.dict <- function(x) dict(x)
-
-#' @rdname dictS3
-#' @export
-is.dict <- function(x) inherits(x, "Dict")
-
-#' @rdname dictS3
 #' @param key `character` unique identifier to access the key-value pair.
 #' @param value value to add to the dictionary.
 #' @export
@@ -67,7 +82,7 @@ discard.Dict <- function(x, key, ...) x$discard(key)
 
 #' @rdname dictS3
 #' @export
-getval.Dict <- function(x, key, ...) x$get(key)
+getval.Dict <- function(x, key, ...) x$getval(key)
 
 #' @rdname dictS3
 #' @export
@@ -103,12 +118,12 @@ rename.Dict <- function(x, old, new, ...) x$rename(old, new)
 #' given, otherwise if `TRUE`, the key-value pair would be added if the `key`
 #' is not yet in the dict.
 #' @export
-setval.Dict <- function(x, key, value, add=FALSE, ...) x$set(key, value, add)
+setval.Dict <- function(x, key, value, add=FALSE, ...) x$setval(key, value, add)
 
 #' @rdname dictS3
 #' @param decr `logical` if `TRUE` the elements are sorted decreasingly
 #' @export
-sortkey.Dict <- function(x, decr=FALSE, ...) x$sort(decr)
+sortkey.Dict <- function(x, decr=FALSE, ...) x$sortkey(decr)
 
 #' @rdname dictS3
 #' @export
@@ -159,7 +174,7 @@ NULL
         stop("cannot select more than one element")
     }
     if (missing(default)) {
-        x$get(key)
+        x$getval(key)
     } else {
         x$peek(key, default)
     }
@@ -174,7 +189,7 @@ NULL
     d = dict()
     for (k in unique(key)) {
         value = if (missing(default)) {
-            x$get(k)
+            x$getval(k)
         } else {
             x$peek(k, default = default)
         }
@@ -201,7 +216,7 @@ NULL
     if (is.dict.frame(x))
     stopifnot(is.character(key))
     stopifnot(length(key) == 1)
-    x$set(key, value, add)
+    x$setval(key, value, add)
 }
 
 
@@ -214,7 +229,7 @@ NULL
         stop("length of key and value must match")
     }
 
-    set_value = function(key, value) x$set(key, value, add)
+    set_value = function(key, value) x$setval(key, value, add)
     mapply(key, value, FUN = set_value)
     invisible(x)
 }

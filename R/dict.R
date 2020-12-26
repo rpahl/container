@@ -198,10 +198,18 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         },
 
-        #' @description Re-order elements according to key-order
+        #' @description This function is deprecated. Use `sortkey` instead.
         #' @param decr `logical` if `TRUE` sort in decreasing order.
         #' @return invisibly returns the `Dict`
         sort = function(decr = FALSE) {
+            .Deprecated("sortkey")
+            self$sortkey(decr)
+        },
+
+        #' @description Re-order elements according to key-order
+        #' @param decr `logical` if `TRUE` sort in decreasing order.
+        #' @return invisibly returns the `Dict`
+        sortkey = function(decr = FALSE) {
             private$elems <- private$elems[order(self$keys(), decreasing=decr)]
             invisible(self)
         },

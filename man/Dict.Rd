@@ -37,6 +37,7 @@ Roman Pahl
 \item \href{#method-set}{\code{Dict$set()}}
 \item \href{#method-setval}{\code{Dict$setval()}}
 \item \href{#method-sort}{\code{Dict$sort()}}
+\item \href{#method-sortkey}{\code{Dict$sortkey()}}
 \item \href{#method-update}{\code{Dict$update()}}
 \item \href{#method-clone}{\code{Dict$clone()}}
 }
@@ -365,9 +366,29 @@ invisibly returns the \code{Dict}
 \if{html}{\out{<a id="method-sort"></a>}}
 \if{latex}{\out{\hypertarget{method-sort}{}}}
 \subsection{Method \code{sort()}}{
-Re-order elements according to key-order
+This function is deprecated. Use \code{sortkey} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$sort(decr = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{decr}}{\code{logical} if \code{TRUE} sort in decreasing order.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sortkey"></a>}}
+\if{latex}{\out{\hypertarget{method-sortkey}{}}}
+\subsection{Method \code{sortkey()}}{
+Re-order elements according to key-order
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$sortkey(decr = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

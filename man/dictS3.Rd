@@ -2,15 +2,17 @@
 % Please edit documentation in R/dict-S3.R
 \name{dictS3}
 \alias{dictS3}
+\alias{dict}
+\alias{dict.data.frame}
+\alias{dict.default}
+\alias{as.dict}
+\alias{is.dict}
 \alias{getval}
 \alias{keys}
 \alias{popitem}
 \alias{setval}
 \alias{rename}
 \alias{sortkey}
-\alias{dict}
-\alias{as.dict}
-\alias{is.dict}
 \alias{add.Dict}
 \alias{delete.Dict}
 \alias{discard.Dict}
@@ -26,6 +28,16 @@
 \alias{update.Dict}
 \title{Dict S3 interface}
 \usage{
+dict(...)
+
+\method{dict}{data.frame}(...)
+
+\method{dict}{default}(...)
+
+as.dict(x)
+
+is.dict(x)
+
 getval(x, ...)
 
 keys(x)
@@ -37,12 +49,6 @@ setval(x, ...)
 rename(x, ...)
 
 sortkey(x, ...)
-
-dict(x = list())
-
-as.dict(x)
-
-is.dict(x)
 
 \method{add}{Dict}(x, key, value, ...)
 
@@ -73,10 +79,10 @@ is.dict(x)
 \method{update}{Dict}(object, other, ...)
 }
 \arguments{
+\item{...}{further arguments depending on the method.}
+
 \item{x}{a named vector (or list) of 'any' type including
 \code{\link[base:data.frame]{base::data.frame()}}s.}
-
-\item{...}{further arguments depending on the method.}
 
 \item{key}{\code{character} unique identifier to access the key-value pair.}
 
