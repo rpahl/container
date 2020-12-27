@@ -231,6 +231,9 @@ test_that("performing d1 + d2 returns a copy of d1 updated by d2", {
     expect_equal(size(d2), 2)
     expect_equal(size(dd), 3)
     expect_equal(values(dd), values(update(d1, d2)))
+    expect_equal(d1 + d1, d1)
+    expect_equal(d1 + dict(), d1)
+    expect_equal(dict() + d1, d1)
 })
 
 test_that("performing d1 - d2 returns a copy of d1 with all d2 keys being discarded", {
@@ -247,5 +250,8 @@ test_that("performing d1 / d2 returns a dictionary of intersected keys", {
     d2 <- dict(       b = 2, c = 1)
     dd <- d1 / d2
     expect_equal(dd, dict(b = 2))
+    expect_equal(d1 / d1, d1)
+    expect_equal(d1 / dict(), dict())
+    expect_equal(dict() / d1, dict())
 })
 
