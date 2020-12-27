@@ -182,9 +182,7 @@ NULL
 #' @export
 `[[.Dict` <- function(x, key, default = NULL)
 {
-    if (!is.character(key) || length(key) != 1) {
-        stop("cannot select more than one element")
-    }
+    print("S3")
     if (missing(default)) {
         x$getval(key)
     } else {
@@ -225,9 +223,6 @@ NULL
 #' @export
 `[[<-.Dict` <- function(x, key, add = FALSE, value)
 {
-    if (is.dict.frame(x))
-    stopifnot(is.character(key))
-    stopifnot(length(key) == 1)
     x$setval(key, value, add)
 }
 
@@ -244,5 +239,45 @@ NULL
     set_value = function(key, value) x$setval(key, value, add)
     mapply(key, value, FUN = set_value)
     invisible(x)
+}
+
+
+#setOldClass(c('Dict'))
+
+#setMethod("[[.Dict",
+#    #signature(x = "Dict", i = "character", j = "ANY"),
+#    signature(x = "Dict"),
+#    function (x) {
+#        print("S4")
+#        x
+#    }
+#)
+
+add_dict_tab_class <- function(x)
+{
+    attr.class <- unique(c("dict.tab", attr(x, "class")))
+    data.table::setattr(x, "class", attr.class)
+    x
+}
+
+#' @export
+dict.tab <- function(...) {
+    dat <- data.table::data.table(...)
+    add_dict_tab_class(dat)
+    dat
+}
+
+#' @export
+`[[.dict.tab` <- function(x, ...)
+{
+    print("do [[")
+    x
+}
+
+#' @export
+`[.dict.tab` <- function(x, ...)
+{
+    print("do [")
+    x
 }
 

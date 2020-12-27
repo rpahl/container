@@ -255,3 +255,19 @@ test_that("performing d1 / d2 returns a dictionary of intersected keys", {
     expect_equal(dict() / d1, dict())
 })
 
+context("Extract and replace operators")
+
+test_that("'[[' select operator works", {
+    d <- dict(a = 1, b = 2)
+    d[["a"]]
+})
+
+test_that("data.table", {
+    d <- data.table(a = 1, b = 2)
+    d[["a"]]
+})
+
+test_that("dict.tab", {
+    d <- dict.tab()
+    d <- new("dict.tab", a=1:3, b=1:3)
+})

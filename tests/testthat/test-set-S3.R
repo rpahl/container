@@ -92,3 +92,9 @@ test_that("set operations work as expected", {
 })
 
 context("set S3 deprecated")
+
+test_that("set initializer is deprecated and replaced by setnew", {
+    s <- expect_warning(set(1, 2, 3))
+    expect_equal(s, Set$new(1, 2, 3))
+})
+
