@@ -13,13 +13,16 @@ test_that("Dict constructor works as expected", {
     expect_equal(Dict$new(x = 1)$values(), list(x = 1))
     expect_equal(Dict$new(x = 1), Dict$new(list(x = 1)))
     expect_equal(Dict$new(c(x = 1))$values(), c(x = 1))
+    expect_equal(Dict$new(c(x = c(1, 4)))$values(), c(x1 = 1, x2 = 4))
+    expect_equal(Dict$new(list(x = c(1, 4)))$values(), list(x = c(1, 4)))
 
     # Two (or more) elements
-    d <- Dict$new(x = 1, y = 2)
+    d <- Dict$new(x = 1:2, y = 2:3)
     expect_true(inherits(d, "Dict"))
     expect_true(inherits(d, "Container"))
-    expect_equal(d, Dict$new(list(x = 1, y = 2)))
-    expect_equal(d$values(), Container$new(x = 1, y = 2, keep_names = TRUE)$values())
+    expect_equal(d, Dict$new(list(x = 1:2, y = 2:3)))
+    expect_equal(d$values(),
+                 Container$new(x = 1:2, y = 2:3, keep_names = TRUE)$values())
     expect_equal(names(d$values()), c("x", "y"))
 
     expect_equal(Dict$new(env = environment(), id = identity)$size(), 2)

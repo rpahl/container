@@ -268,6 +268,6 @@ test_that("data.table", {
 })
 
 test_that("dict.tab", {
-    d <- dict.tab()
-    d <- new("dict.tab", a=1:3, b=1:3)
+    d <- dict.tab(a=1:3, b=1:3)
+    d <- dict.tab(a=1:4, b=c(1, 1, 2, 2))
 })
