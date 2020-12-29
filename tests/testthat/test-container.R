@@ -5,10 +5,10 @@ test_that("Container constructor works as expected", {
     expect_equal(attr(co, "class"), c("Container", "Iterable", "R6"))
 
     co <- Container$new(1:4)
-    expect_equal(co$type(), "numeric")
+    expect_equal(mode(co$values()), "numeric")
 
     co <- Container$new(environment())
-    expect_equal(co$type(), "list")
+    expect_equal(mode(co$values()), "list")
     expect_equal(co$size(), 1)
 
     co <- Container$new(environment(), foo = identity)
@@ -24,14 +24,14 @@ test_that("Container constructor works as expected", {
 })
 
 test_that("type of Container is inialized as expected", {
-    expect_equal(Container$new()$type(), "list")
-    expect_equal(Container$new(1)$type(), "numeric")
-    expect_equal(Container$new(new.env())$type(), "list")
-    expect_equal(Container$new(TRUE)$type(), "logical")
-    expect_equal(Container$new(function(){})$type(), "list")
-    expect_equal(Container$new(raw())$type(), "raw")
-    expect_equal(Container$new(0+0i)$type(), "complex")
-    expect_equal(Container$new(letters[1:10])$type(), "character")
+    expect_equal(mode(Container$new()$values()), "list")
+    expect_equal(mode(Container$new(1)$values()), "numeric")
+    expect_equal(mode(Container$new(new.env())$values()), "list")
+    expect_equal(mode(Container$new(TRUE)$values()), "logical")
+    expect_equal(mode(Container$new(function(){})$values()), "list")
+    expect_equal(mode(Container$new(raw())$values()), "raw")
+    expect_equal(mode(Container$new(0+0i)$values()), "complex")
+    expect_equal(mode(Container$new(letters[1:10])$values()), "character")
 })
 
 test_that("it can be checked whether the Container is empty", {
@@ -119,9 +119,9 @@ test_that("named elements can be added to a Container", {
 
 
 test_that("a cleared Container preserves its type", {
-    expect_equal(Container$new()$clear()$type(), "list")
-    expect_equal(Container$new(1:3)$clear()$type(), "numeric")
-    expect_equal(Container$new("a")$clear()$type(), "character")
+    expect_equal(mode(Container$new()$clear()$values()), "list")
+    expect_equal(mode(Container$new(1:3)$clear()$values()), "numeric")
+    expect_equal(mode(Container$new("a")$clear()$values()), "character")
 })
 
 test_that("it can be determined whether Container contains a certain element", {
@@ -227,5 +227,12 @@ test_that("Iterator can be constructed from Container", {
     sum <- 0
     while(it$has_next()) sum <- sum + it$get_next()
     expect_equal(sum(v), sum(co$values()))
+})
+
+
+test_that("type is deprecated", {
+    co <- Container$new(1:10)
+    expect_warning(expect_equal(co$type(), "numeric"),
+                   "'co$type()' is deprecated.", fixed = TRUE)
 })
 

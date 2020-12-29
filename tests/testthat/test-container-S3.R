@@ -6,10 +6,10 @@ test_that("Container initialization works as expected", {
     expect_equal(attr(co, "class"), c("Container", "Iterable", "R6"))
 
     co <- container(1:4)
-    expect_equal(type(co), "numeric")
+    expect_equal(mode(values(co)), "numeric")
 
     co <- container(environment())
-    expect_equal(type(co), "list")
+    expect_equal(mode(values(co)), "list")
     expect_equal(size(co), 1)
 
     co <- container(environment(), foo = identity)
@@ -24,14 +24,14 @@ test_that("Container initialization works as expected", {
 })
 
 test_that("type of Container is inialized as expected", {
-    expect_equal(type(container()), "list")
-    expect_equal(type(container(1)), "numeric")
-    expect_equal(type(container(new.env())), "list")
-    expect_equal(type(container(TRUE)), "logical")
-    expect_equal(type(container(function(){})), "list")
-    expect_equal(type(container(raw())), "raw")
-    expect_equal(type(container(0+0i)), "complex")
-    expect_equal(type(container(letters[1:10])), "character")
+    expect_equal(mode(values(container())), "list")
+    expect_equal(mode(values(container(1))), "numeric")
+    expect_equal(mode(values(container(new.env()))), "list")
+    expect_equal(mode(values(container(TRUE))), "logical")
+    expect_equal(mode(values(container(function(){}))), "list")
+    expect_equal(mode(values(container(raw()))), "raw")
+    expect_equal(mode(values(container(0+0i))), "complex")
+    expect_equal(mode(values(container(letters[1:10]))), "character")
 })
 
 test_that("it can be checked whether the Container is empty", {
@@ -119,9 +119,9 @@ test_that("named elements can be added to a Container", {
 
 
 test_that("a cleared Container preserves its type", {
-    expect_equal(type(clear(container())), "list")
-    expect_equal(type(clear(container(1:3))), "numeric")
-    expect_equal(type(clear(container("a"))), "character")
+    expect_equal(mode(values(clear(container()))), "list")
+    expect_equal(mode(values(clear(container(1:3)))), "numeric")
+    expect_equal(mode(values(clear(container("a")))), "character")
 })
 
 test_that("it can be determined whether Container contains a certain element", {

@@ -18,11 +18,12 @@ Deque <- R6::R6Class("Deque",
         #' @param elem element to be added.
         #' @return invisibly returns the `Deque()` object.
         addleft = function(elem) {
-            if (self$type() == "list") {
+            type <- mode(self$values())
+            if (type == "list") {
                 elem <- list(elem)
             } else {
-                if (self$type() != mode(elem)) {
-                    stop("type mismatch: expected '", self$type(),
+                if (type != mode(elem)) {
+                    stop("type mismatch: expected '", type,
                          "' but got '", mode(elem), "'")
                 }
             }

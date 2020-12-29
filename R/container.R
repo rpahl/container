@@ -74,11 +74,12 @@ Container <- R6::R6Class("Container",
         #' @param elem element to be added to `Container` object
         #' @return invisibly returns the `Container` object
         add = function(elem) {
-            if (self$type() == "list") {
+            type <- mode(self$values())
+            if (type == "list") {
                 elem <- list(elem)
             } else {
-                if (self$type() != mode(elem)) {
-                    stop("type mismatch: expected '", self$type(),
+                if (type != mode(elem)) {
+                    stop("type mismatch: expected '", type,
                          "' but got '", mode(elem), "'")
                 }
             }
@@ -164,9 +165,16 @@ Container <- R6::R6Class("Container",
         #' @return the `Container` size
         size = function() length(private$elems),
 
-        #' @description Underlying data type
+        #' @description This function is deprecated.
         #' @return type (or mode) of internal vector containing the elements
-        type = function() mode(private$elems),
+        type = function() {
+            old = as.character(sys.call(sys.parent()))[1L]
+            object <- strsplit(old, split = "$", fixed = TRUE)[[1]][1]
+            msg <- paste0("'", old, "()' is deprecated.\n",
+                          "Use 'mode(", object, "$values())' instead.")
+            .Deprecated("mode", msg = msg)
+            mode(private$elems)
+        },
 
         #' @description Get copy of `Container` values
         #' @return a copy of all elements in the same format as they are stored

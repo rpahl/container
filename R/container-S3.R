@@ -66,10 +66,6 @@ size <- function(x) UseMethod("size")
 
 #' @rdname ContainerS3
 #' @export
-type <- function(x) UseMethod("type")
-
-#' @rdname ContainerS3
-#' @export
 values <- function(x) UseMethod("values")
 
 #' @rdname ContainerS3
@@ -111,10 +107,6 @@ delete.Container <- function(x, elem, right=FALSE, ...) x$delete(elem, right)
 #' @rdname ContainerS3
 #' @export
 size.Container <- function(x) x$size()
-
-#' @rdname ContainerS3
-#' @export
-type.Container <- function(x) x$type()
 
 #' @rdname ContainerS3
 #' @export

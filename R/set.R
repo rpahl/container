@@ -23,7 +23,8 @@ Set <- R6::R6Class("Set",
         #' @param elem If not already in set, add `elem`.
         #' @return invisibly returns [Set()] object.
         add = function(elem) {
-            if (length(elem) > 1 && self$type() != "list") {
+            type <- mode(self$values())
+            if (length(elem) > 1 && type != "list") {
                 it <- Iterator$new(elem)
                 while(it$has_next()) {
                     self$add(it$get_next())

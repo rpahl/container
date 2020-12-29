@@ -60,7 +60,6 @@ The following table shows member methods divided by class. The top half contains
 | has(elem)              |               |                | has(key)                     |
 | print(list.len=10)     |               |                |                              |
 | size()                 |               |                |                              |
-| type()                 |               |                |                              |
 | values()               |               |                |                              |
 |                        |               |                |                              |
 |                        | addleft(elem) | diff(s)        | getval(key)                  |
@@ -97,7 +96,6 @@ On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/
 |  has(co, elem)               |                     |                  |  has(d, key)                   |
 |  print(co, list.len=10)      |                     |                  |                                |
 |  size(co)                    |                     |                  |                                |
-|  type(co)                    |                     |                  |                                |
 |  values(co)                  |                     |                  |                                |
 |                              |                     |                  |                                |
 |                              |  addleft(d, elem)   |  s1 - s2         |  getval(d, key)                |

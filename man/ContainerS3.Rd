@@ -14,7 +14,6 @@
 \alias{has}
 \alias{delete}
 \alias{size}
-\alias{type}
 \alias{values}
 \alias{add.Container}
 \alias{clear.Container}
@@ -24,7 +23,6 @@
 \alias{has.Container}
 \alias{print.Container}
 \alias{size.Container}
-\alias{type.Container}
 \alias{values.Container}
 \title{Container S3 interface
 '}
@@ -53,8 +51,6 @@ delete(x, ...)
 
 size(x)
 
-type(x)
-
 values(x)
 
 \method{add}{Container}(x, elem, ...)
@@ -72,8 +68,6 @@ values(x)
 \method{print}{Container}(x, list.len = 10, ...)
 
 \method{size}{Container}(x)
-
-\method{type}{Container}(x)
 
 \method{values}{Container}(x)
 }

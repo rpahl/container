@@ -251,7 +251,7 @@ the \code{Container} size
 \if{html}{\out{<a id="method-type"></a>}}
 \if{latex}{\out{\hypertarget{method-type}{}}}
 \subsection{Method \code{type()}}{
-Underlying data type
+This function is deprecated.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$type()}\if{html}{\out{</div>}}
 }
