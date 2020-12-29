@@ -66,44 +66,16 @@ rename <- function(x, ...) UseMethod("rename")
 #' @export
 sortkey <- function(x, ...) UseMethod("sortkey")
 
-#' @rdname dictS3
-#' @param key `character` unique identifier to access the key-value pair.
-#' @param value value to add to the dictionary.
-#' @export
-add.Dict <- function(x, key, value, ...) x$add(key, value)
 
-#' @rdname dictS3
-#' @export
-delete.Dict <- function(x, key, ...) x$delete(key)
-
-#' @rdname dictS3
-#' @export
-discard.Dict <- function(x, key, ...) x$discard(key)
 
 #' @rdname dictS3
 #' @export
 getval.Dict <- function(x, key, ...) x$getval(key)
 
-#' @rdname dictS3
-#' @export
-has.Dict <- function(x, key, ...) x$has(key)
 
 #' @rdname dictS3
 #' @export
 keys.Dict <- function(x) x$keys()
-
-#' @rdname dictS3
-#' @param default default value to return if `key` not in the dictionary
-#' @export
-peek.Dict <- function(x, key, default=NULL, ...) x$peek(key, default)
-
-#' @rdname dictS3
-#' @export
-pop.Dict <- function(x, key, ...) x$pop(key)
-
-#' @rdname dictS3
-#' @export
-popitem.Dict <- function(x) x$popitem()
 
 #' @rdname dictS3
 #' @export

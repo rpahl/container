@@ -32,7 +32,7 @@ Roman Pahl
 \item \href{#method-peekleft}{\code{Deque$peekleft()}}
 \item \href{#method-pop}{\code{Deque$pop()}}
 \item \href{#method-popleft}{\code{Deque$popleft()}}
-\item \href{#method-reverse}{\code{Deque$reverse()}}
+\item \href{#method-rev}{\code{Deque$rev()}}
 \item \href{#method-rotate}{\code{Deque$rotate()}}
 \item \href{#method-clone}{\code{Deque$clone()}}
 }
@@ -48,6 +48,7 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="initialize">}\href{../../container/html/Container.html#method-initialize}{\code{container::Container$initialize()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
@@ -149,12 +150,12 @@ element 'popped' from the left side of the \code{\link[=Deque]{Deque()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-reverse"></a>}}
-\if{latex}{\out{\hypertarget{method-reverse}{}}}
-\subsection{Method \code{reverse()}}{
+\if{html}{\out{<a id="method-rev"></a>}}
+\if{latex}{\out{\hypertarget{method-rev}{}}}
+\subsection{Method \code{rev()}}{
 Reverse all elements of the \code{\link[=Deque]{Deque()}} in-place.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Deque$reverse()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Deque$rev()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{

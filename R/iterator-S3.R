@@ -17,6 +17,10 @@ iter <- function(x) UseMethod("iter")
 
 #' @rdname iterS3
 #' @export
+iter.Container <- function(x) x$iter()
+
+#' @rdname iterS3
+#' @export
 iter.default <- function(x) Iterator$new(x)
 
 #' @rdname iterS3

@@ -4,72 +4,39 @@
 \alias{dequeS3}
 \alias{deque}
 \alias{as.deque}
+\alias{as.deque.Container}
 \alias{is.deque}
-\alias{addleft}
-\alias{count}
-\alias{peek}
-\alias{peekleft}
-\alias{pop}
-\alias{popleft}
-\alias{reverse}
-\alias{rotate}
-\alias{addleft.Deque}
-\alias{count.Deque}
-\alias{peek.Deque}
-\alias{peekleft.Deque}
-\alias{pop.Deque}
-\alias{popleft.Deque}
-\alias{reverse.Deque}
-\alias{rotate.Deque}
-\title{Deque (double-ended queue) S3 interface}
+\alias{rev.Deque}
+\title{Deque (double-ended queue)}
 \usage{
-deque(...)
+deque(..., keep_names = FALSE)
 
-as.deque(x)
+as.deque(x, ...)
+
+\method{as.deque}{Container}(x, ...)
 
 is.deque(x)
 
-addleft(x, ...)
-
-count(x, ...)
-
-peek(x, ...)
-
-peekleft(x)
-
-pop(x, ...)
-
-popleft(x)
-
-reverse(x)
-
-rotate(x, ...)
-
-\method{addleft}{Deque}(x, elem, ...)
-
-\method{count}{Deque}(x, elem, ...)
-
-\method{peek}{Deque}(x, ...)
-
-\method{peekleft}{Deque}(x)
-
-\method{pop}{Deque}(x, ...)
-
-\method{popleft}{Deque}(x)
-
-\method{reverse}{Deque}(x)
-
-\method{rotate}{Deque}(x, n = 1L, ...)
+\method{rev}{Deque}(x)
 }
 \arguments{
-\item{...}{initial elements to initialize the \code{\link[=Deque]{Deque()}} object or further
-arguments depending on the method.}
+\item{...}{initial elements put into the \code{Deque}.}
 
-\item{x}{\code{\link[=Deque]{Deque()}} object}
+\item{keep_names}{\code{logical} if TRUE, keeps names of passed elements.}
 
-\item{elem}{some element of the deque}
+\item{x}{any \code{R} object, or an object inheriting from class 'Deque' or
+'Coniner' for the corresponding S3 methods.}
+}
+\value{
+\code{\link[=deque]{deque()}} returns a \link[=deque]{Deque()} object.
 
-\item{n}{\code{integer} number of steps to rotate}
+\code{\link[=as.deque]{as.deque()}} coerces to a deque.
+
+\code{\link[=is.deque]{is.deque()}} returns \code{TRUE} if its argument is a \code{\link[=Deque]{Deque()}}
+and \code{FALSE} otherwise.
+
+\code{rev} reverses all elements of the deque in place and invisibly
+returns the \code{\link[=Deque]{Deque()}} object.
 }
 \description{
 Deques are a generalization of stacks and queues typically
@@ -78,8 +45,8 @@ underlying data sequence. As such, the \code{\link[=deque]{deque()}} can also be
 both stacks and queues.
 }
 \details{
-For a detailed documentation of all methods see \code{\link[=Deque]{Deque()}}.
+For a full list of all deque methods see \code{\link[=Deque]{Deque()}}.
 }
 \seealso{
-\code{\link[=Container]{Container()}}, \code{\link[=+.Deque]{+.Deque()}}
+\code{\link[=Deque]{Deque()}}, \code{\link[=container]{container()}}
 }

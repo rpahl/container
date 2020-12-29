@@ -1,96 +1,62 @@
-#' Deque (double-ended queue) S3 interface
+#' Deque (double-ended queue)
 #'
 #' @description Deques are a generalization of stacks and queues typically
 #' with methods to add, remove and access elements at both sides of the
 #' underlying data sequence. As such, the [deque()] can also be used to mimic
 #' both stacks and queues.
-#' @details For a detailed documentation of all methods see [Deque()].
-#' @param x [Deque()] object
-#' @param ... initial elements to initialize the [Deque()] object or further
-#' arguments depending on the method.
+#' @details For a full list of all deque methods see [Deque()].
+#' @param ... initial elements put into the `Deque`.
+#' @param keep_names `logical` if TRUE, keeps names of passed elements.
+#' @param x any `R` object, or an object inheriting from class 'Deque' or
+#' 'Coniner' for the corresponding S3 methods.
+#' @return [deque()] returns a [Deque()] object.
+#' @seealso [Deque()], [container()]
 #' @name dequeS3
-#' @seealso [Container()], [`+.Deque()`]
-NULL
+#' @export
+deque <- function(..., keep_names = FALSE) {
+    if (missing(keep_names)) {
+        Deque$new(...)
+    } else {
+        Deque$new(..., keep_names = keep_names)
+    }
+}
+
+
+#' @rdname dequeS3
+#' @return [as.deque()] coerces to a deque.
+#' @export
+as.deque <- function(x, ...)
+{
+    if (is.null(x)) return(Deque())
+    UseMethod("as.deque")
+}
 
 #' @rdname dequeS3
 #' @export
-deque <- function(...) Deque$new(...)
+as.deque.Container <- function(x, ...)
+{
+    deque(values(x), ...)
+}
 
-#' @rdname dequeS3
 #' @export
-as.deque <- function(x) Deque$new(x)
+as.deque.default <- function(x, ...)
+{
+    if (is.deque(x)) return(x)
+    deque(x, ...)
+}
 
 #' @rdname dequeS3
+#' @return [is.deque()] returns `TRUE` if its argument is a [Deque()]
+#' and `FALSE` otherwise.
 #' @export
 is.deque <- function(x) inherits(x, "Deque")
 
-
 #' @rdname dequeS3
+#' @return `rev` reverses all elements of the deque in place and invisibly
+#' returns the [Deque()] object.
 #' @export
-addleft <- function(x, ...) UseMethod("addleft")
+rev.Deque <- function(x) x$reverse()
 
-#' @rdname dequeS3
-#' @export
-count <- function(x, ...) UseMethod("count")
-
-#' @rdname dequeS3
-#' @export
-peek <- function(x, ...) UseMethod("peek")
-
-#' @rdname dequeS3
-#' @export
-peekleft <- function(x) UseMethod("peekleft")
-
-#' @rdname dequeS3
-#' @export
-pop <- function(x, ...) UseMethod("pop")
-
-#' @rdname dequeS3
-#' @export
-popleft <- function(x) UseMethod("popleft")
-
-#' @rdname dequeS3
-#' @export
-reverse <- function(x) UseMethod("reverse")
-
-#' @rdname dequeS3
-#' @export
-rotate <- function(x, ...) UseMethod("rotate")
-
-
-#' @rdname dequeS3
-#' @param elem some element of the deque
-#' @export
-addleft.Deque <- function(x, elem, ...) x$addleft(elem)
-
-#' @rdname dequeS3
-#' @export
-count.Deque <- function(x, elem, ...) x$count(elem)
-
-#' @rdname dequeS3
-#' @export
-peek.Deque <- function(x, ...) x$peek()
-
-#' @rdname dequeS3
-#' @export
-peekleft.Deque <- function(x) x$peekleft()
-
-#' @rdname dequeS3
-#' @export
-pop.Deque <- function(x, ...) x$pop()
-
-#' @rdname dequeS3
-#' @export
-popleft.Deque <- function(x) x$popleft()
-
-#' @rdname dequeS3
-#' @export
-reverse.Deque <- function(x) x$reverse()
-
-#' @rdname dequeS3
-#' @param n `integer` number of steps to rotate
-#' @export
-rotate.Deque <- function(x, n = 1L, ...) x$rotate(n)
 
 
 #' Binary `Deque` operators

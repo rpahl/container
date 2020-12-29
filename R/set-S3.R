@@ -31,11 +31,6 @@ as.set <- function(x) Set$new(x)
 #' @export
 is.set <- function(x) inherits(x, "Set")
 
-#' @rdname setS3
-#' @param elem some element of the set
-#' @export
-add.Set <- function(x, elem, ...) x$add(elem)
-
 
 #' Binary set operators
 #'

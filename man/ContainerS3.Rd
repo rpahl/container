@@ -5,95 +5,52 @@
 \alias{container}
 \alias{as.container}
 \alias{is.container}
-\alias{add}
-\alias{clear}
-\alias{clone}
-\alias{discard}
-\alias{empty}
-\alias{has}
-\alias{delete}
-\alias{size}
-\alias{values}
-\alias{add.Container}
-\alias{clear.Container}
-\alias{clone.Container}
-\alias{discard.Container}
-\alias{empty.Container}
-\alias{has.Container}
-\alias{print.Container}
-\alias{size.Container}
-\alias{values.Container}
-\title{Container S3 interface
-'}
+\alias{length.Container}
+\alias{as.list.Container}
+\title{A sequence Container}
 \usage{
 container(..., keep_names = FALSE)
 
-as.container(x)
+as.container(x, ...)
 
 is.container(x)
 
-add(x, ...)
+\method{length}{Container}(x)
 
-clear(x)
-
-clone(x, ...)
-
-discard(x, ...)
-
-empty(x)
-
-has(x, ...)
-
-delete(x, ...)
-
-size(x)
-
-values(x)
-
-\method{add}{Container}(x, elem, ...)
-
-\method{clear}{Container}(x)
-
-\method{clone}{Container}(x, deep = FALSE, ...)
-
-\method{discard}{Container}(x, elem, right = FALSE, ...)
-
-\method{empty}{Container}(x)
-
-\method{has}{Container}(x, elem, ...)
-
-\method{print}{Container}(x, list.len = 10, ...)
-
-\method{size}{Container}(x)
-
-\method{values}{Container}(x)
+\method{as.list}{Container}(x)
 }
 \arguments{
-\item{...}{initial elements to initialize the \code{\link[=Container]{Container()}} object or further
-arguments depending on the method.}
+\item{...}{initial elements put into the \code{Container}.}
 
-\item{x}{\code{\link[=Container]{Container()}} object}
+\item{keep_names}{\code{logical} if TRUE, keeps names of passed elements.}
 
-\item{elem}{some element of the container}
+\item{x}{any \code{R} object, or an object inheriting from class 'Container' for
+the S3 methods.}
+}
+\value{
+\code{\link[=container]{container()}} returns a \link[=container]{Container()} object.
 
-\item{deep}{\code{logical} if \code{TRUE} a \code{deep} copy is done otherwise by default a
-shallow copy is performed.}
+\code{\link[=as.container]{as.container()}} coerces to a container.
 
-\item{right}{\code{logical} if \code{TRUE} search from right to left}
+\code{\link[=is.container]{is.container()}} returns \code{TRUE} if its argument is a \code{\link[=Container]{Container()}}
+and \code{FALSE} otherwise.
 
-\item{list.len}{\code{integer} number of elements to print}
+\code{length()} returns the length of the internally stored sequence.
+
+\code{as.list()} returns a copy of the internally stored sequence as a
+base R list.
 }
 \description{
-This function creates a \code{\link[=Container]{Container()}} object, which is a data
-structure with typical member functions to insert, delete and access objects
-from the container. Since the \code{\link[=Container]{Container()}} class mainly serves as the
+A \code{\link[=Container]{Container()}} is a data structure with typical member
+functions to insert, delete and access elements from the container
+object. Since the \code{\link[=Container]{Container()}} class mainly serves as the
 base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}} objects, users are more
 likley to use the corresponding \link[=Deque]{deque()}, \link[=Set]{set()}, and \link[=Dict]{dict()} methods to
 create objects of the respective derived classes.
 }
 \details{
-For a detailed documentation of all methods see \code{\link[=Container]{Container()}}
+For a full list of all container methods see \code{\link[=Container]{Container()}}.
 }
 \seealso{
-\code{\link[=Container]{Container()}}, \code{\link[=+.Container]{+.Container()}}, \code{\link[=deque]{deque()}}, \code{\link[=set]{set()}}, \code{\link[=dict]{dict()}}
+\code{\link[=Container]{Container()}}, \code{\link[=deque]{deque()}}, \code{\link[=set]{set()}}, \code{\link[=dict]{dict()}}
 }

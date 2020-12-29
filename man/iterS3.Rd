@@ -3,6 +3,7 @@
 \name{iterS3}
 \alias{iterS3}
 \alias{iter}
+\alias{iter.Container}
 \alias{iter.default}
 \alias{is.iterator}
 \alias{begin}
@@ -14,6 +15,8 @@
 \title{Iterator S3 methods}
 \usage{
 iter(x)
+
+\method{iter}{Container}(x)
 
 \method{iter}{default}(x)
 

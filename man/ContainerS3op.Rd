@@ -13,7 +13,8 @@
 \item{c2}{\code{\link[=Container]{Container()}} object}
 }
 \value{
-For \code{+} returns \code{c1} and \code{c2} combined (as a copy)
+For \code{+} returns a new \code{\link[=Container]{Container()}} object containing all elements
+from \code{c1} and \code{c2}.
 }
 \description{
 Binary operators for \code{\link[=Container]{Container()}} objects.

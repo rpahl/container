@@ -6,7 +6,6 @@
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
-\alias{add.Set}
 \title{Set S3 interface}
 \usage{
 set(...)
@@ -16,16 +15,12 @@ setnew(...)
 as.set(x)
 
 is.set(x)
-
-\method{add}{Set}(x, elem, ...)
 }
 \arguments{
 \item{...}{initial elements to initialize the \code{\link[=Set]{Set()}} object or further
 arguments depending on the method.}
 
 \item{x}{\code{\link[=Set]{Set()}} object}
-
-\item{elem}{some element of the set}
 }
 \description{
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized

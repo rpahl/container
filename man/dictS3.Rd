@@ -13,14 +13,8 @@
 \alias{setval}
 \alias{rename}
 \alias{sortkey}
-\alias{add.Dict}
-\alias{delete.Dict}
-\alias{discard.Dict}
 \alias{getval.Dict}
-\alias{has.Dict}
 \alias{keys.Dict}
-\alias{peek.Dict}
-\alias{pop.Dict}
 \alias{popitem.Dict}
 \alias{rename.Dict}
 \alias{setval.Dict}
@@ -50,23 +44,9 @@ rename(x, ...)
 
 sortkey(x, ...)
 
-\method{add}{Dict}(x, key, value, ...)
-
-\method{delete}{Dict}(x, key, ...)
-
-\method{discard}{Dict}(x, key, ...)
-
 \method{getval}{Dict}(x, key, ...)
 
-\method{has}{Dict}(x, key, ...)
-
 \method{keys}{Dict}(x)
-
-\method{peek}{Dict}(x, key, default = NULL, ...)
-
-\method{pop}{Dict}(x, key, ...)
-
-\method{popitem}{Dict}(x)
 
 \method{popitem}{Dict}(x)
 
@@ -83,12 +63,6 @@ sortkey(x, ...)
 
 \item{x}{a named vector (or list) of 'any' type including
 \code{\link[base:data.frame]{base::data.frame()}}s.}
-
-\item{key}{\code{character} unique identifier to access the key-value pair.}
-
-\item{value}{value to add to the dictionary.}
-
-\item{default}{default value to return if \code{key} not in the dictionary}
 
 \item{add}{\code{logical} if FALSE and \code{key} is not in dictionary, an error is
 given, otherwise if \code{TRUE}, the key-value pair would be added if the \code{key}

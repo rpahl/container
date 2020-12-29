@@ -22,7 +22,7 @@ Iterable <- R6::R6Class("Iterable",
             it <- private$create_iter()
             hasIterator <- inherits(it, "Iterator")
             if (!hasIterator) stop("Iterable did not create an Iterator")
-            invisible(it)
+            it
         }
     ),
     private = list(create_iter = function() stop("abstract method")),
@@ -30,19 +30,19 @@ Iterable <- R6::R6Class("Iterable",
 )
 
 
-#' @title A sequence container
+#' @title A sequence Container
 #'
 #' @description This class implements a container data structure with typical
-#' member functions to insert, delete and access objects from the container.
+#' member functions to insert, delete and access elements from the container.
 #' While it can be used to create [Container()] objects, it mainly serves as the
 #' base class for [Deque()], [Set()], and [Dict()].
 #' @details
 #' The underlying data structure is based on R vectors (or lists), with the mode
 #' being set to the mode (or type) of the value passed to the initialize
 #' function, which by default is an empty list, in which case the
-#' [Container()] object can store objects of mixed and arbitrary types.
-#' If the container will only contain objects of one particular type, for
-#' example, numeric values, it will be both more efficient and type safe to
+#' [Container()] object can store elements of mixed and arbitrary types.
+#' If the container will only contain atomic elements of one particular type,
+#' for example, numeric values, it will be both more efficient and type safe to
 #' initialize the container with this particular type.
 #' @author Roman Pahl
 #' @docType class
@@ -59,14 +59,15 @@ Container <- R6::R6Class("Container",
         initialize = function(..., keep_names = FALSE) {
             args <- list(...)
             n.elems <- nargs() - !missing(keep_names)
-            elems <- if (n.elems == 1) args[[1]] else args
 
+            elems <- if (n.elems == 1) args[[1]] else args
             if (!is.vector(elems)) elems <- list(elems)
+
             if (!keep_names) {
                 names(elems) <- NULL
             }
-            private$elems <- elems
 
+            private$elems <- elems
             invisible(self)
         },
 
@@ -94,8 +95,8 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Find and delete element from `Container`
-        #' @param elem element to be deleted from the `Container`. If element
-        #'  is not found in the `Container`, an error is signaled.
+        #' @param elem element to be deleted from the `Container`. If not
+        #' found, an error is signaled.
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
         delete = function(elem, right = FALSE) {
@@ -124,7 +125,7 @@ Container <- R6::R6Class("Container",
 
         #' @description Check whether `Container` is empty
         #' @return `TRUE` if the `Container` is empty else `FALSE`
-        empty = function() self$size() == 0,
+        empty = function() self$length() == 0,
 
         #' @description Determine if `Container` has some element.
         #' @param elem element to search for
@@ -134,18 +135,23 @@ Container <- R6::R6Class("Container",
             !is.na(Position(f = comp, x = private$elems))
         },
 
+        #' @description Length of the `Container`
+        #' @return `numeric` length of the `Container`
+        length = function() length(private$elems),
+
         #' @description Print object representation similar to [utils::str()]
-        #' @param list.len `integer` maximum number of elements to display
+        #' @param len `numeric` maximum number of elements to display
         #' @param ... other arguments passed to [utils::str()]
         #' @return invisibly returns the `Container` object
-        print = function(list.len = 10L, ...) {
+        print = function(len, ...) {
+            if (missing(len)) len <- strOptions()[["list.len"]]
             cat0 <- function(...) cat(..., sep="")
             class_name <- paste0("<", data.class(self), ">")
 
-            cat0(class_name, " of ", self$size(), " elements: ")
-            utils::str(self$values(), list.len = list.len, ...)
-            if (list.len < self$size()) {
-                cat0("... with ", self$size() - list.len, " more elements")
+            cat0(class_name, " of ", self$length(), " elements: ")
+            utils::str(self$values(), list.len = len, ...)
+            if (len < self$length()) {
+                cat0("... with ", self$length() - len, " more elements")
             }
             invisible(self)
         },
@@ -161,9 +167,12 @@ Container <- R6::R6Class("Container",
             self$delete(elem, right)
         },
 
-        #' @description Size of the `Container`
-        #' @return the `Container` size
-        size = function() length(private$elems),
+        #' @description This function is deprecated.
+        #' @return the `Container` length
+        size = function() {
+            .Deprecated("length")
+            length(private$elems)
+        },
 
         #' @description This function is deprecated.
         #' @return type (or mode) of internal vector containing the elements
@@ -177,8 +186,8 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Get copy of `Container` values
-        #' @return a copy of all elements in the same format as they are stored
-        #' in the `Container` object.
+        #' @return a copy of all elements if possible as `atomic` vector
+        #' otherwise as a basic `list`.
         values = function() private$elems
     ),
     private = list(elems = vector(mode = "list"),

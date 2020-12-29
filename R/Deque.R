@@ -77,7 +77,7 @@ Deque <- R6::R6Class("Deque",
 
         #' @description Reverse all elements of the [Deque()] in-place.
         #' @return invisibly returns the `Deque()` object.
-        reverse = function() {
+        rev = function() {
             len <- self$size()
             private$elems <- rev(private$elems)
             invisible(self)

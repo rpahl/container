@@ -1,115 +1,64 @@
-#' @title Container S3 interface
-#''
-#' @description This function creates a [Container()] object, which is a data
-#' structure with typical member functions to insert, delete and access objects
-#' from the container. Since the [Container()] class mainly serves as the
+#' @title A sequence Container
+#'
+#' @description A [Container()] is a data structure with typical member
+#' functions to insert, delete and access elements from the container
+#' object. Since the [Container()] class mainly serves as the
 #' base class for [Deque()], [Set()], and [Dict()] objects, users are more
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of the respective derived classes.
-#' @details For a detailed documentation of all methods see [Container()]
-#' @param x [Container()] object
-#' @param ... initial elements to initialize the [Container()] object or further
-#' arguments depending on the method.
+#' @details For a full list of all container methods see [Container()].
+#' @param ... initial elements put into the `Container`.
+#' @param keep_names `logical` if TRUE, keeps names of passed elements.
+#' @param x any `R` object, or an object inheriting from class 'Container' for
+#' the S3 methods.
+#' @return [container()] returns a [Container()] object.
+#' @seealso [Container()], [deque()], [set()], [dict()]
 #' @name ContainerS3
-#' @seealso [Container()], [`+.Container()`], [deque()], [set()], [dict()]
-NULL
-
-#' @rdname ContainerS3
 #' @export
 container <- function(..., keep_names = FALSE) {
-    Container$new(..., keep_names = keep_names)
+    if (missing(keep_names)) {
+        Container$new(...)
+    } else {
+        Container$new(..., keep_names = keep_names)
+    }
 }
 
 #' @rdname ContainerS3
+#' @return [as.container()] coerces to a container.
 #' @export
-as.container <- function(x) container(x)
+as.container <- function(x, ...)
+{
+    if (is.null(x)) return(container())
+    UseMethod("as.container")
+}
+
+#' @export
+as.container.default <- function(x, ...)
+{
+    if (is.container(x)) return(x)
+    container(x, ...)
+}
 
 #' @rdname ContainerS3
+#' @return [is.container()] returns `TRUE` if its argument is a [Container()]
+#' and `FALSE` otherwise.
 #' @export
 is.container <- function(x) inherits(x, "Container")
 
 
-
+#' @rdname ContainerS3
+#' @return `length()` returns the length of the internally stored sequence.
+#' @export
+length.Container <- function(x) x$length()
 
 #' @rdname ContainerS3
+#' @return `as.list()` returns a copy of the internally stored sequence as a
+#' base R list.
 #' @export
-add <- function(x, ...) UseMethod("add")
+`as.list.Container` <- function(x) as.list(x$values())
 
-#' @rdname ContainerS3
-#' @export
-clear <- function(x) UseMethod("clear")
 
-#' @rdname ContainerS3
-#' @export
-clone <- function(x, ...) UseMethod("clone")
 
-#' @rdname ContainerS3
-#' @export
-discard <- function(x, ...) UseMethod("discard")
-
-#' @rdname ContainerS3
-#' @export
-empty <- function(x) UseMethod("empty")
-
-#' @rdname ContainerS3
-#' @export
-has <- function(x, ...) UseMethod("has")
-
-#' @rdname ContainerS3
-#' @export
-delete <- function(x, ...) UseMethod("delete")
-
-#' @rdname ContainerS3
-#' @export
-size <- function(x) UseMethod("size")
-
-#' @rdname ContainerS3
-#' @export
-values <- function(x) UseMethod("values")
-
-#' @rdname ContainerS3
-#' @param elem some element of the container
-#' @export
-add.Container <- function(x, elem, ...) x$add(elem)
-
-#' @rdname ContainerS3
-#' @export
-clear.Container <- function(x) x$clear()
-
-#' @rdname ContainerS3
-#' @param deep `logical` if `TRUE` a `deep` copy is done otherwise by default a
-#' shallow copy is performed.
-#' @export
-clone.Container <- function(x, deep = FALSE, ...) x$clone(deep)
-
-#' @rdname ContainerS3
-#' @param right `logical` if `TRUE` search from right to left
-#' @export
-discard.Container <- function(x, elem, right=FALSE, ...) x$discard(elem, right)
-
-#' @rdname ContainerS3
-#' @export
-empty.Container <- function(x) x$empty()
-
-#' @rdname ContainerS3
-#' @export
-has.Container <- function(x, elem, ...) x$has(elem)
-
-#' @rdname ContainerS3
-#' @param list.len `integer` number of elements to print
-#' @export
-print.Container <- function(x, list.len=10, ...) x$print(list.len, ...)
-
-#' @export
-delete.Container <- function(x, elem, right=FALSE, ...) x$delete(elem, right)
-
-#' @rdname ContainerS3
-#' @export
-size.Container <- function(x) x$size()
-
-#' @rdname ContainerS3
-#' @export
-values.Container <- function(x) x$values()
 
 
 #' @title Binary `Container` operators
@@ -120,14 +69,17 @@ NULL
 #' @rdname ContainerS3op
 #' @param c1 [Container()] object
 #' @param c2 [Container()] object
-#' @return For `+` returns `c1` and `c2` combined (as a copy)
+#' @return For `+` returns a new [Container()] object containing all elements
+#' from `c1` and `c2`.
 #' @export
-`+.Container` <- function(c1, c2) c1$clone()$add(c2)
+`+.Container` <- function(c1, c2)
+{
+    cc <- c1$clone()
+    it <- iter(c2)
+    while(has_next(it)) {
+        cc$add(get_next(it))
+    }
+    cc
+}
 
-
-
-# Conversion to standard R objects
-
-#' @export
-`as.list.Container` <- function(x, ...) as.list(x$values())
 

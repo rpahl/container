@@ -51,15 +51,12 @@ The following table shows member methods divided by class. The top half contains
 | :----------------------| :-------------| :--------------| :----------------------------|
 | Container\$new()       | Deque\$new()  | s <- Set\$new()| Dict\$new()                  |
 |                        |               |                |                              |
-| add(elem)              |               | add(elem)      | add(key, value)              |
-| apply(f)               |               |                |                              |
+| add(elem)              |               |                | add(key, value)              |
 | clear()                |               |                |                              |
 | delete(elem, right=F)  |               |                | delete(key)                  |
 | discard(elem, right=F) |               |                | discard(key)                 |
 | empty()                |               |                |                              |
 | has(elem)              |               |                | has(key)                     |
-| print(list.len=10)     |               |                |                              |
-| size()                 |               |                |                              |
 | values()               |               |                |                              |
 |                        |               |                |                              |
 |                        | addleft(elem) | diff(s)        | getval(key)                  |
@@ -88,14 +85,12 @@ On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/
 | :----------------------------| :-------------------| :----------------| :------------------------------|
 |  co = container()            |  d = deque()        |  s = setnew()    |  d = dict()                    |
 |                              |                     |                  |                                |
-|  add(co, elem)               |                     |  add(s, elem)    |  add(d, key, val)              |
+|  add(co, elem)               |                     |                  |  add(d, key, val)              |
 |  clear(co)                   |                     |                  |                                |
 |  delete(co, elem, right=F)   |                     |                  |  delete(d, key)                |
 |  discard(co, elem, right=F)  |                     |                  |  discard(d, key)               |
 |  empty(co)                   |                     |                  |                                |
 |  has(co, elem)               |                     |                  |  has(d, key)                   |
-|  print(co, list.len=10)      |                     |                  |                                |
-|  size(co)                    |                     |                  |                                |
 |  values(co)                  |                     |                  |                                |
 |                              |                     |                  |                                |
 |                              |  addleft(d, elem)   |  s1 - s2         |  getval(d, key)                |
