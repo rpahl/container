@@ -2,25 +2,33 @@
 % Please edit documentation in R/set-S3.R
 \name{setS3}
 \alias{setS3}
-\alias{set}
 \alias{setnew}
 \alias{as.set}
+\alias{as.set.Container}
 \alias{is.set}
-\title{Set S3 interface}
+\title{Set}
 \usage{
-set(...)
-
 setnew(...)
 
-as.set(x)
+as.set(x, ...)
+
+\method{as.set}{Container}(x)
 
 is.set(x)
 }
 \arguments{
-\item{...}{initial elements to initialize the \code{\link[=Set]{Set()}} object or further
-arguments depending on the method.}
+\item{...}{initial elements put into the \code{Set}.}
 
-\item{x}{\code{\link[=Set]{Set()}} object}
+\item{x}{any \code{R} object, or an object inheriting from class 'Set' or
+'Container' for the corresponding S3 methods.}
+}
+\value{
+\code{\link[=setnew]{setnew()}} returns a \code{\link[=Set]{Set()}} object.
+
+\code{\link[=as.set]{as.set()}} coerces to a set.
+
+\code{\link[=is.set]{is.set()}} returns \code{TRUE} if its argument is a \code{\link[=Set]{Set()}} and \code{FALSE}
+otherwise.
 }
 \description{
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
@@ -28,9 +36,8 @@ The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 it provides typical set operations such as \code{union} and \code{intersect}.
 }
 \details{
-For a detailed documentation of all methods see \code{\link[=Set]{Set()}}.
+For a full list of all set methods see \code{\link[=Set]{Set()}}.
 }
 \seealso{
-\code{\link[=Container]{Container()}}, \code{\link[=+.Set]{+.Set()}}, \code{\link[=/.Set]{/.Set()}}, \code{\link[=-.Set]{-.Set()}}, \code{\link[=<.Set]{<.Set()}},
-\code{\link[=>.Set]{>.Set()}}
+\code{\link[=Set]{Set()}}, \code{\link[=container]{container()}}
 }

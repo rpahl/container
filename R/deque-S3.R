@@ -8,7 +8,7 @@
 #' @param ... initial elements put into the `Deque`.
 #' @param keep_names `logical` if TRUE, keeps names of passed elements.
 #' @param x any `R` object, or an object inheriting from class 'Deque' or
-#' 'Coniner' for the corresponding S3 methods.
+#' 'Container' for the corresponding S3 methods.
 #' @return [deque()] returns a [Deque()] object.
 #' @seealso [Deque()], [container()]
 #' @name dequeS3
@@ -27,7 +27,7 @@ deque <- function(..., keep_names = FALSE) {
 #' @export
 as.deque <- function(x, ...)
 {
-    if (is.null(x)) return(Deque())
+    if (is.null(x)) return(deque())
     UseMethod("as.deque")
 }
 

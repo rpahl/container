@@ -25,7 +25,7 @@ is.deque(x)
 \item{keep_names}{\code{logical} if TRUE, keeps names of passed elements.}
 
 \item{x}{any \code{R} object, or an object inheriting from class 'Deque' or
-'Coniner' for the corresponding S3 methods.}
+'Container' for the corresponding S3 methods.}
 }
 \value{
 \code{\link[=deque]{deque()}} returns a \link[=deque]{Deque()} object.

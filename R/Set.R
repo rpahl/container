@@ -15,6 +15,7 @@ Set <- R6::R6Class("Set",
         initialize = function(...) {
             elems <- list(...)
             if (nargs() == 1) elems <- elems[[1]]
+
             super$initialize(unique(elems))
             invisible(self)
         },
