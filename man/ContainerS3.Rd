@@ -5,7 +5,6 @@
 \alias{container}
 \alias{as.container}
 \alias{is.container}
-\alias{iter.Container}
 \alias{add}
 \alias{clear}
 \alias{clone}
@@ -27,13 +26,11 @@
 \title{Container S3 interface
 '}
 \usage{
-container(...)
+container(..., keep_names = FALSE)
 
 as.container(x)
 
 is.container(x)
-
-\method{iter}{Container}(x)
 
 add(x, ...)
 

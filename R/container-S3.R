@@ -16,7 +16,9 @@ NULL
 
 #' @rdname ContainerS3
 #' @export
-container <- function(...) Container$new(...)
+container <- function(..., keep_names = FALSE) {
+    Container$new(..., keep_names = keep_names)
+}
 
 #' @rdname ContainerS3
 #' @export
@@ -26,9 +28,6 @@ as.container <- function(x) container(x)
 #' @export
 is.container <- function(x) inherits(x, "Container")
 
-#' @rdname ContainerS3
-#' @export
-iter.Container <- function(x) x$iter()
 
 
 
