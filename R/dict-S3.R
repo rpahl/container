@@ -69,9 +69,6 @@ keys <- function(x) x$keys()
 names.Dict <- function(x) x$keys()
 
 
-#' @rdname dictS3
-#' @export
-update.Dict <- function(object, other, ...) object$update(other)
 
 #' Arithmetic binary `dict` operators
 #'

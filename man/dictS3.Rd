@@ -9,7 +9,6 @@
 \alias{is.dict}
 \alias{keys}
 \alias{names.Dict}
-\alias{update.Dict}
 \title{Dict S3 interface}
 \usage{
 dict(...)
@@ -25,8 +24,6 @@ is.dict(x)
 keys(x)
 
 \method{names}{Dict}(x)
-
-\method{update}{Dict}(object, other, ...)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Dict}.}
