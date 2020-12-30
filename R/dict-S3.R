@@ -69,17 +69,6 @@ keys <- function(x) x$keys()
 names.Dict <- function(x) x$keys()
 
 
-
-#' @rdname dictS3
-#' @export
-sortkey <- function(x, ...) UseMethod("sortkey")
-
-#' @rdname dictS3
-#' @param decr `logical` if `TRUE` the elements are sorted decreasingly
-#' @export
-sortkey.Dict <- function(x, decr=FALSE, ...) x$sortkey(decr)
-
-
 #' @rdname dictS3
 #' @export
 update.Dict <- function(object, other, ...) object$update(other)

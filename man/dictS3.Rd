@@ -9,8 +9,6 @@
 \alias{is.dict}
 \alias{keys}
 \alias{names.Dict}
-\alias{sortkey}
-\alias{sortkey.Dict}
 \alias{update.Dict}
 \title{Dict S3 interface}
 \usage{
@@ -28,10 +26,6 @@ keys(x)
 
 \method{names}{Dict}(x)
 
-sortkey(x, ...)
-
-\method{sortkey}{Dict}(x, decr = FALSE, ...)
-
 \method{update}{Dict}(object, other, ...)
 }
 \arguments{
@@ -39,8 +33,6 @@ sortkey(x, ...)
 
 \item{x}{any \code{R} object, or an object inheriting from class 'Dict' or
 'Container'.}
-
-\item{decr}{\code{logical} if \code{TRUE} the elements are sorted decreasingly}
 }
 \value{
 \code{\link[=dict]{dict()}} returns a \link[=dict]{Dict()} object.
