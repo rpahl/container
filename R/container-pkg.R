@@ -14,3 +14,14 @@
 #' @name container.pkg
 NULL
 
+
+.onLoad <- function(libname, pkgname)
+{
+    ip <- names(installed.packages()[, "Package"])
+    hasDT <- "data.table" %in% ip
+    if (!hasDT) {
+        packageStartupMessage("If you want to use dict.table(), ",
+                              "please install the 'data.table' package.")
+    }
+}
+
