@@ -8,9 +8,8 @@
 \alias{as.dict.data.frame}
 \alias{is.dict}
 \alias{keys}
-\alias{rename}
+\alias{names.Dict}
 \alias{sortkey}
-\alias{rename.Dict}
 \alias{sortkey.Dict}
 \alias{update.Dict}
 \title{Dict S3 interface}
@@ -27,11 +26,9 @@ is.dict(x)
 
 keys(x)
 
-rename(x, ...)
+\method{names}{Dict}(x)
 
 sortkey(x, ...)
-
-\method{rename}{Dict}(x, old, new, ...)
 
 \method{sortkey}{Dict}(x, decr = FALSE, ...)
 
@@ -54,6 +51,8 @@ sortkey(x, ...)
 otherwise.
 
 \code{keys()} returns a \code{character} vector of all the dict's keys.
+
+\code{names()} returns the same as \code{\link[=keys]{keys()}}.
 }
 \description{
 The \code{\link[=dict]{dict()}} resembles Python's dict type, and is implemented

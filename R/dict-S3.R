@@ -58,30 +58,27 @@ as.dict.default <- function(x, ...)
 #' @export
 is.dict <- function(x) inherits(x, "Dict")
 
-
 #' @rdname dictS3
 #' @return `keys()` returns a `character` vector of all the dict's keys.
 #' @export
 keys <- function(x) x$keys()
 
-
-
 #' @rdname dictS3
+#' @return `names()` returns the same as [keys()].
 #' @export
-rename <- function(x, ...) UseMethod("rename")
+names.Dict <- function(x) x$keys()
+
+
 
 #' @rdname dictS3
 #' @export
 sortkey <- function(x, ...) UseMethod("sortkey")
 
 #' @rdname dictS3
-#' @export
-rename.Dict <- function(x, old, new, ...) x$rename(old, new)
-
-#' @rdname dictS3
 #' @param decr `logical` if `TRUE` the elements are sorted decreasingly
 #' @export
 sortkey.Dict <- function(x, decr=FALSE, ...) x$sortkey(decr)
+
 
 #' @rdname dictS3
 #' @export

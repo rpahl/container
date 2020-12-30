@@ -6,7 +6,7 @@
 \alias{count.Set}
 \title{Count elements}
 \usage{
-count(x, ...)
+count(x, elem, ...)
 
 \method{count}{Deque}(x, elem)
 
@@ -15,15 +15,13 @@ count(x, ...)
 \arguments{
 \item{x}{any \code{R} object.}
 
-\item{...}{additional arguments to be passed to or from methods.}
-
 \item{elem}{element to counted.}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-A copy of the object.
-
-\code{integer} times the \code{elem} appears in the object.
+Returns how many times \code{elem} occurs in the object.
 }
 \description{
-Count elements
+Count the number of occurences of some element.
 }
