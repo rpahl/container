@@ -1,22 +1,23 @@
 Package: container
 Type: Package
-Title: Deque, Set, Dict, Dict.frame - R6 Based Container Classes with Iterators
+Title: Deque, Set, Dict - R6 Based Container Classes with Iterators
 Version: 0.4.0
 Date: 2020-11-07
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
 Description: Common container data structures deque, set, dict (resembling
-    Python's dict type) and dict.frame (combining dict and data.frame) with
+    Python's dict type) and dict.table (combining dict and data.table) with
     typical member functions to insert, delete and access container elements.
-    The package also provides iterators and reference semantics.
+    Furthermore, the package allows to create iterators and provides reference
+    semantics for all objects.
 Depends: R (>= 3.0)
 License: GPL-3
 LazyData: TRUE
 Encoding: UTF-8
 Imports: R6
 VignetteBuilder: knitr
-Suggests: knitr, testthat, rmarkdown
+Suggests: data.table, testthat, tinytest
 URL: https://github.com/rpahl/container
 BugReports: https://github.com/rpahl/container/issues
 NeedsCompilation: no

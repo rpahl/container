@@ -1,4 +1,4 @@
-#' Dict S3 interface
+#' Dictionary
 #'
 #' @description The [dict()] resembles Python's dict type, and is implemented
 #' as a specialized associative [container()] thus sharing all [container()]
