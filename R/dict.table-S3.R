@@ -19,45 +19,103 @@
 #' dict.table
 #'
 #' @description The [dict.table()] is a mix of a dictionary and a
-#' `data.table`. In particular, it is a dictionary thereby inheriting all
-#' [Dict()] methods, but where each element has the same length. In contrast to
-#' a [base::data.frame()], a [dict.table()] can contain arbitrary complex
-#' objects.
-#' @details For a detailed documentation of all methods see [Dict.table()].
-#' @param x a `dict.table` object.
-#' @param ... arguments of the form tag = value or a named list
+#' `data.table`, that is, a dictionary where each element has the same length.
+#' Since a dict.table behaves like both a dict and a data.table, all dict and
+#' data.table functions and operators can be used as usual.
+#'
+#' As with [Dict()] objects, it provides reference semantics so that changes
+#' like insertion and deletion of elements are done on the original object.
+#' @param ... initial elements of the form `key = value` to be put into the
+#' `dict.table` and/or additional arguments to be passed to the
+#' [data.table::data.table()] constructor. Note that in contrast to
+#' [data.table()], [dict.table()] does not allow duplicated keys and therefore
+#' always is initialized as `data.table(..., check.names = TRUE)`.
+#' @param x any `R` object
 #' @name dict.tableS3
 #' @import data.table
-#' @seealso [Dict()], [data.table:data.table()], [`[[<-.dict.table()`],
-#' [`[[.dict.table()`], [`[<-.dict.table()`], [`[.dict.table()`]
-NULL
-
-#' @rdname dict.tableS3
+#' @seealso [dict()], [data.table::data.table()]
 #' @export
-dict.table <- function(...) {
-
+#' @examples
+#' dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
+#' dit
+#' setkey(dit, "x")                     # sorts by 'x'
+#' dit
+#' (add(dit, "v", 1:9))
+#' dit[y > 5]
+#' (discard(dit, "x"))
+#' \dontrun{
+#'     getval(dit, "x")                 # column 'x' does not exist
+#'     setval(dit, "x", 0)              # cannot be set, if not exist
+#' }
+#' (setval(dit, "x", 0, add = TRUE))    # ok
+#' peek(dit, "x")                       # glance at column
+#' has(dit, "x")                        # TRUE
+#' pop(dit, "x")                        # get column and remove it
+#' has(dit, "x")                        # FALSE
+dict.table <- function(...)
+{
     dat <- data.table::data.table(..., check.names = TRUE)
     .set_class(dat)
+    if (any(duplicated(names(dat)))) {
+        dups <- names(dat)[duplicated(names(dat))]
+        stop("duplicated keys after init: ", toString(dups))
+    }
+    dat
 }
 
 #' @rdname dict.tableS3
 #' @export
-as.dict.table <- function(x, ...) UseMethod("as.dict.table")
+as.dict.table <- function(x, ...)
+{
+    if (is.null(x)) return(dict.table())
+    UseMethod("as.dict.table")
+}
 
 #' @rdname dict.tableS3
+#' @param copy return a copy of the `data.table` object (default) or work on
+#' the passed object by reference?
 #' @export
+#' @examples
+#'
+#' # Copy and reference semantics for coerced data.table
+#' dat = data.table(a = 1)
+#' dit = as.dict.table(dat)
+#' setval(dit, "a", 9)
+#' dit[["a"]]                                   # 9
+#' dat[["a"]]                                   # 1
+#' dit.dat = as.dict.table(dat, copy = FALSE)   # init by reference
+#' setval(dit.dat, "a", 9)
+#' dit.dat[["a"]]                               # 9
+#' dat[["a"]]                                   # 9
+#'
+#' # Coerce from dict
+#' d = dict(a = 1, b = 1:3)
+#' as.dict.table(d)
+#'
+#' # Coerce from and to data.table
+#' dat = data.table(a = 1, b = 2)
+#' dit = as.dict.table(dat)
+#' is.dict.table(dit)                           # TRUE
+#' dat = as.data.table(dit)
+#' is.dict.table(dat)                           # FALSE
+#' is.data.table(dat)                           # TRUE
 as.dict.table.data.table <- function(x, copy = TRUE, ...)
 {
     if (copy) {
         dict.table(x)
     } else {
-        .remove_class(x)
+        #.remove_class(x)
+        .set_class(x)
     }
 }
 
-#' @rdname dict.tableS3
+
 #' @export
-as.dict.table.default <- function(x) dict.table(x)
+as.dict.table.default <- function(x, ...)
+{
+    dots = list(...)
+    do.call(dict.table, args = c(as.list(x), dots))
+}
 
 #' @rdname dict.tableS3
 #' @export
@@ -80,7 +138,7 @@ add.dict.table <- function(x, key, value)
 #' @export
 clear.dict.table <- function(x)
 {
-    delete(x, keys(x))
+    delete(x, names(x))
 }
 
 
@@ -143,7 +201,7 @@ has.dict.table <- function(x, key)
     if (length(key) != 1) stop("key must be of length 1")
     if (is.na(key)) stop("undefined key")
     switch(data.class(key),
-           "character" = key %in% keys(x),
+           "character" = key %in% names(x),
            "numeric" = ncol(x) >= key,
            stop("key must be character or numeric")
     )
@@ -186,7 +244,7 @@ popitem.dict.table <- function(x)
     if (empty(x)) {
         stop("pop at empty ", data.class(x))
     }
-    key <- sample(keys(x), 1)
+    key <- sample(names(x), 1)
     pop(x, key)
 }
 
@@ -248,7 +306,7 @@ size.dict.table <- function(x)
 #' @export
 sortkey.dict.table <- function(x, decr = FALSE)
 {
-    data.table::setcolorder(x, sort(keys(x), decreasing = decr))
+    data.table::setcolorder(x, sort(names(x), decreasing = decr))
 }
 
 

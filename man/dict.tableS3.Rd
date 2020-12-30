@@ -5,7 +5,6 @@
 \alias{dict.table}
 \alias{as.dict.table}
 \alias{as.dict.table.data.table}
-\alias{as.dict.table.default}
 \alias{is.dict.table}
 \alias{add.dict.table}
 \alias{clear.dict.table}
@@ -27,13 +26,11 @@
 \alias{values.dict.table}
 \title{dict.table}
 \usage{
-\method{dict}{table}(...)
+dict.table(...)
 
 as.dict.table(x, ...)
 
 \method{as.dict}{table.data.table}(x, copy = TRUE, ...)
-
-\method{as.dict}{table.default}(x)
 
 is.dict.table(x)
 
@@ -74,21 +71,67 @@ size.dict.table(x)
 \method{values}{dict.table}(x)
 }
 \arguments{
-\item{...}{arguments of the form tag = value or a named list}
+\item{...}{initial elements of the form \code{key = value} to be put into the
+\code{dict.table} and/or additional arguments to be passed to the
+\code{\link[data.table:data.table]{data.table::data.table()}} constructor. Note that in contrast to
+\code{\link[=data.table]{data.table()}}, \code{\link[=dict.table]{dict.table()}} does not allow duplicated keys and therefore
+always is initialized as \code{data.table(..., check.names = TRUE)}.}
 
-\item{x}{a \code{dict.table} object.}
+\item{x}{any \code{R} object}
+
+\item{copy}{return a copy of the \code{data.table} object (default) or work on
+the passed object by reference?}
 }
 \description{
 The \code{\link[=dict.table]{dict.table()}} is a mix of a dictionary and a
-\code{data.table}. In particular, it is a dictionary thereby inheriting all
-\code{\link[=Dict]{Dict()}} methods, but where each element has the same length. In contrast to
-a \code{\link[base:data.frame]{base::data.frame()}}, a \code{\link[=dict.table]{dict.table()}} can contain arbitrary complex
-objects.
+\code{data.table}, that is, a dictionary where each element has the same length.
+Since a dict.table behaves like both a dict and a data.table, all dict and
+data.table functions and operators can be used as usual.
+
+As with \code{\link[=Dict]{Dict()}} objects, it provides reference semantics so that changes
+like insertion and deletion of elements are done on the original object.
 }
-\details{
-For a detailed documentation of all methods see \code{\link[=Dict.table]{Dict.table()}}.
+\examples{
+dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
+dit
+setkey(dit, "x")                     # sorts by 'x'
+dit
+(add(dit, "v", 1:9))
+dit[y > 5]
+(discard(dit, "x"))
+\dontrun{
+    getval(dit, "x")                 # column 'x' does not exist
+    setval(dit, "x", 0)              # cannot be set, if not exist
+}
+(setval(dit, "x", 0, add = TRUE))    # ok
+peek(dit, "x")                       # glance at column
+has(dit, "x")                        # TRUE
+pop(dit, "x")                        # get column and remove it
+has(dit, "x")                        # FALSE
+
+# Copy and reference semantics for coerced data.table
+dat = data.table(a = 1)
+dit = as.dict.table(dat)
+setval(dit, "a", 9)
+dit[["a"]]                                   # 9
+dat[["a"]]                                   # 1
+dit.dat = as.dict.table(dat, copy = FALSE)   # init by reference
+setval(dit.dat, "a", 9)
+dit.dat[["a"]]                               # 9
+dat[["a"]]                                   # 9
+
+# Coerce from dict
+d = dict(a = 1, b = 1:3)
+as.dict.table(d)
+
+# Coerce from and to data.table
+dat = data.table(a = 1, b = 2)
+dit = as.dict.table(dat)
+is.dict.table(dit)                           # TRUE
+dat = as.data.table(dit)
+is.dict.table(dat)                           # FALSE
+is.data.table(dat)                           # TRUE
 }
 \seealso{
-\code{\link[=Dict]{Dict()}}, \code{\link[=data.table:data.table]{data.table:data.table()}}, [\verb{[[<-.dict.table()}],
-[\verb{[[.dict.table()}], [\verb{[<-.dict.table()}], [\verb{[.dict.table()}]
+\code{\link[=dict]{dict()}}, \code{\link[data.table:data.table]{data.table::data.table()}}
 }
