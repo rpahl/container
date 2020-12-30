@@ -31,7 +31,6 @@ Roman Pahl
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-peek}{\code{Dict$peek()}}
 \item \href{#method-pop}{\code{Dict$pop()}}
-\item \href{#method-popitem}{\code{Dict$popitem()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-set}{\code{Dict$set()}}
@@ -49,6 +48,8 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peekitem">}\href{../../container/html/Container.html#method-peekitem}{\code{container::Container$peekitem()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="popitem">}\href{../../container/html/Container.html#method-popitem}{\code{container::Container$popitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
@@ -253,21 +254,6 @@ If \code{key} not found, raise an error.
 }
 \subsection{Returns}{
 If \code{key} in \code{Dict}, return its value.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-popitem"></a>}}
-\if{latex}{\out{\hypertarget{method-popitem}{}}}
-\subsection{Method \code{popitem()}}{
-delete and return an arbitrary (key, value) pair
-from the \code{Dict}. This function can be used to destructively iterate
-over a \code{Dict} as often used in set algorithms.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$popitem()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-random value from the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}

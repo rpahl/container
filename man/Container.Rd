@@ -39,6 +39,8 @@ Roman Pahl
 \item \href{#method-empty}{\code{Container$empty()}}
 \item \href{#method-has}{\code{Container$has()}}
 \item \href{#method-length}{\code{Container$length()}}
+\item \href{#method-popitem}{\code{Container$popitem()}}
+\item \href{#method-peekitem}{\code{Container$peekitem()}}
 \item \href{#method-print}{\code{Container$print()}}
 \item \href{#method-remove}{\code{Container$remove()}}
 \item \href{#method-size}{\code{Container$size()}}
@@ -200,6 +202,30 @@ Length of the \code{Container}
 \subsection{Returns}{
 \code{numeric} length of the \code{Container}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-popitem"></a>}}
+\if{latex}{\out{\hypertarget{method-popitem}{}}}
+\subsection{Method \code{popitem()}}{
+delete and return an arbitrary element from the
+\code{Container}. This function can be used to destructively iterate
+over a \code{Container} as often used in set algorithms.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$popitem()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-peekitem"></a>}}
+\if{latex}{\out{\hypertarget{method-peekitem}{}}}
+\subsection{Method \code{peekitem()}}{
+return an arbitrary element from the \code{Container}.
+This function can be used to sample randomly (with replacement)
+from a \code{Container}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$peekitem()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}

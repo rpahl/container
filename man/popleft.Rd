@@ -3,7 +3,7 @@
 \name{popleft}
 \alias{popleft}
 \alias{popleft.Deque}
-\title{Pop element from left side of an object}
+\title{Pop element from left}
 \usage{
 popleft(x)
 

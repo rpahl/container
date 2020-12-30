@@ -4,18 +4,13 @@
 \alias{dictS3}
 \alias{dict}
 \alias{dict.data.frame}
-\alias{dict.default}
 \alias{as.dict}
+\alias{as.dict.data.frame}
 \alias{is.dict}
-\alias{getval}
 \alias{keys}
-\alias{popitem}
 \alias{setval}
 \alias{rename}
 \alias{sortkey}
-\alias{getval.Dict}
-\alias{keys.Dict}
-\alias{popitem.Dict}
 \alias{rename.Dict}
 \alias{setval.Dict}
 \alias{sortkey.Dict}
@@ -26,29 +21,19 @@ dict(...)
 
 \method{dict}{data.frame}(...)
 
-\method{dict}{default}(...)
-
 as.dict(x)
+
+\method{as.dict}{data.frame}(x)
 
 is.dict(x)
 
-getval(x, ...)
-
 keys(x)
-
-popitem(x)
 
 setval(x, ...)
 
 rename(x, ...)
 
 sortkey(x, ...)
-
-\method{getval}{Dict}(x, key, ...)
-
-\method{keys}{Dict}(x)
-
-\method{popitem}{Dict}(x)
 
 \method{rename}{Dict}(x, old, new, ...)
 
@@ -59,16 +44,26 @@ sortkey(x, ...)
 \method{update}{Dict}(object, other, ...)
 }
 \arguments{
-\item{...}{further arguments depending on the method.}
+\item{...}{initial elements put into the \code{Dict}.}
 
-\item{x}{a named vector (or list) of 'any' type including
-\code{\link[base:data.frame]{base::data.frame()}}s.}
+\item{x}{any \code{R} object, or an object inheriting from class 'Dict' or
+'Container'.}
 
 \item{add}{\code{logical} if FALSE and \code{key} is not in dictionary, an error is
 given, otherwise if \code{TRUE}, the key-value pair would be added if the \code{key}
 is not yet in the dict.}
 
 \item{decr}{\code{logical} if \code{TRUE} the elements are sorted decreasingly}
+}
+\value{
+\code{\link[=dict]{dict()}} returns a \link[=dict]{Dict()} object.
+
+\code{\link[=as.dict]{as.dict()}} coerces to a dict.
+
+\code{\link[=is.dict]{is.dict()}} returns \code{TRUE} if its argument is a \code{\link[=Dict]{Dict()}} and \code{FALSE}
+otherwise.
+
+\code{keys()} returns a \code{character} vector of all the dict's keys.
 }
 \description{
 The \code{\link[=dict]{dict()}} resembles Python's dict type, and is implemented
@@ -77,9 +72,8 @@ methods with some of them being overridden to account for the associative
 key-value pair semantic.
 }
 \details{
-For a detailed documentation of all methods see \code{\link[=Dict]{Dict()}}.
+For a full list of all dict methods see \code{\link[=Dict]{Dict()}}.
 }
 \seealso{
-\code{\link[=Container]{Container()}}, \code{\link[=+.Dict]{+.Dict()}}, \code{\link[=-.Dict]{-.Dict()}}, [\verb{[[<-.Dict()}],
-[\verb{[[.Dict()}], [\verb{[<-.Dict()}], [\verb{[.Dict()}]
+\code{\link[=Dict]{Dict()}}, \code{\link[=container]{container()}}
 }

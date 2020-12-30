@@ -1,4 +1,4 @@
-#' Pop an element from an object
+#' Pop element
 #'
 #' Search and remove an element from an object and return a copy of the
 #' element. If the element is not found, signal an error.
@@ -22,7 +22,8 @@ pop.Deque <- function(x) x$pop()
 pop.Dict <- function(x, key) x$pop(key)
 
 
-#' Pop element from left side of an object
+
+#' Pop element from left
 #'
 #' Search an element in an object from left to right and for the first
 #' occurence return a copy and remove it.
@@ -37,4 +38,22 @@ popleft <- function(x) UseMethod("popleft")
 #' was removed.
 #' @export
 popleft.Deque <- function(x) x$popleft()
+
+
+
+#' Pop random element
+#'
+#' Randomly select and remove an element from an object and return a copy of the
+#' element. If there is no element at all, signal an error.
+#' This function can be used to destructively iterate over a collection of
+#' elements as often used in set algorithms.
+#' @param x any `R` object.
+#' @param ... additional arguments to be passed to or from methods.
+#' @export
+popitem <- function(x) UseMethod("popitem")
+
+#' @rdname popitem
+#' @return For `Container` a randomly popped element is returned.
+#' @export
+popitem.Container <- function(x) x$popitem()
 

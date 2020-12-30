@@ -4,7 +4,7 @@
 \alias{pop}
 \alias{pop.Deque}
 \alias{pop.Dict}
-\title{Pop an element from an object}
+\title{Pop element}
 \usage{
 pop(x, ...)
 

@@ -57,17 +57,18 @@ The following table shows member methods divided by class. The top half contains
 | discard(elem, right=F) |               |                | discard(key)                 |
 | empty()                |               |                |                              |
 | has(elem)              |               |                | has(key)                     |
+| peekitem()             |               |                |                              |
+| popitem()              |               |                |                              |
 | values()               |               |                |                              |
 |                        |               |                |                              |
 |                        | addleft(elem) | diff(s)        | getval(key)                  |
 |                        | count(elem)   | intersect(s)   | keys()                       |
 |                        | peek()        | is.equal(s)    | peek(key, default = NULL)    |
 |                        | peekleft()    | is.subset(s)   | pop(key)                     |
-|                        | pop()         | is.superset(s) | popitem()                    |
-|                        | popleft()     | union(s)       | rename(old, new)             |
-|                        | reverse()     |                | setval(key, value, add=FALSE)|
-|                        | rotate(n=1L)  |                | sort(decr=FALSE)             |
-|                        |               |                | update(other)                |
+|                        | pop()         | is.superset(s) | rename(old, new)             |
+|                        | popleft()     | union(s)       | setval(key, value, add=FALSE)|
+|                        | reverse()     |                | sortkey(decr=FALSE)          |
+|                        | rotate(n=1L)  |                | update(other)                |
 
 
 Table: Overview of classes and member methods

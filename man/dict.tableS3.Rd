@@ -31,9 +31,9 @@
 
 as.dict.table(x, ...)
 
-\method{as.dict.table}{data.table}(x, copy = TRUE, ...)
+\method{as.dict}{table.data.table}(x, copy = TRUE, ...)
 
-\method{as.dict.table}{default}(x)
+\method{as.dict}{table.default}(x)
 
 is.dict.table(x)
 
@@ -51,7 +51,7 @@ is.dict.table(x)
 
 \method{has}{dict.table}(x, key)
 
-\method{keys}{dict.table}(x)
+keys.dict.table(x)
 
 \method{peek}{dict.table}(x, key, default = NULL)
 

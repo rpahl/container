@@ -4,18 +4,17 @@
 #' as a specialized associative [container()] thus sharing all [container()]
 #' methods with some of them being overridden to account for the associative
 #' key-value pair semantic.
-#' @details For a detailed documentation of all methods see [Dict()].
+#' @details For a full list of all dict methods see [Dict()].
+#' @param ... initial elements put into the `Dict`.
+#' @param x any `R` object, or an object inheriting from class 'Dict' or
+#' 'Container'.
+#' @return [dict()] returns a [Dict()] object.
+#' @seealso [Dict()], [container()]
 #' @name dictS3
-#' @param x a named vector (or list) of 'any' type including
-#' [base::data.frame()]s.
-#' @param ... further arguments depending on the method.
-#' @seealso [Container()], [`+.Dict()`], [`-.Dict()`], [`[[<-.Dict()`],
-#' [`[[.Dict()`], [`[<-.Dict()`], [`[.Dict()`]
-NULL
-
-#' @rdname dictS3
 #' @export
-dict <- function(...) UseMethod("dict")
+dict <- function(...) {
+    UseMethod("dict")
+}
 
 #' @rdname dictS3
 #' @export
@@ -24,35 +23,47 @@ dict.data.frame <- function(...)
     Dict$new(as.list(...))
 }
 
-#' @rdname dictS3
 #' @export
 dict.default <- function(...)
 {
     Dict$new(...)
 }
 
+#' @rdname dictS3
+#' @return [as.dict()] coerces to a dict.
+#' @export
+as.dict <- function(x)
+{
+    if (is.null(x)) return(dict())
+    UseMethod("as.dict")
+}
 
 #' @rdname dictS3
 #' @export
-as.dict <- function(x) dict(x)
+as.dict.data.frame <- function(x)
+{
+    dict(as.list(x))
+}
+
+#' @export
+as.dict.default <- function(x, ...)
+{
+    if (is.dict(x)) return(x)
+    dict(x, ...)
+}
 
 #' @rdname dictS3
+#' @return [is.dict()] returns `TRUE` if its argument is a [Dict()] and `FALSE`
+#' otherwise.
 #' @export
 is.dict <- function(x) inherits(x, "Dict")
 
-# S3 generic methods not derived from container
 
 #' @rdname dictS3
+#' @return `keys()` returns a `character` vector of all the dict's keys.
 #' @export
-getval <- function(x, ...) UseMethod("getval")
+keys <- function(x) x$keys()
 
-#' @rdname dictS3
-#' @export
-keys <- function(x) UseMethod("keys")
-
-#' @rdname dictS3
-#' @export
-popitem <- function(x) UseMethod("popitem")
 
 #' @rdname dictS3
 #' @export
@@ -65,21 +76,6 @@ rename <- function(x, ...) UseMethod("rename")
 #' @rdname dictS3
 #' @export
 sortkey <- function(x, ...) UseMethod("sortkey")
-
-
-
-#' @rdname dictS3
-#' @export
-getval.Dict <- function(x, key, ...) x$getval(key)
-
-
-#' @rdname dictS3
-#' @export
-keys.Dict <- function(x) x$keys()
-
-#' @rdname dictS3
-#' @export
-popitem.Dict <- function(x) x$popitem()
 
 #' @rdname dictS3
 #' @export

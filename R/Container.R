@@ -139,6 +139,30 @@ Container <- R6::R6Class("Container",
         #' @return `numeric` length of the `Container`
         length = function() length(private$elems),
 
+        #' @description delete and return an arbitrary element from the
+        #' `Container`. This function can be used to destructively iterate
+        #'  over a `Container` as often used in set algorithms.
+        popitem = function() {
+            if (self$empty()) {
+                stop("popitem at empty ", data.class(self))
+            }
+            pos <- sample(seq_along(private$elems), size = 1)
+            elem <- private$elems[[pos]]
+            private$elems <- private$elems[-pos]
+            elem
+        },
+
+        #' @description return an arbitrary element from the `Container`.
+        #' This function can be used to sample randomly (with replacement)
+        #' from a `Container`.
+        peekitem = function() {
+            if (self$empty()) {
+                return(NULL)
+            }
+            pos <- sample(seq_along(private$elems), size = 1)
+            private$elems[[pos]]
+        },
+
         #' @description Print object representation similar to [utils::str()]
         #' @param len `numeric` maximum number of elements to display
         #' @param ... other arguments passed to [utils::str()]

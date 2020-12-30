@@ -36,3 +36,21 @@ peekleft <- function(x) UseMethod("peekleft")
 #' @export
 peekleft.Deque <- function(x) x$peekleft()
 
+
+
+#' Peek random element
+#'
+#' Randomly select an element from an object and return a copy of it.
+#' If there is no element, return `NULL` or some default value.
+#' This function can be used to sample randomly (with replacement) from a
+#' collection of elements.
+#' @param x any `R` object.
+#' @param ... additional arguments to be passed to or from methods.
+#' @export
+peekitem <- function(x) UseMethod("peekitem")
+
+#' @rdname peekitem
+#' @return For `Container` a randomly peeked element is returned.
+#' @export
+peekitem.Container <- function(x) x$peekitem()
+
