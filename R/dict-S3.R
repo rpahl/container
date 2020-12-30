@@ -65,9 +65,6 @@ is.dict <- function(x) inherits(x, "Dict")
 keys <- function(x) x$keys()
 
 
-#' @rdname dictS3
-#' @export
-setval <- function(x, ...) UseMethod("setval")
 
 #' @rdname dictS3
 #' @export
@@ -80,13 +77,6 @@ sortkey <- function(x, ...) UseMethod("sortkey")
 #' @rdname dictS3
 #' @export
 rename.Dict <- function(x, old, new, ...) x$rename(old, new)
-
-#' @rdname dictS3
-#' @param add `logical` if FALSE and `key` is not in dictionary, an error is
-#' given, otherwise if `TRUE`, the key-value pair would be added if the `key`
-#' is not yet in the dict.
-#' @export
-setval.Dict <- function(x, key, value, add=FALSE, ...) x$setval(key, value, add)
 
 #' @rdname dictS3
 #' @param decr `logical` if `TRUE` the elements are sorted decreasingly

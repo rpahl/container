@@ -8,11 +8,9 @@
 \alias{as.dict.data.frame}
 \alias{is.dict}
 \alias{keys}
-\alias{setval}
 \alias{rename}
 \alias{sortkey}
 \alias{rename.Dict}
-\alias{setval.Dict}
 \alias{sortkey.Dict}
 \alias{update.Dict}
 \title{Dict S3 interface}
@@ -29,15 +27,11 @@ is.dict(x)
 
 keys(x)
 
-setval(x, ...)
-
 rename(x, ...)
 
 sortkey(x, ...)
 
 \method{rename}{Dict}(x, old, new, ...)
-
-\method{setval}{Dict}(x, key, value, add = FALSE, ...)
 
 \method{sortkey}{Dict}(x, decr = FALSE, ...)
 
@@ -48,10 +42,6 @@ sortkey(x, ...)
 
 \item{x}{any \code{R} object, or an object inheriting from class 'Dict' or
 'Container'.}
-
-\item{add}{\code{logical} if FALSE and \code{key} is not in dictionary, an error is
-given, otherwise if \code{TRUE}, the key-value pair would be added if the \code{key}
-is not yet in the dict.}
 
 \item{decr}{\code{logical} if \code{TRUE} the elements are sorted decreasingly}
 }
