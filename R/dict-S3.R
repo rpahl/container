@@ -12,19 +12,23 @@
 #' @seealso [Dict()], [container()]
 #' @name dictS3
 #' @export
-dict <- function(...) {
-    UseMethod("dict")
-}
-
-#' @rdname dictS3
+#' @examples
+#' dict(a = 1, b = "one", f = mean)
+#'
+#' d1 = dict(a = 1, b = 2)
+#' mode(values(d1))                     # 'list'
+#' d2 = dict(c(a = 1, b = 2))
+#' mode(values(d2))                     # 'numeric'
+#'
+#' \dontrun{
+#' dict(a = 1, 2)                       # all elements must be named}
+#'
+#' # Initialize from data.frame
+#' daf = data.frame(A = 1:3, B = 3:1)
+#' d = dict(daf)
+#' d
 #' @export
-dict.data.frame <- function(...)
-{
-    Dict$new(as.list(...))
-}
-
-#' @export
-dict.default <- function(...)
+dict <- function(...)
 {
     Dict$new(...)
 }
@@ -32,24 +36,21 @@ dict.default <- function(...)
 #' @rdname dictS3
 #' @return [as.dict()] coerces to a dict.
 #' @export
-as.dict <- function(x)
+#' @examples
+#'
+#' # Coerce from other types
+#' as.dict(list(A = 1:3, B = "b"))
+#' as.dict(c(x = 1, y = "x", z = 2 + 3))
+as.dict <- function(x, ...)
 {
     if (is.null(x)) return(dict())
     UseMethod("as.dict")
 }
 
-#' @rdname dictS3
 #' @export
-as.dict.data.frame <- function(x)
+as.dict.default <- function(x)
 {
-    dict(as.list(x))
-}
-
-#' @export
-as.dict.default <- function(x, ...)
-{
-    if (is.dict(x)) return(x)
-    dict(x, ...)
+    dict(x)
 }
 
 #' @rdname dictS3
@@ -61,6 +62,11 @@ is.dict <- function(x) inherits(x, "Dict")
 #' @rdname dictS3
 #' @return `keys()` returns a `character` vector of all the dict's keys.
 #' @export
+#' @examples
+#'
+#' d = dict(x = 1, y = 2)
+#' keys(d)
+#' names(d)
 keys <- function(x) x$keys()
 
 #' @rdname dictS3

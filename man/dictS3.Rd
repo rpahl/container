@@ -3,21 +3,15 @@
 \name{dictS3}
 \alias{dictS3}
 \alias{dict}
-\alias{dict.data.frame}
 \alias{as.dict}
-\alias{as.dict.data.frame}
 \alias{is.dict}
 \alias{keys}
 \alias{names.Dict}
-\title{Dict S3 interface}
+\title{Dictionary}
 \usage{
 dict(...)
 
-\method{dict}{data.frame}(...)
-
-as.dict(x)
-
-\method{as.dict}{data.frame}(x)
+as.dict(x, ...)
 
 is.dict(x)
 
@@ -51,6 +45,30 @@ key-value pair semantic.
 }
 \details{
 For a full list of all dict methods see \code{\link[=Dict]{Dict()}}.
+}
+\examples{
+dict(a = 1, b = "one", f = mean)
+
+d1 = dict(a = 1, b = 2)
+mode(values(d1))                     # 'list'
+d2 = dict(c(a = 1, b = 2))
+mode(values(d2))                     # 'numeric'
+
+\dontrun{
+dict(a = 1, 2)                       # all elements must be named}
+
+# Initialize from data.frame
+daf = data.frame(A = 1:3, B = 3:1)
+d = dict(daf)
+d
+
+# Coerce from other types
+as.dict(list(A = 1:3, B = "b"))
+as.dict(c(x = 1, y = "x", z = 2 + 3))
+
+d = dict(x = 1, y = 2)
+keys(d)
+names(d)
 }
 \seealso{
 \code{\link[=Dict]{Dict()}}, \code{\link[=container]{container()}}
