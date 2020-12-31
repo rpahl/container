@@ -4,6 +4,7 @@
 \alias{peek}
 \alias{peek.Deque}
 \alias{peek.Dict}
+\alias{peek.dict.table}
 \title{Peek element of an object}
 \usage{
 peek(x, ...)
@@ -11,6 +12,8 @@ peek(x, ...)
 \method{peek}{Deque}(x)
 
 \method{peek}{Dict}(x, key, default = NULL)
+
+\method{peek}{dict.table}(x, column, default = NULL)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -20,12 +23,19 @@ peek(x, ...)
 \item{key}{\code{character} key of the value to peek.}
 
 \item{default}{\code{ANY} default value to return if \code{key} not in the dictionary.}
+
+\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Deque} the last element at the right side of the deque.
 
 For \code{Dict} if \code{key} does exists, the associated value is returned
 otherwise the given \code{default} value.
+
+For \code{dict.table} returns the column if it does exist otherwise
+the given \code{default} value. If the default length does not match the number
+of rows, it is recycled accordingly and a warning is given, unless the
+default value had a length of 1.
 }
 \description{
 Search an element in an object and return a copy of it. If there is no

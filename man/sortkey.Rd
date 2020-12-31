@@ -3,11 +3,14 @@
 \name{sortkey}
 \alias{sortkey}
 \alias{sortkey.Dict}
+\alias{sortkey.dict.table}
 \title{Sort elements according to their keys}
 \usage{
 sortkey(x, decreasing = FALSE, ...)
 
 \method{sortkey}{Dict}(x, decreasing = FALSE)
+
+\method{sortkey}{dict.table}(x, decreasing = FALSE)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -19,6 +22,9 @@ sortkey(x, decreasing = FALSE, ...)
 \value{
 For \code{Dict} sorts the elements in place and inivisbly returns the
 \code{\link[=Dict]{Dict()}} object.
+
+For \code{dict.table} re-orders the columns in place and inivisbly
+returns the \code{\link[=dict.table]{dict.table()}} object.
 }
 \description{
 Re-order elements according to key-order.

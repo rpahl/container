@@ -3,7 +3,7 @@
     stopifnot(length(class) == 1L)
 
     class.new <- attr(x, "class")
-    pos <- match(class.new, class)
+    pos <- match(class, class.new)
     if (!is.na(pos)) {
         class.new <- class.new[-pos]
     }
@@ -19,9 +19,11 @@
 #' dict.table
 #'
 #' @description The [dict.table()] is a mix of a dictionary and a
-#' `data.table`, that is, a dictionary where each element has the same length.
-#' Since a dict.table behaves like both a dict and a data.table, all dict and
-#' data.table functions and operators can be used as usual.
+#' `data.table`, that is, it can be considered as a dictionary with
+#' all elements having the same length or as a data.table with extended
+#' functionality to manage its data columns.
+#' Basically a dict.table behaves like both a dict and a data.table, so that
+#' all dict and data.table functions and operators are available.
 #'
 #' As with [Dict()] objects, it provides reference semantics so that changes
 #' like insertion and deletion of elements are done on the original object.
@@ -30,28 +32,30 @@
 #' [data.table::data.table()] constructor. Note that in contrast to
 #' [data.table()], [dict.table()] does not allow duplicated keys and therefore
 #' always is initialized as `data.table(..., check.names = TRUE)`.
-#' @param x any `R` object
+#' @param x any `R` object or a `dict.table` object.
 #' @name dict.tableS3
 #' @import data.table
 #' @seealso [dict()], [data.table::data.table()]
 #' @export
 #' @examples
+#' # Some basic examples using some typical data.table and dict operations.
+#' # The constructor can take the 'key' argument known from data.table():
 #' dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
 #' dit
-#' setkey(dit, "x")                     # sorts by 'x'
+#' setkey(dit, "x")                             # sort by 'x'
 #' dit
-#' (add(dit, "v", 1:9))
+#' (add(dit, "v", 1:9))                         # add column v = 1:9
 #' dit[y > 5]
-#' (discard(dit, "x"))
+#' (discard(dit, "x"))                          # discard column 'x'
 #' \dontrun{
-#'     getval(dit, "x")                 # column 'x' does not exist
-#'     setval(dit, "x", 0)              # cannot be set, if not exist
+#'     getval(dit, "x")                         # column 'x' does not exist
+#'     setval(dit, "x", 0)                      # cannot be set, if not exist
 #' }
-#' (setval(dit, "x", 0, add = TRUE))    # ok
-#' peek(dit, "x")                       # glance at column
-#' has(dit, "x")                        # TRUE
-#' pop(dit, "x")                        # get column and remove it
-#' has(dit, "x")                        # FALSE
+#' (setval(dit, "x", 0, add = TRUE))            # ok - re-adds column 'x' with all 0s
+#' peek(dit, "x")                               # glance at column 'x'
+#' has(dit, "x")                                # TRUE
+#' pop(dit, "x")                                # get column and remove it
+#' has(dit, "x")                                # FALSE
 dict.table <- function(...)
 {
     dat <- data.table::data.table(..., check.names = TRUE)
@@ -72,14 +76,16 @@ as.dict.table <- function(x, ...)
 }
 
 #' @rdname dict.tableS3
-#' @param copy return a copy of the `data.table` object (default) or work on
-#' the passed object by reference?
+#' @param copy if `TRUE` creates a copy of the `data.table` object otherwise
+#' works on the passed object by reference.
 #' @export
 #' @examples
 #'
-#' # Copy and reference semantics for coerced data.table
-#' dat = data.table(a = 1)
+#' # Copy and reference semantics when coercing *from* a data.table
+#' dat = data.table(a = 1, b = 2)
 #' dit = as.dict.table(dat)
+#' is.dict.table(dit)                           # TRUE
+#' is.dict.table(dat)                           # FALSE
 #' setval(dit, "a", 9)
 #' dit[["a"]]                                   # 9
 #' dat[["a"]]                                   # 1
@@ -87,24 +93,18 @@ as.dict.table <- function(x, ...)
 #' setval(dit.dat, "a", 9)
 #' dit.dat[["a"]]                               # 9
 #' dat[["a"]]                                   # 9
+#' is.dict.table(dit.dat)                       # TRUE
+#' is.dict.table(dat)                           # TRUE now as well!
 #'
 #' # Coerce from dict
 #' d = dict(a = 1, b = 1:3)
 #' as.dict.table(d)
 #'
-#' # Coerce from and to data.table
-#' dat = data.table(a = 1, b = 2)
-#' dit = as.dict.table(dat)
-#' is.dict.table(dit)                           # TRUE
-#' dat = as.data.table(dit)
-#' is.dict.table(dat)                           # FALSE
-#' is.data.table(dat)                           # TRUE
 as.dict.table.data.table <- function(x, copy = TRUE, ...)
 {
     if (copy) {
         dict.table(x)
     } else {
-        #.remove_class(x)
         .set_class(x)
     }
 }
@@ -121,135 +121,34 @@ as.dict.table.default <- function(x, ...)
 #' @export
 is.dict.table <- function(x) inherits(x, "dict.table")
 
-
-# Common Container methods
-
 #' @rdname dict.tableS3
 #' @export
-add.dict.table <- function(x, key, value)
+#' @examples
+#'
+#' Copy and reference semantics when coercing *to* a data.table
+#' dit = dict.table(a = 1, b = 2)
+#' dat = as.data.table(dit)
+#' is.data.table(dat)                           # TRUE
+#' data.table::set(dat, j = "a", value = 9)
+#' dat[["a"]]                                   # 9
+#' dit[["a"]]                                   # 1
+#' dat.dit = as.data.table(dit, copy = FALSE)   # init by reference
+#' is.data.table(dat.dit)                       # TRUE
+#' is.dict.table(dit)                           # FALSE - not a dict.table anymore ...
+#' is.data.table(dit)                           # TRUE  - ... but a data.table
+#' data.table::set(dat.dit, j = "a", value = 9)
+#' dat.dit[["a"]]                               # 9
+#' dit[["a"]]                                   # 9 - also changed
+`as.data.table.dict.table` <- function(x, copy = TRUE, ...)
 {
-    if (has(x, key)) {
-        stop("key '", key, "' already in ", data.class(x))
-    }
-    setval(x, key, value, add = TRUE)
-}
-
-#' @rdname dict.tableS3
-#' @export
-clear.dict.table <- function(x)
-{
-    delete(x, names(x))
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-delete.dict.table <- function(x, key)
-{
-    has_key <- function(key) has(x, key)
-    missing_cols = Filter(key, f = Negate(has_key))
-    if (length(missing_cols)) {
-        col_str = paste0("'", missing_cols, "'", collapse = ", ")
-        stop("Column", ifelse(length(missing_cols) > 1, "s ", " "),
-             col_str,
-             ifelse(is.character(key),
-                    paste(" not in", data.class(x)),
-                    paste0(" out of range (ncol = ", ncol(x), ")")))
-    }
-    discard(x, key)
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-discard.dict.table <- function(x, key)
-{
-    j = Filter(unique(key), f = function(key) has(x, key))
-    if (is.numeric(j)) j = as.integer(j)
-
-    if (length(j)) {
-        data.table::set(x, j = j, value = NULL)
-    }
-    invisible(x)
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-empty.dict.table <- function(x)
-{
-    ncol(x) == 0
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-getval.dict.table <- function(x, key)
-{
-    if (has(x, key)) {
-        peek(x, key)
+    if (copy) {
+        data.table::as.data.table(as.list(x), ...)
     } else {
-        stop("key '", key, "' not in ", data.class(x))
+        .remove_class(x, class = "dict.table")
     }
 }
 
 
-#' @rdname dict.tableS3
-#' @export
-has.dict.table <- function(x, key)
-{
-    if (length(key) != 1) stop("key must be of length 1")
-    if (is.na(key)) stop("undefined key")
-    switch(data.class(key),
-           "character" = key %in% names(x),
-           "numeric" = ncol(x) >= key,
-           stop("key must be character or numeric")
-    )
-}
-
-#' @rdname dict.tableS3
-#' @export
-keys.dict.table <- function(x)
-{
-    colnames(x)
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-peek.dict.table <- function(x, key, default = NULL)
-{
-    if (has(x, key)) {
-        as.list(x)[[key]]
-    } else {
-        rep(default, times = nrow(x) %/% length(default))
-    }
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-pop.dict.table <- function(x, key)
-{
-    elem <- peek(x, key)
-    delete(x, key)
-    elem
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-popitem.dict.table <- function(x)
-{
-    if (empty(x)) {
-        stop("pop at empty ", data.class(x))
-    }
-    key <- sample(names(x), 1)
-    pop(x, key)
-}
-
-
-#' @rdname dict.tableS3
 #' @export
 print.dict.table <- function(x, ...)
 {
@@ -264,57 +163,18 @@ print.dict.table <- function(x, ...)
 
 #' @rdname dict.tableS3
 #' @export
+#' @examples
+dit = dict.table(a = 1:2, b = 1:2)
+rbind(dit, dit)
+
+# Also works with data.tables
+dat = dict.table(a = 3:4, b = 3:4)
+dit.dat = rbind(dit, dat)
 rbind.dict.table <- function(x, ...)
 {
-    res <- do.call(rbind, args = c(list(as.data.table(x)), list(...)))
+    dots <- list(...)
+    res <- do.call(rbind, args = c(list(as.data.table(x)), dots))
     .set_class(res)
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-rename.dict.table <- function(x, old, new)
-{
-    data.table::setnames(x, old, new)
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-setval.dict.table <- function(x, key, value, add = FALSE)
-{
-    if (!add) {
-        if (!has(x, key)) {
-            stop(ifelse(is.numeric(key), "column", "key"),
-                 " '", key, "' not in ", data.class(x))
-        }
-    }
-    j <- if (is.numeric(key)) as.integer(key) else key
-    data.table::set(x, j = j, value = value)
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-size.dict.table <- function(x)
-{
-    ncol(x)
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-sortkey.dict.table <- function(x, decr = FALSE)
-{
-    data.table::setcolorder(x, sort(names(x), decreasing = decr))
-}
-
-
-#' @rdname dict.tableS3
-#' @export
-values.dict.table <- function(x)
-{
-    as.data.table(x)
 }
 
 
@@ -330,23 +190,5 @@ values.dict.table <- function(x)
 #' or replace.
 NULL
 
-
-# Coercion to other classes
-
-#' @export
-`as.data.frame.dict.table` <- function(x, ...)
-{
-    as.data.frame(as.list(x), ...)
-}
-
-#' @export
-`as.data.table.dict.table` <- function(x, copy = TRUE, ...)
-{
-    if (copy) {
-        data.table::as.data.table(as.list(x), ...)
-    } else {
-        data.table::setattr(x, "class", attr(x, "class")[-1])
-    }
-}
 
 

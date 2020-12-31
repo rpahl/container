@@ -4,6 +4,7 @@
 \alias{pop}
 \alias{pop.Deque}
 \alias{pop.Dict}
+\alias{pop.dict.table}
 \title{Pop element}
 \usage{
 pop(x, ...)
@@ -11,6 +12,8 @@ pop(x, ...)
 \method{pop}{Deque}(x)
 
 \method{pop}{Dict}(x, key)
+
+\method{pop}{dict.table}(x, column)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -19,6 +22,8 @@ pop(x, ...)
 
 \item{key}{\code{character} key of the value to pop. If \code{key} does exists,
 the associated key-value pair is deleted and it's value returned.}
+
+\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Deque} the element from the right side of the deque after it
@@ -26,6 +31,8 @@ was removed.
 
 For \code{Dict} the value associated with the key after the key-value
 pair was removed from the dict.
+
+For \code{dict.table} the column after it was removed from the dict.table.
 }
 \description{
 Search and remove an element from an object and return a copy of the

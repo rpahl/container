@@ -3,11 +3,14 @@
 \name{popitem}
 \alias{popitem}
 \alias{popitem.Container}
+\alias{popitem.dict.table}
 \title{Pop random element}
 \usage{
 popitem(x)
 
 \method{popitem}{Container}(x)
+
+\method{popitem}{dict.table}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}

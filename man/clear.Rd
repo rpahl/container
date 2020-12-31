@@ -3,11 +3,14 @@
 \name{clear}
 \alias{clear}
 \alias{clear.Container}
+\alias{clear.dict.table}
 \title{Clear an object}
 \usage{
 clear(x, ...)
 
 \method{clear}{Container}(x)
+
+\method{clear}{dict.table}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}

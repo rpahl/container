@@ -13,3 +13,17 @@ getval <- function(x, ...) UseMethod("getval")
 #' @export
 getval.Dict <- function(x, key) x$getval(key)
 
+#' @rdname getval
+#' @param column `character` name or `numeric` index of column.
+#' @return For `dict.table` returns the column if it does exist otherwise
+#' throws an error.
+#' @export
+getval.dict.table <- function(x, column)
+{
+    if (has(x, column)) {
+        peek(x, column)
+    } else {
+        stop("column '", column, "' not in ", data.class(x))
+    }
+}
+

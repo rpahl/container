@@ -25,3 +25,20 @@ discard.Container <- function(x, elem, right = FALSE) x$discard(elem, right)
 #' @export
 discard.Dict <- function(x, key) x$discard(key)
 
+#' @rdname discard
+#' @param column `character` name or `numeric` index of column.
+#' @return For `dict.table` the dict.table object after the column was removed
+#' or the unchanged dict.table object if the column did not exist in the first
+#' place.
+#' @export
+discard.dict.table <- function(x, column)
+{
+    j = Filter(unique(column), f = function(column) has(x, column))
+    if (is.numeric(j)) j = as.integer(j)
+
+    if (length(j)) {
+        data.table::set(x, j = j, value = NULL)
+    }
+    invisible(x)
+}
+

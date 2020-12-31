@@ -4,6 +4,7 @@
 \alias{add}
 \alias{add.Container}
 \alias{add.Dict}
+\alias{add.dict.table}
 \title{Add element}
 \usage{
 add(x, ...)
@@ -11,6 +12,8 @@ add(x, ...)
 \method{add}{Container}(x, elem)
 
 \method{add}{Dict}(x, key, elem)
+
+\method{add}{dict.table}(x, column, value)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -20,11 +23,15 @@ add(x, ...)
 \item{elem}{some element to be added.}
 
 \item{key}{\code{character} unique identifier of the item.}
+
+\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Container}, the container object with the element being added.
 
 For \code{Dict}, the dict object with the key-element pair being added.
+
+For \code{dict.table}, the dict.table object with the column being added.
 }
 \description{
 Add element

@@ -3,11 +3,14 @@
 \name{rename}
 \alias{rename}
 \alias{rename.Dict}
+\alias{rename.dict.table}
 \title{Rename elements safely}
 \usage{
 rename(x, old, new, ...)
 
 \method{rename}{Dict}(x, old, new)
+
+\method{rename}{dict.table}(x, old, new)
 }
 \arguments{
 \item{x}{any \code{R} object with names.}
@@ -24,6 +27,9 @@ renamed vector.
 
 For \code{Dict} renames key \code{old} to \code{new} in place and invisibly returns
 the \code{\link[=Dict]{Dict()}} object.
+
+For \code{dict.table} renames key \code{old} to \code{new} in place and invisibly
+returns the \code{\link[=dict.table]{dict.table()}} object.
 }
 \description{
 Search for old name and replace it by new name. If either the

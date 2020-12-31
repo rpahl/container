@@ -11,3 +11,7 @@ clear <- function(x, ...) UseMethod("clear")
 #' @export
 clear.Container <- function(x) x$clear()
 
+#' @rdname clear
+#' @export
+clear.dict.table <- function(x) delete(x, names(x))
+

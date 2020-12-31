@@ -21,6 +21,16 @@ pop.Deque <- function(x) x$pop()
 #' @export
 pop.Dict <- function(x, key) x$pop(key)
 
+#' @rdname pop
+#' @param column `character` name or `numeric` index of column.
+#' @return For `dict.table` the column after it was removed from the dict.table.
+#' @export
+pop.dict.table <- function(x, column)
+{
+    elem <- peek(x, column)
+    delete(x, column)
+    elem
+}
 
 
 #' Pop element from left
@@ -56,4 +66,15 @@ popitem <- function(x) UseMethod("popitem")
 #' @return For `Container` a randomly popped element is returned.
 #' @export
 popitem.Container <- function(x) x$popitem()
+
+#' @rdname popitem
+#' @export
+popitem.dict.table <- function(x)
+{
+    if (empty(x)) {
+        stop("popitem at empty ", data.class(x))
+    }
+    column <- sample(names(x), 1)
+    pop(x, column)
+}
 

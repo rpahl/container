@@ -3,11 +3,14 @@
 \name{values}
 \alias{values}
 \alias{values.Container}
+\alias{values.dict.table}
 \title{Get raw values of an object}
 \usage{
 values(x, ...)
 
 \method{values}{Container}(x)
+
+\method{values}{dict.table}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}

@@ -20,6 +20,29 @@ peek.Deque <- function(x) x$peek()
 #' @export
 peek.Dict <- function(x, key, default = NULL) x$peek(key, default)
 
+#' @rdname peek
+#' @param column `character` name or `numeric` index of column.
+#' @return For `dict.table` returns the column if it does exist otherwise
+#' the given `default` value. If the default length does not match the number
+#' of rows, it is recycled accordingly and a warning is given, unless the
+#' default value had a length of 1.
+#' @export
+peek.dict.table <- function(x, column, default = NULL)
+{
+    if (has(x, column)) {
+        as.list(x)[[column]]
+    } else {
+        if (length(default) > 0 && length(default) != nrow(x)) {
+            if (length(default) != 1) {
+                warning("length of 'default' value did not match number ",
+                        "of rows and therefore was recycled")
+            }
+            default = rep_len(default, length.out = nrow(x))
+        }
+        default
+    }
+}
+
 
 
 #' Peek element on left side of an object

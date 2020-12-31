@@ -17,6 +17,19 @@ add.Container <- function(x, elem) x$add(elem)
 #' @export
 add.Dict <- function(x, key, elem) x$add(key, elem)
 
+#' @rdname add
+#' @param column `character` name or `numeric` index of column.
+#' @return For `dict.table`, the dict.table object with the column being added.
+#' @export
+add.dict.table <- function(x, column, value)
+{
+    if (has(x, column)) {
+        stop("column '", column, "' already in ", data.class(x))
+    }
+    setval(x, column, value, add = TRUE)
+}
+
+
 
 #' Add element to the left
 #'

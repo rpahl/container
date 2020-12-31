@@ -33,6 +33,15 @@ rename <- function(x, old, new, ...)
 #' @export
 rename.Dict <- function(x, old, new) x$rename(old, new)
 
+#' @rdname rename
+#' @return For `dict.table` renames key `old` to `new` in place and invisibly
+#' returns the [dict.table()] object.
+#' @export
+rename.dict.table <- function(x, old, new)
+{
+    data.table::setnames(x, old, new)
+}
+
 
 #' @export
 rename.default <- function(x, old, new)

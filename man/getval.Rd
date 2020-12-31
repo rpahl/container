@@ -3,11 +3,14 @@
 \name{getval}
 \alias{getval}
 \alias{getval.Dict}
+\alias{getval.dict.table}
 \title{Strict element access}
 \usage{
 getval(x, ...)
 
 \method{getval}{Dict}(x, key)
+
+\method{getval}{dict.table}(x, column)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -15,10 +18,15 @@ getval(x, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 
 \item{key}{\code{character} name of key.}
+
+\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Dict} returns value at \code{key}, if \code{key} is found in \code{Dict}
 otherwise throws an error.
+
+For \code{dict.table} returns the column if it does exist otherwise
+throws an error.
 }
 \description{
 Try to access elements and signal an error if not found.

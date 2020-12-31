@@ -13,3 +13,12 @@ sortkey <- function(x, decreasing = FALSE, ...) UseMethod("sortkey")
 #' @export
 sortkey.Dict <- function(x, decreasing = FALSE) x$sortkey(decreasing)
 
+#' @rdname sortkey
+#' @return For `dict.table` re-orders the columns in place and inivisbly
+#' returns the [dict.table()] object.
+#' @export
+sortkey.dict.table <- function(x, decreasing = FALSE)
+{
+    data.table::setcolorder(x, sort(names(x), decreasing = decreasing))
+}
+

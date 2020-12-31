@@ -6,24 +6,9 @@
 \alias{as.dict.table}
 \alias{as.dict.table.data.table}
 \alias{is.dict.table}
-\alias{add.dict.table}
-\alias{clear.dict.table}
-\alias{delete.dict.table}
-\alias{discard.dict.table}
-\alias{empty.dict.table}
-\alias{getval.dict.table}
-\alias{has.dict.table}
-\alias{keys.dict.table}
-\alias{peek.dict.table}
-\alias{pop.dict.table}
-\alias{popitem.dict.table}
+\alias{as.data.table.dict.table}
 \alias{print.dict.table}
 \alias{rbind.dict.table}
-\alias{rename.dict.table}
-\alias{setval.dict.table}
-\alias{size.dict.table}
-\alias{sortkey.dict.table}
-\alias{values.dict.table}
 \title{dict.table}
 \usage{
 dict.table(...)
@@ -34,41 +19,11 @@ as.dict.table(x, ...)
 
 is.dict.table(x)
 
-\method{add}{dict.table}(x, key, value)
-
-\method{clear}{dict.table}(x)
-
-\method{delete}{dict.table}(x, key)
-
-\method{discard}{dict.table}(x, key)
-
-\method{empty}{dict.table}(x)
-
-\method{getval}{dict.table}(x, key)
-
-\method{has}{dict.table}(x, key)
-
-keys.dict.table(x)
-
-\method{peek}{dict.table}(x, key, default = NULL)
-
-\method{pop}{dict.table}(x, key)
-
-\method{popitem}{dict.table}(x)
+\method{as.data.table}{dict.table}(x, copy = TRUE, ...)
 
 \method{print}{dict.table}(x, ...)
 
 \method{rbind}{dict.table}(x, ...)
-
-\method{rename}{dict.table}(x, old, new)
-
-\method{setval}{dict.table}(x, key, value, add = FALSE)
-
-size.dict.table(x)
-
-\method{sortkey}{dict.table}(x, decr = FALSE)
-
-\method{values}{dict.table}(x)
 }
 \arguments{
 \item{...}{initial elements of the form \code{key = value} to be put into the
@@ -77,41 +32,47 @@ size.dict.table(x)
 \code{\link[=data.table]{data.table()}}, \code{\link[=dict.table]{dict.table()}} does not allow duplicated keys and therefore
 always is initialized as \code{data.table(..., check.names = TRUE)}.}
 
-\item{x}{any \code{R} object}
+\item{x}{any \code{R} object or a \code{dict.table} object.}
 
-\item{copy}{return a copy of the \code{data.table} object (default) or work on
-the passed object by reference?}
+\item{copy}{if \code{TRUE} creates a copy of the \code{data.table} object otherwise
+works on the passed object by reference.}
 }
 \description{
 The \code{\link[=dict.table]{dict.table()}} is a mix of a dictionary and a
-\code{data.table}, that is, a dictionary where each element has the same length.
-Since a dict.table behaves like both a dict and a data.table, all dict and
-data.table functions and operators can be used as usual.
+\code{data.table}, that is, it can be considered as a dictionary with
+all elements having the same length or as a data.table with extended
+functionality to manage its data columns.
+Basically a dict.table behaves like both a dict and a data.table, so that
+all dict and data.table functions and operators are available.
 
 As with \code{\link[=Dict]{Dict()}} objects, it provides reference semantics so that changes
 like insertion and deletion of elements are done on the original object.
 }
 \examples{
+# Some basic examples using some typical data.table and dict functions.
+# The constructor can take the 'key' argument known from data.table():
 dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
 dit
-setkey(dit, "x")                     # sorts by 'x'
+setkey(dit, "x")                             # sort by 'x'
 dit
-(add(dit, "v", 1:9))
+(add(dit, "v", 1:9))                         # add column v = 1:9
 dit[y > 5]
-(discard(dit, "x"))
+(discard(dit, "x"))                          # discard column 'x'
 \dontrun{
-    getval(dit, "x")                 # column 'x' does not exist
-    setval(dit, "x", 0)              # cannot be set, if not exist
+    getval(dit, "x")                         # column 'x' does not exist
+    setval(dit, "x", 0)                      # cannot be set, if not exist
 }
-(setval(dit, "x", 0, add = TRUE))    # ok
-peek(dit, "x")                       # glance at column
-has(dit, "x")                        # TRUE
-pop(dit, "x")                        # get column and remove it
-has(dit, "x")                        # FALSE
+(setval(dit, "x", 0, add = TRUE))            # ok - re-adds column 'x' with all 0s
+peek(dit, "x")                               # glance at column 'x'
+has(dit, "x")                                # TRUE
+pop(dit, "x")                                # get column and remove it
+has(dit, "x")                                # FALSE
 
-# Copy and reference semantics for coerced data.table
-dat = data.table(a = 1)
+# Copy and reference semantics when coercing *from* a data.table
+dat = data.table(a = 1, b = 2)
 dit = as.dict.table(dat)
+is.dict.table(dit)                           # TRUE
+is.dict.table(dat)                           # FALSE
 setval(dit, "a", 9)
 dit[["a"]]                                   # 9
 dat[["a"]]                                   # 1
@@ -119,18 +80,28 @@ dit.dat = as.dict.table(dat, copy = FALSE)   # init by reference
 setval(dit.dat, "a", 9)
 dit.dat[["a"]]                               # 9
 dat[["a"]]                                   # 9
+is.dict.table(dit.dat)                       # TRUE
+is.dict.table(dat)                           # TRUE now as well!
 
 # Coerce from dict
 d = dict(a = 1, b = 1:3)
 as.dict.table(d)
 
-# Coerce from and to data.table
-dat = data.table(a = 1, b = 2)
-dit = as.dict.table(dat)
-is.dict.table(dit)                           # TRUE
+
+Copy and reference semantics when coercing *to* a data.table
+dit = dict.table(a = 1, b = 2)
 dat = as.data.table(dit)
-is.dict.table(dat)                           # FALSE
 is.data.table(dat)                           # TRUE
+data.table::set(dat, j = "a", value = 9)
+dat[["a"]]                                   # 9
+dit[["a"]]                                   # 1
+dat.dit = as.data.table(dit, copy = FALSE)   # init by reference
+is.data.table(dat.dit)                       # TRUE
+is.dict.table(dit)                           # FALSE - not a dict.table anymore ...
+is.data.table(dit)                           # TRUE  - ... but a data.table
+data.table::set(dat.dit, j = "a", value = 9)
+dat.dit[["a"]]                               # 9
+dit[["a"]]                                   # 9 - also changed
 }
 \seealso{
 \code{\link[=dict]{dict()}}, \code{\link[data.table:data.table]{data.table::data.table()}}

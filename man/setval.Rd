@@ -3,11 +3,14 @@
 \name{setval}
 \alias{setval}
 \alias{setval.Dict}
+\alias{setval.dict.table}
 \title{Strict element replacement}
 \usage{
 setval(x, ...)
 
 \method{setval}{Dict}(x, key, value, add = FALSE)
+
+\method{setval}{dict.table}(x, column, value, add = FALSE)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -19,12 +22,19 @@ setval(x, ...)
 \item{add}{\code{logical} if FALSE (default) and element was not found, an error is
 given. Otherwise if \code{TRUE} the new element is not used as a replacement but
 just added as a new element.}
+
+\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Dict} overrides \code{value} at \code{key} if \code{key} is already in the
 \code{Dict}. If \code{key} not in \code{Dict}, an error is given unless \code{add} was set to
 \code{TRUE} in which case the \code{value} is added under \code{key}.
 Invisibly returns the altered \code{\link[=Dict]{Dict()}} object.
+
+For \code{dict.table} overrides the values at the given column.
+If \code{column} does not exist, an error is given unless \code{add} was set to
+\code{TRUE} in which case the column is added if possible. All changes are made
+by reference. Invisibly returns the altered \code{\link[=dict.table]{dict.table()}} object.
 }
 \description{
 Try to find and replace elements and signal an error if not

@@ -4,6 +4,7 @@
 \alias{discard}
 \alias{discard.Container}
 \alias{discard.Dict}
+\alias{discard.dict.table}
 \title{Discard elements}
 \usage{
 discard(x, ...)
@@ -11,6 +12,8 @@ discard(x, ...)
 \method{discard}{Container}(x, elem, right = FALSE)
 
 \method{discard}{Dict}(x, key)
+
+\method{discard}{dict.table}(x, column)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -24,6 +27,8 @@ object is not altered.}
 
 \item{key}{\code{character} key of value to discard. If \code{key} does exist,
 the associated key-value pair is deleted, otherwise it is ignored.}
+
+\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Container} the container object after the element was removed
@@ -32,6 +37,10 @@ container in the first place.
 
 For \code{Dict} the dict object after the key-value pair was removed or
 the unchanged dict object if the key was not in the dict in the first place.
+
+For \code{dict.table} the dict.table object after the column was removed
+or the unchanged dict.table object if the column did not exist in the first
+place.
 }
 \description{
 Search and remove an element from an object. If the element is not found, do

@@ -10,3 +10,7 @@ empty <- function(x, ...) UseMethod("empty")
 #' @export
 empty.Container <- function(x) x$empty()
 
+#' @rdname empty
+#' @export
+empty.dict.table <- function(x) ncol(x) == 0
+

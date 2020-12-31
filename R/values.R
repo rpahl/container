@@ -11,3 +11,7 @@ values <- function(x, ...) UseMethod("values")
 #' @export
 values.Container <- function(x) x$values()
 
+#' @rdname values
+#' @export
+values.dict.table <- function(x) as.list(x)
+
