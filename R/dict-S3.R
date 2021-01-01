@@ -85,36 +85,6 @@ names.Dict <- function(x) x$keys()
 #' @param key `character` name of elements to extract or replace.
 NULL
 
-#' @rdname dictS3replace
-#' @param default A suitable default value.
-#' @return For `[[` returns the element found at key, or `default` if not found.
-#' @export
-`[[.Dict` <- function(x, key, default = NULL)
-{
-    if (missing(default)) {
-        x$getval(key)
-    } else {
-        x$peek(key, default)
-    }
-}
-
-
-#' @rdname dictS3replace
-#' @return For `[` returns a dictionary containing the extracted values.
-#' @export
-`[.Dict` <- function(x, key, default = NULL)
-{
-    d = dict()
-    for (k in unique(key)) {
-        value = if (missing(default)) {
-            x$getval(k)
-        } else {
-            x$peek(k, default = default)
-        }
-        d$add(k, value)
-    }
-    d
-}
 
 
 #' @rdname dictS3replace
