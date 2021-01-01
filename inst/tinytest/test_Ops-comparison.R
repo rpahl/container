@@ -1,0 +1,22 @@
+
+# Set
+l1 <- list(1, 2, 3,    "A", "B", "C")
+l2 <- list(   2, 3, 4,      "B", "C", "D")
+s1 <- setnew(l1)
+s2 <- setnew(l2)
+expect_false(s1 < s2)
+expect_false(s1 <= s2)
+expect_false(s1 > s2)
+expect_false(s1 >= s2)
+expect_false(s2 < s1)
+expect_false(s2 <= s1)
+expect_false(s2 >= s1)
+expect_true((s1 + s2) > s1)
+expect_true((s1 + s2) > s2)
+expect_true((s1 / s2) < s1)
+expect_true((s1 - s2) < s1)
+expect_true(s1 >= s1)
+expect_true(s1 <= s1)
+expect_true(s2 >= s2)
+expect_true(s2 <= s2)
+

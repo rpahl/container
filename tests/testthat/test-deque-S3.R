@@ -81,9 +81,3 @@ test_that("Conversion", {
     expect_equal(as.list(d), as.list(d$values()))
 })
 
-test_that("Operators", {
-    d <- deque(1:3)
-    expect_equal(0 + d, addleft(d, 0))
-    expect_equal(d + 0, add(d, 0))
-})
-

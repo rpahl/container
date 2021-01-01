@@ -221,40 +221,6 @@ test_that("data.frame can be converted to dict", {
 })
 
 
-context("Arithmetic dict operators")
-
-test_that("performing d1 + d2 returns a copy of d1 updated by d2", {
-    d1 <- dict(a = 1, b = 2)
-    d2 <- dict(       b = 2, c = 1)
-    dd <- d1 + d2
-    expect_equal(size(d1), 2)
-    expect_equal(size(d2), 2)
-    expect_equal(size(dd), 3)
-    expect_equal(values(dd), values(update(d1, d2)))
-    expect_equal(d1 + d1, d1)
-    expect_equal(d1 + dict(), d1)
-    expect_equal(dict() + d1, d1)
-})
-
-test_that("performing d1 - d2 returns a copy of d1 with all d2 keys being discarded", {
-    d1 <- dict(A = 1, B = 2, C = 3)
-    d2 <- dict(A = 1, B = 2)
-    expect_equal(d1 - d2, dict(C = 3))
-    expect_equivalent(d2 - d1, dict())
-    expect_equivalent(d1 - d1, dict())
-    expect_equivalent(dict() - d1, dict())
-})
-
-test_that("performing d1 / d2 returns a dictionary of intersected keys", {
-    d1 <- dict(a = 1, b = 2)
-    d2 <- dict(       b = 2, c = 1)
-    dd <- d1 / d2
-    expect_equal(dd, dict(b = 2))
-    expect_equal(d1 / d1, d1)
-    expect_equal(d1 / dict(), dict())
-    expect_equal(dict() / d1, dict())
-})
-
 context("Extract and replace operators")
 
 test_that("'[[' select operator works", {
