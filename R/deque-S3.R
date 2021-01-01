@@ -58,27 +58,3 @@ is.deque <- function(x) inherits(x, "Deque")
 rev.Deque <- function(x) x$reverse()
 
 
-
-#' Binary `Deque` operators
-#'
-#' @description Binary operators for [Deque()] objects.
-#' @name dequeS3binOp
-#'
-#' @param x1 primitive or [Deque()] object
-#' @param x2 primitive or [Deque()] object
-NULL
-
-#' @rdname dequeS3binOp
-#' @return For `+` if left side is a [Deque()], adds element to right side of
-#' the [Deque()]. If right side is a [Deque()], adds element to left side of
-#' the [Deque()].
-#' @export
-`+.Deque` <- function(x1, x2)
-{
-    if (is.deque(x1)) {
-        x1$clone()$add(x2)
-    } else {
-        x2$clone()$addleft(x1)
-    }
-}
-

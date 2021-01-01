@@ -7,7 +7,6 @@
 \alias{as.dict.table.data.table}
 \alias{is.dict.table}
 \alias{as.data.table.dict.table}
-\alias{print.dict.table}
 \alias{rbind.dict.table}
 \title{dict.table}
 \usage{
@@ -20,8 +19,6 @@ as.dict.table(x, ...)
 is.dict.table(x)
 
 \method{as.data.table}{dict.table}(x, copy = TRUE, ...)
-
-\method{print}{dict.table}(x, ...)
 
 \method{rbind}{dict.table}(x, ...)
 }
@@ -49,7 +46,7 @@ As with \code{\link[=Dict]{Dict()}} objects, it provides reference semantics so 
 like insertion and deletion of elements are done on the original object.
 }
 \examples{
-# Some basic examples using some typical data.table and dict functions.
+# Some basic examples using some typical data.table and dict operations.
 # The constructor can take the 'key' argument known from data.table():
 dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
 dit
@@ -102,6 +99,12 @@ is.data.table(dit)                           # TRUE  - ... but a data.table
 data.table::set(dat.dit, j = "a", value = 9)
 dat.dit[["a"]]                               # 9
 dit[["a"]]                                   # 9 - also changed
+dit = dict.table(a = 1:2, b = 1:2)
+rbind(dit, dit)
+
+# Also works with data.tables
+dat = dict.table(a = 3:4, b = 3:4)
+dit.dat = rbind(dit, dat)
 }
 \seealso{
 \code{\link[=dict]{dict()}}, \code{\link[data.table:data.table]{data.table::data.table()}}

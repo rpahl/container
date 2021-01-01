@@ -48,47 +48,13 @@ as.set.default <- function(x)
 is.set <- function(x) inherits(x, "Set")
 
 
-#' Binary set operators
-#'
-#' @description Binary operators for [Set()] objects.
-#' @name setS3binOp
-#' @param s1 [Set()] object
-#' @param s2 [Set()] object
-NULL
-
-#' @rdname setS3binOp
-#' @return For `!=` return `TRUE` if both sets are not equal.
+#' @rdname setS3
+#' @param e some element of any type
+#' @return `%e%` returns `TRUE` if e is an element of `x`
 #' @export
-`!=.Set` <- function(s1, s2) !(s1$is.equal(s2))
-
-#' @rdname setS3binOp
-#' @return For `==` return `TRUE` if both sets are equal.
-#' @export
-`==.Set` <- function(s1, s2) s1$is.equal(s2)
-
-#' @rdname setS3binOp
-#' @return For `+` return union of both sets
-#' @export
-`+.Set` <- function(s1, s2) s1$union(s2)
-
-#' @rdname setS3binOp
-#' @return For `/` return intersection of both sets
-#' @export
-`/.Set` <- function(s1, s2) s1$intersect(s2)
-
-#' @rdname setS3binOp
-#' @return For `-` return set-difference of both sets
-#' @export
-`-.Set` <- function(s1, s2) s1$diff(s2)
-
-#' @rdname setS3binOp
-#' @return For `< return `TRUE` if s1 is subset of s2.
-#' @export
-`<.Set` <- function(s1, s2) s1$is.subset(s2)
-
-#' @rdname setS3binOp
-#' @return For `> return `TRUE` if s1 is superset of s2.
-#' @export
-`>.Set` <- function(s1, s2) s1$is.superset(s2)
-
+`%e%` <- function(e, x)
+{
+    if (!is.set(x)) stop("x must be a 'Set'")
+    x$has(e)
+}
 

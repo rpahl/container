@@ -12,7 +12,7 @@
 \alias{has_next}
 \alias{pos}
 \alias{next_iter}
-\title{Iterator S3 methods}
+\title{Iterator}
 \usage{
 iter(x)
 

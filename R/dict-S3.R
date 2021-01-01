@@ -76,44 +76,6 @@ names.Dict <- function(x) x$keys()
 
 
 
-#' Arithmetic binary `dict` operators
-#'
-#' @description Arithmetic operators for [Dict()] objects.
-#' @name dictS3binOp
-#'
-#' @param d1 [Dict()] object
-#' @param d2 [Dict()] object
-NULL
-
-#' @rdname dictS3binOp
-#' @return For `+` returns a copy of `d1` updated by `d2`.
-#' @export
-`+.Dict` <- function(d1, d2) d1$clone()$update(d2)
-
-#' @rdname dictS3binOp
-#' @return For `-` returns a copy of `d1` with all `d2` keys being discarded.
-#' @export
-`-.Dict` <- function(d1, d2)
-{
-    d1.clone <- d1$clone()
-    lapply(d2$keys(), FUN = function(k) d1.clone$discard(k))
-    d1.clone
-}
-
-#' @rdname dictS3binOp
-#' @return For `/` returns a copy of `d1` containing only keys that exist in
-#' both, that is, an intersection of the keys.
-#' @export
-`/.Dict` <- function(d1, d2)
-{
-    keys.both <- intersect(keys(d1), keys(d2))
-    d <- dict()
-    for (key in keys.both) {
-        d$add(key, d1$getval(key))
-    }
-    d
-}
-
 #' Extract or replace parts of a `Dict`
 #'
 #' @description Access and assignment operators for [Dict()] objects.

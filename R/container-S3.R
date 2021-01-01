@@ -58,28 +58,3 @@ length.Container <- function(x) x$length()
 `as.list.Container` <- function(x) as.list(x$values())
 
 
-
-
-
-#' @title Binary `Container` operators
-#' @description Binary operators for [Container()] objects.
-#' @name ContainerS3op
-NULL
-
-#' @rdname ContainerS3op
-#' @param c1 [Container()] object
-#' @param c2 [Container()] object
-#' @return For `+` returns a new [Container()] object containing all elements
-#' from `c1` and `c2`.
-#' @export
-`+.Container` <- function(c1, c2)
-{
-    cc <- c1$clone()
-    it <- iter(c2)
-    while(has_next(it)) {
-        cc$add(get_next(it))
-    }
-    cc
-}
-
-

@@ -164,12 +164,12 @@ print.dict.table <- function(x, ...)
 #' @rdname dict.tableS3
 #' @export
 #' @examples
-dit = dict.table(a = 1:2, b = 1:2)
-rbind(dit, dit)
-
-# Also works with data.tables
-dat = dict.table(a = 3:4, b = 3:4)
-dit.dat = rbind(dit, dat)
+#' dit = dict.table(a = 1:2, b = 1:2)
+#' rbind(dit, dit)
+#'
+#' # Also works with data.tables
+#' dat = dict.table(a = 3:4, b = 3:4)
+#' dit.dat = rbind(dit, dat)
 rbind.dict.table <- function(x, ...)
 {
     dots <- list(...)
