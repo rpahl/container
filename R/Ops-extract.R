@@ -1,8 +1,9 @@
 #' Extract Operators for Containers
 #'
-#' @description Extract parts of Container objects.
+#' @description Extract parts of Container and dict.table objects.
 #' @name OpsExtract
-#' @param x `Container` object from which to extract element(s)
+#' @param x `Container` or `dict.table` object from which to extract
+#' elements or columns.
 NULL
 
 #' @rdname OpsExtract
@@ -40,4 +41,19 @@ NULL
     }
     d
 }
+
+
+#' @rdname OpsExtract
+#' @param j `numeric` or `character` column index.
+#' @return For `dict.table`, `[[` returns the selected column.
+#' @export
+`[[.dict.table` <- function(x, j, default = NULL)
+{
+    if (missing(default)) {
+        getval(x, j)
+    } else {
+        peek(x, j, default)
+    }
+}
+
 

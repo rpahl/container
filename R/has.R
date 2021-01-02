@@ -27,7 +27,7 @@ has.Dict <- function(x, key) x$has(key)
 #' @export
 has.dict.table <- function(x, column)
 {
-    if (length(column) != 1) stop("column name must be of length 1")
+    if (length(column) != 1) stop("column index must be of length 1")
     if (is.na(column)) stop("undefined column")
     switch(data.class(column),
            "character" = column %in% names(x),
