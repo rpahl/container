@@ -48,7 +48,7 @@ s[[NULL]] <- median
 expect_true(s$has(median))
 expect_equal(length(s), 4)
 expect_error(s[["x"]] <- "y", "'x' not found")
-expect_true("y" %e% s)
+expect_false("y" %e% s)
 
 # ----------
 # dict.table

@@ -97,13 +97,13 @@ NULL
 #' @return For `dict.table` `$` replaces the selected column. If the column
 #' does not exist, it is added to the `dict.table`.
 #' @export
-`$<-.Dict` <- function(x, key, value)
+`$<-.dict.table` <- function(x, key, value)
 {
     if (has(x, key)) {
-        setval(x, j, value)
+        setval(x, key, value)
     }
     else {
-        setval(copy(x), j, value, add = TRUE)
+        setval(copy(x), key, value, add = TRUE)
     }
 }
 
