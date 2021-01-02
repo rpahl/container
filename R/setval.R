@@ -33,7 +33,12 @@ setval.dict.table <- function(x, column, value, add = FALSE)
 {
     if (!add) {
         if (!has(x, column)) {
-            stop("column '", column, "' not in ", data.class(x))
+            if (is.character(column)) {
+                stop("column '", column, "' not in ", data.class(x), ". ",
+                     "To add the column, use 'add = TRUE'.")
+            } else {
+                stop(column, " is outside range [1, ncol = ", ncol(x), "]")
+            }
         }
     }
     j <- if (is.numeric(column)) as.integer(column) else column

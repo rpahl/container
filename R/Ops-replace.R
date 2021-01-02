@@ -1,8 +1,9 @@
 #' Replace Operators for Containers
 #'
-#' @description Replace parts of Container objects.
+#' @description Replace parts of `Container` or `dict.table` objects.
 #' @name OpsReplace
-#' @param x `Container` object in which to replace element(s)
+#' @param x `Container` or `dict.table` object in which to replace elements or
+#' columns.
 NULL
 
 
@@ -18,6 +19,14 @@ NULL
 #' argument was set to `TRUE` (see details at `add` description).
 #' @export
 `[[<-.Dict` <- function(x, key, add = FALSE, value)
+{
+    x$setval(key, value, add)
+}
+
+
+#' @rdname OpsReplace
+#' @export
+`[[<-.$` <- function(x, key, add = FALSE, value)
 {
     x$setval(key, value, add)
 }
@@ -49,7 +58,9 @@ NULL
 
 #' @rdname OpsReplace
 #' @param element an element of the [Set()]
-#' @return For `Set`, `[[<-` replaces `element` by `value`.
+#' @return For `Set`, `[[<-` replaces `element` by `value`. If the `element`
+#' does not exist, an error is signaled, unless you pass `NULL`, in which case
+#' the value is just added to the `Set`.
 #' @export
 `[[<-.Set` <- function(x, element, value)
 {
@@ -63,5 +74,18 @@ NULL
     }
     x$add(value)
     invisible(x)
+}
+
+
+#' @rdname OpsReplace
+#' @param j `numeric` or `character` column index.
+#' @return For `dict.table`, `[[` replaces the selected column. If the column
+#' does not exist, an error is signaled, unless `add` was set to `TRUE`.
+#' @export
+`[[<-.dict.table` <- function(x, j, add = FALSE, value)
+{
+    # setval(x, j, value, add)
+    # the above crashes due to memory issue so we need to work on a copy
+    setval(copy(x), j, value, add)
 }
 

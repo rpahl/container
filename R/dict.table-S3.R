@@ -179,16 +179,3 @@ rbind.dict.table <- function(x, ...)
 
 
 
-#' Extract or replace parts of a `dict.table`
-#'
-#' @description Access and assignment operators for [dict.table()] objects.
-#' @name dict.table.replace
-#'
-#' @param x [dict.table()] object.
-#' @param i `integer` row indices of elements to extract or replace.
-#' @param j `integer` or `character` column indices of elements to extract
-#' or replace.
-NULL
-
-
-

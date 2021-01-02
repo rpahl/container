@@ -5,6 +5,7 @@
 \alias{[[<-.Dict}
 \alias{[<-.Dict}
 \alias{[[<-.Set}
+\alias{[[<-.dict.table}
 \title{Replace Operators for Containers}
 \usage{
 \method{[[}{Dict}(x, key, add = FALSE) <- value
@@ -12,9 +13,12 @@
 \method{[}{Dict}(x, key, add = FALSE) <- value
 
 \method{[[}{Set}(x, element) <- value
+
+\method{[[}{dict.table}(x, j, add = FALSE) <- value
 }
 \arguments{
-\item{x}{\code{Container} object in which to replace element(s)}
+\item{x}{\code{Container} or \code{dict.table} object in which to replace elements or
+columns.}
 
 \item{add}{\code{logical} If \code{FALSE} and key is not yet in the dict, an
 error is signaled. This is different from standard R lists, where instead
@@ -25,6 +29,8 @@ new key-value pair if the key is not yet in the dictionary.}
 \item{value}{A suitable replacement value.}
 
 \item{element}{an element of the \code{\link[=Set]{Set()}}}
+
+\item{j}{\code{numeric} or \code{character} column index.}
 }
 \value{
 For \code{Dict} \verb{[[<-} replaces the value associated with \code{key}. If \code{key}
@@ -35,8 +41,13 @@ For \code{Dict}, \verb{[<-} replaces the values at the given \code{keys}. If one
 more keys are not found, an error is signaled, unless \code{add} was set to
 \code{TRUE}.
 
-For \code{Set}, \verb{[[<-} replaces \code{element} by \code{value}.
+For \code{Set}, \verb{[[<-} replaces \code{element} by \code{value}. If the \code{element}
+does not exist, an error is signaled, unless you pass \code{NULL}, in which case
+the value is just added to the \code{Set}.
+
+For \code{dict.table}, \code{[[} replaces the selected column. If the column
+does not exist, an error is signaled, unless \code{add} was set to \code{TRUE}.
 }
 \description{
-Replace parts of Container objects.
+Replace parts of \code{Container} or \code{dict.table} objects.
 }
