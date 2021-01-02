@@ -29,7 +29,7 @@ Iterator <- R6::R6Class("Iterator",
 
         #' @description get value where the iterator points to
         get_value = function() {
-            private$elems[[private$i]]
+            .subset2(private$elems, private$i)
         },
 
         #' @description get next element
