@@ -7,6 +7,7 @@
 \alias{[<-.Dict}
 \alias{[[<-.Set}
 \alias{[[<-.dict.table}
+\alias{$<-.dict.table}
 \title{Replace Operators for Containers}
 \usage{
 \method{[[}{Dict}(x, key, add = FALSE) <- value
@@ -19,7 +20,7 @@
 
 \method{[[}{dict.table}(x, j, add = FALSE) <- value
 
-\method{$}{Dict}(x, key) <- value
+\method{$}{dict.table}(x, key) <- value
 }
 \arguments{
 \item{x}{\code{Container} or \code{dict.table} object in which to replace elements or}

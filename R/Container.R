@@ -114,12 +114,13 @@ Container <- R6::R6Class("Container",
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
         discard = function(elem, right = FALSE) {
-            comp <- function(x) isTRUE(all.equal(x, elem))
+            #comp <- function(x) isTRUE(all.equal(x, elem))
+            comp <- function(x) identical(x, elem)
             pos <- Position(f = comp,
                             x = private$elems,
                             right = right,
                             nomatch = 0)
-            if (pos > 0) private$elems <- private$elems[-pos]
+            if (pos > 0) private$elems <- .subset(private$elems, -pos)
             invisible(self)
         },
 
@@ -131,7 +132,8 @@ Container <- R6::R6Class("Container",
         #' @param elem element to search for
         #' @return `TRUE` of `Container` contains `elem` else `FALSE`
         has = function(elem) {
-            comp <- function(x) isTRUE(all.equal(x, elem))
+            #comp <- function(x) isTRUE(all.equal(x, elem))
+            comp <- function(x) identical(x, elem)
             !is.na(Position(f = comp, x = private$elems))
         },
 
@@ -147,8 +149,8 @@ Container <- R6::R6Class("Container",
                 stop("popitem at empty ", data.class(self))
             }
             pos <- sample(seq_along(private$elems), size = 1)
-            elem <- private$elems[[pos]]
-            private$elems <- private$elems[-pos]
+            elem <- .subset2(private$elems, pos)
+            private$elems <- subset(private$elems, -pos)
             elem
         },
 
@@ -160,7 +162,7 @@ Container <- R6::R6Class("Container",
                 return(NULL)
             }
             pos <- sample(seq_along(private$elems), size = 1)
-            private$elems[[pos]]
+            .subset2(private$elems, pos)
         },
 
         #' @description Print object representation similar to [utils::str()]

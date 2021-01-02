@@ -64,7 +64,7 @@ Dict <- R6::R6Class("Dict",
         discard = function(key) {
             if (self$has(key)) {
                 pos <- match(key, self$keys())
-                private$elems <- private$elems[-pos]
+                private$elems <- .subset(private$elems, -pos)
             }
             invisible(self)
         },
@@ -110,7 +110,7 @@ Dict <- R6::R6Class("Dict",
         #' @param default returned default value.
         #' @return value for `key` if `key` is in the `Dict` else `default`.
         peek = function(key, default = NULL) {
-            if (self$has(key)) private$elems[[key]] else default
+            if (self$has(key)) .subset2(private$elems, key) else default
         },
 
         #' @description Get value and delete key-value pair from `Dict`.
@@ -200,8 +200,9 @@ Dict <- R6::R6Class("Dict",
         #' @description Re-order elements according to key-order
         #' @param decr `logical` if `TRUE` sort in decreasing order.
         #' @return invisibly returns the `Dict`
-        sortkey = function(decr = FALSE) {
-            private$elems <- private$elems[order(self$keys(), decreasing=decr)]
+        sortkey = function(decreasing = FALSE) {
+            new_order <- order(self$keys(), decreasing = decreasing)
+            private$elems <- .subset(private$elems, new_order)
             invisible(self)
         },
 

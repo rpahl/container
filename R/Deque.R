@@ -43,7 +43,7 @@ Deque <- R6::R6Class("Deque",
         #' @return element 'peeked' on the right
         peek = function() {
             len <- self$size()
-            last <- if (len > 0) private$elems[[len]] else NULL
+            last <- if (len > 0) .subset2(private$elems, len) else NULL
             last
         },
 
@@ -51,7 +51,7 @@ Deque <- R6::R6Class("Deque",
         #' @return element 'peeked' on the left
         peekleft = function() {
             len <- self$size()
-            first <- if (len > 0) private$elems[[1]] else NULL
+            first <- if (len > 0) .subset2(private$elems, 1) else NULL
             first
         },
 
