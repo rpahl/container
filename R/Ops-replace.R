@@ -3,6 +3,7 @@
 #' @description Replace parts of `Container` or `dict.table` objects.
 #' @name OpsReplace
 #' @param x `Container` or `dict.table` object in which to replace elements or
+#' @param key `character` name of key or column.
 #' columns.
 NULL
 
@@ -25,10 +26,12 @@ NULL
 
 
 #' @rdname OpsReplace
+#' @return For `Dict` `$` replaces the value associated with `key`. If `key`
+#' is not in the dict, the value is added.
 #' @export
-`[[<-.$` <- function(x, key, add = FALSE, value)
+`$<-.Dict` <- function(x, key, value)
 {
-    x$setval(key, value, add)
+    x$setval(key, value, add = TRUE)
 }
 
 
@@ -87,5 +90,20 @@ NULL
     # setval(x, j, value, add)
     # the above crashes due to memory issue so we need to work on a copy
     setval(copy(x), j, value, add)
+}
+
+
+#' @rdname OpsReplace
+#' @return For `dict.table` `$` replaces the selected column. If the column
+#' does not exist, it is added to the `dict.table`.
+#' @export
+`$<-.Dict` <- function(x, key, value)
+{
+    if (has(x, key)) {
+        setval(x, j, value)
+    }
+    else {
+        setval(copy(x), j, value, add = TRUE)
+    }
 }
 

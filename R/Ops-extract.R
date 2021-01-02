@@ -45,7 +45,9 @@ NULL
 
 #' @rdname OpsExtract
 #' @param j `numeric` or `character` column index.
-#' @return For `dict.table`, `[[` returns the selected column.
+#' @return For `dict.table`, `[[` returns the selected column. If the
+#' column does not exist, an error is signaled, unless `default` was specified,
+#' which then would be returned instead.
 #' @export
 `[[.dict.table` <- function(x, j, default = NULL)
 {
@@ -56,4 +58,16 @@ NULL
     }
 }
 
+
+#' @rdname OpsExtract
+#' @return For `dict.table`, `$` returns the selected column. If the
+#' column does not exist, an error is signaled.
+#' @export
+`$.dict.table` <- function(x, key)
+{
+    j = pmatch(key, names(x))
+    if (is.na(j)) j = key
+
+    getval(x, j)
+}
 

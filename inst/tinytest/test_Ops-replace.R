@@ -2,6 +2,23 @@
 # ----
 # Dict
 # ----
+# Dict [[<- operator
+d = dict(a = 1, b = 2)
+d[["a"]] <- "foo"
+expect_equal(d$getval("a"), "foo")
+expect_error(d[["z"]] <- 0, "key 'z' not in Dict")
+expect_equal(values(d), list(a = "foo", b = 2)) # ensure d was not changed
+expect_silent(d[["z", TRUE]] <- 0)
+expect_equal(d$getval("z"), 0)
+
+# Dict $<- operator
+d = dict(a = 1, b = 2)
+d$a <- "foo"
+expect_equal(d$getval("a"), "foo")
+expect_silent(d$z <- 0)
+expect_equal(d$getval("z"), 0)
+
+# Dict [<- operator
 d = dict(a = 1, b = 2)
 d[c("a", "b")] <- c(3, 4)
 expect_equal(values(d), list(a = 3, b = 4))
@@ -36,6 +53,7 @@ expect_true("y" %e% s)
 # ----------
 # dict.table
 # ----------
+# dict.table [[<- operator
 dit <- dict.table(a = 1:2, b = 2:1)
 expect_error(dit[["x"]] <- 3:4, "column 'x' not in dict.table")
 expect_silent(dit[["x", TRUE]] <- 3:4)
@@ -55,4 +73,16 @@ dit[[1]] <- 9:10
 expect_equal(dit[[1]], 9:10)
 dit[[1]] <- 0
 expect_equal(dit[[1]], c(0, 0))
+
+expect_warning(dit[[1]] <- "a")
+expect_true(all(is.na(dit[[1]])))
+expect_silent(dit[["z", TRUE]] <- "a")
+expect_equal(dit[["z"]], rep("a", 2))
+
+# dict.table $<- operator
+dit <- dict.table(a = 1:2, b = 2:1)
+dit$a <- 3:4
+expect_equal(dit$a, 3:4)
+dit$x <- 0
+expect_equal(dit$x, c(0, 0))
 

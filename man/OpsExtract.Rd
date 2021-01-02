@@ -5,6 +5,7 @@
 \alias{[[.Dict}
 \alias{[.Dict}
 \alias{[[.dict.table}
+\alias{$.dict.table}
 \title{Extract Operators for Containers}
 \usage{
 \method{[[}{Dict}(x, key, default = NULL)
@@ -12,6 +13,8 @@
 \method{[}{Dict}(x, key, default = NULL)
 
 \method{[[}{dict.table}(x, j, default = NULL)
+
+\method{$}{dict.table}(x, key)
 }
 \arguments{
 \item{x}{\code{Container} or \code{dict.table} object from which to extract
@@ -33,7 +36,12 @@ found at the keys. If one or more keys are not found, an error is signaled,
 unless \code{default} was specified, which then would be put in place for all
 missing keys.
 
-For \code{dict.table}, \code{[[} returns the selected column.
+For \code{dict.table}, \code{[[} returns the selected column. If the
+column does not exist, an error is signaled, unless \code{default} was specified,
+which then would be returned instead.
+
+For \code{dict.table}, \code{$} returns the selected column. If the
+column does not exist, an error is signaled.
 }
 \description{
 Extract parts of Container and dict.table objects.
