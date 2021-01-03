@@ -26,9 +26,8 @@ expect_equal(peekleft(d), utils::head(v, 1))
 
 
 # printed Deque object looks as expected
-expect_output(print(deque(1:3)),
-              "<Deque> of 3 elements:  int [1:3] 1 2 3", fixed = TRUE)
-
+out <- capture.output(print(deque(1:3)))
+expect_equal(out, "<Deque> of 3 elements:  int [1:3] 1 2 3")
 
 # the left and rightmost element can be popped
 v <- 1:3
