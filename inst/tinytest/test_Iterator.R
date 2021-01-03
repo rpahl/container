@@ -1,3 +1,25 @@
+# is.iterable
+expect_true(is.iterable(Container$new()))
+expect_false(is.iterable(1))
+
+# is.subsettable
+f = as.factor(1:3)
+expect_false(is.vector(f))
+expect_true(is.subsettable(f))
+f = formula(y ~ x + 1)
+expect_false(is.vector(f))
+expect_true(is.subsettable(f))
+expect_true(is.subsettable(1))
+expect_true(is.subsettable(data.frame(a = 1)))
+expect_true(is.subsettable(expression(x + 1)))
+
+expect_false(is.subsettable(NULL))
+expect_false(is.subsettable(list()))
+expect_false(is.subsettable(numeric()))
+expect_false(is.subsettable(data.frame()))
+expect_false(is.subsettable(dict.table()))
+
+
 # Iterator constructor works as expected
 expect_error(Iterator$new(environment()), "'x' is not iterable")
 it <- Iterator$new(as.list(environment())) # ok
