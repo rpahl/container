@@ -144,7 +144,7 @@ invisibly returns the \code{Dict}
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-This function is deprecated. Use \code{getval} instead.
+This function is deprecated. Use \code{\link[=getval]{getval()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$get(key)}\if{html}{\out{</div>}}
 }
@@ -260,7 +260,7 @@ If \code{key} in \code{Dict}, return its value.
 \if{html}{\out{<a id="method-remove"></a>}}
 \if{latex}{\out{\hypertarget{method-remove}{}}}
 \subsection{Method \code{remove()}}{
-This function is deprecated. Use \code{delete} instead.
+This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$remove(key)}\if{html}{\out{</div>}}
 }
@@ -304,7 +304,7 @@ invisibly returns the \code{Dict} object
 \if{html}{\out{<a id="method-set"></a>}}
 \if{latex}{\out{\hypertarget{method-set}{}}}
 \subsection{Method \code{set()}}{
-This function is deprecated. Use \code{setval} instead.
+This function is deprecated. Use \code{\link[=setval]{setval()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$set(key, value, add = FALSE)}\if{html}{\out{</div>}}
 }
@@ -356,15 +356,15 @@ invisibly returns the \code{Dict}
 \if{html}{\out{<a id="method-sort"></a>}}
 \if{latex}{\out{\hypertarget{method-sort}{}}}
 \subsection{Method \code{sort()}}{
-This function is deprecated. Use \code{sortkey} instead.
+This function is deprecated. Use \code{\link[=sortkey]{sortkey()}} instead.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$sort(decr = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$sort(decreasing = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{decr}}{\code{logical} if \code{TRUE} sort in decreasing order.}
+\item{\code{decreasing}}{\code{logical} if \code{TRUE} sort in decreasing order.}
 }
 \if{html}{\out{</div>}}
 }
@@ -378,13 +378,13 @@ invisibly returns the \code{Dict}
 \subsection{Method \code{sortkey()}}{
 Re-order elements according to key-order
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$sortkey(decr = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$sortkey(decreasing = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{decr}}{\code{logical} if \code{TRUE} sort in decreasing order.}
+\item{\code{decreasing}}{\code{logical} if \code{TRUE} sort in decreasing order.}
 }
 \if{html}{\out{</div>}}
 }

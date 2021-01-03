@@ -194,13 +194,13 @@ Determine if \code{Container} has some element.
 \if{html}{\out{<a id="method-length"></a>}}
 \if{latex}{\out{\hypertarget{method-length}{}}}
 \subsection{Method \code{length()}}{
-Length of the \code{Container}
+Number of elements of the \code{Container}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$length()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
-\code{numeric} length of the \code{Container}
+\code{integer} length of the \code{Container}
 }
 }
 \if{html}{\out{<hr>}}
@@ -253,9 +253,7 @@ invisibly returns the \code{Container} object
 \if{html}{\out{<a id="method-remove"></a>}}
 \if{latex}{\out{\hypertarget{method-remove}{}}}
 \subsection{Method \code{remove()}}{
-Find and remove element from \code{Container}. This
-function does the same as \code{delete} and is only kept for backwards
-compatibility.
+This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$remove(elem, right = FALSE)}\if{html}{\out{</div>}}
 }
@@ -278,7 +276,7 @@ invisibly returns the \code{Container} object
 \if{html}{\out{<a id="method-size"></a>}}
 \if{latex}{\out{\hypertarget{method-size}{}}}
 \subsection{Method \code{size()}}{
-This function is deprecated.
+This function is deprecated. Use \code{\link[=length]{length()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$size()}\if{html}{\out{</div>}}
 }

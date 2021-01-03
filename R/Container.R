@@ -137,8 +137,8 @@ Container <- R6::R6Class("Container",
             !is.na(Position(f = comp, x = private$elems))
         },
 
-        #' @description Length of the `Container`
-        #' @return `numeric` length of the `Container`
+        #' @description Number of elements of the `Container`.
+        #' @return `integer` length of the `Container`
         length = function() length(private$elems),
 
         #' @description delete and return an arbitrary element from the
@@ -182,18 +182,17 @@ Container <- R6::R6Class("Container",
             invisible(self)
         },
 
-        #' @description Find and remove element from `Container`. This
-        #' function does the same as `delete` and is only kept for backwards
-        #' compatibility.
+        #' @description This function is deprecated. Use [delete()] instead.
         #' @param elem element to be deleted from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
         remove = function(elem, right = FALSE) {
+            .Deprecated("delete")
             self$delete(elem, right)
         },
 
-        #' @description This function is deprecated.
+        #' @description This function is deprecated. Use [length()] instead.
         #' @return the `Container` length
         size = function() {
             .Deprecated("length")

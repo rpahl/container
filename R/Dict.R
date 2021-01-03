@@ -69,7 +69,7 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         },
 
-        #' @description This function is deprecated. Use `getval` instead.
+        #' @description This function is deprecated. Use [getval()] instead.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return value at `key`, else throw error.
         get = function(key) {
@@ -123,7 +123,7 @@ Dict <- R6::R6Class("Dict",
             elem
         },
 
-        #' @description This function is deprecated. Use `delete` instead.
+        #' @description This function is deprecated. Use [delete()] instead.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, remove it, otherwise raise an error.
         remove = function(key) {
@@ -158,7 +158,7 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         },
 
-        #' @description This function is deprecated. Use `setval` instead.
+        #' @description This function is deprecated. Use [setval()] instead.
         #' @param key `character` name of key.
         #' @param value the value to be set
         #' @param add `logical` if `TRUE` the value is set regardless whether
@@ -189,16 +189,16 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         },
 
-        #' @description This function is deprecated. Use `sortkey` instead.
-        #' @param decr `logical` if `TRUE` sort in decreasing order.
+        #' @description This function is deprecated. Use [sortkey()] instead.
+        #' @param decreasing `logical` if `TRUE` sort in decreasing order.
         #' @return invisibly returns the `Dict`
-        sort = function(decr = FALSE) {
+        sort = function(decreasing = FALSE) {
             .Deprecated("sortkey")
             self$sortkey(decr)
         },
 
         #' @description Re-order elements according to key-order
-        #' @param decr `logical` if `TRUE` sort in decreasing order.
+        #' @param decreasing `logical` if `TRUE` sort in decreasing order.
         #' @return invisibly returns the `Dict`
         sortkey = function(decreasing = FALSE) {
             new_order <- order(self$keys(), decreasing = decreasing)
