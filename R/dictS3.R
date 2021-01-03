@@ -67,7 +67,12 @@ is.dict <- function(x) inherits(x, "Dict")
 #' d = dict(x = 1, y = 2)
 #' keys(d)
 #' names(d)
-keys <- function(x) x$keys()
+keys <- function(x)
+{
+    if (!inherits(x, "Dict")) stop("x must be a 'Dict'")
+    x$keys()
+}
+
 
 #' @rdname dictS3
 #' @return `names()` returns the same as [keys()].
