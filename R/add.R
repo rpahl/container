@@ -13,9 +13,10 @@ add.Container <- function(x, elem) x$add(elem)
 
 #' @rdname add
 #' @param key `character` unique identifier of the item.
+#' @param value value to be added.
 #' @return For `Dict`, the dict object with the key-element pair being added.
 #' @export
-add.Dict <- function(x, key, elem) x$add(key, elem)
+add.Dict <- function(x, key, value) x$add(key, value)
 
 #' @rdname add
 #' @param column `character` name or `numeric` index of column.

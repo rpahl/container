@@ -150,7 +150,7 @@ Container <- R6::R6Class("Container",
             }
             pos <- sample(seq_along(private$elems), size = 1)
             elem <- .subset2(private$elems, pos)
-            private$elems <- subset(private$elems, -pos)
+            private$elems <- .subset(private$elems, -pos)
             elem
         },
 

@@ -14,9 +14,11 @@
 #' @export
 rename <- function(x, old, new, ...)
 {
-    stopifnot(is.character(old))
-    stopifnot(is.character(new))
-    stopifnot(length(old) == length(new))
+    if (!is.character(old)) stop("'old' must be character")
+    if (!is.character(new)) stop("'new' must be character")
+    if (length(old) != length(new)) {
+        stop("'old' and 'new' names must be of the same length")
+    }
     if (any(duplicated(old))) {
         stop("'old' has duplicated names: ", toString(old[duplicated(old)]))
     }
