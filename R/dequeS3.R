@@ -55,6 +55,6 @@ is.deque <- function(x) inherits(x, "Deque")
 #' @return `rev` reverses all elements of the deque in place and invisibly
 #' returns the [Deque()] object.
 #' @export
-rev.Deque <- function(x) x$reverse()
+rev.Deque <- function(x) x$rev()
 
 

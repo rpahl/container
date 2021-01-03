@@ -42,7 +42,7 @@ Deque <- R6::R6Class("Deque",
         #' @description Peek at last element on the right without removing it.
         #' @return element 'peeked' on the right
         peek = function() {
-            len <- self$size()
+            len <- self$length()
             last <- if (len > 0) .subset2(private$elems, len) else NULL
             last
         },
@@ -50,7 +50,7 @@ Deque <- R6::R6Class("Deque",
         #' @description Peek at first element on the left without removing it.
         #' @return element 'peeked' on the left
         peekleft = function() {
-            len <- self$size()
+            len <- self$length()
             first <- if (len > 0) .subset2(private$elems, 1) else NULL
             first
         },
@@ -78,7 +78,7 @@ Deque <- R6::R6Class("Deque",
         #' @description Reverse all elements of the [Deque()] in-place.
         #' @return invisibly returns the `Deque()` object.
         rev = function() {
-            len <- self$size()
+            len <- self$length()
             private$elems <- rev(private$elems)
             invisible(self)
         },

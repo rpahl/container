@@ -46,7 +46,7 @@ expect_error(Deque$new()$popleft())
 
 # a Deque can be reversed
 v <- 1:10
-expect_equal(Deque$new(v)$reverse()$values(), rev(v))
+expect_equal(Deque$new(v)$rev()$values(), rev(v))
 
 
 # a Deque can be rotated
