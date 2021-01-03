@@ -57,11 +57,7 @@ Container <- R6::R6Class("Container",
         #' @param keep_names `logical` if TRUE, keeps names of passed elements
         #' @return invisibly returns the `Container` object
         initialize = function(..., keep_names = FALSE) {
-            args <- list(...)
-            n.elems <- nargs() - !missing(keep_names)
-
-            elems <- if (n.elems == 1) args[[1]] else args
-            if (!is.vector(elems)) elems <- list(elems)
+            elems <- list(...)
 
             if (!keep_names) {
                 names(elems) <- NULL
@@ -91,7 +87,7 @@ Container <- R6::R6Class("Container",
         #' @description delete all elements from the `Container`
         #' @return invisibly returns the cleared `Container` object
         clear = function() {
-            self$initialize(vector(mode(private$elems)))
+            self$initialize()
         },
 
         #' @description Find and delete element from `Container`
@@ -211,12 +207,12 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Get copy of `Container` values
-        #' @return a copy of all elements if possible as `atomic` vector
+        #' @return a copy of all elements in a list
         #' otherwise as a basic `list`.
         values = function() private$elems
     ),
-    private = list(elems = vector(mode = "list"),
-        create_iter = function() Iterator$new(private$elems)
+    private = list(elems = list(),
+                   create_iter = function() Iterator$new(private$elems)
     ),
     lock_class=TRUE
 )

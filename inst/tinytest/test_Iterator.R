@@ -21,7 +21,8 @@ expect_false(is.subsettable(dict.table()))
 
 
 # Iterator constructor works as expected
-expect_error(Iterator$new(environment()), "'x' is not iterable")
+expect_error(Iterator$new(environment()), "'x' must be at least a vector")
+expect_error(Iterator$new(factor(1)), "'x' must be at least a vector")
 it <- Iterator$new(as.list(environment())) # ok
 
 # it can be checked if Iterator has next element

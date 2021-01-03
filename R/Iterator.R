@@ -42,8 +42,8 @@ Iterator <- R6::R6Class("Iterator",
             if (is.iterable(x)) {
                 return(x$iter())
             }
-            if (!is.vector(x) && !is.subsettable(x)) {
-                stop("'x' must be at least a vector or subsettable")
+            if (!is.vector(x)) {
+                stop("'x' must be at least a vector")
             }
             private$elems <- x
             invisible(self)

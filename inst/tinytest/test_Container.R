@@ -1,12 +1,9 @@
 # Container constructor works as expected
 co <- Container$new()
 expect_equal(attr(co, "class"), c("Container", "Iterable", "R6"))
-
-co <- Container$new(1:4)
-expect_equal(mode(co$values()), "numeric")
+expect_equal(mode(co$values()), "list")
 
 co <- Container$new(environment())
-expect_equal(mode(co$values()), "list")
 expect_equal(co$length(), 1)
 
 co <- Container$new(environment(), foo = identity)
@@ -20,19 +17,10 @@ expect_equal(names(co$values()), c("A", "B"))
 expect_equal(Container$new(keep_names = TRUE),
              Container$new(keep_names = FALSE))
 
-# type of Container is inialized as expected
-expect_equal(mode(Container$new()$values()), "list")
-expect_equal(mode(Container$new(1)$values()), "numeric")
-expect_equal(mode(Container$new(new.env())$values()), "list")
-expect_equal(mode(Container$new(TRUE)$values()), "logical")
-expect_equal(mode(Container$new(function(){})$values()), "list")
-expect_equal(mode(Container$new(raw())$values()), "raw")
-expect_equal(mode(Container$new(0+0i)$values()), "complex")
-expect_equal(mode(Container$new(letters[1:10])$values()), "character")
 
 # it can be checked whether the Container is empty
 expect_true(Container$new()$empty())
-expect_true(Container$new(numeric())$empty())
+expect_false(Container$new(numeric())$empty())
 expect_false(Container$new(1)$empty())
 
 # elements can be added to the Container
@@ -41,12 +29,8 @@ expect_true(co$empty())
 co$add(1)
 expect_equal(co$values(), list(1))
 
-co <- Container$new(numeric())
-co$add(1)
-expect_equal(co$values(), 1)
 
-
-# NULL and empty lists can be added to a Container
+# NULL and empty lists can be added to and deleted from a Container
 co <- Container$new()
 co$add(NULL)
 co$add(list())
@@ -61,20 +45,6 @@ expect_equal(co$length(), 3)
 co$delete(list())
 co$delete(NULL)
 expect_equal(co$values(), list(0))
-
-expect_true(Container$new(numeric(0))$add(numeric(0))$empty())
-
-
-# types of added elements must match for non-list Containers
-co <- Container$new(1)
-expect_equal(co$values(), 1)
-co$add(2)
-expect_equal(co$values(), 1:2)
-expect_error(co$add("a"), "type mismatch: expected 'numeric' but got 'character'")
-expect_error(co$add(list(1)), "type mismatch: expected 'numeric' but got 'list'")
-expect_error(co$add(list()), "type mismatch: expected 'numeric' but got 'list'")
-expect_error(co$add(NULL), "type mismatch: expected 'numeric' but got 'NULL'")
-expect_equal(co$add(3:5)$values(), 1:5)
 
 
 # non-trivial objects are added correctly
@@ -91,34 +61,23 @@ expect_equal(co$length(), length(collection))
 
 
 # a Container can be added to a Container
-v <- 1:10
-co <- Container$new(v)
+co <- Container$new(1, 2)
 coco <- Container$new()
 coco$add(co)
 expect_equal(coco$values()[[1]], co)
-expect_equal(coco$values()[[1]]$values(), v)
+expect_equal(coco$values()[[1]]$values(), list(1, 2))
 
 
 # named elements can be added to a Container
-co <- Container$new(numeric())
+co <- Container$new()
 x <- 1
 names(x) <- "x"
 co$add(x)
-
-y <- 1:3
-names(y) <- letters[1:3]
-co$add(y)
-expect_equal(co$values(), c(x, y))
-
-
-# a cleared Container preserves its type
-expect_equal(mode(Container$new()$clear()$values()), "list")
-expect_equal(mode(Container$new(1:3)$clear()$values()), "numeric")
-expect_equal(mode(Container$new("a")$clear()$values()), "character")
+expect_equal(co$values(), list(c(x = 1)))
 
 
 # it can be determined whether Container contains a certain element
-co <- Container$new(1:5)
+co <- Container$new(1L)
 expect_true(co$has(1L))
 expect_false(co$has(7L))
 expect_true(co$add(7L)$has(7L))
@@ -133,10 +92,9 @@ expect_false(co$has(function() print("bar")))
 
 
 # elements can be discarded from a Container
-x <- 1:5
-co <- Container$new(x)
+co <- Container$new(1L, 2L, 3L)
 co$discard(3L)
-expect_equal(co$values(), x[-3])
+expect_equal(co$values(), list(1L, 2L))
 
 co <- Container$new(mean, identity)
 expect_equal(co$discard(mean)$values(), list(identity))
@@ -145,56 +103,50 @@ expect_error(co$discard(), 'argument "elem" is missing, with no default')
 
 
 # elements can be discarded from left and from right
-co <- Container$new(c(1, 2, 1))
-expect_equal(co$discard(1)$values(), 2:1)
+co <- Container$new(1, 2, 1)
+expect_equal(co$discard(1)$values(), as.list(2:1))
 
-co <- Container$new(c(1, 2, 1))
-expect_equal(co$discard(1, right = TRUE)$values(), 1:2)
+co <- Container$new(1, 2, 1)
+expect_equal(co$discard(1, right = TRUE)$values(), as.list(1:2))
 
 
 # discarding non-existent elements does not change Container
-co <- Container$new(1:3)
-expect_equal(co$discard(5)$values(), 1:3)
+co <- Container$new(1, 2, 3)
+expect_equal(co$discard(5)$values(), as.list(1:3))
 expect_equal(Container$new()$discard(1), Container$new())
 
 
 # elements can be deleted from a Container
-x <- 1:5
-co <- Container$new(x)
-co$delete(3L)
-expect_equal(co$values(), x[-3])
+co <- Container$new(1, 2, 3)
+co$delete(3)
+expect_equal(co$values(), list(1, 2))
 
 co <- Container$new(mean, identity)
 expect_equal(co$delete(mean)$values(), list(identity))
 expect_error(co$delete(), 'argument "elem" is missing, with no default')
 
 # Container gives an error if trying to delete non-existing element
-co <- Container$new(1:3)
+co <- Container$new(1)
 expect_error(co$delete(5), "5 not in Container")
 
 # elements can be deleted from left and from right
-co <- Container$new(c(1, 2, 1))
-expect_equal(co$delete(1)$values(), 2:1)
+co <- Container$new(1, 2, 1)
+expect_equal(co$delete(1)$values(), as.list(2:1))
 
-co <- Container$new(c(1, 2, 1))
-expect_equal(co$delete(1, right = TRUE)$values(), 1:2)
+co <- Container$new(1, 2, 1)
+expect_equal(co$delete(1, right = TRUE)$values(), as.list(1:2))
 
 # the length of a Container can be retrieved
 expect_equal(Container$new()$length(), 0)
-x <- 1:5
-co <- Container$new(x)
-expect_equal(co$length(), length(x))
-
-ll <- list(mean, identity)
-co <- Container$new(ll)
-expect_equal(co$length(), length(ll))
+co <- Container$new(1, 2, 3)
+expect_equal(co$length(), length(co$values()))
 
 # the data values of a Container can be retrieved
 expect_equal(Container$new()$values(), list())
-expect_equal(Container$new(1:5)$values(), 1:5)
+expect_equal(Container$new(1, 2, 3)$values(), list(1, 2, 3))
 
 # Container objects provide reference semantics but can also be cloned
-c1 <- Container$new(1:10)
+c1 <- Container$new(1, 2, 3)
 c2 <- c1
 cc <- c1$clone()
 expect_true(identical(c1, c2))
@@ -202,21 +154,20 @@ expect_false(identical(c1, cc))
 expect_equal(c1$length(), cc$length())
 expect_equal(c1, cc)
 
-c1$delete(7L)
+c1$delete(3)
 expect_true(identical(c1, c2))
-expect_lt(c1$length(), cc$length())
+expect_true(c1$length() < cc$length())
 
 
 # Iterator can be constructed from Container
 v <- 1:5
-co <- Container$new(v)
+co <- as.container(v)
 it <- co$iter()
 sum <- 0
 while(it$has_next()) sum <- sum + it$get_next()
-expect_equal(sum(v), sum(co$values()))
+expect_equal(sum(v), sum(as.integer(co$values())))
 
-
-# type is deprecated
-co <- Container$new(1:10)
+# verify that type() is deprecated
+co <- Container$new()
 expect_warning(expect_equal(co$type(), "numeric"), "deprecated")
 

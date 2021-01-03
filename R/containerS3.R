@@ -28,15 +28,20 @@ container <- function(..., keep_names = FALSE) {
 #' @export
 as.container <- function(x, ...)
 {
-    if (is.null(x)) return(container())
+    if (length(x) == 0) return(container())
     UseMethod("as.container")
 }
 
 #' @export
-as.container.default <- function(x, ...)
+as.container.default <- function(x)
 {
     if (is.container(x)) return(x)
-    container(x, ...)
+    co = container()
+    it = Iterator$new(x)
+    while (it$has_next()) {
+        co$add(it$get_next())
+    }
+    co
 }
 
 #' @rdname ContainerS3
