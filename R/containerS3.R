@@ -32,6 +32,18 @@ as.container <- function(x, ...)
     UseMethod("as.container")
 }
 
+#' @rdname ContainerS3
+#' @export
+as.container.Iterable <- function(x)
+{
+    co = container()
+    it = iter(x)
+    while (it$has_next()) {
+        co$add(it$get_next())
+    }
+    co
+}
+
 #' @export
 as.container.default <- function(x)
 {

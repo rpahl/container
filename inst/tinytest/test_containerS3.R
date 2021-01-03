@@ -182,6 +182,9 @@ expect_equal(as.container(1:3), container(1, 2, 3))
 expect_error(as.container(factor(letters[1:3])))
 expect_error(as.container(globalenv()))
 
+expect_equal(as.container(deque(1, 2, 3)), container(1, 2, 3))
+# TODO: as.container(dict(a = 1, b = 2))
+
 # container is printed as expected
 out <- capture.output(print(Container$new()))
 out.expected <- c("<Container> of 0 elements")
