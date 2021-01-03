@@ -170,10 +170,19 @@ Container <- R6::R6Class("Container",
             cat0 <- function(...) cat(..., sep="")
             class_name <- paste0("<", data.class(self), ">")
 
-            cat0(class_name, " of ", self$length(), " elements: ")
-            utils::str(self$values(), list.len = len, ...)
-            if (len < self$length()) {
-                cat0("... with ", self$length() - len, " more elements")
+            elem_str <- if (self$length() == 1) "element" else "elements"
+            cat(class_name, "of", self$length(), elem_str)
+            if (self$length()) {
+                cat0(":\n")
+                utils::str(self$values(),
+                           list.len = len,
+                           no.list = TRUE,
+                           comp.str = "", ...)
+                if (len < self$length()) {
+                    cat0("... with ", self$length() - len, " more elements")
+                }
+            } else {
+                cat("\n")
             }
             invisible(self)
         },

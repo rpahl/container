@@ -179,4 +179,22 @@ expect_equal(as.container(NULL), container())
 expect_equal(as.container(1), container(1))
 expect_equal(as.container(1:3), container(1, 2, 3))
 
-expect_equal(as.container(as.factor(letters[1:3])), container(1, 2, 3))
+expect_error(as.container(factor(letters[1:3])))
+expect_error(as.container(globalenv()))
+
+# container is printed as expected
+out <- capture.output(print(Container$new()))
+out.expected <- c("<Container> of 0 elements")
+expect_equal(out, out.expected)
+
+out <- capture.output(print(Container$new(1)))
+out.expected <- c("<Container> of 1 element:",
+                  " : num 1")
+expect_equal(out, out.expected)
+
+out <- capture.output(print(Container$new(1, 2)))
+out.expected <- c("<Container> of 2 elements:",
+                  " : num 1",
+                  " : num 2")
+expect_equal(out, out.expected)
+
