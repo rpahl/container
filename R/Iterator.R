@@ -37,35 +37,42 @@ Iterator <- R6::R6Class("Iterator",
 
         #' @description `Iterator` constructor
         #' @param x object to iterate over
-        #' @return invisibly returns `Iterator` object
+        #' @return invisibly returns the `Iterator` object
         initialize = function(x) {
             if (is.iterable(x)) {
-                elems <- list()
-                it <- x$iter()
-                while (it$has_next()) {
-                    elems <- c(elems, it$get_next())
-                }
+                return(x$iter())
             } else {
                 elems <- as.list(x)
+                names(elems) <- seq_along(elems)
             }
-            private$elems <- elems
+            private$.clear()
+            self$reset_iter()
+            private$env <- list2env(elems, envir = private$env)
             invisible(self)
         },
 
-        #' @description set iterator to start of sequence
+        #' @description set iterator to the first element of the underlying
+        #' sequence unless length of sequence is zero, in which case it will
+        #' point to nothing.
+        #' @return invisibly returns the `Iterator` object
         begin = function() {
-            private$i <- 0
+            private$i <- min(1L, self$length())
             invisible(self)
         },
 
         #' @description get value where the iterator points to
+        #' @return returns the value the `Iterator` is pointing at.
         get_value = function() {
-            .subset2(private$elems, private$i)
+            name <- as.character(private$i)
+            tryCatch(get(name, private$env, inherits = FALSE),
+                     error = function(e) stop("iterator does not point at a value"))
         },
 
-        #' @description get next element
+        #' @description get next value
+        #' @return increments the iterator and returns the value the `Iterator`
+        #' is pointing to.
         get_next = function() {
-            private$`i++`()$get_value()
+            self$next_iter()$get_value()
         },
 
         #' @description check if `iterator` has more elements
@@ -77,33 +84,43 @@ Iterator <- R6::R6Class("Iterator",
         #' @description iterator length
         #' @return number of elements to iterate
         length = function() {
-            length(private$elems)
+            length(private$env)
         },
 
         #' @description get iterator position
+        #' @return `integer` if `iterator` has next element else `FALSE`
         pos = function() {
             private$i
         },
 
         #' @description increment `iterator`
+        #' @return invisibly returns the `Iterator` object
         next_iter = function() {
-            private$`i++`()
+            if (self$has_next()) {
+                private$i <- private$i + 1
+            } else {
+                stop("Iterator has no more elements.")
+            }
+            invisible(self)
         },
 
         #' @description print method
         print = function() {
             cat("<Iterator> at position",
                 self$pos(), "/", self$length(), "\n")
+        },
+
+        #' @description reset iterator to '0'
+        #' @return invisibly returns the `Iterator` object
+        reset_iter = function() {
+            private$i <- 0L
+            invisible(self)
         }
     ),
-    private = list(elems = NULL, i = 0,
-                   `i++` = function() {
-                       if (self$has_next()) {
-                           private$i <- private$i + 1
-                       } else {
-                           stop("Iterator has no more elements.")
-                       }
-                       invisible(self)
+    private = list(env = new.env(),
+                   i = 0L,
+                   .clear = function() {
+                       remove(list = ls(private$env), envir = private$env)
                    }
     ),
     lock_class = TRUE

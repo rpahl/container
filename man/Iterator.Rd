@@ -24,6 +24,7 @@ Roman Pahl
 \item \href{#method-pos}{\code{Iterator$pos()}}
 \item \href{#method-next_iter}{\code{Iterator$next_iter()}}
 \item \href{#method-print}{\code{Iterator$print()}}
+\item \href{#method-reset_iter}{\code{Iterator$reset_iter()}}
 \item \href{#method-clone}{\code{Iterator$clone()}}
 }
 }
@@ -44,18 +45,23 @@ Roman Pahl
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns \code{Iterator} object
+invisibly returns the \code{Iterator} object
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-begin"></a>}}
 \if{latex}{\out{\hypertarget{method-begin}{}}}
 \subsection{Method \code{begin()}}{
-set iterator to start of sequence
+set iterator to the first element of the underlying
+sequence unless length of sequence is zero, in which case it will
+point to nothing.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Iterator$begin()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+invisibly returns the \code{Iterator} object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_value"></a>}}
@@ -66,16 +72,23 @@ get value where the iterator points to
 \if{html}{\out{<div class="r">}}\preformatted{Iterator$get_value()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+returns the value the \code{Iterator} is pointing at.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_next"></a>}}
 \if{latex}{\out{\hypertarget{method-get_next}{}}}
 \subsection{Method \code{get_next()}}{
-get next element
+get next value
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Iterator$get_next()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+increments the iterator and returns the value the \code{Iterator}
+is pointing to.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-has_next"></a>}}
@@ -112,6 +125,9 @@ get iterator position
 \if{html}{\out{<div class="r">}}\preformatted{Iterator$pos()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+\code{integer} if \code{iterator} has next element else \code{FALSE}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-next_iter"></a>}}
@@ -122,6 +138,9 @@ increment \code{iterator}
 \if{html}{\out{<div class="r">}}\preformatted{Iterator$next_iter()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+invisibly returns the \code{Iterator} object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
@@ -132,6 +151,19 @@ print method
 \if{html}{\out{<div class="r">}}\preformatted{Iterator$print()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-reset_iter"></a>}}
+\if{latex}{\out{\hypertarget{method-reset_iter}{}}}
+\subsection{Method \code{reset_iter()}}{
+reset iterator to '0'
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$reset_iter()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+invisibly returns the \code{Iterator} object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-clone"></a>}}

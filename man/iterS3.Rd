@@ -12,6 +12,7 @@
 \alias{has_next}
 \alias{pos}
 \alias{next_iter}
+\alias{reset_iter}
 \alias{length.Iterator}
 \title{Iterator}
 \usage{
@@ -34,6 +35,8 @@ has_next(it)
 pos(it)
 
 next_iter(it)
+
+reset_iter(it)
 
 \method{length}{Iterator}(x)
 }

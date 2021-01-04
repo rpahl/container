@@ -76,6 +76,14 @@ next_iter <- function(it)
 }
 
 #' @rdname iterS3
+#' @export
+reset_iter <- function(it)
+{
+    if (!is.iterator(it)) stop("arg must be an Iterator")
+    it$reset_iter()
+}
+
+#' @rdname iterS3
 #' @return `length()` returns the number of elements to iterate
 #' @export
 length.Iterator <- function(x) x$length()

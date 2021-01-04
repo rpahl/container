@@ -32,6 +32,25 @@ expect_equal(Iterator$new(Container$new(1, 2, 3))$length(), 3)
 expect_equal(Iterator$new(new.env())$length(), 0)
 expect_equal(Iterator$new(factor(letters[1:2]))$length(), 2)
 
+# the position of the iterator can be accessed
+x <- 1:5
+it <- Iterator$new(x)
+expect_equal(it$pos(), 0)
+for (i in x) {
+    expect_equal(it$get_next(), i)
+    expect_equal(it$pos(), i)
+}
+
+# iterator can be moved to being of sequence
+it <- Iterator$new(1:3)
+expect_equal(it$pos(), 0)
+it$begin()
+expect_equal(it$pos(), 1)
+expect_equal(it$get_value(), 1)
+
+# for empty sequence, begin points to 0
+expect_equal(Iterator$new(NULL)$begin()$pos(), 0)
+
 # it can be checked if Iterator has next element
 expect_true(Iterator$new(1:5)$has_next())
 expect_false(Iterator$new(list())$has_next())
@@ -50,22 +69,14 @@ expect_true(it$has_next())
 expect_equal(it$get_next(), 1)
 expect_false(it$has_next())
 
-# the position of the iterator can be accessed
-x <- 1:5
-it <- Iterator$new(x)
-expect_equal(it$pos(), 0)
-for (i in x) {
-    expect_equal(it$get_next(), i)
-    expect_equal(it$pos(), i)
-}
-
 # Iterator can be reset
 it <- Iterator$new(1:3)
 expect_equal(it$pos(), 0)
-expect_equal(it$get_next(), 1)
-expect_equal(it$pos(), 1)
-it$begin()
-expect_equal(it$pos(), 0)
+
+while (it$has_next()) it$next_iter()
+expect_equal(it$pos(), 3)
+expect_equal(it$reset_iter()$pos(), 0)
+
 
 # Iterator can be incremented
 x <- 1:5

@@ -15,3 +15,8 @@ clear.Container <- function(x) x$clear()
 #' @export
 clear.dict.table <- function(x) delete(x, names(x))
 
+#' @export
+clear.default <- function(x) {
+    stop("clear not implemented for '", data.class(x), "'")
+}
+
