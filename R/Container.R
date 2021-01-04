@@ -221,7 +221,7 @@ Container <- R6::R6Class("Container",
         values = function() private$elems
     ),
     private = list(elems = list(),
-                   create_iter = function() Iterator$new(private$elems)
+                   create_iter = function() Iterator$new(self$values())
     ),
     lock_class=TRUE
 )

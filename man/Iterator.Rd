@@ -20,6 +20,7 @@ Roman Pahl
 \item \href{#method-get_value}{\code{Iterator$get_value()}}
 \item \href{#method-get_next}{\code{Iterator$get_next()}}
 \item \href{#method-has_next}{\code{Iterator$has_next()}}
+\item \href{#method-has_value}{\code{Iterator$has_value()}}
 \item \href{#method-length}{\code{Iterator$length()}}
 \item \href{#method-pos}{\code{Iterator$pos()}}
 \item \href{#method-next_iter}{\code{Iterator$next_iter()}}
@@ -101,6 +102,19 @@ check if \code{iterator} has more elements
 
 \subsection{Returns}{
 \code{TRUE} if \code{iterator} has next element else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_value"></a>}}
+\if{latex}{\out{\hypertarget{method-has_value}{}}}
+\subsection{Method \code{has_value()}}{
+check if \code{iterator} points at value
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$has_value()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{TRUE} if \code{iterator} points at value otherwise \code{FALSE}
 }
 }
 \if{html}{\out{<hr>}}

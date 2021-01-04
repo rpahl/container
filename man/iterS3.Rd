@@ -10,6 +10,7 @@
 \alias{get_value}
 \alias{get_next}
 \alias{has_next}
+\alias{has_value}
 \alias{pos}
 \alias{next_iter}
 \alias{reset_iter}
@@ -31,6 +32,8 @@ get_value(it)
 get_next(it)
 
 has_next(it)
+
+has_value(it)
 
 pos(it)
 

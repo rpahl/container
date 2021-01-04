@@ -61,6 +61,14 @@ has_next <- function(it)
 
 #' @rdname iterS3
 #' @export
+has_value <- function(it)
+{
+    if (!is.iterator(it)) stop("arg must be an Iterator")
+    it$has_value()
+}
+
+#' @rdname iterS3
+#' @export
 pos <- function(it)
 {
     if (!is.iterator(it)) stop("arg must be an Iterator")

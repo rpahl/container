@@ -35,8 +35,10 @@ expect_false(has_next(iter(list())))
 
 # the value behind the iterator can be retrieved
 it <- iter(1:5)
+expect_false(has_value(it))
 expect_error(get_value(it), "iterator does not point at a value")
 next_iter(it)
+expect_true(has_value(it))
 expect_equal(get_value(it), 1)
 next_iter(it)
 expect_equal(get_value(it), 2)

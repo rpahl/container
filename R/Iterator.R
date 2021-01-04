@@ -39,15 +39,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @param x object to iterate over
         #' @return invisibly returns the `Iterator` object
         initialize = function(x) {
-            if (is.iterable(x)) {
-                return(x$iter())
-            } else {
-                elems <- as.list(x)
-                names(elems) <- seq_along(elems)
-            }
-            private$.clear()
-            self$reset_iter()
-            private$env <- list2env(elems, envir = private$env)
+            private$elems <- as.list(x)
             invisible(self)
         },
 
@@ -63,9 +55,10 @@ Iterator <- R6::R6Class("Iterator",
         #' @description get value where the iterator points to
         #' @return returns the value the `Iterator` is pointing at.
         get_value = function() {
-            name <- as.character(private$i)
-            tryCatch(get(name, private$env, inherits = FALSE),
-                     error = function(e) stop("iterator does not point at a value"))
+            if (!self$has_value()) {
+                stop("iterator does not point at a value")
+            }
+            .subset2(private$elems, self$pos())
         },
 
         #' @description get next value
@@ -81,10 +74,16 @@ Iterator <- R6::R6Class("Iterator",
             private$i < self$length()
         },
 
+        #' @description check if `iterator` points at value
+        #' @return `TRUE` if `iterator` points at value otherwise `FALSE`
+        has_value = function() {
+            self$pos() > 0 && self$pos() <= self$length()
+        },
+
         #' @description iterator length
         #' @return number of elements to iterate
         length = function() {
-            length(private$env)
+            length(private$elems)
         },
 
         #' @description get iterator position
@@ -117,12 +116,7 @@ Iterator <- R6::R6Class("Iterator",
             invisible(self)
         }
     ),
-    private = list(env = new.env(),
-                   i = 0L,
-                   .clear = function() {
-                       remove(list = ls(private$env), envir = private$env)
-                   }
-    ),
+    private = list(elems = list(), i = 0L),
     lock_class = TRUE
 )
 
