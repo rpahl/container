@@ -20,6 +20,7 @@ Roman Pahl
 \item \href{#method-get_value}{\code{Iterator$get_value()}}
 \item \href{#method-get_next}{\code{Iterator$get_next()}}
 \item \href{#method-has_next}{\code{Iterator$has_next()}}
+\item \href{#method-length}{\code{Iterator$length()}}
 \item \href{#method-pos}{\code{Iterator$pos()}}
 \item \href{#method-next_iter}{\code{Iterator$next_iter()}}
 \item \href{#method-print}{\code{Iterator$print()}}
@@ -87,6 +88,19 @@ check if \code{iterator} has more elements
 
 \subsection{Returns}{
 \code{TRUE} if \code{iterator} has next element else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-length"></a>}}
+\if{latex}{\out{\hypertarget{method-length}{}}}
+\subsection{Method \code{length()}}{
+iterator length
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$length()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+number of elements to iterate
 }
 }
 \if{html}{\out{<hr>}}

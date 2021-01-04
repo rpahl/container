@@ -1,7 +1,15 @@
 # Iterator constructor works as expected
-expect_error(iter(environment()), "'x' must be at least a vector")
-it <- iter(as.list(environment())) # ok
-expect_true(is.iterator(it))
+expect_error(iter())
+expect_equal(iter(1:3)$length(), 3)
+expect_equal(iter(new.env())$length(), 0)
+expect_equal(iter(NULL)$length(), 0)
+expect_equal(iter(factor(1:2))$length(), 2)
+expect_equal(iter(list("a", mean))$length(), 2)
+expect_equal(iter(Container$new())$length(), 0)
+expect_equal(iter(Container$new(1, 2, 3))$length(), 3)
+expect_equal(iter(new.env())$length(), 0)
+expect_equal(iter(factor(letters[1:2]))$length(), 2)
+
 
 # it can be checked if Iterator has next element
 expect_true(has_next(iter(1:5)))

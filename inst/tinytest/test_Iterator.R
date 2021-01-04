@@ -21,9 +21,16 @@ expect_false(is.subsettable(dict.table()))
 
 
 # Iterator constructor works as expected
-expect_error(Iterator$new(environment()), "'x' must be at least a vector")
-expect_error(Iterator$new(factor(1)), "'x' must be at least a vector")
-it <- Iterator$new(as.list(environment())) # ok
+expect_error(Iterator$new())
+expect_equal(Iterator$new(1:3)$length(), 3)
+expect_equal(Iterator$new(new.env())$length(), 0)
+expect_equal(Iterator$new(NULL)$length(), 0)
+expect_equal(Iterator$new(factor(1:2))$length(), 2)
+expect_equal(Iterator$new(list("a", mean))$length(), 2)
+expect_equal(Iterator$new(Container$new())$length(), 0)
+expect_equal(Iterator$new(Container$new(1, 2, 3))$length(), 3)
+expect_equal(Iterator$new(new.env())$length(), 0)
+expect_equal(Iterator$new(factor(letters[1:2]))$length(), 2)
 
 # it can be checked if Iterator has next element
 expect_true(Iterator$new(1:5)$has_next())

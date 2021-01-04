@@ -125,7 +125,7 @@ expect_equal(peek(d, "x", default = 9), 9)
 
 # elements can be popped and popping non-existent element gives an error
 d <- dict(a = 1, b = 2)
-expect_equal(pop(d, "a"), x[["a"]])
+expect_equal(pop(d, "a"), 1)
 expect_false(has(d, "a"))
 expect_error(pop(d, "a"))
 

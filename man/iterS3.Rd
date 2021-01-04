@@ -12,6 +12,7 @@
 \alias{has_next}
 \alias{pos}
 \alias{next_iter}
+\alias{length.Iterator}
 \title{Iterator}
 \usage{
 iter(x)
@@ -33,11 +34,16 @@ has_next(it)
 pos(it)
 
 next_iter(it)
+
+\method{length}{Iterator}(x)
 }
 \arguments{
 \item{x}{an iterable object}
 
 \item{it}{\code{Iterator} object}
+}
+\value{
+\code{length()} returns the number of elements to iterate
 }
 \description{
 An \code{Iterator} is an object that allows to iterate over

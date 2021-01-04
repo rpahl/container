@@ -75,3 +75,8 @@ next_iter <- function(it)
     it$next_iter()
 }
 
+#' @rdname iterS3
+#' @return `length()` returns the number of elements to iterate
+#' @export
+length.Iterator <- function(x) x$length()
+

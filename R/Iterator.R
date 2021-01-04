@@ -36,16 +36,19 @@ Iterator <- R6::R6Class("Iterator",
     public = list(
 
         #' @description `Iterator` constructor
-        #' @param x sequence to iterate over
+        #' @param x object to iterate over
         #' @return invisibly returns `Iterator` object
         initialize = function(x) {
             if (is.iterable(x)) {
-                return(x$iter())
+                elems <- list()
+                it <- x$iter()
+                while (it$has_next()) {
+                    elems <- c(elems, it$get_next())
+                }
+            } else {
+                elems <- as.list(x)
             }
-            if (!is.vector(x)) {
-                stop("'x' must be at least a vector")
-            }
-            private$elems <- x
+            private$elems <- elems
             invisible(self)
         },
 
@@ -68,7 +71,13 @@ Iterator <- R6::R6Class("Iterator",
         #' @description check if `iterator` has more elements
         #' @return `TRUE` if `iterator` has next element else `FALSE`
         has_next = function() {
-            private$i < length(private$elems)
+            private$i < self$length()
+        },
+
+        #' @description iterator length
+        #' @return number of elements to iterate
+        length = function() {
+            length(private$elems)
         },
 
         #' @description get iterator position
@@ -83,7 +92,8 @@ Iterator <- R6::R6Class("Iterator",
 
         #' @description print method
         print = function() {
-            cat("<Iterator> at position", self$pos(), "\n")
+            cat("<Iterator> at position",
+                self$pos(), "/", self$length(), "\n")
         }
     ),
     private = list(elems = NULL, i = 0,
