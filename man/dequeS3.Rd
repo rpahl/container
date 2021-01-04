@@ -4,7 +4,7 @@
 \alias{dequeS3}
 \alias{deque}
 \alias{as.deque}
-\alias{as.deque.Container}
+\alias{as.deque.Iterable}
 \alias{is.deque}
 \alias{rev.Deque}
 \title{Deque (double-ended queue)}
@@ -13,7 +13,7 @@ deque(..., keep_names = FALSE)
 
 as.deque(x, ...)
 
-\method{as.deque}{Container}(x, ...)
+\method{as.deque}{Iterable}(x)
 
 is.deque(x)
 

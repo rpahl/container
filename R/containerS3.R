@@ -28,6 +28,7 @@ container <- function(..., keep_names = FALSE) {
 #' @export
 as.container <- function(x, ...)
 {
+    if (is.container(x)) return(x)
     if (length(x) == 0) return(container())
     UseMethod("as.container")
 }
@@ -47,7 +48,6 @@ as.container.Iterable <- function(x)
 #' @export
 as.container.default <- function(x)
 {
-    if (is.container(x)) return(x)
     co = container()
     it = Iterator$new(x)
     while (it$has_next()) {
