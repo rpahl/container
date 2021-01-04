@@ -21,8 +21,8 @@ expect_equal(values(d + d), rep(values(d), 2))
 # ---
 l1 <- list(1, 2, 3,    "A", "B", "C")
 l2 <- list(   2, 3, 4,      "B", "C", "D")
-s1 <- setnew(l1)
-s2 <- setnew(l2)
+s1 <- as.set(l1)
+s2 <- as.set(l2)
 expect_equal(values(s1 + s2), union(l1, l2))
 expect_true(setequal(values(s1 + s2), values(s2 + s1)))
 expect_equal(values(s1 / s2), intersect(l1, l2))
@@ -30,6 +30,11 @@ expect_true(setequal(values(s1 / s2), values(s2 / s1)))
 expect_equal(values(s1 - s2), setdiff(l1, l2))
 expect_false(setequal(values(s1 - s2), values(s2 - s1)))
 expect_equal(values(s2 - s1), setdiff(l2, l1))
+
+l1 <- list(1, "1")
+expect_equal(intersect(l1, l1), list(1)) # 'wrong' base implementation
+s1 <- as.set(l1)
+expect_equal(s1 / s1, s1)
 
 
 # ----

@@ -35,8 +35,15 @@ Set <- R6::R6Class("Set",
             if (!inherits(s, data.class(self))) {
                 stop("s must be a ", data.class(self))
             }
-            diff <- base::setdiff(self$values(), s$values())
-            Set$new(diff)
+
+            # Starting from a copy of self, discard all elems that are in s
+            res <- self$clone()
+            it <- Iterator$new(s$values())
+            while(it$has_next()) {
+                elem <- it$get_next()
+                res$discard(elem)
+            }
+            res
         },
 
         #' @description `Set` intersection
@@ -46,8 +53,17 @@ Set <- R6::R6Class("Set",
             if (!inherits(s, data.class(self))) {
                 stop("s must be a ", data.class(self))
             }
-            intersection <- base::intersect(self$values(), s$values())
-            Set$new(intersection)
+
+            # Starting from new empty set, add all values that are in both
+            res <- Set$new()
+            it <- Iterator$new(self$values())
+            while(it$has_next()) {
+                elem <- it$get_next()
+                if (s$has(elem)) {
+                    res$add(elem)
+                }
+            }
+            res
         },
 
         #' @description `Set` comparison
@@ -87,8 +103,15 @@ Set <- R6::R6Class("Set",
             if (!inherits(s, data.class(self))) {
                 stop("s must be a ", data.class(self))
             }
-            uniset <- base::union(self$values(), s$values())
-            Set$new(uniset)
+
+            # Add all values from s to a copy of self
+            res <- self$clone()
+            it <- Iterator$new(s$values())
+            while(it$has_next()) {
+                elem <- it$get_next()
+                res$add(elem)
+            }
+            res
         }
     ),
     lock_class = TRUE
