@@ -11,7 +11,7 @@ add(x, ...)
 
 \method{add}{Container}(x, elem)
 
-\method{add}{Dict}(x, key, elem)
+\method{add}{Dict}(x, key, value)
 
 \method{add}{dict.table}(x, column, value)
 }
@@ -23,6 +23,8 @@ add(x, ...)
 \item{elem}{some element to be added.}
 
 \item{key}{\code{character} unique identifier of the item.}
+
+\item{value}{value to be added.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
 }
