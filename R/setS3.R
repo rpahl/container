@@ -13,33 +13,29 @@
 #' @export
 setnew <- function(...) Set$new(...)
 
-
 set <- function(...) {
     .Deprecated("setnew")
     setnew(...)
 }
 
+
 #' @rdname setS3
 #' @return [as.set()] coerces to a set.
 #' @export
-as.set <- function(x, ...) {
-    if (is.null(x)) return(setnew())
+as.set <- function(x, ...)
+{
+    if (is.set(x)) return(x)
+    if (length(x) == 0) return(setnew())
     UseMethod("as.set")
 }
 
-#' @rdname setS3
-#' @export
-as.set.Container <- function(x)
-{
-    setnew(values(x))
-}
 
 #' @export
 as.set.default <- function(x)
 {
-    if (is.set(x)) return(x)
-    setnew(x)
+    do.call(setnew, args = as.list(x))
 }
+
 
 #' @rdname setS3
 #' @return [is.set()] returns `TRUE` if its argument is a [Set()] and `FALSE`

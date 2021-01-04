@@ -4,7 +4,6 @@
 \alias{setS3}
 \alias{setnew}
 \alias{as.set}
-\alias{as.set.Container}
 \alias{is.set}
 \alias{\%e\%}
 \title{Set}
@@ -12,8 +11,6 @@
 setnew(...)
 
 as.set(x, ...)
-
-\method{as.set}{Container}(x)
 
 is.set(x)
 

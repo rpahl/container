@@ -13,10 +13,8 @@ Set <- R6::R6Class("Set",
         #' @param ... initial elements put into the `Set`
         #' @return invisibly returns the `Set`
         initialize = function(...) {
-            elems <- list(...)
-            if (nargs() == 1) elems <- elems[[1]]
-
-            super$initialize(unique(elems))
+            super$initialize()
+            lapply(list(...), self$add)
             invisible(self)
         },
 
@@ -24,15 +22,6 @@ Set <- R6::R6Class("Set",
         #' @param elem If not already in set, add `elem`.
         #' @return invisibly returns [Set()] object.
         add = function(elem) {
-            type <- mode(self$values())
-            if (length(elem) > 1 && type != "list") {
-                it <- Iterator$new(elem)
-                while(it$has_next()) {
-                    self$add(it$get_next())
-                }
-                return(invisible(self))
-            }
-
             if (!self$has(elem)) {
                 super$add(elem)
             }
