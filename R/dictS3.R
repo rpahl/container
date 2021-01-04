@@ -50,7 +50,7 @@ as.dict <- function(x, ...)
 #' @export
 as.dict.default <- function(x)
 {
-    dict(x)
+    do.call(dict, args = as.list(x))
 }
 
 #' @rdname dictS3

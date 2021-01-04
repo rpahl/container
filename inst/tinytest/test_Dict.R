@@ -1,32 +1,29 @@
 # Dict constructor works as expected
+d = Dict$new()
+expect_true(inherits(d, "Dict"))
+expect_true(inherits(d, "Container"))
 expect_true(Dict$new()$empty())
 expect_equal(mode(Dict$new()$values()), "list")
 expect_error(Dict$new(1:2), "all elems must be named")
 expect_error(Dict$new(x = 1, y = 2, x = 3), "duplicated keys")
 expect_equal(Dict$new()$keys(), character(0))
-expect_equal(mode(Dict$new(c(x = 1, y = 2))$values()), "numeric")
-expect_equal(mode(Dict$new(list(x = 1, y = 2))$values()), "list")
 
 # One element
 expect_equal(Dict$new(x = 1)$values(), list(x = 1))
-expect_equal(Dict$new(x = 1), Dict$new(list(x = 1)))
-expect_equal(Dict$new(c(x = 1))$values(), c(x = 1))
-expect_equal(Dict$new(c(x = c(1, 4)))$values(), c(x1 = 1, x2 = 4))
-expect_equal(Dict$new(list(x = c(1, 4)))$values(), list(x = c(1, 4)))
+expect_equal(Dict$new(x = NULL)$values(), list(x = NULL))
+expect_equal(Dict$new(x = 1:4)$values(), list(x = 1:4))
+env = new.env()
+expect_equal(Dict$new(x = env)$values(), list(x = env))
 
 # Two (or more) elements
 d <- Dict$new(x = 1:2, y = 2:3)
-expect_true(inherits(d, "Dict"))
-expect_true(inherits(d, "Container"))
-expect_equal(d, Dict$new(list(x = 1:2, y = 2:3)))
 expect_equal(d$values(),
              Container$new(x = 1:2, y = 2:3, keep_names = TRUE)$values())
 expect_equal(names(d$values()), c("x", "y"))
-
 expect_equal(Dict$new(env = environment(), id = identity)$length(), 2)
 
 
-# adding elements to a Dict required a character key and a value
+# adding elements to a Dict requires a character key and a value
 d <- Dict$new()
 expect_error(d$add(1), "key must be character")
 expect_error(d$add("", 1, "zero-length key"))
@@ -49,17 +46,7 @@ expect_error(d$add("a", NULL), "key 'a' already in Dict")
 d <- Dict$new()
 d$add("null", NULL)
 d$add("empty-list", list())
-
 expect_equal(d$values(), list("null" = NULL, "empty-list" = list()))
-
-
-# the underlying type changes depending on added elements as with base R
-d <- Dict$new(c(x = 1))
-expect_equal(mode(d$values()), "numeric")
-d$add("y", "a")
-expect_equal(mode(d$values()), "character")
-d$add("n", NULL)
-expect_equal(mode(d$values()), "list")
 
 
 # elements can be deleted from a Dict
@@ -76,6 +63,8 @@ expect_error(Dict$new(a = 1)$delete("b"), "key 'b' not in Dict")
 d <- Dict$new(a = 1, b = 2)
 expect_error(d$delete(c("a", "b"), "key must be of length 1"),
              "key must be of length 1")
+
+# failed delete does not alter the dict object
 d_was_not_touched <- d$length() == 2
 expect_true(d_was_not_touched)
 
@@ -131,13 +120,11 @@ expect_equal(d$keys(), "b")
 d <- Dict$new(a = 1, b = 2)
 expect_equal(d$peek("a"), d$getval("a"))
 expect_true(is.null(d$peek("x")))
-
 expect_equal(d$peek("x", default = 9), 9)
 
 
 # elements can be popped and popping non-existent element gives an error
-x <- c(a = 1, b = 2)
-d <- Dict$new(x)
+d <- Dict$new(a = 1, b = 2)
 expect_equal(d$pop("a"), x[["a"]])
 expect_false(d$has("a"))
 expect_error(d$pop("a"))
@@ -145,20 +132,18 @@ expect_error(d$pop("a"))
 
 # elements can be popped randomly from Dict
 x <- c(a = 1, b = 2)
-d <- Dict$new(x)
+d <- as.dict(x)
 v <- numeric(0)
 while (!d$empty()) {
     v <- c(v, d$popitem())
 }
-
 expect_equal(sort(v), as.numeric(x))
-
 expect_true(d$empty())
 expect_error(d$popitem(), "popitem at empty Dict")
 
 
 # A key in the Dict can be renamed
-d <- Dict$new(list(A = 1, B = 2))
+d <- Dict$new(A = 1, B = 2)
 expect_error(d$rename(1, "C"), "key must be character")
 expect_error(d$rename("A", 1), "key must be character")
 expect_error(d$rename("A", c("C", "D")), "must be of same length")
@@ -197,8 +182,8 @@ expect_equal(d$sortkey()$keys(), c("a", "b"))
 
 
 # a Dict can be updated by another Dict object
-d1 <- Dict$new(list(A = 1, B = 2, C = 12))
-d2 <- Dict$new(list(              C = 3, D = 4))
+d1 <- Dict$new(A = 1, B = 2, C = 12)
+d2 <- Dict$new(              C = 3, D = 4)
 expect_error(d1$update(list()), "arg must be a Dict")
 expect_equal(d1$update(Dict$new()), d1)
 expect_equal(d1$update(d2)$values(), list(A = 1, B = 2, C = 3, D = 4))

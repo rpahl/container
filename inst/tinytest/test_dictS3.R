@@ -1,22 +1,22 @@
 # dict initialization works as expected
+d = dict()
+expect_true(inherits(d, "Dict"))
+expect_true(inherits(d, "Container"))
 expect_true(empty(dict()))
 expect_equal(mode(values(dict())), "list")
 expect_error(dict(1:2), "all elems must be named")
 expect_error(dict(x = 1, y = 2, x = 3), "duplicated keys")
 expect_equal(keys(dict()), character(0))
-expect_equal(mode(values(dict(c(x = 1, y = 2)))), "numeric")
-expect_equal(mode(values(dict(list(x = 1, y = 2)))), "list")
 
 # One element
 expect_equal(values(dict(x = 1)), list(x = 1))
-expect_equal(dict(x = 1), dict(list(x = 1)))
-expect_equal(values(dict(c(x = 1))), c(x = 1))
+expect_equal(values(dict(x = NULL)), list(x = NULL))
+expect_equal(values(dict(x = 1:4)), list(x = 1:4))
+env = new.env()
+expect_equal(values(dict(x = env)), list(x = env))
 
 # Two (or more) elements
 d <- dict(x = 1, y = 2)
-expect_true(inherits(d, "Dict"))
-expect_true(inherits(d, "Container"))
-expect_equal(d, dict(list(x = 1, y = 2)))
 expect_equal(values(d), values(container(x = 1, y = 2, keep_names = TRUE)))
 expect_equal(names(values(d)), c("x", "y"))
 
@@ -46,17 +46,7 @@ expect_error(add(d, "a", NULL), "key 'a' already in Dict")
 d <- dict()
 add(d, "null", NULL)
 add(d, "empty-list", list())
-
 expect_equal(values(d), list("null" = NULL, "empty-list" = list()))
-
-
-# the underlying type changes depending on added elements as with base R
-d <- dict(c(x = 1))
-expect_equal(mode(values(d)), "numeric")
-add(d, "y", "a")
-expect_equal(mode(values(d)), "character")
-add(d, "n", NULL)
-expect_equal(mode(values(d)), "list")
 
 
 # elements can be deleted from a Dict
@@ -73,6 +63,8 @@ expect_error(delete(dict(a = 1), "b"), "key 'b' not in Dict")
 d <- dict(a = 1, b = 2)
 expect_error(delete(d, c("a", "b"), "key must be of length 1"),
              "key must be of length 1")
+
+# failed delete does not alter the dict object
 d_was_not_touched <- length(d) == 2
 expect_true(d_was_not_touched)
 
@@ -128,13 +120,11 @@ expect_equal(keys(d), "b")
 d <- dict(a = 1, b = 2)
 expect_equal(peek(d, "a"), getval(d, "a"))
 expect_true(is.null(peek(d, "x")))
-
 expect_equal(peek(d, "x", default = 9), 9)
 
 
 # elements can be popped and popping non-existent element gives an error
-x <- c(a = 1, b = 2)
-d <- dict(x)
+d <- dict(a = 1, b = 2)
 expect_equal(pop(d, "a"), x[["a"]])
 expect_false(has(d, "a"))
 expect_error(pop(d, "a"))
@@ -142,19 +132,18 @@ expect_error(pop(d, "a"))
 
 # elements can be popped randomly from Dict
 x <- c(a = 1, b = 2)
-d <- dict(x)
+d <- as.dict(x)
 v <- numeric(0)
 while (!empty(d)) {
     v <- c(v, popitem(d))
 }
 expect_equal(sort(v), as.numeric(x))
-
 expect_true(empty(d))
 expect_error(popitem(d), "popitem at empty Dict")
 
 
 # A key in the Dict can be renamed
-d <- dict(list(A = 1, B = 2))
+d <- dict(A = 1, B = 2)
 expect_error(rename(d, 1, "C"), "'old' must be character")
 expect_error(rename(d, "A", 1), "'new' must be character")
 expect_error(rename(d, "A", c("C", "D")), "must be of the same length")
@@ -194,18 +183,18 @@ expect_equal(keys(sortkey(d)), c("a", "b"))
 
 
 # a Dict can be updated by another Dict object
-d1 <- dict(list(A = 1, B = 2, C = 12))
-d2 <- dict(list(              C = 3, D = 4))
+d1 <- dict(A = 1, B = 2, C = 12)
+d2 <- dict(              C = 3, D = 4)
 expect_error(update(d1, list()), "'other' must be a Dict")
 expect_equal(update(d1, dict()), d1)
 expect_equal(values(update(d1, d2)), list(A = 1, B = 2, C = 3, D = 4))
 expect_equal(update(dict(), d2), d2)
 
 
-# data.frame can be converted to dict
-# TODO:
-#df <- data.frame(A = 1:5, B = 1:5)
-#d <- as.dict(df)
-#expect_equal(as.data.frame(as.list(d)), df)
+# Conversion
 
+# data.frame can be converted to dict
+df <- data.frame(A = 1:5, B = 1:5)
+d <- as.dict(df)
+expect_equal(as.data.frame(as.list(d)), df)
 

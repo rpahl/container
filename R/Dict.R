@@ -17,8 +17,8 @@ Dict <- R6::R6Class("Dict",
         #' @return invisibly returns the `Dict`
         initialize = function(...) {
             elems <- list(...)
-            if (nargs() == 1 && is.null(names(elems))) {
-                elems <- elems[[1]]
+            if (length(elems) == 0) {
+                return(super$initialize())
             }
 
             keys <- names(elems)
@@ -29,9 +29,9 @@ Dict <- R6::R6Class("Dict",
             }
 
             if (any(duplicated(keys))) {
-                stop("duplicated keys")
+                stop("duplicated keys are not allowed for ", data.class(self))
             }
-            super$initialize(elems, keep_names = TRUE)
+            super$initialize(..., keep_names = TRUE)
         },
 
         #' @description If `key` not yet in `Dict`, insert `value` at `key`,
