@@ -169,5 +169,5 @@ expect_equal(sum(v), sum(as.integer(co$values())))
 
 # verify that type() is deprecated
 co <- Container$new()
-expect_warning(expect_equal(co$type(), "numeric"), "deprecated")
+expect_warning(co$type(), "deprecated")
 

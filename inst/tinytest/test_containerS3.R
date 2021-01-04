@@ -179,11 +179,15 @@ expect_equal(as.container(NULL), container())
 expect_equal(as.container(1), container(1))
 expect_equal(as.container(1:3), container(1, 2, 3))
 
-expect_error(as.container(factor(letters[1:3])))
-expect_error(as.container(globalenv()))
+ff = factor(letters[1:2])
+expect_equal(values(as.container(ff)), as.list(ff))
+env = new.env()
+env$a = 1
+expect_equivalent(values(as.container(env)), as.list(env))
 
 expect_equal(as.container(deque(1, 2, 3)), container(1, 2, 3))
-# TODO: as.container(dict(a = 1, b = 2))
+expect_equal(as.container(setnew(1, 2, 1)), container(1, 2))
+expect_equal(as.container(dict(a = 1)), container(1))
 
 # container is printed as expected
 out <- capture.output(print(Container$new()))

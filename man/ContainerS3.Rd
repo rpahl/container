@@ -4,7 +4,6 @@
 \alias{ContainerS3}
 \alias{container}
 \alias{as.container}
-\alias{as.container.Iterable}
 \alias{is.container}
 \alias{length.Container}
 \alias{as.list.Container}
@@ -13,8 +12,6 @@
 container(..., keep_names = FALSE)
 
 as.container(x, ...)
-
-\method{as.container}{Iterable}(x)
 
 is.container(x)
 

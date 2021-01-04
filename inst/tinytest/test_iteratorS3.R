@@ -1,5 +1,5 @@
 # Iterator constructor works as expected
-expect_error(iter(environment()), "'x' is not iterable")
+expect_error(iter(environment()), "'x' must be at least a vector")
 it <- iter(as.list(environment())) # ok
 expect_true(is.iterator(it))
 

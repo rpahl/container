@@ -28,32 +28,15 @@ container <- function(..., keep_names = FALSE) {
 #' @export
 as.container <- function(x, ...)
 {
-    if (is.container(x)) return(x)
     if (length(x) == 0) return(container())
     UseMethod("as.container")
 }
 
-#' @rdname ContainerS3
-#' @export
-as.container.Iterable <- function(x)
-{
-    co = container()
-    it = iter(x)
-    while (it$has_next()) {
-        co$add(it$get_next())
-    }
-    co
-}
 
 #' @export
 as.container.default <- function(x)
 {
-    co = container()
-    it = Iterator$new(x)
-    while (it$has_next()) {
-        co$add(it$get_next())
-    }
-    co
+    do.call(container, args = as.list(x))
 }
 
 #' @rdname ContainerS3
@@ -72,6 +55,6 @@ length.Container <- function(x) x$length()
 #' @return `as.list()` returns a copy of the internally stored sequence as a
 #' base R list.
 #' @export
-`as.list.Container` <- function(x) as.list(x$values())
+`as.list.Container` <- function(x) x$values()
 
 

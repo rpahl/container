@@ -43,8 +43,8 @@ expect_equal(s1 / s1, s1)
 # x + y updates x by y
 lx = list(a = 1, b = 2)
 ly = list(       b = 9, c = 1)
-x <- dict(lx)
-y <- dict(ly)
+x <- as.dict(lx)
+y <- as.dict(ly)
 xy <- x + y
 expect_equal(values(x), lx)  # verify x was not touched
 expect_equal(values(y), ly)  # verify y was not touched
@@ -60,8 +60,8 @@ expect_equal(length(y), 2)  # verify y was not touched
 # x - y returns a copy of x with all `y` keys being discarded
 lx = list(a = 1, b = 2)
 ly = list(       b = 9, c = 1)
-x <- dict(lx)
-y <- dict(ly)
+x <- as.dict(lx)
+y <- as.dict(ly)
 expect_equal(x - y, dict(a = 1))
 expect_equal(y - x, dict(c = 1))
 expect_equivalent(x - x, dict())
@@ -72,8 +72,8 @@ expect_equal(values(y), ly)  # verify y was not touched
 # x / y returns a copy keeping only keys exiting in both
 lx = list(a = 1, b = 2)
 ly = list(       b = 9, c = 1)
-x <- dict(lx)
-y <- dict(ly)
+x <- as.dict(lx)
+y <- as.dict(ly)
 expect_equal(values(x / y), list(b = 2))
 expect_equal(values(y / x), list(b = 9))
 expect_equal(x / x, x)

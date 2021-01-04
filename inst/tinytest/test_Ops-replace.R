@@ -31,9 +31,9 @@ expect_equal(d, d2)  # ensure d2 was not changed (partially)
 d2[c("b", "x"), add = TRUE] <- c(5, 6)
 expect_equal(values(d2), list(a = 3, b = 5, x = 6))
 
-d = dict(c(a = 1, b = 2))
+d = dict(a = 1, b = 2)
 d[c("a", "b")] <- 0
-expect_equal(values(d), c(a = 0, b = 0))
+expect_equal(values(d), list(a = 0, b = 0))
 
 
 # ---
@@ -49,6 +49,9 @@ expect_true(s$has(median))
 expect_equal(length(s), 4)
 expect_error(s[["x"]] <- "y", "'x' not found")
 expect_false("y" %e% s)
+s[[]] <- 9
+expect_true(9 %e% s)
+
 
 # ----------
 # dict.table

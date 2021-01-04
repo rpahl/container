@@ -5,7 +5,7 @@ expect_true(is.deque(d))
 
 
 # an element can be added to the left of a Deque
-expect_equal(values(addleft(deque(0), 1)), as.integer(1:0))
+expect_equal(values(addleft(deque(0), 1)), as.list(1:0))
 expect_equal(values(addleft(deque(mean), median)), list(median, mean))
 
 
