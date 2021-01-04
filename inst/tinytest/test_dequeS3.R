@@ -68,6 +68,7 @@ expect_equal(rotate(rotate(as.deque(v), 3), -3), as.deque(v))
 co <- container(1, 2, 3)
 d <- as.deque(co)
 expect_equal(values(co), values(d))
+expect_equal(as.deque(NULL), deque())
 
 v <- rnorm(10)
 expect_equal(unlist(values(as.deque(v))), v)

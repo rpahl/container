@@ -24,7 +24,6 @@ set <- function(...) {
 #' @export
 as.set <- function(x, ...)
 {
-    if (is.set(x)) return(x)
     if (length(x) == 0) return(setnew())
     UseMethod("as.set")
 }

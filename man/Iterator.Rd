@@ -39,7 +39,7 @@ Roman Pahl
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{sequence to iterate over}
+\item{\code{x}}{object to iterate over}
 }
 \if{html}{\out{</div>}}
 }

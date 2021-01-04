@@ -27,27 +27,14 @@ deque <- function(..., keep_names = FALSE) {
 #' @export
 as.deque <- function(x, ...)
 {
-    if (is.deque(x)) return(x)
-    if (length(x) == 0) return(container())
+    if (length(x) == 0) return(deque())
     UseMethod("as.deque")
-}
-
-#' @rdname dequeS3
-#' @export
-as.deque.Iterable <- function(x)
-{
-    d <- deque()
-    it <- iter(x)
-    while (it$has_next()) {
-        d$add(it$get_next())
-    }
-    d
 }
 
 #' @export
 as.deque.default <- function(x)
 {
-    as.deque(as.container(x))
+    do.call(deque, args = as.list(x))
 }
 
 #' @rdname dequeS3

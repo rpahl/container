@@ -192,6 +192,8 @@ expect_equal(update(dict(), d2), d2)
 
 
 # Conversion
+expect_equal(as.dict(NULL), dict())
+expect_equal(as.dict(c(a = 1)), dict(a = 1))
 
 # data.frame can be converted to dict
 df <- data.frame(A = 1:5, B = 1:5)
