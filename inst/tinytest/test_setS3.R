@@ -23,7 +23,6 @@ add(s, list())
 expect_equal(values(s), list(NULL, list()))
 add(s, list())
 expect_equal(values(s), list(NULL, list()))
-
 add(s, numeric(0))
 expect_equal(values(s), list(NULL, list(), numeric(0)))
 

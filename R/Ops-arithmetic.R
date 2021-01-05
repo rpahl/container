@@ -14,9 +14,9 @@ NULL
 `+.Set` <- function(x, y) x$union(y)
 
 #' @rdname OpsArith
-#' @return For `Set` , `/` returns the intersection of both sets.
+#' @return For `Set` , `&` returns the intersection of both sets.
 #' @export
-`/.Set` <- function(x, y) x$intersect(y)
+`&.Set` <- function(x, y) x$intersect(y)
 
 #' @rdname OpsArith
 #' @return For `Set`, `-` returns the set-difference of both sets.
@@ -97,11 +97,11 @@ NULL
 }
 
 #' @rdname OpsArith
-#' @return For `Dict`, `/` returns a copy of `x` keeping only the keys that
-#' exist in both, that is, all keys in `x` that do not exist in `y` are
-#' removed.
+#' @return For `Dict`, `&` returns a copy of `x` keeping only the keys that
+#' exist in both (intersection), that is, all keys in `x` that do not exist
+#' in `y` are removed.
 #' @export
-`/.Dict` <- function(x, y)
+`&.Dict` <- function(x, y)
 {
     if (!(is.dict(x) && is.dict(y))) {
         stop("both arguments must be dicts")

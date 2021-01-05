@@ -25,8 +25,8 @@ s1 <- as.set(l1)
 s2 <- as.set(l2)
 expect_equal(values(s1 + s2), union(l1, l2))
 expect_true(setequal(values(s1 + s2), values(s2 + s1)))
-expect_equal(values(s1 / s2), intersect(l1, l2))
-expect_true(setequal(values(s1 / s2), values(s2 / s1)))
+expect_equal(values(s1 & s2), intersect(l1, l2))
+expect_true(setequal(values(s1 & s2), values(s2 & s1)))
 expect_equal(values(s1 - s2), setdiff(l1, l2))
 expect_false(setequal(values(s1 - s2), values(s2 - s1)))
 expect_equal(values(s2 - s1), setdiff(l2, l1))
@@ -34,7 +34,7 @@ expect_equal(values(s2 - s1), setdiff(l2, l1))
 l1 <- list(1, "1")
 expect_equal(intersect(l1, l1), list(1)) # 'wrong' base implementation
 s1 <- as.set(l1)
-expect_equal(s1 / s1, s1)
+expect_equal(s1 & s1, s1)
 
 
 # ----
@@ -69,16 +69,16 @@ expect_equivalent(dict() - x, dict())
 expect_equal(values(x), lx)  # verify x was not touched
 expect_equal(values(y), ly)  # verify y was not touched
 
-# x / y returns a copy keeping only keys exiting in both
+# x & y returns a new dict containing keys
 lx = list(a = 1, b = 2)
 ly = list(       b = 9, c = 1)
 x <- as.dict(lx)
 y <- as.dict(ly)
-expect_equal(values(x / y), list(b = 2))
-expect_equal(values(y / x), list(b = 9))
-expect_equal(x / x, x)
-expect_equal(x / dict(), dict())
-expect_equal(dict() / x, dict())
+expect_equal(values(x & y), list(b = 2))
+expect_equal(values(y & x), list(b = 9))
+expect_equal(x & x, x)
+expect_equal(x & dict(), dict())
+expect_equal(dict() & x, dict())
 expect_equal(values(x), lx)  # verify x was not touched
 expect_equal(values(y), ly)  # verify y was not touched
 
