@@ -68,7 +68,7 @@ Set <- R6::R6Class("Set",
 
         #' @description `Set` comparison
         #' @param s `Set` object to compare
-        #' @return `TRUE` if `Set` s is equal to this, otherwise `FALSE`
+        #' @return `TRUE` if this is equal to `s`, otherwise `FALSE`
         is.equal = function(s) {
             if (!inherits(s, data.class(self))) {
                 stop("s must be a ", data.class(self))
@@ -80,7 +80,8 @@ Set <- R6::R6Class("Set",
             # Since set is not sorted, we have to check each element.
             it <- Iterator$new(self$values())
             while(it$has_next()) {
-                if (!s$has(it$get_next())) {
+                elem <- it$get_next()
+                if (!s$has(elem)) {
                     return(FALSE)
                 }
             }
@@ -89,22 +90,38 @@ Set <- R6::R6Class("Set",
 
         #' @description Check if subset
         #' @param s `Set` object to check
-        #' @return `TRUE` if `Set` s is subset of this, otherwise `FALSE`
-        is.subset = function(s) {
+        #' @param s `logical` strict subset (<) or just subset (<=)?
+        #' @return `TRUE` if this is subset of `s`, otherwise `FALSE`
+        is.subset = function(s, strict = TRUE) {
             if (!inherits(s, data.class(self))) {
                 stop("s must be a ", data.class(self))
             }
-            length(base::setdiff(self$values(), s$values())) == 0
+
+            # Start with the easy case
+            if (self$length() > s$length()) return(FALSE)
+
+            # Since set is not sorted, we have to check each element.
+            it <- Iterator$new(self$values())
+            while(it$has_next()) {
+                elem <- it$get_next()
+                if (!s$has(elem)) {
+                    return(FALSE)
+                }
+            }
+
+            # If we get here, we have either equality or strict subset
+            if (self$length() == s$length() && strict) FALSE else TRUE
         },
 
         #' @description Check if superset
         #' @param s `Set` object to check
-        #' @return `TRUE` if `Set` s is superset of this, otherwise `FALSE`
-        is.superset = function(s) {
+        #' @param s `logical` strict superset (>) or just superset (>=)?
+        #' @return `TRUE` if this is superset of `s`, otherwise `FALSE`
+        is.superset = function(s, strict = TRUE) {
             if (!inherits(s, data.class(self))) {
                 stop("s must be a ", data.class(self))
             }
-            length(base::setdiff(s$values(), self$values())) == 0
+            s$is.subset(self, strict = strict)
         },
 
         #' @description `Set` union
