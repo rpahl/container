@@ -9,61 +9,81 @@
 NULL
 
 #' @rdname OpsArith
-#' @return For `Set`, `|` returns the union of both sets.
+#' @return For `Set`, `+` returns the set union of x and y. Result is always a
+#' valid set.
 #' @export
-`|.Set` <- function(x, y) x$union(y)
-
-#' @rdname OpsArith
-#' @return For `Set` , `&` returns the intersection of both sets.
-#' @export
-`&.Set` <- function(x, y) x$intersect(y)
-
-#' @rdname OpsArith
-#' @return For `Set`, `-` returns the set-difference of both sets.
-#' @export
-`-.Set` <- function(x, y) x$diff(y)
-
-
-#' @rdname OpsArith
-#' @return For `Container`, `|` returns a new [Container()] object containing
-#' all elements from `x` and `y`. Note that x | y and y | x will yield identical
-#' results.
-#' @export
-`|.Container` <- function(x, y)
+`+.Set` <- function(x, y)
 {
-    if (is.container(x)) {
-        co <- x$clone()
-        it <- iter(y)
-    } else {
-        return(y | x)
-    }
-    while(has_next(it)) {
-        co$add(get_next(it))
-    }
+    s <- as.set(x)
+    lapply(as.list(y), s$add)
+    s
+}
+
+#' @rdname OpsArith
+#' @return For `Set` , `&` returns the set intersection of x and y
+#' @export
+`&.Set` <- function(x, y)
+{
+    s1 <- as.set(x)
+    s2 <- as.set(y)
+    s1$intersect(s2)
+}
+
+#' @rdname OpsArith
+#' @return For `Set`, `-` returns the set-difference of x and y. Result is
+#' always a valid set.
+#' @export
+`-.Set` <- function(x, y)
+{
+    s <- as.set(x)
+    lapply(as.list(y), s$discard)
+    s
+}
+
+
+
+#' @rdname ContainerS3
+#' @details * `x + y` combines `x` and `y` element-wise into a new container.
+#' @export
+`+.Container` <- function(x, y)
+{
+    co <- as.container(x)
+    lapply(as.list(y), co$add)
+    co
+}
+
+#' @rdname ContainerS3
+#' @details * `x - y` element-wise removes all items of `y` from `x`, given
+#' the element was contained in `x`. The result is always a container.
+#' @export
+`-.Container` <- function(x, y)
+{
+    co <- as.container(x)
+    lapply(as.list(y), co$discard)
     co
 }
 
 
 #' @rdname OpsArith
-#' @return For `Deque`, `|` returns a new [Deque()] object with all elements
+#' @return For `Deque`, `+` returns a new [Deque()] object with all elements
 #' from `x` and `y`. If `x` is not a [Deque()], it's elements will be added to
 #' the left of `y`.
 #' @export
-`|.Deque` <- function(x, y)
+`+.Deque` <- function(x, y)
 {
-    if (is.deque(x)) {
-        deq <- x$clone()
-        it <- iter(y)
-        while(has_next(it)) {
-            deq$add(get_next(it))
-        }
-    } else {
-        deq <- y$clone()
-        it <- iter(x)
-        while(has_next(it)) {
-            deq$addleft(get_next(it))
-        }
-    }
+    deq <- as.deque(x)
+    lapply(as.list(y), deq$add)
+    deq
+}
+
+
+#' @rdname OpsArith
+#' @return For `Deque`, `-` returns x - y
+#' @export
+`-.Deque` <- function(x, y)
+{
+    deq <- as.deque(x)
+    lapply(as.list(y), deq$discard)
     deq
 }
 
@@ -73,27 +93,25 @@ NULL
 #' @export
 `+.Dict` <- function(x, y)
 {
-    if (!(is.dict(x) && is.dict(y))) {
-        stop("both arguments must be dicts")
-    }
-    x$clone(deep = TRUE)$update(y)
+    d1 = as.dict(x)
+    d2 = as.dict(y)
+    d1$update(d2)
 }
 
 
 #' @rdname OpsArith
-#' @return For `Dict`, `-` returns a copy of `x` with all `y` keys being
-#' discarded, that is, it keeps only those keys of `x` that are not in `y`.
+#' @return For `Dict`, `-` `x` with keys discarded appearing in `y`.
 #' @export
 `-.Dict` <- function(x, y)
 {
-    if (!(is.dict(x) && is.dict(y))) {
-        stop("both arguments must be dicts")
+    d1 = as.dict(x)
+    d2 = as.dict(y)
+    for (key in names(as.list(y)))
+
+    for (key in d2$keys()) {
+        d1$discard(key)
     }
-    xx <- x$clone(deep = TRUE)
-    for (key in y$keys()) {
-        xx$discard(key)
-    }
-    xx
+    d1
 }
 
 #' @rdname OpsArith
@@ -103,14 +121,12 @@ NULL
 #' @export
 `&.Dict` <- function(x, y)
 {
-    if (!(is.dict(x) && is.dict(y))) {
-        stop("both arguments must be dicts")
+    d1 = as.dict(x)
+    d2 = as.dict(y)
+    key_diff <- setdiff(d1$keys(), d2$keys())
+    for (key in key_diff) {
+        d1$delete(key)
     }
-    common_keys <- intersect(x$keys(), y$keys())
-    d <- dict()
-    for (key in common_keys) {
-        d$add(key, x$getval(key))
-    }
-    d
+    d1
 }
 

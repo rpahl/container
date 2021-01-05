@@ -2,14 +2,11 @@
 % Please edit documentation in R/delete.R
 \name{delete}
 \alias{delete}
-\alias{delete.Container}
 \alias{delete.Dict}
 \alias{delete.dict.table}
 \title{Delete elements}
 \usage{
 delete(x, ...)
-
-\method{delete}{Container}(x, elem, right = FALSE)
 
 \method{delete}{Dict}(x, key)
 
@@ -20,19 +17,12 @@ delete(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{elem}{element to be deleted from the object. If not found, an
-error is signaled.}
-
-\item{right}{\code{logical} if \code{TRUE}, search from right to left.}
-
 \item{key}{\code{character} key of the value to delete. If \code{key} does exists,
 the associated key-value pair is deleted, otherwise an error is signaled.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Container} the container object after the element was removed.
-
 For \code{Dict} the dict object after the key-value pair was removed.
 
 For \code{dict.table} the dict.table object after the column was removed.

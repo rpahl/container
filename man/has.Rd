@@ -2,14 +2,11 @@
 % Please edit documentation in R/has.R
 \name{has}
 \alias{has}
-\alias{has.Container}
 \alias{has.Dict}
 \alias{has.dict.table}
 \title{Determine if object has some element}
 \usage{
 has(x, ...)
-
-\method{has}{Container}(x, elem)
 
 \method{has}{Dict}(x, key)
 
@@ -20,15 +17,11 @@ has(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{elem}{element to search for.}
-
 \item{key}{\code{character} name of key to search for.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Container} \code{TRUE} if element is in container otherwise \code{FALSE}.
-
 For \code{Dict} \code{TRUE} if key is in dict otherwise \code{FALSE}.
 
 For \code{dict.table} \code{TRUE} if column name or index is in dict.table,

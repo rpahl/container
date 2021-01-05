@@ -1,14 +1,14 @@
 #' Determine if object has some element
 #'
 #' @param x any `R` object.
-#' @param elem element to search for.
 #' @param ... additional arguments to be passed to or from methods.
 #' @export
 has <- function(x, ...) UseMethod("has")
 
 
-#' @rdname has
-#' @return For `Container` `TRUE` if element is in container otherwise `FALSE`.
+#' @rdname ContainerS3
+#' @param elem some element of any type
+#' @details * `has(x)` `TRUE` if element is in `x` and otherwise `FALSE`.
 #' @export
 has.Container <- function(x, elem) x$has(elem)
 

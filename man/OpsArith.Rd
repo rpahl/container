@@ -2,25 +2,25 @@
 % Please edit documentation in R/Ops-arithmetic.R
 \name{OpsArith}
 \alias{OpsArith}
-\alias{|.Set}
+\alias{+.Set}
 \alias{&.Set}
 \alias{-.Set}
-\alias{|.Container}
-\alias{|.Deque}
+\alias{+.Deque}
+\alias{-.Deque}
 \alias{+.Dict}
 \alias{-.Dict}
 \alias{&.Dict}
 \title{Arithmetic Operators for Containers}
 \usage{
-\method{|}{Set}(x, y)
+\method{+}{Set}(x, y)
 
 \method{&}{Set}(x, y)
 
 \method{-}{Set}(x, y)
 
-\method{|}{Container}(x, y)
+\method{+}{Deque}(x, y)
 
-\method{|}{Deque}(x, y)
+\method{-}{Deque}(x, y)
 
 \method{+}{Dict}(x, y)
 
@@ -34,24 +34,23 @@ class \code{\link[=Container]{Container()}} or the respective derived class. Bot
 iterable.}
 }
 \value{
-For \code{Set}, \code{|} returns the union of both sets.
+For \code{Set}, \code{+} returns the set union of x and y. Result is always a
+valid set.
 
-For \code{Set} , \code{&} returns the intersection of both sets.
+For \code{Set} , \code{&} returns the set intersection of x and y
 
-For \code{Set}, \code{-} returns the set-difference of both sets.
+For \code{Set}, \code{-} returns the set-difference of x and y. Result is
+always a valid set.
 
-For \code{Container}, \code{|} returns a new \code{\link[=Container]{Container()}} object containing
-all elements from \code{x} and \code{y}. Note that x | y and y | x will yield identical
-results.
-
-For \code{Deque}, \code{|} returns a new \code{\link[=Deque]{Deque()}} object with all elements
+For \code{Deque}, \code{+} returns a new \code{\link[=Deque]{Deque()}} object with all elements
 from \code{x} and \code{y}. If \code{x} is not a \code{\link[=Deque]{Deque()}}, it's elements will be added to
 the left of \code{y}.
 
+For \code{Deque}, \code{-} returns x - y
+
 For \code{Dict}, \code{+} returns a copy of \code{x} updated by \code{y}.
 
-For \code{Dict}, \code{-} returns a copy of \code{x} with all \code{y} keys being
-discarded, that is, it keeps only those keys of \code{x} that are not in \code{y}.
+For \code{Dict}, \code{-} \code{x} with keys discarded appearing in \code{y}.
 
 For \code{Dict}, \code{&} returns a copy of \code{x} keeping only the keys that
 are common in both (key intersection), that is, all keys in \code{x} that do not

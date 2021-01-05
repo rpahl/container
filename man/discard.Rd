@@ -2,14 +2,11 @@
 % Please edit documentation in R/discard.R
 \name{discard}
 \alias{discard}
-\alias{discard.Container}
 \alias{discard.Dict}
 \alias{discard.dict.table}
 \title{Discard elements}
 \usage{
 discard(x, ...)
-
-\method{discard}{Container}(x, elem, right = FALSE)
 
 \method{discard}{Dict}(x, key)
 
@@ -20,21 +17,12 @@ discard(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{elem}{element to be deleted from the object. If elem is not found, the
-object is not altered.}
-
-\item{right}{\code{logical} if \code{TRUE}, search from right to left.}
-
 \item{key}{\code{character} key of value to discard. If \code{key} does exist,
 the associated key-value pair is deleted, otherwise it is ignored.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Container} the container object after the element was removed
-or the unchanged container object if the element was not contained in the
-container in the first place.
-
 For \code{Dict} the dict object after the key-value pair was removed or
 the unchanged dict object if the key was not in the dict in the first place.
 
@@ -43,6 +31,6 @@ or the unchanged dict.table object if the column did not exist in the first
 place.
 }
 \description{
-Search and remove an element from an object. If the element is not found, do
-nothing.
+Search and remove an element from an object. If the element is not found,
+ignore it.
 }

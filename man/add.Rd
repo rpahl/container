@@ -17,13 +17,11 @@ add(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{key}{\code{character} unique identifier of the item.}
+\item{key}{\code{character} unique key identifier}
 
-\item{value}{value to be added.}
+\item{value}{some value}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
-
-\item{elem}{some element to be added.}
 }
 \value{
 For \code{Dict}, the dict object with the key-element pair being added.

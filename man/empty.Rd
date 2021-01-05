@@ -2,13 +2,10 @@
 % Please edit documentation in R/empty.R
 \name{empty}
 \alias{empty}
-\alias{empty.Container}
 \alias{empty.dict.table}
 \title{Check if object is empty}
 \usage{
 empty(x, ...)
-
-\method{empty}{Container}(x)
 
 \method{empty}{dict.table}(x)
 }

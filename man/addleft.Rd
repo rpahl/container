@@ -14,7 +14,7 @@ addleft(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{elem}{some element to be added.}
+\item{elem}{some element of any type}
 }
 \value{
 For \code{Deque}, the deque object with the element being added to the

@@ -14,8 +14,9 @@
 #' @param ... initial elements put into the `Container`.
 #' @param keep_names `logical` if TRUE, keeps names of passed elements.
 #' @param elem some element of any type
-#' @param x any `R` object for [as.container()] and [is.container()]. An
-#' object of class `Container` for the `S3` methods.
+#' @param x any `R` object for [as.container()] and [is.container()] and the
+#' operators. An object of class `Container` for the `S3` methods.
+#' @param y any iterable `R` object
 #' @name ContainerS3
 #' @seealso For the class documentation see [Container()] and it's derived
 #' classes [Deque()], [Det()], and [Dict()].
@@ -51,7 +52,7 @@ as.container.default <- function(x)
 }
 
 #' @rdname ContainerS3
-#' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`.
+#' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`
 #' and `FALSE` otherwise.
 #' @export
 is.container <- function(x) inherits(x, "Container")

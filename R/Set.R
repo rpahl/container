@@ -73,7 +73,18 @@ Set <- R6::R6Class("Set",
             if (!inherits(s, data.class(self))) {
                 stop("s must be a ", data.class(self))
             }
-            setequal(self$values(), s$values())
+
+            # If unequal length we can stop right here
+            if (self$length() != s$length()) return(FALSE)
+
+            # Since set is not sorted, we have to check each element.
+            it <- Iterator$new(self$values())
+            while(it$has_next()) {
+                if (!s$has(it$get_next())) {
+                    return(FALSE)
+                }
+            }
+            TRUE
         },
 
         #' @description Check if subset

@@ -6,7 +6,8 @@
 #' @export
 empty <- function(x, ...) UseMethod("empty")
 
-#' @rdname empty
+#' @rdname ContainerS3
+#' @details * `empty(x)` returns `TRUE` if `x` is empty and `FALSE` otherwise.
 #' @export
 empty.Container <- function(x) x$empty()
 

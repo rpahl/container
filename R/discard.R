@@ -1,19 +1,16 @@
 #' Discard elements
 #'
-#' Search and remove an element from an object. If the element is not found, do
-#' nothing.
+#' Search and remove an element from an object. If the element is not found,
+#' ignore it.
 #' @param x any `R` object.
-#' @param elem element to be deleted from the object. If elem is not found, the
-#' object is not altered.
-#' @param right `logical` if `TRUE`, search from right to left.
 #' @param ... additional arguments to be passed to or from methods.
 #' @export
 discard <- function(x, ...) UseMethod("discard")
 
-#' @rdname discard
-#' @return For `Container` the container object after the element was removed
-#' or the unchanged container object if the element was not contained in the
-#' container in the first place.
+#' @rdname ContainerS3
+#' @details * `discard(x, elem, right)` finds and removes `elem`. If not found, `elem` is ignored.
+#' @param elem some element of any type
+#' @param right `logical` if `TRUE`, search from right to left.
 #' @export
 discard.Container <- function(x, elem, right = FALSE) x$discard(elem, right)
 
