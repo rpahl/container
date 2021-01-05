@@ -4,6 +4,7 @@
 #' may be defunct as soon as the next release.
 #' @param ... (arguments)
 #' @seealso [base::Deprecated()]
+#' @usage set(...)  ### -- use  setnew(...)  instead to create `Set`s
 #' @usage size(...)  ### -- use  length(...)  instead
 #' @usage sortkey(...)  ### -- `Dict` keys are now always sorted
 #' @usage remove(...)  ### -- use  delete(...)  instead

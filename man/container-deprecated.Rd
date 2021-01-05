@@ -4,6 +4,8 @@
 \alias{container-deprecated}
 \title{Deprecated Functions in Package container}
 \usage{
+set(...)  ### -- use  setnew(...)  instead to create `Set`s
+
 size(...)  ### -- use  length(...)  instead
 
 sortkey(...)  ### -- `Dict` keys are now always sorted
