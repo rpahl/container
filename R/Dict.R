@@ -234,6 +234,18 @@ Dict <- R6::R6Class("Dict",
         #' @return a copy of all elements in a list
         values = function() as.list(private$elems)[self$keys()]
     ),
-    lock_class = TRUE
+    private = list(
+        # Since elems are stored in an environment for Dict, some extra care
+        # has to be taken if a true/deep copy is desired.
+        deep_clone = function(name, value) {
+            if (name == "elems") {
+                list2env(as.list.environment(value, all.names = TRUE),
+                         parent = emptyenv())
+            } else {
+                value
+            }
+        }
+    ),
+    lock_class = TRUE,
 )
 

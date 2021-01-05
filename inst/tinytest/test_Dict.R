@@ -204,7 +204,7 @@ d <- Dict$new(a = 1, b = 2)
 expect_warning(d$remove("b"), "Use 'delete' instead.")
 expect_false(d$has("b"))
 
-# Dict sort is defunct
+# Dict sort is deprecated
 d <- Dict$new(b = 1, a = 2)
 expect_warning(d$sort(), "'sort' is deprecated - keys are now always sorted")
 

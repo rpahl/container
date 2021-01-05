@@ -76,7 +76,7 @@ NULL
     if (!(is.dict(x) && is.dict(y))) {
         stop("both arguments must be dicts")
     }
-    x$clone()$update(y)
+    x$clone(deep = TRUE)$update(y)
 }
 
 
@@ -89,7 +89,7 @@ NULL
     if (!(is.dict(x) && is.dict(y))) {
         stop("both arguments must be dicts")
     }
-    xx <- x$clone()
+    xx <- x$clone(deep = TRUE)
     for (key in y$keys()) {
         xx$discard(key)
     }
