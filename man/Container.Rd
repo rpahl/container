@@ -10,15 +10,6 @@ member functions to insert, delete and access elements from the container.
 While it can be used to create \code{\link[=Container]{Container()}} objects, it mainly serves as the
 base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}.
 }
-\details{
-The underlying data structure is based on R vectors (or lists), with the mode
-being set to the mode (or type) of the value passed to the initialize
-function, which by default is an empty list, in which case the
-\code{\link[=Container]{Container()}} object can store elements of mixed and arbitrary types.
-If the container will only contain atomic elements of one particular type,
-for example, numeric values, it will be both more efficient and type safe to
-initialize the container with this particular type.
-}
 \seealso{
 \code{\link[=Iterable]{Iterable()}}, \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}
 }
@@ -296,7 +287,7 @@ the \code{Container} length
 \if{html}{\out{<a id="method-type"></a>}}
 \if{latex}{\out{\hypertarget{method-type}{}}}
 \subsection{Method \code{type()}}{
-This function is deprecated.
+This function is deprecated and of no real use anymore.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$type()}\if{html}{\out{</div>}}
 }

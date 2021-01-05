@@ -4,6 +4,7 @@
 #' as a specialized associative [Container()] thus sharing all [Container()]
 #' methods with some of them being overriden to account for the associative
 #' key-value pair semantic.
+#' @details Key-value pairs internally are stored in a hash-table.
 #'
 #' @author Roman Pahl
 #' @importFrom R6 R6Class

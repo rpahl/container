@@ -9,6 +9,9 @@ as a specialized associative \code{\link[=Container]{Container()}} thus sharing 
 methods with some of them being overriden to account for the associative
 key-value pair semantic.
 }
+\details{
+Key-value pairs internally are stored in a hash-table.
+}
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=dict]{dict()}}
 }

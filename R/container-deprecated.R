@@ -7,6 +7,7 @@
 #' @usage size(...)  ### -- use  length(...)  instead
 #' @usage sortkey(...)  ### -- `Dict` keys are now always sorted
 #' @usage remove(...)  ### -- use  delete(...)  instead
+#' @usage type(...)  ### -- not of use anymore
 #' @name container-deprecated
 NULL
 
@@ -16,7 +17,6 @@ NULL
 #' @return `integer` size of the `Container`, that is, the number of
 #' elements it contains.
 #' @name size-deprecated
-#' @export
 NULL
 
 #' @rdname size-deprecated
@@ -53,4 +53,5 @@ sortkey.Dict <- function(x, decr = FALSE) {
     .Deprecated(msg = "'sort' is deprecated - keys are now always sorted")
     invisible(x)
 }
+
 

@@ -36,14 +36,6 @@ Iterable <- R6::R6Class("Iterable",
 #' member functions to insert, delete and access elements from the container.
 #' While it can be used to create [Container()] objects, it mainly serves as the
 #' base class for [Deque()], [Set()], and [Dict()].
-#' @details
-#' The underlying data structure is based on R vectors (or lists), with the mode
-#' being set to the mode (or type) of the value passed to the initialize
-#' function, which by default is an empty list, in which case the
-#' [Container()] object can store elements of mixed and arbitrary types.
-#' If the container will only contain atomic elements of one particular type,
-#' for example, numeric values, it will be both more efficient and type safe to
-#' initialize the container with this particular type.
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
@@ -71,16 +63,7 @@ Container <- R6::R6Class("Container",
         #' @param elem element to be added to `Container` object
         #' @return invisibly returns the `Container` object
         add = function(elem) {
-            type <- mode(self$values())
-            if (type == "list") {
-                elem <- list(elem)
-            } else {
-                if (type != mode(elem)) {
-                    stop("type mismatch: expected '", type,
-                         "' but got '", mode(elem), "'")
-                }
-            }
-            private$elems <- c(private$elems, elem)
+            private$elems <- c(private$elems, list(elem))
             invisible(self)
         },
 
@@ -207,13 +190,13 @@ Container <- R6::R6Class("Container",
             length(private$elems)
         },
 
-        #' @description This function is deprecated.
+        #' @description This function is deprecated and of no real use anymore.
         #' @return type (or mode) of internal vector containing the elements
         type = function() {
             old = as.character(sys.call(sys.parent()))[1L]
             object <- strsplit(old, split = "$", fixed = TRUE)[[1]][1]
-            msg <- paste0("'", old, "()' is deprecated.\n",
-                          "Use 'mode(", object, "$values())' instead.")
+            msg <- paste0("'", old, "()' is deprecated and not useful anymore.\n",
+                          "You can use 'mode(", object, "$values())' instead.")
             .Deprecated("mode", msg = msg)
             mode(private$elems)
         },
