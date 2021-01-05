@@ -7,7 +7,8 @@
 #' @export
 clear <- function(x, ...) UseMethod("clear")
 
-#' @rdname clear
+#' @rdname ContainerS3
+#' @details * `clear(x)` removes all elements from `x`.
 #' @export
 clear.Container <- function(x) x$clear()
 

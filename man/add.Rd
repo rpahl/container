@@ -2,14 +2,11 @@
 % Please edit documentation in R/add.R
 \name{add}
 \alias{add}
-\alias{add.Container}
 \alias{add.Dict}
 \alias{add.dict.table}
 \title{Add element}
 \usage{
 add(x, ...)
-
-\method{add}{Container}(x, elem)
 
 \method{add}{Dict}(x, key, value)
 
@@ -20,17 +17,15 @@ add(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{elem}{some element to be added.}
-
 \item{key}{\code{character} unique identifier of the item.}
 
 \item{value}{value to be added.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
+
+\item{elem}{some element to be added.}
 }
 \value{
-For \code{Container}, the container object with the element being added.
-
 For \code{Dict}, the dict object with the key-element pair being added.
 
 For \code{dict.table}, the dict.table object with the column being added.

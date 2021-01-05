@@ -6,8 +6,8 @@
 #' @export
 add <- function(x, ...) UseMethod("add")
 
-#' @rdname add
-#' @return For `Container`, the container object with the element being added.
+#' @rdname ContainerS3
+#' @details * `add(x, elem)` adds element `elem` to `x`.
 #' @export
 add.Container <- function(x, elem) x$add(elem)
 

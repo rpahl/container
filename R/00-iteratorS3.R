@@ -5,7 +5,9 @@
 #'  value of the sequence it is associated with.
 #' @details For more details on the methods see [Iterator()].
 #'
-#' @param x an iterable object
+#' @param x an object of class [Iterable()] or any other `R` object. In the
+#' latter case, `x` will always be coerced to a base `R` list prior to creating
+#' the `iterator`.
 #' @param it `Iterator` object
 #' @name iterS3
 #' @seealso [Iterator()]
@@ -15,7 +17,7 @@ NULL
 #' @export
 iter <- function(x) UseMethod("iter")
 
-#' @rdname iterS3
+#' @rdname ContainerS3
 #' @export
 iter.Container <- function(x) x$iter()
 

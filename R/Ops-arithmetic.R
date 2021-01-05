@@ -9,9 +9,9 @@
 NULL
 
 #' @rdname OpsArith
-#' @return For `Set`, `+` returns the union of both sets.
+#' @return For `Set`, `|` returns the union of both sets.
 #' @export
-`+.Set` <- function(x, y) x$union(y)
+`|.Set` <- function(x, y) x$union(y)
 
 #' @rdname OpsArith
 #' @return For `Set` , `&` returns the intersection of both sets.
@@ -25,17 +25,17 @@ NULL
 
 
 #' @rdname OpsArith
-#' @return For `Container`, `+` returns a new [Container()] object containing
-#' all elements from `x` and `y`. Note that x + y and y + x will yield identical
+#' @return For `Container`, `|` returns a new [Container()] object containing
+#' all elements from `x` and `y`. Note that x | y and y | x will yield identical
 #' results.
 #' @export
-`+.Container` <- function(x, y)
+`|.Container` <- function(x, y)
 {
     if (is.container(x)) {
         co <- x$clone()
         it <- iter(y)
     } else {
-        return(y + x)
+        return(y | x)
     }
     while(has_next(it)) {
         co$add(get_next(it))
@@ -45,11 +45,11 @@ NULL
 
 
 #' @rdname OpsArith
-#' @return For `Deque`, `+` returns a new [Deque()] object with all elements
+#' @return For `Deque`, `|` returns a new [Deque()] object with all elements
 #' from `x` and `y`. If `x` is not a [Deque()], it's elements will be added to
 #' the left of `y`.
 #' @export
-`+.Deque` <- function(x, y)
+`|.Deque` <- function(x, y)
 {
     if (is.deque(x)) {
         deq <- x$clone()
@@ -98,8 +98,8 @@ NULL
 
 #' @rdname OpsArith
 #' @return For `Dict`, `&` returns a copy of `x` keeping only the keys that
-#' exist in both (intersection), that is, all keys in `x` that do not exist
-#' in `y` are removed.
+#' are common in both (key intersection), that is, all keys in `x` that do not
+#' exist in `y` were removed.
 #' @export
 `&.Dict` <- function(x, y)
 {

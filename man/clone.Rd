@@ -2,20 +2,14 @@
 % Please edit documentation in R/clone.R
 \name{clone}
 \alias{clone}
-\alias{clone.Container}
 \title{Clone an object}
 \usage{
 clone(x, ...)
-
-\method{clone}{Container}(x, deep = FALSE)
 }
 \arguments{
 \item{x}{any \code{R} object.}
 
 \item{...}{additional arguments to be passed to or from methods.}
-
-\item{deep}{\code{logical} if \code{TRUE} a \code{deep} copy otherwise (default) a shallow
-copy is performed.}
 }
 \value{
 A copy of the object.

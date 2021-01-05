@@ -8,9 +8,8 @@
 clone <- function(x, ...) UseMethod("clone")
 
 
-#' @rdname clone
-#' @param deep `logical` if `TRUE` a `deep` copy otherwise (default) a shallow
-#' copy is performed.
+#' @rdname ContainerS3
+#' @details * `clone(x)` returns a copy of `x`.
 #' @export
-clone.Container <- function(x, deep = FALSE) x$clone(deep)
+clone.Container <- function(x) x$clone(deep = TRUE)
 

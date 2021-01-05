@@ -2,18 +2,18 @@
 # Container
 # ---------
 co <- container(1, 2)
-expect_equal(values(co + 1), list(1, 2, 1))
-expect_equal(co + 1, 1 + co)
-expect_equal(values(co + co), rep(values(co), 2))
+expect_equal(values(co | 1), list(1, 2, 1))
+expect_equal(co | 1, 1 | co)
+expect_equal(values(co | co), rep(values(co), 2))
 
 
 # -----
 # Deque
 # -----
 d <- deque(1, 2)
-expect_equal(values(d + 1), list(1, 2, 1))
-expect_equal(values(1 + d), list(1, 1, 2))
-expect_equal(values(d + d), rep(values(d), 2))
+expect_equal(values(d | 1), list(1, 2, 1))
+expect_equal(values(1 | d), list(1, 1, 2))
+expect_equal(values(d | d), rep(values(d), 2))
 
 
 # ---
@@ -23,8 +23,8 @@ l1 <- list(1, 2, 3,    "A", "B", "C")
 l2 <- list(   2, 3, 4,      "B", "C", "D")
 s1 <- as.set(l1)
 s2 <- as.set(l2)
-expect_equal(values(s1 + s2), union(l1, l2))
-expect_true(setequal(values(s1 + s2), values(s2 + s1)))
+expect_equal(values(s1 | s2), union(l1, l2))
+expect_true(setequal(values(s1 | s2), values(s2 | s1)))
 expect_equal(values(s1 & s2), intersect(l1, l2))
 expect_true(setequal(values(s1 & s2), values(s2 & s1)))
 expect_equal(values(s1 - s2), setdiff(l1, l2))
@@ -69,7 +69,8 @@ expect_equivalent(dict() - x, dict())
 expect_equal(values(x), lx)  # verify x was not touched
 expect_equal(values(y), ly)  # verify y was not touched
 
-# x & y returns a new dict containing keys
+# x & y returns a copy of the first dict with all keys being removed that are
+# not common in both x and y
 lx = list(a = 1, b = 2)
 ly = list(       b = 9, c = 1)
 x <- as.dict(lx)

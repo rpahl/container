@@ -3,7 +3,6 @@
 \name{iterS3}
 \alias{iterS3}
 \alias{iter}
-\alias{iter.Container}
 \alias{iter.default}
 \alias{is.iterator}
 \alias{begin}
@@ -18,8 +17,6 @@
 \title{Iterator}
 \usage{
 iter(x)
-
-\method{iter}{Container}(x)
 
 \method{iter}{default}(x)
 
@@ -44,7 +41,9 @@ reset_iter(it)
 \method{length}{Iterator}(x)
 }
 \arguments{
-\item{x}{an iterable object}
+\item{x}{an object of class \code{\link[=Iterable]{Iterable()}} or any other \code{R} object. In the
+latter case, \code{x} will always be coerced to a base \code{R} list prior to creating
+the \code{iterator}.}
 
 \item{it}{\code{Iterator} object}
 }

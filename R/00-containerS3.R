@@ -6,14 +6,26 @@
 #' base class for [Deque()], [Set()], and [Dict()] objects, users are more
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of the respective derived classes.
-#' @details For a full list of all container methods see [Container()].
+#' @details
+#' Methods inherited from [Iterable()]:
+#' * `iter(x)` returns an [Iterator()] object to iterate over `x`. Note that
+#' this works on a copy of `x`, that is, changing `x` after the iterator was
+#' created will not be accessible by the iterator.
 #' @param ... initial elements put into the `Container`.
 #' @param keep_names `logical` if TRUE, keeps names of passed elements.
-#' @param x any `R` object, or an object inheriting from class 'Container' for
-#' the S3 methods.
-#' @return [container()] returns a [Container()] object.
-#' @seealso [Container()], [deque()], [set()], [dict()]
+#' @param elem some element of any type
+#' @param x any `R` object for [as.container()] and [is.container()]. An
+#' object of class `Container` for the `S3` methods.
 #' @name ContainerS3
+#' @seealso For the class documentation see [Container()] and it's derived
+#' classes [Deque()], [Det()], and [Dict()].
+NULL
+
+
+#' @rdname ContainerS3
+#' @details
+#' Container methods:
+#' * `container(...)` initializes and returns a [Container()] object.
 #' @export
 container <- function(..., keep_names = FALSE) {
     if (missing(keep_names)) {
@@ -24,14 +36,13 @@ container <- function(..., keep_names = FALSE) {
 }
 
 #' @rdname ContainerS3
-#' @return [as.container()] coerces to a container.
+#' @details * [as.container(x)] coerces `x` to a container.
 #' @export
-as.container <- function(x, ...)
+as.container <- function(x)
 {
     if (length(x) == 0) return(container())
     UseMethod("as.container")
 }
-
 
 #' @export
 as.container.default <- function(x)
@@ -40,21 +51,20 @@ as.container.default <- function(x)
 }
 
 #' @rdname ContainerS3
-#' @return [is.container()] returns `TRUE` if its argument is a [Container()]
+#' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`.
 #' and `FALSE` otherwise.
 #' @export
 is.container <- function(x) inherits(x, "Container")
 
 
 #' @rdname ContainerS3
-#' @return `length()` returns the length of the internally stored sequence.
-#' @export
-length.Container <- function(x) x$length()
-
-#' @rdname ContainerS3
-#' @return `as.list()` returns a copy of the internally stored sequence as a
-#' base R list.
+#' @details * `as.list(x)` converts container `x` to a base `R` list.
 #' @export
 `as.list.Container` <- function(x) x$values()
 
+
+#' @rdname ContainerS3
+#' @details * `length(x)` returns the number of elements in container `x`.
+#' @export
+length.Container <- function(x) x$length()
 
