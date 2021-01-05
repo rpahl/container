@@ -134,7 +134,8 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Number of elements of the `Container`.
-        #' @return `integer` length of the `Container`
+        #' @return `integer` length of the `Container`, that is, the number of
+        #' elements it contains.
         length = function() length(private$elems),
 
         #' @description peek random item

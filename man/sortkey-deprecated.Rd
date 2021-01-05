@@ -22,6 +22,6 @@ For \code{Dict} sorts the elements in place and inivisbly returns the
 \code{\link[=Dict]{Dict()}} object.
 }
 \description{
-Re-order elements according to key-order.This function
+Re-order elements according to key-order. This function
 is deprecated as keys are now always sorted.
 }

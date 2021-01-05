@@ -200,7 +200,8 @@ Number of elements of the \code{Container}.
 }
 
 \subsection{Returns}{
-\code{integer} length of the \code{Container}
+\code{integer} length of the \code{Container}, that is, the number of
+elements it contains.
 }
 }
 \if{html}{\out{<hr>}}

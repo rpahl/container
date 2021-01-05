@@ -4,9 +4,11 @@
 \alias{container-deprecated}
 \title{Deprecated Functions in Package container}
 \usage{
-sortkey(...)  ### `Dict` keys are now always sorted
+size(...)  ### -- use  length(...)  instead
 
-bar(...)  ### -- use  system.time(...)  instead
+sortkey(...)  ### -- `Dict` keys are now always sorted
+
+remove(...)  ### -- use  delete(...)  instead
 }
 \arguments{
 \item{...}{(arguments)}

@@ -4,14 +4,36 @@
 #' may be defunct as soon as the next release.
 #' @param ... (arguments)
 #' @seealso [base::Deprecated()]
-#' @usage sortkey(...)  ### `Dict` keys are now always sorted
-#' @usage bar(...)  ### -- use  system.time(...)  instead
+#' @usage size(...)  ### -- use  length(...)  instead
+#' @usage sortkey(...)  ### -- `Dict` keys are now always sorted
+#' @usage remove(...)  ### -- use  delete(...)  instead
 #' @name container-deprecated
 NULL
 
 
+#' @title Container size (deprecated)
+#' @description This function is deprecated. Use [length()] instead.
+#' @return `integer` size of the `Container`, that is, the number of
+#' elements it contains.
+#' @name size-deprecated
+#' @export
+NULL
+
+#' @rdname size-deprecated
+#' @export
+size <- function(x, ...) UseMethod("size")
+
+#' @rdname size-deprecated
+#' @export
+size.Container <- function(x)
+{
+    .Deprecated("length")
+    length(x)
+}
+
+
 #' @title Sort Dict keys (deprecated)
-#' @description Re-order elements according to key-order.This function
+#' @description Re-order elements according to key-order. This function
 #' is deprecated as keys are now always sorted.
 #' @param x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
