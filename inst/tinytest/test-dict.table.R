@@ -231,16 +231,6 @@ expect_equal(getval(dit, 2), rep(0, 2))
 expect_error(setval(dit, 3, 1:2), "3 is outside range")
 
 
-# column names can be sorted increasingly and decreasingly
-dit = dict.table(A = 1:2, B = 2:1)
-daf = as.data.frame(dit)
-expect_equal(colnames(dit), colnames(daf))
-sortkey(dit)
-expect_equal(colnames(dit), colnames(daf))
-sortkey(dit, decr = TRUE)
-expect_equal(colnames(dit), rev(colnames(daf)))
-
-
 # rbind works as expected for dict.tables
 dat = data.table(A = 1:2, B = 2:1)
 dit = dict.table(dat)

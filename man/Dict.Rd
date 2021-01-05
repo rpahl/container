@@ -30,14 +30,16 @@ Roman Pahl
 \item \href{#method-has}{\code{Dict$has()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-peek}{\code{Dict$peek()}}
+\item \href{#method-peekitem}{\code{Dict$peekitem()}}
 \item \href{#method-pop}{\code{Dict$pop()}}
+\item \href{#method-popitem}{\code{Dict$popitem()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-set}{\code{Dict$set()}}
 \item \href{#method-setval}{\code{Dict$setval()}}
 \item \href{#method-sort}{\code{Dict$sort()}}
-\item \href{#method-sortkey}{\code{Dict$sortkey()}}
 \item \href{#method-update}{\code{Dict$update()}}
+\item \href{#method-values}{\code{Dict$values()}}
 \item \href{#method-clone}{\code{Dict$clone()}}
 }
 }
@@ -48,12 +50,9 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peekitem">}\href{../../container/html/Container.html#method-peekitem}{\code{container::Container$peekitem()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="popitem">}\href{../../container/html/Container.html#method-popitem}{\code{container::Container$popitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -236,6 +235,21 @@ value for \code{key} if \code{key} is in the \code{Dict} else \code{default}.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-peekitem"></a>}}
+\if{latex}{\out{\hypertarget{method-peekitem}{}}}
+\subsection{Method \code{peekitem()}}{
+peek random item
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$peekitem()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+returns an arbitrary element from the \code{Dict}. This
+function can be used to sample randomly (with replacement) from
+a \code{Dict}.
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pop"></a>}}
 \if{latex}{\out{\hypertarget{method-pop}{}}}
 \subsection{Method \code{pop()}}{
@@ -254,6 +268,21 @@ If \code{key} not found, raise an error.
 }
 \subsection{Returns}{
 If \code{key} in \code{Dict}, return its value.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-popitem"></a>}}
+\if{latex}{\out{\hypertarget{method-popitem}{}}}
+\subsection{Method \code{popitem()}}{
+pop random item
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$popitem()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+deletes and return an arbitrary element from the
+\code{Dict}. This function can be used to destructively iterate
+over a \code{Dict}.
 }
 }
 \if{html}{\out{<hr>}}
@@ -356,35 +385,16 @@ invisibly returns the \code{Dict}
 \if{html}{\out{<a id="method-sort"></a>}}
 \if{latex}{\out{\hypertarget{method-sort}{}}}
 \subsection{Method \code{sort()}}{
-This function is deprecated. Use \code{\link[=sortkey]{sortkey()}} instead.
+Sort elements according to their keys. This function
+is deprecated as keys are now always sorted.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$sort(decreasing = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$sort(decr = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{decreasing}}{\code{logical} if \code{TRUE} sort in decreasing order.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-invisibly returns the \code{Dict}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-sortkey"></a>}}
-\if{latex}{\out{\hypertarget{method-sortkey}{}}}
-\subsection{Method \code{sortkey()}}{
-Re-order elements according to key-order
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$sortkey(decreasing = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{decreasing}}{\code{logical} if \code{TRUE} sort in decreasing order.}
+\item{\code{decr}}{\code{logical} if \code{TRUE} sort in decreasing order.}
 }
 \if{html}{\out{</div>}}
 }
@@ -411,6 +421,19 @@ not in the \code{Dict} and update the key with the new value otherwise.
 }
 \subsection{Returns}{
 invisibly returns the \code{Dict}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-values"></a>}}
+\if{latex}{\out{\hypertarget{method-values}{}}}
+\subsection{Method \code{values()}}{
+Get \code{Container} values
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$values()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+a copy of all elements in a list
 }
 }
 \if{html}{\out{<hr>}}

@@ -137,7 +137,20 @@ Container <- R6::R6Class("Container",
         #' @return `integer` length of the `Container`
         length = function() length(private$elems),
 
-        #' @description delete and return an arbitrary element from the
+        #' @description peek random item
+        #' @return returns an arbitrary element from the `Container`. This
+        #' function can be used to sample randomly (with replacement) from
+        #' a `Container`.
+        peekitem = function() {
+            if (self$empty()) {
+                return(NULL)
+            }
+            pos <- sample(seq_along(private$elems), size = 1)
+            .subset2(private$elems, pos)
+        },
+
+        #' @description pop random item
+        #' @return deletes and return an arbitrary element from the
         #' `Container`. This function can be used to destructively iterate
         #'  over a `Container` as often used in set algorithms.
         popitem = function() {
@@ -148,17 +161,6 @@ Container <- R6::R6Class("Container",
             elem <- .subset2(private$elems, pos)
             private$elems <- .subset(private$elems, -pos)
             elem
-        },
-
-        #' @description return an arbitrary element from the `Container`.
-        #' This function can be used to sample randomly (with replacement)
-        #' from a `Container`.
-        peekitem = function() {
-            if (self$empty()) {
-                return(NULL)
-            }
-            pos <- sample(seq_along(private$elems), size = 1)
-            .subset2(private$elems, pos)
         },
 
         #' @description Print object representation similar to [utils::str()]
@@ -215,9 +217,8 @@ Container <- R6::R6Class("Container",
             mode(private$elems)
         },
 
-        #' @description Get copy of `Container` values
+        #' @description Get `Container` values
         #' @return a copy of all elements in a list
-        #' otherwise as a basic `list`.
         values = function() private$elems
     ),
     private = list(elems = list(),

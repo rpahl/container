@@ -44,9 +44,9 @@ expect_error(d$add("a", NULL), "key 'a' already in Dict")
 
 # NULL and empty lists can be added
 d <- Dict$new()
-d$add("null", NULL)
 d$add("empty-list", list())
-expect_equal(d$values(), list("null" = NULL, "empty-list" = list()))
+d$add("null", NULL)
+expect_equal(d$values(), list("empty-list" = list(), "null" = NULL))
 
 
 # elements can be deleted from a Dict
@@ -174,12 +174,10 @@ expect_equal(d$getval("b"), list(1, 2))
 expect_error(d$setval("x", 1), "key 'x' not in Dict")
 
 
-# a Dict can be re-sorted according to its keys
-d <- Dict$new()
-d$add("b", 1)$add("a", 2)
-expect_equal(d$keys(), c("b", "a"))
-expect_equal(d$sortkey()$keys(), c("a", "b"))
-
+# a Dict's keys are always sorted
+v <- c(h = 1, d = 2, a = 8, b = 0)
+d <- as.dict(v)
+expect_equal(keys(d), sort(names(v)))
 
 # a Dict can be updated by another Dict object
 d1 <- Dict$new(A = 1, B = 2, C = 12)
@@ -206,8 +204,7 @@ d <- Dict$new(a = 1, b = 2)
 expect_warning(d$remove("b"), "Use 'delete' instead.")
 expect_false(d$has("b"))
 
-# Dict sort is deprecated and replaced by sortkey
-d <- Dict$new(a = 1, b = 2)
-expect_warning(d$remove("b"), "Use 'delete' instead.")
-expect_false(d$has("b"))
+# Dict sort is defunct
+d <- Dict$new(b = 1, a = 2)
+expect_warning(d$sort(), "'sort' is deprecated - keys are now always sorted")
 

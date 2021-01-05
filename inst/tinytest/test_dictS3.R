@@ -44,9 +44,9 @@ expect_error(add(d, "a", NULL), "key 'a' already in Dict")
 
 # NULL and empty lists can be added
 d <- dict()
-add(d, "null", NULL)
 add(d, "empty-list", list())
-expect_equal(values(d), list("null" = NULL, "empty-list" = list()))
+add(d, "null", NULL)
+expect_equal(values(d), list("empty-list" = list(), "null" = NULL))
 
 
 # elements can be deleted from a Dict
@@ -174,14 +174,6 @@ expect_equal(getval(d, "b"), list(1, 2))
 expect_error(setval(d, "x", 1), "key 'x' not in Dict")
 
 
-# a Dict can be re-sorted according to its keys
-d <- dict()
-add(d, "b", 1)
-add(d, "a", 2)
-expect_equal(keys(d), c("b", "a"))
-expect_equal(keys(sortkey(d)), c("a", "b"))
-
-
 # a Dict can be updated by another Dict object
 d1 <- dict(A = 1, B = 2, C = 12)
 d2 <- dict(              C = 3, D = 4)
@@ -199,4 +191,8 @@ expect_equal(as.dict(c(a = 1)), dict(a = 1))
 df <- data.frame(A = 1:5, B = 1:5)
 d <- as.dict(df)
 expect_equal(as.data.frame(as.list(d)), df)
+
+# Dict sort is deprecated
+d <- Dict$new(b = 1, a = 2)
+expect_warning(sortkey(d), "'sort' is deprecated - keys are now always sorted")
 

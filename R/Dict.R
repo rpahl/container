@@ -17,9 +17,6 @@ Dict <- R6::R6Class("Dict",
         #' @return invisibly returns the `Dict`
         initialize = function(...) {
             elems <- list(...)
-            if (length(elems) == 0) {
-                return(super$initialize())
-            }
 
             keys <- names(elems)
             keys.len <- length(keys)
@@ -31,7 +28,9 @@ Dict <- R6::R6Class("Dict",
             if (any(duplicated(keys))) {
                 stop("duplicated keys are not allowed for ", data.class(self))
             }
-            super$initialize(..., keep_names = TRUE)
+            #super$initialize(..., keep_names = TRUE)
+            private$elems <- list2env(elems, parent = emptyenv(), hash = TRUE)
+            invisible(self)
         },
 
         #' @description If `key` not yet in `Dict`, insert `value` at `key`,
@@ -63,8 +62,7 @@ Dict <- R6::R6Class("Dict",
         #' @return invisibly returns the `Dict`
         discard = function(key) {
             if (self$has(key)) {
-                pos <- match(key, self$keys())
-                private$elems <- .subset(private$elems, -pos)
+                remove(list = key, envir = private$elems)
             }
             invisible(self)
         },
@@ -96,13 +94,13 @@ Dict <- R6::R6Class("Dict",
             if (!is.character(key)) stop("key must be character")
             if (is.na(key)) stop("undefined key")
             if (isTRUE(nchar(key) == 0)) stop("zero-length key")
-            key %in% self$keys()
+            utils::hasName(private$elems, key)
         },
 
         #' @description Get all keys.
         #' @return `character` vector of all keys.
         keys = function() {
-            as.character(names(private$elems))
+            ls(envir = private$elems)
         },
 
         #' @description Peek for value in `Dict`.
@@ -110,7 +108,19 @@ Dict <- R6::R6Class("Dict",
         #' @param default returned default value.
         #' @return value for `key` if `key` is in the `Dict` else `default`.
         peek = function(key, default = NULL) {
-            if (self$has(key)) .subset2(private$elems, key) else default
+            get0(key, envir = private$elems, ifnotfound = default)
+        },
+
+        #' @description peek random item
+        #' @return returns an arbitrary element from the `Dict`. This
+        #' function can be used to sample randomly (with replacement) from
+        #' a `Dict`.
+        peekitem = function() {
+            if (self$empty()) {
+                return(NULL)
+            }
+            key <- sample(self$keys(), size = 1)
+            self$peek(key)
         },
 
         #' @description Get value and delete key-value pair from `Dict`.
@@ -121,6 +131,18 @@ Dict <- R6::R6Class("Dict",
             elem <- self$peek(key)
             self$delete(key)
             elem
+        },
+
+        #' @description pop random item
+        #' @return deletes and return an arbitrary element from the
+        #' `Dict`. This function can be used to destructively iterate
+        #'  over a `Dict`.
+        popitem = function() {
+            if (self$empty()) {
+                stop("popitem at empty ", data.class(self))
+            }
+            key <- sample(self$keys(), size = 1)
+            self$pop(key)
         },
 
         #' @description This function is deprecated. Use [delete()] instead.
@@ -153,8 +175,8 @@ Dict <- R6::R6Class("Dict",
             if (self$has(new)) {
                 stop("rename failed because '", new, "' exists already")
             }
-            pos = match(old, self$keys())
-            names(private$elems)[pos] <- new
+            self$add(key = new, value = self$getval(old))
+            self$delete(old)
             invisible(self)
         },
 
@@ -181,28 +203,16 @@ Dict <- R6::R6Class("Dict",
             if (!add && !self$has(key)) {
                 stop("key '", key, "' not in ", data.class(self))
             }
-            if (length(value) == 0) {
-                private$elems[key] <- list(value)
-            } else {
-                private$elems[[key]] <- value
-            }
+            assign(key, value, envir = private$elems)
             invisible(self)
         },
 
-        #' @description This function is deprecated. Use [sortkey()] instead.
-        #' @param decreasing `logical` if `TRUE` sort in decreasing order.
+        #' @description Sort elements according to their keys. This function
+        #' is deprecated as keys are now always sorted.
+        #' @param decr `logical` if `TRUE` sort in decreasing order.
         #' @return invisibly returns the `Dict`
-        sort = function(decreasing = FALSE) {
-            .Deprecated("sortkey")
-            self$sortkey(decr)
-        },
-
-        #' @description Re-order elements according to key-order
-        #' @param decreasing `logical` if `TRUE` sort in decreasing order.
-        #' @return invisibly returns the `Dict`
-        sortkey = function(decreasing = FALSE) {
-            new_order <- order(self$keys(), decreasing = decreasing)
-            private$elems <- .subset(private$elems, new_order)
+        sort = function(decr = FALSE) {
+            .Deprecated(msg = "'sort' is deprecated - keys are now always sorted")
             invisible(self)
         },
 
@@ -218,7 +228,11 @@ Dict <- R6::R6Class("Dict",
                 self$setval(key, other$getval(key), add = TRUE)
             }
             invisible(self)
-        }
+        },
+
+        #' @description Get `Container` values
+        #' @return a copy of all elements in a list
+        values = function() as.list(private$elems)[self$keys()]
     ),
     lock_class = TRUE
 )

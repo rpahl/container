@@ -11,7 +11,7 @@
 #'
 #' @author Roman Pahl, \email{roman.pahl@gmail.com}
 #' @docType package
-#' @name container.pkg
+#' @name container-pkg
 NULL
 
 
