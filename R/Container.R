@@ -93,9 +93,7 @@ Container <- R6::R6Class("Container",
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
         discard = function(elem, right = FALSE) {
-            #comp <- function(x) isTRUE(all.equal(x, elem))
-            comp <- function(x) identical(x, elem)
-            pos <- Position(f = comp,
+            pos <- Position(f = private$.create_compare(elem),
                             x = private$elems,
                             right = right,
                             nomatch = 0)
@@ -112,8 +110,8 @@ Container <- R6::R6Class("Container",
         #' @return `TRUE` of `Container` contains `elem` else `FALSE`
         has = function(elem) {
             #comp <- function(x) isTRUE(all.equal(x, elem))
-            comp <- function(x) identical(x, elem)
-            !is.na(Position(f = comp, x = private$elems))
+            !is.na(Position(f = private$.create_compare(elem),
+                            x = private$elems))
         },
 
         #' @description Number of elements of the `Container`.
@@ -206,7 +204,8 @@ Container <- R6::R6Class("Container",
         values = function() private$elems
     ),
     private = list(elems = list(),
-                   create_iter = function() Iterator$new(self$values())
+                   create_iter = function() Iterator$new(self$values()),
+                   .create_compare = function(x) function(y) identical(x, y)
     ),
     lock_class=TRUE
 )
