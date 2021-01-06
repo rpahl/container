@@ -9,6 +9,7 @@
 \alias{is.container}
 \alias{as.list.Container}
 \alias{length.Container}
+\alias{unpack}
 \alias{iter.Container}
 \alias{+.Container}
 \alias{-.Container}
@@ -30,6 +31,8 @@ is.container(x)
 \method{as.list}{Container}(x)
 
 \method{length}{Container}(x)
+
+unpack(x)
 
 \method{iter}{Container}(x)
 
@@ -101,6 +104,11 @@ and \code{FALSE} otherwise.
 
 \itemize{
 \item \code{length(x)} returns the number of elements in container \code{x}.
+}
+
+\itemize{
+\item \code{unpack(x)} recursively unpacks any nested container objects (or
+lists of nested containers) into a flat list.
 }
 
 \itemize{

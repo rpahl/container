@@ -69,3 +69,24 @@ is.container <- function(x) inherits(x, "Container")
 #' @export
 length.Container <- function(x) x$length()
 
+
+#' @rdname ContainerS3
+#' @details * `unpack(x)` recursively unpacks any nested container objects (or
+#' lists of nested containers) into a flat list.
+#' @export
+unpack <- function(x)
+{
+    res <- if (is.container(x)) {
+        unlist(unpack(as.list(x)))
+    } else {
+        elems = unlist(x)
+        hasContainer <- sapply(elems, is.container)
+        if (any(hasContainer)) {
+            unlist(lapply(elems, unpack))
+        } else {
+            unlist(elems)
+        }
+    }
+    res
+}
+
