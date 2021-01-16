@@ -93,11 +93,8 @@ Container <- R6::R6Class("Container",
         #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
         discard = function(elem, right = FALSE) {
-            pos <- Position(f = private$.create_compare(elem),
-                            x = private$elems,
-                            right = right,
-                            nomatch = 0)
-            if (pos > 0) private$elems <- .subset(private$elems, -pos)
+            pos <- private$.get_position(elem, right)
+            if (!is.na(pos)) private$elems <- .subset(private$elems, -pos)
             invisible(self)
         },
 
@@ -109,9 +106,7 @@ Container <- R6::R6Class("Container",
         #' @param elem element to search for
         #' @return `TRUE` of `Container` contains `elem` else `FALSE`
         has = function(elem) {
-            #comp <- function(x) isTRUE(all.equal(x, elem))
-            !is.na(Position(f = private$.create_compare(elem),
-                            x = private$elems))
+            !is.na(private$.get_position(elem))
         },
 
         #' @description Number of elements of the `Container`.
@@ -145,29 +140,19 @@ Container <- R6::R6Class("Container",
             elem
         },
 
-        #' @description Print object representation similar to [utils::str()]
-        #' @param len `numeric` maximum number of elements to display
-        #' @param ... other arguments passed to [utils::str()]
+        #' @description Print object representation
+        #' @param left `character` character printed as open bracket
+        #' @param right `character` character printed as closing bracket
+        #' @param len `integer` max number of elements per group
+        #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
-        print = function(len, ...) {
-            if (missing(len)) len <- strOptions()[["list.len"]]
-            cat0 <- function(...) cat(..., sep="")
-            class_name <- paste0("<", data.class(self), ">")
+        print = function(left = "[", right = "]", len = 6L, ...) {
+            cat(LABEL(self, limit = 0), "\n")
+            x = .format_values(self$values(),
+                               left = left, right = right,
+                               limit = len, ...)
 
-            elem_str <- if (self$length() == 1) "element" else "elements"
-            cat(class_name, "of", self$length(), elem_str)
-            if (self$length()) {
-                cat0(":\n")
-                utils::str(self$values(),
-                           list.len = len,
-                           no.list = TRUE,
-                           comp.str = "", ...)
-                if (len < self$length()) {
-                    cat0("... with ", self$length() - len, " more elements")
-                }
-            } else {
-                cat("\n")
-            }
+            writeLines(strwrap(format(x, ...), exdent = 1L))
             invisible(self)
         },
 
@@ -203,10 +188,58 @@ Container <- R6::R6Class("Container",
         #' @return a copy of all elements in a list
         values = function() private$elems
     ),
-    private = list(elems = list(),
-                   create_iter = function() Iterator$new(self$values()),
-                   .create_compare = function(x) function(y) identical(x, y)
+    private = list(
+        elems = list(),
+        create_iter = function() Iterator$new(self$values()),
+        .create_compare_fun = function(x) {
+            function(y) isTRUE(all.equal(x, y))
+        },
+        .get_position = function(elem, right = FALSE) {
+            Position(f = private$.create_compare_fun(elem),
+                     x = private$elems,
+                     right = right)
+        }
     ),
     lock_class=TRUE
 )
+
+
+.create_object_string <- function(x, x.names, name_seps, ...)
+{
+    if (length(x) == 0) return("")
+
+    paste(x.names, name_seps, LABELS(as.list(x), ...),
+          sep = "", collapse = ", ")
+}
+
+.format_values <- function(x, left, right, ...)
+{
+    x.names <- names(x)
+    names(x) <- NULL
+    name_seps <- rep.int("", length(x))
+
+    if (!is.null(x.names)) {
+        name_seps[x.names != ""] <- " = "
+    }
+
+    obj_str <- .create_object_string(x, x.names, name_seps)
+
+    paste0(left, obj_str, right)
+}
+
+
+format.Container <- function(x, ...)
+{
+    .format_values(values(x), left = "[", right = "]", ...)
+}
+
+format.Set <- function(x, ...)
+{
+    .format_values(values(x), left = "{", right = "}", ...)
+}
+
+format.Dict <- function(x, ...)
+{
+    .format_values(values(x), left = "{", right = "}", ...)
+}
 

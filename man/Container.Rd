@@ -229,17 +229,21 @@ over a \code{Container} as often used in set algorithms.
 \if{html}{\out{<a id="method-print"></a>}}
 \if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
-Print object representation similar to \code{\link[utils:str]{utils::str()}}
+Print object representation
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$print(len, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$print(left = "[", right = "]", len = 6L, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{len}}{\code{numeric} maximum number of elements to display}
+\item{\code{left}}{\code{character} character printed as open bracket}
 
-\item{\code{...}}{other arguments passed to \code{\link[utils:str]{utils::str()}}}
+\item{\code{right}}{\code{character} character printed as closing bracket}
+
+\item{\code{len}}{\code{integer} max number of elements per group}
+
+\item{\code{...}}{further arguments passed to \code{\link[=format]{format()}}}
 }
 \if{html}{\out{</div>}}
 }
