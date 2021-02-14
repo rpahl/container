@@ -85,7 +85,9 @@ expect_error(co$delete(), 'argument "elem" is missing, with no default')
 
 # Container gives an error if trying to delete non-existing element
 co <- Container$new(1)
-expect_error(co$delete(5), "'5' is not in Container")
+expect_error(co$delete(5), "5 is not in Container")
+li = list(1, 2)
+expect_error(co$delete(li), "li is not in Container")
 
 # Elements are deleted according to LIFO principle
 co <- Container$new(1, 2, 1)

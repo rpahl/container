@@ -82,8 +82,9 @@ Container <- R6::R6Class("Container",
         #' @param elem element to be discarded.
         #' @return invisibly returns the `Container` object
         delete = function(elem) {
+            elem_str = deparse(substitute(elem))
             if (!self$has(elem))
-                stop("'", deparse(elem), "' is not in ", data.class(self))
+                stop(elem_str, " is not in ", data.class(self))
 
             self$discard(elem)
         },
@@ -205,10 +206,17 @@ Container <- R6::R6Class("Container",
                      x = private$elems,
                      right = right,
                      ...)
+        },
+        .verify_same_class = function(x) {
+            x_str = deparse(substitute(x))
+            if (!inherits(x, data.class(self))) {
+                stop(x_str, " must be a ", data.class(self))
+            }
         }
     ),
-    lock_class=TRUE
+    lock_class = TRUE
 )
+
 
 
 .create_object_string <- function(x, x.names, name_seps, ...)
@@ -225,11 +233,10 @@ Container <- R6::R6Class("Container",
     names(x) <- NULL
     name_seps <- rep.int("", length(x))
 
-    if (!is.null(x.names)) {
+    if (!is.null(x.names))
         name_seps[x.names != ""] <- " = "
-    }
 
-    obj_str <- .create_object_string(x, x.names, name_seps)
+    obj_str = .create_object_string(x, x.names, name_seps)
 
     paste0(left, obj_str, right)
 }
