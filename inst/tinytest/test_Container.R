@@ -1,4 +1,6 @@
-# Container constructor works as expected
+# ----------
+# initialize
+# ----------
 co <- Container$new()
 expect_equal(attr(co, "class"), c("Container", "Iterable", "R6"))
 expect_equal(mode(co$values()), "list")
@@ -18,12 +20,9 @@ expect_equal(Container$new(keep_names = TRUE),
              Container$new(keep_names = FALSE))
 
 
-# it can be checked whether the Container is empty
-expect_true(Container$new()$empty())
-expect_false(Container$new(numeric())$empty())
-expect_false(Container$new(1)$empty())
-
-# elements can be added to the Container
+# ---
+# add
+# ---
 co <- Container$new()
 expect_true(co$empty())
 co$add(1)
@@ -46,7 +45,6 @@ co$delete(list())
 co$delete(NULL)
 expect_equal(co$values(), list(0))
 
-
 # non-trivial objects are added correctly
 v <- 1:10
 env <- new.env()
@@ -59,14 +57,12 @@ co$add(v)$add(env)$add(ll)$add(foo)
 expect_equal(co$values(), collection)
 expect_equal(co$length(), length(collection))
 
-
 # a Container can be added to a Container
 co <- Container$new(1, 2)
 coco <- Container$new()
 coco$add(co)
 expect_equal(coco$values()[[1]], co)
 expect_equal(coco$values()[[1]]$values(), list(1, 2))
-
 
 # named elements can be added to a Container
 co <- Container$new()
@@ -75,6 +71,61 @@ names(x) <- "x"
 co$add(x)
 expect_equal(co$values(), list(c(x = 1)))
 
+# ------
+# delete
+# ------
+# elements can be deleted from a Container
+co <- Container$new(1, 2, 3)
+co$delete(3)
+expect_equal(co$values(), list(1, 2))
+
+co <- Container$new(mean, identity)
+expect_equal(co$delete(mean)$values(), list(identity))
+expect_error(co$delete(), 'argument "elem" is missing, with no default')
+
+# Container gives an error if trying to delete non-existing element
+co <- Container$new(1)
+expect_error(co$delete(5), "'5' is not in Container")
+
+# Elements are deleted according to LIFO principle
+co <- Container$new(1, 2, 1)
+co$delete(1)
+expect_equal(co, Container$new(1, 2))
+
+# -------
+# discard
+# -------
+# elements can be discarded from a Container
+co <- Container$new(1, 2, 3)
+co$discard(3)
+expect_equal(co$values(), list(1, 2))
+
+co <- Container$new(mean, identity)
+expect_equal(co$discard(mean)$values(), list(identity))
+expect_error(co$discard(), 'argument "elem" is missing, with no default')
+
+# Container is not changed when trying to discard non-existing element
+co <- Container$new(1)
+expect_silent(co$discard(5))
+
+# Elements are discarded according to LIFO principle
+co <- Container$new(1, 2, 1)
+co$discard(1)
+expect_equal(co, Container$new(1, 2))
+
+
+# -----
+# empty
+# -----
+
+# it can be checked whether the Container is empty
+expect_true(Container$new()$empty())
+expect_false(Container$new(numeric())$empty())
+expect_false(Container$new(1)$empty())
+
+# ---
+# has
+# ---
 
 # it can be determined whether Container contains a certain element
 co <- Container$new(1L)
@@ -90,51 +141,6 @@ expect_false(co$has(median))
 expect_true(co$has(function() print("foo")))
 expect_false(co$has(function() print("bar")))
 
-
-# elements can be discarded from a Container
-co <- Container$new(1L, 2L, 3L)
-co$discard(3L)
-expect_equal(co$values(), list(1L, 2L))
-
-co <- Container$new(mean, identity)
-expect_equal(co$discard(mean)$values(), list(identity))
-
-expect_error(co$discard(), 'argument "elem" is missing, with no default')
-
-
-# elements can be discarded from left and from right
-co <- Container$new(1, 2, 1)
-expect_equal(co$discard(1)$values(), as.list(2:1))
-
-co <- Container$new(1, 2, 1)
-expect_equal(co$discard(1, right = TRUE)$values(), as.list(1:2))
-
-
-# discarding non-existent elements does not change Container
-co <- Container$new(1, 2, 3)
-expect_equal(co$discard(5)$values(), as.list(1:3))
-expect_equal(Container$new()$discard(1), Container$new())
-
-
-# elements can be deleted from a Container
-co <- Container$new(1, 2, 3)
-co$delete(3)
-expect_equal(co$values(), list(1, 2))
-
-co <- Container$new(mean, identity)
-expect_equal(co$delete(mean)$values(), list(identity))
-expect_error(co$delete(), 'argument "elem" is missing, with no default')
-
-# Container gives an error if trying to delete non-existing element
-co <- Container$new(1)
-expect_error(co$delete(5), "5 not in Container")
-
-# elements can be deleted from left and from right
-co <- Container$new(1, 2, 1)
-expect_equal(co$delete(1)$values(), as.list(2:1))
-
-co <- Container$new(1, 2, 1)
-expect_equal(co$delete(1, right = TRUE)$values(), as.list(1:2))
 
 # the length of a Container can be retrieved
 expect_equal(Container$new()$length(), 0)

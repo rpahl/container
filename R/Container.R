@@ -73,28 +73,35 @@ Container <- R6::R6Class("Container",
             self$initialize()
         },
 
-        #' @description Find and delete element from `Container`
-        #' @param elem element to be deleted from the `Container`. If not
+        #' @description Search for `elem` in `Container` and remove it.
+        #' @note The operation is done as last in first out (LIFO), that is,
+        #' if the container contains two or more of the same element, the one
+        #' that was entered last into the container will be removed first.
+        #' @param elem element to be discarded from the `Container`. If not
         #' found, an error is signaled.
-        #' @param right `logical` if `TRUE`, search from right to left.
+        #' @param elem element to be discarded.
         #' @return invisibly returns the `Container` object
-        delete = function(elem, right = FALSE) {
-            if (self$has(elem)) {
-                self$discard(elem, right)
-            } else {
-                stop(elem, " not in ", data.class(self))
-            }
-            invisible(self)
+        delete = function(elem) {
+            if (!self$has(elem))
+                stop("'", deparse(elem), "' is not in ", data.class(self))
+
+            self$discard(elem)
         },
 
-        #' @description Search for first `elem` in `Container` and, if found,
-        #' delete it. If not found, the `Container` object is not altered.
+        #' @description Search for `elem` in `Container` and remove it.
+        #' @note The operation is done as last in first out (LIFO), that is,
+        #' if the container contains two or more of the same element, the one
+        #' that was entered last into the container will be removed first.
+        #' @param elem element to be discarded from the `Container`. If not
+        #' found, the operation is ignored and the object *not* altered.
         #' @param elem element to be discarded.
-        #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
-        discard = function(elem, right = FALSE) {
-            pos <- private$.get_position(elem, right)
-            if (!is.na(pos)) private$elems <- .subset(private$elems, -pos)
+        discard = function(elem) {
+            pos <- private$.get_position(elem)
+            hasElem = !is.na(pos)
+
+            if (hasElem) private$elems <- .subset(private$elems, -pos)
+
             invisible(self)
         },
 
@@ -159,11 +166,10 @@ Container <- R6::R6Class("Container",
         #' @description This function is deprecated. Use [delete()] instead.
         #' @param elem element to be deleted from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
-        #' @param right `logical` if `TRUE`, search from right to left.
         #' @return invisibly returns the `Container` object
-        remove = function(elem, right = FALSE) {
+        remove = function(elem) {
             .Deprecated("delete")
-            self$delete(elem, right)
+            self$delete(elem)
         },
 
         #' @description This function is deprecated. Use [length()] instead.
@@ -191,13 +197,14 @@ Container <- R6::R6Class("Container",
     private = list(
         elems = list(),
         create_iter = function() Iterator$new(self$values()),
-        .create_compare_fun = function(x) {
+        get_compare_fun = function(x) {
             function(y) isTRUE(all.equal(x, y))
         },
-        .get_position = function(elem, right = FALSE) {
-            Position(f = private$.create_compare_fun(elem),
+        .get_position = function(elem, right = TRUE, ...) {
+            Position(f = private$get_compare_fun(elem),
                      x = private$elems,
-                     right = right)
+                     right = right,
+                     ...)
         }
     ),
     lock_class=TRUE
