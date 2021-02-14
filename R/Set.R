@@ -13,8 +13,12 @@ Set <- R6::R6Class("Set",
         #' @param ... initial elements put into the `Set`
         #' @return invisibly returns the `Set`
         initialize = function(...) {
-            super$initialize()
-            lapply(list(...), self$add)
+            matchfun = private$get_compare_fun()
+            private$elems <- sets::cset(list(), matchfun = matchfun)
+
+            for (e in list(...))
+                self$add(e)
+
             invisible(self)
         },
 
@@ -22,9 +26,7 @@ Set <- R6::R6Class("Set",
         #' @param elem If not already in set, add `elem`.
         #' @return invisibly returns [Set()] object.
         add = function(elem) {
-            if (!self$has(elem)) {
-                super$add(elem)
-            }
+            private$elems = sets::set_union(self$values(), elem)
             invisible(self)
         },
 
@@ -90,7 +92,7 @@ Set <- R6::R6Class("Set",
 
         #' @description Check if subset
         #' @param s `Set` object to check
-        #' @param s `logical` strict subset (<) or just subset (<=)?
+        #' @param strict `logical` strict subset (<) or just subset (<=)?
         #' @return `TRUE` if this is subset of `s`, otherwise `FALSE`
         is.subset = function(s, strict = TRUE) {
             if (!inherits(s, data.class(self))) {
@@ -115,7 +117,7 @@ Set <- R6::R6Class("Set",
 
         #' @description Check if superset
         #' @param s `Set` object to check
-        #' @param s `logical` strict superset (>) or just superset (>=)?
+        #' @param strict `logical` strict superset (>) or just superset (>=)?
         #' @return `TRUE` if this is superset of `s`, otherwise `FALSE`
         is.superset = function(s, strict = TRUE) {
             if (!inherits(s, data.class(self))) {
@@ -140,6 +142,11 @@ Set <- R6::R6Class("Set",
                 res$add(elem)
             }
             res
+        }
+    ),
+    private = list(
+        get_compare_fun = function() {
+            sets::matchfun(function(x, y) isTRUE(all.equal(x, y)))
         }
     ),
     lock_class = TRUE

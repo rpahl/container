@@ -111,13 +111,16 @@ LABEL.interval <- LABEL.set
 function(x, limit, ...)
 {
     l <- length(x)
-    if (l < limit) {
-        if (is.integer(x))
-            format(ifelse(is.na(x), x, paste0(x, "L")), ...)
-        else
-            format(x, ...)
-    } else
-        paste0("<<", class(x)[1L], "(", l, ")>>")
+    if (l == 0)
+        return(paste0(class(x)[1L], "()"))
+
+    if (l >= limit)
+        return(paste0("<<", class(x)[1L], "(", l, ")>>"))
+
+    if (is.integer(x))
+        format(ifelse(is.na(x), x, paste0(x, "L")), ...)
+    else
+        format(x, ...)
 }
 
 
