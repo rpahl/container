@@ -36,11 +36,6 @@ expect_equal(as.list(s$values()), list(NULL, list()))
 s$add(numeric(0))
 expect_equal(as.list(s$values()), list(NULL, list(), numeric(0)))
 
-# Output of zero-length elements looks as expected
-out = utils::capture.output(s)
-expect_equal(out[[1]], "<<Set(3)>> ")
-expect_equal(out[[2]], "[<<NULL>>, list(), numeric()]")
-
 # -----
 # clear
 # -----
@@ -119,6 +114,80 @@ expect_true(s$popitem() %in% 1:2)
 expect_equal(s$length(), 0)
 expect_error(s$popitem())
 
+# -----
+# print
+# -----
+out = capture.output(print(Set$new()))
+expect_equal(out[[1]], "Set()")
+expect_equal(out[[2]], "[]")
+
+s = Set$new(1, 1L, NULL, integer())
+out = capture.output(print(s))
+expect_equal(out[[1]], "<<Set(4)>>")
+expect_equal(out[[2]], "[<<NULL>>, integer(), 1L, 1]")
+
+s2 = Set$new(list(), 3:5, s)
+out = capture.output(print(s2))
+expect_equal(out[[1]], "<<Set(3)>>")
+expect_equal(out[[2]], "[list(), <<integer(3)>>, {<<NULL>>, integer(), 1L, 1}]")
+
+# Increasing the size of the first Set alters the output
+s$add(1)$add(2)$add(3)
+out = capture.output(print(s2))
+expect_equal(out[[1]], "<<Set(3)>>")
+expect_equal(out[[2]], "[list(), <<integer(3)>>, <<Set(6)>>]")
+
+s2$add(data.frame(A = 1:3, B = 3:1))
+out = capture.output(print(s2))
+expect_equal(out[[1]], "<<Set(4)>>")
+expect_equal(out[[2]],
+             "[list(), <<data.frame(3x2)>>, <<integer(3)>>, <<Set(6)>>]")
+
+
+# -------
+# replace
+# -------
+# Signals an error if elem does not exist
+expect_error(Set$new()$replace(0, 1))
+expect_error(Set$new()$replace(NULL, 1))
+expect_error(Set$new(0)$replace(1, 2))
+
+# Replacing to an existing element, reduces the set
+s = Set$new(1, 2)
+s$replace(2, 1)
+expect_equal(s, Set$new(1))
+s$replace(1, NULL)
+expect_equal(s, Set$new(NULL))
+
+# Replacing to non-existing element works as expected
+s = Set$new(1, 2, 3)
+s$replace(1, 4)
+expect_equal(s, Set$new(2, 3, 4))
+
+s = Set$new(1, 1L, "1")
+s$replace(1, 0)
+expect_equal(s, Set$new(0, 1L, "1"))
+
+# Replace works on special elements of basic type
+s = Set$new(NULL, numeric(0), list())
+s$replace(NULL, 0)
+expect_equal(s, Set$new(0, numeric(), list()))
+s$replace(numeric(0), 0)
+expect_equal(s, Set$new(0, list()))
+s$replace(list(), 0)
+expect_equal(s, Set$new(0))
+
+# Replace works on non-basic typed objects
+S1 = Set$new(1, "1")
+S2 = Set$new(2, "2")
+Co = Container$new(NULL)
+s = Set$new(S1, S2, Co)
+s$replace(S1, 1)
+expect_equal(s, Set$new(1, S2, Co))
+s$replace(S2, 2)
+expect_equal(s, Set$new(1, 2, Co))
+s$replace(Co, 0)
+expect_equal(s, Set$new(0, 1, 2))
 
 # ------
 # values
@@ -202,7 +271,7 @@ expect_true(s123$is_equal(s123))
 expect_false(s0$is_equal(s1))
 expect_false(s1$is_equal(s0))
 
-expect_false(s0$is_subset(s0))
+expect_true(s0$is_subset(s0))
 expect_true(s1$is_subset(s1))
 expect_false(s1$is_subset(s0))
 expect_true(s0$is_subset(s1))

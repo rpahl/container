@@ -21,6 +21,7 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \item \href{#method-add}{\code{Set$add()}}
 \item \href{#method-discard}{\code{Set$discard()}}
 \item \href{#method-has}{\code{Set$has()}}
+\item \href{#method-replace}{\code{Set$replace()}}
 \item \href{#method-diff}{\code{Set$diff()}}
 \item \href{#method-intersect}{\code{Set$intersect()}}
 \item \href{#method-union}{\code{Set$union()}}
@@ -126,6 +127,28 @@ Determine if \code{Set} has some element.
 }
 \subsection{Returns}{
 \code{TRUE} of \code{Set} contains \code{elem} else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-replace"></a>}}
+\if{latex}{\out{\hypertarget{method-replace}{}}}
+\subsection{Method \code{replace()}}{
+Replace one element by another element
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$replace(old, new)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{old}}{element to be replaced}
+
+\item{\code{new}}{element to be put instead of old}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Set} object
 }
 }
 \if{html}{\out{<hr>}}

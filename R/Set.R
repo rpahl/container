@@ -40,6 +40,16 @@ Set <- R6::R6Class("Set",
             sets::cset_contains_element(self$values(), elem)
         },
 
+        #' @description Replace one element by another element
+        #' @param old element to be replaced
+        #' @param new element to be put instead of old
+        #' @return invisibly returns the `Set` object
+        replace = function(old, new) {
+            self$delete(old)
+            self$add(new)
+            invisible(self)
+        },
+
         #' @description `Set` difference
         #' @param s `Set` object to 'subtract'
         #' @return new `Set` being the set difference between this and s.
