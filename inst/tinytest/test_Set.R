@@ -185,3 +185,29 @@ expect_equal(s12$union(s23), s123)
 expect_equal(s23$union(s12), s123)
 expect_equal(s12$union(s1_3), s123)
 
+expect_true(original_sets_were_not_altered)
+
+# comparison
+expect_error(s1$is_equal(2))
+expect_error(s1$is_equal(NULL))
+expect_error(s1$is_equal(NA))
+
+expect_true(s0$is_equal(s0))
+expect_true(s123$is_equal(s123))
+expect_false(s0$is_equal(s1))
+expect_false(s1$is_equal(s0))
+
+expect_false(s0$is_subset(s0))
+expect_true(s1$is_subset(s1))
+expect_false(s1$is_subset(s0))
+expect_true(s0$is_subset(s1))
+expect_true(s1$is_subset(s12))
+expect_false(s12$is_subset(s1))
+
+expect_true(s0$is_proper_subset(s1))
+expect_true(s1$is_proper_subset(s12))
+expect_false(s0$is_proper_subset(s0))
+expect_false(s1$is_proper_subset(s1))
+
+expect_true(original_sets_were_not_altered)
+

@@ -3,7 +3,6 @@
 #' @description The [Set()] is considered and implemented as a specialized
 #' [Container()], that is, elements are always unique in the [Container()] and
 #' it provides typical set operations such as `union` and `intersect`.
-#' @author Roman Pahl
 #' @seealso [Container()], [set()]
 #' @export
 Set <- R6::R6Class("Set",
@@ -13,7 +12,6 @@ Set <- R6::R6Class("Set",
         #' @param ... initial elements put into the `Set`
         #' @return invisibly returns the `Set`
         initialize = function(...) {
-
             private$elems = sets::set()
 
             for (elem in list(...))
@@ -44,7 +42,6 @@ Set <- R6::R6Class("Set",
             sets::cset_contains_element(self$values(), elem)
         },
 
-
         #' @description `Set` difference
         #' @param s `Set` object to 'subtract'
         #' @return new `Set` being the set difference between this and s.
@@ -67,6 +64,30 @@ Set <- R6::R6Class("Set",
         union = function(s) {
             private$.verify_same_class(s)
             Set$new(sets::set_union(self$values(), s$values()))
+        },
+
+        #' @description `Set` equality
+        #' @param s `Set` object to compare against
+        #' @return `TRUE` if this is equal to `s`, otherwise `FALSE`
+        is_equal = function(s) {
+            private$.verify_same_class(s)
+            sets::set_is_equal(self$values(), s$values())
+        },
+
+        #' @description `Set` proper subset
+        #' @param s `Set` object to compare against
+        #' @return `TRUE` if this is subset of `s`, otherwise `FALSE`
+        is_subset = function(s) {
+            private$.verify_same_class(s)
+            sets::set_is_subset(self$values(), s$values())
+        },
+
+        #' @description `Set` subset
+        #' @param s `Set` object to compare against
+        #' @return `TRUE` if this is proper subset of `s`, otherwise `FALSE`
+        is_proper_subset = function(s) {
+            private$.verify_same_class(s)
+            sets::set_is_proper_subset(self$values(), s$values())
         }
     ),
     lock_class = TRUE

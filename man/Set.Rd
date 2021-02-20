@@ -11,9 +11,6 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=set]{set()}}
 }
-\author{
-Roman Pahl
-}
 \section{Super classes}{
 \code{\link[container:Iterable]{container::Iterable}} -> \code{\link[container:Container]{container::Container}} -> \code{Set}
 }
@@ -27,6 +24,9 @@ Roman Pahl
 \item \href{#method-diff}{\code{Set$diff()}}
 \item \href{#method-intersect}{\code{Set$intersect()}}
 \item \href{#method-union}{\code{Set$union()}}
+\item \href{#method-is_equal}{\code{Set$is_equal()}}
+\item \href{#method-is_subset}{\code{Set$is_subset()}}
+\item \href{#method-is_proper_subset}{\code{Set$is_proper_subset()}}
 \item \href{#method-clone}{\code{Set$clone()}}
 }
 }
@@ -186,6 +186,66 @@ new \code{Set} as a result of the intersection of this and s.
 }
 \subsection{Returns}{
 new \code{Set} being the result of the union of this and s.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_equal"></a>}}
+\if{latex}{\out{\hypertarget{method-is_equal}{}}}
+\subsection{Method \code{is_equal()}}{
+\code{Set} equality
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$is_equal(s)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{s}}{\code{Set} object to compare against}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if this is equal to \code{s}, otherwise \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_subset"></a>}}
+\if{latex}{\out{\hypertarget{method-is_subset}{}}}
+\subsection{Method \code{is_subset()}}{
+\code{Set} proper subset
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$is_subset(s)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{s}}{\code{Set} object to compare against}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if this is subset of \code{s}, otherwise \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_proper_subset"></a>}}
+\if{latex}{\out{\hypertarget{method-is_proper_subset}{}}}
+\subsection{Method \code{is_proper_subset()}}{
+\code{Set} subset
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$is_proper_subset(s)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{s}}{\code{Set} object to compare against}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if this is proper subset of \code{s}, otherwise \code{FALSE}
 }
 }
 \if{html}{\out{<hr>}}
