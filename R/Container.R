@@ -74,10 +74,10 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Search for `elem` in `Container` and remove it.
-        #' @note The operation is done as last in first out (LIFO), that is,
+        #' The operation is performed as 'last in first out' (LIFO), that is,
         #' if the container contains two or more of the same element, the one
         #' that was entered last into the container will be removed first.
-        #' @param elem element to be discarded from the `Container`. If not
+        #' @param elem element to be deleted from the `Container`. If not
         #' found, an error is signaled.
         #' @return invisibly returns the `Container` object
         delete = function(elem) {
@@ -89,7 +89,7 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Search for `elem` in `Container` and remove it.
-        #' @note The operation is done as last in first out (LIFO), that is,
+        #' The operation is performed as 'last in first out' (LIFO), that is,
         #' if the container contains two or more of the same element, the one
         #' that was entered last into the container will be removed first.
         #' @param elem element to be discarded from the `Container`. If not
@@ -153,12 +153,29 @@ Container <- R6::R6Class("Container",
         #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
         print = function(left = "[", right = "]", len = 6L, ...) {
-            cat(LABEL(self, limit = 0), "\n")
+            cat(LABEL(self, limit = 0), "\n", sep = "")
             x = .format_values(self$values(),
                                left = left, right = right,
                                limit = len, ...)
 
             writeLines(strwrap(format(x, ...), exdent = 1L))
+            invisible(self)
+        },
+
+        #' @description Replace one element by another element
+        #' @param old element to be replaced
+        #' @param new element to be put instead of old
+        #' @return invisibly returns the `Container` object
+        replace = function(old, new) {
+
+            pos <- private$.get_position(old)
+
+            hasElem = !is.na(pos)
+            if (!hasElem)
+                stop(deparse(substitute(old)), " is not in ", data.class(self))
+
+            new_elem = if (length(new)) new else list(new)
+            private$elems[[pos]] <- new
             invisible(self)
         },
 

@@ -10,15 +10,6 @@ member functions to insert, delete and access elements from the container.
 While it can be used to create \code{\link[=Container]{Container()}} objects, it mainly serves as the
 base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}.
 }
-\note{
-The operation is done as last in first out (LIFO), that is,
-if the container contains two or more of the same element, the one
-that was entered last into the container will be removed first.
-
-The operation is done as last in first out (LIFO), that is,
-if the container contains two or more of the same element, the one
-that was entered last into the container will be removed first.
-}
 \seealso{
 \code{\link[=Iterable]{Iterable()}}, \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}
 }
@@ -42,6 +33,7 @@ Roman Pahl
 \item \href{#method-peekitem}{\code{Container$peekitem()}}
 \item \href{#method-popitem}{\code{Container$popitem()}}
 \item \href{#method-print}{\code{Container$print()}}
+\item \href{#method-replace}{\code{Container$replace()}}
 \item \href{#method-remove}{\code{Container$remove()}}
 \item \href{#method-size}{\code{Container$size()}}
 \item \href{#method-type}{\code{Container$type()}}
@@ -116,6 +108,9 @@ invisibly returns the cleared \code{Container} object
 \if{latex}{\out{\hypertarget{method-delete}{}}}
 \subsection{Method \code{delete()}}{
 Search for \code{elem} in \code{Container} and remove it.
+The operation is performed as 'last in first out' (LIFO), that is,
+if the container contains two or more of the same element, the one
+that was entered last into the container will be removed first.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem)}\if{html}{\out{</div>}}
 }
@@ -123,7 +118,7 @@ Search for \code{elem} in \code{Container} and remove it.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be discarded from the \code{Container}. If not
+\item{\code{elem}}{element to be deleted from the \code{Container}. If not
 found, an error is signaled.}
 }
 \if{html}{\out{</div>}}
@@ -137,6 +132,9 @@ invisibly returns the \code{Container} object
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
 Search for \code{elem} in \code{Container} and remove it.
+The operation is performed as 'last in first out' (LIFO), that is,
+if the container contains two or more of the same element, the one
+that was entered last into the container will be removed first.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$discard(elem)}\if{html}{\out{</div>}}
 }
@@ -249,6 +247,28 @@ Print object representation
 \item{\code{len}}{\code{integer} max number of elements per group}
 
 \item{\code{...}}{further arguments passed to \code{\link[=format]{format()}}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-replace"></a>}}
+\if{latex}{\out{\hypertarget{method-replace}{}}}
+\subsection{Method \code{replace()}}{
+Replace one element by another element
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$replace(old, new)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{old}}{element to be replaced}
+
+\item{\code{new}}{element to be put instead of old}
 }
 \if{html}{\out{</div>}}
 }
