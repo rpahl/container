@@ -9,6 +9,7 @@
 \alias{is.container}
 \alias{as.list.Container}
 \alias{length.Container}
+\alias{names.Container}
 \alias{unpack}
 \alias{iter.Container}
 \alias{+.Container}
@@ -22,7 +23,7 @@
 \alias{has.Container}
 \title{A sequence Container}
 \usage{
-container(..., keep_names = FALSE)
+container(...)
 
 as.container(x)
 
@@ -31,6 +32,8 @@ is.container(x)
 \method{as.list}{Container}(x)
 
 \method{length}{Container}(x)
+
+\method{names}{Container}(x)
 
 unpack(x)
 
@@ -57,12 +60,8 @@ unpack(x)
 \arguments{
 \item{...}{initial elements put into the \code{Container}.}
 
-\item{keep_names}{\code{logical} if TRUE, keeps names of passed elements.}
-
 \item{x}{any \code{R} object for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}} and the
 operators. An object of class \code{Container} for the \code{S3} methods.}
-
-\item{y}{any iterable \code{R} object}
 
 \item{elem}{some element of any type}
 
@@ -77,13 +76,6 @@ likley to use the corresponding \link[=Deque]{deque()}, \link[=Set]{set()}, and 
 create objects of the respective derived classes.
 }
 \details{
-Methods inherited from \code{\link[=Iterable]{Iterable()}}:
-\itemize{
-\item \code{iter(x)} returns an \code{\link[=Iterator]{Iterator()}} object to iterate over \code{x}. Note that
-this works on a copy of \code{x}, that is, changing \code{x} after the iterator was
-created will not be accessible by the iterator.
-}
-
 Container methods:
 \itemize{
 \item \code{container(...)} initializes and returns a \code{\link[=Container]{Container()}} object.
@@ -103,12 +95,16 @@ and \code{FALSE} otherwise.
 }
 
 \itemize{
-\item \code{length(x)} returns the number of elements in container \code{x}.
+\item \code{length(x)} returns the number of elements contained in \code{x}.
 }
 
 \itemize{
-\item \code{unpack(x)} recursively unpacks any nested container objects (or
-lists of nested containers) into a flat list.
+\item \code{names(x)} returns the names of the elements contained in \code{x}.
+}
+
+\itemize{
+\item \code{unpack(x)} recursively unpacks any (possibly nested) recursive
+structure into a flattened list.
 }
 
 \itemize{

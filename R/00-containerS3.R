@@ -6,34 +6,23 @@
 #' base class for [Deque()], [Set()], and [Dict()] objects, users are more
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of the respective derived classes.
-#' @details
-#' Methods inherited from [Iterable()]:
-#' * `iter(x)` returns an [Iterator()] object to iterate over `x`. Note that
-#' this works on a copy of `x`, that is, changing `x` after the iterator was
-#' created will not be accessible by the iterator.
 #' @param ... initial elements put into the `Container`.
-#' @param keep_names `logical` if TRUE, keeps names of passed elements.
 #' @param elem some element of any type
 #' @param x any `R` object for [as.container()] and [is.container()] and the
 #' operators. An object of class `Container` for the `S3` methods.
-#' @param y any iterable `R` object
 #' @name ContainerS3
 #' @seealso For the class documentation see [Container()] and it's derived
 #' classes [Deque()], [Det()], and [Dict()].
 NULL
-
 
 #' @rdname ContainerS3
 #' @details
 #' Container methods:
 #' * `container(...)` initializes and returns a [Container()] object.
 #' @export
-container <- function(..., keep_names = FALSE) {
-    if (missing(keep_names)) {
-        Container$new(...)
-    } else {
-        Container$new(..., keep_names = keep_names)
-    }
+container <- function(...)
+{
+    Container$new(...)
 }
 
 #' @rdname ContainerS3
@@ -41,14 +30,8 @@ container <- function(..., keep_names = FALSE) {
 #' @export
 as.container <- function(x)
 {
-    if (length(x) == 0) return(container())
-    UseMethod("as.container")
-}
-
-#' @export
-as.container.default <- function(x)
-{
-    do.call(container, args = as.list(x))
+    elems = if (length(x) == 0) list(x) else x
+    do.call(container, args = as.list(elems))
 }
 
 #' @rdname ContainerS3
@@ -65,28 +48,32 @@ is.container <- function(x) inherits(x, "Container")
 
 
 #' @rdname ContainerS3
-#' @details * `length(x)` returns the number of elements in container `x`.
+#' @details * `length(x)` returns the number of elements contained in `x`.
 #' @export
 length.Container <- function(x) x$length()
 
+#' @rdname ContainerS3
+#' @details * `names(x)` returns the names of the elements contained in `x`.
+#' @export
+names.Container <- function(x) names(x$values())
+
 
 #' @rdname ContainerS3
-#' @details * `unpack(x)` recursively unpacks any nested container objects (or
-#' lists of nested containers) into a flat list.
+#' @details * `unpack(x)` recursively unpacks any (possibly nested) recursive
+#' structure into a flattened list.
 #' @export
-unpack <- function(x)
-{
-    res <- if (is.container(x)) {
-        unlist(unpack(as.list(x)))
-    } else {
-        elems = unlist(x)
-        hasContainer <- sapply(elems, is.container)
-        if (any(hasContainer)) {
-            unlist(lapply(elems, unpack))
-        } else {
-            unlist(elems)
-        }
+unpack = function(x) {
+
+    .unpack = function(x) {
+        if (is.container(x))
+            rapply(as.list(x), f = .unpack)
+        else
+            unlist(x)
     }
-    res
+
+    if (is.recursive(x))
+        rapply(as.list(x), f = .unpack)
+    else
+        x
 }
 
