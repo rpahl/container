@@ -73,12 +73,10 @@ Container <- R6::R6Class("Container",
             self$initialize()
         },
 
-        #' @description Search for `elem` in `Container` and remove it.
-        #' The operation is performed as 'last in first out' (LIFO), that is,
-        #' if the container contains two or more of the same element, the one
-        #' that was entered last into the container will be removed first.
-        #' @param elem element to be deleted from the `Container`. If not
-        #' found, an error is signaled.
+        #' @description Search for occurence(s) of `elem` in `Container` and
+        #' remove all of them. If the `elem` does not exist, an error is
+        #' signaled.
+        #' @param elem element to be removed from the `Container`.
         #' @return invisibly returns the `Container` object
         delete = function(elem) {
             elem_str = deparse(substitute(elem))
@@ -88,18 +86,15 @@ Container <- R6::R6Class("Container",
             self$discard(elem)
         },
 
-        #' @description Search for `elem` in `Container` and remove it.
-        #' The operation is performed as 'last in first out' (LIFO), that is,
-        #' if the container contains two or more of the same element, the one
-        #' that was entered last into the container will be removed first.
+        #' @description Search for occurence(s) of `elem` in `Container` and
+        #' remove all of them.
         #' @param elem element to be discarded from the `Container`. If not
-        #' found, the operation is ignored and the object *not* altered.
+        #' found, the operation is ignored and the is object *not* altered.
         #' @return invisibly returns the `Container` object
         discard = function(elem) {
-            pos <- private$.get_position(elem)
-            hasElem = !is.na(pos)
 
-            if (hasElem) private$elems <- .subset(private$elems, -pos)
+            f = Negate(private$get_compare_fun(elem))
+            private$elems = Filter(f, private$elems)
 
             invisible(self)
         },

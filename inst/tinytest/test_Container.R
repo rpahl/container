@@ -11,6 +11,7 @@ expect_equal(co$length(), 1)
 co <- Container$new(environment(), foo = identity)
 expect_equal(co$length(), 2)
 
+# can be initialized such that names are kept
 co <- Container$new(A = 1, B = 2)
 expect_true(is.null(names(co$values())))
 co <- Container$new(A = 1, B = 2, keep_names = TRUE)
@@ -71,6 +72,13 @@ names(x) <- "x"
 co$add(x)
 expect_equal(co$values(), list(c(x = 1)))
 
+# -----
+# clear
+# -----
+expect_equal(Container$new()$clear(), Container$new())
+expect_equal(Container$new(1, 2)$clear(), Container$new())
+expect_equal(Container$new(a = 1, b = 2)$clear(), Container$new())
+
 # ------
 # delete
 # ------
@@ -89,10 +97,10 @@ expect_error(co$delete(5), "5 is not in Container")
 li = list(1, 2)
 expect_error(co$delete(li), "li is not in Container")
 
-# Elements are deleted according to LIFO principle
+# Multiple elements are all deleted
 co <- Container$new(1, 2, 1)
 co$delete(1)
-expect_equal(co, Container$new(1, 2))
+expect_equal(co, Container$new(2))
 
 # -------
 # discard
@@ -110,16 +118,14 @@ expect_error(co$discard(), 'argument "elem" is missing, with no default')
 co <- Container$new(1)
 expect_silent(co$discard(5))
 
-# Elements are discarded according to LIFO principle
+# Multiple elements are all discarded
 co <- Container$new(1, 2, 1)
 co$discard(1)
-expect_equal(co, Container$new(1, 2))
-
+expect_equal(co, Container$new(2))
 
 # -----
 # empty
 # -----
-
 # it can be checked whether the Container is empty
 expect_true(Container$new()$empty())
 expect_false(Container$new(numeric())$empty())
@@ -128,12 +134,9 @@ expect_false(Container$new(1)$empty())
 # ---
 # has
 # ---
-
-# it can be determined whether Container contains a certain element
-co <- Container$new(1L)
-expect_true(co$has(1L))
-expect_false(co$has(7L))
-expect_true(co$add(7L)$has(7L))
+co <- Container$new()
+expect_false(co$has(NULL))
+expect_true(co$add(NULL)$has(NULL))
 
 foo <- function() print("foo")
 co <- Container$new(mean, foo, identity)
@@ -143,16 +146,92 @@ expect_false(co$has(median))
 expect_true(co$has(function() print("foo")))
 expect_false(co$has(function() print("bar")))
 
+co = Container$new(1, "1", integer(), NA)
+expect_true(co$has(1))
+expect_true(co$has("1"))
+expect_true(co$has(integer()))
+expect_true(co$has(NA))
+expect_false(co$has(as.numeric(NA)))
 
+# Due to internal all.equal compare function the following are also true.
+# This is intended - maybe allow to let user set compare function in a future
+# version of the package.
+expect_true(co$has(numeric()))
+expect_true(co$has(1L))
+
+# ------
+# length
+# ------
 # the length of a Container can be retrieved
 expect_equal(Container$new()$length(), 0)
 co <- Container$new(1, 2, 3)
 expect_equal(co$length(), length(co$values()))
 
+# --------
+# peekitem
+# --------
+co = Container$new(1, 2, 3)
+expect_true(co$peekitem() %in% 1:3)
+expect_equal(co$length(), 3)
+expect_true(is.null(Container$new()$peekitem()))
+
+
+# -------
+# popitem
+# -------
+co = Container$new(1, 2)
+expect_true(co$popitem() %in% 1:2)
+expect_equal(co$length(), 1)
+expect_true(co$popitem() %in% 1:2)
+expect_equal(co$length(), 0)
+expect_error(co$popitem())
+
+# -----
+# print
+# -----
+out = capture.output(print(Container$new()))
+expect_equal(out[[1]], "Container()")
+expect_equal(out[[2]], "[]")
+
+co = Container$new(1, 1L, NULL, integer())
+out = capture.output(print(co))
+expect_equal(out[[1]], "<<Container(4)>>")
+expect_equal(out[[2]], "[1, 1L, <<NULL>>, integer()]")
+
+co2 = Container$new(list(), 3:5, co)
+out = capture.output(print(co2))
+expect_equal(out[[1]], "<<Container(3)>>")
+expect_equal(out[[2]], "[list(), <<integer(3)>>, [1, 1L, <<NULL>>, integer()]]")
+
+# Increasing the size of the first container alters the output
+co$add(1)$add(2)$add(3)
+out = capture.output(print(co2))
+expect_equal(out[[1]], "<<Container(3)>>")
+expect_equal(out[[2]], "[list(), <<integer(3)>>, <<Container(7)>>]")
+
+co2$add(data.frame(A = 1:3, B = 3:1))
+out = capture.output(print(co2))
+expect_equal(out[[1]], "<<Container(4)>>")
+expect_equal(out[[2]],
+             "[list(), <<integer(3)>>, <<Container(7)>>, <<data.frame(3x2)>>]")
+
+# -------
+# replace
+# -------
+
+
+
+
+# ------
+# values
+# ------
 # the data values of a Container can be retrieved
 expect_equal(Container$new()$values(), list())
-expect_equal(Container$new(1, 2, 3)$values(), list(1, 2, 3))
+expect_equal(Container$new(1, 2, NULL)$values(), list(1, 2, NULL))
 
+# -----
+# clone
+# -----
 # Container objects provide reference semantics but can also be cloned
 c1 <- Container$new(1, 2, 3)
 c2 <- c1
@@ -167,6 +246,11 @@ expect_true(identical(c1, c2))
 expect_true(c1$length() < cc$length())
 
 
+
+
+# --------
+# Iterator
+# --------
 # Iterator can be constructed from Container
 v <- 1:5
 co <- as.container(v)
@@ -175,7 +259,14 @@ sum <- 0
 while(it$has_next()) sum <- sum + it$get_next()
 expect_equal(sum(v), sum(as.integer(co$values())))
 
-# verify that type() is deprecated
-co <- Container$new()
+
+# ----------
+# deprecated
+# ----------
+# verify that functions are deprecated
+co <- Container$new(1L)
+expect_warning(co$remove(), "deprecated")
+expect_warning(co$size(), "deprecated")
 expect_warning(co$type(), "deprecated")
+
 

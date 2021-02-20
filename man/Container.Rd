@@ -107,10 +107,9 @@ invisibly returns the cleared \code{Container} object
 \if{html}{\out{<a id="method-delete"></a>}}
 \if{latex}{\out{\hypertarget{method-delete}{}}}
 \subsection{Method \code{delete()}}{
-Search for \code{elem} in \code{Container} and remove it.
-The operation is performed as 'last in first out' (LIFO), that is,
-if the container contains two or more of the same element, the one
-that was entered last into the container will be removed first.
+Search for occurence(s) of \code{elem} in \code{Container} and
+remove all of them. If the \code{elem} does not exist, an error is
+signaled.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem)}\if{html}{\out{</div>}}
 }
@@ -118,8 +117,7 @@ that was entered last into the container will be removed first.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be deleted from the \code{Container}. If not
-found, an error is signaled.}
+\item{\code{elem}}{element to be removed from the \code{Container}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -131,10 +129,8 @@ invisibly returns the \code{Container} object
 \if{html}{\out{<a id="method-discard"></a>}}
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
-Search for \code{elem} in \code{Container} and remove it.
-The operation is performed as 'last in first out' (LIFO), that is,
-if the container contains two or more of the same element, the one
-that was entered last into the container will be removed first.
+Search for occurence(s) of \code{elem} in \code{Container} and
+remove all of them.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$discard(elem)}\if{html}{\out{</div>}}
 }
@@ -143,7 +139,7 @@ that was entered last into the container will be removed first.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{elem}}{element to be discarded from the \code{Container}. If not
-found, the operation is ignored and the object \emph{not} altered.}
+found, the operation is ignored and the is object \emph{not} altered.}
 }
 \if{html}{\out{</div>}}
 }
