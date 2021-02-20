@@ -163,14 +163,15 @@ Container <- R6::R6Class("Container",
         #' @return invisibly returns the `Container` object
         replace = function(old, new) {
 
-            pos <- private$.get_position(old)
+            is_matching_old = private$get_compare_fun(old)
+            pos = which(sapply(self$values(), is_matching_old))
 
-            hasElem = !is.na(pos)
+            hasElem = length(pos) > 0
             if (!hasElem)
                 stop(deparse(substitute(old)), " is not in ", data.class(self))
 
             new_elem = if (length(new)) new else list(new)
-            private$elems[[pos]] <- new
+            private$elems <- replace(self$values(), pos, new_elem)
             invisible(self)
         },
 
@@ -225,7 +226,6 @@ Container <- R6::R6Class("Container",
     ),
     lock_class = TRUE
 )
-
 
 
 .create_object_string <- function(x, x.names, name_seps, ...)
