@@ -218,6 +218,11 @@ expect_equal(out[[2]],
 # -------
 # replace
 # -------
+# Signals an error if elem does not exist
+expect_error(Container$new()$replace(0, 1))
+expect_error(Container$new()$replace(NULL, 1))
+expect_error(Container$new(0)$replace(1, 2))
+
 # Multiple occurcenes are replaced at once
 co = Container$new(1, 2, 1, 3)
 co$replace(1, 0)

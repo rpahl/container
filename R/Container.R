@@ -142,16 +142,12 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Print object representation
-        #' @param left `character` character printed as open bracket
-        #' @param right `character` character printed as closing bracket
         #' @param len `integer` max number of elements per group
         #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
-        print = function(left = "[", right = "]", len = 6L, ...) {
+        print = function(len = 6L, ...) {
             cat(LABEL(self, limit = 0), "\n", sep = "")
-            x = .format_values(self$values(),
-                               left = left, right = right,
-                               limit = len, ...)
+            x = format(self, limit = len, ...)
 
             writeLines(strwrap(format(x, ...), exdent = 1L))
             invisible(self)
@@ -256,12 +252,17 @@ format.Container <- function(x, ...)
     .format_values(values(x), left = "[", right = "]", ...)
 }
 
-format.Set <- function(x, ...)
+format.Dict <- function(x, ...)
 {
-    .format_values(values(x), left = "{", right = "}", ...)
+    .format_values(values(x), left = "[", right = "]", ...)
 }
 
-format.Dict <- function(x, ...)
+format.Deque <- function(x, ...)
+{
+    .format_values(values(x), left = "|", right = "|", ...)
+}
+
+format.Set <- function(x, ...)
 {
     .format_values(values(x), left = "{", right = "}", ...)
 }

@@ -119,29 +119,29 @@ expect_error(s$popitem())
 # -----
 out = capture.output(print(Set$new()))
 expect_equal(out[[1]], "Set()")
-expect_equal(out[[2]], "[]")
+expect_equal(out[[2]], "{}")
 
 s = Set$new(1, 1L, NULL, integer())
 out = capture.output(print(s))
 expect_equal(out[[1]], "<<Set(4)>>")
-expect_equal(out[[2]], "[<<NULL>>, integer(), 1L, 1]")
+expect_equal(out[[2]], "{<<NULL>>, integer(), 1L, 1}")
 
 s2 = Set$new(list(), 3:5, s)
 out = capture.output(print(s2))
 expect_equal(out[[1]], "<<Set(3)>>")
-expect_equal(out[[2]], "[list(), <<integer(3)>>, {<<NULL>>, integer(), 1L, 1}]")
+expect_equal(out[[2]], "{list(), <<integer(3)>>, {<<NULL>>, integer(), 1L, 1}}")
 
 # Increasing the size of the first Set alters the output
 s$add(1)$add(2)$add(3)
 out = capture.output(print(s2))
 expect_equal(out[[1]], "<<Set(3)>>")
-expect_equal(out[[2]], "[list(), <<integer(3)>>, <<Set(6)>>]")
+expect_equal(out[[2]], "{list(), <<integer(3)>>, <<Set(6)>>}")
 
 s2$add(data.frame(A = 1:3, B = 3:1))
 out = capture.output(print(s2))
 expect_equal(out[[1]], "<<Set(4)>>")
 expect_equal(out[[2]],
-             "[list(), <<data.frame(3x2)>>, <<integer(3)>>, <<Set(6)>>]")
+             "{list(), <<data.frame(3x2)>>, <<integer(3)>>, <<Set(6)>>}")
 
 
 # -------
