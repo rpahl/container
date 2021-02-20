@@ -11,14 +11,9 @@ expect_equal(co$length(), 1)
 co <- Container$new(environment(), foo = identity)
 expect_equal(co$length(), 2)
 
-# can be initialized such that names are kept
+# initialized names are kept
 co <- Container$new(A = 1, B = 2)
-expect_true(is.null(names(co$values())))
-co <- Container$new(A = 1, B = 2, keep_names = TRUE)
 expect_equal(names(co$values()), c("A", "B"))
-
-expect_equal(Container$new(keep_names = TRUE),
-             Container$new(keep_names = FALSE))
 
 
 # ---
@@ -30,21 +25,14 @@ co$add(1)
 expect_equal(co$values(), list(1))
 
 
-# NULL and empty lists can be added to and deleted from a Container
+# NULL and empty lists can be added to a Container
 co <- Container$new()
 co$add(NULL)
 co$add(list())
 co$add(0)
 co$add(NULL)
 co$add(list())
-
-expect_equal(co$length(), 5)
-co$delete(NULL)
-co$delete(list())
-expect_equal(co$length(), 3)
-co$delete(list())
-co$delete(NULL)
-expect_equal(co$values(), list(0))
+expect_equal(co$values(), list(NULL, list(), 0, NULL, list()))
 
 # non-trivial objects are added correctly
 v <- 1:10

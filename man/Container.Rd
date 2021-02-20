@@ -54,15 +54,13 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$new(..., keep_names = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$new(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{...}}{initial elements put into the \code{Container}}
-
-\item{\code{keep_names}}{\code{logical} if TRUE, keeps names of passed elements}
 }
 \if{html}{\out{</div>}}
 }
@@ -230,16 +228,12 @@ over a \code{Container} as often used in set algorithms.
 \subsection{Method \code{print()}}{
 Print object representation
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$print(left = "[", right = "]", len = 6L, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$print(len = 6L, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{left}}{\code{character} character printed as open bracket}
-
-\item{\code{right}}{\code{character} character printed as closing bracket}
-
 \item{\code{len}}{\code{integer} max number of elements per group}
 
 \item{\code{...}}{further arguments passed to \code{\link[=format]{format()}}}
