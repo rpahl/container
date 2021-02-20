@@ -13,7 +13,12 @@ Set <- R6::R6Class("Set",
         #' @param ... initial elements put into the `Set`
         #' @return invisibly returns the `Set`
         initialize = function(...) {
-            private$elems = sets::set(...)
+
+            private$elems = sets::set()
+
+            for (elem in list(...))
+                self$add(elem)
+
             invisible(self)
         },
 
