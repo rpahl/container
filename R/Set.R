@@ -12,11 +12,9 @@ Set <- R6::R6Class("Set",
         #' @param ... initial elements put into the `Set`
         #' @return invisibly returns the `Set`
         initialize = function(...) {
-            private$elems = sets::set()
 
-            for (elem in list(...))
-                self$add(elem)
-
+            super$initialize(...)
+            private$elems = sets::as.set(self$values())
             invisible(self)
         },
 
@@ -47,7 +45,8 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` being the set difference between this and s.
         diff = function(s) {
             private$.verify_same_class(s)
-            Set$new(self$values() - s$values())
+            set_diff = self$values() - s$values()
+            private$create_from_list(as.list(set_diff))
         },
 
         #' @description `Set` intersection
@@ -55,7 +54,8 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` as a result of the intersection of this and s.
         intersect = function(s) {
             private$.verify_same_class(s)
-            Set$new(sets::set_intersection(self$values(), s$values()))
+            set_intersection = sets::set_intersection(self$values(), s$values())
+            private$create_from_list(as.list(set_intersection))
         },
 
         #' @description `Set` union
@@ -63,7 +63,8 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` being the result of the union of this and s.
         union = function(s) {
             private$.verify_same_class(s)
-            Set$new(sets::set_union(self$values(), s$values()))
+            set_union = sets::set_union(self$values(), s$values())
+            private$create_from_list(as.list(set_union))
         },
 
         #' @description `Set` equality
@@ -88,6 +89,15 @@ Set <- R6::R6Class("Set",
         is_proper_subset = function(s) {
             private$.verify_same_class(s)
             sets::set_is_proper_subset(self$values(), s$values())
+        }
+    ),
+    private = list(
+        create_from_list = function(x) {
+            stopifnot(is.list(x))
+            s = Set$new()
+            for (elem in x)
+                s$add(elem)
+            s
         }
     ),
     lock_class = TRUE

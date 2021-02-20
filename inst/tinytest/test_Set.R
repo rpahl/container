@@ -1,7 +1,7 @@
 # ----------
 # initialize
 # ----------
-s <- Set$new()
+s = Set$new()
 expect_true(s$empty())
 expect_equal(s$length(), 0)
 expect_false(s$has(NULL))
@@ -12,6 +12,11 @@ expect_equal(Set$new(1, 1, 1), Set$new(1))
 expect_equal(Set$new(NULL, NULL), Set$new(NULL))
 expect_equal(Set$new(mean, mean, 1, 2), Set$new(mean, 1, 2))
 
+# Set elements can be named
+s = Set$new(a = 1, b = 3)
+expect_equal(names(s$values()), NULL)
+s = Set$new(a = 1, b = 3, keep_names = TRUE)
+expect_equal(names(s$values()), c("a", "b"))
 
 # ---
 # add
