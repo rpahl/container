@@ -172,4 +172,16 @@ expect_equal(s12$intersect(s12), s12)
 
 expect_true(original_sets_were_not_altered)
 
+# union
+expect_error(s1$union(2))
+expect_error(s1$union(NULL))
+expect_error(s1$union(NA))
+
+expect_equal(s0$union(s0), s0)
+expect_equal(s0$union(s123), s123)
+expect_equal(s123$union(s0), s123)
+
+expect_equal(s12$union(s23), s123)
+expect_equal(s23$union(s12), s123)
+expect_equal(s12$union(s1_3), s123)
 

@@ -58,7 +58,7 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` as a result of the intersection of this and s.
         intersect = function(s) {
             private$.verify_same_class(s)
-            Set$new(sets::set_intersection(self$values(), s))
+            Set$new(sets::set_intersection(self$values(), s$values()))
         },
 
         #' @description `Set` union
@@ -66,6 +66,7 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` being the result of the union of this and s.
         union = function(s) {
             private$.verify_same_class(s)
+            Set$new(sets::set_union(self$values(), s$values()))
         }
     ),
     lock_class = TRUE
