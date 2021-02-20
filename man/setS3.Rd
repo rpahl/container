@@ -5,7 +5,6 @@
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
-\alias{\%e\%}
 \title{Set}
 \usage{
 setnew(...)
@@ -13,16 +12,12 @@ setnew(...)
 as.set(x, ...)
 
 is.set(x)
-
-e \%e\% x
 }
 \arguments{
 \item{...}{initial elements put into the \code{Set}.}
 
 \item{x}{any \code{R} object, or an object inheriting from class 'Set' or
 'Container' for the corresponding S3 methods.}
-
-\item{e}{some element of any type}
 }
 \value{
 \code{\link[=setnew]{setnew()}} returns a \code{\link[=Set]{Set()}} object.
@@ -31,8 +26,6 @@ e \%e\% x
 
 \code{\link[=is.set]{is.set()}} returns \code{TRUE} if its argument is a \code{\link[=Set]{Set()}} and \code{FALSE}
 otherwise.
-
-\verb{\%e\%} returns \code{TRUE} if e is an element of \code{x}
 }
 \description{
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized

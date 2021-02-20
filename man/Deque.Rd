@@ -142,7 +142,7 @@ element 'popped' from the right side of the \code{\link[=Deque]{Deque()}}
 \if{html}{\out{<a id="method-popleft"></a>}}
 \if{latex}{\out{\hypertarget{method-popleft}{}}}
 \subsection{Method \code{popleft()}}{
-Delete and return element from the right side of the \code{\link[=Deque]{Deque()}}.
+Delete and return element from the left side of the \code{\link[=Deque]{Deque()}}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Deque$popleft()}\if{html}{\out{</div>}}
 }

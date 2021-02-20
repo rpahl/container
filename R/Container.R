@@ -79,7 +79,6 @@ Container <- R6::R6Class("Container",
         #' that was entered last into the container will be removed first.
         #' @param elem element to be discarded from the `Container`. If not
         #' found, an error is signaled.
-        #' @param elem element to be discarded.
         #' @return invisibly returns the `Container` object
         delete = function(elem) {
             elem_str = deparse(substitute(elem))
@@ -95,7 +94,6 @@ Container <- R6::R6Class("Container",
         #' that was entered last into the container will be removed first.
         #' @param elem element to be discarded from the `Container`. If not
         #' found, the operation is ignored and the object *not* altered.
-        #' @param elem element to be discarded.
         #' @return invisibly returns the `Container` object
         discard = function(elem) {
             pos <- private$.get_position(elem)

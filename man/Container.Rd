@@ -10,6 +10,15 @@ member functions to insert, delete and access elements from the container.
 While it can be used to create \code{\link[=Container]{Container()}} objects, it mainly serves as the
 base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}.
 }
+\note{
+The operation is done as last in first out (LIFO), that is,
+if the container contains two or more of the same element, the one
+that was entered last into the container will be removed first.
+
+The operation is done as last in first out (LIFO), that is,
+if the container contains two or more of the same element, the one
+that was entered last into the container will be removed first.
+}
 \seealso{
 \code{\link[=Iterable]{Iterable()}}, \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}
 }
@@ -106,18 +115,16 @@ invisibly returns the cleared \code{Container} object
 \if{html}{\out{<a id="method-delete"></a>}}
 \if{latex}{\out{\hypertarget{method-delete}{}}}
 \subsection{Method \code{delete()}}{
-Find and delete element from \code{Container}
+Search for \code{elem} in \code{Container} and remove it.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem, right = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be deleted from the \code{Container}. If not
+\item{\code{elem}}{element to be discarded from the \code{Container}. If not
 found, an error is signaled.}
-
-\item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}
 }
 \if{html}{\out{</div>}}
 }
@@ -129,18 +136,16 @@ invisibly returns the \code{Container} object
 \if{html}{\out{<a id="method-discard"></a>}}
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
-Search for first \code{elem} in \code{Container} and, if found,
-delete it. If not found, the \code{Container} object is not altered.
+Search for \code{elem} in \code{Container} and remove it.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$discard(elem, right = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$discard(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be discarded.}
-
-\item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}
+\item{\code{elem}}{element to be discarded from the \code{Container}. If not
+found, the operation is ignored and the object \emph{not} altered.}
 }
 \if{html}{\out{</div>}}
 }
@@ -257,7 +262,7 @@ invisibly returns the \code{Container} object
 \subsection{Method \code{remove()}}{
 This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$remove(elem, right = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$remove(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -265,8 +270,6 @@ This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 \describe{
 \item{\code{elem}}{element to be deleted from the \code{Container}. If element
 is not found in the \code{Container}, an error is signaled.}
-
-\item{\code{right}}{\code{logical} if \code{TRUE}, search from right to left.}
 }
 \if{html}{\out{</div>}}
 }

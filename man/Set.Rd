@@ -22,11 +22,10 @@ Roman Pahl
 \itemize{
 \item \href{#method-new}{\code{Set$new()}}
 \item \href{#method-add}{\code{Set$add()}}
+\item \href{#method-discard}{\code{Set$discard()}}
+\item \href{#method-has}{\code{Set$has()}}
 \item \href{#method-diff}{\code{Set$diff()}}
 \item \href{#method-intersect}{\code{Set$intersect()}}
-\item \href{#method-is.equal}{\code{Set$is.equal()}}
-\item \href{#method-is.subset}{\code{Set$is.subset()}}
-\item \href{#method-is.superset}{\code{Set$is.superset()}}
 \item \href{#method-union}{\code{Set$union()}}
 \item \href{#method-clone}{\code{Set$clone()}}
 }
@@ -37,9 +36,7 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peekitem">}\href{../../container/html/Container.html#method-peekitem}{\code{container::Container$peekitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="popitem">}\href{../../container/html/Container.html#method-popitem}{\code{container::Container$popitem()}}\out{</span>}
@@ -92,6 +89,46 @@ invisibly returns \code{\link[=Set]{Set()}} object.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-discard"></a>}}
+\if{latex}{\out{\hypertarget{method-discard}{}}}
+\subsection{Method \code{discard()}}{
+Discard element from \code{Set} if it exists.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$discard(elem)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{elem}}{element to be discarded.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+invisibly returns the \code{Set} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has"></a>}}
+\if{latex}{\out{\hypertarget{method-has}{}}}
+\subsection{Method \code{has()}}{
+Determine if \code{Set} has some element.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$has(elem)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{elem}}{element to search for}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} of \code{Set} contains \code{elem} else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-diff"></a>}}
 \if{latex}{\out{\hypertarget{method-diff}{}}}
 \subsection{Method \code{diff()}}{
@@ -132,66 +169,6 @@ new \code{Set} as a result of the intersection of this and s.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-is.equal"></a>}}
-\if{latex}{\out{\hypertarget{method-is.equal}{}}}
-\subsection{Method \code{is.equal()}}{
-\code{Set} comparison
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$is.equal(s)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{s}}{\code{Set} object to compare}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if \code{Set} s is equal to this, otherwise \code{FALSE}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-is.subset"></a>}}
-\if{latex}{\out{\hypertarget{method-is.subset}{}}}
-\subsection{Method \code{is.subset()}}{
-Check if subset
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$is.subset(s)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{s}}{\code{Set} object to check}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if \code{Set} s is subset of this, otherwise \code{FALSE}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-is.superset"></a>}}
-\if{latex}{\out{\hypertarget{method-is.superset}{}}}
-\subsection{Method \code{is.superset()}}{
-Check if superset
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$is.superset(s)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{s}}{\code{Set} object to check}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if \code{Set} s is superset of this, otherwise \code{FALSE}
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-union"></a>}}
 \if{latex}{\out{\hypertarget{method-union}{}}}
 \subsection{Method \code{union()}}{
@@ -203,7 +180,7 @@ Check if superset
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{s}}{\code{Set} object to 'unified'}
+\item{\code{s}}{\code{Set} object to be 'unified'}
 }
 \if{html}{\out{</div>}}
 }
