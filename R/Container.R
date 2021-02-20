@@ -208,9 +208,8 @@ Container <- R6::R6Class("Container",
                      ...)
         },
         .verify_same_class = function(x) {
-            x_str = deparse(substitute(x))
             if (!inherits(x, data.class(self))) {
-                stop(x_str, " must be a ", data.class(self))
+                stop("arg must be a ", data.class(self))
             }
         }
     ),
