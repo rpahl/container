@@ -261,7 +261,19 @@ c1$delete(3)
 expect_true(identical(c1, c2))
 expect_true(c1$length() < cc$length())
 
+# Container objects can be even cloned deeply
+c1 = Container$new(1)
+c2 = Container$new(c1)
 
+cc = c2$clone()
+expect_equal(cc, Container$new(Container$new(1)))
+c1$add(2)   # since it was not a deep clone, this will affect cc
+expect_equal(cc, Container$new(Container$new(1, 2)))
+
+cc.deep = c2$clone(deep = TRUE)
+c1$add(3)   # this again affects cc but not cc.deep
+expect_equal(cc, Container$new(Container$new(1, 2, 3)))
+expect_equal(cc.deep, Container$new(Container$new(1, 2)))
 
 
 # --------

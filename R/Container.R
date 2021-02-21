@@ -198,6 +198,14 @@ Container <- R6::R6Class("Container",
     private = list(
         elems = list(),
         create_iter = function() Iterator$new(self$values()),
+        deep_clone = function(name, value) {
+            if (name != "elems") return(value)
+
+            clone_deep_if_container = function(x) {
+                if (inherits(x, "Container")) x$clone(deep = TRUE) else x
+            }
+            lapply(value, clone_deep_if_container)
+        },
         get_compare_fun = function(x) {
             function(y) isTRUE(all.equal(x, y))
         },
