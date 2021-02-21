@@ -1,8 +1,72 @@
-# Deque constructor
+# -----
+# deque
+# -----
 d <- deque()
-expect_equal(attr(d, "class"), c("Deque", "Container", "Iterable", "R6"))
 expect_true(is.deque(d))
+expect_equal(length(d), 0)
+expect_equal(names(d), NULL)
+expect_equal(attr(d, "class"), c("Deque", "Container", "Iterable", "R6"))
 
+# deque elements can be named
+d <- deque(a = 2, 9, b = 1)
+expect_equal(names(d), c("a", "", "b"))
+
+# --------
+# as.deque
+# --------
+expect_equal(as.deque(numeric()), deque())
+expect_equal(as.deque(NULL), deque())
+expect_equal(as.deque(list()), deque())
+expect_equal(as.deque(1), deque(1))
+expect_equal(as.deque(1:2), deque(1L, 2L))
+expect_equal(as.deque(deque(1)), deque(1))
+
+# deque can be created as copy from another deque
+d = deque(1, 2)
+d2 = as.deque(d)
+expect_equal(d, d2)
+d$clear()
+# if d2 is a copy, it should not have been cleared
+expect_equal(length(d), 0)
+d2_was_also_cleaned = length(d2) == 0
+expect_false(d2_was_also_cleaned )
+
+# a data.frame can be converted to a deque
+daf = data.frame(A = 1:2, B = 3:4)
+expect_equal(as.list(as.deque(daf)), as.list(daf))
+
+# a deque can be converted to a list
+d = deque(1, b = 2)
+expect_equal(as.list(as.deque(d)), list(1, b = 2))
+
+# a set can be converted to a deque
+s = setnew(1, 2)
+expect_equal(as.list(as.deque(s)), list(1, 2))
+
+# a dict can be converted to a deque
+d = dict(a = 1, b = 2)
+expect_equal(as.list(as.deque(d)), list(a = 1, b = 2))
+
+# --------
+# is.deque
+# --------
+expect_error(is.deque())
+expect_false(is.deque(0))
+expect_false(is.deque(list()))
+expect_false(is.deque(container()))
+expect_false(is.deque(dict()))
+expect_false(is.deque(setnew()))
+
+expect_true(is.deque(deque()))
+expect_true(is.deque(deque(NULL)))
+expect_true(is.deque(deque()))
+
+
+
+
+# ----------
+# S3 methods
+# ----------
 
 # an element can be added to the left of a Deque
 expect_equal(values(addleft(deque(0), 1)), as.list(1:0))
