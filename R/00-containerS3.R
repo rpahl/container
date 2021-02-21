@@ -11,8 +11,7 @@
 #' @param x any `R` object for [as.container()] and [is.container()] and the
 #' operators. An object of class `Container` for the `S3` methods.
 #' @name ContainerS3
-#' @seealso For the class documentation see [Container()] and it's derived
-#' classes [Deque()], [Det()], and [Dict()].
+#' @seealso For the class documentation see [Container()].
 NULL
 
 #' @rdname ContainerS3
@@ -30,8 +29,7 @@ container <- function(...)
 #' @export
 as.container <- function(x)
 {
-    elems = if (length(x) == 0) list(x) else x
-    do.call(container, args = as.list(elems))
+    do.call(container, args = as.list(x))
 }
 
 #' @rdname ContainerS3

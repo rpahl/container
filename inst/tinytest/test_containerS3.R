@@ -13,12 +13,12 @@ expect_equal(container(co), Container$new(co))
 # ------------
 # as.container
 # ------------
-expect_equal(as.container(numeric()), container(numeric()))
-expect_equal(as.container(NULL), container(NULL))
-expect_equal(as.container(list()), container(list()))
+expect_equal(as.container(numeric()), container())
+expect_equal(as.container(NULL), container())
+expect_equal(as.container(list()), container())
 expect_equal(as.container(1), container(1))
-
 expect_equal(as.container(1:2), container(1, 2))
+expect_equal(as.container(container(1)), container(1))
 
 # container can be created as copy from another container
 co = container(1, 2)
