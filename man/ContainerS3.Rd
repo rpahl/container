@@ -6,8 +6,8 @@
 \alias{ContainerS3}
 \alias{container}
 \alias{as.container}
-\alias{is.container}
 \alias{as.list.Container}
+\alias{is.container}
 \alias{length.Container}
 \alias{names.Container}
 \alias{unpack}
@@ -27,15 +27,15 @@ container(...)
 
 as.container(x)
 
-is.container(x)
-
 \method{as.list}{Container}(x)
+
+is.container(x)
 
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
 
-unpack(x)
+unpack(x, recursive = TRUE, use.name = TRUE)
 
 \method{iter}{Container}(x)
 
@@ -86,12 +86,14 @@ Container methods:
 }
 
 \itemize{
-\item \code{is.container(x)} returns \code{TRUE} if \code{x} is of class \code{Container}
-and \code{FALSE} otherwise.
+\item \code{as.list(x)} converts container \code{x} to a base \code{R} list. All of
+the container's elements will copied (deeply) during this conversion so that
+the resulting list represents a true copy of the converted container.
 }
 
 \itemize{
-\item \code{as.list(x)} converts container \code{x} to a base \code{R} list.
+\item \code{is.container(x)} returns \code{TRUE} if \code{x} is of class \code{Container}
+and \code{FALSE} otherwise.
 }
 
 \itemize{

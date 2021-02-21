@@ -35,9 +35,11 @@ as.container <- function(x)
 }
 
 #' @rdname ContainerS3
-#' @details * `as.list(x)` converts container `x` to a base `R` list.
+#' @details * `as.list(x)` converts container `x` to a base `R` list. All of
+#' the container's elements will copied (deeply) during this conversion so that
+#' the resulting list represents a true copy of the converted container.
 #' @export
-`as.list.Container` <- function(x) x$clone(deep = TRUE)$as.list()
+`as.list.Container` <- function(x) x$clone(deep = TRUE)$values()
 
 #' @rdname ContainerS3
 #' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`

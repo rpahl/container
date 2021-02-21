@@ -323,7 +323,7 @@ Get \code{Container} values
 }
 
 \subsection{Returns}{
-a copy of all elements in a list
+elements of the container as a base list
 }
 }
 \if{html}{\out{<hr>}}
