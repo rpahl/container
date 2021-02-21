@@ -9,31 +9,35 @@
 \usage{
 setnew(...)
 
-as.set(x, ...)
+as.set(x)
 
 is.set(x)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Set}.}
 
-\item{x}{any \code{R} object, or an object inheriting from class 'Set' or
-'Container' for the corresponding S3 methods.}
-}
-\value{
-\code{\link[=setnew]{setnew()}} returns a \code{\link[=Set]{Set()}} object.
-
-\code{\link[=as.set]{as.set()}} coerces to a set.
-
-\code{\link[=is.set]{is.set()}} returns \code{TRUE} if its argument is a \code{\link[=Set]{Set()}} and \code{FALSE}
-otherwise.
+\item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.set]{as.set()}} and \code{\link[=is.set]{is.set()}}
+or of class \code{Set} for the \code{S3} methods.}
 }
 \description{
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
-\code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and
-it provides typical set operations such as \code{union} and \code{intersect}.
+\code{\link[=Container]{Container()}}, that is, \code{Set} elements are always unique. It provides
+typical set operations such as \code{union} and \code{intersect}.
 }
 \details{
-For a full list of all set methods see \code{\link[=Set]{Set()}}.
+\code{Set} S3 methods:
+\itemize{
+\item \code{setnew(...)} initializes and returns a \code{\link[=Set]{Set()}} object.
+}
+
+\itemize{
+\item \code{as.set(x)} coerces \code{x} to a set.
+}
+
+\itemize{
+\item \code{is.set(x)} returns \code{TRUE} if \code{x} is of class \code{Set} and \code{FALSE}
+otherwise.
+}
 }
 \seealso{
 \code{\link[=Set]{Set()}}, \code{\link[=container]{container()}}

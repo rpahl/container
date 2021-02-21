@@ -1,15 +1,18 @@
-#' Set
+#' @title Set
 #'
 #' @description The [Set()] is considered and implemented as a specialized
-#' [Container()], that is, elements are always unique in the [Container()] and
-#' it provides typical set operations such as `union` and `intersect`.
-#' @details For a full list of all set methods see [Set()].
+#' [Container()], that is, `Set` elements are always unique. It provides
+#' typical set operations such as `union` and `intersect`.
 #' @param ... initial elements put into the `Set`.
-#' @param x any `R` object, or an object inheriting from class 'Set' or
-#' 'Container' for the corresponding S3 methods.
-#' @return [setnew()] returns a [Set()] object.
-#' @seealso [Set()], [container()]
+#' @param x `R` object of `ANY` type for [as.set()] and [is.set()]
+#' or of class `Set` for the `S3` methods.
 #' @name setS3
+#' @seealso [Set()], [container()]
+NULL
+
+#' @rdname setS3
+#' @details `Set` S3 methods:
+#' * `setnew(...)` initializes and returns a [Set()] object.
 #' @export
 setnew <- function(...) Set$new(...)
 
@@ -20,36 +23,17 @@ set <- function(...) {
 
 
 #' @rdname setS3
-#' @return [as.set()] coerces to a set.
+#' @details * `as.set(x)` coerces `x` to a set.
 #' @export
-as.set <- function(x, ...)
+as.set <- function(x)
 {
-    if (length(x) == 0) return(setnew())
-    UseMethod("as.set")
-}
-
-
-#' @export
-as.set.default <- function(x)
-{
-    do.call(setnew, args = as.list(x))
+    return(do.call(setnew, args = as.list(x)))
 }
 
 
 #' @rdname setS3
-#' @return [is.set()] returns `TRUE` if its argument is a [Set()] and `FALSE`
+#' @details * `is.set(x)` returns `TRUE` if `x` is of class `Set` and `FALSE`
 #' otherwise.
 #' @export
 is.set <- function(x) inherits(x, "Set")
-
-
-#' @rdname setS3
-#' @param e some element of any type
-#' @return `%e%` returns `TRUE` if e is an element of `x`
-#' @export
-`%e%` <- function(e, x)
-{
-    if (!is.set(x)) stop("x must be a 'Set'")
-    x$has(e)
-}
 
