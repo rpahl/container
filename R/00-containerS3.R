@@ -8,15 +8,15 @@
 #' create objects of the respective derived classes.
 #' @param ... initial elements put into the `Container`.
 #' @param elem some element of any type
-#' @param x any `R` object for [as.container()] and [is.container()] and the
-#' operators. An object of class `Container` for the `S3` methods.
+#' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
+#' or of class `Container` for the `S3` methods.
 #' @name ContainerS3
 #' @seealso For the class documentation see [Container()].
 NULL
 
 #' @rdname ContainerS3
 #' @details
-#' Container methods:
+#' `Container` S3 methods:
 #' * `container(...)` initializes and returns a [Container()] object.
 #' @export
 container <- function(...)
@@ -85,3 +85,4 @@ unpack = function(x, recursive = TRUE, use.name = TRUE) {
         x
 }
 
+# TODO: implement generic %in%

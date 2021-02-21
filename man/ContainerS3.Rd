@@ -60,8 +60,8 @@ unpack(x, recursive = TRUE, use.name = TRUE)
 \arguments{
 \item{...}{initial elements put into the \code{Container}.}
 
-\item{x}{any \code{R} object for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}} and the
-operators. An object of class \code{Container} for the \code{S3} methods.}
+\item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
+or of class \code{Container} for the \code{S3} methods.}
 
 \item{elem}{some element of any type}
 
@@ -76,7 +76,7 @@ likley to use the corresponding \link[=Deque]{deque()}, \link[=Set]{set()}, and 
 create objects of the respective derived classes.
 }
 \details{
-Container methods:
+\code{Container} S3 methods:
 \itemize{
 \item \code{container(...)} initializes and returns a \code{\link[=Container]{Container()}} object.
 }
@@ -148,6 +148,5 @@ found, an error is signaled.
 }
 }
 \seealso{
-For the class documentation see \code{\link[=Container]{Container()}} and it's derived
-classes \code{\link[=Deque]{Deque()}}, \code{\link[=Det]{Det()}}, and \code{\link[=Dict]{Dict()}}.
+For the class documentation see \code{\link[=Container]{Container()}}.
 }
