@@ -1,4 +1,4 @@
-#' @title Set
+#' @title Set methods
 #'
 #' @description The [Set()] is considered and implemented as a specialized
 #' [Container()], that is, `Set` elements are always unique. It provides
@@ -7,12 +7,17 @@
 #' @param x `R` object of `ANY` type for [as.set()] and [is.set()]
 #' or of class `Set` for the `S3` methods.
 #' @name setS3
-#' @seealso [Set()], [container()]
+#' @seealso See [container()] for all inherited methods. For the full class
+#' documentation see [Set()] and it's superclass [Container()].
+#' @details While the [Set()] class is based on the `R6` framework and
+#' provides reference semantics, the presented methods provide an `S3`
+#' interface with copy semantics. Note that any `S3` methods defined for the
+#' `Container` class also work with `Set` objects.
+#' ## Methods
 NULL
 
 #' @rdname setS3
-#' @details `Set` S3 methods:
-#' * `setnew(...)` initializes and returns a [Set()] object.
+#' @details * `setnew(...)` initializes and returns a [Set()] object.
 #' @export
 setnew <- function(...) Set$new(...)
 

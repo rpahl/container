@@ -1,4 +1,4 @@
-#' A Set class
+#' Set
 #'
 #' @description The [Set()] is considered and implemented as a specialized
 #' [Container()], that is, elements are always unique in the [Container()] and

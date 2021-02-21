@@ -1,4 +1,4 @@
-#' @title A Dict class
+#' @title Dict
 #'
 #' @description The [Dict()] resembles Python's dict type, and is implemented
 #' as a specialized associative [Container()] thus sharing all [Container()]

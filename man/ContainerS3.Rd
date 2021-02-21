@@ -20,7 +20,7 @@
 \alias{discard.Container}
 \alias{empty.Container}
 \alias{has.Container}
-\title{A sequence Container}
+\title{Container methods}
 \usage{
 container(...)
 
@@ -70,16 +70,21 @@ functions to insert, delete and access elements from the container
 object. Since the \code{\link[=Container]{Container()}} class mainly serves as the
 base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}} objects, users are more
 likley to use the corresponding \link[=Deque]{deque()}, \link[=Set]{set()}, and \link[=Dict]{dict()} methods to
-create objects of the respective derived classes.
+create objects of these classes.
 }
 \details{
-\code{Container} S3 methods:
+While the \code{\link[=Container]{Container()}} class is based on the \code{R6} framework and
+provides reference semantics, the presented methods provide an \code{S3}
+interface with copy semantics.
+\subsection{Methods}{
+}
+
 \itemize{
 \item \code{container(...)} initializes and returns a \code{\link[=Container]{Container()}} object.
 }
 
 \itemize{
-\item \link{as.container(x)} coerces \code{x} to a container.
+\item \code{as.container(x)} coerces \code{x} to a container.
 }
 
 \itemize{
@@ -140,5 +145,5 @@ found, an error is signaled.
 }
 }
 \seealso{
-For the class documentation see \code{\link[=Container]{Container()}}.
+For the \code{Container} class documentation see \code{\link[=Container]{Container()}}.
 }

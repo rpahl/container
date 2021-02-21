@@ -53,12 +53,13 @@ The following table shows member methods divided by class. The top half contains
 |                        |               |                |                              |
 | add(elem)              |               |                | add(key, value)              |
 | clear()                |               |                |                              |
-| delete(elem, right=F)  |               |                | delete(key)                  |
-| discard(elem, right=F) |               |                | discard(key)                 |
+| delete(elem)           |               |                | delete(key)                  |
+| discard(elem)          |               |                | discard(key)                 |
 | empty()                |               |                |                              |
 | has(elem)              |               |                | has(key)                     |
 | peekitem()             |               |                |                              |
 | popitem()              |               |                |                              |
+| replace(old, new)      |               |                |                              |
 | values()               |               |                |                              |
 |                        |               |                |                              |
 |                        | addleft(elem) | diff(s)        | getval(key)                  |

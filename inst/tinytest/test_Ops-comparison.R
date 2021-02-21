@@ -35,3 +35,7 @@ expect_true(x <= y)
 expect_true(y > x)
 expect_true(y >= y)
 
+x = setnew(1, setnew(2, 3))
+y = setnew(1, setnew(3, 2))
+#expect_true(x == y) # TODO: fails atm
+

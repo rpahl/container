@@ -1,22 +1,25 @@
-#' @title A sequence Container
+#' @title Container methods
 #'
 #' @description A [Container()] is a data structure with typical member
 #' functions to insert, delete and access elements from the container
 #' object. Since the [Container()] class mainly serves as the
 #' base class for [Deque()], [Set()], and [Dict()] objects, users are more
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
-#' create objects of the respective derived classes.
+#' create objects of these classes.
 #' @param ... initial elements put into the `Container`.
 #' @param elem some element of any type
 #' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.
 #' @name ContainerS3
-#' @seealso For the class documentation see [Container()].
+#' @seealso For the `Container` class documentation see [Container()].
+#' @details While the [Container()] class is based on the `R6` framework and
+#' provides reference semantics, the presented methods provide an `S3`
+#' interface with copy semantics.
+#' ## Methods
 NULL
 
 #' @rdname ContainerS3
 #' @details
-#' `Container` S3 methods:
 #' * `container(...)` initializes and returns a [Container()] object.
 #' @export
 container <- function(...)
@@ -25,7 +28,7 @@ container <- function(...)
 }
 
 #' @rdname ContainerS3
-#' @details * [as.container(x)] coerces `x` to a container.
+#' @details * `as.container(x)` coerces `x` to a container.
 #' @export
 as.container <- function(x)
 {

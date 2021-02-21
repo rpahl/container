@@ -7,11 +7,11 @@
 \alias{is.dict}
 \alias{keys}
 \alias{names.Dict}
-\title{Dictionary}
+\title{Dict methods}
 \usage{
 dict(...)
 
-as.dict(x, ...)
+as.dict(x)
 
 is.dict(x)
 
@@ -22,29 +22,43 @@ keys(x)
 \arguments{
 \item{...}{initial elements put into the \code{Dict}.}
 
-\item{x}{any \code{R} object, or an object inheriting from class 'Dict' or
-'Container'.}
+\item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.dict]{as.dict()}} and \code{\link[=is.dict]{is.dict()}}
+or of class \code{Dict} for the \code{S3} methods.}
 }
 \value{
-\code{\link[=dict]{dict()}} returns a \link[=dict]{Dict()} object.
-
-\code{\link[=as.dict]{as.dict()}} coerces to a dict.
-
-\code{\link[=is.dict]{is.dict()}} returns \code{TRUE} if its argument is a \code{\link[=Dict]{Dict()}} and \code{FALSE}
-otherwise.
-
 \code{keys()} returns a \code{character} vector of all the dict's keys.
 
 \code{names()} returns the same as \code{\link[=keys]{keys()}}.
 }
 \description{
 The \code{\link[=dict]{dict()}} resembles Python's dict type, and is implemented
-as a specialized associative \code{\link[=container]{container()}} thus sharing all \code{\link[=container]{container()}}
+as a specialized associative \code{\link[=Container]{Container()}} thus sharing all \link[=Container]{container()}
 methods with some of them being overridden to account for the associative
 key-value pair semantic.
 }
 \details{
 For a full list of all dict methods see \code{\link[=Dict]{Dict()}}.
+
+While the \code{\link[=Dict]{Dict()}} class is based on the \code{R6} framework and
+provides reference semantics, the presented methods provide an \code{S3}
+interface with copy semantics. Note that any \code{S3} methods defined for the
+\code{Container} class also work with \code{Deque} objects, even if not overwritten
+explicitly.
+\subsection{Methods}{
+}
+
+\itemize{
+\item \code{dict(...)} initializes and returns an object of class \code{Dict}
+}
+
+\itemize{
+\item \code{as.dict(x)} coerces \code{x} to a deque.
+}
+
+\itemize{
+\item \code{is.dict(x)} returns \code{TRUE} if \code{x} is of class \code{Deque}
+and \code{FALSE} otherwise.
+}
 }
 \examples{
 dict(a = 1, b = "one", f = mean)
@@ -57,12 +71,7 @@ mode(values(d2))                     # 'numeric'
 \dontrun{
 dict(a = 1, 2)                       # all elements must be named}
 
-# Initialize from data.frame
-daf = data.frame(A = 1:3, B = 3:1)
-d = dict(daf)
-d
-
-# Coerce from other types
+# Coercion
 as.dict(list(A = 1:3, B = "b"))
 as.dict(c(x = 1, y = "x", z = 2 + 3))
 
@@ -71,5 +80,6 @@ keys(d)
 names(d)
 }
 \seealso{
-\code{\link[=Dict]{Dict()}}, \code{\link[=container]{container()}}
+See \code{\link[=container]{container()}} for all inherited methods. For the full class
+documentation see \code{\link[=Dict]{Dict()}} and it's superclass \link[=container]{Container()}.
 }

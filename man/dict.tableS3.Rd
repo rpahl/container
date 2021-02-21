@@ -14,7 +14,7 @@ dict.table(...)
 
 as.dict.table(x, ...)
 
-\method{as.dict}{table.data.table}(x, copy = TRUE, ...)
+\method{as.dict.table}{data.table}(x, copy = TRUE, ...)
 
 is.dict.table(x)
 

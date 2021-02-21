@@ -1,17 +1,24 @@
-#' Dictionary
+#' Dict methods
 #'
 #' @description The [dict()] resembles Python's dict type, and is implemented
-#' as a specialized associative [container()] thus sharing all [container()]
+#' as a specialized associative [Container()] thus sharing all [container()]
 #' methods with some of them being overridden to account for the associative
 #' key-value pair semantic.
 #' @details For a full list of all dict methods see [Dict()].
 #' @param ... initial elements put into the `Dict`.
-#' @param x any `R` object, or an object inheriting from class 'Dict' or
-#' 'Container'.
-#' @return [dict()] returns a [Dict()] object.
-#' @seealso [Dict()], [container()]
+#' @param x `R` object of `ANY` type for [as.dict()] and [is.dict()]
+#' or of class `Dict` for the `S3` methods.
+#' @seealso See [container()] for all inherited methods. For the full class
+#' documentation see [Dict()] and it's superclass [Container()].
 #' @name dictS3
-#' @export
+#' @details While the [Dict()] class is based on the `R6` framework and
+#' provides reference semantics, the presented methods provide an `S3`
+#' interface with copy semantics. Note that any `S3` methods defined for the
+#' `Container` class also work with `Deque` objects, even if not overwritten
+#' explicitly.
+#' ## Methods
+NULL
+
 #' @examples
 #' dict(a = 1, b = "one", f = mean)
 #'
@@ -22,42 +29,30 @@
 #'
 #' \dontrun{
 #' dict(a = 1, 2)                       # all elements must be named}
-#'
-#' # Initialize from data.frame
-#' daf = data.frame(A = 1:3, B = 3:1)
-#' d = dict(daf)
-#' d
-#' @export
-dict <- function(...)
-{
-    Dict$new(...)
-}
-
 #' @rdname dictS3
-#' @return [as.dict()] coerces to a dict.
+#' @details * `dict(...)` initializes and returns an object of class `Dict`
 #' @export
+dict <- function(...) Dict$new(...)
+
 #' @examples
 #'
-#' # Coerce from other types
+#' # Coercion
 #' as.dict(list(A = 1:3, B = "b"))
 #' as.dict(c(x = 1, y = "x", z = 2 + 3))
-as.dict <- function(x, ...)
-{
-    if (is.null(x)) return(dict())
-    UseMethod("as.dict")
-}
-
+#' @rdname dictS3
+#' @details * `as.dict(x)` coerces `x` to a deque.
 #' @export
-as.dict.default <- function(x)
+as.dict <- function(x)
 {
-    do.call(dict, args = as.list(x))
+    return(do.call(dict, args = as.list(x)))
 }
 
 #' @rdname dictS3
-#' @return [is.dict()] returns `TRUE` if its argument is a [Dict()] and `FALSE`
-#' otherwise.
+#' @details * `is.dict(x)` returns `TRUE` if `x` is of class `Deque`
+#' and `FALSE` otherwise.
 #' @export
 is.dict <- function(x) inherits(x, "Dict")
+
 
 #' @rdname dictS3
 #' @return `keys()` returns a `character` vector of all the dict's keys.
@@ -69,6 +64,7 @@ is.dict <- function(x) inherits(x, "Dict")
 #' names(d)
 keys <- function(x)
 {
+    # TODO: deprecate?
     if (!inherits(x, "Dict")) stop("x must be a 'Dict'")
     x$keys()
 }
@@ -77,6 +73,6 @@ keys <- function(x)
 #' @rdname dictS3
 #' @return `names()` returns the same as [keys()].
 #' @export
-names.Dict <- function(x) x$keys()
+names.Dict <- function(x) x$keys() # TODO: should be defined via Container
 
 

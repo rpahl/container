@@ -9,7 +9,7 @@
 \alias{rev.Deque}
 \title{Deque (double-ended queue)}
 \usage{
-deque(..., keep_names = FALSE)
+deque(...)
 
 as.deque(x)
 
@@ -22,10 +22,8 @@ addleft(x, ...)
 \arguments{
 \item{...}{initial elements put into the \code{Deque}.}
 
-\item{keep_names}{\code{logical} TRUE keeps names of passed elements.}
-
-\item{x}{any \code{R} object for \code{\link[=as.deque]{as.deque()}} and \code{\link[=is.deque]{is.deque()}}. An
-object of class \code{Deque} for the \code{S3} methods.}
+\item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.deque]{as.deque()}} and \code{\link[=is.deque]{is.deque()}}
+or of class \code{Deque} for the \code{S3} methods.}
 
 \item{elem}{an \code{R} object of any type}
 }
@@ -36,11 +34,12 @@ underlying data sequence. As such, the \code{\link[=deque]{deque()}} can also be
 both stacks and queues.
 }
 \details{
-The \code{\link[=Deque]{Deque()}} class inherits from class \code{\link[=Container]{Container()}} and extends
-it by \code{pop} and \code{peek} methods, element counting, and reverse and rotate
-functionality. For documentation of inherited methods, see \link[=Container]{container()}.
-
-Deque methods:
+While the \code{\link[=Deque]{Deque()}} class is based on the \code{R6} framework and
+provides reference semantics, the presented methods provide an \code{S3}
+interface with copy semantics. Note that any \code{S3} methods defined for the
+\code{Container} class also work with \code{Deque} objects.
+\subsection{Methods}{
+}
 
 \itemize{
 \item \code{deque(...)} initializes and returns an object of class \code{Deque}
@@ -66,6 +65,6 @@ returns the \code{\link[=Deque]{Deque()}} object.
 }
 }
 \seealso{
-See \code{\link[=container]{container()}} for all inherited methods. For the class
+See \code{\link[=container]{container()}} for all inherited methods. For the full class
 documentation see \code{\link[=Deque]{Deque()}} and it's superclass \link[=container]{Container()}.
 }

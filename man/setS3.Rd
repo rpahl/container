@@ -5,7 +5,7 @@
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
-\title{Set}
+\title{Set methods}
 \usage{
 setnew(...)
 
@@ -25,7 +25,13 @@ The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 typical set operations such as \code{union} and \code{intersect}.
 }
 \details{
-\code{Set} S3 methods:
+While the \code{\link[=Set]{Set()}} class is based on the \code{R6} framework and
+provides reference semantics, the presented methods provide an \code{S3}
+interface with copy semantics. Note that any \code{S3} methods defined for the
+\code{Container} class also work with \code{Set} objects.
+\subsection{Methods}{
+}
+
 \itemize{
 \item \code{setnew(...)} initializes and returns a \code{\link[=Set]{Set()}} object.
 }
@@ -40,5 +46,6 @@ otherwise.
 }
 }
 \seealso{
-\code{\link[=Set]{Set()}}, \code{\link[=container]{container()}}
+See \code{\link[=container]{container()}} for all inherited methods. For the full class
+documentation see \code{\link[=Set]{Set()}} and it's superclass \link[=container]{Container()}.
 }
