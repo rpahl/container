@@ -60,22 +60,40 @@ expect_error(Deque$new()$popleft(), "popleft at empty Deque")
 v <- list(1, 2, 3)
 expect_equal(Deque$new(1, 2, 3)$rev()$values(), rev(v))
 
+# rev works also on empty elements
+d <- Deque$new(list(), NULL, NA, numeric())
+l <- as.list(d)
+d$rev()
+expect_equal(d$length(), 4)
+expect_equal(as.list(d), rev(l))
 
-# ---------------------
-# rotate and rotateleft
-# ---------------------
-# a Deque can be rotated in both directions
+# ------
+# rotate
+# ------
 d <- Deque$new()
-expect_equal(d, d$rotate())
-expect_equal(d, d$rotateleft())
+expect_equal(d$rotate(), Deque$new())
 
-expect_equal(Deque$new(1, 2)$rotate()$values(), list(2, 1))
-expect_equal(Deque$new(1, 2, 3)$rotate()$values(), list(3, 1, 2))
-expect_equal(Deque$new(1, 2, 3)$rotate(2)$values(), list(2, 3, 1))
-expect_equal(Deque$new(1, 2, 3)$rotate(3)$values(), list(1, 2, 3))
+d <- Deque$new(1)
+expect_equal(d$rotate(1), Deque$new(1))
+expect_equal(d$rotate(-1), Deque$new(1))
 
-expect_equal(Deque$new(1, 2, 3)$rotateleft(1)$values(), list(2, 3, 1))
-expect_equal(Deque$new(1, 2, 3)$rotateleft(2)$values(), list(3, 1, 2))
+d <- Deque$new(1, 2)
+d12 <- Deque$new(1, 2)
+d21 <- Deque$new(2, 1)
+expect_equal(d$rotate(), d21)
+expect_equal(d$rotate(2), d21)
+expect_equal(d$rotate(-2), d21)
+expect_equal(d$rotate(-1), d12)
+expect_equal(d$rotate(4), d12)
 
-expect_error(d, d$rotateleft(-1))
+# rotate works also with empty elements
+d <- Deque$new(list(), NULL, NA, numeric())
+l <- as.list(d)
+
+expect_equal(as.list(d$rotate()), l[c(4, 1, 2, 3)])
+expect_equal(as.list(d$rotate(-1)), l)
+expect_equal(as.list(d$rotate(3)), l[c(2, 3, 4, 1)])
+
+
+
 
