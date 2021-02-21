@@ -17,9 +17,6 @@ functionality.
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=deque]{deque()}}
 }
-\author{
-Roman Pahl
-}
 \section{Super classes}{
 \code{\link[container:Iterable]{container::Iterable}} -> \code{\link[container:Container]{container::Container}} -> \code{Deque}
 }
@@ -53,6 +50,7 @@ Roman Pahl
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="popitem">}\href{../../container/html/Container.html#method-popitem}{\code{container::Container$popitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace">}\href{../../container/html/Container.html#method-replace}{\code{container::Container$replace()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}

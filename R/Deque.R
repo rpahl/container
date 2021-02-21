@@ -7,7 +7,6 @@
 #' @details This class inherits from class [Container()] and extends it by
 #' `pop` and `peek` methods, element counting, and reverse and rotate
 #' functionality.
-#' @author Roman Pahl
 #' @importFrom R6 R6Class
 #' @seealso [Container()], [deque()]
 #' @export
@@ -52,17 +51,17 @@ Deque <- R6::R6Class("Deque",
         pop = function() {
             if (self$empty()) stop("pop at empty ", data.class(self))
             last <- self$peek()
-            self$delete(last, right = TRUE)
+            private$elems = utils::head(self$values(), n = -1)
             last
         },
 
         #' @description
-        #' Delete and return element from the right side of the [Deque()].
+        #' Delete and return element from the left side of the [Deque()].
         #' @return element 'popped' from the left side of the [Deque()]
         popleft = function() {
             if (self$empty()) stop("popleft at empty ", data.class(self))
             first <- self$peekleft()
-            self$delete(first)
+            private$elems = utils::tail(self$values(), n = -1)
             first
         },
 
@@ -79,20 +78,18 @@ Deque <- R6::R6Class("Deque",
         #' @param n `integer` number of steps to rotate
         #' @return invisibly returns the `Deque()` object.
         rotate = function(n = 1L) {
-            # Rotate deque n steps to the right. If n is negative, rotate left.
-            if (self$empty()) return(invisible(self))
-            if (n >= 0L) {
-                for (i in seq_len(n)) {
-                    last <- self$pop()
-                    self$addleft(last)
-                }
+            if (self$empty() || n == 0)
+                return(invisible(self))
+
+            if (n > 0L) {
+                last <- self$pop()
+                self$addleft(last)
+                self$rotate(n - 1)
             } else {
-                for (i in seq_len(-n)) {
-                    first <- self$popleft()
-                    self$add(first)
-                }
+                first <- self$popleft()
+                self$add(first)
+                self$rotate(n + 1)
             }
-            invisible(self)
         }
     ),
     lock_class = TRUE
