@@ -65,24 +65,4 @@ length.Container <- function(x) x$length()
 #' @export
 names.Container <- function(x) names(x$values())
 
-
-#' @rdname ContainerS3
-#' @details * `unpack(x)` recursively unpacks any (possibly nested) recursive
-#' structure into a flattened list.
-#' @export
-unpack = function(x, recursive = TRUE, use.name = TRUE) {
-
-    .unpack = function(x) {
-        if (is.container(x))
-            rapply(as.list(x), f = .unpack)
-        else
-            unlist(x)
-    }
-
-    if (is.recursive(x))
-        rapply(as.list(x), f = .unpack)
-    else
-        x
-}
-
 # TODO: implement generic %in%

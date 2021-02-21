@@ -10,7 +10,6 @@
 \alias{is.container}
 \alias{length.Container}
 \alias{names.Container}
-\alias{unpack}
 \alias{iter.Container}
 \alias{+.Container}
 \alias{-.Container}
@@ -34,8 +33,6 @@ is.container(x)
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
-
-unpack(x, recursive = TRUE, use.name = TRUE)
 
 \method{iter}{Container}(x)
 
@@ -102,11 +99,6 @@ and \code{FALSE} otherwise.
 
 \itemize{
 \item \code{names(x)} returns the names of the elements contained in \code{x}.
-}
-
-\itemize{
-\item \code{unpack(x)} recursively unpacks any (possibly nested) recursive
-structure into a flattened list.
 }
 
 \itemize{
