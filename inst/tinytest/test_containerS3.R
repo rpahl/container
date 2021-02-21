@@ -65,6 +65,43 @@ co = container(a = 1, 2)
 l = list(1, numeric(0), NULL, co)
 expect_equal(as.list(as.container(l)), l)
 
+# Ensure nested containers are always converted as copies
+c1 = container(1)
+cc1 = container(c1)
+ccc1 = container(cc1)
+l = as.list(ccc1)
+expect_equal(l, list(container(container(1))))
+c1$add(2)
+cc1$add(2)
+expect_equal(ccc1, container(container(container(1, 2), 2)))
+expect_equal(l, list(container(container(1))))  # not changed
+
+
+# -----------------
+# c.Container
+# -----------------
+# Standard concatenate
+c1 = container(1)
+expect_equal(c(c1, NULL), c1)
+expect_equal(c(c1, list()), c1)
+expect_equal(c(c1, numeric()), c1)
+expect_equal(c(c1, 2:3), as.container(1:3))
+c2 = container(2)
+expect_equal(c(c1, c2, c2), container(1, 2, 2))
+
+# Ensure concatenated objects are always copies also for nested containers
+cc1 = container(c1)
+ccc1 = container(cc1)
+
+cc = c(c1, cc1, ccc1)
+expect_equal(cc, container(1, container(1), container(container(1))))
+c1$add(3)
+cc1$add(3)
+ccc1$add(3)
+# If copies were concatenated the following must still hold
+expect_equal(cc, container(1, container(1), container(container(1))))
+
+
 # ----------------
 # length.Container
 # ----------------

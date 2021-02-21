@@ -35,16 +35,24 @@ as.container <- function(x)
 }
 
 #' @rdname ContainerS3
+#' @details * `as.list(x)` converts container `x` to a base `R` list.
+#' @export
+`as.list.Container` <- function(x) x$clone(deep = TRUE)$as.list()
+
+#' @rdname ContainerS3
 #' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`
 #' and `FALSE` otherwise.
 #' @export
 is.container <- function(x) inherits(x, "Container")
 
 
-#' @rdname ContainerS3
-#' @details * `as.list(x)` converts container `x` to a base `R` list.
 #' @export
-`as.list.Container` <- function(x) x$values()
+c.Container <- function(...)
+{
+    ll = lapply(list(...), FUN = as.list)
+    l = Reduce(ll, f = c)
+    as.container(l)
+}
 
 
 #' @rdname ContainerS3
@@ -62,7 +70,7 @@ names.Container <- function(x) names(x$values())
 #' @details * `unpack(x)` recursively unpacks any (possibly nested) recursive
 #' structure into a flattened list.
 #' @export
-unpack = function(x) {
+unpack = function(x, recursive = TRUE, use.name = TRUE) {
 
     .unpack = function(x) {
         if (is.container(x))
