@@ -3,7 +3,7 @@
 # ----------
 co <- Container$new()
 expect_equal(attr(co, "class"), c("Container", "Iterable", "R6"))
-expect_equal(mode(co$values()), "list")
+expect_equal(mode(co$as.list()), "list")
 
 co <- Container$new(environment())
 expect_equal(co$length(), 1)
@@ -13,7 +13,7 @@ expect_equal(co$length(), 2)
 
 # initialized names are kept
 co <- Container$new(A = 1, B = 2)
-expect_equal(names(co$values()), c("A", "B"))
+expect_equal(names(co$as.list()), c("A", "B"))
 
 
 # ---
@@ -22,7 +22,14 @@ expect_equal(names(co$values()), c("A", "B"))
 co <- Container$new()
 expect_true(co$empty())
 co$add(1)
-expect_equal(co$values(), list(1))
+expect_equal(co$as.list(), list(1))
+
+# -------
+# as.list
+# -------
+# the values of a Container can be retrieved as a list
+expect_equal(Container$new()$as.list(), list())
+expect_equal(Container$new(1, 2, NULL)$as.list(), list(1, 2, NULL))
 
 
 # NULL and empty lists can be added to a Container
@@ -32,7 +39,7 @@ co$add(list())
 co$add(0)
 co$add(NULL)
 co$add(list())
-expect_equal(co$values(), list(NULL, list(), 0, NULL, list()))
+expect_equal(co$as.list(), list(NULL, list(), 0, NULL, list()))
 
 # non-trivial objects are added correctly
 v <- 1:10
@@ -43,22 +50,22 @@ collection <- c(list(v), list(env), list(ll), list(foo))
 
 co <- Container$new()
 co$add(v)$add(env)$add(ll)$add(foo)
-expect_equal(co$values(), collection)
+expect_equal(co$as.list(), collection)
 expect_equal(co$length(), length(collection))
 
 # a Container can be added to a Container
 co <- Container$new(1, 2)
 coco <- Container$new()
 coco$add(co)
-expect_equal(coco$values()[[1]], co)
-expect_equal(coco$values()[[1]]$values(), list(1, 2))
+expect_equal(coco$as.list()[[1]], co)
+expect_equal(coco$as.list()[[1]]$as.list(), list(1, 2))
 
 # named elements can be added to a Container
 co <- Container$new()
 x <- 1
 names(x) <- "x"
 co$add(x)
-expect_equal(co$values(), list(c(x = 1)))
+expect_equal(co$as.list(), list(c(x = 1)))
 
 # -----
 # clear
@@ -73,10 +80,10 @@ expect_equal(Container$new(a = 1, b = 2)$clear(), Container$new())
 # elements can be deleted from a Container
 co <- Container$new(1, 2, 3)
 co$delete(3)
-expect_equal(co$values(), list(1, 2))
+expect_equal(co$as.list(), list(1, 2))
 
 co <- Container$new(mean, identity)
-expect_equal(co$delete(mean)$values(), list(identity))
+expect_equal(co$delete(mean)$as.list(), list(identity))
 expect_error(co$delete(), 'argument "elem" is missing, with no default')
 
 # Container gives an error if trying to delete non-existing element
@@ -96,10 +103,10 @@ expect_equal(co, Container$new(2))
 # elements can be discarded from a Container
 co <- Container$new(1, 2, 3)
 co$discard(3)
-expect_equal(co$values(), list(1, 2))
+expect_equal(co$as.list(), list(1, 2))
 
 co <- Container$new(mean, identity)
-expect_equal(co$discard(mean)$values(), list(identity))
+expect_equal(co$discard(mean)$as.list(), list(identity))
 expect_error(co$discard(), 'argument "elem" is missing, with no default')
 
 # Container is not changed when trying to discard non-existing element
@@ -153,7 +160,7 @@ expect_true(co$has(1L))
 # the length of a Container can be retrieved
 expect_equal(Container$new()$length(), 0)
 co <- Container$new(1, 2, 3)
-expect_equal(co$length(), length(co$values()))
+expect_equal(co$length(), length(co$as.list()))
 
 # --------
 # peekitem
@@ -238,13 +245,6 @@ expect_equal(co, Container$new(1, co2, 1, co2))
 co$replace(co2, 2)
 expect_equal(co, Container$new(1, 2, 1, 2))
 
-# ------
-# values
-# ------
-# the data values of a Container can be retrieved
-expect_equal(Container$new()$values(), list())
-expect_equal(Container$new(1, 2, NULL)$values(), list(1, 2, NULL))
-
 # -----
 # clone
 # -----
@@ -285,7 +285,7 @@ co <- as.container(v)
 it <- co$iter()
 sum <- 0
 while(it$has_next()) sum <- sum + it$get_next()
-expect_equal(sum(v), sum(as.integer(co$values())))
+expect_equal(sum(v), sum(as.integer(co$as.list())))
 
 
 # ----------
@@ -296,5 +296,6 @@ co <- Container$new(1L)
 expect_warning(co$remove(), "deprecated")
 expect_warning(co$size(), "deprecated")
 expect_warning(co$type(), "deprecated")
+expect_warning(co$values(), "deprecated")
 
 

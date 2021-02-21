@@ -60,6 +60,12 @@ Container <- R6::R6Class("Container",
             invisible(self)
         },
 
+        #' @description convert to `list`
+        #' @return returns container content as a base `list`
+        as.list = function() {
+            private$elems
+        },
+
         #' @description delete all elements from the `Container`
         #' @return invisibly returns the cleared `Container` object
         clear = function() {
@@ -153,14 +159,14 @@ Container <- R6::R6Class("Container",
         replace = function(old, new) {
 
             is_matching_old = private$get_compare_fun(old)
-            pos = which(sapply(self$values(), is_matching_old))
+            pos = which(sapply(self$as.list(), is_matching_old))
 
             hasElem = length(pos) > 0
             if (!hasElem)
                 stop(deparse(substitute(old)), " is not in ", data.class(self))
 
             new_elem = if (length(new)) new else list(new)
-            private$elems <- replace(self$values(), pos, new_elem)
+            private$elems <- replace(self$as.list(), pos, new_elem)
             invisible(self)
         },
 
@@ -186,18 +192,21 @@ Container <- R6::R6Class("Container",
             old = as.character(sys.call(sys.parent()))[1L]
             object <- strsplit(old, split = "$", fixed = TRUE)[[1]][1]
             msg <- paste0("'", old, "()' is deprecated and not useful anymore.\n",
-                          "You can use 'mode(", object, "$values())' instead.")
+                          "You can use 'mode(", object, "$as.list())' instead.")
             .Deprecated("mode", msg = msg)
             mode(private$elems)
         },
 
-        #' @description Get `Container` values
-        #' @return a copy of all elements in a list
-        values = function() private$elems
+        #' @description This function is deprecated. Use [as.list()] instead.
+        #' @return returns container content as a base `list`
+        values = function() {
+            .Deprecated("as.list")
+            self$as.list()
+        }
     ),
     private = list(
         elems = list(),
-        create_iter = function() Iterator$new(self$values()),
+        create_iter = function() Iterator$new(self$as.list()),
         deep_clone = function(name, value) {
             if (name != "elems") return(value)
 
@@ -250,21 +259,21 @@ Container <- R6::R6Class("Container",
 
 format.Container <- function(x, ...)
 {
-    .format_values(values(x), left = "[", right = "]", ...)
+    .format_values(x$as.list(), left = "[", right = "]", ...)
 }
 
 format.Dict <- function(x, ...)
 {
-    .format_values(values(x), left = "[", right = "]", ...)
+    .format_values(x$as.list(), left = "[", right = "]", ...)
 }
 
 format.Deque <- function(x, ...)
 {
-    .format_values(values(x), left = "|", right = "|", ...)
+    .format_values(x$as.list(), left = "|", right = "|", ...)
 }
 
 format.Set <- function(x, ...)
 {
-    .format_values(values(x), left = "{", right = "}", ...)
+    .format_values(x$as.list(), left = "{", right = "}", ...)
 }
 
