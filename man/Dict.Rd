@@ -26,7 +26,7 @@ Key-value pairs internally are stored in a hash-table.
 \item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
-\item \href{#method-getval}{\code{Dict$getval()}}
+\item \href{#method-getvalue}{\code{Dict$getvalue()}}
 \item \href{#method-has}{\code{Dict$has()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-peek}{\code{Dict$peek()}}
@@ -144,7 +144,7 @@ invisibly returns the \code{Dict}
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-This function is deprecated. Use \code{\link[=getval]{getval()}} instead.
+This function is deprecated. Use \code{\link[=getvalue]{getvalue()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$get(key)}\if{html}{\out{</div>}}
 }
@@ -161,12 +161,12 @@ If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getval"></a>}}
-\if{latex}{\out{\hypertarget{method-getval}{}}}
-\subsection{Method \code{getval()}}{
+\if{html}{\out{<a id="method-getvalue"></a>}}
+\if{latex}{\out{\hypertarget{method-getvalue}{}}}
+\subsection{Method \code{getvalue()}}{
 Access value.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$getval(key)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$getvalue(key)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -348,8 +348,8 @@ set to \code{TRUE}.
 
 \item{\code{value}}{the value to be set}
 
-\item{\code{add}}{\code{logical} if \code{TRUE} the value is set regardless whether
-\code{key} already exists in \code{Dict}.}
+\item{\code{add}}{\code{logical} if \code{TRUE} the \code{value} is added in case
+\code{key} does not exists.}
 }
 \if{html}{\out{</div>}}
 }

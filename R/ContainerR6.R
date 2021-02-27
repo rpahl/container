@@ -218,10 +218,12 @@ Container <- R6::R6Class("Container",
         elems = list(),
         create_iter = function() Iterator$new(self$values()),
         deep_clone = function(name, value) {
-            if (name != "elems") return(value)
+            if (name != "elems")
+                return(value)
 
             clone_deep_if_container = function(x) {
-                if (inherits(x, "Container")) x$clone(deep = TRUE) else x
+                if (is.container(x))
+                    x$clone(deep = TRUE) else x
             }
             lapply(value, clone_deep_if_container)
         },
@@ -274,7 +276,7 @@ format.Container <- function(x, ...)
 
 format.Dict <- function(x, ...)
 {
-    .format_values(values(x), left = "[", right = "]", ...)
+    .format_values(values(x), left = "{", right = "}", ...)
 }
 
 format.Deque <- function(x, ...)

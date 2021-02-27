@@ -63,7 +63,7 @@ The following table shows member methods divided by class. The top half contains
 | replace(x, y, add = F)  |               |                | replace(key, value, add = F) |
 | values()                |               |                |                              |
 |                         |               |                |                              |
-|                         | addleft(x)    | diff(s)        | getval(key)                  |
+|                         | addleft(x)    | diff(s)        | getvalue(key)                |
 |                         |               | intersect(s)   | keys()                       |
 |                         | peek()        | is.equal(s)    | peek(key, default = NULL)    |
 |                         | peekleft()    | is.subset(s)   | pop(key)                     |

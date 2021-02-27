@@ -5,8 +5,6 @@
 #' methods with some of them being overriden to account for the associative
 #' key-value pair semantic.
 #' @details Key-value pairs internally are stored in a hash-table.
-#'
-#' @author Roman Pahl
 #' @importFrom R6 R6Class
 #' @seealso [Container()], [dict()]
 #' @export
@@ -22,14 +20,12 @@ Dict <- R6::R6Class("Dict",
             keys <- names(elems)
             keys.len <- length(keys)
             keys.nchars <- sapply(keys, nchar)
-            if (length(elems) != keys.len || any(keys.nchars == 0)) {
+            if (length(elems) != keys.len || any(keys.nchars == 0))
                 stop("all elems must be named")
-            }
 
-            if (any(duplicated(keys))) {
+            if (any(duplicated(keys)))
                 stop("duplicated keys are not allowed for ", data.class(self))
-            }
-            #super$initialize(..., keep_names = TRUE)
+
             private$elems <- list2env(elems, parent = emptyenv(), hash = TRUE)
             invisible(self)
         },
@@ -39,10 +35,10 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @param value the value to be added to the `Dict`.
         add = function(key, value) {
-            if (self$has(key)) {
+            if (self$has(key))
                 stop("key '", key, "' already in ", data.class(self))
-            }
-            self$setval(key, value, add = TRUE)
+
+            self$replace(key, value, add = TRUE)
         },
 
         #' @description If key in `Dict`, delete associated key-value pair.
@@ -51,9 +47,9 @@ Dict <- R6::R6Class("Dict",
         #' signaled.
         #' @return invisibly returns the `Dict`
         delete = function(key) {
-            if (!self$has(key)) {
+            if (!self$has(key))
                 stop("key '", key, "' not in ", data.class(self))
-            }
+
             self$discard(key)
         },
 
@@ -62,29 +58,28 @@ Dict <- R6::R6Class("Dict",
         #' the associated key-value pair is deleted, otherwise it is ignored.
         #' @return invisibly returns the `Dict`
         discard = function(key) {
-            if (self$has(key)) {
+            if (self$has(key))
                 remove(list = key, envir = private$elems)
-            }
+
             invisible(self)
         },
 
-        #' @description This function is deprecated. Use [getval()] instead.
+        #' @description This function is deprecated. Use [getvalue()] instead.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return value at `key`, else throw error.
         get = function(key) {
-            .Deprecated("getval")
-            self$getval(key)
+            .Deprecated("getvalue")
+            self$getvalue(key)
         },
 
         #' @description Access value.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return value at `key`, else throw error.
-        getval = function(key) {
-            if (self$has(key)) {
+        getvalue = function(key) {
+            if (self$has(key))
                 self$peek(key)
-            } else {
+            else
                 stop("key '", key, "' not in ", data.class(self))
-            }
         },
 
         #' @description Determine if `Dict` has a `key`.
@@ -117,9 +112,9 @@ Dict <- R6::R6Class("Dict",
         #' function can be used to sample randomly (with replacement) from
         #' a `Dict`.
         peekitem = function() {
-            if (self$empty()) {
+            if (self$empty())
                 return(NULL)
-            }
+
             key <- sample(self$keys(), size = 1)
             self$peek(key)
         },
@@ -139,9 +134,9 @@ Dict <- R6::R6Class("Dict",
         #' `Dict`. This function can be used to destructively iterate
         #'  over a `Dict`.
         popitem = function() {
-            if (self$empty()) {
+            if (self$empty())
                 stop("popitem at empty ", data.class(self))
-            }
+
             key <- sample(self$keys(), size = 1)
             self$pop(key)
         },
@@ -161,35 +156,26 @@ Dict <- R6::R6Class("Dict",
         #' @param new `character` new key name.
         #' @return invisibly returns the `Dict` object
         rename = function(old, new) {
-            if (length(old) != length(new)) {
+            if (length(old) != length(new))
                 stop("old and new must be of same length")
-            }
+
             if (length(old) > 1) {
-                for (i in seq_along(old)) {
-                    self$rename(old[i], new[i])
-                }
+                mapply(self$rename, old, new)
                 return(invisible(self))
             }
 
-            if (identical(old, new)) return(self)
-            if (!self$has(old)) stop("key '", old, "' not found")
-            if (self$has(new)) {
+            if (identical(old, new))
+                return(self)
+
+            if (!self$has(old))
+                stop("key '", old, "' not found")
+
+            if (self$has(new))
                 stop("rename failed because '", new, "' exists already")
-            }
-            self$add(key = new, value = self$getval(old))
+
+            self$add(key = new, value = self$getvalue(old))
             self$delete(old)
             invisible(self)
-        },
-
-        #' @description This function is deprecated. Use [setval()] instead.
-        #' @param key `character` name of key.
-        #' @param value the value to be set
-        #' @param add `logical` if `TRUE` the value is set regardless whether
-        #' `key` already exists in `Dict`.
-        #' @return invisibly returns the `Dict`
-        set = function(key, value, add = FALSE) {
-            .Deprecated("setval")
-            self$setval(key, value, add)
         },
 
         #' @description Overrides `value` at `key` if `key` is already in the
@@ -197,15 +183,27 @@ Dict <- R6::R6Class("Dict",
         #' set to `TRUE`.
         #' @param key `character` name of key.
         #' @param value the value to be set
+        #' @param add `logical` if `TRUE` the `value` is added in case
+        #' `key` does not exists.
+        #' @return invisibly returns the `Dict`
+        replace = function(key, value, add = FALSE) {
+            if (!add && !self$has(key))
+                stop("key '", key, "' not in ", data.class(self))
+
+            assign(key, value, envir = private$elems)
+            invisible(self)
+        },
+
+
+        #' @description This function is deprecated. Use [replace()] instead.
+        #' @param key `character` name of key.
+        #' @param value the value to be set
         #' @param add `logical` if `TRUE` the value is set regardless whether
         #' `key` already exists in `Dict`.
         #' @return invisibly returns the `Dict`
-        setval = function(key, value, add = FALSE) {
-            if (!add && !self$has(key)) {
-                stop("key '", key, "' not in ", data.class(self))
-            }
-            assign(key, value, envir = private$elems)
-            invisible(self)
+        set = function(key, value, add = FALSE) {
+            .Deprecated("replace")
+            self$replace(key, value, add)
         },
 
         #' @description Sort elements according to their keys. This function
@@ -222,12 +220,12 @@ Dict <- R6::R6Class("Dict",
         #' @param other `Dict` dictionary used to update the `Dict`
         #' @return invisibly returns the `Dict`
         update = function(other = Dict$new()) {
-            if (!inherits(other, data.class(self))) {
+            if (!inherits(other, data.class(self)))
                 stop("arg must be a ", data.class(self))
-            }
-            for (key in other$keys()) {
-                self$setval(key, other$getval(key), add = TRUE)
-            }
+
+            for (key in other$keys())
+                self$replace(key, other$getvalue(key), add = TRUE)
+
             invisible(self)
         },
 
@@ -239,12 +237,17 @@ Dict <- R6::R6Class("Dict",
         # Since elems are stored in an environment for Dict, some extra care
         # has to be taken if a true/deep copy is desired.
         deep_clone = function(name, value) {
-            if (name == "elems") {
-                list2env(as.list.environment(value, all.names = TRUE),
-                         parent = emptyenv())
-            } else {
-                value
+            if (name != "elems")
+                return(value)
+
+            clone_deep_if_container = function(x) {
+                if (is.container(x))
+                    x$clone(deep = TRUE) else x
             }
+
+            l = as.list.environment(value, all.names = TRUE)
+            list2env(lapply(l, clone_deep_if_container),
+                     parent = emptyenv())
         }
     ),
     lock_class = TRUE,
