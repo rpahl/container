@@ -40,12 +40,21 @@ Set <- R6::R6Class("Set",
             sets::cset_contains_element(self$values(), elem)
         },
 
-        #' @description Replace one element by another element
+        #' @description Search for occurence of `old` in the `Set` and
+        #' replace it by `new`. If `old` does not exist, an error is
+        #' signaled, unless `add` was set to `TRUE`, in which case `new` is
+        #' added.
         #' @param old element to be replaced
         #' @param new element to be put instead of old
+        #' @param add `logical` if `TRUE` the `new` element is added in case
+        #' `old` does not exists.
         #' @return invisibly returns the `Set` object
-        replace = function(old, new) {
-            self$delete(old)
+        replace = function(old, new, add = FALSE) {
+            if (add)
+                self$discard(old)
+            else
+                self$delete(old)
+
             self$add(new)
             invisible(self)
         },

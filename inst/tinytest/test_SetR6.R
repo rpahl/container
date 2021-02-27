@@ -147,10 +147,12 @@ expect_equal(out[[2]],
 # -------
 # replace
 # -------
-# Signals an error if elem does not exist
+# Signals an error if elem does not exist unless add == TRUE
 expect_error(Set$new()$replace(0, 1))
 expect_error(Set$new()$replace(NULL, 1))
 expect_error(Set$new(0)$replace(1, 2))
+
+expect_equal(Set$new()$replace(0, 1, add = TRUE), Set$new(1))
 
 # Replacing to an existing element, reduces the set
 s = Set$new(1, 2)

@@ -157,12 +157,12 @@ Container <- R6::R6Class("Container",
 
         #' @description Search for occurence(s) of `old` in `Container` and
         #' replace them by `new`. If `old` does not exist, an error is
-        #' signaled, unless `add` was set to `TRUE`, in which case `new` will
-        #' be added.
+        #' signaled, unless `add` was set to `TRUE`, in which case `new` is
+        #' added.
         #' @param old element to be replaced
         #' @param new element to be put instead of old
-        #' @param add `logical` if `TRUE` the `new` element is added always,
-        #' regardless whether `old` already exists in the container or not.
+        #' @param add `logical` if `TRUE` the `new` element is added in case
+        #' `old` does not exists.
         #' @return invisibly returns the `Container` object
         replace = function(old, new, add = FALSE) {
 
