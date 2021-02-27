@@ -51,19 +51,19 @@ The following table shows member methods divided by class. The top half contains
 | :-----------------------| :-------------| :--------------| :----------------------------|
 | Container\$new()        | Deque\$new()  | s <- Set\$new()| Dict\$new()                  |
 |                         |               |                |                              |
-| add(elem)               |               |                | add(key, elem)               |
+| add(x)                  |               |                | add(key, value)              |
 | clear()                 |               |                |                              |
-| count(elem)             |               |                |                              |
-| delete(elem)            |               |                | delete(key)                  |
-| discard(elem)           |               |                | discard(key)                 |
+| count(x)                |               |                |                              |
+| delete(x)               |               |                | delete(key)                  |
+| discard(x)              |               |                | discard(key)                 |
 | empty()                 |               |                |                              |
-| has(elem)               |               |                | has(key)                     |
+| has(x)                  |               |                | has(key)                     |
 | peekitem()              |               |                |                              |
 | popitem()               |               |                |                              |
-| replace(old, new, add=F)|               |                | replace(key, elem, add=F)    |
+| replace(x, y, add = F)  |               |                | replace(key, value, add = F) |
 | values()                |               |                |                              |
 |                         |               |                |                              |
-|                         | addleft(elem) | diff(s)        | getval(key)                  |
+|                         | addleft(x)    | diff(s)        | getval(key)                  |
 |                         |               | intersect(s)   | keys()                       |
 |                         | peek()        | is.equal(s)    | peek(key, default = NULL)    |
 |                         | peekleft()    | is.subset(s)   | pop(key)                     |

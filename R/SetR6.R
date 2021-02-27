@@ -19,43 +19,43 @@ Set <- R6::R6Class("Set",
         },
 
         #' @description Add element
-        #' @param elem If not already in set, add `elem`.
+        #' @param x If not already in set, add `x`.
         #' @return invisibly returns [Set()] object.
-        add = function(elem) {
-            private$elems = sets::set_union(self$values(), elem)
+        add = function(x) {
+            private$elems = sets::set_union(self$values(), x)
             invisible(self)
         },
 
         #' @description Discard element from `Set` if it exists.
-        #' @param elem element to be discarded.
+        #' @param x element to be discarded.
         #' @return invisibly returns the `Set` object
-        discard = function(elem) {
-            private$elems = self$values() - sets::set(elem)
+        discard = function(x) {
+            private$elems = self$values() - sets::set(x)
         },
 
         #' @description Determine if `Set` has some element.
-        #' @param elem element to search for
-        #' @return `TRUE` of `Set` contains `elem` else `FALSE`
-        has = function(elem) {
-            sets::cset_contains_element(self$values(), elem)
+        #' @param x element to search for
+        #' @return `TRUE` of `Set` contains `x` else `FALSE`
+        has = function(x) {
+            sets::cset_contains_element(self$values(), x)
         },
 
-        #' @description Search for occurence of `old` in the `Set` and
-        #' replace it by `new`. If `old` does not exist, an error is
-        #' signaled, unless `add` was set to `TRUE`, in which case `new` is
+        #' @description Search for occurence of `x` in the `Set` and
+        #' replace it by `y`. If `x` does not exist, an error is
+        #' signaled, unless `add` was set to `TRUE`, in which case `y` is
         #' added.
-        #' @param old element to be replaced
-        #' @param new element to be put instead of old
-        #' @param add `logical` if `TRUE` the `new` element is added in case
-        #' `old` does not exists.
+        #' @param x element to be replaced
+        #' @param y element to be put instead of x
+        #' @param add `logical` if `TRUE` the `y` element is added in case
+        #' `x` does not exists.
         #' @return invisibly returns the `Set` object
-        replace = function(old, new, add = FALSE) {
+        replace = function(x, y, add = FALSE) {
             if (add)
-                self$discard(old)
+                self$discard(x)
             else
-                self$delete(old)
+                self$delete(x)
 
-            self$add(new)
+            self$add(y)
             invisible(self)
         },
 
@@ -111,11 +111,11 @@ Set <- R6::R6Class("Set",
         }
     ),
     private = list(
-        create_from_list = function(x) {
-            stopifnot(is.list(x))
+        create_from_list = function(l) {
+            stopifnot(is.list(l))
             s = Set$new()
-            for (elem in x)
-                s$add(elem)
+            for (x in l)
+                s$add(x)
             s
         }
     ),

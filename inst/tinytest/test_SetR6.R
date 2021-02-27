@@ -14,8 +14,6 @@ expect_equal(Set$new(mean, mean, 1, 2), Set$new(mean, 1, 2))
 
 # Set elements can be named
 s = Set$new(a = 1, b = 3)
-expect_equal(names(s$values()), NULL)
-s = Set$new(a = 1, b = 3, keep_names = TRUE)
 expect_equal(names(s$values()), c("a", "b"))
 
 # ---

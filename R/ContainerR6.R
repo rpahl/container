@@ -53,10 +53,10 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description add element
-        #' @param elem element to be added to `Container` object
+        #' @param x element to be added to `Container` object
         #' @return invisibly returns the `Container` object
-        add = function(elem) {
-            private$elems <- c(private$elems, list(elem))
+        add = function(x) {
+            private$elems <- c(private$elems, list(x))
             invisible(self)
         },
 
@@ -66,34 +66,33 @@ Container <- R6::R6Class("Container",
             self$initialize()
         },
 
-        #' @description Count number of elem occurences.
-        #' @param elem element to be counted.
-        #' @return `integer` number of `elem` occurences in the [Deque()]
-        count = function(elem) {
-            sum(sapply(private$elems, FUN = private$get_compare_fun(elem)))
+        #' @description Count number of element occurences.
+        #' @param x element to be counted.
+        #' @return `integer` number of `x` occurences in the [Container()]
+        count = function(x) {
+            sum(sapply(private$elems, FUN = private$get_compare_fun(x)))
         },
 
-        #' @description Search for occurence(s) of `elem` in `Container` and
-        #' remove all of them. If the `elem` does not exist, an error is
-        #' signaled.
-        #' @param elem element to be removed from the `Container`.
+        #' @description Search for occurence(s) of `x` in `Container` and
+        #' remove all of them. If `x` does not exist, an error is signaled.
+        #' @param x element to be removed from the `Container`.
         #' @return invisibly returns the `Container` object
-        delete = function(elem) {
-            elem_str = deparse(substitute(elem))
-            if (!self$has(elem))
+        delete = function(x) {
+            elem_str = deparse(substitute(x))
+            if (!self$has(x))
                 stop(elem_str, " is not in ", data.class(self))
 
-            self$discard(elem)
+            self$discard(x)
         },
 
-        #' @description Search for occurence(s) of `elem` in `Container` and
+        #' @description Search for occurence(s) of `x` in `Container` and
         #' remove all of them.
-        #' @param elem element to be discarded from the `Container`. If not
+        #' @param x element to be discarded from the `Container`. If not
         #' found, the operation is ignored and the is object *not* altered.
         #' @return invisibly returns the `Container` object
-        discard = function(elem) {
+        discard = function(x) {
 
-            f = Negate(private$get_compare_fun(elem))
+            f = Negate(private$get_compare_fun(x))
             private$elems = Filter(f, private$elems)
 
             invisible(self)
@@ -104,10 +103,10 @@ Container <- R6::R6Class("Container",
         empty = function() self$length() == 0,
 
         #' @description Determine if `Container` has some element.
-        #' @param elem element to search for
-        #' @return `TRUE` of `Container` contains `elem` else `FALSE`
-        has = function(elem) {
-            !is.na(private$.get_position(elem))
+        #' @param x element to search for
+        #' @return `TRUE` of `Container` contains `x` else `FALSE`
+        has = function(x) {
+            !is.na(private$.get_position(x))
         },
 
         #' @description Number of elements of the `Container`.
@@ -136,9 +135,9 @@ Container <- R6::R6Class("Container",
                 stop("popitem at empty ", data.class(self))
             }
             pos <- sample(seq_along(private$elems), size = 1)
-            elem <- .subset2(private$elems, pos)
+            x <- .subset2(private$elems, pos)
             private$elems <- .subset(private$elems, -pos)
-            elem
+            x
         },
 
         #' @description Print object representation
@@ -155,18 +154,18 @@ Container <- R6::R6Class("Container",
 
         #' @description Replace one element by another element
 
-        #' @description Search for occurence(s) of `old` in `Container` and
-        #' replace them by `new`. If `old` does not exist, an error is
-        #' signaled, unless `add` was set to `TRUE`, in which case `new` is
+        #' @description Search for occurence(s) of `x` in `Container` and
+        #' replace them by `y`. If `x` does not exist, an error is
+        #' signaled, unless `add` was set to `TRUE`, in which case `y` is
         #' added.
-        #' @param old element to be replaced
-        #' @param new element to be put instead of old
-        #' @param add `logical` if `TRUE` the `new` element is added in case
-        #' `old` does not exists.
+        #' @param x element to be replaced
+        #' @param y element to be put instead of x
+        #' @param add `logical` if `TRUE` the `y` element is added in case
+        #' `x` does not exists.
         #' @return invisibly returns the `Container` object
-        replace = function(old, new, add = FALSE) {
+        replace = function(x, y, add = FALSE) {
 
-            is_matching_old = private$get_compare_fun(old)
+            is_matching_old = private$get_compare_fun(x)
 
             pos = integer(0)
             if (!self$empty())
@@ -174,23 +173,23 @@ Container <- R6::R6Class("Container",
 
             hasElem = length(pos) > 0
             if (!hasElem && add)
-                return(self$add(new))
+                return(self$add(y))
 
             if (!hasElem)
-                stop(deparse(substitute(old)), " is not in ", data.class(self))
+                stop(deparse(substitute(x)), " is not in ", data.class(self))
 
-            new_elem = if (length(new)) new else list(new)
+            new_elem = if (length(y)) y else list(y)
             private$elems <- replace(self$values(), pos, new_elem)
             invisible(self)
         },
 
         #' @description This function is deprecated. Use [delete()] instead.
-        #' @param elem element to be deleted from the `Container`. If element
+        #' @param x element to be deleted from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
         #' @return invisibly returns the `Container` object
-        remove = function(elem) {
+        remove = function(x) {
             .Deprecated("delete")
-            self$delete(elem)
+            self$delete(x)
         },
 
         #' @description This function is deprecated. Use [length()] instead.
@@ -229,8 +228,8 @@ Container <- R6::R6Class("Container",
         get_compare_fun = function(x) {
             function(y) isTRUE(all.equal(x, y))
         },
-        .get_position = function(elem, right = TRUE, ...) {
-            Position(f = private$get_compare_fun(elem),
+        .get_position = function(x, right = TRUE, ...) {
+            Position(f = private$get_compare_fun(x),
                      x = private$elems,
                      right = right,
                      ...)
