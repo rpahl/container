@@ -42,3 +42,7 @@ as.set <- function(x)
 #' @export
 is.set <- function(x) inherits(x, "Set")
 
+
+#' @export
+c.Set <- function(...) as.set(c.Container(...))
+

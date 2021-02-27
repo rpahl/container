@@ -14,10 +14,10 @@ Deque <- R6::R6Class("Deque",
     inherit = Container,
     public = list(
         #' @description Add element to left side of the `Deque`.
-        #' @param x element to be added.
+        #' @param elem element to be added.
         #' @return invisibly returns the `Deque()` object.
-        addleft = function(x) {
-            private$elems <- c(list(x), private$elems)
+        addleft = function(elem) {
+            private$elems <- c(list(elem), private$elems)
             invisible(self)
         },
 

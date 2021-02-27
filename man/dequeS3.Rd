@@ -5,7 +5,6 @@
 \alias{deque}
 \alias{as.deque}
 \alias{is.deque}
-\alias{addleft}
 \alias{rev.Deque}
 \title{Deque (double-ended queue)}
 \usage{
@@ -15,8 +14,6 @@ as.deque(x)
 
 is.deque(x)
 
-addleft(x, ...)
-
 \method{rev}{Deque}(x)
 }
 \arguments{
@@ -24,8 +21,6 @@ addleft(x, ...)
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.deque]{as.deque()}} and \code{\link[=is.deque]{is.deque()}}
 or of class \code{Deque} for the \code{S3} methods.}
-
-\item{elem}{an \code{R} object of any type}
 }
 \description{
 Deques are a generalization of stacks and queues typically
@@ -52,11 +47,6 @@ interface with copy semantics. Note that any \code{S3} methods defined for the
 \itemize{
 \item \code{is.deque(x)} returns \code{TRUE} if \code{x} is of class \code{Deque}
 and \code{FALSE} otherwise.
-}
-
-\itemize{
-\item \code{addleft(x, elem)} adds element \code{elem} to the left side of
-deque \code{x}.
 }
 
 \itemize{

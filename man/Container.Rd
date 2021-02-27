@@ -75,13 +75,13 @@ invisibly returns the \code{Container} object
 \subsection{Method \code{add()}}{
 add element
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$add(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$add(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be added to \code{Container} object}
+\item{\code{elem}}{element to be added to \code{Container} object}
 }
 \if{html}{\out{</div>}}
 }
@@ -108,34 +108,34 @@ invisibly returns the cleared \code{Container} object
 \subsection{Method \code{count()}}{
 Count number of element occurences.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$count(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$count(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be counted.}
+\item{\code{elem}}{element to be counted.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{integer} number of \code{x} occurences in the \code{\link[=Container]{Container()}}
+\code{integer} number of \code{elem} occurences in the \code{\link[=Container]{Container()}}
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-delete"></a>}}
 \if{latex}{\out{\hypertarget{method-delete}{}}}
 \subsection{Method \code{delete()}}{
-Search for occurence(s) of \code{x} in \code{Container} and
-remove all of them. If \code{x} does not exist, an error is signaled.
+Search for occurence(s) of \code{elem} in \code{Container} and
+remove all of them. If \code{elem} does not exist, an error is signaled.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$delete(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be removed from the \code{Container}.}
+\item{\code{elem}}{element to be removed from the \code{Container}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -147,16 +147,16 @@ invisibly returns the \code{Container} object
 \if{html}{\out{<a id="method-discard"></a>}}
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
-Search for occurence(s) of \code{x} in \code{Container} and
+Search for occurence(s) of \code{elem} in \code{Container} and
 remove all of them.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$discard(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$discard(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be discarded from the \code{Container}. If not
+\item{\code{elem}}{element to be discarded from the \code{Container}. If not
 found, the operation is ignored and the is object \emph{not} altered.}
 }
 \if{html}{\out{</div>}}
@@ -184,18 +184,18 @@ Check whether \code{Container} is empty
 \subsection{Method \code{has()}}{
 Determine if \code{Container} has some element.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$has(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$has(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to search for}
+\item{\code{elem}}{element to search for}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{TRUE} of \code{Container} contains \code{x} else \code{FALSE}
+\code{TRUE} of \code{Container} contains \code{elem} else \code{FALSE}
 }
 }
 \if{html}{\out{<hr>}}
@@ -271,23 +271,23 @@ invisibly returns the \code{Container} object
 Replace one element by another element
 
 
-Search for occurence(s) of \code{x} in \code{Container} and
-replace them by \code{y}. If \code{x} does not exist, an error is
-signaled, unless \code{add} was set to \code{TRUE}, in which case \code{y} is
+Search for occurence(s) of \code{elem} in \code{Container} and
+replace them by \code{new}. If \code{elem} does not exist, an error is
+signaled, unless \code{add} was set to \code{TRUE}, in which case \code{new} is
 added.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$replace(x, y, add = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$replace(old, new, add = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be replaced}
+\item{\code{old}}{element to be replaced}
 
-\item{\code{y}}{element to be put instead of x}
+\item{\code{new}}{element to be put instead of old}
 
-\item{\code{add}}{\code{logical} if \code{TRUE} the \code{y} element is added in case
-\code{x} does not exists.}
+\item{\code{add}}{\code{logical} if \code{TRUE} the \code{new} element is added in case
+\code{old} does not exists.}
 }
 \if{html}{\out{</div>}}
 }
@@ -301,13 +301,13 @@ invisibly returns the \code{Container} object
 \subsection{Method \code{remove()}}{
 This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$remove(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$remove(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be deleted from the \code{Container}. If element
+\item{\code{elem}}{element to be deleted from the \code{Container}. If element
 is not found in the \code{Container}, an error is signaled.}
 }
 \if{html}{\out{</div>}}

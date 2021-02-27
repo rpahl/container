@@ -61,6 +61,17 @@ expect_true(is.deque(deque()))
 expect_true(is.deque(deque(NULL)))
 expect_true(is.deque(deque()))
 
+# -------
+# c.Deque
+# -------
+# Standard concatenate
+d1 = deque(1)
+expect_equal(c(d1, NULL), d1)
+expect_equal(c(d1, list()), d1)
+expect_equal(c(d1, numeric()), d1)
+expect_equal(c(d1, 2:3), as.deque(1:3))
+d2 = deque(2)
+expect_equal(c(d1, d2, d2), deque(1, 2, 2))
 
 
 

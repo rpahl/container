@@ -36,13 +36,10 @@ as.deque <- function(x)
 #' @export
 is.deque <- function(x) inherits(x, "Deque")
 
-
-#' @rdname dequeS3
-#' @param elem an `R` object of any type
-#' @details * `addleft(x, elem)` adds element `elem` to the left side of
-#' deque `x`.
 #' @export
-addleft <- function(x, elem) x$addleft(elem)
+c.Deque <- function(...) as.deque(c.Container(...))
+
+
 
 
 #' @rdname dequeS3

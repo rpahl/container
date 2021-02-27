@@ -195,6 +195,37 @@ expect_equal(s, Set$new(0, 1, 2))
 s = Set$new(1, 2, 3)
 expect_equal(s$values(), sets::set(1, 2, 3))
 
+# -----
+# clone
+# -----
+# Set objects provide reference semantics but can also be cloned
+s1 <- Set$new(1, 2, 3)
+s2 <- s1
+ss <- s1$clone()
+expect_true(identical(s1, s2))
+expect_false(identical(s1, ss))
+expect_equal(s1$length(), ss$length())
+expect_equal(s1, ss)
+
+s1$delete(3)
+expect_true(identical(s1, s2))
+expect_true(s1$length() < ss$length())
+
+# Set objects can be even cloned deeply
+s1 = Set$new(1)
+s2 = Set$new(s1)
+
+ss = s2$clone()
+expect_equal(unpack(ss), 1)
+s1$add(2)   # since it was not a deep clone, this will be modified in ss as well
+expect_equal(unpack(ss), 1:2)
+
+ss.deep = s2$clone(deep = TRUE)
+expect_equal(unpack(ss.deep), 1:2)
+s1$add(3)   # this again affects ss but not ss.deep
+expect_equal(unpack(ss), 1:3)
+expect_equal(unpack(ss.deep), 1:2)
+
 
 # --------------
 # Set operations

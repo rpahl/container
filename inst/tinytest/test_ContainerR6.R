@@ -88,7 +88,7 @@ expect_equal(co$values(), list(1, 2))
 
 co <- Container$new(mean, identity)
 expect_equal(co$delete(mean)$values(), list(identity))
-expect_error(co$delete(), 'argument "x" is missing, with no default')
+expect_error(co$delete(), 'argument "elem" is missing, with no default')
 
 # Container gives an error if trying to delete non-existing element
 co <- Container$new(1)
@@ -111,7 +111,7 @@ expect_equal(co$values(), list(1, 2))
 
 co <- Container$new(mean, identity)
 expect_equal(co$discard(mean)$values(), list(identity))
-expect_error(co$discard(), 'argument "x" is missing, with no default')
+expect_error(co$discard(), 'argument "elem" is missing, with no default')
 
 # Container is not changed when trying to discard non-existing element
 co <- Container$new(1)
@@ -171,6 +171,7 @@ expect_equal(co$length(), length(co$values()))
 # --------
 co = Container$new(1, 2, 3)
 expect_true(co$peekitem() %in% 1:3)
+expect_equal(length(co$peekitem()), 1)
 expect_equal(co$length(), 3)
 expect_true(is.null(Container$new()$peekitem()))
 
@@ -217,11 +218,11 @@ expect_equal(out[[2]],
 # -------
 # replace
 # -------
-# Requires two arguments x and y
+# Requires two arguments old and new
 expect_error(Container$new(0)$replace(0),
-             'argument "y" is missing, with no default')
-expect_error(Container$new(0)$replace(y = 1),
-             'argument "x" is missing, with no default')
+             'argument "new" is missing, with no default')
+expect_error(Container$new(0)$replace(new = 1),
+             'argument "old" is missing, with no default')
 
 # By default signals an error if element does not exist
 expect_error(Container$new()$replace(0, 1), "0 is not in Container")

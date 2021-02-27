@@ -63,13 +63,13 @@ functionality.
 \subsection{Method \code{addleft()}}{
 Add element to left side of the \code{Deque}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Deque$addleft(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Deque$addleft(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be added.}
+\item{\code{elem}}{element to be added.}
 }
 \if{html}{\out{</div>}}
 }

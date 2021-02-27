@@ -76,13 +76,13 @@ invisibly returns the \code{Set}
 \subsection{Method \code{add()}}{
 Add element
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$add(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Set$add(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{If not already in set, add \code{x}.}
+\item{\code{elem}}{If not already in set, add \code{elem}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -96,13 +96,13 @@ invisibly returns \code{\link[=Set]{Set()}} object.
 \subsection{Method \code{discard()}}{
 Discard element from \code{Set} if it exists.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$discard(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Set$discard(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be discarded.}
+\item{\code{elem}}{element to be discarded.}
 }
 \if{html}{\out{</div>}}
 }
@@ -116,41 +116,41 @@ invisibly returns the \code{Set} object
 \subsection{Method \code{has()}}{
 Determine if \code{Set} has some element.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$has(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Set$has(elem)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to search for}
+\item{\code{elem}}{element to search for}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{TRUE} of \code{Set} contains \code{x} else \code{FALSE}
+\code{TRUE} of \code{Set} contains \code{elem} else \code{FALSE}
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-replace"></a>}}
 \if{latex}{\out{\hypertarget{method-replace}{}}}
 \subsection{Method \code{replace()}}{
-Search for occurence of \code{x} in the \code{Set} and
-replace it by \code{y}. If \code{x} does not exist, an error is
-signaled, unless \code{add} was set to \code{TRUE}, in which case \code{y} is
+Search for occurence of \code{elem} in the \code{Set} and
+replace it by \code{new}. If \code{elem} does not exist, an error is
+signaled, unless \code{add} was set to \code{TRUE}, in which case \code{new} is
 added.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$replace(x, y, add = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Set$replace(old, new, add = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{element to be replaced}
+\item{\code{old}}{element to be replaced}
 
-\item{\code{y}}{element to be put instead of x}
+\item{\code{new}}{element to be put instead of old}
 
-\item{\code{add}}{\code{logical} if \code{TRUE} the \code{y} element is added in case
-\code{x} does not exists.}
+\item{\code{add}}{\code{logical} if \code{TRUE} the \code{new} element is added in case
+\code{old} does not exists.}
 }
 \if{html}{\out{</div>}}
 }
