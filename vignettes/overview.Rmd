@@ -47,29 +47,31 @@ The following table shows member methods divided by class. The top half contains
 }
 </style>
 ```
-| Container              | Deque         | Set            | Dict                         |
-| :----------------------| :-------------| :--------------| :----------------------------|
-| Container\$new()       | Deque\$new()  | s <- Set\$new()| Dict\$new()                  |
-|                        |               |                |                              |
-| add(elem)              |               |                | add(key, value)              |
-| clear()                |               |                |                              |
-| delete(elem)           |               |                | delete(key)                  |
-| discard(elem)          |               |                | discard(key)                 |
-| empty()                |               |                |                              |
-| has(elem)              |               |                | has(key)                     |
-| peekitem()             |               |                |                              |
-| popitem()              |               |                |                              |
-| replace(old, new)      |               |                |                              |
-| values()               |               |                |                              |
-|                        |               |                |                              |
-|                        | addleft(elem) | diff(s)        | getval(key)                  |
-|                        | count(elem)   | intersect(s)   | keys()                       |
-|                        | peek()        | is.equal(s)    | peek(key, default = NULL)    |
-|                        | peekleft()    | is.subset(s)   | pop(key)                     |
-|                        | pop()         | is.superset(s) | rename(old, new)             |
-|                        | popleft()     | union(s)       | setval(key, value, add=FALSE)|
-|                        | reverse()     |                | sortkey(decr=FALSE)          |
-|                        | rotate(n=1L)  |                | update(other)                |
+| Container               | Deque         | Set            | Dict                         |
+| :-----------------------| :-------------| :--------------| :----------------------------|
+| Container\$new()        | Deque\$new()  | s <- Set\$new()| Dict\$new()                  |
+|                         |               |                |                              |
+| add(elem)               |               |                | add(key, elem)               |
+| clear()                 |               |                |                              |
+| count(elem)             |               |                |                              |
+| delete(elem)            |               |                | delete(key)                  |
+| discard(elem)           |               |                | discard(key)                 |
+| empty()                 |               |                |                              |
+| has(elem)               |               |                | has(key)                     |
+| peekitem()              |               |                |                              |
+| popitem()               |               |                |                              |
+| replace(old, new, add=F)|               |                | replace(key, elem, add=F)    |
+| values()                |               |                |                              |
+|                         |               |                |                              |
+|                         | addleft(elem) | diff(s)        | getval(key)                  |
+|                         |               | intersect(s)   | keys()                       |
+|                         | peek()        | is.equal(s)    | peek(key, default = NULL)    |
+|                         | peekleft()    | is.subset(s)   | pop(key)                     |
+|                         | pop()         | is.superset(s) | rename(old, new)             |
+|                         | popleft()     | union(s)       | update(other)                |
+|                         | rev()         |                |                              |
+|                         | rotate(n)     |                |                              |
+|                         | rotateleft(n) |                |                              |
 
 
 Table: Overview of classes and member methods

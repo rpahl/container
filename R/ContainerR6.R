@@ -93,8 +93,6 @@ Container <- R6::R6Class("Container",
         #' @return invisibly returns the `Container` object
         discard = function(elem) {
 
-            # TODO: discard the first item from the container whose value is
-            # equal to elem.
             f = Negate(private$get_compare_fun(elem))
             private$elems = Filter(f, private$elems)
 
@@ -156,15 +154,28 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Replace one element by another element
+
+        #' @description Search for occurence(s) of `old` in `Container` and
+        #' replace them by `new`. If `old` does not exist, an error is
+        #' signaled, unless `add` was set to `TRUE`, in which case `new` will
+        #' be added.
         #' @param old element to be replaced
         #' @param new element to be put instead of old
+        #' @param add `logical` if `TRUE` the `new` element is added always,
+        #' regardless whether `old` already exists in the container or not.
         #' @return invisibly returns the `Container` object
-        replace = function(old, new) {
+        replace = function(old, new, add = FALSE) {
 
             is_matching_old = private$get_compare_fun(old)
-            pos = which(sapply(self$values(), is_matching_old))
+
+            pos = integer(0)
+            if (!self$empty())
+                pos = which(sapply(self$values(), is_matching_old))
 
             hasElem = length(pos) > 0
+            if (!hasElem && add)
+                return(self$add(new))
+
             if (!hasElem)
                 stop(deparse(substitute(old)), " is not in ", data.class(self))
 
