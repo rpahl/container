@@ -66,6 +66,13 @@ Container <- R6::R6Class("Container",
             self$initialize()
         },
 
+        #' @description Count number of elem occurences.
+        #' @param elem element to be counted.
+        #' @return `integer` number of `elem` occurences in the [Deque()]
+        count = function(elem) {
+            sum(sapply(private$elems, FUN = private$get_compare_fun(elem)))
+        },
+
         #' @description Search for occurence(s) of `elem` in `Container` and
         #' remove all of them. If the `elem` does not exist, an error is
         #' signaled.
@@ -86,6 +93,8 @@ Container <- R6::R6Class("Container",
         #' @return invisibly returns the `Container` object
         discard = function(elem) {
 
+            # TODO: discard the first item from the container whose value is
+            # equal to elem.
             f = Negate(private$get_compare_fun(elem))
             private$elems = Filter(f, private$elems)
 

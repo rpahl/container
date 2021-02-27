@@ -21,14 +21,6 @@ Deque <- R6::R6Class("Deque",
             invisible(self)
         },
 
-        #' @description Count number of elem occurences.
-        #' @param elem element to be counted.
-        #' @return `integer` number of `elem` occurences in the [Deque()]
-        count = function(elem) {
-            comp <- function(x) isTRUE(all.equal(x, elem))
-            sum(sapply(private$elems, FUN = comp))
-        },
-
         #' @description Peek at last element on the right without removing it.
         #' @return element 'peeked' on the right
         peek = function() {

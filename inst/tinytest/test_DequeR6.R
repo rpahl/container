@@ -13,17 +13,6 @@ expect_equal(Deque$new(0L)$addleft(1)$values(), as.list(1:0))
 expect_equal(Deque$new(mean)$addleft(median)$values(), list(median, mean))
 
 
-# -----
-# count
-# -----
-# number of element occurrences can be counted
-names <- Deque$new("Lisa", "Bob", "Bob")
-expect_equal(names$count("Lisa"), 1)
-expect_equal(names$count("Bob"), 2)
-expect_equal(names$count("1"), 0)
-expect_equal(names$add("1")$count("1"), 1)
-
-
 # -----------------
 # peek and peekleft
 # -----------------

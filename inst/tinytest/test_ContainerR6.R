@@ -67,6 +67,17 @@ expect_equal(Container$new()$clear(), Container$new())
 expect_equal(Container$new(1, 2)$clear(), Container$new())
 expect_equal(Container$new(a = 1, b = 2)$clear(), Container$new())
 
+# -----
+# count
+# -----
+# number of element occurrences can be counted
+co <- Container$new("a", "a", "b", "a", "c")
+expect_equal(co$count("a"), 3)
+expect_equal(co$count("b"), 1)
+expect_equal(co$count("c"), 1)
+expect_equal(co$count("d"), 0)
+
+
 # ------
 # delete
 # ------
