@@ -14,7 +14,7 @@ Iterable <- R6::R6Class("Iterable",
 
         #' @description
         #' `Iterable` is an abstract class and thus cannot be instantiated.
-        initialize = function() stop("abstract class"),
+        initialize = function() stop("abstract class", call. = FALSE),
 
         #' @description Create iterator
         #' @return invisibly returns the `Iterator` object.

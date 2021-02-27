@@ -20,13 +20,10 @@
 NULL
 
 #' @examples
-#' dict(a = 1, b = "one", f = mean)
-#'
-#' d1 = dict(a = 1, b = 2)
-#' mode(values(d1))                     # 'list'
-#' d2 = dict(c(a = 1, b = 2))
-#' mode(values(d2))                     # 'numeric'
-#'
+#' 'd = dict(a = 1, b = "one", f = mean)
+#' 'print(d)
+#' 'print(values(d))
+#' '
 #' \dontrun{
 #' dict(a = 1, 2)                       # all elements must be named}
 #' @rdname dictS3
@@ -44,7 +41,7 @@ dict <- function(...) Dict$new(...)
 #' @export
 as.dict <- function(x)
 {
-    return(do.call(dict, args = as.list(x)))
+    do.call(dict, args = as.list(x))
 }
 
 #' @rdname dictS3
@@ -54,25 +51,14 @@ as.dict <- function(x)
 is.dict <- function(x) inherits(x, "Dict")
 
 
-#' @rdname dictS3
-#' @return `keys()` returns a `character` vector of all the dict's keys.
 #' @export
-#' @examples
-#'
-#' d = dict(x = 1, y = 2)
-#' keys(d)
-#' names(d)
 keys <- function(x)
 {
-    # TODO: deprecate?
-    if (!inherits(x, "Dict")) stop("x must be a 'Dict'")
-    x$keys()
+    .Deprecated("names")
+    names(x)
 }
 
 
-#' @rdname dictS3
-#' @return `names()` returns the same as [keys()].
 #' @export
-names.Dict <- function(x) x$keys() # TODO: should be defined via Container
-
+c.Dict <- function(...) as.dict(c.Container(...))
 

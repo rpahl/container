@@ -5,8 +5,6 @@
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
-\alias{keys}
-\alias{names.Dict}
 \title{Dict methods}
 \usage{
 dict(...)
@@ -14,21 +12,12 @@ dict(...)
 as.dict(x)
 
 is.dict(x)
-
-keys(x)
-
-\method{names}{Dict}(x)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Dict}.}
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.dict]{as.dict()}} and \code{\link[=is.dict]{is.dict()}}
 or of class \code{Dict} for the \code{S3} methods.}
-}
-\value{
-\code{keys()} returns a \code{character} vector of all the dict's keys.
-
-\code{names()} returns the same as \code{\link[=keys]{keys()}}.
 }
 \description{
 The \code{\link[=dict]{dict()}} resembles Python's dict type, and is implemented
@@ -61,23 +50,16 @@ and \code{FALSE} otherwise.
 }
 }
 \examples{
-dict(a = 1, b = "one", f = mean)
-
-d1 = dict(a = 1, b = 2)
-mode(values(d1))                     # 'list'
-d2 = dict(c(a = 1, b = 2))
-mode(values(d2))                     # 'numeric'
-
+'d = dict(a = 1, b = "one", f = mean)
+'print(d)
+'print(values(d))
+'
 \dontrun{
 dict(a = 1, 2)                       # all elements must be named}
 
 # Coercion
 as.dict(list(A = 1:3, B = "b"))
 as.dict(c(x = 1, y = "x", z = 2 + 3))
-
-d = dict(x = 1, y = 2)
-keys(d)
-names(d)
 }
 \seealso{
 See \code{\link[=container]{container()}} for all inherited methods. For the full class

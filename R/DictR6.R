@@ -21,10 +21,11 @@ Dict <- R6::R6Class("Dict",
             keys.len <- length(keys)
             keys.nchars <- sapply(keys, nchar)
             if (length(elems) != keys.len || any(keys.nchars == 0))
-                stop("all elems must be named")
+                stop("all elements must be named", call. = FALSE)
 
             if (any(duplicated(keys)))
-                stop("duplicated keys are not allowed for ", data.class(self))
+                stop("duplicated keys are not allowed for ",
+                     data.class(self), call. = FALSE)
 
             private$elems <- list2env(elems, parent = emptyenv(), hash = TRUE)
             invisible(self)

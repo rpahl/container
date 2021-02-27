@@ -1,27 +1,90 @@
-# dict initialization works as expected
+# ----
+# dict
+# ----
 d = dict()
-expect_true(inherits(d, "Dict"))
-expect_true(inherits(d, "Container"))
+expect_true(is.dict(d))
+expect_equal(length(d), 0)
+expect_equal(names(d), character(0))
+expect_equal(attr(d, "class"), c("Dict", "Container", "Iterable", "R6"))
+
 expect_true(empty(dict()))
 expect_equal(mode(values(dict())), "list")
 expect_error(dict(1:2), "all elems must be named")
 expect_error(dict(x = 1, y = 2, x = 3), "duplicated keys")
-expect_equal(keys(dict()), character(0))
+expect_warning(keys(dict()), "'keys' is deprecated.")
 
-# One element
-expect_equal(values(dict(x = 1)), list(x = 1))
-expect_equal(values(dict(x = NULL)), list(x = NULL))
-expect_equal(values(dict(x = 1:4)), list(x = 1:4))
-env = new.env()
-expect_equal(values(dict(x = env)), list(x = env))
+# -------
+# as.dict
+# -------
+expect_equal(as.dict(numeric()), dict())
+expect_equal(as.dict(NULL), dict())
+expect_equal(as.dict(list()), dict())
+expect_equal(as.dict(c(a = 1)), dict(a = 1))
+expect_equal(as.dict(list(a = 1, b = 2)), dict(a = 1, b = 2))
+expect_equal(as.dict(dict(a = 1)), dict(a = 1))
 
-# Two (or more) elements
-d <- dict(x = 1, y = 2)
-expect_equal(values(d), values(container(x = 1, y = 2, keep_names = TRUE)))
-expect_equal(names(values(d)), c("x", "y"))
+# a data.frame can be converted to a dict
+daf = data.frame(A = 1:2, B = 3:4)
+expect_equal(as.list(as.dict(daf)), as.list(daf))
 
-expect_equal(length(dict(env = environment(), id = identity)), 2)
+# a dict can be converted to a list
+d = dict(a = 1, b = 2)
+expect_equal(as.list(d), list(a = 1, b = 2))
 
+# a set can be converted to a dict
+s = setnew(a = 1, b = 2)
+expect_equal(as.dict(s), dict(a = 1, b = 2))
+
+# -------
+# is.dict
+# -------
+expect_error(is.dict())
+expect_false(is.dict(0))
+expect_false(is.dict(list()))
+expect_false(is.dict(container()))
+expect_false(is.dict(setnew()))
+expect_false(is.dict(deque()))
+
+expect_true(is.dict(dict()))
+expect_true(is.dict(dict(a = NULL)))
+expect_true(is.dict(dict()))
+
+# ------
+# c.Dict
+# ------
+# Standard concatenate
+d1 = dict(a = 1)
+expect_equal(c(d1, NULL), d1)
+expect_equal(c(d1, list()), d1)
+expect_equal(c(d1, numeric()), d1)
+expect_equal(c(d1, list(b = 2, d = 3)), dict(a = 1, b = 2, d = 3))
+expect_error(c(d1, list(2, d = 3)), "all elements must be named")
+
+d2 = dict(b = 2)
+expect_equal(c(d1, d2), dict(a = 1, b = 2))
+
+# Ensure concatenated objects are always copies also for nested containers
+dd1 = dict(d1 = d1)
+ddd1 = dict(dd1 = dd1)
+
+dd = c(d1, dd1, ddd1)
+expect_equal(dd, dict(a = 1, d1 = dict(a = 1), dd1 = dict(d1 = dict(a = 1))))
+expect_equal(unpack(dd), c(a = 1, d1.a = 1, dd1.d1.a = 1))
+d1$add("x", 3)
+dd1$add("x", 3)
+ddd1$add("x", 3)
+
+# If concatenation was done with copies, the following must still hold
+expect_equal(unpack(dd), c(a = 1, d1.a = 1, dd1.d1.a = 1))
+
+
+
+
+
+
+# ----------
+# S3 methods
+# ----------
 
 # adding elements to a Dict required a character key and a value
 d <- dict()
