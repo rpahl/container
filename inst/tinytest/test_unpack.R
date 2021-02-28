@@ -1,25 +1,53 @@
 # ------
 # unpack
 # ------
-expect_equal(unpack(container()), NULL)
-expect_equal(unpack(container(NULL)), NULL)
-expect_equal(unpack(container(container())), NULL)
-expect_equal(unpack(container(container(list()))), NULL)
-expect_equal(unpack(list()), NULL)
-expect_equal(unpack(list(list())), NULL)
-expect_equal(unpack(list(list(1))), 1)
-expect_equal(unpack(list(1:2)), 1:2)
-expect_equal(unpack(container(numeric())), numeric())
-expect_equivalent(unpack(container(data.frame(A = 1:2, B = 3:4))), 1:4)
+# Verify equality to unlist if only using list arguments
+check = function(x, ...) {
+    expect_equal(unpack(x, ...), unlist(x, ...))
+}
 
-co <- container(1, mean)
-co2 <- container(2, co, co)
-expect_equal(unpack(co2), unlist(list(2, as.list(co), as.list(co))))
-l <- list(co, list(list(3, 4), co2))
-expect_equal(unpack(l), list(1, mean, 3, 4,  2, 1, mean, 1, mean))
+check(NULL)
+check(numeric())
+check(list())
+check(c(a = 1))
+check(list(a = 1))
+check(list(a = 1, 2))
+check(list(a = 1, 2, use.names = FALSE))
 
-co3 <- container(7, 6)
-l <- list(list(container(co3,  co3), 0), 1:4)
-expect_equal(unpack(l), c(7,6,  7,6,  0,  1:4))
+l = list(a = list(b = 1:5, ll = list(0, x = NULL, 1)))
+check(l)
+check(l, recursive = FALSE)
+check(l, use.names = FALSE)
+check(l, recursive = FALSE, use.names = FALSE)
+
+
+# container vs list
+check = function(x, y, ...) {
+    expect_equal(unpack(x, ...), unlist(y, ...))
+}
+
+check(container(), list())
+check(container(), list(), recursive = FALSE)
+check(container(NULL), list(NULL))
+check(container(container()), list(list()))
+check(container(co = container()), list(co = container()), recursive = FALSE)
+
+daf = data.frame(A = 1:2, B = 3:4)
+check(container(daf = daf), list(daf = daf))
+check(container(daf = daf), list(daf = daf), use.names = FALSE)
+check(container(daf = daf), list(daf = daf), recursive = FALSE)
+
+co <- container(a = 1, b = 2)
+check(container(co = co), list(co = co), recursive = FALSE)
+expect_equal(unpack(container(co = co)), c(co.a = 1, co.b = 2))
+
+
+# nested containers
+co <- container(co = container(0),
+                s = setnew(1, 2),
+                d = dict(a = 1, b = 9),
+                de = as.deque(5:6))
+expect_equal(unpack(co),
+             c(co = 0, s1 = 1, s2 = 2, d.a = 1, d.b = 9, de1 = 5, de2 = 6))
 
 

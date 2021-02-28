@@ -4,20 +4,37 @@
 #' into a flat list. In contrast to [unlist()], [unpack()] also works with
 #' (possibly nested) [Container()] objects.
 #' @param x any `R` object
+#' @param recursive `logical` traverse recursively into nested objects?
+#' @param use.names `logical` Should names be preserved?
 #' @return a `list`
 #' @export
-unpack = function(x) {
+unpack = function(x, recursive = TRUE, use.names = TRUE) {
 
-    .unpack = function(x) {
+    if (!is.recursive(x))
+        return(x)
+
+    unpack_recursive = function(x) {
         if (is.container(x))
-            rapply(as.list(x), f = .unpack)
+            rapply(as.list(x), f = unpack_recursive)
         else
-            unlist(x)
+            unlist(x, recursive = TRUE, use.names = use.names)
     }
 
-    if (is.recursive(x))
-        rapply(as.list(x), f = .unpack)
+    unpack_nonrecursive = function(x) {
+        if (is.container(x))
+            unlist(as.list(x), recursive = FALSE, use.names = use.names)
+        else
+            unlist(x,          recursive = FALSE, use.names = use.names)
+    }
+
+    res = if (recursive)
+        rapply(as.list(x), f = unpack_recursive)
     else
-        x
+        unpack_nonrecursive(x)
+
+    if (!use.names)
+        names(res) = NULL
+
+    res
 }
 
