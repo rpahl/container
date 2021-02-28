@@ -26,7 +26,6 @@ Key-value pairs internally are stored in a hash-table.
 \item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
-\item \href{#method-getvalue}{\code{Dict$getvalue()}}
 \item \href{#method-has}{\code{Dict$has()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-peek}{\code{Dict$peek()}}
@@ -144,29 +143,9 @@ invisibly returns the \code{Dict}
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-This function is deprecated. Use \code{\link[=getvalue]{getvalue()}} instead.
+Access value at key.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$get(key)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{key}}{\code{character} name of key.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getvalue"></a>}}
-\if{latex}{\out{\hypertarget{method-getvalue}{}}}
-\subsection{Method \code{getvalue()}}{
-Access value.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$getvalue(key)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

@@ -61,17 +61,80 @@ expect_true(is.deque(deque()))
 expect_true(is.deque(deque(NULL)))
 expect_true(is.deque(deque()))
 
-# -------
+
+
+# -----------
 # c.Deque
-# -------
-# Standard concatenate
-d1 = deque(1)
-expect_equal(c(d1, NULL), d1)
-expect_equal(c(d1, list()), d1)
-expect_equal(c(d1, numeric()), d1)
-expect_equal(c(d1, 2:3), as.deque(1:3))
-d2 = deque(2)
-expect_equal(c(d1, d2, d2), deque(1, 2, 2))
+# -----------
+
+# standard non-recursive
+expect_equal(as.list(c(deque())), c(list()))
+expect_equal(as.list(c(deque(1))), c(list(1)))
+expect_equal(as.list(c(deque(NULL))), c(list(NULL)))
+
+expect_equal(as.list(c(deque(), deque())),
+                     c(list(), list()))
+expect_equal(as.list(c(deque(1), deque())),
+                     c(list(1), list()))
+expect_equal(as.list(c(deque(1), deque(2))),
+                     c(list(1), list(2)))
+expect_equal(as.list(c(deque(1), deque(2, list(a = 3)))),
+                     c(list(1), list(2, list(a = 3))))
+expect_equal(as.list(c(deque(1), deque(2, deque(a = 3)))),
+                     c(list(1), list(2, deque(a = 3))))
+expect_equal(c(deque(1), dict(a = 2, b = deque(a = 3))),
+               deque(1,       a = 2, b = deque(a = 3)))
+
+expect_equal(c(deque(1), dict(a = 2, b = deque(a = 3)), use.names = FALSE),
+               deque(1,           2,     deque(a = 3)))
+expect_equal(as.list(c(a = deque(1), b = deque(2, list(a = 3)),
+                       use.names = FALSE)),
+                     c(     list(1),      list(2, list(a = 3)),
+                       use.names = FALSE))
+
+
+# recursive
+cr = function(...) c(..., recursive = TRUE)
+expect_equal(cr(deque()),
+             cr(list()))
+expect_equal(cr(deque(1)),
+             cr(list(1)))
+expect_equal(cr(deque(NULL)),
+             cr(list(NULL)))
+
+expect_equal(cr(deque(), deque()),
+             cr( list(),  list()))
+expect_equal(cr(deque(1), deque()),
+             cr( list(1),  list()))
+expect_equal(cr(deque(1), deque(2)),
+             cr( list(1),  list(2)))
+expect_equal(cr(deque(1), deque(2, 3)),
+             cr( list(1),  list(2, 3)))
+expect_equal(cr(deque(1), deque(2, list(a = 3))),
+             cr( list(1),  list(2, list(a = 3))))
+expect_equal(cr(deque(1), deque(2, deque(a = 3))),
+             cr( list(1),  list(2, list(a = 3))))
+expect_equal(cr(deque(1),  list(2, deque(a = 3))),
+             cr( list(1),  list(2, list(a = 3))))
+expect_equal(cr(deque(1),  list(2, dict(a = 3))),
+             cr( list(1),  list(2, list(a = 3))))
+expect_equal(cr(deque(),   list(2, dict(a = 3))),
+             cr( list(),   list(2, list(a = 3))))
+
+expect_equal(c(deque(1), dict(a = 2, b = deque(a = 3)), recursive = TRUE),
+             c(1, a = 2, b.a = 3))
+
+
+# Ensure concatenated objects are always copies
+c1 = deque(1)
+c2 = deque(2)
+c1c1 = deque(c1 = c1)
+
+cc = c(c1, c1c1, c2)
+expect_equal(unpack(cc), c(1, c1 = 1, 2))
+c1$add(2)
+expect_equal(unpack(cc), c(1, c1 = 1, 2)) # still the same
+
 
 
 

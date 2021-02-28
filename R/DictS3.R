@@ -10,23 +10,23 @@
 #' or of class `Dict` for the `S3` methods.
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Dict()] and it's superclass [Container()].
-#' @name dictS3
+#' @name DictS3
 #' @details While the [Dict()] class is based on the `R6` framework and
-#' provides reference semantics, the presented methods provide an `S3`
+#' provides reference semantics, the methods described here provide an `S3`
 #' interface with copy semantics. Note that any `S3` methods defined for the
-#' `Container` class also work with `Deque` objects, even if not overwritten
+#' `Container` class also work with `Dict` objects, even if not overwritten
 #' explicitly.
 #' ## Methods
 NULL
 
 #' @examples
-#' 'd = dict(a = 1, b = "one", f = mean)
-#' 'print(d)
-#' 'print(values(d))
-#' '
+#' d = dict(a = 1, b = "one", f = mean)
+#' print(d)
+#' print(values(d))
+#'
 #' \dontrun{
 #' dict(a = 1, 2)                       # all elements must be named}
-#' @rdname dictS3
+#' @rdname DictS3
 #' @details * `dict(...)` initializes and returns an object of class `Dict`
 #' @export
 dict <- function(...) Dict$new(...)
@@ -36,16 +36,16 @@ dict <- function(...) Dict$new(...)
 #' # Coercion
 #' as.dict(list(A = 1:3, B = "b"))
 #' as.dict(c(x = 1, y = "x", z = 2 + 3))
-#' @rdname dictS3
-#' @details * `as.dict(x)` coerces `x` to a deque.
+#' @rdname DictS3
+#' @details * `as.dict(x)` coerces `x` to a dictionary
 #' @export
 as.dict <- function(x)
 {
     do.call(dict, args = as.list(x))
 }
 
-#' @rdname dictS3
-#' @details * `is.dict(x)` returns `TRUE` if `x` is of class `Deque`
+#' @rdname DictS3
+#' @details * `is.dict(x)` returns `TRUE` if `x` is of class `Dict`
 #' and `FALSE` otherwise.
 #' @export
 is.dict <- function(x) inherits(x, "Dict")
@@ -60,5 +60,13 @@ keys <- function(x)
 
 
 #' @export
-c.Dict <- function(...) as.dict(c.Container(...))
+c.Dict <- function(..., recursive = FALSE)
+{
+    concat = c.Container(..., recursive = recursive, use.names = TRUE)
+
+    if (recursive)
+        concat
+    else
+        as.dict(concat)
+}
 

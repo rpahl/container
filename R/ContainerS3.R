@@ -52,16 +52,19 @@ is.container <- function(x) inherits(x, "Container")
 #' @export
 c.Container <- function(..., recursive = FALSE, use.names = TRUE)
 {
-    args = list(...)
-    l1 = as.list(args[[1]])
-    rest = unpack(args[-1], recursive = recursive, use.names = use.names)
-
-    co = as.container(c(l1, rest, recursive = recursive, use.names = use.names))
+    elements = container(...)$values() # yields a deep copy of all elements
 
     if (recursive)
-        co = unpack(co)
+        return(unpack(elements, recursive = TRUE, use.names = use.names))
 
-    co
+    to_list_if_container = function(x)
+        if (is.container(x)) as.list(x) else x
+
+    list_elements = lapply(elements, to_list_if_container)
+
+    c.args = c(list_elements, list(use.names = use.names))
+    concatenated_elements = do.call(c, args = c.args)
+    as.container(concatenated_elements)
 }
 
 

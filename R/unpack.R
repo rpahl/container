@@ -5,7 +5,7 @@
 #' (possibly nested) [Container()] objects. In principle, it works for any
 #' object that can be transformed to a list via `as.list`.
 #' @param x any `R` object
-#' @param recursive `logical` traverse recursively into nested objects?
+#' @param recursive `logical` descend recursively into nested objects?
 #' @param use.names `logical` Should names be preserved?
 #' @return a `list`
 #' @export

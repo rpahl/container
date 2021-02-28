@@ -40,7 +40,8 @@ is.container(x)
 
 \method{-}{Container}(x, y)
 
-\method{add}{Container}(x, elem)
+## S3 method for class 'Container'
+add(x, elem)
 
 \method{clear}{Container}(x)
 
@@ -74,7 +75,7 @@ create objects of these classes.
 }
 \details{
 While the \code{\link[=Container]{Container()}} class is based on the \code{R6} framework and
-provides reference semantics, the presented methods provide an \code{S3}
+provides reference semantics, the methods described here provide an \code{S3}
 interface with copy semantics.
 \subsection{Methods}{
 }

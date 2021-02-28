@@ -9,40 +9,46 @@
 #' or of class `Deque` for the `S3` methods.
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Deque()] and it's superclass [Container()].
-#' @name dequeS3
+#' @name DequeS3
 #' @details While the [Deque()] class is based on the `R6` framework and
-#' provides reference semantics, the presented methods provide an `S3`
+#' provides reference semantics, the methods described here provide an `S3`
 #' interface with copy semantics. Note that any `S3` methods defined for the
 #' `Container` class also work with `Deque` objects.
 #' ## Methods
 NULL
 
-#' @rdname dequeS3
+#' @rdname DequeS3
 #' @details * `deque(...)` initializes and returns an object of class `Deque`
 #' @export
 deque <- function(...) Deque$new(...)
 
-#' @rdname dequeS3
+#' @rdname DequeS3
 #' @details * `as.deque(x)` coerces `x` to a deque.
 #' @export
-as.deque <- function(x)
-{
-    return(do.call(deque, args = as.list(x)))
-}
+as.deque <- function(x) do.call(deque, args = as.list(x))
 
-#' @rdname dequeS3
+
+#' @rdname DequeS3
 #' @details * `is.deque(x)` returns `TRUE` if `x` is of class `Deque`
 #' and `FALSE` otherwise.
 #' @export
 is.deque <- function(x) inherits(x, "Deque")
 
 #' @export
-c.Deque <- function(...) as.deque(c.Container(...))
+c.Deque <- function(..., recursive = FALSE, use.names = TRUE)
+{
+    concat = c.Container(..., recursive = recursive, use.names = use.names)
+
+    if (recursive)
+        concat
+    else
+        as.deque(concat)
+}
 
 
 
 
-#' @rdname dequeS3
+#' @rdname DequeS3
 #' @details * `rev(x)` reverses all elements of the deque in place and invisibly
 #' returns the [Deque()] object.
 #' @export

@@ -84,36 +84,63 @@ expect_equal(ccc1, container(container(container(1))))
 expect_equal(l, list(container(container(1))))  # not changed
 
 
-# -----------------
+# -----------
 # c.Container
-# -----------------
-# concat to empty container
-check_c_empty = function(..., recursive = FALSE) {
-    cco = c(container(), ..., recursive = recursive)
-    if (!recursive)
-        cco = as.list(cco)
+# -----------
+# standard non-recursive
+expect_equal(as.list(c(container())), c(list()))
+expect_equal(as.list(c(container(1))), c(list(1)))
+expect_equal(as.list(c(container(NULL))), c(list(NULL)))
 
-    cli = c(list(), ..., recursive = recursive)
-    expect_equal(cco, cli)
-}
+expect_equal(as.list(c(container(), container())),
+                     c(     list(),      list()))
+expect_equal(as.list(c(container(1), container())),
+                     c(     list(1),      list()))
+expect_equal(as.list(c(container(1), container(2))),
+                     c(     list(1),      list(2)))
+expect_equal(as.list(c(container(1), container(2, list(a = 3)))),
+                     c(     list(1),      list(2, list(a = 3))))
+expect_equal(as.list(c(container(1), container(2, container(a = 3)))),
+                     c(     list(1),      list(2, container(a = 3))))
+expect_equal(c(container(1), dict(a = 2, b = container(a = 3))),
+               container(1,       a = 2, b = container(a = 3)))
 
-check_c_empty(NULL)
-check_c_empty(numeric())
-check_c_empty(list())
-check_c_empty(container())
-check_c_empty(list(a = 1, co = container(y = 3, list(z = 4))))
-check_c_empty(list(a = 1, co = container(y = 3, list(z = 4))), use.names = FALSE)
-check_c_empty(list(a = 1, li = list(y = 3, list(z = 4))))
-check_c_empty(list(a = 1, li = list(y = 3, list(z = 4))), recursive = TRUE)
+expect_equal(c(container(1), dict(a = 2, b = container(a = 3)), use.names = FALSE),
+               container(1,           2,     container(a = 3)))
+expect_equal(as.list(c(a = container(1), b = container(2, list(a = 3)), use.names = FALSE)),
+                     c(         list(1),          list(2, list(a = 3)), use.names = FALSE))
 
-expect_equal(c(container(), list(a = 1, li = container(y = 3, dict(z = 4))), recursive = TRUE),
-             c(     list(), list(a = 1, li =      list(y = 3, list(z = 4))), recursive = TRUE))
 
-expect_equal(as.list(c(container(a = 1, list(x = 9)), list(b = 2, li = list(), NULL))),
-                     c(     list(a = 1, list(x = 9)), list(b = 2, li = list(), NULL)))
+# recursive
+cr = function(...) c(..., recursive = TRUE)
+expect_equal(cr(container()),
+             cr(     list()))
+expect_equal(cr(container(1)),
+             cr(     list(1)))
+expect_equal(cr(container(NULL)),
+             cr(     list(NULL)))
 
-expect_equal(c(container(a = 1, list(x = 9)), list(b = 2, li = list(), NULL), recursive = TRUE),
-                  c(list(a = 1, list(x = 9)), list(b = 2, li = list(), NULL), recursive = TRUE))
+expect_equal(cr(container(), container()),
+             cr(     list(),      list()))
+expect_equal(cr(container(1), container()),
+             cr(     list(1),      list()))
+expect_equal(cr(container(1), container(2)),
+             cr(     list(1),      list(2)))
+expect_equal(cr(container(1), container(2, 3)),
+             cr(     list(1),      list(2, 3)))
+expect_equal(cr(container(1), container(2, list(a = 3))),
+             cr(     list(1),      list(2, list(a = 3))))
+expect_equal(cr(container(1), container(2, container(a = 3))),
+             cr(     list(1),      list(2, list(a = 3))))
+expect_equal(cr(container(1),      list(2, container(a = 3))),
+             cr(     list(1),      list(2, list(a = 3))))
+expect_equal(cr(container(1),      list(2, dict(a = 3))),
+             cr(     list(1),      list(2, list(a = 3))))
+expect_equal(cr(container(),       list(2, dict(a = 3))),
+             cr(     list(),       list(2, list(a = 3))))
+
+expect_equal(c(container(1), dict(a = 2, b = container(a = 3)), recursive = TRUE),
+             c(1, a = 2, b.a = 3))
 
 
 # Ensure concatenated objects are always copies
