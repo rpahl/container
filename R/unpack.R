@@ -2,7 +2,8 @@
 #'
 #' Similary to [unlist()] recursively unpacks any (possibly nested) structure
 #' into a flat list. In contrast to [unlist()], [unpack()] also works with
-#' (possibly nested) [Container()] objects.
+#' (possibly nested) [Container()] objects. In principle, it works for any
+#' object that can be transformed to a list via `as.list`.
 #' @param x any `R` object
 #' @param recursive `logical` traverse recursively into nested objects?
 #' @param use.names `logical` Should names be preserved?

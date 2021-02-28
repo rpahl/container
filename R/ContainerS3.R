@@ -13,7 +13,7 @@
 #' @name ContainerS3
 #' @seealso For the `Container` class documentation see [Container()].
 #' @details While the [Container()] class is based on the `R6` framework and
-#' provides reference semantics, the presented methods provide an `S3`
+#' provides reference semantics, the methods described here provide an `S3`
 #' interface with copy semantics.
 #' ## Methods
 NULL
@@ -24,7 +24,7 @@ NULL
 #' @export
 container <- function(...)
 {
-    Container$new(...)
+    Container$new(...)$clone(deep = TRUE)
 }
 
 #' @rdname ContainerS3
@@ -50,11 +50,18 @@ is.container <- function(x) inherits(x, "Container")
 
 
 #' @export
-c.Container <- function(...)
+c.Container <- function(..., recursive = FALSE, use.names = TRUE)
 {
-    ll = lapply(list(...), FUN = as.list)
-    l = Reduce(ll, f = c)
-    as.container(l)
+    args = list(...)
+    l1 = as.list(args[[1]])
+    rest = unpack(args[-1], recursive = recursive, use.names = use.names)
+
+    co = as.container(c(l1, rest, recursive = recursive, use.names = use.names))
+
+    if (recursive)
+        co = unpack(co)
+
+    co
 }
 
 

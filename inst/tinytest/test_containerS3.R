@@ -10,6 +10,12 @@ expect_equal(container(1, 2, NULL), Container$new(1, 2, NULL))
 co = container(1, 2)
 expect_equal(container(co), Container$new(co))
 
+# Ensure container objects are passed as copies as well
+coco = container(co)
+expect_equal(unpack(coco), 1:2)
+co$add(3)
+expect_equal(unpack(coco), 1:2)
+
 # ------------
 # as.container
 # ------------
@@ -74,33 +80,52 @@ l = as.list(ccc1)
 expect_equal(l, list(container(container(1))))
 c1$add(2)
 cc1$add(2)
-expect_equal(ccc1, container(container(container(1, 2), 2)))
+expect_equal(ccc1, container(container(container(1))))
 expect_equal(l, list(container(container(1))))  # not changed
 
 
 # -----------------
 # c.Container
 # -----------------
-# Standard concatenate
+# concat to empty container
+check_c_empty = function(..., recursive = FALSE) {
+    cco = c(container(), ..., recursive = recursive)
+    if (!recursive)
+        cco = as.list(cco)
+
+    cli = c(list(), ..., recursive = recursive)
+    expect_equal(cco, cli)
+}
+
+check_c_empty(NULL)
+check_c_empty(numeric())
+check_c_empty(list())
+check_c_empty(container())
+check_c_empty(list(a = 1, co = container(y = 3, list(z = 4))))
+check_c_empty(list(a = 1, co = container(y = 3, list(z = 4))), use.names = FALSE)
+check_c_empty(list(a = 1, li = list(y = 3, list(z = 4))))
+check_c_empty(list(a = 1, li = list(y = 3, list(z = 4))), recursive = TRUE)
+
+expect_equal(c(container(), list(a = 1, li = container(y = 3, dict(z = 4))), recursive = TRUE),
+             c(     list(), list(a = 1, li =      list(y = 3, list(z = 4))), recursive = TRUE))
+
+expect_equal(as.list(c(container(a = 1, list(x = 9)), list(b = 2, li = list(), NULL))),
+                     c(     list(a = 1, list(x = 9)), list(b = 2, li = list(), NULL)))
+
+expect_equal(c(container(a = 1, list(x = 9)), list(b = 2, li = list(), NULL), recursive = TRUE),
+                  c(list(a = 1, list(x = 9)), list(b = 2, li = list(), NULL), recursive = TRUE))
+
+
+# Ensure concatenated objects are always copies
 c1 = container(1)
-expect_equal(c(c1, NULL), c1)
-expect_equal(c(c1, list()), c1)
-expect_equal(c(c1, numeric()), c1)
-expect_equal(c(c1, 2:3), as.container(1:3))
 c2 = container(2)
-expect_equal(c(c1, c2, c2), container(1, 2, 2))
+c1c1 = container(c1 = c1)
 
-# Ensure concatenated objects are always copies also for nested containers
-cc1 = container(c1)
-ccc1 = container(cc1)
+cc = c(c1, c1c1, c2)
+expect_equal(unpack(cc), c(1, c1 = 1, 2))
+c1$add(2)
+expect_equal(unpack(cc), c(1, c1 = 1, 2)) # still the same
 
-cc = c(c1, cc1, ccc1)
-expect_equal(cc, container(1, container(1), container(container(1))))
-c1$add(3)
-cc1$add(3)
-ccc1$add(3)
-# If copies were concatenated the following must still hold
-expect_equal(cc, container(1, container(1), container(container(1))))
 
 
 # ----------------

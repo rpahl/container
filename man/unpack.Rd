@@ -19,5 +19,6 @@ a \code{list}
 \description{
 Similary to \code{\link[=unlist]{unlist()}} recursively unpacks any (possibly nested) structure
 into a flat list. In contrast to \code{\link[=unlist]{unlist()}}, \code{\link[=unpack]{unpack()}} also works with
-(possibly nested) \code{\link[=Container]{Container()}} objects.
+(possibly nested) \code{\link[=Container]{Container()}} objects. In principle, it works for any
+object that can be transformed to a list via \code{as.list}.
 }
