@@ -9,7 +9,7 @@ unpack(x, recursive = TRUE, use.names = TRUE)
 \arguments{
 \item{x}{any \code{R} object}
 
-\item{recursive}{\code{logical} traverse recursively into nested objects?}
+\item{recursive}{\code{logical} descend recursively into nested objects?}
 
 \item{use.names}{\code{logical} Should names be preserved?}
 }

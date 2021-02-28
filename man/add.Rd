@@ -2,32 +2,52 @@
 % Please edit documentation in R/add.R
 \name{add}
 \alias{add}
+\alias{add.Container}
 \alias{add.Dict}
 \alias{add.dict.table}
+\alias{addleft}
+\alias{addleft.Deque}
 \title{Add element}
 \usage{
 add(x, ...)
 
+\method{add}{Container}(x, elem)
+
 \method{add}{Dict}(x, key, value)
 
-\method{add}{dict.table}(x, column, value)
+\method{add}{dict.table}(x, j, value)
+
+addleft(x, ...)
+
+\method{addleft}{Deque}(x, elem)
 }
 \arguments{
-\item{x}{any \code{R} object.}
+\item{x}{an \code{R} object of the respective class.}
 
 \item{...}{additional arguments to be passed to or from methods.}
+
+\item{elem}{some element of any type}
 
 \item{key}{\code{character} unique key identifier}
 
 \item{value}{some value}
 
-\item{column}{\code{character} name or \code{numeric} index of column.}
+\item{j}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Dict}, the dict object with the key-element pair being added.
+For \code{Container}, an object of class \code{Container} with the value being
+added to \code{x}.
 
-For \code{dict.table}, the dict.table object with the column being added.
+For \code{Dict}, an object of class \code{Dict} with the key-value pair being
+added to \code{x}. If the \code{key} already existed, an error is given.
+
+For \code{dict.table}, an object of class \code{dict.table} with the value
+being added to \code{x} at column \code{j}. If the column already existed, an error is
+given.
+
+For \code{Deque}, an object of class \code{Deque} with the element being
+added to the left of \code{x}.
 }
 \description{
-Add element
+Add an element to an object.
 }
