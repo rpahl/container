@@ -65,18 +65,10 @@ Dict <- R6::R6Class("Dict",
             invisible(self)
         },
 
-        #' @description This function is deprecated. Use [getvalue()] instead.
+        #' @description Access value at key.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return value at `key`, else throw error.
         get = function(key) {
-            .Deprecated("getvalue")
-            self$getvalue(key)
-        },
-
-        #' @description Access value.
-        #' @param key `character` name of key.
-        #' @return If `key` in `Dict`, return value at `key`, else throw error.
-        getvalue = function(key) {
             if (self$has(key))
                 self$peek(key)
             else
@@ -174,7 +166,7 @@ Dict <- R6::R6Class("Dict",
             if (self$has(new))
                 stop("rename failed because '", new, "' exists already")
 
-            self$add(key = new, value = self$getvalue(old))
+            self$add(key = new, value = self$get(old))
             self$delete(old)
             invisible(self)
         },
@@ -225,7 +217,7 @@ Dict <- R6::R6Class("Dict",
                 stop("arg must be a ", data.class(self))
 
             for (key in other$keys())
-                self$replace(key, other$getvalue(key), add = TRUE)
+                self$replace(key, other$get(key), add = TRUE)
 
             invisible(self)
         },

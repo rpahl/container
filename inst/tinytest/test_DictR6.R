@@ -291,10 +291,6 @@ expect_equal(ddd.deep,
 # ----------
 # verify that functions are deprecated
 
-# Dict get is deprecated and replaced by getvalue
-d <- Dict$new(a = 1, b = 2)
-expect_warning(expect_equal(d$get("b"), 2), "Use 'getvalue' instead.")
-
 # Dict set is deprecated and replaced by replace
 d <- Dict$new(a = 1, b = 2)
 expect_warning(d$set("b", 9), "Use 'replace' instead.")
