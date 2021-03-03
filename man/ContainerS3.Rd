@@ -43,7 +43,8 @@ is.container(x)
 ## S3 method for class 'Container'
 add(x, elem)
 
-\method{clear}{Container}(x)
+## S3 method for class 'Container'
+clear(x)
 
 \method{clone}{Container}(x)
 

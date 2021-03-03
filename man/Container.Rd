@@ -127,7 +127,8 @@ Count number of element occurences.
 \if{latex}{\out{\hypertarget{method-delete}{}}}
 \subsection{Method \code{delete()}}{
 Search for occurence(s) of \code{elem} in \code{Container} and
-remove all of them. If \code{elem} does not exist, an error is signaled.
+remove first one that is found. If \code{elem} does not exist, an error
+is signaled.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$delete(elem)}\if{html}{\out{</div>}}
 }
@@ -148,7 +149,7 @@ invisibly returns the \code{Container} object
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
 Search for occurence(s) of \code{elem} in \code{Container} and
-remove all of them.
+remove first one that is found.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$discard(elem)}\if{html}{\out{</div>}}
 }
@@ -157,7 +158,7 @@ remove all of them.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{elem}}{element to be discarded from the \code{Container}. If not
-found, the operation is ignored and the is object \emph{not} altered.}
+found, the operation is ignored and the object is \emph{not} altered.}
 }
 \if{html}{\out{</div>}}
 }
@@ -268,11 +269,9 @@ invisibly returns the \code{Container} object
 \if{html}{\out{<a id="method-replace"></a>}}
 \if{latex}{\out{\hypertarget{method-replace}{}}}
 \subsection{Method \code{replace()}}{
-Replace one element by another element
-
-
-Search for occurence(s) of \code{elem} in \code{Container} and
-replace them by \code{new}. If \code{elem} does not exist, an error is
+Replace one element by another element.
+Search for occurence of \code{old} in \code{Container} and, if found,
+replace it by \code{new}. If \code{old} does not exist, an error is
 signaled, unless \code{add} was set to \code{TRUE}, in which case \code{new} is
 added.
 \subsection{Usage}{
