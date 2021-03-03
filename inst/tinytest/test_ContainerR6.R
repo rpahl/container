@@ -96,10 +96,10 @@ expect_error(co$delete(5), "5 is not in Container")
 li = list(1, 2)
 expect_error(co$delete(li), "li is not in Container")
 
-# Multiple elements are all deleted
+# If duplicates, only one element is deleted
 co <- Container$new(1, 2, 1)
 co$delete(1)
-expect_equal(co, Container$new(2))
+expect_equal(co, Container$new(1, 2))
 
 # -------
 # discard
@@ -120,7 +120,7 @@ expect_silent(co$discard(5))
 # Multiple elements are all discarded
 co <- Container$new(1, 2, 1)
 co$discard(1)
-expect_equal(co, Container$new(2))
+expect_equal(co, Container$new(1, 2))
 
 # -----
 # empty
@@ -233,14 +233,14 @@ expect_error(Container$new(0)$replace(1, 2), "1 is not in Container")
 expect_equal(Container$new()$replace(0, 1, add = TRUE), Container$new(1))
 expect_equal(Container$new(1)$delete(1)$replace(0, 2, TRUE), Container$new(2))
 
-# Multiple occurcenes are replaced at once
+# If multiple occurcenes, only one of them is replaced starting from the right
 co = Container$new(1, 2, 1, 3)
 co$replace(1, 0)
-expect_equal(co, Container$new(0, 2, 0, 3))
+expect_equal(co, Container$new(1, 2, 0, 3))
 
 co = Container$new(1, 1L, "1")
 co$replace(1, 0)
-expect_equal(co, Container$new(0, 0, "1"))
+expect_equal(co, Container$new(1, 0, "1"))
 
 # Replace works on special elements of basic type
 co = Container$new(NULL, numeric(0), list(), NULL, numeric(0), list())

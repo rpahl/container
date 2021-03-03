@@ -74,7 +74,8 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Search for occurence(s) of `elem` in `Container` and
-        #' remove all of them. If `elem` does not exist, an error is signaled.
+        #' remove first one that is found. If `elem` does not exist, an error
+        #' is signaled.
         #' @param elem element to be removed from the `Container`.
         #' @return invisibly returns the `Container` object
         delete = function(elem) {
@@ -86,14 +87,21 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Search for occurence(s) of `elem` in `Container` and
-        #' remove all of them.
+        #' remove first one that is found.
         #' @param elem element to be discarded from the `Container`. If not
-        #' found, the operation is ignored and the is object *not* altered.
+        #' found, the operation is ignored and the object is *not* altered.
         #' @return invisibly returns the `Container` object
         discard = function(elem) {
+            if (self$empty())
+                return(invisible(self))
 
-            f = Negate(private$get_compare_fun(elem))
-            private$elems = Filter(f, private$elems)
+            is_matching_elem = private$get_compare_fun(elem)
+
+            pos = Position(is_matching_elem, self$values(), right = TRUE)
+
+            hasElem = !is.na(pos)
+            if (hasElem)
+                private$elems <- .subset(private$elems, -pos)
 
             invisible(self)
         },
@@ -152,10 +160,9 @@ Container <- R6::R6Class("Container",
             invisible(self)
         },
 
-        #' @description Replace one element by another element
-
-        #' @description Search for occurence(s) of `elem` in `Container` and
-        #' replace them by `new`. If `elem` does not exist, an error is
+        #' @description Replace one element by another element.
+        #' Search for occurence of `old` in `Container` and, if found,
+        #' replace it by `new`. If `old` does not exist, an error is
         #' signaled, unless `add` was set to `TRUE`, in which case `new` is
         #' added.
         #' @param old element to be replaced
@@ -166,12 +173,9 @@ Container <- R6::R6Class("Container",
         replace = function(old, new, add = FALSE) {
 
             is_matching_old = private$get_compare_fun(old)
+            pos = Position(is_matching_old, self$values(), right = TRUE)
 
-            pos = integer(0)
-            if (!self$empty())
-                pos = which(sapply(self$values(), is_matching_old))
-
-            hasElem = length(pos) > 0
+            hasElem = !is.na(pos)
             if (!hasElem && add)
                 return(self$add(new))
 
