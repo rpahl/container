@@ -26,7 +26,7 @@ expect_equal(as.container(1), container(1))
 expect_equal(as.container(1:2), container(1, 2))
 expect_equal(as.container(container(1)), container(1))
 
-# container can be created as copy from another container
+# container is created as copy from another container
 co = container(1, 2)
 co2 = as.container(co)
 expect_equal(co, co2)

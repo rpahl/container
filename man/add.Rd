@@ -49,5 +49,5 @@ For \code{Deque}, an object of class \code{Deque} with the element being
 added to the left of \code{x}.
 }
 \description{
-Add an element to an object.
+Add an element to a container object.
 }
