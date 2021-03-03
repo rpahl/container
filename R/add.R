@@ -1,6 +1,6 @@
 #' Add element
 #'
-#' Add an element to an object.
+#' Add an element to a container object.
 #' @param x an `R` object of the respective class.
 #' @param elem some element of any type
 #' @param ... additional arguments to be passed to or from methods.

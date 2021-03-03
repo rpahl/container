@@ -2,10 +2,13 @@
 % Please edit documentation in R/clear.R
 \name{clear}
 \alias{clear}
+\alias{clear.Container}
 \alias{clear.dict.table}
-\title{Clear an object}
+\title{Clear a container}
 \usage{
 clear(x, ...)
+
+\method{clear}{Container}(x)
 
 \method{clear}{dict.table}(x)
 }
@@ -15,8 +18,12 @@ clear(x, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-The cleared object.
+For \code{Container}, an object of class \code{Container} with all elements
+being removed.
+
+For \code{dict.table}, an object of class \code{dict.table} with all elements
+being removed.
 }
 \description{
-Removes all elements from the object.
+Removes all elements from the container object.
 }
