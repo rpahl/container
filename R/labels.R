@@ -141,12 +141,12 @@ LABEL.data.frame <- function(x, limit = NULL, ...)
 #' @export
 LABEL.data.table <- function(x, limit = NULL, ...)
 {
-    sprintf("<<%ix%i data.frame>>", nrow(x), ncol(x))
+    sprintf("<<%ix%i data.table>>", nrow(x), ncol(x))
 }
 
 #' @export
 LABEL.dict.table <- function(x, limit = NULL, ...)
 {
-    sprintf("<<data.frame(%ix%i)>>", nrow(x), ncol(x))
+    sprintf("<<dict.table(%ix%i)>>", nrow(x), ncol(x))
 }
 
