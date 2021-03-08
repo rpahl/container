@@ -79,3 +79,6 @@ length.Container <- function(x) x$length()
 names.Container <- function(x) names(x$values())
 
 # TODO: implement generic %in%
+
+# TODO: implement na.omit
+

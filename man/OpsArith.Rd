@@ -2,22 +2,16 @@
 % Please edit documentation in R/Ops-arithmetic.R
 \name{OpsArith}
 \alias{OpsArith}
-\alias{+.Set}
-\alias{&.Set}
-\alias{-.Set}
 \alias{+.Deque}
 \alias{-.Deque}
 \alias{+.Dict}
 \alias{-.Dict}
 \alias{&.Dict}
+\alias{+.Set}
+\alias{&.Set}
+\alias{-.Set}
 \title{Arithmetic Operators for Containers}
 \usage{
-\method{+}{Set}(x, y)
-
-\method{&}{Set}(x, y)
-
-\method{-}{Set}(x, y)
-
 \method{+}{Deque}(x, y)
 
 \method{-}{Deque}(x, y)
@@ -27,13 +21,34 @@
 \method{-}{Dict}(x, y)
 
 \method{&}{Dict}(x, y)
+
+\method{+}{Set}(x, y)
+
+\method{&}{Set}(x, y)
+
+\method{-}{Set}(x, y)
 }
 \arguments{
 \item{x, y}{Depending on the operator at least one or both must be of
-class \code{\link[=Container]{Container()}} or the respective derived class. Both must be at least
-iterable.}
+class \code{\link[=Container]{Container()}} or the respective derived class or at least coercible to
+the respective class.}
 }
 \value{
+For \code{Deque}, \code{+} returns a new \code{\link[=Deque]{Deque()}} object with all elements
+from \code{x} and \code{y} combined. If \code{x} is not a \code{\link[=Deque]{Deque()}}, it's elements will
+be added to the left of \code{y}.
+
+For \code{Deque}, \code{-} returns x - y
+
+For \code{Dict}, \code{+} returns a copy of \code{x} updated by \code{y}.
+
+For \code{Dict}, \code{-} returns \code{x} after all keys were discarded
+that appear in \code{y}.
+
+For \code{Dict}, \code{&} returns a copy of \code{x} keeping only the keys that
+are common in both (key intersection), that is, all keys in \code{x} that do not
+exist in \code{y} were removed.
+
 For \code{Set}, \code{+} returns the set union of x and y. Result is always a
 valid set.
 
@@ -41,22 +56,14 @@ For \code{Set} , \code{&} returns the set intersection of x and y
 
 For \code{Set}, \code{-} returns the set-difference of x and y. Result is
 always a valid set.
-
-For \code{Deque}, \code{+} returns a new \code{\link[=Deque]{Deque()}} object with all elements
-from \code{x} and \code{y}. If \code{x} is not a \code{\link[=Deque]{Deque()}}, it's elements will be added to
-the left of \code{y}.
-
-For \code{Deque}, \code{-} returns x - y
-
-For \code{Dict}, \code{+} returns a copy of \code{x} updated by \code{y}.
-
-For \code{Dict}, \code{-} \code{x} with keys discarded appearing in \code{y}.
-
-For \code{Dict}, \code{&} returns a copy of \code{x} keeping only the keys that
-are common in both (key intersection), that is, all keys in \code{x} that do not
-exist in \code{y} were removed.
 }
 \description{
 Binary arithmetic operators for \code{\link[=Container]{Container()}} objects and
 derived classes.
+}
+\details{
+\itemize{
+\item \code{x - y} element-wise removes all items of \code{y} from \code{x}, given
+the element was contained in \code{x}.
+}
 }

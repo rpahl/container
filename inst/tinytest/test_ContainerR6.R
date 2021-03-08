@@ -245,20 +245,20 @@ expect_equal(co, Container$new(1, 0, "1"))
 # Replace works on special elements of basic type
 co = Container$new(NULL, numeric(0), list(), NULL, numeric(0), list())
 co$replace(NULL, 0)
-expect_equal(co, Container$new(0, numeric(), list(), 0, numeric(), list()))
+expect_equal(co, Container$new(NULL, numeric(), list(), 0, numeric(), list()))
 co$replace(numeric(0), 0)
-expect_equal(co, Container$new(0, 0, list(), 0, 0, list()))
+expect_equal(co, Container$new(NULL, numeric(), list(), 0, 0, list()))
 co$replace(list(), 0)
-expect_equal(co, Container$new(0, 0, 0, 0, 0, 0))
+expect_equal(co, Container$new(NULL, numeric(), list(), 0, 0, 0))
 
 # Replace works on Container objects
 co1 = Container$new(1)
 co2 = Container$new(2)
 co = Container$new(co1, co2, co1, co2)
 co$replace(co1, 1)
-expect_equal(co, Container$new(1, co2, 1, co2))
+expect_equal(co, Container$new(co1, co2, 1, co2))
 co$replace(co2, 2)
-expect_equal(co, Container$new(1, 2, 1, 2))
+expect_equal(co, Container$new(co1, co2, 1, 2))
 
 
 # ------

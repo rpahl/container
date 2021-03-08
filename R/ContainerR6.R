@@ -153,6 +153,8 @@ Container <- R6::R6Class("Container",
         #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
         print = function(len = 6L, ...) {
+            # TODO: add verbose = container_option("print.verbose") argument
+            # and set this to FALSE by default, which omits the LABEL
             cat(LABEL(self, limit = 0), "\n", sep = "")
             x = format(self, limit = len, ...)
 

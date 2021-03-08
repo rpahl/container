@@ -1,5 +1,6 @@
-
-# Set
+# ----------
+# Comparison
+# ----------
 x = setnew(1, 2,    "1", "2")
 y = setnew(   2, 3,      "2", "3")
 expect_true(x > setnew())
@@ -37,5 +38,5 @@ expect_true(y >= y)
 
 x = setnew(1, setnew(2, 3))
 y = setnew(1, setnew(3, 2))
-#expect_true(x == y) # TODO: fails atm
+expect_true(x == y)
 
