@@ -1,3 +1,6 @@
+SETS_MATCHFUN <- sets::matchfun(function(x, y) isTRUE(all.equal(x, y)))
+#SETS_MATCHFUN <- sets::matchfun(function(x, y) identical(x, y))
+
 #' Set
 #'
 #' @description The [Set()] is considered and implemented as a specialized
@@ -14,7 +17,9 @@ Set <- R6::R6Class("Set",
         initialize = function(...) {
 
             super$initialize(...)
-            private$elems = sets::as.set(self$values())
+
+            sets::sets_options("matchfun", SETS_MATCHFUN)
+            private$elems = sets::as.cset(self$values())
             invisible(self)
         },
 
@@ -22,7 +27,7 @@ Set <- R6::R6Class("Set",
         #' @param elem If not already in set, add `elem`.
         #' @return invisibly returns [Set()] object.
         add = function(elem) {
-            private$elems = sets::set_union(self$values(), elem)
+            private$elems = sets::cset_union(self$values(), elem)
             invisible(self)
         },
 
@@ -30,7 +35,7 @@ Set <- R6::R6Class("Set",
         #' @param elem element to be discarded.
         #' @return invisibly returns the `Set` object
         discard = function(elem) {
-            private$elems = self$values() - sets::set(elem)
+            private$elems = self$values() - sets::cset(elem)
         },
 
         #' @description Determine if `Set` has some element.
@@ -64,8 +69,7 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` being the set difference between this and s.
         diff = function(s) {
             private$.verify_same_class(s)
-            set_diff = self$values() - s$values()
-            private$create_from_list(as.list(set_diff))
+            as.set(as.list(self$values() - s$values()))
         },
 
         #' @description `Set` intersection
@@ -73,8 +77,8 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` as a result of the intersection of this and s.
         intersect = function(s) {
             private$.verify_same_class(s)
-            set_intersection = sets::set_intersection(self$values(), s$values())
-            private$create_from_list(as.list(set_intersection))
+            intersection = sets::cset_intersection(self$values(), s$values())
+            as.set(as.list(intersection))
         },
 
         #' @description `Set` union
@@ -82,8 +86,8 @@ Set <- R6::R6Class("Set",
         #' @return new `Set` being the result of the union of this and s.
         union = function(s) {
             private$.verify_same_class(s)
-            set_union = sets::set_union(self$values(), s$values())
-            private$create_from_list(as.list(set_union))
+            the_union = sets::cset_union(self$values(), s$values())
+            as.set(as.list(the_union))
         },
 
         #' @description `Set` equality
@@ -91,7 +95,8 @@ Set <- R6::R6Class("Set",
         #' @return `TRUE` if this is equal to `s`, otherwise `FALSE`
         is_equal = function(s) {
             private$.verify_same_class(s)
-            sets::set_is_equal(self$values(), s$values())
+            length(self) == length(s) &&
+                sets::cset_is_equal(self$values(), s$values())
         },
 
         #' @description `Set` proper subset
@@ -99,7 +104,7 @@ Set <- R6::R6Class("Set",
         #' @return `TRUE` if this is subset of `s`, otherwise `FALSE`
         is_subset = function(s) {
             private$.verify_same_class(s)
-            sets::set_is_subset(self$values(), s$values())
+            length(self) <= length(s) && self$diff(s)$empty()
         },
 
         #' @description `Set` subset
@@ -107,16 +112,7 @@ Set <- R6::R6Class("Set",
         #' @return `TRUE` if this is proper subset of `s`, otherwise `FALSE`
         is_proper_subset = function(s) {
             private$.verify_same_class(s)
-            sets::set_is_proper_subset(self$values(), s$values())
-        }
-    ),
-    private = list(
-        create_from_list = function(l) {
-            stopifnot(is.list(l))
-            s = Set$new()
-            for (elem in l)
-                s$add(elem)
-            s
+            length(self) < length(s) && self$diff(s)$empty()
         }
     ),
     lock_class = TRUE

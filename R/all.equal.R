@@ -22,11 +22,13 @@
     TRUE
 }
 
-#' TODO: construct messages if non-equality as is typical for all.equal
+
 #' @export
 all.equal.Container = function(target, current, ...)
 {
-    .has_equal_containers(target, current)
+    if (.has_equal_containers(target, current))
+        return(TRUE)
 
+    # TODO: construct messages for non-equality case
 }
 

@@ -222,7 +222,8 @@ Container <- R6::R6Class("Container",
     ),
     private = list(
         elems = list(),
-        create_iter = function() Iterator$new(self$values()),
+        #create_iter = function() Iterator$new(self$values()),
+        create_iter = function() Iterator$new(private$elems),
         deep_clone = function(name, value) {
             if (name != "elems")
                 return(value)
