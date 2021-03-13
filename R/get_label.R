@@ -13,15 +13,16 @@ function(x, vec.len = 4L, ...)
 #' @export
 get_label.default <-
 function(x, ...) {
-    dim.x = dim(x)
-    if (is.null(dim.x))
-        dim.x = length(x)
+    if (is.null(x))
+        return("NULL")
 
-    left = paste0("<<", class(x)[1L], "(")
-    mid = paste(dim.x, collapse = "x")
-    right = ")>>"
+    s = class(x)[1L]
 
-    paste0(left, mid, right)
+    if (!is.null(dim(x)))
+        s = paste0(s, paste(dim(x), collapse = "x"))
+
+    #if (is.object(x))
+    paste0("<<", s, ">>")
 }
 
 

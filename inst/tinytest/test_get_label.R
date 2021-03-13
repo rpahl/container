@@ -2,8 +2,25 @@ f... = get_label
 f = function(...) get_label(..., useDots = FALSE)
 ee = expect_equal
 
+# -------------
+# Special cases
+# -------------
 expect_error(f...())
 expect_error(f())
+ee(f(NA), "NA")
+ee(f(NULL), "NULL")
+
+ee(f(raw()), "<<raw>>")
+ee(f(raw(5)), "<<raw>>")
+
+ee(f(mean), "<<function>>") # TODO: improve
+ee(f(getClass("MethodDefinition")), "<<classRepresentation>>")
+ee(f(lm(y ~ x, data = data.frame(y = 1:2, x = 1:2))), "<<lm>>")
+
+ee(f(new.env()), "<<environment>>")
+ee(f(Sys.time()), "<<POSIXct>>")
+
+
 
 # -------
 # numeric
@@ -95,6 +112,27 @@ ee(f(character(5)), "<<character(5)>>")
 ee(f(character(2), vec.len = 1), "<<character(2)>>")
 
 
+# ----
+# list
+# ----
+ee(f(list()), "list()")
+ee(f(list(1)), "list(1)")
+ee(f(list(NULL)), "list(1)")
 
+# ---------
+# Container
+# ---------
+ee(f(container()), "Container")
 
+# -----------
+# matrix & co
+# -----------
+ee(f(matrix()), "<<matrix(1x1)>>")
+ee(f(matrix(1:4)), "<<matrix(4x1)>>")
+ee(f(matrix(1:4, nrow = 2)), "<<matrix(2x2)>>")
+ee(f(matrix(1:10, nrow = 5)), "<<matrix(5x2)>>")
+
+ee(f(data.frame()), "<<data.frame(0x0)>>")
+ee(f(data.frame(a = 1:3)), "<<data.frame(3x1)>>")
+ee(f(data.frame(a = 1:2, b = 3:4)), "<<data.frame(2x2)>>")
 
