@@ -27,7 +27,6 @@ ee(f(list(as.dict(v[1:6]))), "<<Dict(6)>>")
 
 ee(f(container()), "")
 ee(f(container(list( ))), "list()")
-ee(f(container(list(1))), "<<list(1)>>")
 ee(f(container(list(1)), limit = 1), "list(1)")
 ee(f(container(list(1, 2)), limit = 1), "<<list(2)>>")
 ee(f(container(list(1, 2)), limit = 2), "list(1, 2)")
@@ -37,12 +36,12 @@ ee(f(container(numeric(0))), "numeric()")
 ee(f(container(c(1))), "1")
 ee(f(container(c(1)), limit = 1), "1")
 ee(f(container(c(1, 2)), limit = 1), "<<numeric(2)>>")
-ee(f(container(c(1, 2)), limit = 2), "(1, 2)")
+ee(f(container(c(1, 2)), limit = 2), "(1 2)")
 
 ee(f(container(c("a"))), '"a"')
 ee(f(container(c("a")), limit = 1), '"a"')
 ee(f(container(c("a", "b")), limit = 1), "<<character(2)>>")
-ee(f(container(c("a", "b")), limit = 2), '("a", "b")')
+ee(f(container(c("a", "b")), limit = 2), '("a" "b")')
 
 # -------
 # formats

@@ -1,130 +1,92 @@
-# The basic code idea below is borrowed from the 'sets' package with some
-# minor adjustments and fixes and extended by some functions to handle
-# Container and other classes.
-LABELS <-
-function(x, limit = NULL, ...)
+#' Object labels
+#'
+#' @references Credits for the code idea below belong to the authors of the
+#' very well written `sets` package.
+#' @seealso [sets::LABEL()]
+#' @noRd
+#' @export
+get_label <- function(x, limit = 5L, ...) UseMethod("get_label")
+
+
+#' @export
+get_label.default <- function(x, ...)
+    paste0("<<", data.class(x), ">>")
+
+
+.get_atomic_label <-
+function(x, limit = 5L, ...)
 {
-    x <- as.list(x)
-    len <- length(x)
+    s = .format_or_class_label(x, limit, ...)
 
-    # Where names are defined, we use them as labels
-    labels <- names(x)
-    if (is.null(labels))
-        labels <- rep.int("", len)
+    if (length(s) > 1)
+        s = paste0("(", paste(s, collapse = " "), ")")
+    s
+}
 
-    noLabel <- is.na(labels) | (labels == "")
-    if (any(noLabel))
-        labels[noLabel] <- sapply(x[noLabel], LABEL, limit, ...)
+#' @export
+get_label.numeric <- .get_atomic_label
 
-    labels
+#' @export
+get_label.factor <- .get_atomic_label
+
+#' @export
+get_label.integer <- .get_atomic_label
+
+#' @export
+get_label.logical <- .get_atomic_label
+
+#' @export
+get_label.character <-
+function(x, limit = 5L, ...)
+{
+    x <- ifelse(is.na(x), x, paste0("\"", x, "\""))
+    .get_atomic_label(x)
+}
+
+#' @export
+get_label.list <- function(x, limit = 5L, ...)
+{
+    .format_or_class_label(x, limit, ...)
 }
 
 
 #' @export
-LABEL <- function(x, limit = NULL, ...) UseMethod("LABEL")
-
-
-#' @export
-LABEL.default <- function(x, limit = NULL, ...)
-    paste0("<<", class(x)[1L], ">>")
-
+get_label.Container <- function(x, limit = 5L, ...)
+{
+    .format_or_class_label(x, limit, ...)
+}
 
 #' @export
-LABEL.matrix <- function(x, limit = NULL, ...)
+get_label.matrix <- function(x, ...)
     sprintf("<<%ix%i matrix>>", nrow(x), ncol(x))
 
 #' @export
-LABEL.numeric <-
-function(x, limit = NULL, ...)
-{
-    if (is.null(limit))
-        limit <- 2L
-
-    s = .format_or_class(x, limit, ...)
-    if (length(s) > 1)
-        s = paste0("(", toString(s), ")")
-    s
-}
-
-#' @export
-LABEL.factor <- LABEL.numeric
-
-#' @export
-LABEL.integer <- LABEL.numeric
-
-#' @export
-LABEL.logical <- LABEL.numeric
-
-#' @export
-LABEL.character <-
-function(x, limit = NULL, quote = TRUE, ...)
-{
-    if (is.null(limit))
-        limit <- 2L
-
-    if (quote)
-        x <- ifelse(is.na(x), x, paste0("\"", x, "\""))
-
-    s = .format_or_class(x, limit, ...)
-
-    if (length(s) > 1)
-        s = paste0("(", toString(s), ")")
-    s
-
-}
-
-#' @export
-LABEL.list <- function(x, limit = NULL, ...)
-{
-    if (is.null(limit))
-        limit <- 0L
-
-    s = .format_or_class(x, limit, ...)
-
-    if (length(s) > 1)
-        s = paste0("list(", toString(s), ")")
-
-    if (length(s) == 1 && !startsWith(s, "list") && !startsWith(s, "<"))
-        s = paste0("list(", toString(s), ")")
-
-    s
-}
-
-
-#' @export
-LABEL.Container <- function(x, limit = NULL, ...)
-{
-    if (is.null(limit))
-        limit <- 5L
-    .format_or_class(x, limit, ...)
-}
-
-#' @export
-LABEL.data.frame <- function(x, limit = NULL, ...)
+get_label.data.frame <- function(x, ...)
     sprintf("<<%s(%ix%i)>>", data.class(x), nrow(x), ncol(x))
 
 
 #' @export
-LABEL.data.table <- function(x, limit = NULL, ...)
+get_label.data.table <- function(x, ...)
     sprintf("<<%ix%i data.table>>", nrow(x), ncol(x))
 
 
 #' @export
-LABEL.dict.table <- function(x, limit = NULL, ...)
+get_label.dict.table <- function(x, ...)
     sprintf("<<dict.table(%ix%i)>>", nrow(x), ncol(x))
 
 
-.format_or_class <-
-function(x, limit, ...)
+.format_or_class_label <- function(x, limit, ...)
 {
-    l <- length(x)
-    if (l == 0)
-        return(paste0(class(x)[1L], "()"))
+    len <- length(x)
+    if (len == 0)
+        return(paste0(data.class(x), "()"))
 
-    if (l > limit)
-        return(paste0("<<", class(x)[1L], "(", l, ")>>"))
+    createClassLabel = len > limit
+    if (createClassLabel)
+        return(paste0("<<", data.class(x), "(", len, ")>>"))
 
-    if (is.integer(x))
+    isUsingIdentical = TRUE
+    if (is.integer(x) && isUsingIdentical)
         format(ifelse(is.na(x), x, paste0(x, "L")), ...)
     else
         format(x, ...)

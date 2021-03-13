@@ -1,21 +1,15 @@
-.create_object_string <- function(x, x.names, name_seps, ...)
-{
-    if (length(x) == 0) return("")
-
-    paste(x.names, name_seps, LABELS(as.list(x), ...),
-          sep = "", collapse = ", ")
-}
-
 .format_values <- function(x, left = "(", right = ")", ...)
 {
     x.names <- names(x)
-    names(x) <- NULL
+    #names(x) <- NULL
     name_seps <- rep.int("", length(x))
 
     if (!is.null(x.names))
         name_seps[x.names != ""] <- " = "
 
-    obj_str = .create_object_string(x, x.names, name_seps, ...)
+    labels = sapply(x, LABEL, ...)
+
+    obj_str = paste(x.names, name_seps, labels, sep = "", collapse = ", ")
 
     paste0(left, obj_str, right)
 }
@@ -39,5 +33,10 @@ format.Dict <- function(x, ...)
 format.Set <- function(x, ...)
 {
     .format_values(as.list(x), left = "{", right = "}", ...)
+}
+
+format.list <- function(x, ...)
+{
+    .format_values(x, left = "list(", right = ")", ...)
 }
 
