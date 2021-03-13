@@ -5,7 +5,8 @@
 #' @seealso [sets::LABEL()]
 #' @noRd
 #' @export
-get_label <- function(x, limit = 5L, ...) UseMethod("get_label")
+get_label <- function(x, vec.len = NULL, ...)
+    UseMethod("get_label")
 
 
 #' @export
@@ -14,9 +15,12 @@ get_label.default <- function(x, ...)
 
 
 .get_atomic_label <-
-function(x, limit = 5L, ...)
+function(x, vec.len = NULL, ...)
 {
-    s = .format_or_class_label(x, limit, ...)
+    if (is.null(vec.len))
+        vec.len = utils::strOptions()$vec.len
+
+    s = .format_or_class_label(x, vec.len, ...)
 
     if (length(s) > 1)
         s = paste0("(", paste(s, collapse = " "), ")")
@@ -37,23 +41,32 @@ get_label.logical <- .get_atomic_label
 
 #' @export
 get_label.character <-
-function(x, limit = 5L, ...)
+function(x, vec.len = NULL, ...)
 {
+    if (is.null(vec.len))
+        vec.len = utils::strOptions()$vec.len
+
     x <- ifelse(is.na(x), x, paste0("\"", x, "\""))
     .get_atomic_label(x)
 }
 
 #' @export
-get_label.list <- function(x, limit = 5L, ...)
+get_label.list <- function(x, vec.len = NULL, ...)
 {
-    .format_or_class_label(x, limit, ...)
+    if (is.null(vec.len))
+        vec.len = utils::strOptions()$vec.len
+
+    .format_or_class_label(x, vec.len, ...)
 }
 
 
 #' @export
-get_label.Container <- function(x, limit = 5L, ...)
+get_label.Container <- function(x, vec.len = NULL, ...)
 {
-    .format_or_class_label(x, limit, ...)
+    if (is.null(vec.len))
+        vec.len = utils::strOptions()$vec.len
+
+    .format_or_class_label(x, vec.len, ...)
 }
 
 #' @export
@@ -75,13 +88,18 @@ get_label.dict.table <- function(x, ...)
     sprintf("<<dict.table(%ix%i)>>", nrow(x), ncol(x))
 
 
-.format_or_class_label <- function(x, limit, ...)
+
+
+.format_or_class_label <- function(x, vec.len = NULL, ...)
 {
+    if (is.null(vec.len))
+        vec.len = utils::strOptions()$vec.len
+
     len <- length(x)
     if (len == 0)
         return(paste0(data.class(x), "()"))
 
-    createClassLabel = len > limit
+    createClassLabel = len > vec.len
     if (createClassLabel)
         return(paste0("<<", data.class(x), "(", len, ")>>"))
 
@@ -91,5 +109,4 @@ get_label.dict.table <- function(x, ...)
     else
         format(x, ...)
 }
-
 

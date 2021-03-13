@@ -1,16 +1,14 @@
 .format_values <- function(x, left = "(", right = ")", ...)
 {
     x.names <- names(x)
-    #names(x) <- NULL
     name_seps <- rep.int("", length(x))
 
     if (!is.null(x.names))
         name_seps[x.names != ""] <- " = "
 
-    labels = sapply(x, LABEL, ...)
+    labels = sapply(x, get_label, ...)
 
     obj_str = paste(x.names, name_seps, labels, sep = "", collapse = ", ")
-
     paste0(left, obj_str, right)
 }
 
