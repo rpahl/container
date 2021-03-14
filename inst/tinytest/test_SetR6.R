@@ -270,60 +270,49 @@ s23  = Set$new(   2, 3)
 s1_3 = Set$new(1,    3)
 s123 = Set$new(1, 2, 3)
 
-original_sets_were_not_altered =
-    isTRUE(all.equal(s0, Set$new()))            &&
-    isTRUE(all.equal(s1, Set$new(1)))           &&
-    isTRUE(all.equal(s12, Set$new(1, 2)))       &&
-    isTRUE(all.equal(s23, Set$new(   2, 3)))    &&
-    isTRUE(all.equal(s1_3, Set$new(1,   3)))    &&
-    isTRUE(all.equal(s123, Set$new(1, 2, 3)))
-
 # diff
-expect_error(s1$diff(2))
-expect_error(s1$diff(NULL))
-expect_error(s1$diff(NA))
+expect_error(s1$diff(2), "arg must be a Set")
+expect_error(s1$diff(NULL), "arg must be a Set")
+expect_error(s1$diff(NA), "arg must be a Set")
 
 expect_equal(s0$diff(s1), s0)
 expect_equal(s1$diff(s0), s1)
 expect_equal(s123$diff(s0), s123)
 
-expect_equal(s1$diff(s1), s0)
-expect_equal(s1$diff(s12), s0)
-expect_equal(s12$diff(s1), Set$new(2))
-expect_equal(s123$diff(s1), s23)
-expect_equal(s1_3$diff(s23), s1)
-
-expect_true(original_sets_were_not_altered)
+expect_equal(Set$new(1)$diff(s1), s0)
+expect_equal(Set$new(1)$diff(s12), s0)
+expect_equal(Set$new(1, 2)$diff(s1), Set$new(2))
+expect_equal(Set$new(1, 2, 3)$diff(s1), s23)
+expect_equal(Set$new(1, 3)$diff(s23), s1)
 
 # intersect
-expect_error(s1$intersect(2))
-expect_error(s1$intersect(NULL))
-expect_error(s1$intersect(NA))
+expect_error(s1$intersect(2), "arg must be a Set")
+expect_error(s1$intersect(NULL), "arg must be a Set")
+expect_error(s1$intersect(NA), "arg must be a Set")
 
 expect_equal(s0$intersect(s0), s0)
 expect_equal(s0$intersect(s123), s0)
-expect_equal(s123$intersect(s0), s0)
+expect_equal(Set$new(1, 2, 3)$intersect(s0), s0)
 
-expect_equal(s12$intersect(s23), s23$intersect(s12)) # commutativity
-expect_equal(s1$intersect(s23), s0)
-expect_equal(s12$intersect(s12), s12)
+expect_equal(Set$new(1, 2)$intersect(Set$new(2, 3)),
+             Set$new(2, 3)$intersect(Set$new(1, 2))) # commutativity
+expect_equal(Set$new(1)$intersect(s23), s0)
+expect_equal(Set$new(1, 2)$intersect(s12), s12)
 
-expect_true(original_sets_were_not_altered)
 
 # union
-expect_error(s1$union(2))
-expect_error(s1$union(NULL))
-expect_error(s1$union(NA))
+expect_error(s1$union(2), "arg must be a Set")
+expect_error(s1$union(NULL), "arg must be a Set")
+expect_error(s1$union(NA), "arg must be a Set")
 
 expect_equal(s0$union(s0), s0)
-expect_equal(s0$union(s123), s123)
-expect_equal(s123$union(s0), s123)
+expect_equal(Set$new()$union(s123), s123)
+expect_equal(Set$new(1, 2, 3)$union(s0), s123)
 
-expect_equal(s12$union(s23), s123)
-expect_equal(s23$union(s12), s123)
-expect_equal(s12$union(s1_3), s123)
+expect_equal(Set$new(1, 2)$union(s23), s123)
+expect_equal(Set$new(2, 3)$union(s12), s123)
+expect_equal(Set$new(1, 2)$union(s1_3), s123)
 
-expect_true(original_sets_were_not_altered)
 
 # comparison
 expect_error(s1$is_equal(2))

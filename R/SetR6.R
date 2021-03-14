@@ -99,7 +99,10 @@ Set <- R6::R6Class("Set",
         #' @return the `Set` object as a result of the union of this and s.
         union = function(s) {
             private$verify_same_class(s)
-            do.call(self$add, args = s$values())
+
+            for (elem in s$values()) {
+                self$add(elem)
+            }
             self
         },
 
