@@ -30,6 +30,7 @@ Iterable <- R6::R6Class("Iterable",
 )
 
 
+
 #' @title A sequence Container
 #'
 #' @description This class implements a container data structure with typical
@@ -46,9 +47,12 @@ Container <- R6::R6Class("Container",
     public = list(
         #' @description constructor
         #' @param ... initial elements put into the `Container`
+        #' @param .cmp `character` or `function` used for comparing of
+        #' elements. Default to `all.equal`.
         #' @return invisibly returns the `Container` object
-        initialize = function(...) {
+        initialize = function(..., .cmp = container_options("compare")[[1]]) {
             private$elems <- list(...)
+            private$set_compare_fun(.cmp)
             invisible(self)
         },
 
@@ -70,7 +74,7 @@ Container <- R6::R6Class("Container",
         #' @param elem element to be counted.
         #' @return `integer` number of `elem` occurences in the [Container()]
         count = function(elem) {
-            sum(sapply(private$elems, FUN = private$get_compare_fun(elem)))
+            sum(sapply(private$elems, FUN = private$compare_predicate(elem)))
         },
 
         #' @description Search for occurence(s) of `elem` in `Container` and
@@ -95,9 +99,7 @@ Container <- R6::R6Class("Container",
             if (self$empty())
                 return(invisible(self))
 
-            is_matching_elem = private$get_compare_fun(elem)
-
-            pos = Position(is_matching_elem, self$values(), right = TRUE)
+            pos = private$get_position(elem)
 
             hasElem = !is.na(pos)
             if (hasElem)
@@ -110,11 +112,13 @@ Container <- R6::R6Class("Container",
         #' @return `TRUE` if the `Container` is empty else `FALSE`
         empty = function() self$length() == 0,
 
+        get_compare_fun = function() private$compare_fun,
+
         #' @description Determine if `Container` has some element.
         #' @param elem element to search for
-        #' @return `TRUE` of `Container` contains `elem` else `FALSE`
+        #' @return `TRUE` if `Container` contains `elem` else `FALSE`
         has = function(elem) {
-            !is.na(private$.get_position(elem))
+            !is.na(private$get_position(elem))
         },
 
         #' @description Number of elements of the `Container`.
@@ -149,14 +153,12 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Print object representation
-        #' @param len `integer` max number of elements per group
         #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
-        print = function(len = 6L, ...) {
-            # TODO: add verbose = container_option("print.verbose") argument
-            # and set this to FALSE by default, which omits the LABEL
-            cat(LABEL(self, limit = 0), "\n", sep = "")
-            x = format(self, limit = len, ...)
+        print = function(...) {
+            vec.len = container_options("vec.len")
+            useDots = container_options("useDots")
+            x = format(self, vec.len = vec.len, useDots = useDots, ...)
 
             writeLines(strwrap(format(x, ...), exdent = 1L))
             invisible(self)
@@ -174,8 +176,7 @@ Container <- R6::R6Class("Container",
         #' @return invisibly returns the `Container` object
         replace = function(old, new, add = FALSE) {
 
-            is_matching_old = private$get_compare_fun(old)
-            pos = Position(is_matching_old, self$values(), right = TRUE)
+            pos = private$get_position(old)
 
             hasElem = !is.na(pos)
             if (!hasElem && add)
@@ -221,9 +222,9 @@ Container <- R6::R6Class("Container",
         values = function() private$elems
     ),
     private = list(
+        compare_fun = NULL,
         elems = list(),
-        #create_iter = function() Iterator$new(self$values()),
-        create_iter = function() Iterator$new(private$elems),
+        create_iter = function() Iterator$new(self$values()),
         deep_clone = function(name, value) {
             if (name != "elems")
                 return(value)
@@ -234,16 +235,20 @@ Container <- R6::R6Class("Container",
             }
             lapply(value, clone_deep_if_container)
         },
-        get_compare_fun = function(x) {
-            function(y) isTRUE(all.equal(x, y))
+        compare_predicate = function(x) {
+            function(y) isTRUE(private$compare_fun(x, y))
         },
-        .get_position = function(x, right = TRUE, ...) {
-            Position(f = private$get_compare_fun(x),
-                     x = private$elems,
+        get_position = function(x, right = TRUE, ...) {
+            Position(f = private$compare_predicate(x),
+                     x = self$values(),
                      right = right,
                      ...)
         },
-        .verify_same_class = function(x) {
+        set_compare_fun = function(x) {
+            f = if (is.character(x)) get(x) else x
+            private$compare_fun = f
+        },
+        verify_same_class = function(x) {
             if (!inherits(x, data.class(self))) {
                 stop("arg must be a ", data.class(self))
             }

@@ -26,14 +26,12 @@ ee(f(container(NULL)), "[NULL]")
 ee(f(container(integer())), "[integer()]")
 ee(f(container(numeric())), "[numeric()]")
 ee(f(container(1, b = 2)), "[1, b = 2]")
-ee(f(container(list(a = 1, x = 1:2))), "{list(a = 1, x = (1L 2L))}")
-ee(f(container(list(x = 1:40))), "{list(x = (1L 2L 3L 4L ...))}")
+ee(f(container(list(a = 1, x = 1:2))), "[list(a = 1, x = (1L 2L))]")
+ee(f(container(list(x = 1:40))), "[list(x = (1L 2L 3L 4L ...))]")
 
 co = container(1, 2)
 ee(f(container(co, list(x = co, 3))), '[[1, 2], list(x = [1, 2], 3)]')
-
-ee(f(container(co, list(s = setnew(7:5, co), 3))),
-   '[[1, 2], list(s = {[1, 2], (7L 6L 5L)}, 3)]')
+ee(f(container(co, s = setnew(co), 3)), '[[1, 2], s = {[1, 2]}, 3]')
 
 
 # -----------
@@ -42,6 +40,12 @@ ee(f(container(co, list(s = setnew(7:5, co), 3))),
 f = format.Dict
 ee(f(dict(a = 1, b = 2:3, c = container(), d = deque(4, 1))),
    "{a = 1, b = (2L 3L), c = Container(), d = |4, 1|}")
+
+# ------------
+# format.Deque
+# ------------
+f = format.Deque
+ee(f(deque(2, 3, 1)), "|2, 3, 1|")
 
 
 # ----------

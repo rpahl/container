@@ -29,6 +29,7 @@ Roman Pahl
 \item \href{#method-delete}{\code{Container$delete()}}
 \item \href{#method-discard}{\code{Container$discard()}}
 \item \href{#method-empty}{\code{Container$empty()}}
+\item \href{#method-get_compare_fun}{\code{Container$get_compare_fun()}}
 \item \href{#method-has}{\code{Container$has()}}
 \item \href{#method-length}{\code{Container$length()}}
 \item \href{#method-peekitem}{\code{Container$peekitem()}}
@@ -55,13 +56,16 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$new(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$new(..., .cmp = container_options("compare")[[1]])}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{...}}{initial elements put into the \code{Container}}
+
+\item{\code{.cmp}}{\code{character} or \code{function} used for comparing of
+elements. Default to \code{all.equal}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -180,6 +184,15 @@ Check whether \code{Container} is empty
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_compare_fun"></a>}}
+\if{latex}{\out{\hypertarget{method-get_compare_fun}{}}}
+\subsection{Method \code{get_compare_fun()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$get_compare_fun()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-has"></a>}}
 \if{latex}{\out{\hypertarget{method-has}{}}}
 \subsection{Method \code{has()}}{
@@ -196,7 +209,7 @@ Determine if \code{Container} has some element.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{TRUE} of \code{Container} contains \code{elem} else \code{FALSE}
+\code{TRUE} if \code{Container} contains \code{elem} else \code{FALSE}
 }
 }
 \if{html}{\out{<hr>}}
@@ -249,14 +262,12 @@ over a \code{Container} as often used in set algorithms.
 \subsection{Method \code{print()}}{
 Print object representation
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$print(len = 6L, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$print(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{len}}{\code{integer} max number of elements per group}
-
 \item{\code{...}}{further arguments passed to \code{\link[=format]{format()}}}
 }
 \if{html}{\out{</div>}}

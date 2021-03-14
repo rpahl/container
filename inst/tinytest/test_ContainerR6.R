@@ -152,11 +152,14 @@ expect_true(co$has(integer()))
 expect_true(co$has(NA))
 expect_false(co$has(as.numeric(NA)))
 
-# Due to internal all.equal compare function the following are also true.
-# This is intended - maybe allow to let user set compare function in a future
-# version of the package.
+# Due to all.equal being the default compare function the following also holds:
 expect_true(co$has(numeric()))
 expect_true(co$has(1L))
+
+# This can be changed by using identical as the comparison function:
+co2 = Container$new(co$values(), .cmp = identical)
+expect_false(co2$has(numeric()))
+expect_false(co2$has(1L))
 
 # ------
 # length

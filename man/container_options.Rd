@@ -26,11 +26,11 @@ Set container package options
 }
 \examples{
 container_options()
-old <- container_options(dots = FALSE)
+old <- container_options(useDots = FALSE)
 old
-container_options("dots")
-container_options("dots", "vec.len")
-container_options(cmp = "identical", foo = "bar")
+container_options("useDots")
+container_options("useDots", "vec.len")
+container_options(compare = "identical", foo = "bar")
 container_options()
 (container_options(.reset = TRUE))
 }

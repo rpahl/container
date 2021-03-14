@@ -8,8 +8,9 @@ for (name in names(.default_options()))
     expect_equal(co(name), .default_options()[[name]])
 
 # Several at once
-expect_equal(co("cmp", "vec.len"), .default_options()[c("cmp", "vec.len")])
-expect_equal(co("cmp", "foo"), .default_options()["cmp"])
+expect_equal(co("compare", "vec.len"),
+             .default_options()[c("compare", "vec.len")])
+expect_equal(co("compare", "foo"), .default_options()["compare"])
 
 co("zzz" = "foo")
 expect_equal(co("zzz"), list(zzz = "foo"))
@@ -19,11 +20,11 @@ co(zzz = NULL)
 expect_equal(co(), .default_options())
 
 # Set several options at once
-old = co(cmp = "identical", dots = FALSE)
+old = co(compare = "identical", useDots = FALSE)
 expect_equal(old, .default_options())
 
 expect_equal(co(), replace(.default_options(),
-                           c("cmp", "dots"),
+                           c("compare", "useDots"),
                            list("identical", FALSE)))
 
 co(.reset = TRUE)
