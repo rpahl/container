@@ -1,32 +1,54 @@
-.default_options = function() {
-    list("cmp" = "identical",
-         "first.few" = TRUE,
+.default_options = function()
+{
+    list("cmp" = "all.equal",
+         "dots" = TRUE,
          "vec.len" = 4L)
 }
 
+options = .default_options()
+
+
+#' Set container package options
+#'
+#' @param ... any options can be defined, using name = value.
+#' @param .reset `logical` if TRUE, the options are reset to their default and
+#' returned.
+#' @return
+#' * container_options() returns a list of all set options sorted by name.
+#' * container_options(name), a list of length one containing the set value,
+#' or NULL if it is unset. Can also be multiple names (see examples).
+#' * container_options(key = value) sets the option with name `key` to `value`
+#' and returns the previous options invisibly.
 #' @export
-container_options = local({
+#' @examples
+#' container_options()
+#' old <- container_options(dots = FALSE)
+#' old
+#' container_options("dots")
+#' container_options("dots", "vec.len")
+#' container_options(cmp = "identical", foo = "bar")
+#' container_options()
+#' (container_options(.reset = TRUE))
+container_options <-
+function(..., .reset = FALSE)
+{
+    if (.reset)
+        return(options <<- .default_options())
 
-    options = .default_options()
+    args = list(...)
+    if (!length(args))
+        return(options)
 
-    function(..., .reset = FALSE) {
-        if (.reset)
-            return(options <<- .default_options())
+    arg.names = names(args)
+    if (is.null(arg.names))
+        return(Filter(x = options[as.character(args)], f = Negate(is.null)))
 
-        args = list(...)
-        if (!length(args))
-            return(options)
+    old = options
+    new = replace(options, arg.names, args)
+    new = Filter(x = new, f = Negate(is.null))
+    new = new[sort(names(new))]
+    options <<- new
 
-        arg.names = names(args)
-        if (is.null(arg.names))
-            return(unlist(options[as.character(args)]))
-
-        old = options
-        new = replace(options, arg.names, args)
-        new = Filter(x = new, Negate(is.null))
-        options <<- new
-
-        invisible(old)
-    }
-})
+    invisible(old)
+}
 
