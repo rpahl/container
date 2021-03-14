@@ -47,12 +47,11 @@ Container <- R6::R6Class("Container",
     public = list(
         #' @description constructor
         #' @param ... initial elements put into the `Container`
-        #' @param .cmp `character` or `function` used for comparing of
-        #' elements. Default to `all.equal`.
         #' @return invisibly returns the `Container` object
-        initialize = function(..., .cmp = container_options("compare")[[1]]) {
+        initialize = function(...) {
             private$elems <- list(...)
-            private$set_compare_fun(.cmp)
+            f.cmp = container_options("compare")[[1]]
+            private$set_compare_fun(f.cmp)
             invisible(self)
         },
 

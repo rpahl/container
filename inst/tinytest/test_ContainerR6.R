@@ -157,9 +157,11 @@ expect_true(co$has(numeric()))
 expect_true(co$has(1L))
 
 # This can be changed by using identical as the comparison function:
-co2 = Container$new(co$values(), .cmp = identical)
-expect_false(co2$has(numeric()))
-expect_false(co2$has(1L))
+container_options(compare = identical)
+co.ident = Container$new(co$values())
+expect_false(co.ident$has(numeric()))
+expect_false(co.ident$has(1L))
+container_options(.reset = TRUE)
 
 # ------
 # length
@@ -193,30 +195,24 @@ expect_error(co$popitem())
 # print
 # -----
 out = capture.output(print(Container$new()))
-expect_equal(out[[1]], "Container()")
-expect_equal(out[[2]], "[]")
+expect_equal(out, "[]")
 
 co = Container$new(1, 1L, NULL, integer())
 out = capture.output(print(co))
-expect_equal(out[[1]], "<<Container(4)>>")
-expect_equal(out[[2]], "[1, 1L, <<NULL>>, integer()]")
+expect_equal(out, "[1, 1L, NULL, integer()]")
 
 co2 = Container$new(list(), 3:5, co)
 out = capture.output(print(co2))
-expect_equal(out[[1]], "<<Container(3)>>")
-expect_equal(out[[2]], "[list(), <<integer(3)>>, [1, 1L, <<NULL>>, integer()]]")
+expect_equal(out, "[list(), (3L 4L 5L), [1, 1L, NULL, integer()]]")
 
 # Increasing the size of the first container alters the output
 co$add(1)$add(2)$add(3)
 out = capture.output(print(co2))
-expect_equal(out[[1]], "<<Container(3)>>")
-expect_equal(out[[2]], "[list(), <<integer(3)>>, <<Container(7)>>]")
+expect_equal(out, "[list(), (3L 4L 5L), <<Container(7)>>]")
 
 co2$add(data.frame(A = 1:3, B = 3:1))
 out = capture.output(print(co2))
-expect_equal(out[[1]], "<<Container(4)>>")
-expect_equal(out[[2]],
-             "[list(), <<integer(3)>>, <<Container(7)>>, <<data.frame(3x2)>>]")
+expect_equal(out, "[list(), (3L 4L 5L), <<Container(7)>>, <<data.frame(3x2)>>]")
 
 # -------
 # replace

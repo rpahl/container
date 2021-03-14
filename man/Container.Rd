@@ -55,16 +55,13 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$new(..., .cmp = container_options("compare")[[1]])}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$new(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{...}}{initial elements put into the \code{Container}}
-
-\item{\code{.cmp}}{\code{character} or \code{function} used for comparing of
-elements. Default to \code{all.equal}.}
 }
 \if{html}{\out{</div>}}
 }
