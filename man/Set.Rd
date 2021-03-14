@@ -19,8 +19,6 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \itemize{
 \item \href{#method-new}{\code{Set$new()}}
 \item \href{#method-add}{\code{Set$add()}}
-\item \href{#method-discard}{\code{Set$discard()}}
-\item \href{#method-has}{\code{Set$has()}}
 \item \href{#method-replace}{\code{Set$replace()}}
 \item \href{#method-diff}{\code{Set$diff()}}
 \item \href{#method-intersect}{\code{Set$intersect()}}
@@ -28,6 +26,7 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \item \href{#method-is_equal}{\code{Set$is_equal()}}
 \item \href{#method-is_subset}{\code{Set$is_subset()}}
 \item \href{#method-is_proper_subset}{\code{Set$is_proper_subset()}}
+\item \href{#method-values}{\code{Set$values()}}
 \item \href{#method-clone}{\code{Set$clone()}}
 }
 }
@@ -38,7 +37,9 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peekitem">}\href{../../container/html/Container.html#method-peekitem}{\code{container::Container$peekitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="popitem">}\href{../../container/html/Container.html#method-popitem}{\code{container::Container$popitem()}}\out{</span>}
@@ -46,7 +47,6 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}
 }
 \out{</details>}
 }
@@ -76,7 +76,7 @@ invisibly returns the \code{Set}
 \subsection{Method \code{add()}}{
 Add element
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$add(elem)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Set$add(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -88,46 +88,6 @@ Add element
 }
 \subsection{Returns}{
 invisibly returns \code{\link[=Set]{Set()}} object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-discard"></a>}}
-\if{latex}{\out{\hypertarget{method-discard}{}}}
-\subsection{Method \code{discard()}}{
-Discard element from \code{Set} if it exists.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$discard(elem)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{elem}}{element to be discarded.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-invisibly returns the \code{Set} object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-has"></a>}}
-\if{latex}{\out{\hypertarget{method-has}{}}}
-\subsection{Method \code{has()}}{
-Determine if \code{Set} has some element.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$has(elem)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{elem}}{element to search for}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} of \code{Set} contains \code{elem} else \code{FALSE}
 }
 }
 \if{html}{\out{<hr>}}
@@ -175,7 +135,8 @@ invisibly returns the \code{Set} object
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-new \code{Set} being the set difference between this and s.
+the \code{Set} object updated as a result of the set difference
+between this and s.
 }
 }
 \if{html}{\out{<hr>}}
@@ -195,7 +156,7 @@ new \code{Set} being the set difference between this and s.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-new \code{Set} as a result of the intersection of this and s.
+the \code{Set} object as a result of the intersection of this and s.
 }
 }
 \if{html}{\out{<hr>}}
@@ -215,7 +176,7 @@ new \code{Set} as a result of the intersection of this and s.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-new \code{Set} being the result of the union of this and s.
+the \code{Set} object as a result of the union of this and s.
 }
 }
 \if{html}{\out{<hr>}}
@@ -276,6 +237,19 @@ new \code{Set} being the result of the union of this and s.
 }
 \subsection{Returns}{
 \code{TRUE} if this is proper subset of \code{s}, otherwise \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-values"></a>}}
+\if{latex}{\out{\hypertarget{method-values}{}}}
+\subsection{Method \code{values()}}{
+Get \code{Set} values
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$values()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+elements of the set as a base list
 }
 }
 \if{html}{\out{<hr>}}

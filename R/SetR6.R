@@ -1,4 +1,4 @@
-SETS_MATCHFUN <- sets::matchfun(function(x, y) isTRUE(all.equal(x, y)))
+#SETS_MATCHFUN <- sets::matchfun(function(x, y) isTRUE(all.equal(x, y)))
 #SETS_MATCHFUN <- sets::matchfun(function(x, y) identical(x, y))
 
 #' Set
@@ -16,33 +16,41 @@ Set <- R6::R6Class("Set",
         #' @return invisibly returns the `Set`
         initialize = function(...) {
 
-            super$initialize(...)
+            elems = list(...)
+            super$initialize()
 
-            sets::sets_options("matchfun", SETS_MATCHFUN)
-            private$elems = sets::as.cset(self$values())
+            if (length(elems))
+                do.call(self$add, args = elems)
+
             invisible(self)
         },
 
         #' @description Add element
         #' @param elem If not already in set, add `elem`.
         #' @return invisibly returns [Set()] object.
-        add = function(elem) {
-            private$elems = sets::cset_union(self$values(), elem)
+        add = function(...) {
+            elems = list(...)
+
+            if (length(elems) == 0)
+                return(invisible(self))
+
+            if (length(elems) > 1) {
+                for (i in seq_along(elems))
+                    do.call(self$add, elems[i])
+
+                return(invisible(self))
+            }
+
+            value = elems[[1]]
+            if (self$has(value))
+                return(invisible(self))
+
+            named_value = elems[1]
+            hash_value = private$get_hash_value(value)
+            private$elems[[hash_value]] = named_value
+            private$resort_by_hash()
+
             invisible(self)
-        },
-
-        #' @description Discard element from `Set` if it exists.
-        #' @param elem element to be discarded.
-        #' @return invisibly returns the `Set` object
-        discard = function(elem) {
-            private$elems = self$values() - sets::cset(elem)
-        },
-
-        #' @description Determine if `Set` has some element.
-        #' @param elem element to search for
-        #' @return `TRUE` of `Set` contains `elem` else `FALSE`
-        has = function(elem) {
-            sets::cset_contains_element(self$values(), elem)
         },
 
         #' @description Search for occurence of `elem` in the `Set` and
@@ -66,53 +74,93 @@ Set <- R6::R6Class("Set",
 
         #' @description `Set` difference
         #' @param s `Set` object to 'subtract'
-        #' @return new `Set` being the set difference between this and s.
+        #' @return the `Set` object updated as a result of the set difference
+        #' between this and s.
         diff = function(s) {
-            private$.verify_same_class(s)
-            as.set(as.list(self$values() - s$values()))
+            private$verify_same_class(s)
+            lapply(s$values(), self$discard)
+            self
         },
 
         #' @description `Set` intersection
         #' @param s `Set` object to 'intersect'
-        #' @return new `Set` as a result of the intersection of this and s.
+        #' @return the `Set` object as a result of the intersection of this and s.
         intersect = function(s) {
-            private$.verify_same_class(s)
-            intersection = sets::cset_intersection(self$values(), s$values())
-            as.set(as.list(intersection))
+            private$verify_same_class(s)
+            for (elem in self$values()) {
+                if (!s$has(elem))
+                    self$discard(elem)
+            }
+            self
         },
 
         #' @description `Set` union
         #' @param s `Set` object to be 'unified'
-        #' @return new `Set` being the result of the union of this and s.
+        #' @return the `Set` object as a result of the union of this and s.
         union = function(s) {
-            private$.verify_same_class(s)
-            the_union = sets::cset_union(self$values(), s$values())
-            as.set(as.list(the_union))
+            private$verify_same_class(s)
+            do.call(self$add, args = s$values())
+            self
         },
 
         #' @description `Set` equality
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is equal to `s`, otherwise `FALSE`
         is_equal = function(s) {
-            private$.verify_same_class(s)
-            length(self) == length(s) &&
-                sets::cset_is_equal(self$values(), s$values())
+            private$verify_same_class(s)
+            if (length(self) != length(s))
+                return(FALSE)
+
+            self == s
         },
 
         #' @description `Set` proper subset
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is subset of `s`, otherwise `FALSE`
         is_subset = function(s) {
-            private$.verify_same_class(s)
-            length(self) <= length(s) && self$diff(s)$empty()
+            private$verify_same_class(s)
+            self$is_proper_subset(s) || self$is_equal(s)
         },
 
         #' @description `Set` subset
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is proper subset of `s`, otherwise `FALSE`
         is_proper_subset = function(s) {
-            private$.verify_same_class(s)
-            length(self) < length(s) && self$diff(s)$empty()
+            private$verify_same_class(s)
+            if (length(self) >= length(s))
+                return(FALSE)
+
+            self < s
+        },
+
+        #' @description Get `Set` values
+        #' @return elements of the set as a base list
+        values = function() {
+            l = private$elems
+            names(l) = NULL
+            unlist(l, recursive = FALSE)
+        }
+    ),
+    private = list(
+        deep_clone = function(name, value) {
+            if (name != "elems")
+                return(value)
+
+            clone_deep_if_container = function(x) {
+                elem = x[[1]]
+                elem = if (is.container(elem))
+                    elem$clone(deep = TRUE) else elem
+                list(elem)
+            }
+            lapply(value, clone_deep_if_container)
+        },
+        get_hash_value = function(x) {
+            #as.character(paste(object.size(x), serialize(x, NULL), collapse = ""))
+            as.character(paste(length(x), serialize(x, NULL), collapse = ""))
+        },
+        resort_by_hash = function() {
+            new_order = order(names(private$elems))
+            private$elems = private$elems[new_order]
         }
     ),
     lock_class = TRUE

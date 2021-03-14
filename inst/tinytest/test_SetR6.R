@@ -27,12 +27,12 @@ expect_equal(s$length(), 1)
 expect_equal(as.list(s$values()), list(NULL))
 
 s$add(list())
-expect_equal(as.list(s$values()), list(NULL, list()))
+expect_equal(as.list(s$values()), list(list(), NULL))
 s$add(list())
-expect_equal(as.list(s$values()), list(NULL, list()))
+expect_equal(as.list(s$values()), list(list(), NULL))
 
 s$add(numeric(0))
-expect_equal(as.list(s$values()), list(NULL, list(), numeric(0)))
+expect_equal(as.list(s$values()), list(numeric(), list(), NULL))
 
 # -----
 # clear
@@ -83,16 +83,38 @@ s = Set$new(1, "1", NULL, integer())
 expect_true(s$has(1))
 expect_true(s$has("1"))
 expect_true(s$has(integer()))
-expect_false(s$has(numeric()))
-expect_false(s$has(1L))
+expect_true(s$has(numeric()))
+expect_true(s$has(1L))
+
+# Use identical as the comparison function to achieve different result:
+container_options(compare = identical)
+s.ident = Set$new(s$values(), .cmp = identical)
+expect_false(s.ident$has(numeric()))
+expect_false(s.ident$has(1L))
+container_options(.reset = TRUE)
+
+# Membership of container objects depends on comparison function. By default
+# (all.equal) a copy with the same elements is considered equal. Using
+# 'identical' will check for the exact reference.
+s  = Set$new()
+container_options(compare = identical)
+s.ident  = Set$new()
+container_options(.reset = TRUE)
 
 co = Container$new(1, 2)
 s$add(co)
+s.ident$add(co)
 expect_true(s$has(co))
+expect_true(s.ident$has(co))
+
 co2 = Container$new(1, 2)
-expect_false(s$has(co2))
+expect_true(s$has(co2))         # TRUE, because co2 has same elements as co
+expect_false(s.ident$has(co2))  # FALSE, as the reference is checked
+
 co$add("a")
 expect_true(s$has(co))
+expect_true(s.ident$has(co))
+
 
 # --------
 # peekitem
@@ -116,30 +138,34 @@ expect_error(s$popitem())
 # print
 # -----
 out = capture.output(print(Set$new()))
-expect_equal(out[[1]], "Set()")
-expect_equal(out[[2]], "{}")
+expect_equal(out, "{}")
 
 s = Set$new(1, 1L, NULL, integer())
 out = capture.output(print(s))
-expect_equal(out[[1]], "<<Set(4)>>")
-expect_equal(out[[2]], "{<<NULL>>, integer(), 1L, 1}")
+expect_equal(out, "{integer(), NULL, 1}")
+s = Set$new(1L, 1, NULL, integer())
+out = capture.output(print(s))
+expect_equal(out, "{integer(), NULL, 1L}")
+
+# Using identical lets will keep both numeric and integer
+container_options(compare = identical)
+s = Set$new(1, 1L, NULL, integer())
+out = capture.output(print(s))
+expect_equal(out, "{integer(), NULL, 1L, 1}")
+container_options(.reset = TRUE)
 
 s2 = Set$new(list(), 3:5, s)
 out = capture.output(print(s2))
-expect_equal(out[[1]], "<<Set(3)>>")
-expect_equal(out[[2]], "{list(), <<integer(3)>>, {<<NULL>>, integer(), 1L, 1}}")
+expect_equal(out, "{list(), (3L 4L 5L), {integer(), NULL, 1L, 1}}")
 
 # Increasing the size of the first Set alters the output
 s$add(1)$add(2)$add(3)
 out = capture.output(print(s2))
-expect_equal(out[[1]], "<<Set(3)>>")
-expect_equal(out[[2]], "{list(), <<integer(3)>>, <<Set(6)>>}")
+expect_equal(out, "{list(), (3L 4L 5L), <<Set(6)>>}")
 
 s2$add(data.frame(A = 1:3, B = 3:1))
 out = capture.output(print(s2))
-expect_equal(out[[1]], "<<Set(4)>>")
-expect_equal(out[[2]],
-             "{list(), <<data.frame(3x2)>>, <<integer(3)>>, <<Set(6)>>}")
+expect_equal(out, "{list(), <<data.frame(3x2)>>, (3L 4L 5L), <<Set(6)>>}")
 
 
 # -------
@@ -164,9 +190,9 @@ s = Set$new(1, 2, 3)
 s$replace(1, 4)
 expect_equal(s, Set$new(2, 3, 4))
 
-s = Set$new(1, 1L, "1")
+s = Set$new(1, "1")
 s$replace(1, 0)
-expect_equal(s, Set$new(0, 1L, "1"))
+expect_equal(s, Set$new(0, "1"))
 
 # Replace works on special elements of basic type
 s = Set$new(NULL, numeric(0), list())
@@ -177,7 +203,7 @@ expect_equal(s, Set$new(0, list()))
 s$replace(list(), 0)
 expect_equal(s, Set$new(0))
 
-# Replace works on non-basic typed objects
+# Replace works on non-basic objects
 S1 = Set$new(1, "1")
 S2 = Set$new(2, "2")
 Co = Container$new(NULL)
@@ -193,7 +219,7 @@ expect_equal(s, Set$new(0, 1, 2))
 # values
 # ------
 s = Set$new(1, 2, 3)
-expect_equal(s$values(), sets::set(1, 2, 3))
+expect_equal(s$values(), list(1, 2, 3))
 
 # -----
 # clone
@@ -226,6 +252,13 @@ s1$add(3)   # this again affects ss but not ss.deep
 expect_equal(unpack(ss), 1:3)
 expect_equal(unpack(ss.deep), 1:2)
 
+# Do one more nested layer
+sss = Set$new(42, ss)
+ss.deep = sss$clone(deep = TRUE)
+s1$add(4)
+
+expect_equal(unpack(sss), c(1:4, 42))
+expect_equal(unpack(ss.deep), c(1:3, 42))
 
 # --------------
 # Set operations
