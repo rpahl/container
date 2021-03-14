@@ -1,4 +1,5 @@
-.format_values <- function(x, left = "(", right = ")", ...)
+.format_values <-
+function(x, left = "(", right = ")", ...)
 {
     x.names <- names(x)
     name_seps <- rep.int("", length(x))
@@ -13,28 +14,28 @@
 }
 
 
-format.Container <- function(x, ...)
-{
+format.Container <-
+function(x, ...) {
     .format_values(as.list(x), left = "[", right = "]", ...)
 }
 
-format.Deque <- function(x, ...)
-{
+format.Deque <-
+function(x, ...) {
     .format_values(as.list(x), left = "|", right = "|", ...)
 }
 
-format.Dict <- function(x, ...)
-{
+format.Dict <-
+function(x, ...) {
     .format_values(as.list(x), left = "{", right = "}", ...)
 }
 
-format.Set <- function(x, ...)
-{
+format.Set <-
+function(x, ...) {
     .format_values(as.list(x), left = "{", right = "}", ...)
 }
 
-format.list <- function(x, ...)
-{
+format.list <-
+function(x, ...) {
     .format_values(x, left = "list(", right = ")", ...)
 }
 

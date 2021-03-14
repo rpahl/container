@@ -1,57 +1,52 @@
-# ----------------
-# format of values
-# ----------------
+# -------------
+# format values
+# -------------
 ee = expect_equal
-f = function(...) .format_values(..., left = "", right ="")
+f = .format_values
 
-ee(f(list(a = 1)), "a = 1")
-ee(f(list(container(1))), "[1]")
-ee(f(list(as.container(1:5))), "[1L, 2L, 3L, 4L, 5L]")
-ee(f(list(as.container(1:6))), "<<Container(6)>>")
-ee(f(list(as.container(1:10))), "<<Container(10)>>")
-ee(f(list(as.container(1:10)), vec.len = 20), "[1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L]")
+expect_error(f())
+ee(f(NA), "(NA)")
+ee(f(list(NULL)), "(NULL)")
+ee(f(list(mean)), "(<<function>>)")
 
-ee(f(list(deque(1))), "|1|")
-ee(f(list(as.deque(1:5))), "|1L, 2L, 3L, 4L, 5L|")
-ee(f(list(as.deque(1:6))), "<<Deque(6)>>")
-
-ee(f(list(setnew(1))), "{1}")
-ee(f(list(as.set(1:5))), "{1L, 2L, 3L, 4L, 5L}")
-ee(f(list(as.set(1:6))), "<<Set(6)>>")
-
-ee(f(list(dict(a = 1))), "{a = 1}")
-v = 1:10
-names(v) = letters[1:10]
-ee(f(list(as.dict(v[1:5]))), "{a = 1L, b = 2L, c = 3L, d = 4L, e = 5L}")
-ee(f(list(as.dict(v[1:6]))), "<<Dict(6)>>")
-
-ee(f(container()), "")
-ee(f(container(list( ))), "list()")
-ee(f(container(list(1)), vec.len = 1), "list(1)")
-ee(f(container(list(1, 2)), vec.len = 1), "<<list(2)>>")
-ee(f(container(list(1, 2)), vec.len = 2), "list(1, 2)")
-
-ee(f(container(numeric( ))), "numeric()")
-ee(f(container(numeric(0))), "numeric()")
-ee(f(container(c(1))), "1")
-ee(f(container(c(1)), vec.len = 1), "1")
-ee(f(container(c(1, 2)), vec.len = 1), "<<numeric(2)>>")
-ee(f(container(c(1, 2)), vec.len = 2), "(1 2)")
-
-ee(f(container(c("a"))), '"a"')
-ee(f(container(c("a")), vec.len = 1), '"a"')
-ee(f(container(c("a", "b")), vec.len = 1), "<<character(2)>>")
-ee(f(container(c("a", "b")), vec.len = 2), '("a" "b")')
-
-# -------
-# formats
-# -------
-l = list(1, 2)
-ee = expect_equal
-ee(format.Container(1), "[1]")
-ee(format.Deque(1), "|1|")
-ee(format.Dict(1), "{1}")
-ee(format.Set(1), "{1}")
+ee(f(as.list(1:10)), "(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L)")
+ee(f(list(a = 1, b = 1:10)), "(a = 1, b = (1L 2L 3L 4L ...))")
+ee(f(list(b = 1:10, m = matrix(1:6, nrow = 2))),
+   '(b = (1L 2L 3L 4L ...), m = <<matrix2x3>>)')
+ee(f(list(b = 1:10, m = matrix(1:6, nrow = 2))),
+   '(b = (1L 2L 3L 4L ...), m = <<matrix2x3>>)')
 
 
+# ----------------
+# format.Container
+# ----------------
+f = format.Container
+ee(f(container()), "[]")
+ee(f(container(NULL)), "[NULL]")
+ee(f(container(integer())), "[integer()]")
+ee(f(container(numeric())), "[numeric()]")
+ee(f(container(1, b = 2)), "[1, b = 2]")
+ee(f(container(list(a = 1, x = 1:2))), "{list(a = 1, x = (1L 2L))}")
+ee(f(container(list(x = 1:40))), "{list(x = (1L 2L 3L 4L ...))}")
+
+co = container(1, 2)
+ee(f(container(co, list(x = co, 3))), '[[1, 2], list(x = [1, 2], 3)]')
+
+ee(f(container(co, list(s = setnew(7:5, co), 3))),
+   '[[1, 2], list(s = {[1, 2], (7L 6L 5L)}, 3)]')
+
+
+# -----------
+# format.Dict
+# -----------
+f = format.Dict
+ee(f(dict(a = 1, b = 2:3, c = container(), d = deque(4, 1))),
+   "{a = 1, b = (2L 3L), c = Container(), d = |4, 1|}")
+
+
+# ----------
+# format.Set
+# ----------
+f = format.Set
+ee(f(setnew(2, 3, 1)), "{1, 2, 3}")
 
