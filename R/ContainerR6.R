@@ -112,8 +112,6 @@ Container <- R6::R6Class("Container",
         #' @return `TRUE` if the `Container` is empty else `FALSE`
         empty = function() self$length() == 0,
 
-        get_compare_fun = function() private$compare_fun,
-
         #' @description Determine if `Container` has some element.
         #' @param elem element to search for
         #' @return `TRUE` if `Container` contains `elem` else `FALSE`
@@ -156,8 +154,8 @@ Container <- R6::R6Class("Container",
         #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
         print = function(...) {
-            vec.len = container_options("vec.len")
-            useDots = container_options("useDots")
+            vec.len = container_options("vec.len")[[1]]
+            useDots = container_options("useDots")[[1]]
             x = format(self, vec.len = vec.len, useDots = useDots, ...)
 
             writeLines(strwrap(format(x, ...), exdent = 1L))

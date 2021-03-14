@@ -19,7 +19,7 @@ function(x, ...) {
     s = class(x)[1L]
 
     if (!is.null(dim(x)))
-        s = paste0(s, paste(dim(x), collapse = "x"))
+        s = paste0(s, "(", paste(dim(x), collapse = "x"), ")")
 
     #if (is.object(x))
     paste0("<<", s, ">>")
