@@ -153,7 +153,10 @@ Set <- R6::R6Class("Set",
                 elem = x[[1]]
                 elem = if (is.container(elem))
                     elem$clone(deep = TRUE) else elem
-                list(elem)
+
+                l = list(elem)
+                names(l) = names(x)
+                l
             }
             lapply(value, clone_deep_if_container)
         },

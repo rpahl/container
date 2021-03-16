@@ -16,22 +16,22 @@ function(x, left = "(", right = ")", ...)
 
 format.Container <-
 function(x, ...) {
-    .format_values(as.list(x), left = "[", right = "]", ...)
+    .format_values(x$values(), left = "[", right = "]", ...)
 }
 
 format.Deque <-
 function(x, ...) {
-    .format_values(as.list(x), left = "|", right = "|", ...)
+    .format_values(x$values(), left = "|", right = "|", ...)
 }
 
 format.Dict <-
 function(x, ...) {
-    .format_values(as.list(x), left = "{", right = "}", ...)
+    .format_values(x$values(), left = "{", right = "}", ...)
 }
 
 format.Set <-
 function(x, ...) {
-    .format_values(as.list(x), left = "{", right = "}", ...)
+    .format_values(x$values(), left = "{", right = "}", ...)
 }
 
 format.list <-

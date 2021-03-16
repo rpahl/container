@@ -22,14 +22,17 @@ expect_false(is.subsettable(dict.table()))
 
 # Iterator constructor works as expected
 expect_error(Iterator$new())
+expect_error(Iterator$new(list()), "must be iterable or subsettable")
+expect_error(Iterator$new(NULL), "must be iterable or subsettable")
+e = new.env()
+e$a = 1
+expect_error(Iterator$new(e), "must be iterable or subsettable")
+
 expect_equal(Iterator$new(1:3)$length(), 3)
-expect_equal(Iterator$new(new.env())$length(), 0)
-expect_equal(Iterator$new(NULL)$length(), 0)
 expect_equal(Iterator$new(factor(1:2))$length(), 2)
 expect_equal(Iterator$new(list("a", mean))$length(), 2)
 expect_equal(Iterator$new(Container$new())$length(), 0)
 expect_equal(Iterator$new(Container$new(1, 2, 3))$length(), 3)
-expect_equal(Iterator$new(new.env())$length(), 0)
 expect_equal(Iterator$new(factor(letters[1:2]))$length(), 2)
 
 # the position of the iterator can be accessed
@@ -48,12 +51,9 @@ it$begin()
 expect_equal(it$pos(), 1)
 expect_equal(it$get_value(), 1)
 
-# for empty sequence, begin points to 0
-expect_equal(Iterator$new(NULL)$begin()$pos(), 0)
-
 # it can be checked if Iterator has next element
 expect_true(Iterator$new(1:5)$has_next())
-expect_false(Iterator$new(list())$has_next())
+expect_false(Iterator$new(1)$next_iter()$has_next())
 
 # the value behind the iterator can be retrieved
 it <- Iterator$new(1:5)
@@ -77,13 +77,6 @@ while (it$has_next()) it$next_iter()
 expect_equal(it$pos(), 3)
 expect_equal(it$reset_iter()$pos(), 0)
 
-
-# Iterator can be incremented
-x <- 1:5
-it <- Iterator$new(x)
-for (i in x) {
-    expect_equal(it$next_iter()$pos(), i)
-}
 
 # Iterator works as expected
 s <- "Hello World!"

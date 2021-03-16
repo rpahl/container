@@ -19,7 +19,7 @@ iter <- function(x) UseMethod("iter")
 
 #' @rdname ContainerS3
 #' @export
-iter.Container <- function(x) x$iter()
+iter.Container <- function(x) x$clone(deep = TRUE)$iter()
 
 #' @rdname iterS3
 #' @export

@@ -34,12 +34,12 @@ NULL
 #' @rdname OpsComp
 #' @return For `Set`, `==` returns `TRUE` if both sets are equal.
 #' @export
-`==.Set` <- function(x, y) x$is_equal(y)
+`==.Set` <- function(x, y) `==.Container`(x, y)
 
 #' @rdname OpsComp
 #' @return For `Set`, `<` returns `TRUE` if x is a *proper* subset of y.
 #' @export
-`<.Set` <- function(x, y) x$is_proper_subset(y)
+`<.Set` <- function(x, y) `<.Container`(x, y)
 
 #' @rdname OpsComp
 #' @return For `Set`, `<=` returns `TRUE` if x is a subset of y.
