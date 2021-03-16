@@ -111,6 +111,10 @@ Container <- R6::R6Class("Container",
         #' @return `TRUE` if the `Container` is empty else `FALSE`
         empty = function() self$length() == 0,
 
+        #' @description Get comparison function used internally by the
+        #' `Container` object to compare elements.
+        get_compare_fun = function() private$compare_fun,
+
         #' @description Determine if `Container` has some element.
         #' @param elem element to search for
         #' @return `TRUE` if `Container` contains `elem` else `FALSE`
@@ -221,7 +225,7 @@ Container <- R6::R6Class("Container",
     private = list(
         compare_fun = NULL,
         elems = list(),
-        create_iter = function() Iterator$new(self$values()),
+        create_iter = function() Iterator$new(self, private$.subset),
         deep_clone = function(name, value) {
             if (name != "elems")
                 return(value)
@@ -249,7 +253,8 @@ Container <- R6::R6Class("Container",
             if (!inherits(x, data.class(self))) {
                 stop("arg must be a ", data.class(self))
             }
-        }
+        },
+        .subset = function(x, ...) .subset2(x$values(), ...)
     ),
     lock_class = TRUE
 )

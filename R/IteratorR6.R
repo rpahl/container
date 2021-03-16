@@ -1,13 +1,15 @@
 #' Check if object is subsettable
 #'
-#' @param any `R` object
+#' @param x any `R` object
+#' @param .subset subset function to be used on `x`
 #' @return returns `TRUE` if object is subsettable otherwise `FALSE`
 #' @export
-is.subsettable <- function(x)
+is.subsettable <- function(x, .subset = .subset2)
 {
     if (length(x) == 0) return(FALSE)
+    stopifnot(is.function(.subset))
 
-    res = tryCatch(.subset2(x, 1), error = identity)
+    res = tryCatch(.subset(x, 1), error = identity)
     !inherits(res, "error")
 }
 
@@ -37,9 +39,14 @@ Iterator <- R6::R6Class("Iterator",
 
         #' @description `Iterator` constructor
         #' @param x object to iterate over
+        #' @param .subset accessor function
         #' @return invisibly returns the `Iterator` object
-        initialize = function(x) {
-            private$elems <- as.list(x)
+        initialize = function(x, .subset = .subset2) {
+            if (!(is.iterable(x) || is.subsettable(x, .subset)))
+                stop("x must be iterable or subsettable")
+
+            private$object <- x
+            private$.subset <- .subset
             invisible(self)
         },
 
@@ -58,7 +65,7 @@ Iterator <- R6::R6Class("Iterator",
             if (!self$has_value()) {
                 stop("iterator does not point at a value")
             }
-            .subset2(private$elems, self$pos())
+            private$.subset(private$object, self$pos())
         },
 
         #' @description get next value
@@ -83,7 +90,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @description iterator length
         #' @return number of elements to iterate
         length = function() {
-            length(private$elems)
+            length(private$object)
         },
 
         #' @description get iterator position
@@ -116,7 +123,9 @@ Iterator <- R6::R6Class("Iterator",
             invisible(self)
         }
     ),
-    private = list(elems = list(), i = 0L),
+    private = list(object = list(),
+                   .subset = NULL,
+                   i = 0L),
     lock_class = TRUE
 )
 

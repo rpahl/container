@@ -41,7 +41,7 @@ for (i in x) {
     expect_equal(it$pos(), i)
 }
 
-# iterator can be moved to being of sequence
+# iterator can be moved to begin of the sequence
 it <- Iterator$new(1:3)
 expect_equal(it$pos(), 0)
 it$begin()
@@ -94,4 +94,19 @@ while(it$has_next()) s2 <- paste0(s2, it$get_next())
 expect_equal(s2, s)
 expect_false(it$has_next())
 expect_error(it$get_next())
+
+# Iterator works by reference on Container object
+co = container(1, 2, 3)
+it = co$iter()
+
+expect_equal(it$next_iter()$get_value(), 1)
+co$discard(1)
+expect_equal(it$get_value(), 2)
+co$discard(2)
+expect_equal(it$get_value(), 3)
+co$clear()
+expect_error(it$get_value(), "iterator does not point at a value")
+co$add(4)
+expect_equal(it$get_value(), 4)
+expect_equal(it$pos(), 1)
 
