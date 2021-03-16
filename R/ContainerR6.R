@@ -254,7 +254,7 @@ Container <- R6::R6Class("Container",
                 stop("arg must be a ", data.class(self))
             }
         },
-        .subset = function(x, ...) .subset2(x$values(), ...)
+        .subset = function(x, ...) .subset(x$values(), ...)
     ),
     lock_class = TRUE
 )

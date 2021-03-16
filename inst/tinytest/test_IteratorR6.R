@@ -98,15 +98,32 @@ expect_error(it$get_next())
 # Iterator works by reference on Container object
 co = container(1, 2, 3)
 it = co$iter()
+it$next_iter()
 
-expect_equal(it$next_iter()$get_value(), 1)
+expect_equal(it$get_value(), list(1))
 co$discard(1)
-expect_equal(it$get_value(), 2)
+expect_equal(it$get_value(), list(2))
 co$discard(2)
-expect_equal(it$get_value(), 3)
+expect_equal(it$get_value(), list(3))
 co$clear()
 expect_error(it$get_value(), "iterator does not point at a value")
 co$add(4)
-expect_equal(it$get_value(), 4)
+expect_equal(it$get_value(), list(4))
 expect_equal(it$pos(), 1)
+
+# Iterator works by reference on Dict object
+d = dict(a = 1, b = 2)
+it = d$iter()
+it$next_iter()
+expect_equal(it$get_value(), list(a = 1))
+d$discard("a")
+expect_equal(it$get_value(), list(b = 2))
+
+# Iterator works by reference on Set object
+s = setnew(a = 1, 2, 3)
+it = s$iter()
+it$next_iter()
+expect_equal(it$get_value(), list(a = 1))
+s$discard(1)
+expect_equal(it$get_value(), list(2))
 
