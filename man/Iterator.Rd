@@ -35,13 +35,15 @@ Roman Pahl
 \subsection{Method \code{new()}}{
 \code{Iterator} constructor
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Iterator$new(x)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Iterator$new(x, .subset = .subset2)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{x}}{object to iterate over}
+
+\item{\code{.subset}}{accessor function}
 }
 \if{html}{\out{</div>}}
 }

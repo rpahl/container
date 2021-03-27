@@ -29,6 +29,7 @@ Roman Pahl
 \item \href{#method-delete}{\code{Container$delete()}}
 \item \href{#method-discard}{\code{Container$discard()}}
 \item \href{#method-empty}{\code{Container$empty()}}
+\item \href{#method-get_compare_fun}{\code{Container$get_compare_fun()}}
 \item \href{#method-has}{\code{Container$has()}}
 \item \href{#method-length}{\code{Container$length()}}
 \item \href{#method-peekitem}{\code{Container$peekitem()}}
@@ -178,6 +179,17 @@ Check whether \code{Container} is empty
 \subsection{Returns}{
 \code{TRUE} if the \code{Container} is empty else \code{FALSE}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_compare_fun"></a>}}
+\if{latex}{\out{\hypertarget{method-get_compare_fun}{}}}
+\subsection{Method \code{get_compare_fun()}}{
+Get comparison function used internally by the
+\code{Container} object to compare elements.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$get_compare_fun()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-has"></a>}}

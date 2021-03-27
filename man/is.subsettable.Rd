@@ -4,10 +4,12 @@
 \alias{is.subsettable}
 \title{Check if object is subsettable}
 \usage{
-is.subsettable(x)
+is.subsettable(x, .subset = .subset2)
 }
 \arguments{
-\item{any}{\code{R} object}
+\item{x}{any \code{R} object}
+
+\item{.subset}{subset function to be used on \code{x}}
 }
 \value{
 returns \code{TRUE} if object is subsettable otherwise \code{FALSE}
