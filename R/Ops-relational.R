@@ -7,24 +7,57 @@
 NULL
 
 #' @export
-`==.Container` <- function(x, y) all.equal(x, y)
+`==.Container` <- function(x, y) isTRUE(all.equal(x, y))
+
+
+#' @export
+`!=.Container` <- function(x, y) !(x == y)
+
 
 #' @export
 `<.Container` <- function(x, y)
 {
-    if (length(x) >= length(y))
-        return(FALSE)
-
     x.iter = x$iter()
     y.iter = y$iter()
+
     while (x.iter$has_next()) {
-        xx = x.iter$get_next()
-        yy = y.iter$get_next()
-        if (!isTRUE(all.equal(xx, yy)))
+        if (!y.iter$has_next())
             return(FALSE)
+
+        x.elem = x.iter$get_next()[[1]]
+        y.elem = y.iter$get_next()[[1]]
+
+        if (y.elem < x.elem)
+            return(FALSE)
+
+        if (x.elem < y.elem)
+            return(TRUE)
     }
-    TRUE
+    y.iter$has_next()
 }
+
+
+#' @export
+`>.Container` <- function(x, y)
+{
+    y < x
+}
+
+
+#' @export
+`<=.Container` <- function(x, y)
+{
+    !(y < x)
+}
+
+
+#' @export
+`>=.Container` <- function(x, y)
+{
+    !(x < y)
+}
+
+
 
 #' @rdname OpsComp
 #' @return For `Set`, `!=` returns `TRUE` if both sets are not equal.

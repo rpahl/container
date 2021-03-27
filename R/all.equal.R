@@ -10,14 +10,14 @@
     if (!identical(names(x), names(y)))
         return(FALSE)
 
-    it.x = x$iter()
-    it.y = y$iter()
+    x.iter = x$iter()
+    y.iter = y$iter()
 
     is_equal = match.fun(container_options("compare")[[1]])
 
-    while (it.x$has_next()) {
-        target = it.x$get_next()[[1]]
-        current = it.y$get_next()[[1]]
+    while (x.iter$has_next()) {
+        target = x.iter$get_next()[[1]]
+        current = y.iter$get_next()[[1]]
         if (!isTRUE(is_equal(target, current, ...)))
             return(FALSE)
     }

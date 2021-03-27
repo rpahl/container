@@ -26,7 +26,7 @@ Set <- R6::R6Class("Set",
         },
 
         #' @description Add element
-        #' @param elem If not already in set, add `elem`.
+        #' @param ... elements to be added to the `Set`
         #' @return invisibly returns [Set()] object.
         add = function(...) {
             elems = list(...)
