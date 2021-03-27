@@ -6,16 +6,19 @@
     if (length(x) != length(y))
         return(FALSE)
 
-    xx = x$values()
-    yy = y$values()
 
-    if (!identical(names(xx), names(yy)))
+    if (!identical(names(x), names(y)))
         return(FALSE)
 
-    for (i in seq_along(xx)) {
-        target = xx[[i]]
-        current = yy[[i]]
-        if (!isTRUE(all.equal(target, current, ...)))
+    it.x = x$iter()
+    it.y = y$iter()
+
+    is_equal = match.fun(container_options("compare")[[1]])
+
+    while (it.x$has_next()) {
+        target = it.x$get_next()[[1]]
+        current = it.y$get_next()[[1]]
+        if (!isTRUE(is_equal(target, current, ...)))
             return(FALSE)
     }
 
@@ -30,5 +33,6 @@ all.equal.Container = function(target, current, ...)
         return(TRUE)
 
     # TODO: construct messages for non-equality case
+    FALSE
 }
 
