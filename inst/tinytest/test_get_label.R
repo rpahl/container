@@ -117,12 +117,22 @@ ee(f(character(2), vec.len = 1), "<<character(2)>>")
 # ----
 ee(f(list()), "list()")
 ee(f(list(1)), "list(1)")
-ee(f(list(NULL)), "list(1)")
+ee(f(list(NULL)), "list(NULL)")
+ee(f(list(1:3)), "list((1L 2L 3L))")
+ee(f(list(1, 2, 3)), "list(1, 2, 3))")
+ee(f(list(a = 1, b = "b", 3, 4)), 'list(a = 1, b = "b", 3, 4)')
+ee(f(as.list(1:5)), '<<list(5)>>')
 
 # ---------
 # Container
 # ---------
-ee(f(container()), "Container")
+ee(f(container()), "Container()")
+ee(f(container(1)), "[1]")
+ee(f(container(NULL)), "[NULL]")
+ee(f(container(1:3)), "[(1L 2L 3L)]")
+ee(f(container(1, 2, 3)), "[(1, 2, 3)]")
+ee(f(container(a = 1, b = "b", 3, 4)), '[a = 1, b = "b", 3, 4]')
+ee(f(as.container(1:5)), '<<Container(5)>>')
 
 # -----------
 # matrix & co
