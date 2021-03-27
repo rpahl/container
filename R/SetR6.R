@@ -162,7 +162,7 @@ Set <- R6::R6Class("Set",
         },
         get_hash_value = function(x) {
             #as.character(paste(object.size(x), serialize(x, NULL), collapse = ""))
-            as.character(paste(length(x), serialize(x, NULL), collapse = ""))
+            as.character(paste(length(x), serialize(unpack(x), NULL), collapse = ""))
         },
         resort_by_hash = function() {
             new_order = order(names(private$elems))
