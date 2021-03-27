@@ -246,7 +246,7 @@ Container <- R6::R6Class("Container",
                      ...)
         },
         set_compare_fun = function(x) {
-            f = if (is.character(x)) get(x) else x
+            f = if (is.character(x)) match.fun(x) else x
             private$compare_fun = f
         },
         verify_same_class = function(x) {
