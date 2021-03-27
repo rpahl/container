@@ -2,41 +2,9 @@
 % Please edit documentation in R/Ops-relational.R
 \name{OpsComp}
 \alias{OpsComp}
-\alias{!=.Set}
-\alias{==.Set}
-\alias{<.Set}
-\alias{<=.Set}
-\alias{>.Set}
-\alias{>=.Set}
 \title{Relational Operators for Containers}
-\usage{
-\method{!=}{Set}(x, y)
-
-\method{==}{Set}(x, y)
-
-\method{<}{Set}(x, y)
-
-\method{<=}{Set}(x, y)
-
-\method{>}{Set}(x, y)
-
-\method{>=}{Set}(x, y)
-}
 \arguments{
 \item{x, y}{objects of class \code{\link[=Container]{Container()}} or one of the derived classes.}
-}
-\value{
-For \code{Set}, \code{!=} returns \code{TRUE} if both sets are not equal.
-
-For \code{Set}, \code{==} returns \code{TRUE} if both sets are equal.
-
-For \code{Set}, \code{<} returns \code{TRUE} if x is a \emph{proper} subset of y.
-
-For \code{Set}, \code{<=} returns \code{TRUE} if x is a subset of y.
-
-For \code{Set}, \code{>} returns \code{TRUE} if x is a \emph{proper} superset of y.
-
-For \code{Set}, \code{>=} returns \code{TRUE} if x is a superset of y.
 }
 \description{
 Binary comparison operators for \code{\link[=Container]{Container()}} objects and

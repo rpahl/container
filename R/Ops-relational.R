@@ -17,6 +17,9 @@ NULL
 #' @export
 `<.Container` <- function(x, y)
 {
+    if (!is.iterable(x) || !is.iterable(y))
+        stop("both arguments must be iterable")
+
     x.iter = x$iter()
     y.iter = y$iter()
 
@@ -40,6 +43,9 @@ NULL
 #' @export
 `>.Container` <- function(x, y)
 {
+    if (!is.iterable(x) || !is.iterable(y))
+        stop("both arguments must be iterable")
+
     y < x
 }
 
@@ -47,6 +53,9 @@ NULL
 #' @export
 `<=.Container` <- function(x, y)
 {
+    if (!is.iterable(x) || !is.iterable(y))
+        stop("both arguments must be iterable")
+
     !(y < x)
 }
 
@@ -56,36 +65,4 @@ NULL
 {
     !(x < y)
 }
-
-
-
-#' @rdname OpsComp
-#' @return For `Set`, `!=` returns `TRUE` if both sets are not equal.
-#' @export
-`!=.Set` <- function(x, y) !(x$is_equal(y))
-
-#' @rdname OpsComp
-#' @return For `Set`, `==` returns `TRUE` if both sets are equal.
-#' @export
-`==.Set` <- function(x, y) `==.Container`(x, y)
-
-#' @rdname OpsComp
-#' @return For `Set`, `<` returns `TRUE` if x is a *proper* subset of y.
-#' @export
-`<.Set` <- function(x, y) `<.Container`(x, y)
-
-#' @rdname OpsComp
-#' @return For `Set`, `<=` returns `TRUE` if x is a subset of y.
-#' @export
-`<=.Set` <- function(x, y) x$is_subset(y)
-
-#' @rdname OpsComp
-#' @return For `Set`, `>` returns `TRUE` if x is a *proper* superset of y.
-#' @export
-`>.Set` <- function(x, y) y$is_proper_subset(x)
-
-#' @rdname OpsComp
-#' @return For `Set`, `>=` returns `TRUE` if x is a superset of y.
-#' @export
-`>=.Set` <- function(x, y) y$is_subset(x)
 
