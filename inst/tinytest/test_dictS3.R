@@ -13,6 +13,12 @@ expect_error(dict(1:2), "all elems must be named")
 expect_error(dict(x = 1, y = 2, x = 3), "duplicated keys")
 expect_warning(keys(dict()), "'keys' is deprecated.")
 
+# dict of dict is also a copy throughout
+d1 = dict(a = 1)
+d2 = dict(d = d1)
+d1$clear()
+expect_equal(d2, dict(d = dict(a = 1)))
+
 # -------
 # as.dict
 # -------

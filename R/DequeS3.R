@@ -20,7 +20,7 @@ NULL
 #' @rdname DequeS3
 #' @details * `deque(...)` initializes and returns an object of class `Deque`
 #' @export
-deque <- function(...) Deque$new(...)
+deque <- function(...) Deque$new(...)$clone(deep = TRUE)
 
 #' @rdname DequeS3
 #' @details * `as.deque(x)` coerces `x` to a deque.

@@ -29,7 +29,7 @@ NULL
 #' @rdname DictS3
 #' @details * `dict(...)` initializes and returns an object of class `Dict`
 #' @export
-dict <- function(...) Dict$new(...)
+dict <- function(...) Dict$new(...)$clone(deep = TRUE)
 
 #' @examples
 #'

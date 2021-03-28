@@ -11,6 +11,12 @@ expect_equal(attr(d, "class"), c("Deque", "Container", "Iterable", "R6"))
 d <- deque(a = 2, 9, b = 1)
 expect_equal(names(d), c("a", "", "b"))
 
+# deque of deque is also a copy throughout
+d1 = deque(1)
+d2 = deque(d1)
+d1$clear()
+expect_equal(d2, deque(deque(1)))
+
 # --------
 # as.deque
 # --------
