@@ -19,6 +19,7 @@ expect_equal(as.set(NULL), setnew())
 expect_equal(as.set(list()), setnew())
 expect_equal(as.set(1), setnew(1))
 expect_equal(as.set(1:2), setnew(1L, 2L))
+expect_equal(as.set(setnew()), setnew())
 expect_equal(as.set(setnew(1)), setnew(1))
 
 # set can be created as copy from another set

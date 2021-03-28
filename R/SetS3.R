@@ -30,7 +30,12 @@ set <- function(...) {
 #' @rdname SetS3
 #' @details * `as.set(x)` coerces `x` to a set.
 #' @export
-as.set <- function(x) do.call(setnew, args = as.list(x))
+as.set <- function(x) {
+    if (length(x) == 0)
+        return(setnew())
+
+    do.call(setnew, args = as.list(x))
+}
 
 
 #' @rdname SetS3
