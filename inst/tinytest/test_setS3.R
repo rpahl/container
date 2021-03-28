@@ -11,6 +11,12 @@ expect_equal(attr(s, "class"), c("Set", "Container", "Iterable", "R6"))
 s <- setnew(a = 2, b = 1, 9)
 expect_equal(names(s), c("b", "a", ""))
 
+# Set of set is also a copy throughout
+s1 = setnew(1)
+s2 = setnew(s1)
+s1$clear()
+expect_equal(s2, setnew(setnew(1)))
+
 # ------
 # as.set
 # ------

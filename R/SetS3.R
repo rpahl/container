@@ -19,7 +19,7 @@ NULL
 #' @rdname SetS3
 #' @details * `setnew(...)` initializes and returns a [Set()] object.
 #' @export
-setnew <- function(...) Set$new(...)
+setnew <- function(...) Set$new(...)$clone(deep = TRUE)
 
 set <- function(...) {
     .Deprecated("setnew")
