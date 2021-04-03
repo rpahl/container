@@ -16,8 +16,8 @@
 
 #' @rdname Ops
 #' @return For `Dict`, `|` returns a copy of `x` extended by all elements of
-#' `y` that are behind keys that do not exist in `x`, thereby combining the
-#' keys of both objects (key union).
+#' `y` that are stored at keys (or names) that do not exist in `x`, thereby
+#' combining the keys of both objects (i.e. basically union of keys).
 #' @export
 `|.Dict` <- function(x, y)
 {

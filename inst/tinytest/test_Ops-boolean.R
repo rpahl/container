@@ -49,7 +49,8 @@ expect_equal(res, dict(d = dict(a = 1)))
 # Set
 # ---
 
-# &-Operator
+# Set intersection
+# ----------------
 s0   = setnew()
 s1   = setnew(1)
 s2   = setnew(   2)
@@ -90,4 +91,13 @@ res = ss1 & ss2
 expect_equal(res, setnew(setnew(1)))
 s1$add(2)
 expect_equal(res, setnew(setnew(1)))
+
+# Named elements
+s1 = setnew(a = 1, b = 2)
+s2 = setnew(a = 2, c = 3)
+expect_equal(s1 & s2, setnew(b = 2))
+expect_equal(s2 & s1, setnew(b = a))
+
+# Set union
+# ---------
 
