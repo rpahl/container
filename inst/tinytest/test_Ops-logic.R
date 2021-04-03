@@ -101,7 +101,12 @@ ee(s1 & s2, setnew(b = 2))
 ee(s2 & s1, setnew(b = a))
 
 # sets combined with other objects
-ee(setnew(1, 2, 3) & list(1, 2)
+ee(s123 & list(1, 2), setnew(1, 2))
+ee(list(1, 2) & s123, setnew(1, 2))
+ee(s123 & 1:2, setnew(1, 2))
+ee(1:2 & setnew(1, 2, 3), setnew(1, 2))
+ee(s123 & 1:10, setnew(1, 2, 3))
+
 
 # Set union
 # ---------
@@ -135,4 +140,25 @@ original_sets_were_not_altered =
     isTRUE(all.equal(s123, setnew(1, 2, 3)))
 
 expect_true(original_sets_were_not_altered)
+
+# Nested sets
+s1  = setnew(1)
+ss1 = setnew(1, s1)
+ss2 = setnew(2, s1)
+res = ss1 | ss2
+ee(res, setnew(setnew(1), 2))
+s1$add(2)
+has_used_copy_semantics <- res == setnew(setnew(1), 2)
+expect_true(has_used_copy_semantics)
+
+# Named elements
+s1 = setnew(a = 1, b = 2)
+s2 = setnew(a = 2, c = 3)
+ee(s1 | s2, setnew(a = 1, b = 2, c = 3))
+ee(s2 | s1, setnew(a = 1, a = 2, c = 3))
+
+# sets combined with other objects
+ee(setnew(1) | list(1, 2), setnew(1, 2))
+ee(list(a = 1, 2) | setnew(1, 2, c = 3), setnew(a = 1, 2, c = 3))
+ee(setnew(1) | as.numeric(2:3), setnew(1, 2, 3))
 

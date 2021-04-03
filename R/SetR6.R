@@ -100,9 +100,10 @@ Set <- R6::R6Class("Set",
         union = function(s) {
             private$verify_same_class(s)
 
-            for (elem in s$values()) {
-                self$add(elem)
-            }
+            it = s$iter()
+            while (it$has_next())
+                do.call(self$add, args = it$get_next())
+
             self
         },
 
