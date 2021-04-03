@@ -13,7 +13,7 @@ Dict <- R6::R6Class("Dict",
     public = list(
         #' @description `Dict` constructor
         #' @param ... initial elements put into the `Dict`
-        #' @return invisibly returns the `Dict`
+        #' @return returns the `Dict`
         initialize = function(...) {
             elems <- list(...)
 
@@ -28,7 +28,7 @@ Dict <- R6::R6Class("Dict",
                      data.class(self), call. = FALSE)
 
             private$elems <- list2env(elems, parent = emptyenv(), hash = TRUE)
-            invisible(self)
+            self
         },
 
         #' @description If `key` not yet in `Dict`, insert `value` at `key`,
@@ -46,7 +46,7 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` key of value to delete. If `key` does exist,
         #' the associated key-value pair is deleted, otherwise an error is
         #' signaled.
-        #' @return invisibly returns the `Dict`
+        #' @return the `Dict` object
         delete = function(key) {
             if (!self$has(key))
                 stop("key '", key, "' not in ", data.class(self))
@@ -57,12 +57,12 @@ Dict <- R6::R6Class("Dict",
         #' @description If key in `Dict`, discard associated key-value pair.
         #' @param key `character` key of value to discard. If `key` does exist,
         #' the associated key-value pair is deleted, otherwise it is ignored.
-        #' @return invisibly returns the `Dict`
+        #' @return the `Dict`
         discard = function(key) {
             if (self$has(key))
                 remove(list = key, envir = private$elems)
 
-            invisible(self)
+            self
         },
 
         #' @description Access value at key.
@@ -147,14 +147,14 @@ Dict <- R6::R6Class("Dict",
         #' in a name-clash with an existing key.
         #' @param old `character` name of key to be renamed.
         #' @param new `character` new key name.
-        #' @return invisibly returns the `Dict` object
+        #' @return the `Dict` object
         rename = function(old, new) {
             if (length(old) != length(new))
                 stop("old and new must be of same length")
 
             if (length(old) > 1) {
                 mapply(self$rename, old, new)
-                return(invisible(self))
+                return(self)
             }
 
             if (identical(old, new))
@@ -168,7 +168,7 @@ Dict <- R6::R6Class("Dict",
 
             self$add(key = new, value = self$get(old))
             self$delete(old)
-            invisible(self)
+            self
         },
 
         #' @description Overrides `value` at `key` if `key` is already in the
@@ -178,13 +178,13 @@ Dict <- R6::R6Class("Dict",
         #' @param value the value to be set
         #' @param add `logical` if `TRUE` the `value` is added in case
         #' `key` does not exists.
-        #' @return invisibly returns the `Dict`
+        #' @return returns the `Dict`
         replace = function(key, value, add = FALSE) {
             if (!add && !self$has(key))
                 stop("key '", key, "' not in ", data.class(self))
 
             assign(key, value, envir = private$elems)
-            invisible(self)
+            self
         },
 
 
@@ -193,7 +193,7 @@ Dict <- R6::R6Class("Dict",
         #' @param value the value to be set
         #' @param add `logical` if `TRUE` the value is set regardless whether
         #' `key` already exists in `Dict`.
-        #' @return invisibly returns the `Dict`
+        #' @return returns the `Dict`
         set = function(key, value, add = FALSE) {
             .Deprecated("replace")
             self$replace(key, value, add)
@@ -202,16 +202,16 @@ Dict <- R6::R6Class("Dict",
         #' @description Sort elements according to their keys. This function
         #' is deprecated as keys are now always sorted.
         #' @param decr `logical` if `TRUE` sort in decreasing order.
-        #' @return invisibly returns the `Dict`
+        #' @return returns the `Dict`
         sort = function(decr = FALSE) {
             .Deprecated(msg = "'sort' is deprecated - keys are now always sorted")
-            invisible(self)
+            self
         },
 
         #' @description Add elements of other dict to the `Dict` if the key is
         #' not in the `Dict` and update the key with the new value otherwise.
         #' @param other `Dict` dictionary used to update the `Dict`
-        #' @return invisibly returns the `Dict`
+        #' @return returns the `Dict`
         update = function(other = Dict$new()) {
             if (!inherits(other, data.class(self)))
                 stop("arg must be a ", data.class(self))
@@ -219,7 +219,7 @@ Dict <- R6::R6Class("Dict",
             for (key in other$keys())
                 self$replace(key, other$get(key), add = TRUE)
 
-            invisible(self)
+            self
         },
 
         #' @description Get `Container` values
