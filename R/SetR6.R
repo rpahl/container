@@ -111,6 +111,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is equal to `s`, otherwise `FALSE`
         is_equal = function(s) {
+            private$verify_same_class(s)
             self == s
         },
 
@@ -118,6 +119,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is subset of `s`, otherwise `FALSE`
         is_subset = function(s) {
+            private$verify_same_class(s)
             self <= s
         },
 
@@ -125,6 +127,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is proper subset of `s`, otherwise `FALSE`
         is_proper_subset = function(s) {
+            private$verify_same_class(s)
             self < s
         },
 
