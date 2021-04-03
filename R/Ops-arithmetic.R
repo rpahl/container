@@ -3,9 +3,9 @@
 #' @description Binary arithmetic operators for [Container()] objects and
 #' derived classes.
 #' @name OpsArith
-#' @param x,y Depending on the operator at least one or both must be of
-#' class [Container()] or the respective derived class or at least coercible to
-#' the respective class.
+#' @param x,y Depending on the operator at least one must be of class
+#' [Container()] or the respective derived class and the other at least be
+#' coercible to the respective class.
 NULL
 
 #' @rdname ContainerS3
@@ -82,23 +82,6 @@ NULL
 }
 
 #' @rdname OpsArith
-#' @return For `Dict`, `&` returns a copy of `x` keeping only the keys that
-#' are common in both (key intersection), that is, all keys in `x` that do not
-#' exist in `y` were removed.
-#' @export
-`&.Dict` <- function(x, y)
-{
-    d1 = as.dict(x)
-    d2 = as.dict(y)
-    key_diff <- setdiff(d1$keys(), d2$keys())
-    for (key in key_diff) {
-        d1$delete(key)
-    }
-    d1
-}
-
-
-#' @rdname OpsArith
 #' @return For `Set`, `+` returns the set union of x and y. Result is always a
 #' valid set.
 #' @export
@@ -107,16 +90,6 @@ NULL
     s <- as.set(x)
     lapply(as.list(y), s$add)
     s
-}
-
-#' @rdname OpsArith
-#' @return For `Set` , `&` returns the set intersection of x and y
-#' @export
-`&.Set` <- function(x, y)
-{
-    s1 <- as.set(x)
-    s2 <- as.set(y)
-    s1$intersect(s2)
 }
 
 #' @rdname OpsArith
