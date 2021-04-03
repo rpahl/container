@@ -10,9 +10,8 @@ discard <- function(x, ...) UseMethod("discard")
 #' @rdname ContainerS3
 #' @details * `discard(x, elem, right)` finds and removes `elem`. If not found, `elem` is ignored.
 #' @param elem some element of any type
-#' @param right `logical` if `TRUE`, search from right to left.
 #' @export
-discard.Container <- function(x, elem, right = FALSE) x$discard(elem, right)
+discard.Container <- function(x, elem) x$discard(elem)
 
 #' @rdname discard
 #' @param key `character` key of value to discard. If `key` does exist,

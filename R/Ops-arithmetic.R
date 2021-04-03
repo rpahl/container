@@ -9,24 +9,24 @@
 NULL
 
 #' @rdname ContainerS3
-#' @details * `x + y` combines `x` and `y` element-wise into a new container.
+#' @details * `x + y` combines `x` and `y` into a new container by appending `y`
+#' to `x`.
 #' @export
 `+.Container` <- function(x, y)
 {
-    cx <- as.container(x)
-    lapply(as.list(y), cx$add)
-    cx
+    c(as.container(x), as.container(y))
 }
 
 #' @rdname ContainerS3
-#' @details * `x - y` element-wise removes all items of `y` from `x`, given
+#' @details * `x - y` element-wise discards all items of `y` from `x`, given
 #' the element was contained in `x`. The result is always a container.
 #' @export
 `-.Container` <- function(x, y)
 {
-    cx <- as.container(x)
-    lapply(as.list(y), cx$discard)
-    cx
+    co <- as.container(x)
+    lapply(as.list(y), co$discard)
+    co
+
 }
 
 
@@ -73,7 +73,6 @@ NULL
 {
     d1 = as.dict(x)
     d2 = as.dict(y)
-    for (key in names(as.list(y)))
 
     for (key in d2$keys()) {
         d1$discard(key)
@@ -87,9 +86,7 @@ NULL
 #' @export
 `+.Set` <- function(x, y)
 {
-    s <- as.set(x)
-    lapply(as.list(y), s$add)
-    s
+    x | y
 }
 
 #' @rdname OpsArith
@@ -98,9 +95,7 @@ NULL
 #' @export
 `-.Set` <- function(x, y)
 {
-    s <- as.set(x)
-    lapply(as.list(y), s$discard)
-    s
+    as.set(x)$diff(as.set(y))
 }
 
 
