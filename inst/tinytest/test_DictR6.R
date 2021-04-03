@@ -15,7 +15,7 @@ expect_equal(d$length(), 2)
 
 expect_true(Dict$new()$empty())
 
-expect_error(Dict$new(1:2), "all elems must be named")
+expect_error(Dict$new(1:2), "all elements must be named")
 expect_error(Dict$new(x = 1, y = 2, x = 3), "duplicated keys")
 expect_equal(Dict$new()$keys(), character(0))
 
@@ -35,7 +35,7 @@ expect_equal(names(d$values()), c("x", "y"))
 # a Dict's keys are always sorted
 v <- c(h = 1, d = 2, a = 8, b = 0)
 d <- as.dict(v)
-expect_equal(keys(d), sort(names(v)))
+expect_equal(d$keys(), sort(names(v)))
 
 
 # ---
@@ -116,14 +116,14 @@ expect_true(d_was_not_touched)
 # -------
 # trying to extract from non-existing key throws an error
 d <- Dict$new(a = 1, b = 2, n = NULL)
-expect_equal(d$getvalue("a"), 1)
-expect_true(is.null(d$getvalue("n")))
-expect_error(d$getvalue("x"), "key 'x' not in Dict")
+expect_equal(d$get("a"), 1)
+expect_true(is.null(d$get("n")))
+expect_error(d$get("x"), "key 'x' not in Dict")
 
 
 # only one key at a time can be accessed
 d <- Dict$new(a = 1, b = 2)
-expect_error(d$getvalue(c("a", "b")), "key must be of length 1")
+expect_error(d$get(c("a", "b")), "key must be of length 1")
 
 
 # ---
@@ -150,7 +150,7 @@ expect_equal(d$keys(), "b")
 # ----
 # elements can be peeked and return default value if key does not exist
 d <- Dict$new(a = 1, b = 2)
-expect_equal(d$peek("a"), d$getvalue("a"))
+expect_equal(d$peek("a"), d$get("a"))
 expect_true(is.null(d$peek("x")))
 expect_equal(d$peek("x", default = 9), 9)
 
@@ -220,7 +220,7 @@ expect_equal(d$keys(), c("x3", "y"))
 # values at keys can be replaced
 d <- Dict$new(a = 1, b = NULL)
 d$replace("b", list(1, 2))
-expect_equal(d$getvalue("b"), list(1, 2))
+expect_equal(d$get("b"), list(1, 2))
 expect_error(d$replace("x", 1), "key 'x' not in Dict")
 
 
