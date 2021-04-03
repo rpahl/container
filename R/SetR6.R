@@ -153,8 +153,12 @@ Set <- R6::R6Class("Set",
             lapply(value, clone_deep_if_container)
         },
         get_hash_value = function(x) {
-            #as.character(paste(object.size(x), serialize(x, NULL), collapse = ""))
-            as.character(paste(length(x), serialize(unpack(x), NULL), collapse = ""))
+            serialize_if = function(x, ...) {
+                if (is.recursive(x) || !length(x))
+                    return(serialize(x, ...))
+                serialize(unpack(x), ...)
+            }
+            as.character(paste(length(x), serialize_if(x, NULL), collapse = ""))
         },
         resort_by_hash = function() {
             new_order = order(names(private$elems))
