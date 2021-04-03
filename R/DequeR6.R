@@ -15,10 +15,10 @@ Deque <- R6::R6Class("Deque",
     public = list(
         #' @description Add element to left side of the `Deque`.
         #' @param elem element to be added.
-        #' @return invisibly returns the `Deque()` object.
+        #' @return the `Deque()` object.
         addleft = function(elem) {
             private$elems <- c(list(elem), private$elems)
-            invisible(self)
+            self
         },
 
         #' @description Peek at last element on the right without removing it.
@@ -58,20 +58,20 @@ Deque <- R6::R6Class("Deque",
         },
 
         #' @description Reverse all elements of the [Deque()] in-place.
-        #' @return invisibly returns the `Deque()` object.
+        #' @return the `Deque()` object.
         rev = function() {
             len <- self$length()
             private$elems <- rev(private$elems)
-            invisible(self)
+            self
         },
 
         #' @description Rotate all elements `n` steps to the right. If n is
         #' negative, rotate to the left.
         #' @param n `integer` number of steps to rotate
-        #' @return invisibly returns the `Deque()` object.
+        #' @return returns the `Deque()` object.
         rotate = function(n = 1L) {
             if (self$empty() || n == 0)
-                return(invisible(self))
+                return(self)
 
             if (n > 0L) {
                 last <- self$pop()
