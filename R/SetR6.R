@@ -13,7 +13,7 @@ Set <- R6::R6Class("Set",
     public = list(
         #' @description `Set` constructor
         #' @param ... initial elements put into the `Set`
-        #' @return invisibly returns the `Set`
+        #' @return returns the `Set` object
         initialize = function(...) {
 
             elems = list(...)
@@ -22,35 +22,35 @@ Set <- R6::R6Class("Set",
             if (length(elems))
                 do.call(self$add, args = elems)
 
-            invisible(self)
+            self
         },
 
         #' @description Add element
         #' @param ... elements to be added to the `Set`
-        #' @return invisibly returns [Set()] object.
+        #' @return the `Set` object.
         add = function(...) {
             elems = list(...)
 
             if (length(elems) == 0)
-                return(invisible(self))
+                return(self)
 
             if (length(elems) > 1) {
                 for (i in seq_along(elems))
                     do.call(self$add, elems[i])
 
-                return(invisible(self))
+                return(self)
             }
 
             value = elems[[1]]
             if (self$has(value))
-                return(invisible(self))
+                return(self)
 
             named_value = elems[1]
             hash_value = private$get_hash_value(value)
             private$elems[[hash_value]] = named_value
             private$resort_by_hash()
 
-            invisible(self)
+            self
         },
 
         #' @description Search for occurence of `elem` in the `Set` and
@@ -61,7 +61,7 @@ Set <- R6::R6Class("Set",
         #' @param new element to be put instead of old
         #' @param add `logical` if `TRUE` the `new` element is added in case
         #' `old` does not exists.
-        #' @return invisibly returns the `Set` object
+        #' @return the `Set` object
         replace = function(old, new, add = FALSE) {
             if (add)
                 self$discard(old)
@@ -69,7 +69,7 @@ Set <- R6::R6Class("Set",
                 self$delete(old)
 
             self$add(new)
-            invisible(self)
+            self
         },
 
         #' @description `Set` difference
