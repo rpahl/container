@@ -56,10 +56,22 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description add element
-        #' @param elem element to be added to `Container` object
+        #' @param ... elements to be added to the `Container`
         #' @return invisibly returns the `Container` object
-        add = function(elem) {
-            private$elems <- c(private$elems, list(elem))
+        add = function(...) {
+            elems = list(...)
+
+            if (length(elems) == 0)
+                return(invisible(self))
+
+            if (length(elems) > 1) {
+                for (i in seq_along(elems))
+                    do.call(self$add, elems[i])
+
+                return(invisible(self))
+            }
+
+            private$elems <- c(private$elems, elems)
             invisible(self)
         },
 
