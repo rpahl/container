@@ -17,7 +17,7 @@ Iterable <- R6::R6Class("Iterable",
         initialize = function() stop("abstract class", call. = FALSE),
 
         #' @description Create iterator
-        #' @return invisibly returns the `Iterator` object.
+        #' @return returns the `Iterator` object.
         iter = function() {
             it <- private$create_iter()
             hasIterator <- inherits(it, "Iterator")
@@ -47,36 +47,36 @@ Container <- R6::R6Class("Container",
     public = list(
         #' @description constructor
         #' @param ... initial elements put into the `Container`
-        #' @return invisibly returns the `Container` object
+        #' @return the `Container` object
         initialize = function(...) {
             private$elems <- list(...)
             f.cmp = container_options("compare")[[1]]
             private$set_compare_fun(f.cmp)
-            invisible(self)
+            self
         },
 
         #' @description add element
         #' @param ... elements to be added to the `Container`
-        #' @return invisibly returns the `Container` object
+        #' @return the `Container` object
         add = function(...) {
             elems = list(...)
 
             if (length(elems) == 0)
-                return(invisible(self))
+                return(self)
 
             if (length(elems) > 1) {
                 for (i in seq_along(elems))
                     do.call(self$add, elems[i])
 
-                return(invisible(self))
+                return(self)
             }
 
             private$elems <- c(private$elems, elems)
-            invisible(self)
+            self
         },
 
         #' @description delete all elements from the `Container`
-        #' @return invisibly returns the cleared `Container` object
+        #' @return the cleared `Container` object
         clear = function() {
             self$initialize()
         },
@@ -92,7 +92,7 @@ Container <- R6::R6Class("Container",
         #' remove first one that is found. If `elem` does not exist, an error
         #' is signaled.
         #' @param elem element to be removed from the `Container`.
-        #' @return invisibly returns the `Container` object
+        #' @return the `Container` object
         delete = function(elem) {
             elem_str = deparse(substitute(elem))
             if (!self$has(elem))
@@ -105,10 +105,10 @@ Container <- R6::R6Class("Container",
         #' remove first one that is found.
         #' @param elem element to be discarded from the `Container`. If not
         #' found, the operation is ignored and the object is *not* altered.
-        #' @return invisibly returns the `Container` object
+        #' @return the `Container` object
         discard = function(elem) {
             if (self$empty())
-                return(invisible(self))
+                return(self)
 
             pos = private$get_position(elem)
 
@@ -116,7 +116,7 @@ Container <- R6::R6Class("Container",
             if (hasElem)
                 private$elems <- .subset(private$elems, -pos)
 
-            invisible(self)
+            self
         },
 
         #' @description Check whether `Container` is empty
@@ -186,7 +186,7 @@ Container <- R6::R6Class("Container",
         #' @param new element to be put instead of old
         #' @param add `logical` if `TRUE` the `new` element is added in case
         #' `old` does not exists.
-        #' @return invisibly returns the `Container` object
+        #' @return the `Container` object
         replace = function(old, new, add = FALSE) {
 
             pos = private$get_position(old)
@@ -200,13 +200,13 @@ Container <- R6::R6Class("Container",
 
             new_elem = if (length(new)) new else list(new)
             private$elems <- replace(self$values(), pos, new_elem)
-            invisible(self)
+            self
         },
 
         #' @description This function is deprecated. Use [delete()] instead.
         #' @param elem element to be deleted from the `Container`. If element
         #'  is not found in the `Container`, an error is signaled.
-        #' @return invisibly returns the `Container` object
+        #' @return the `Container` object
         remove = function(elem) {
             .Deprecated("delete")
             self$delete(elem)
