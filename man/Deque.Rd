@@ -64,18 +64,18 @@ functionality.
 \subsection{Method \code{addleft()}}{
 Add element to left side of the \code{Deque}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Deque$addleft(elem)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Deque$addleft(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be added.}
+\item{\code{...}}{elements to be added.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Deque()} object.
+the \code{Deque()} object.
 }
 }
 \if{html}{\out{<hr>}}
@@ -140,7 +140,7 @@ Reverse all elements of the \code{\link[=Deque]{Deque()}} in-place.
 }
 
 \subsection{Returns}{
-invisibly returns the \code{Deque()} object.
+the \code{Deque()} object.
 }
 }
 \if{html}{\out{<hr>}}
@@ -161,7 +161,7 @@ negative, rotate to the left.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Deque()} object.
+returns the \code{Deque()} object.
 }
 }
 \if{html}{\out{<hr>}}

@@ -12,6 +12,11 @@ expect_equal(attr(d, "class"), c("Deque", "Container", "Iterable", "R6"))
 expect_equal(Deque$new(0L)$addleft(1)$values(), as.list(1:0))
 expect_equal(Deque$new(mean)$addleft(median)$values(), list(median, mean))
 
+# several named elements can be added to the left
+d = Deque$new(0)
+d$addleft(a = 1, b = 2)
+expect_equal(d, Deque$new(b = 2, a = 1, 0))
+
 
 # -----------------
 # peek and peekleft
