@@ -1,71 +1,131 @@
-#' Add element
+#' Add elements
 #'
-#' Add an element to a container object.
+#' Add elements to container-like objects.
 #' @param x an `R` object of the respective class.
-#' @param elem some element of any type
-#' @param ... additional arguments to be passed to or from methods.
+#' @param ... elements to be added. If `x` is a `Dict` or `dict.table` object,
+#' all elements must be named, that is, of the form `key = value`.
 #' @export
 add <- function(x, ...) UseMethod("add")
 
 #' @rdname add
-#' @return For `Container`, an object of class `Container` with the value being
-#' added to `x`.
+#' @return For `Container`, an object of class `Container` (or of the
+#' respective derived class) with the elements being added to `x`.
 #' @export
-add.Container <- function(x, elem)
+#' @examples
+#' co = container()
+#' add(co, 1, b = 2, c = container(1:3))
+#'
+#' s = setnew()
+#' add(s, 1, 1, b = 2, "1", co = container(1, 1))
+#'
+add.Container <- function(x, ...)
 {
-    if (length(elem) == 0)
-        elem = list(elem)
-
-    c(x, elem)
+    x$clone(deep = TRUE)$add(...)
 }
 
 #' @name add.Container
 #' @rdname ContainerS3
 #' @usage ## S3 method for class 'Container'
-#' add(x, elem)
-#' @details * `add(x, elem)` adds `elem` to `x`.
+#' add(x, ...)
+#' @details * `add(x, ...)` add elements to `x`.
+#' @examples
+#' co = container()
+#' add(co, 1, b = 2, c = container(1:3))
 NULL
 
 
 
 #' @rdname add
-#' @param key `character` unique key identifier
-#' @param value some value
-#' @return For `Dict`, an object of class `Dict` with the key-value pair being
-#' added to `x`. If the `key` already existed, an error is given.
+#' @return For `Dict`, an object of class `Dict` with the key-value pairs being
+#' added to `x`. If one of the keys already exists, an error is given.
 #' @export
-add.Dict <- function(x, key, value)
+add.Dict <- function(x, ...)
 {
-    l = list()
-    l[[key]] = value
-    c(x, l)
+    d = as.dict(x) # create copy
+
+    elems = list(...)
+
+    if (length(elems) == 0)
+        return(d)
+
+    elem_names = names(elems)
+
+    if (!length(elem_names) ||
+        !all(sapply(elem_names, is_nonempty_string)))
+        stop("all elements must be named")
+
+    for (i in seq_along(elems))
+        d$add(elem_names[[i]], elems[[i]])
+
+    d
 }
 
 #' @name add.Dict
 #' @rdname DictS3
 #' @usage ## S3 method for class 'Dict'
-#' add(x, key, value)
-#' @details * `add(x, key, value)` adds key-value pair to `x`. If the `key`
-#' already existed, an error is given.
+#' add(x, ...)
+#' @details * `add(x, ...)` adds `key = value` pairs to `x`. If one of the
+#' keys already exists, an error is given.
 NULL
 
 
 
 #' @rdname add
-#' @param j `character` name or `numeric` index of column.
-#' @param value some value
-#' @return For `dict.table`, an object of class `dict.table` with the value
-#' being added to `x` at column `j`. If the column already existed, an error is
-#' given.
+#' @return For `dict.table`, an object of class `dict.table` with the columns
+#' being added to `x`. All given columns must be named. If one of the column
+#' names already exists, an error is given.
 #' @export
-add.dict.table <- function(x, j, value)
+#' @examples
+#' if (requireNamespace("data.table")) {
+#'   dit = dict.table(a = 1:3)
+#'   add(dit, b = 3:1, d = 4:6)
+#' }
+#'
+#' \dontrun{
+#' add(dit, a = 7:9)  # column 'a' already exists}
+#'
+add.dict.table <- function(x, ...)
 {
-    if (has(x, j)) {
-        stop("column '", j, "' already in ", data.class(x))
-    }
-    setval(x, j, value, add = TRUE)
+    elems = list(...)
+
+    if (length(elems) == 0)
+        return(x)
+
+    elem_names = names(elems)
+
+    if (!length(elem_names) ||
+        !all(sapply(elem_names, is_nonempty_string)))
+        stop("all elements must be named")
+
+    common_names = intersect(colnames(x), elem_names)
+    hasNameCollision = length(common_names) > 0
+    if (hasNameCollision)
+        stop("column(s) ", toString(paste0("'", common_names, "'")),
+             " exist(s) already")
+
+    for (i in seq_along(elems))
+        replace(x, elem_names[[i]], elems[[i]], add = TRUE)
+
+    x
 }
 
+
+#' @name add.dict.table
+#' @rdname dict.table
+#' @usage ## S3 method for class 'dict.table'
+#' add(x, ...)
+#' @details * `add(x, ...)` adds `key = value` pairs to `x`. If one of the
+#' keys already exists, an error is given.
+#' @examples
+#' if (requireNamespace("data.table")) {
+#'   dit = dict.table(a = 1:3)
+#'   add(dit, b = 3:1, d = 4:6)
+#' }
+#'
+#' \dontrun{
+#' add(dit, a = 7:9)  # column 'a' already exists}
+#'
+NULL
 
 
 #' @rdname add
@@ -73,21 +133,27 @@ add.dict.table <- function(x, j, value)
 addleft <- function(x, ...) UseMethod("addleft")
 
 #' @rdname add
-#' @return For `Deque`, an object of class `Deque` with the element being
-#' added to the left of `x`.
+#' @return For `Deque`, an object of class `Deque` with the elements being
+#' added to the right or left (`addleft`) of `x`.
 #' @export
-addleft.Deque <- function(x, elem)
+#' @examples
+#' d = deque(0)
+#' add(d, a = 1, b = 2)
+#' addleft(d, a = 1, b = 2)
+addleft.Deque <- function(x, ...)
 {
-    if (length(elem) == 0)
-        elem = list(elem)
-
-    c(x, elem)$rotate(1L)
+    x$clone(deep = TRUE)$addleft(...)
 }
 
 #' @name addleft.Deque
 #' @rdname DequeS3
 #' @usage ## S3 method for class 'Deque'
-#' addleft(x, elem)
-#' @details * `addleft(x, elem)` adds `elem` to left side of `x`.
+#' addleft(x, ...)
+#' @details * `addleft(x, ...)` add (possibly named) elements to left
+#' side of `x`.
+#' @examples
+#' d = deque(0)
+#' add(d, a = 1, b = 2)
+#' addleft(d, a = 1, b = 2)
 NULL
 

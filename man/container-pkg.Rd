@@ -6,12 +6,11 @@
 \title{Container, Deque, Set, and Dict (aka Map) - R6 based container classes
 with iterators and reference semantics.}
 \description{
-Implements a general Container class with typical member functions to insert,
-delete and access objects from the container. The Container class serves as
-the base class for the Deque, Set and Dict classes (resembling 'Python's
-dict type). Supports iterators and, being R6 classes, reference semantics.
-The focus of implementation was not on speed but to define consistent class
-interfaces based on a meaningful class hierarchy.
+Implements a general Container class with iterators and typical member
+functions to insert, delete and access objects from the container.
+The Container class serves as the base class for the Deque, Set and Dict
+classes (the latter resembling Python's dict type). For any created object
+both reference semantics or classic S3 copy semantics is provided.
 }
 \author{
 Roman Pahl, \email{roman.pahl@gmail.com}

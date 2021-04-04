@@ -1,9 +1,11 @@
-#' Relational Operators for Containers
+#' Comparison Operators for Containers
 #'
 #' @description Binary comparison operators for [Container()] objects and
 #' derived classes.
 #' @name OpsComp
-#' @param x,y objects of class [Container()] or one of the derived classes.
+#' @param x, y objects of class [Container()] or one of the derived classes.
+#' @param x,y at least one must be a [Container()] object (or an object of
+#' one of the derived classes) while the other must be at least iterable.
 NULL
 
 #' @export

@@ -55,10 +55,8 @@ expect_equal(coco$values()[[1]]$values(), list(1, 2))
 
 # named elements can be added to a Container
 co <- Container$new()
-x <- 1
-names(x) <- "x"
-co$add(x)
-expect_equal(co$values(), list(c(x = 1)))
+co$add(a = 1, 2, b = 3)
+expect_equal(co$values(), list(a = 1, 2, b = 3))
 
 # -----
 # clear
@@ -314,7 +312,9 @@ v <- 1:5
 co <- as.container(v)
 it <- co$iter()
 sum <- 0
-while(it$has_next()) sum <- sum + it$get_next()
+while(it$has_next())
+    sum <- sum + it$get_next()[[1]]
+
 expect_equal(sum(v), sum(as.integer(co$values())))
 
 

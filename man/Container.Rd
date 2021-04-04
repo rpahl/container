@@ -67,7 +67,7 @@ constructor
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Container} object
+the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -76,18 +76,18 @@ invisibly returns the \code{Container} object
 \subsection{Method \code{add()}}{
 add element
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$add(elem)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$add(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{elem}}{element to be added to \code{Container} object}
+\item{\code{...}}{elements to be added to the \code{Container}}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Container} object
+the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -100,7 +100,7 @@ delete all elements from the \code{Container}
 }
 
 \subsection{Returns}{
-invisibly returns the cleared \code{Container} object
+the cleared \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -142,7 +142,7 @@ is signaled.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Container} object
+the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -164,7 +164,7 @@ found, the operation is ignored and the object is \emph{not} altered.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Container} object
+the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -301,7 +301,7 @@ added.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Container} object
+the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -322,7 +322,7 @@ is not found in the \code{Container}, an error is signaled.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Container} object
+the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}

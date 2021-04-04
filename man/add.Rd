@@ -7,47 +7,59 @@
 \alias{add.dict.table}
 \alias{addleft}
 \alias{addleft.Deque}
-\title{Add element}
+\title{Add elements}
 \usage{
 add(x, ...)
 
-\method{add}{Container}(x, elem)
+\method{add}{Container}(x, ...)
 
-\method{add}{Dict}(x, key, value)
+\method{add}{Dict}(x, ...)
 
-\method{add}{dict.table}(x, j, value)
+\method{add}{dict.table}(x, ...)
 
 addleft(x, ...)
 
-\method{addleft}{Deque}(x, elem)
+\method{addleft}{Deque}(x, ...)
 }
 \arguments{
 \item{x}{an \code{R} object of the respective class.}
 
-\item{...}{additional arguments to be passed to or from methods.}
-
-\item{elem}{some element of any type}
-
-\item{key}{\code{character} unique key identifier}
-
-\item{value}{some value}
-
-\item{j}{\code{character} name or \code{numeric} index of column.}
+\item{...}{elements to be added. If \code{x} is a \code{Dict} or \code{dict.table} object,
+all elements must be named, that is, of the form \code{key = value}.}
 }
 \value{
-For \code{Container}, an object of class \code{Container} with the value being
-added to \code{x}.
+For \code{Container}, an object of class \code{Container} (or of the
+respective derived class) with the elements being added to \code{x}.
 
-For \code{Dict}, an object of class \code{Dict} with the key-value pair being
-added to \code{x}. If the \code{key} already existed, an error is given.
+For \code{Dict}, an object of class \code{Dict} with the key-value pairs being
+added to \code{x}. If one of the keys already exists, an error is given.
 
-For \code{dict.table}, an object of class \code{dict.table} with the value
-being added to \code{x} at column \code{j}. If the column already existed, an error is
-given.
+For \code{dict.table}, an object of class \code{dict.table} with the columns
+being added to \code{x}. All given columns must be named. If one of the column
+names already exists, an error is given.
 
-For \code{Deque}, an object of class \code{Deque} with the element being
-added to the left of \code{x}.
+For \code{Deque}, an object of class \code{Deque} with the elements being
+added to the right or left (\code{addleft}) of \code{x}.
 }
 \description{
-Add an element to a container object.
+Add elements to container-like objects.
+}
+\examples{
+co = container()
+add(co, 1, b = 2, c = container(1:3))
+
+s = setnew()
+add(s, 1, 1, b = 2, "1", co = container(1, 1))
+
+if (requireNamespace("data.table")) {
+  dit = dict.table(a = 1:3)
+  add(dit, b = 3:1, d = 4:6)
+}
+
+\dontrun{
+add(dit, a = 7:9)  # column 'a' already exists}
+
+d = deque(0)
+add(d, a = 1, b = 2)
+addleft(d, a = 1, b = 2)
 }

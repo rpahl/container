@@ -45,7 +45,7 @@ Create iterator
 }
 
 \subsection{Returns}{
-invisibly returns the \code{Iterator} object.
+returns the \code{Iterator} object.
 }
 }
 \if{html}{\out{<hr>}}

@@ -41,7 +41,7 @@ is.container(x)
 \method{-}{Container}(x, y)
 
 ## S3 method for class 'Container'
-add(x, elem)
+add(x, ...)
 
 ## S3 method for class 'Container'
 clear(x)
@@ -50,7 +50,7 @@ clear(x)
 
 \method{delete}{Container}(x, elem, right = FALSE)
 
-\method{discard}{Container}(x, elem, right = FALSE)
+\method{discard}{Container}(x, elem)
 
 \method{empty}{Container}(x)
 
@@ -109,16 +109,17 @@ and \code{FALSE} otherwise.
 }
 
 \itemize{
-\item \code{x + y} combines \code{x} and \code{y} element-wise into a new container.
+\item \code{x + y} combines \code{x} and \code{y} into a new container by appending \code{y}
+to \code{x}.
 }
 
 \itemize{
-\item \code{x - y} element-wise removes all items of \code{y} from \code{x}, given
+\item \code{x - y} element-wise discards all items of \code{y} from \code{x}, given
 the element was contained in \code{x}. The result is always a container.
 }
 
 \itemize{
-\item \code{add(x, elem)} adds \code{elem} to \code{x}.
+\item \code{add(x, ...)} add elements to \code{x}.
 }
 
 \itemize{
@@ -145,6 +146,10 @@ found, an error is signaled.
 \itemize{
 \item \code{has(x)} \code{TRUE} if element is in \code{x} and otherwise \code{FALSE}.
 }
+}
+\examples{
+co = container()
+add(co, 1, b = 2, c = container(1:3))
 }
 \seealso{
 For the \code{Container} class documentation see \code{\link[=Container]{Container()}}.

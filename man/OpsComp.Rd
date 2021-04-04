@@ -2,9 +2,12 @@
 % Please edit documentation in R/Ops-compare.R
 \name{OpsComp}
 \alias{OpsComp}
-\title{Relational Operators for Containers}
+\title{Comparison Operators for Containers}
 \arguments{
-\item{x, y}{objects of class \code{\link[=Container]{Container()}} or one of the derived classes.}
+\item{x, }{y objects of class \code{\link[=Container]{Container()}} or one of the derived classes.}
+
+\item{x, y}{at least one must be a \code{\link[=Container]{Container()}} object (or an object of
+one of the derived classes) while the other must be at least iterable.}
 }
 \description{
 Binary comparison operators for \code{\link[=Container]{Container()}} objects and

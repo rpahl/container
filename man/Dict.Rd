@@ -74,7 +74,7 @@ Key-value pairs internally are stored in a hash-table.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict}
+returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
@@ -116,7 +116,7 @@ signaled.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict}
+the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -137,7 +137,7 @@ the associated key-value pair is deleted, otherwise it is ignored.}
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict}
+the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
@@ -307,7 +307,7 @@ in a name-clash with an existing key.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict} object
+the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -334,7 +334,7 @@ set to \code{TRUE}.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict}
+returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
@@ -359,7 +359,7 @@ This function is deprecated. Use \code{\link[=replace]{replace()}} instead.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict}
+returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
@@ -380,7 +380,7 @@ is deprecated as keys are now always sorted.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict}
+returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
@@ -401,7 +401,7 @@ not in the \code{Dict} and update the key with the new value otherwise.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Dict}
+returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}

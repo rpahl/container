@@ -18,7 +18,7 @@ is.deque(x)
 \method{rev}{Deque}(x)
 
 ## S3 method for class 'Deque'
-addleft(x, elem)
+addleft(x, ...)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Deque}.}
@@ -59,8 +59,14 @@ returns the \code{\link[=Deque]{Deque()}} object.
 }
 
 \itemize{
-\item \code{addleft(x, elem)} adds \code{elem} to left side of \code{x}.
+\item \code{addleft(x, ...)} add (possibly named) elements to left
+side of \code{x}.
 }
+}
+\examples{
+d = deque(0)
+add(d, a = 1, b = 2)
+addleft(d, a = 1, b = 2)
 }
 \seealso{
 See \code{\link[=container]{container()}} for all inherited methods. For the full class

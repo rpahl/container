@@ -1,8 +1,10 @@
-ip <- names(installed.packages()[, "Package"])
-hasDT <- "data.table" %in% ip
-if (!hasDT){
+ee = expect_equal
+
+# ----------
+# dict.table
+# ----------
+if (!requireNamespace(data.table))
     exit_file("skip dict.table, because data.table pkg is not installed")
-}
 
 data.table <- data.table::data.table
 as.data.table <- data.table::as.data.table
@@ -12,23 +14,37 @@ dat = data.table(A = 1, B = 2)
 dit = dict.table(A = 1, B = 2)
 expect_equivalent(dit, dat)
 
+# --------------
+# add.dict.table
+# --------------
+dit = dict.table(a = 1)
+ee(add(dit, b = 2, c = 3), dict.table(a = 1, b = 2, c = 3))
+ee(dit, dict.table(a = 1, b = 2, c = 3)) # was done by reference
+
+expect_error(add(dit, d = 4, 5), "all elements must be named")
+d_was_not_touched_upon_error = all.equal(dit, dict.table(a = 1, b = 2, c = 3))
+expect_true(d_was_not_touched_upon_error)
+
+expect_error(add(dit, d = 4, a = 5, b = 6), "all elements must be named")
+
+
 
 # access of dict.table properities work as expected
 dat = data.table(A = 1, B = 2)
 dit = dict.table(A = 1, B = 2)
-expect_equal(dim(dit), dim(dat))
-expect_equal(nrow(dit), nrow(dat))
-expect_equal(ncol(dit), ncol(dat))
-expect_equal(rownames(dit), rownames(dat))
-expect_equal(colnames(dit), colnames(dat))
-expect_equal(dimnames(dit), dimnames(dat))
+ee(dim(dit), dim(dat))
+ee(nrow(dit), nrow(dat))
+ee(ncol(dit), ncol(dat))
+ee(rownames(dit), rownames(dat))
+ee(colnames(dit), colnames(dat))
+ee(dimnames(dit), dimnames(dat))
 
 
 # dict.table rownames can be changed
 dit = dict.table(A = 1:3)
-expect_equal(row.names(dit), as.character(1:3))
+ee(row.names(dit), as.character(1:3))
 rownames(dit) <- letters[1:3]
-expect_equal(row.names(dit), letters[1:3])
+ee(row.names(dit), letters[1:3])
 
 
 # dict.table is created as copy of another data.table
@@ -57,7 +73,7 @@ expect_error(add(dit, "x", 1:3), "Supplied 3 items to be assigned to 4 items of 
 expect_error(add(dit, "x", 1:2))
 expect_false(has(dit, "x"))
 add(dit, "x", 1)
-expect_equal(getval(dit, "x"), rep(1, 4))
+ee(getval(dit, "x"), rep(1, 4))
 
 
 # a column cannot be added twice
@@ -73,7 +89,7 @@ expect_false(has(dit, "x"))
 
 # a dict.table can be cleared
 dit = dict.table(A = 1, B = 2)
-expect_equal(clear(dit), dict.table())
+ee(clear(dit), dict.table())
 
 
 # columns can be deleted from dict.table
@@ -82,7 +98,7 @@ expect_true(has(dit, "B"))
 delete(dit, "B")
 expect_false(has(dit, "B"))
 
-expect_equal(c("A", "C"), colnames(dit))
+ee(c("A", "C"), colnames(dit))
 delete(dit, c("A", "C"))
 expect_true(empty(dit))
 
@@ -93,7 +109,7 @@ expect_true(has(dit, "B"))
 discard(dit, "B")
 expect_false(has(dit, "B"))
 
-expect_equal(c("A", "C"), colnames(dit))
+ee(c("A", "C"), colnames(dit))
 discard(dit, c("A", "C"))
 expect_true(empty(dit))
 
@@ -103,7 +119,7 @@ dit = dict.table(A = 1:2, B = 2:1, C = 3:4)
 expect_true(has(dit, "B"))
 discard(dit, 2)
 expect_false(has(dit, "B"))
-expect_equal(c("A", "C"), colnames(dit))
+ee(c("A", "C"), colnames(dit))
 
 expect_silent(discard(dit, 1:2))
 expect_true(empty(dit))
@@ -130,7 +146,7 @@ dit = dict.table(A = 1:2, B = 2:1)
 dit.copy = data.table::copy(dit)
 
 expect_error(delete(dit, c("B", "X")), "Column 'X' not in dict.table")
-expect_equal(dit, dit.copy)
+ee(dit, dit.copy)
 
 
 # dict.table can be printed
@@ -140,65 +156,65 @@ out.expected <- c("<dict.table> with 2 rows and 2 columns",
                   "   A B",
                   "1: 1 2",
                   "2: 2 1")
-expect_equal(out, out.expected)
+ee(out, out.expected)
 
 
 # dict.table has a size
 dit = dict.table(A = 1:2, B = 2:1, C = 3:4)
-expect_equal(length(dit), ncol(dit))
-expect_equal(length(clear(dit)), 0)
+ee(length(dit), ncol(dit))
+ee(length(clear(dit)), 0)
 
 
 # standard dict getter works as expected
 dit = dict.table(A = 1:2, B = 2:1, C = 3:4)
 daf = as.data.frame(dit)
 
-expect_equal(getval(dit, "A"), daf[["A"]])
+ee(getval(dit, "A"), daf[["A"]])
 expect_error(getval(dit, c("A", "B")), "column index must be of length 1")
 
 
 # peek works as expected
 dit = dict.table(A = 1:2, B = 2:1)
-expect_equal(peek(dit, "A"), getval(dit, "A"))
+ee(peek(dit, "A"), getval(dit, "A"))
 expect_error(peek(dit, c("A", "B")), "column index must be of length 1")
 
 expect_true(is.null(peek(dit, "X")))
-expect_equal(peek(dit, "X", default = 9), rep(9, nrow(dit)))
-expect_equal(peek(dit, "X", default = "a"), rep("a", nrow(dit)))
+ee(peek(dit, "X", default = 9), rep(9, nrow(dit)))
+ee(peek(dit, "X", default = "a"), rep("a", nrow(dit)))
 
 
 # pop works as expected
 dit = dict.table(A = 1:2, B = 2:1)
-expect_equal(pop(dit, "A"), 1:2)
+ee(pop(dit, "A"), 1:2)
 expect_false(has(dit, "A"))
 
-expect_equal(pop(dit, "B"), 2:1)
+ee(pop(dit, "B"), 2:1)
 expect_true(empty(dit))
 
 
 # popitem works as expected
 set.seed(123)
 dit = dict.table(A = 1:2, B = 2:1)
-expect_equal(popitem(dit), 1:2)
+ee(popitem(dit), 1:2)
 expect_false(has(dit, "A"))
 
-expect_equal(popitem(dit), 2:1)
+ee(popitem(dit), 2:1)
 expect_true(empty(dit))
 
 
 # columns can be renamed
 dit = dict.table(A = 1:2, B = 2:1)
 rename(dit, "A", "X")
-expect_equal(colnames(dit), c("X", "B"))
+ee(colnames(dit), c("X", "B"))
 rename(dit, c("X", "B"), c("y", "z"))
-expect_equal(colnames(dit), c("y", "z"))
+ee(colnames(dit), c("y", "z"))
 expect_error(rename(dit, "A", "b"))
 
 
 # a column can be set
 dit = dict.table(A = 1:2, B = 2:1)
 setval(dit, "A", 3:4)
-expect_equal(getval(dit, "A"), 3:4)
+ee(getval(dit, "A"), 3:4)
 
 
 # a column can only bet set if already existing unless declared to be added
@@ -206,8 +222,8 @@ dit = dict.table(A = 1)
 expect_error(setval(dit, "B", 1), "column 'B' not in dict.table")
 
 setval(dit, "B", 1, add = TRUE)
-expect_equal(getval(dit, "B"), 1)
-expect_equal(colnames(dit), c("A", "B"))
+ee(getval(dit, "B"), 1)
+ee(colnames(dit), c("A", "B"))
 
 expect_error(setval(dit, 3, 1, add = TRUE),
              "Item 1 of column numbers in j is 3 which is outside range")
@@ -218,16 +234,16 @@ dit = dict.table(A = 1:4, B = 4:1)
 expect_error(setval(dit, "A", 1:3),
              "Supplied 3 items to be assigned to 4 items of column 'A'")
 expect_error(setval(dit, "A", 1:2))
-expect_equal(getval(dit, "A"), 1:4)
+ee(getval(dit, "A"), 1:4)
 
 setval(dit, "A", 9)
-expect_equal(getval(dit, "A"), rep(9, 4))
+ee(getval(dit, "A"), rep(9, 4))
 
 
 # a column can be set by numeric index
 dit = dict.table(A = 1:2, B = 2:1)
 setval(dit, 2, 0)
-expect_equal(getval(dit, 2), rep(0, 2))
+ee(getval(dit, 2), rep(0, 2))
 expect_error(setval(dit, 3, 1:2), "3 is outside range")
 
 
@@ -237,10 +253,10 @@ dit = dict.table(dat)
 dat2 <- rbind(dat, dat)
 dit2 <- rbind(dit, dit)
 expect_true(is.dict.table(dit2))
-expect_equal(as.data.table(dit2), dat2)
+ee(as.data.table(dit2), dat2)
 dit.dat <- rbind(dit, dat)
 expect_true(is.dict.table(dit.dat))
-expect_equal(as.data.table(dit.dat), dat2)
+ee(as.data.table(dit.dat), dat2)
 
 
 # dict.table coercion works as expected
@@ -249,13 +265,13 @@ expect_true(is.data.frame(as.data.frame(dit)))
 
 dat = as.data.table(dit)
 expect_true(is.data.table(dat))
-expect_equal(dat, data.table(A = 1:2, B = 3:4))
+ee(dat, data.table(A = 1:2, B = 3:4))
 expect_true(is.dict.table(dit))
 data.table::set(dat, j = "C", value = 1:2)
 expect_false(has(dit, "C"))
 
 daf = as.data.frame(dit)
-expect_equal(daf, data.frame(A = 1:2, B = 3:4))
+ee(daf, data.frame(A = 1:2, B = 3:4))
 expect_true(is.dict.table(dit))
 
 # By reference means dit also becomes a data.table
@@ -264,6 +280,6 @@ expect_true(is.data.table(dat))
 expect_false(is.dict.table(dit))
 expect_true(is.data.table(dit))
 data.table::set(dat, j = "C", value = 1:2)
-expect_equal(dat, dit)
+ee(dat, dit)
 
 

@@ -15,7 +15,7 @@ as.dict(x)
 is.dict(x)
 
 ## S3 method for class 'Dict'
-add(x, key, value)
+add(x, ...)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Dict}.}
@@ -54,8 +54,8 @@ and \code{FALSE} otherwise.
 }
 
 \itemize{
-\item \code{add(x, key, value)} adds key-value pair to \code{x}. If the \code{key}
-already existed, an error is given.
+\item \code{add(x, ...)} adds \code{key = value} pairs to \code{x}. If one of the
+keys already exists, an error is given.
 }
 }
 \examples{

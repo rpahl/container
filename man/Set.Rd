@@ -68,7 +68,7 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Set}
+returns the \code{Set} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -88,7 +88,7 @@ Add element
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns \code{\link[=Set]{Set()}} object.
+the \code{Set} object.
 }
 }
 \if{html}{\out{<hr>}}
@@ -116,7 +116,7 @@ added.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-invisibly returns the \code{Set} object
+the \code{Set} object
 }
 }
 \if{html}{\out{<hr>}}

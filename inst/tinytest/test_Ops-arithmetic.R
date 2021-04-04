@@ -73,19 +73,6 @@ expect_equal(list() - x, setnew())
 expect_true(x - y != y - x)
 
 
-# x & y
-x <- setnew(1, 2,    "1", "2")
-y <- setnew(   2, 3,      "2", "3")
-expect_equal(intersect(as.list(x), as.list(y)), list(2)) # 'wrong' base implementation
-expect_equal(as.list(x & y), list(2, "2"))  # correct
-expect_equal(x & x, x)
-expect_equal(x & setnew(), setnew())
-expect_equal(setnew() & x, setnew())
-expect_equal(list() & x, setnew())
-expect_equal(x & list(), setnew())
-expect_true((x & y) == (y & x))
-
-
 # ----
 # Dict
 # ----
