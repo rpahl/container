@@ -79,10 +79,9 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @return `TRUE` if `key` in `Dict`, otherwise `FALSE`.
         has = function(key) {
-            if (length(key) != 1) stop("key must be of length 1")
-            if (!is.character(key)) stop("key must be character")
-            if (is.na(key)) stop("undefined key")
-            if (isTRUE(nchar(key) == 0)) stop("zero-length key")
+            if (!is_nonempty_string(key))
+                stop("key must be a non-empty string")
+
             utils::hasName(private$elems, key)
         },
 
