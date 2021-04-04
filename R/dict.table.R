@@ -16,6 +16,7 @@
     data.table::setattr(x, "class", class.new)
 }
 
+
 #' dict.table
 #'
 #' @description The [dict.table()] is a mix of a dictionary and a
@@ -33,7 +34,7 @@
 #' [data.table()], [dict.table()] does not allow duplicated keys and therefore
 #' always is initialized as `data.table(..., check.names = TRUE)`.
 #' @param x any `R` object or a `dict.table` object.
-#' @name dict.tableS3
+#' @name dict.table
 #' @import data.table
 #' @seealso [dict()], [data.table::data.table()]
 #' @export
@@ -58,6 +59,11 @@
 #' has(dit, "x")                                # FALSE
 dict.table <- function(...)
 {
+    if (!requireNamespace(data.table)) {
+        message("dict.table() requires the 'data.table' package.")
+        return(.ask_data.table_install())
+    }
+
     dat <- data.table::data.table(..., check.names = TRUE)
     .set_class(dat)
     if (any(duplicated(names(dat)))) {
@@ -67,7 +73,7 @@ dict.table <- function(...)
     dat
 }
 
-#' @rdname dict.tableS3
+#' @rdname dict.table
 #' @export
 as.dict.table <- function(x, ...)
 {
@@ -75,7 +81,7 @@ as.dict.table <- function(x, ...)
     UseMethod("as.dict.table")
 }
 
-#' @rdname dict.tableS3
+#' @rdname dict.table
 #' @param copy if `TRUE` creates a copy of the `data.table` object otherwise
 #' works on the passed object by reference.
 #' @export
@@ -102,26 +108,24 @@ as.dict.table <- function(x, ...)
 #'
 as.dict.table.data.table <- function(x, copy = TRUE, ...)
 {
-    if (copy) {
+    if (copy)
         dict.table(x)
-    } else {
+    else
         .set_class(x)
-    }
 }
 
 
 #' @export
 as.dict.table.default <- function(x, ...)
 {
-    dots = list(...)
-    do.call(dict.table, args = c(as.list(x), dots))
+    do.call(dict.table, args = as.list(x))
 }
 
-#' @rdname dict.tableS3
+#' @rdname dict.table
 #' @export
 is.dict.table <- function(x) inherits(x, "dict.table")
 
-#' @rdname dict.tableS3
+#' @rdname dict.table
 #' @export
 #' @examples
 #'
@@ -161,7 +165,7 @@ print.dict.table <- function(x, ...)
 }
 
 
-#' @rdname dict.tableS3
+#' @rdname dict.table
 #' @export
 #' @examples
 #' dit = dict.table(a = 1:2, b = 1:2)
