@@ -9,8 +9,8 @@ Authors@R:
 Description: Common container data structures deque, set, dict (resembling
     Python's dict type) and dict.table (combining dict and data.table) with
     typical member functions to insert, delete and access container elements.
-    Furthermore, the package allows to create iterators and provides reference
-    semantics for all objects.
+    Furthermore, iterators are provided and for any created object both
+    reference and copy semantics are supported simultaneously.
 Depends: R (>= 3.0)
 License: GPL-3
 LazyData: TRUE

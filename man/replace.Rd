@@ -9,11 +9,11 @@
 \usage{
 replace(x, ...)
 
-\method{replace}{Container}(x, old, new, add = FALSE)
+\method{replace}{Container}(x, old, new, add = FALSE, copy = TRUE)
 
-\method{replace}{Dict}(x, key, value, add = FALSE)
+\method{replace}{Dict}(x, key, value, add = FALSE, copy = TRUE)
 
-\method{replace}{dict.table}(x, key, value, add = FALSE)
+\method{replace}{dict.table}(x, key, value, add = FALSE, copy = TRUE)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -29,32 +29,36 @@ given. In contrast, if set to \code{TRUE} the new element is added regardless
 whether it already exists or not, that is, either as a replacement or just
 as a new element.}
 
+\item{copy}{\code{logical} if TRUE (default) the replacement operation is done on
+a copy of \code{x}, otherwise on the original object.}
+
 \item{key}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Container}, an object of class \code{Container} (or of the
-respective derived class) after the element was replaced (or added).
+respective derived class) with the element being replaced (or added).
 
-For \code{Dict} overrides \code{value} at \code{key} if \code{key} is already in the
-\code{Dict}. If \code{key} not in \code{Dict}, an error is given unless \code{add} was set to
-\code{TRUE} in which case the \code{value} is added under \code{key}.
-Invisibly returns the altered \code{\link[=Dict]{Dict()}} object.
+For \code{Dict}, and object of class \code{Dict} with \code{value} replaced at
+\code{key} if \code{key} is already in the \code{Dict}. If \code{key} is not in the \code{Dict},
+an error is given unless \code{add} was set to \code{TRUE} in which case the \code{value}
+is added under \code{key}.
 
-For \code{dict.table} overrides the values at the given column.
-If \code{key} does not exist, an error is given unless \code{add} was set to
-\code{TRUE} in which case the column is added if possible. All changes are made
-by reference. Invisibly returns the altered \code{\link[=dict.table]{dict.table()}} object.
+For \code{dict.table}, an object of class \code{dict.table} with values
+replaced at column \code{key}, which can be a name or a numeric index.
+If column \code{key} does not exist, an error is given
+unless \code{add} was set to \code{TRUE} in which case the column is added if possible.
+All changes are made by reference.
 }
 \description{
 Try to find and replace elements and signal an error if not
-found, unless stated otherwise (see option \code{add}).
+found, unless it is stated to explicitly add the element (see option \code{add}).
 }
 \examples{
 co = container("x", 9)
 replace(co, 9, 0)
 replace(co, "x", 0)
+\dontrun{
+replace(co, "z", 0)              # old element ("z") is not in Container}
+replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 
-s = setnew(1, "z")
-replace(s, 9, 0)
-replace(s, "x", 0)
 }

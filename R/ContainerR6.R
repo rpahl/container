@@ -94,9 +94,8 @@ Container <- R6::R6Class("Container",
         #' @param elem element to be removed from the `Container`.
         #' @return the `Container` object
         delete = function(elem) {
-            elem_str = deparse(substitute(elem))
             if (!self$has(elem))
-                stop(elem_str, " is not in ", data.class(self))
+                stop(get_label(elem), " is not in ", data.class(self))
 
             self$discard(elem)
         },

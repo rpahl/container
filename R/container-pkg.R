@@ -2,11 +2,11 @@
 #' with iterators and reference semantics.
 #'
 #' @description
-#' Implements a general Container class with iterators and typical member
-#' functions to insert, delete and access objects from the container.
-#' The Container class serves as the base class for the Deque, Set and Dict
-#' classes (the latter resembling Python's dict type). For any created object
-#' both reference semantics or classic S3 copy semantics is provided.
+#' Common container data structures deque, set, dict (resembling
+#' Python's dict type) and dict.table (combining dict and data.table) with
+#' typical member functions to insert, delete and access container elements.
+#' Furthermore, iterators are provided and for any created object both
+#' reference and copy semantics are supported simultaneously.
 #'
 #' @author Roman Pahl, \email{roman.pahl@gmail.com}
 #' @docType package

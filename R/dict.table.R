@@ -59,11 +59,6 @@
 #' has(dit, "x")                                # FALSE
 dict.table <- function(...)
 {
-    if (!requireNamespace("data.table")) {
-        message("dict.table() requires the 'data.table' package.")
-        return(.ask_data.table_install())
-    }
-
     dat <- data.table::data.table(..., check.names = TRUE)
     .set_class(dat)
     if (any(duplicated(names(dat)))) {

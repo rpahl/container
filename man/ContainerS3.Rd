@@ -163,6 +163,10 @@ add(co, 1, b = 2, c = container(1:3))
 co = container("x", 9)
 replace(co, 9, 0)
 replace(co, "x", 0)
+\dontrun{
+replace(co, "z", 0)              # old element ("z") is not in Container}
+replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
+
 }
 \seealso{
 For the \code{Container} class documentation see \code{\link[=Container]{Container()}}.
