@@ -338,5 +338,3 @@ expect_true(s1$is_proper_subset(s12))
 expect_false(s0$is_proper_subset(s0))
 expect_false(s1$is_proper_subset(s1))
 
-expect_true(original_sets_were_not_altered)
-

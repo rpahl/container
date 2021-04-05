@@ -3,9 +3,6 @@ ee = expect_equal
 # ----------
 # dict.table
 # ----------
-if (!requireNamespace(data.table))
-    exit_file("skip dict.table, because data.table pkg is not installed")
-
 data.table <- data.table::data.table
 as.data.table <- data.table::as.data.table
 
@@ -13,17 +10,6 @@ as.data.table <- data.table::as.data.table
 dat = data.table(A = 1, B = 2)
 dit = dict.table(A = 1, B = 2)
 expect_equivalent(dit, dat)
-
-# ------------------
-# replace.dict.table
-# ------------------
-x = deque(1, "z")
-ee(replace(x, 1, 0), deque(0, "z"))
-ee(replace(x, "z", 0), deque(1, 0))
-
-x_was_not_touched = all.equal(x, deque(1, "z"))
-expect_true(x_was_not_touched)
-
 
 
 # access of dict.table properities work as expected
@@ -57,25 +43,21 @@ expect_true(dit == dat2)
 # a column can be addded to a dict.table if name is specified as character
 dit = dict.table(A = 1)
 expect_false("x" %in% colnames(dit))
-add(dit, "x", 2)
-expect_true("x" %in% colnames(dit))
-
-expect_error(add(dit, 3, 3),
-             "Item 1 of column numbers in j is 3 which is outside range")
+expect_true(hasName(add(dit, "b" = 2), "b"))
 
 
 # the length of added columns must match or be of length 1
 dit = dict.table(A = 1:4, B = 4:1)
-expect_error(add(dit, "x", 1:3), "Supplied 3 items to be assigned to 4 items of column 'x'")
-expect_error(add(dit, "x", 1:2))
-expect_false(has(dit, "x"))
-add(dit, "x", 1)
-ee(getval(dit, "x"), rep(1, 4))
+expect_error(add(dit, a = 1:3), "Supplied 3 items to be assigned to 4 items of column 'a'")
+expect_error(add(dit, a = 1:2))
+expect_false(has(dit, "a"))
+add(dit, a = 1)
+ee(getval(dit, "a"), rep(1, 4))
 
 
 # a column cannot be added twice
 dit = dict.table(A = 1:2, B = 2:1)
-expect_error(add(dit, "A", 1:2), "column 'A' already in dict.table")
+expect_error(add(dit, "A" = 1:2), "column\\(s\\) 'A' exist\\(s\\) already")
 
 
 # it can be checked if a dict.table has a certain column
@@ -210,38 +192,38 @@ expect_error(rename(dit, "A", "b"))
 
 # a column can be set
 dit = dict.table(A = 1:2, B = 2:1)
-setval(dit, "A", 3:4)
+replace(dit, "A", 3:4, .copy = FALSE)
 ee(getval(dit, "A"), 3:4)
 
 
 # a column can only bet set if already existing unless declared to be added
 dit = dict.table(A = 1)
-expect_error(setval(dit, "B", 1), "column 'B' not in dict.table")
+expect_error(replace(dit, "B", 1), "column 'B' not in dict.table")
 
-setval(dit, "B", 1, add = TRUE)
+replace(dit, "B", 1, add = TRUE, .copy = FALSE)
 ee(getval(dit, "B"), 1)
 ee(colnames(dit), c("A", "B"))
 
-expect_error(setval(dit, 3, 1, add = TRUE),
+expect_error(replace(dit, 3, 1, add = TRUE),
              "Item 1 of column numbers in j is 3 which is outside range")
 
 
 # the length of set column must match or be of length 1
 dit = dict.table(A = 1:4, B = 4:1)
-expect_error(setval(dit, "A", 1:3),
+expect_error(replace(dit, "A", 1:3),
              "Supplied 3 items to be assigned to 4 items of column 'A'")
-expect_error(setval(dit, "A", 1:2))
+expect_error(replace(dit, "A", 1:2))
 ee(getval(dit, "A"), 1:4)
 
-setval(dit, "A", 9)
+replace(dit, "A", 9, .copy = FALSE)
 ee(getval(dit, "A"), rep(9, 4))
 
 
 # a column can be set by numeric index
 dit = dict.table(A = 1:2, B = 2:1)
-setval(dit, 2, 0)
+replace(dit, 2, 0, .copy = FALSE)
 ee(getval(dit, 2), rep(0, 2))
-expect_error(setval(dit, 3, 1:2), "3 is outside range")
+expect_error(replace(dit, 3, 1:2), "3 is outside range")
 
 
 # rbind works as expected for dict.tables

@@ -1,4 +1,7 @@
+exit_file(msg = "options")
+
 co = container_options
+co(.reset = TRUE)
 
 # With no arg all options should be returned
 expect_equal(co(), .default_options())

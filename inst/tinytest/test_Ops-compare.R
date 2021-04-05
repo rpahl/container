@@ -9,7 +9,7 @@ co3 = container(3)
 co12 = container(1, 2)
 co21 = container(2, 1)
 co123 = container(1, 2, 3)
-expect_error(container(1, 2, 3) < 1:4, "second argument must be iterable")
+expect_error(container(1, 2, 3) < 1:4, "both arguments must be iterable")
 
 expect_false(co123 < co123)
 expect_false(co123 > co123)
@@ -102,13 +102,8 @@ expect_true(x != y)
 expect_true(x < y)
 
 y = setnew(1, container(2, deque(3)))
-expect_true(x > y)
-expect_true(y < x)
-
-# Put 4 also into the container
-y = setnew(1, container(2, deque(3), 4))
 expect_false(x == y)
-expect_true(x > y)
+expect_error(expect_true(x > y))
 
 
 

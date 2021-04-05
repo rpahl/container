@@ -5,6 +5,12 @@
 #' @param ... elements to be added. If `x` is a `Dict` or `dict.table` object,
 #' all elements must be named, that is, of the form `key = value`.
 #' @export
+add <- function(x, ...) UseMethod("add")
+
+#' @rdname add
+#' @return For `Container`, an object of class `Container` (or of the
+#' respective derived class) with the elements being added to `x`.
+#' @export
 #' @examples
 #' co = container(1)
 #' add(co, 1, b = 2, c = container(1:3))
@@ -12,12 +18,6 @@
 #' s = setnew(1)
 #' add(s, 1, 1, b = 2, "1", co = container(1, 1))
 #'
-add <- function(x, ...) UseMethod("add")
-
-#' @rdname add
-#' @return For `Container`, an object of class `Container` (or of the
-#' respective derived class) with the elements being added to `x`.
-#' @export
 add.Container <- function(x, ...)
 {
     x$clone(deep = TRUE)$add(...)
@@ -108,7 +108,7 @@ add.dict.table <- function(x, ...)
              " exist(s) already")
 
     for (i in seq_along(elems))
-        replace(x, elem_names[[i]], elems[[i]], add = TRUE)
+        replace(x, elem_names[[i]], elems[[i]], add = TRUE, .copy = FALSE)
 
     x
 }

@@ -8,7 +8,7 @@
 #' given. In contrast, if set to `TRUE` the new element is added regardless
 #' whether it already exists or not, that is, either as a replacement or just
 #' as a new element.
-#' @param copy `logical` if TRUE (default) the replacement operation is done on
+#' @param .copy `logical` if TRUE (default) the replacement operation is done on
 #' a copy of `x`, otherwise on the original object.
 #' @export
 replace <- function(x, ...) UseMethod("replace")
@@ -35,9 +35,9 @@ replace.default <- function(x, ...)
 #' replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 #'
 #' @export
-replace.Container <- function(x, old, new, add = FALSE, copy = TRUE)
+replace.Container <- function(x, old, new, add = FALSE, .copy = TRUE)
 {
-    co = if (copy)
+    co = if (.copy)
         x$clone(deep = TRUE)
     else
         x
@@ -71,9 +71,9 @@ NULL
 #' an error is given unless `add` was set to `TRUE` in which case the `value`
 #' is added under `key`.
 #' @export
-replace.Dict <- function(x, key, value, add = FALSE, copy = TRUE)
+replace.Dict <- function(x, key, value, add = FALSE, .copy = TRUE)
 {
-    d = if (copy)
+    d = if (.copy)
         x$clone(deep = TRUE)
     else
         x
@@ -90,7 +90,7 @@ replace.Dict <- function(x, key, value, add = FALSE, copy = TRUE)
 #' unless `add` was set to `TRUE` in which case the column is added if possible.
 #' All changes are made by reference.
 #' @export
-replace.dict.table <- function(x, key, value, add = FALSE, copy = TRUE)
+replace.dict.table <- function(x, key, value, add = FALSE, .copy = TRUE)
 {
     if (!add && !has(x, key)) {
         if (is.character(key))
@@ -100,7 +100,7 @@ replace.dict.table <- function(x, key, value, add = FALSE, copy = TRUE)
             stop(key, " is outside range [1, ncol = ", ncol(x), "]")
     }
 
-    dit = as.dict.table(x, copy = copy)
+    dit = as.dict.table(x, copy = .copy)
     j <- if (is.numeric(key)) as.integer(key) else key
     data.table::set(dit, j = j, value = value)
 

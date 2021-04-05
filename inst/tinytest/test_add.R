@@ -46,7 +46,8 @@ expect_error(add(dit, d = 4, 5), "all elements must be named")
 d_was_not_touched_upon_error = all.equal(dit, dict.table(a = 1, b = 2, c = 3))
 expect_true(d_was_not_touched_upon_error)
 
-expect_error(add(dit, d = 4, a = 5, b = 6), "all elements must be named")
+expect_error(add(dit, d = 4, a = 5, b = 6),
+             "column\\(s\\) 'a', 'b' exist\\(s\\) already")
 
 
 # -------------

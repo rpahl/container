@@ -92,7 +92,7 @@ expect_error(co$delete(), 'argument "elem" is missing, with no default')
 co <- Container$new(1)
 expect_error(co$delete(5), "5 is not in Container")
 li = list(1, 2)
-expect_error(co$delete(li), "li is not in Container")
+expect_error(co$delete(li), "list\\(1, 2\\) is not in Container")
 
 # If duplicates, only one element is deleted
 co <- Container$new(1, 2, 1)

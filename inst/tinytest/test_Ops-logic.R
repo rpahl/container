@@ -212,9 +212,9 @@ s1  = setnew(1)
 ss1 = setnew(1, s1)
 ss2 = setnew(2, s1)
 res = ss1 | ss2
-ee(res, setnew(setnew(1), 2))
-s1$add(2)
-has_used_copy_semantics <- res == setnew(setnew(1), 2)
+ee(res, setnew(setnew(1), 1, 2))
+s1$add(5)
+has_used_copy_semantics <- res == setnew(setnew(1), 1, 2)
 expect_true(has_used_copy_semantics)
 
 # Named elements

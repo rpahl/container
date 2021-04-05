@@ -4,12 +4,12 @@
 d = dict()
 expect_true(is.dict(d))
 expect_equal(length(d), 0)
-expect_equal(names(d), character(0))
+expect_equal(names(d), NULL)
 expect_equal(attr(d, "class"), c("Dict", "Container", "Iterable", "R6"))
 
 expect_true(empty(dict()))
 expect_equal(mode(values(dict())), "list")
-expect_error(dict(1:2), "all elems must be named")
+expect_error(dict(1:2), "all elements must be named")
 expect_error(dict(x = 1, y = 2, x = 3), "duplicated keys")
 expect_warning(keys(dict()), "'keys' is deprecated.")
 
@@ -92,42 +92,44 @@ expect_equal(cr(dict(x = NULL)),
 
 expect_equal(cr(dict(), dict()),
              cr( list(),  list()))
-expect_equal(cr(dict(1), dict()),
-             cr( list(1),  list()))
-expect_equal(cr(dict(1), dict(2)),
-             cr( list(1),  list(2)))
-expect_equal(cr(dict(1), dict(2, 3)),
-             cr( list(1),  list(2, 3)))
-expect_equal(cr(dict(1), dict(2, list(a = 3))),
-             cr( list(1),  list(2, list(a = 3))))
-expect_equal(cr(dict(1), dict(2, dict(a = 3))),
-             cr( list(1),  list(2, list(a = 3))))
-expect_equal(cr(dict(1),  list(2, dict(a = 3))),
-             cr( list(1),  list(2, list(a = 3))))
-expect_equal(cr(dict(1),  list(2, dict(a = 3))),
-             cr( list(1),  list(2, list(a = 3))))
-expect_equal(cr(dict(),   list(2, dict(a = 3))),
-             cr( list(),   list(2, list(a = 3))))
+expect_equal(cr(dict(a = 1), dict()),
+             cr(list(a = 1), list()))
+expect_equal(cr(dict(a = 1), dict(b = 2)),
+             cr(list(a = 1), list(b = 2)))
+expect_equal(cr(dict(a = 1), dict(b = 2, c = 3)),
+             cr(list(a = 1), list(b = 2, c = 3)))
+expect_equal(cr(dict(a = 1), dict(b = 2, l = list(a = 3))),
+             cr(list(a = 1), list(b = 2, l = list(a = 3))))
+expect_equal(cr(dict(a = 1), dict(b = 2, d = dict(a = 3))),
+             cr(list(a = 1), list(b = 2, d = list(a = 3))))
+expect_equal(cr(dict(a = 1), list(b = 2, d = dict(a = 3))),
+             cr(list(a = 1), list(b = 2, d = list(a = 3))))
+expect_equal(cr(dict(a = 1), l = list(b = 2, d = dict(a = 3))),
+             cr(list(a = 1), l = list(b = 2, d = list(a = 3))))
+expect_equal(cr(dict(), l = list(b = 2, x = dict(a = 3))),
+             cr(list(), l = list(b = 2, x = list(a = 3))))
 
-expect_equal(c(dict(1), dict(a = 2, b = dict(a = 3)), recursive = TRUE),
-             c(1, a = 2, b.a = 3))
+expect_equal(c(dict(a = 1), dict(a = 2, b = dict(a = 3)), recursive = TRUE),
+             c(a = 1, a = 2, b.a = 3))
 
 
 # Ensure concatenated objects are always copies
-c1 = dict(1)
-c2 = dict(2)
+c1 = dict(a = 1)
+c2 = dict(b = 2)
 c1c1 = dict(c1 = c1)
 
 cc = c(c1, c1c1, c2)
-expect_equal(unpack(cc), c(1, c1 = 1, 2))
-c1$add(2)
-expect_equal(unpack(cc), c(1, c1 = 1, 2)) # still the same
+expect_equal(unpack(cc), c(a = 1, b = 2, c1.a = 1))
+c1$add("y", 2)
+still_the_same = expect_equal(unpack(cc), c(a = 1, b = 2, c1.a = 1))
+expect_true(still_the_same)
 
 
 
 # ----------
 # S3 methods
 # ----------
+exit_file(msg = "Dict S3 methods - todo")
 
 # adding elements to a Dict required a character key and a value
 d <- dict()
