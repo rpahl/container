@@ -32,7 +32,7 @@ s$add(list())
 expect_equal(as.list(s$values()), list(list(), NULL))
 
 s$add(numeric(0))
-expect_equal(as.list(s$values()), list(numeric(), list(), NULL))
+expect_equal(as.list(s$values()), list(list(), NULL, numeric()))
 
 # -----
 # clear
@@ -151,12 +151,12 @@ expect_equal(out, "{integer(), NULL, 1L}")
 container_options(compare = identical)
 s = Set$new(1, 1L, NULL, integer())
 out = capture.output(print(s))
-expect_equal(out, "{integer(), NULL, 1L, 1}")
+expect_equal(out, "{integer(), NULL, 1, 1L}")
 container_options(.reset = TRUE)
 
 s2 = Set$new(list(), 3:5, s)
 out = capture.output(print(s2))
-expect_equal(out, "{list(), (3L 4L 5L), {integer(), NULL, 1L, 1}}")
+expect_equal(out, "{list(), (3L 4L 5L), {integer(), NULL, 1, 1L}}")
 
 # Increasing the size of the first Set alters the output
 s$add(1)$add(2)$add(3)

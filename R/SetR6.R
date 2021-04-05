@@ -1,6 +1,3 @@
-#SETS_MATCHFUN <- sets::matchfun(function(x, y) isTRUE(all.equal(x, y)))
-#SETS_MATCHFUN <- sets::matchfun(function(x, y) identical(x, y))
-
 #' Set
 #'
 #' @description The [Set()] is considered and implemented as a specialized
@@ -51,6 +48,10 @@ Set <- R6::R6Class("Set",
             private$resort_by_hash()
 
             self
+        },
+
+        get_hashes = function() {
+            names(private$elems)
         },
 
         #' @description Search for occurence of `elem` in the `Set` and
@@ -156,15 +157,13 @@ Set <- R6::R6Class("Set",
             lapply(value, clone_deep_if_container)
         },
         get_hash_value = function(x) {
-            serialize_if = function(x, ...) {
-                if (is.recursive(x) || !length(x))
-                    return(serialize(x, ...))
-                serialize(unpack(x), ...)
-            }
-            as.character(paste(length(x), serialize_if(x, NULL), collapse = ""))
+            lab = get_label(x)
+            #x = unpack(as.list(x))
+            #out = utils::capture.output(print(x))
+            paste(length(x), lab, serialize(x, NULL), collapse = "")
         },
         resort_by_hash = function() {
-            new_order = order(names(private$elems))
+            new_order = order(lengths(self$values()), names(private$elems))
             private$elems = private$elems[new_order]
         }
     ),

@@ -41,7 +41,7 @@ d1 = dict(a = 1, c = container(3, y = setnew(deque(1, 2), deque(3, 4))))
 dd = dict(a = 1, c = container(3, y = setnew(deque(1, 2), deque(3, 4))))
 expect_true(all.equal(d1, dd))
 dd = dict(a = 1, c = container(3, y = setnew(deque(3, 4), deque(1, 2))))
-#expect_true(all.equal(d1, dd)) # TODO: fails
+expect_true(all.equal(d1, dd))
 dd = dict(a = 1, c = container(3, y = setnew(deque(1, 2), deque(4, 3))))
 expect_false(isTRUE(all.equal(d1, dd)))
 
