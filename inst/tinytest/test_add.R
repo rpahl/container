@@ -23,7 +23,6 @@ x_was_not_touched = all.equal(x, deque(1))
 expect_true(x_was_not_touched)
 
 
-
 # --------
 # add.Dict
 # --------
@@ -35,6 +34,19 @@ expect_true(d_was_not_touched)
 expect_error(add(d, a = 2), "key 'a' already in Dict")
 expect_error(add(d, 2), "all elements must be named")
 expect_error(add(d, "a", 2), "all elements must be named")
+
+# --------------
+# add.dict.table
+# --------------
+dit = dict.table(a = 1)
+ee(add(dit, b = 2, c = 3), dict.table(a = 1, b = 2, c = 3))
+ee(dit, dict.table(a = 1, b = 2, c = 3)) # was done by reference
+
+expect_error(add(dit, d = 4, 5), "all elements must be named")
+d_was_not_touched_upon_error = all.equal(dit, dict.table(a = 1, b = 2, c = 3))
+expect_true(d_was_not_touched_upon_error)
+
+expect_error(add(dit, d = 4, a = 5, b = 6), "all elements must be named")
 
 
 # -------------

@@ -5,19 +5,19 @@
 #' @param ... elements to be added. If `x` is a `Dict` or `dict.table` object,
 #' all elements must be named, that is, of the form `key = value`.
 #' @export
+#' @examples
+#' co = container(1)
+#' add(co, 1, b = 2, c = container(1:3))
+#'
+#' s = setnew(1)
+#' add(s, 1, 1, b = 2, "1", co = container(1, 1))
+#'
 add <- function(x, ...) UseMethod("add")
 
 #' @rdname add
 #' @return For `Container`, an object of class `Container` (or of the
 #' respective derived class) with the elements being added to `x`.
 #' @export
-#' @examples
-#' co = container()
-#' add(co, 1, b = 2, c = container(1:3))
-#'
-#' s = setnew()
-#' add(s, 1, 1, b = 2, "1", co = container(1, 1))
-#'
 add.Container <- function(x, ...)
 {
     x$clone(deep = TRUE)$add(...)
@@ -34,11 +34,17 @@ add.Container <- function(x, ...)
 NULL
 
 
-
 #' @rdname add
 #' @return For `Dict`, an object of class `Dict` with the key-value pairs being
 #' added to `x`. If one of the keys already exists, an error is given.
 #' @export
+#' @examples
+#' d = dict(a = 1)
+#' add(d, b = 2, co = container(1:3))
+#'
+#' \dontrun{
+#' add(d, a = 7:9)  # key 'a' already in Dict}
+#'
 add.Dict <- function(x, ...)
 {
     d = as.dict(x) # create copy
@@ -76,10 +82,8 @@ NULL
 #' names already exists, an error is given.
 #' @export
 #' @examples
-#' if (requireNamespace("data.table")) {
-#'   dit = dict.table(a = 1:3)
-#'   add(dit, b = 3:1, d = 4:6)
-#' }
+#' dit = dict.table(a = 1:3)
+#' add(dit, b = 3:1, d = 4:6)
 #'
 #' \dontrun{
 #' add(dit, a = 7:9)  # column 'a' already exists}
@@ -117,10 +121,8 @@ add.dict.table <- function(x, ...)
 #' @details * `add(x, ...)` adds `key = value` pairs to `x`. If one of the
 #' keys already exists, an error is given.
 #' @examples
-#' if (requireNamespace("data.table")) {
-#'   dit = dict.table(a = 1:3)
-#'   add(dit, b = 3:1, d = 4:6)
-#' }
+#' dit = dict.table(a = 1:3)
+#' add(dit, b = 3:1, d = 4:6)
 #'
 #' \dontrun{
 #' add(dit, a = 7:9)  # column 'a' already exists}
@@ -138,12 +140,13 @@ addleft <- function(x, ...) UseMethod("addleft")
 #' @export
 #' @examples
 #' d = deque(0)
-#' add(d, a = 1, b = 2)
-#' addleft(d, a = 1, b = 2)
+#' add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
+#' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 addleft.Deque <- function(x, ...)
 {
     x$clone(deep = TRUE)$addleft(...)
 }
+
 
 #' @name addleft.Deque
 #' @rdname DequeS3
@@ -153,7 +156,7 @@ addleft.Deque <- function(x, ...)
 #' side of `x`.
 #' @examples
 #' d = deque(0)
-#' add(d, a = 1, b = 2)
-#' addleft(d, a = 1, b = 2)
+#' add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
+#' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 NULL
 

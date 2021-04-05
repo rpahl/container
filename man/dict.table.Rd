@@ -55,10 +55,8 @@ keys already exists, an error is given.
 }
 }
 \examples{
-if (requireNamespace("data.table")) {
-  dit = dict.table(a = 1:3)
-  add(dit, b = 3:1, d = 4:6)
-}
+dit = dict.table(a = 1:3)
+add(dit, b = 3:1, d = 4:6)
 
 \dontrun{
 add(dit, a = 7:9)  # column 'a' already exists}

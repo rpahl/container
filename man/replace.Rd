@@ -2,11 +2,14 @@
 % Please edit documentation in R/replace.R
 \name{replace}
 \alias{replace}
+\alias{replace.Container}
 \alias{replace.Dict}
 \alias{replace.dict.table}
 \title{Strict element replacement}
 \usage{
 replace(x, ...)
+
+\method{replace}{Container}(x, old, new, add = FALSE)
 
 \method{replace}{Dict}(x, key, value, add = FALSE)
 
@@ -17,13 +20,21 @@ replace(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{key}{\code{character} name or \code{numeric} index of column.}
+\item{old}{old element to be found and replaced.}
+
+\item{new}{the new element replacing the old one.}
 
 \item{add}{\code{logical} if FALSE (default) and element was not found, an error is
-given. Otherwise if \code{TRUE} the new element is not used as a replacement but
-just added as a new element.}
+given. In contrast, if set to \code{TRUE} the new element is added regardless
+whether it already exists or not, that is, either as a replacement or just
+as a new element.}
+
+\item{key}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
+For \code{Container}, an object of class \code{Container} (or of the
+respective derived class) after the element was replaced (or added).
+
 For \code{Dict} overrides \code{value} at \code{key} if \code{key} is already in the
 \code{Dict}. If \code{key} not in \code{Dict}, an error is given unless \code{add} was set to
 \code{TRUE} in which case the \code{value} is added under \code{key}.

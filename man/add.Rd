@@ -45,21 +45,25 @@ added to the right or left (\code{addleft}) of \code{x}.
 Add elements to container-like objects.
 }
 \examples{
-co = container()
+co = container(1)
 add(co, 1, b = 2, c = container(1:3))
 
-s = setnew()
+s = setnew(1)
 add(s, 1, 1, b = 2, "1", co = container(1, 1))
 
-if (requireNamespace("data.table")) {
-  dit = dict.table(a = 1:3)
-  add(dit, b = 3:1, d = 4:6)
-}
+d = dict(a = 1)
+add(d, b = 2, co = container(1:3))
+
+\dontrun{
+add(d, a = 7:9)  # key 'a' already in Dict}
+
+dit = dict.table(a = 1:3)
+add(dit, b = 3:1, d = 4:6)
 
 \dontrun{
 add(dit, a = 7:9)  # column 'a' already exists}
 
 d = deque(0)
-add(d, a = 1, b = 2)
-addleft(d, a = 1, b = 2)
+add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
+addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 }

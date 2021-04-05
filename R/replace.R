@@ -5,15 +5,34 @@
 #' @param x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
 #' @param add `logical` if FALSE (default) and element was not found, an error is
-#' given. Otherwise if `TRUE` the new element is not used as a replacement but
-#' just added as a new element.
+#' given. In contrast, if set to `TRUE` the new element is added regardless
+#' whether it already exists or not, that is, either as a replacement or just
+#' as a new element.
 #' @export
 replace <- function(x, ...) UseMethod("replace")
 
+#' @rdname replace
+#' @param old old element to be found and replaced.
+#' @param new the new element replacing the old one.
+#' @return For `Container`, an object of class `Container` (or of the
+#' respective derived class) after the element was replaced (or added).
 #' @export
 replace.Container <- function(x, old, new, add = FALSE)
 {
+    x$clone(deep = TRUE)$replace(old, new, add = add)
 }
+
+#' @name replace.Container
+#' @rdname ContainerS3
+#' @usage ## S3 method for class 'Container'
+#' replace(x, old, new, add = FALSE)
+#' @details * `replace(x, old, new, add = FALSE)` tries to find element `old`
+#' and replace it with element `new`. If `old` does not exist, an error is
+#' raised, unless `add` was set to `FALSE`.
+#' @examples
+#' co = container(1)
+#' replace(co, 1, 2)
+NULL
 
 
 #' @rdname replace

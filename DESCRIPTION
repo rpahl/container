@@ -15,9 +15,9 @@ Depends: R (>= 3.0)
 License: GPL-3
 LazyData: TRUE
 Encoding: UTF-8
-Imports: R6, sets
+Imports: R6, data.table
 VignetteBuilder: knitr
-Suggests: data.table, testthat, tinytest
+Suggests: tinytest
 URL: https://github.com/rpahl/container
 BugReports: https://github.com/rpahl/container/issues
 NeedsCompilation: no
