@@ -196,10 +196,11 @@ Container <- R6::R6Class("Container",
                 return(self$add(new))
 
             if (!hasElem)
-                stop(deparse(substitute(old)), " is not in ", data.class(self))
+                stop("old element (", get_label(old),
+                     ") is not in ", data.class(self))
 
             new_elem = if (length(new)) new else list(new)
-            private$elems[[pos]] <- new_elem
+            private$elems <- replace(self$values(), pos, new_elem)
             self
         },
 

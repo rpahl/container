@@ -160,8 +160,9 @@ raised, unless \code{add} was set to \code{FALSE}.
 \examples{
 co = container()
 add(co, 1, b = 2, c = container(1:3))
-co = container(1)
-replace(co, 1, 2)
+co = container("x", 9)
+replace(co, 9, 0)
+replace(co, "x", 0)
 }
 \seealso{
 For the \code{Container} class documentation see \code{\link[=Container]{Container()}}.

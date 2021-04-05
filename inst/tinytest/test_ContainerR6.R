@@ -226,9 +226,12 @@ expect_error(Container$new(0)$replace(new = 1),
              'argument "old" is missing, with no default')
 
 # By default signals an error if element does not exist
-expect_error(Container$new()$replace(0, 1), "0 is not in Container")
-expect_error(Container$new()$replace(NULL, 1), "NULL is not in Container")
-expect_error(Container$new(0)$replace(1, 2), "1 is not in Container")
+expect_error(Container$new()$replace(0, 1),
+             "old element \\(0\\) is not in Container")
+expect_error(Container$new()$replace(NULL, 1),
+             "old element \\(NULL\\) is not in Container")
+expect_error(Container$new(0)$replace(1, 2),
+             "old element \\(1\\) is not in Container")
 
 # If add == TRUE element is always added
 expect_equal(Container$new()$replace(0, 1, add = TRUE), Container$new(1))
@@ -243,7 +246,7 @@ co = Container$new(1, 1L, "1")
 co$replace(1, 0)
 expect_equal(co, Container$new(1, 0, "1"))
 
-# Replace works on special elements of basic type
+# Replace can replace special elements of basic type
 co = Container$new(NULL, numeric(0), list(), NULL, numeric(0), list())
 co$replace(NULL, 0)
 expect_equal(co, Container$new(NULL, numeric(), list(), 0, numeric(), list()))
@@ -251,6 +254,13 @@ co$replace(numeric(0), 0)
 expect_equal(co, Container$new(NULL, numeric(), list(), 0, 0, list()))
 co$replace(list(), 0)
 expect_equal(co, Container$new(NULL, numeric(), list(), 0, 0, 0))
+
+# Replace can replace by special elements of basic type
+co = Container$new(0)
+expect_equal(co$replace(0, NULL), container(NULL))
+expect_equal(co$replace(NULL, numeric()), container(numeric()))
+expect_equal(co$replace(numeric(), list()), container(list()))
+
 
 # Replace works on Container objects
 co1 = Container$new(1)

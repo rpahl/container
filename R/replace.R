@@ -11,16 +11,29 @@
 #' @export
 replace <- function(x, ...) UseMethod("replace")
 
+
+#' @export
+replace.default <- function(x, ...)
+{
+    base::replace(x, ...)
+}
+
+
 #' @rdname replace
 #' @param old old element to be found and replaced.
 #' @param new the new element replacing the old one.
 #' @return For `Container`, an object of class `Container` (or of the
 #' respective derived class) after the element was replaced (or added).
+#' @examples
+#' co = container("x", 9)
+#' replace(co, 9, 0)
+#' replace(co, "x", 0)
 #' @export
 replace.Container <- function(x, old, new, add = FALSE)
 {
     x$clone(deep = TRUE)$replace(old, new, add = add)
 }
+
 
 #' @name replace.Container
 #' @rdname ContainerS3
@@ -30,8 +43,9 @@ replace.Container <- function(x, old, new, add = FALSE)
 #' and replace it with element `new`. If `old` does not exist, an error is
 #' raised, unless `add` was set to `FALSE`.
 #' @examples
-#' co = container(1)
-#' replace(co, 1, 2)
+#' co = container("x", 9)
+#' replace(co, 9, 0)
+#' replace(co, "x", 0)
 NULL
 
 
@@ -46,6 +60,7 @@ replace.Dict <- function(x, key, value, add = FALSE)
 {
     x$replace(key, value, add)
 }
+
 
 #' @rdname replace
 #' @param key `character` name or `numeric` index of column.

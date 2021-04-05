@@ -49,3 +49,12 @@ by reference. Invisibly returns the altered \code{\link[=dict.table]{dict.table(
 Try to find and replace elements and signal an error if not
 found, unless stated otherwise (see option \code{add}).
 }
+\examples{
+co = container("x", 9)
+replace(co, 9, 0)
+replace(co, "x", 0)
+
+s = setnew(1, "z")
+replace(s, 9, 0)
+replace(s, "x", 0)
+}

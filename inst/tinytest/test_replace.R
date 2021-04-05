@@ -30,4 +30,14 @@ ee(replace(x, "z", 0), deque(1, 0))
 x_was_not_touched = all.equal(x, deque(1, "z"))
 expect_true(x_was_not_touched)
 
+# ------------------
+# replace.dict.table
+# ------------------
+x = deque(1, "z")
+ee(replace(x, 1, 0), deque(0, "z"))
+ee(replace(x, "z", 0), deque(1, 0))
+
+x_was_not_touched = all.equal(x, deque(1, "z"))
+expect_true(x_was_not_touched)
+
 
