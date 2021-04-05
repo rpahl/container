@@ -67,25 +67,25 @@ expect_true(is.set(setnew(NULL)))
 expect_true(is.set(setnew()))
 
 
-# -----------
-# c.Container
-# -----------
-exit_file("todo")
+# -----
+# c.Set
+# -----
 # standard non-recursive
-#expect_equal(as.list(c(setnew())), c(list())) # TODO: fails
+expect_equal(as.list(c(setnew())), c(list()))
 expect_equal(as.list(c(setnew(1))), c(list(1)))
 expect_equal(as.list(c(setnew(NULL))), c(list(NULL)))
 
-#expect_equal(as.list(c(setnew(), setnew())),
-#                     c(list(),     list())) # TODO: fails
+expect_equal(as.list(c(setnew(), setnew())),
+                     c(list(),     list()))
 expect_equal(as.list(c(setnew(1), setnew())),
                      c(list(1), list()))
 expect_equal(as.list(c(setnew(1), setnew(2))),
                      c(list(1), list(2)))
 expect_equal(as.list(c(setnew(1), setnew(2, list(a = 3)))),
                      c(list(1), list(2, list(a = 3))))
-# TODO: order set elements first by size/length, then lexicographical
-#expect_equal(as.list(c(setnew(1), setnew(2, setnew(a = 3)))), c(list(1), list(2, setnew(a = 3))))
+
+expect_equal(as.list(c(setnew(1), setnew(2, setnew(a = 3)))),
+             c(list(setnew(a = 3)), list(1), list(2)))
 
 expect_equal(names(c(setnew(1), dict(a = 2, b = setnew(a = 3)), use.names = FALSE)), NULL)
 
@@ -100,23 +100,23 @@ expect_equal(cr(setnew(NULL)),
              cr(  list(NULL)))
 
 expect_equal(cr(setnew(), setnew()),
-             cr(list(), list()))
+             cr(list(),     list()))
 expect_equal(cr(setnew(1), setnew()),
-             cr(list(1), list()))
+             cr(list(1),     list()))
 expect_equal(cr(setnew(1), setnew(2)),
-             cr(list(1), list(2)))
+             cr(list(1),     list(2)))
 expect_equal(cr(setnew(1), setnew(2, 3)),
-             cr(list(1), list(2, 3)))
+             cr(list(1),     list(2, 3)))
 expect_equal(cr(setnew(1), setnew(2, list(a = 3))),
-             cr(list(1), list(2, list(a = 3)))[c(1, 3, 2)])
+             cr(  list(1),   list(2, list(a = 3))))
 expect_equal(cr(setnew(1), setnew(2, setnew(a = 3))),
-             cr(list(1), list(2, list(a = 3)))[c(1, 3, 2)])
+             cr(list(1),     list(list(a = 3), 2)))
 expect_equal(cr(setnew(1), list(2, setnew(a = 3))),
-             cr(list(1), list(2, list(a = 3))))
+             cr(list(1),   list(2, list(a = 3))))
 expect_equal(cr(setnew(1), list(2, dict(a = 3))),
-             cr(list(1), list(2, list(a = 3))))
+             cr(list(1),   list(2, list(a = 3))))
 expect_equal(cr(setnew(), list(2, dict(a = 3))),
-             cr(list(), list(2, list(a = 3))))
+             cr(list(),   list(2, list(a = 3))))
 
 expect_equal(c(setnew(1), dict(a = 2, b = setnew(a = 3)), recursive = TRUE),
              c(1, a = 2, b.a = 3))

@@ -50,10 +50,6 @@ Set <- R6::R6Class("Set",
             self
         },
 
-        get_hashes = function() {
-            names(private$elems)
-        },
-
         #' @description Search for occurence of `elem` in the `Set` and
         #' replace it by `new`. If `elem` does not exist, an error is
         #' signaled, unless `add` was set to `TRUE`, in which case `new` is
@@ -137,7 +133,10 @@ Set <- R6::R6Class("Set",
         values = function() {
             l = private$elems
             names(l) = NULL
-            unlist(l, recursive = FALSE)
+            if (length(l))
+                unlist(l, recursive = FALSE)
+            else
+                l
         }
     ),
     private = list(

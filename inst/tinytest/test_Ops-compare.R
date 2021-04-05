@@ -117,7 +117,7 @@ s23  = setnew(   2, 3)
 s1_3 = setnew(1,    3)
 s123 = setnew(1, 2, 3)
 
-expect_equal(s0 & s0, s0) # TODO:
+expect_equal(s0 & s0, s0)
 
 original_sets_were_not_altered =
     isTRUE(all.equal(s0,   setnew()))           &&
