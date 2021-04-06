@@ -1,6 +1,7 @@
 .default_options = function()
 {
-    list("compare" = "all.equal",
+    list(".copy"   = TRUE,
+         "compare" = "all.equal",
          "useDots" = TRUE,
          "vec.len" = 4L)
 }
@@ -50,5 +51,18 @@ function(..., .reset = FALSE)
     options <<- new
 
     invisible(old)
+}
+
+
+getContainerOption = function(x, default = NULL)
+{
+    if (!is_string(x))
+        stop("'x' must be a character string")
+
+
+    if (hasName(container_options(), x))
+        container_options()[[x]]
+    else
+        default
 }
 

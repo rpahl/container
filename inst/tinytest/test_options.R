@@ -1,3 +1,7 @@
+# -----------------
+# container_options
+# -----------------
+
 exit_file(msg = "options")
 
 co = container_options
@@ -34,6 +38,19 @@ co(.reset = TRUE)
 expect_equal(co(), .default_options())
 
 # Verify that options are sorted
-container_options("aaa" = 1, "zzz" = 2)
-expect_equal(co(), c(list(aaa = 1), .default_options(), list(zzz = 2)))
+container_options(".aa" = 1, "zzz" = 2)
+expect_equal(co(), c(list(.aa = 1), .default_options(), list(zzz = 2)))
+
+
+# ------------------
+# getContainerOption
+# ------------------
+expect_equal(getContainerOption("useDots"), container_options()[["useDots"]])
+expect_equal(getContainerOption("compare"), container_options()[["compare"]])
+
+expect_equal(getContainerOption("bla"), NULL)
+expect_equal(getContainerOption("bla", default = 1), 1)
+
+expect_error(getContainerOption(c("useDots", "compare")),
+             "'x' must be a character string")
 
