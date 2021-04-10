@@ -14,3 +14,19 @@ is_nonempty_string = function(x)
     isTRUE(is_string(x) && nchar(x) > 0)
 }
 
+
+verify_names = function(x)
+{
+    if (!length(x) || !all(sapply(x, is_nonempty_string)))
+        stop("all elements must be named")
+}
+
+
+check_name_collision = function(x, y)
+{
+    common = intersect(x, y)
+
+    if (length(common))
+        stop("name(s) ", toString(paste0("'", common, "'")), " exist(s) already")
+}
+

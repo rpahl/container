@@ -2,18 +2,30 @@
 % Please edit documentation in R/replace.R
 \name{replace}
 \alias{replace}
+\alias{replace_}
 \alias{replace.Container}
+\alias{replace_.Container}
 \alias{replace.Dict}
+\alias{replace_.Dict}
 \alias{replace.dict.table}
+\alias{replace_.dict.table}
 \title{Strict element replacement}
 \usage{
 replace(x, ...)
 
-\method{replace}{Container}(x, old, new, add = FALSE, copy = TRUE)
+replace_(x, ...)
 
-\method{replace}{Dict}(x, key, value, add = FALSE, copy = TRUE)
+\method{replace}{Container}(x, old, new, add = FALSE)
 
-\method{replace}{dict.table}(x, key, value, add = FALSE, copy = TRUE)
+\method{replace_}{Container}(x, old, new, add = FALSE)
+
+\method{replace}{Dict}(x, key, value, add = FALSE)
+
+\method{replace_}{Dict}(x, key, value, add = FALSE)
+
+\method{replace}{dict.table}(x, key, value, add = FALSE)
+
+\method{replace_}{dict.table}(x, key, value, add = FALSE)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -24,34 +36,27 @@ replace(x, ...)
 
 \item{new}{the new element replacing the old one.}
 
-\item{add}{\code{logical} if FALSE (default) and element was not found, an error is
-given. In contrast, if set to \code{TRUE} the new element is added regardless
-whether it already exists or not, that is, either as a replacement or just
-as a new element.}
-
-\item{copy}{\code{logical} if TRUE (default) the replacement operation is done on
-a copy of \code{x}, otherwise on the original object.}
+\item{add}{\code{logical} if FALSE (default) and element (or key) was not found,
+an error is given. In contrast, if set to \code{TRUE} the new element is added
+regardless of whether it is used as a replacement for an existing element or
+just added as a new element.}
 
 \item{key}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Container}, an object of class \code{Container} (or of the
-respective derived class) with the element being replaced (or added).
+For \code{Container}, an object of class \code{Container} (or one of the
+respective derived classes).
 
-For \code{Dict}, and object of class \code{Dict} with \code{value} replaced at
-\code{key} if \code{key} is already in the \code{Dict}. If \code{key} is not in the \code{Dict},
-an error is given unless \code{add} was set to \code{TRUE} in which case the \code{value}
-is added under \code{key}.
+For \code{Dict} an object of class \code{Dict}.
 
-For \code{dict.table}, an object of class \code{dict.table} with values
-replaced at column \code{key}, which can be a name or a numeric index.
-If column \code{key} does not exist, an error is given
-unless \code{add} was set to \code{TRUE} in which case the column is added if possible.
-All changes are made by reference.
+For \code{dict.table} an object of class \code{dict.table}.
 }
 \description{
 Try to find and replace elements and signal an error if not
 found, unless it is stated to explicitly add the element (see option \code{add}).
+}
+\details{
+\code{replace} uses copy semantics while \code{replace_} works by reference.
 }
 \examples{
 co = container("x", 9)
@@ -61,4 +66,14 @@ replace(co, "x", 0)
 replace(co, "z", 0)              # old element ("z") is not in Container}
 replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 
+d = dict(a = 1)
+replace(d, "a", 1:5)
+\dontrun{
+replace(d, "b", 2)              # key 'b' not in Dict}
+replace(d, "b", 2, add = TRUE)  # ok, adds value
+dit = dict.table(a = 1:3)
+replace(dit, "a", 3:1)
+\dontrun{
+replace(dit, "b", 4:6)               # column 'b' not in dict.table}
+replace(dit, "b", 4:6, add = TRUE)   # ok, adds value
 }

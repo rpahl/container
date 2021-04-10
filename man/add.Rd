@@ -2,47 +2,71 @@
 % Please edit documentation in R/add.R
 \name{add}
 \alias{add}
-\alias{add.Container}
-\alias{add.Dict}
-\alias{add.dict.table}
+\alias{add_}
 \alias{addleft}
+\alias{addleft_}
+\alias{add.Container}
+\alias{add_.Container}
 \alias{addleft.Deque}
+\alias{addleft_.Deque}
+\alias{add.Dict}
+\alias{add_.Dict}
+\alias{add.dict.table}
+\alias{add_.dict.table}
 \title{Add elements}
 \usage{
 add(x, ...)
 
-\method{add}{Container}(x, ...)
-
-\method{add}{Dict}(x, ...)
-
-\method{add}{dict.table}(x, ...)
+add_(x, ...)
 
 addleft(x, ...)
 
+addleft_(x, ...)
+
+\method{add}{Container}(x, ...)
+
+\method{add_}{Container}(x, ...)
+
 \method{addleft}{Deque}(x, ...)
+
+\method{addleft_}{Deque}(x, ...)
+
+\method{add}{Dict}(x, ...)
+
+\method{add_}{Dict}(x, ...)
+
+\method{add}{dict.table}(x, ...)
+
+\method{add_}{dict.table}(x, ...)
 }
 \arguments{
 \item{x}{an \code{R} object of the respective class.}
 
-\item{...}{elements to be added. If \code{x} is a \code{Dict} or \code{dict.table} object,
-all elements must be named, that is, of the form \code{key = value}.}
+\item{...}{elements to be added.}
 }
 \value{
-For \code{Container}, an object of class \code{Container} (or of the
-respective derived class) with the elements being added to \code{x}.
-
-For \code{Dict}, an object of class \code{Dict} with the key-value pairs being
-added to \code{x}. If one of the keys already exists, an error is given.
-
-For \code{dict.table}, an object of class \code{dict.table} with the columns
-being added to \code{x}. All given columns must be named. If one of the column
-names already exists, an error is given.
+For \code{Container}, an object of class \code{Container} (or one of the
+respective derived classes).
 
 For \code{Deque}, an object of class \code{Deque} with the elements being
 added to the right or left (\code{addleft}) of \code{x}.
+
+For \code{Dict}, an object of class \code{Dict}.
+
+For \code{dict.table}, an object of class \code{dict.table}.
 }
 \description{
 Add elements to container-like objects.
+}
+\details{
+Both \code{add} and \code{addleft} use copy semantics while \code{add_} and
+\code{addleft_} work by reference.
+
+If \code{x} is a \code{Container}, \code{Set} or \code{Deque} object, the elements being added
+can (but must not) be named.
+
+If \code{x} is a \code{Dict} or \code{dict.table} object, all elements \emph{must} be of the
+form \code{key = value}. If one of the keys already exists, an error is given.
 }
 \examples{
 co = container(1)
@@ -50,6 +74,10 @@ add(co, 1, b = 2, c = container(1:3))
 
 s = setnew(1)
 add(s, 1, 1, b = 2, "1", co = container(1, 1))
+
+d = deque(0)
+add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
+addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 
 d = dict(a = 1)
 add(d, b = 2, co = container(1:3))
@@ -63,7 +91,4 @@ add(dit, b = 3:1, d = 4:6)
 \dontrun{
 add(dit, a = 7:9)  # column 'a' already exists}
 
-d = deque(0)
-add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
-addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 }

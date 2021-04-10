@@ -51,13 +51,13 @@ dit = dict.table(A = 1:4, B = 4:1)
 expect_error(add(dit, a = 1:3), "Supplied 3 items to be assigned to 4 items of column 'a'")
 expect_error(add(dit, a = 1:2))
 expect_false(has(dit, "a"))
-add(dit, a = 1)
+dit = add(dit, a = 1)
 ee(getval(dit, "a"), rep(1, 4))
 
 
 # a column cannot be added twice
 dit = dict.table(A = 1:2, B = 2:1)
-expect_error(add(dit, "A" = 1:2), "column\\(s\\) 'A' exist\\(s\\) already")
+expect_error(add(dit, "A" = 1:2), "name\\(s\\) 'A' exist\\(s\\) already")
 
 
 # it can be checked if a dict.table has a certain column
@@ -192,7 +192,7 @@ expect_error(rename(dit, "A", "b"))
 
 # a column can be set
 dit = dict.table(A = 1:2, B = 2:1)
-replace(dit, "A", 3:4, .copy = FALSE)
+dit = replace(dit, "A", 3:4)
 ee(getval(dit, "A"), 3:4)
 
 
@@ -200,7 +200,7 @@ ee(getval(dit, "A"), 3:4)
 dit = dict.table(A = 1)
 expect_error(replace(dit, "B", 1), "column 'B' not in dict.table")
 
-replace(dit, "B", 1, add = TRUE, .copy = FALSE)
+replace_(dit, "B", 1, add = TRUE)
 ee(getval(dit, "B"), 1)
 ee(colnames(dit), c("A", "B"))
 
@@ -215,13 +215,13 @@ expect_error(replace(dit, "A", 1:3),
 expect_error(replace(dit, "A", 1:2))
 ee(getval(dit, "A"), 1:4)
 
-replace(dit, "A", 9, .copy = FALSE)
+replace_(dit, "A", 9)
 ee(getval(dit, "A"), rep(9, 4))
 
 
 # a column can be set by numeric index
 dit = dict.table(A = 1:2, B = 2:1)
-replace(dit, 2, 0, .copy = FALSE)
+replace_(dit, 2, 0)
 ee(getval(dit, 2), rep(0, 2))
 expect_error(replace(dit, 3, 1:2), "3 is outside range")
 

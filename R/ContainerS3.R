@@ -12,9 +12,10 @@
 #' or of class `Container` for the `S3` methods.
 #' @name ContainerS3
 #' @seealso For the `Container` class documentation see [Container()].
-#' @details While the [Container()] class is based on the `R6` framework and
-#' provides reference semantics, the methods described here provide an `S3`
-#' interface with copy semantics.
+#' @details The S3 methods for class `Container` usually come in two versions
+#' providing either copy or reference semantics where the latter are visible
+#' by an underscore appended to the standard function name, for example,
+#' `add` and `add_`.
 #' ## Methods
 NULL
 
@@ -36,17 +37,25 @@ as.container <- function(x)
 }
 
 #' @rdname ContainerS3
-#' @details * `as.list(x)` converts container `x` to a base `R` list. All of
-#' the container's elements will copied (deeply) during this conversion so that
-#' the resulting list represents a true copy of the converted container.
-#' @export
-`as.list.Container` <- function(x) x$clone(deep = TRUE)$values()
-
-#' @rdname ContainerS3
 #' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`
 #' and `FALSE` otherwise.
 #' @export
 is.container <- function(x) inherits(x, "Container")
+
+
+#' @name as.list.Container
+#' @rdname ContainerS3
+#' @usage
+#' ## S3 methods for class 'Container'
+#' ## --------------------------------
+#'
+#' as.list(x)
+#' @details * `as.list(x)` converts container `x` to a base `R` list. All of
+#' the container's elements will copied (deeply) during the conversion.
+NULL
+
+#' @export
+`as.list.Container` <- function(x) x$clone(deep = TRUE)$values()
 
 
 #' @export

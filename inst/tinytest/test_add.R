@@ -8,12 +8,18 @@ ee(add(x, 2, b = 3), container(1, 2, b = 3))
 x_was_not_touched = all.equal(x, container(1))
 expect_true(x_was_not_touched)
 
+add_(x, 2)
+ee(x, container(1, 2))
+
 # set
 # ---
 x = setnew(1)
 ee(add(x, 2, b = 3), setnew(1, 2, b = 3))
 x_was_not_touched = all.equal(x, setnew(1))
 expect_true(x_was_not_touched)
+
+add_(x, 2)
+ee(x, setnew(1, 2))
 
 # deque
 # -----
@@ -22,6 +28,8 @@ ee(add(x, 2, b = 3), deque(1, 2, b = 3))
 x_was_not_touched = all.equal(x, deque(1))
 expect_true(x_was_not_touched)
 
+add_(x, 2)
+ee(x, deque(1, 2))
 
 # --------
 # add.Dict
@@ -31,7 +39,17 @@ ee(add(d, b = 2, d = 4), dict(a = 1, b = 2, d = 4))
 d_was_not_touched = all.equal(d, dict(a = 1))
 expect_true(d_was_not_touched)
 
-expect_error(add(d, a = 2), "key 'a' already in Dict")
+add_(d, b = 2, d = 4)
+ee(d, dict(a = 1, b = 2, d = 4))
+
+expect_error(add_(d, z = 9, b = 2),
+             "name\\(s\\) 'b' exist\\(s\\) already")
+
+d_was_not_touched_upon_error = all.equal(d, dict(a = 1, b = 2, d = 4))
+expect_true(d_was_not_touched_upon_error)
+
+
+expect_error(add(d, a = 2), "name\\(s\\) 'a' exist\\(s\\) already")
 expect_error(add(d, 2), "all elements must be named")
 expect_error(add(d, "a", 2), "all elements must be named")
 
@@ -40,14 +58,19 @@ expect_error(add(d, "a", 2), "all elements must be named")
 # --------------
 dit = dict.table(a = 1)
 ee(add(dit, b = 2, c = 3), dict.table(a = 1, b = 2, c = 3))
-ee(dit, dict.table(a = 1, b = 2, c = 3)) # was done by reference
+dit_was_not_touched = all.equal(dit, dict.table(a = 1))
+expect_true(dit_was_not_touched)
+
+add_(dit, b = 2, c = 3)
+ee(dit, dict.table(a = 1, b = 2, c = 3))
+
 
 expect_error(add(dit, d = 4, 5), "all elements must be named")
 d_was_not_touched_upon_error = all.equal(dit, dict.table(a = 1, b = 2, c = 3))
 expect_true(d_was_not_touched_upon_error)
 
 expect_error(add(dit, d = 4, a = 5, b = 6),
-             "column\\(s\\) 'a', 'b' exist\\(s\\) already")
+             "name\\(s\\) 'a', 'b' exist\\(s\\) already")
 
 
 # -------------
@@ -59,4 +82,7 @@ ee(addleft(d, n0 = 0, n1 = 1),
              deque(n1 = 1, n0 = 0, 1, 2, 3))
 d_was_not_touched = all.equal(d, as.deque(1:3))
 expect_true(d_was_not_touched)
+
+addleft_(d, 4)
+ee(d, deque(4, 1, 2, 3))
 

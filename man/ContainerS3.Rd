@@ -6,8 +6,8 @@
 \alias{ContainerS3}
 \alias{container}
 \alias{as.container}
-\alias{as.list.Container}
 \alias{is.container}
+\alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
 \alias{iter.Container}
@@ -27,9 +27,12 @@ container(...)
 
 as.container(x)
 
-\method{as.list}{Container}(x)
-
 is.container(x)
+
+## S3 methods for class 'Container'
+## --------------------------------
+
+as.list(x)
 
 \method{length}{Container}(x)
 
@@ -41,8 +44,8 @@ is.container(x)
 
 \method{-}{Container}(x, y)
 
-## S3 method for class 'Container'
 add(x, ...)
+add_(x, ...)
 
 ## S3 method for class 'Container'
 clear(x)
@@ -57,8 +60,8 @@ clear(x)
 
 \method{has}{Container}(x, elem)
 
-## S3 method for class 'Container'
 replace(x, old, new, add = FALSE)
+replace_(x, old, new, add = FALSE)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Container}.}
@@ -79,9 +82,10 @@ likley to use the corresponding \link[=Deque]{deque()}, \link[=Set]{set()}, and 
 create objects of these classes.
 }
 \details{
-While the \code{\link[=Container]{Container()}} class is based on the \code{R6} framework and
-provides reference semantics, the methods described here provide an \code{S3}
-interface with copy semantics.
+The S3 methods for class \code{Container} usually come in two versions
+providing either copy or reference semantics where the latter are visible
+by an underscore appended to the standard function name, for example,
+\code{add} and \code{add_}.
 \subsection{Methods}{
 }
 
@@ -94,14 +98,13 @@ interface with copy semantics.
 }
 
 \itemize{
-\item \code{as.list(x)} converts container \code{x} to a base \code{R} list. All of
-the container's elements will copied (deeply) during this conversion so that
-the resulting list represents a true copy of the converted container.
+\item \code{is.container(x)} returns \code{TRUE} if \code{x} is of class \code{Container}
+and \code{FALSE} otherwise.
 }
 
 \itemize{
-\item \code{is.container(x)} returns \code{TRUE} if \code{x} is of class \code{Container}
-and \code{FALSE} otherwise.
+\item \code{as.list(x)} converts container \code{x} to a base \code{R} list. All of
+the container's elements will copied (deeply) during the conversion.
 }
 
 \itemize{
@@ -123,7 +126,7 @@ the element was contained in \code{x}. The result is always a container.
 }
 
 \itemize{
-\item \code{add(x, ...)} add elements to \code{x}.
+\item \code{add(x, ...)} and \code{add_(x, ...)} add elements to \code{x}.
 }
 
 \itemize{
@@ -152,9 +155,9 @@ found, an error is signaled.
 }
 
 \itemize{
-\item \code{replace(x, old, new, add = FALSE)} tries to find element \code{old}
-and replace it with element \code{new}. If \code{old} does not exist, an error is
-raised, unless \code{add} was set to \code{FALSE}.
+\item \code{replace(x, old, new, add = FALSE)} and \code{replace_(x, ...)} try to find
+element \code{old} and replace it with element \code{new}. If \code{old} does not exist,
+an error is raised, unless \code{add} was set to \code{TRUE}.
 }
 }
 \examples{
@@ -165,7 +168,7 @@ replace(co, 9, 0)
 replace(co, "x", 0)
 \dontrun{
 replace(co, "z", 0)              # old element ("z") is not in Container}
-replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
+replace(co, "z", 0, add = TRUE)  # ok, adds the element
 
 }
 \seealso{
