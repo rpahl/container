@@ -85,6 +85,9 @@ Container <- R6::R6Class("Container",
         #' @param elem element to be counted.
         #' @return `integer` number of `elem` occurences in the [Container()]
         count = function(elem) {
+            if (self$is_empty())
+                return(0)
+
             sum(sapply(private$elems, FUN = private$compare_predicate(elem)))
         },
 

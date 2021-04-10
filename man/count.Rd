@@ -2,13 +2,13 @@
 % Please edit documentation in R/count.R
 \name{count}
 \alias{count}
-\alias{count.Deque}
+\alias{count.Container}
 \alias{count.Set}
 \title{Count elements}
 \usage{
 count(x, elem, ...)
 
-\method{count}{Deque}(x, elem)
+\method{count}{Container}(x, elem)
 
 \method{count}{Set}(x, elem)
 }
@@ -20,8 +20,15 @@ count(x, elem, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-Returns how many times \code{elem} occurs in the object.
+\code{integer} number of how many times \code{elem} occurs in the object.
 }
 \description{
 Count the number of occurences of some element.
+}
+\examples{
+
+co = container("a", "b", "a", mean, mean)
+count(co, "a")
+count(co, mean)
+count(co, "c")
 }
