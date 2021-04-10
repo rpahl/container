@@ -7,26 +7,75 @@
 clear <- function(x, ...) UseMethod("clear")
 
 #' @rdname clear
-#' @return For `Container`, an object of class `Container` with all elements
-#' being removed.
 #' @export
-clear.Container <- function(x) x$clear()
+clear_ <- function(x, ...) UseMethod("clear_")
+
+
+#' @rdname clear
+#' @return For `Container`, an object of class `Container` (or one of the
+#' respective derived classes).
+#' @export
+#' @examples
+#' co = container(1, 2, mean)
+#' clear(co)
+#' co
+#' clear_(co)
+#' co
+clear.Container <- function(x) x$clone(deep = TRUE)$clear()
 
 #' @name clear.Container
 #' @rdname ContainerS3
-#' @usage ## S3 method for class 'Container'
+#' @usage
 #' clear(x)
-#' @details * `clear(x)` removes all elements from `x`.
+#' clear_(x)
+#' @details
+#' * `clear(x)` and clear_(x) remove all elements from `x`.
+#' @examples
+#' co = container(1, 2, mean)
+#' clear(co)
+#' co
+#' clear_(co)
+#' co
 NULL
 
 #' @rdname clear
-#' @return For `dict.table`, an object of class `dict.table` with all elements
-#' being removed.
 #' @export
-clear.dict.table <- function(x) delete(x, names(x))
+clear_.Container <- function(x)
+{
+    x$clear()
+}
 
+
+#' @rdname clear
+#' @return For `dict.table` an object of class `dict.table`.
 #' @export
-clear.default <- function(x) {
-    stop("clear not implemented for '", data.class(x), "'")
+#' @examples
+#' dit = dict.table(a = 1, b = 2)
+#' clear(dit)
+#' dit
+#' clear_(dit)
+#' dit
+clear.dict.table <- function(x) dict.table()
+
+#' @name clear.dict.table
+#' @rdname dict.table
+#' @usage
+#' clear(x)
+#' clear_(x)
+#' @details
+#' * `clear(x)` and clear_(x) remove all elements from `x`.
+#' @examples
+#' dit = dict.table(a = 1, b = 2)
+#' clear(dit)
+#' dit
+#' clear_(dit)
+#' dit
+NULL
+
+#' @rdname clear
+#' @export
+clear_.dict.table <- function(x)
+{
+    delete(x, names(x))
 }
 

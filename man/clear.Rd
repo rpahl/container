@@ -2,15 +2,24 @@
 % Please edit documentation in R/clear.R
 \name{clear}
 \alias{clear}
+\alias{clear_}
 \alias{clear.Container}
+\alias{clear_.Container}
 \alias{clear.dict.table}
+\alias{clear_.dict.table}
 \title{Clear a container}
 \usage{
 clear(x, ...)
 
+clear_(x, ...)
+
 \method{clear}{Container}(x)
 
+\method{clear_}{Container}(x)
+
 \method{clear}{dict.table}(x)
+
+\method{clear_}{dict.table}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -18,12 +27,23 @@ clear(x, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-For \code{Container}, an object of class \code{Container} with all elements
-being removed.
+For \code{Container}, an object of class \code{Container} (or one of the
+respective derived classes).
 
-For \code{dict.table}, an object of class \code{dict.table} with all elements
-being removed.
+For \code{dict.table} an object of class \code{dict.table}.
 }
 \description{
 Removes all elements from the container object.
+}
+\examples{
+co = container(1, 2, mean)
+clear(co)
+co
+clear_(co)
+co
+dit = dict.table(a = 1, b = 2)
+clear(dit)
+dit
+clear_(dit)
+dit
 }

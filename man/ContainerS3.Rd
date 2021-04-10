@@ -47,8 +47,8 @@ as.list(x)
 add(x, ...)
 add_(x, ...)
 
-## S3 method for class 'Container'
 clear(x)
+clear_(x)
 
 \method{clone}{Container}(x)
 
@@ -130,7 +130,7 @@ the element was contained in \code{x}. The result is always a container.
 }
 
 \itemize{
-\item \code{clear(x)} removes all elements from \code{x}.
+\item \code{clear(x)} and clear_(x) remove all elements from \code{x}.
 }
 
 \itemize{
@@ -163,6 +163,11 @@ an error is raised, unless \code{add} was set to \code{TRUE}.
 \examples{
 co = container()
 add(co, 1, b = 2, c = container(1:3))
+co = container(1, 2, mean)
+clear(co)
+co
+clear_(co)
+co
 co = container("x", 9)
 replace(co, 9, 0)
 replace(co, "x", 0)

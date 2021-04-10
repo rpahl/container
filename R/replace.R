@@ -124,7 +124,7 @@ NULL
 #' replace(dit, "b", 4:6, add = TRUE)   # ok, adds value
 replace.dict.table <- function(x, key, value, add = FALSE)
 {
-    replace_(as.dict.table(x), key, value, add)
+    replace_(copy(x), key, value, add)
 }
 
 #' @rdname replace

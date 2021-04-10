@@ -87,7 +87,8 @@ expect_equal(as.list(c(setnew(1), setnew(2, list(a = 3)))),
 expect_equal(as.list(c(setnew(1), setnew(2, setnew(a = 3)))),
              c(list(setnew(a = 3)), list(1), list(2)))
 
-expect_equal(names(c(setnew(1), dict(a = 2, b = setnew(a = 3)), use.names = FALSE)), NULL)
+expect_equal(names(c(setnew(1), dict(a = 2, b = setnew(a = 3)),
+                     use.names = FALSE)), NULL)
 
 
 # recursive

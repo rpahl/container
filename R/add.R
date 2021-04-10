@@ -40,13 +40,6 @@ add.Container <- function(x, ...)
     add_(x$clone(deep = TRUE), ...)
 }
 
-#' @rdname add
-#' @export
-add_.Container <- function(x, ...)
-{
-    x$add(...)
-}
-
 #' @name add.Container
 #' @rdname ContainerS3
 #' @usage
@@ -58,6 +51,13 @@ add_.Container <- function(x, ...)
 #' co = container()
 #' add(co, 1, b = 2, c = container(1:3))
 NULL
+
+#' @rdname add
+#' @export
+add_.Container <- function(x, ...)
+{
+    x$add(...)
+}
 
 
 #' @rdname add
@@ -160,7 +160,7 @@ add_.Dict <- function(x, ...)
 #'
 add.dict.table <- function(x, ...)
 {
-    add_(as.dict.table(x), ...)
+    add_(copy(x), ...)
 }
 
 
