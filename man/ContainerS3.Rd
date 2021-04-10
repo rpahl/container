@@ -50,7 +50,7 @@ add_(x, ...)
 clear(x)
 clear_(x)
 
-\method{clone}{Container}(x)
+clone(x)
 
 \method{delete}{Container}(x, elem, right = FALSE)
 
@@ -134,7 +134,7 @@ the element was contained in \code{x}. The result is always a container.
 }
 
 \itemize{
-\item \code{clone(x)} returns a copy of \code{x}.
+\item clone(x) create a copy of \code{x}.
 }
 
 \itemize{
@@ -173,6 +173,9 @@ clear(co)
 co
 clear_(co)
 co
+
+co = container(1, 2, 3)
+co2 = clone(co)
 
 co = container(1, 2)
 is_empty(co)

@@ -56,8 +56,8 @@ The following table shows member methods divided by class. The top half contains
 | count(elem)                |               |                      |                              |
 | delete(elem)               |               |                      | delete(key)                  |
 | discard(elem)              |               |                      | discard(key)                 |
-| empty()                    |               |                      |                              |
 | has(elem)                  |               |                      | has(key)                     |
+| is_empty()                 |               |                      |                              |
 | peekitem()                 |               |                      |                              |
 | popitem()                  |               |                      |                              |
 | replace(old, new, add = F) |               |                      | replace(key, value, add = F) |
@@ -91,8 +91,8 @@ On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/
 |  clear(co)                   |                     |                  |                                |
 |  delete(co, elem, right=F)   |                     |                  |  delete(d, key)                |
 |  discard(co, elem, right=F)  |                     |                  |  discard(d, key)               |
-|  empty(co)                   |                     |                  |                                |
 |  has(co, elem)               |                     |                  |  has(d, key)                   |
+|  is_empty(co)                |                     |                  |                                |
 |  values(co)                  |                     |                  |                                |
 |                              |                     |                  |                                |
 |                              |  addleft(d, elem)   |  s1 - s2         |  getval(d, key)                |

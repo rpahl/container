@@ -2,9 +2,15 @@
 % Please edit documentation in R/clone.R
 \name{clone}
 \alias{clone}
+\alias{clone.Container}
+\alias{clone.dict.table}
 \title{Clone an object}
 \usage{
 clone(x, ...)
+
+\method{clone}{Container}(x)
+
+\method{clone}{dict.table}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -16,4 +22,12 @@ A copy of the object.
 }
 \description{
 Creates a copy of the object.
+}
+\examples{
+
+co = container(1, 2, 3)
+co2 = clone(co)
+
+d = dict.table(a = 1:2, b = 3:4)
+clone(d)
 }
