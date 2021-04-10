@@ -80,6 +80,13 @@ dict(a = 1, 2)                       # all elements must be named}
 # Coercion
 as.dict(list(A = 1:3, B = "b"))
 as.dict(c(x = 1, y = "x", z = 2 + 3))
+
+d = dict(a = 1)
+add(d, b = 2, co = container(1:3))
+
+\dontrun{
+add(d, a = 7:9)  # key 'a' already in Dict}
+
 d = dict(a = 1)
 replace(d, "a", 1:5)
 \dontrun{

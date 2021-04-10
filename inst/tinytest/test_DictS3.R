@@ -7,7 +7,7 @@ expect_equal(length(d), 0)
 expect_equal(names(d), NULL)
 expect_equal(attr(d, "class"), c("Dict", "Container", "Iterable", "R6"))
 
-expect_true(empty(dict()))
+expect_true(is_empty(dict()))
 expect_equal(mode(values(dict())), "list")
 expect_error(dict(1:2), "all elements must be named")
 expect_error(dict(x = 1, y = 2, x = 3), "duplicated keys")
@@ -159,9 +159,8 @@ expect_equal(values(d), list("empty-list" = list(), "null" = NULL))
 
 # elements can be deleted from a Dict
 d <- dict(a = 1)
-expect_false(empty(d))
-expect_true(empty(delete(d, "a")))
-
+expect_false(is_empty(d))
+expect_true(is_empty(delete(d, "a")))
 
 # if key not in Dict, trying to delete it gives an error
 expect_error(delete(dict(a = 1), "b"), "key 'b' not in Dict")
@@ -179,8 +178,8 @@ expect_true(d_was_not_touched)
 
 # elements can be discarded
 d <- dict(a = 1)
-expect_false(empty(d))
-expect_true(empty(discard(d, "a")))
+expect_false(is_empty(d))
+expect_true(is_empty(discard(d, "a")))
 
 
 # discard ignores non-existing elements without error
@@ -242,11 +241,11 @@ expect_error(pop(d, "a"))
 x <- c(a = 1, b = 2)
 d <- as.dict(x)
 v <- numeric(0)
-while (!empty(d)) {
+while (!is_empty(d)) {
     v <- c(v, popitem(d))
 }
 expect_equal(sort(v), as.numeric(x))
-expect_true(empty(d))
+expect_true(is_empty(d))
 expect_error(popitem(d), "popitem at empty Dict")
 
 

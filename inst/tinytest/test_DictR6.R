@@ -13,7 +13,7 @@ expect_equal(d$length(), 1)
 d <- Dict$new(env = environment(), foo = identity)
 expect_equal(d$length(), 2)
 
-expect_true(Dict$new()$empty())
+expect_true(Dict$new()$is_empty())
 
 expect_error(Dict$new(1:2), "all elements must be named")
 expect_error(Dict$new(x = 1, y = 2, x = 3), "duplicated keys")
@@ -72,8 +72,8 @@ expect_equal(d$values(), list("empty-list" = list(), "null" = NULL))
 # ------
 # elements can be deleted from a Dict
 d <- Dict$new(a = 1)
-expect_false(d$empty())
-expect_true(d$delete("a")$empty())
+expect_false(d$is_empty())
+expect_true(d$delete("a")$is_empty())
 
 # if key not in Dict, trying to delete it gives an error
 expect_error(Dict$new(a = 1)$delete("b"), "key 'b' not in Dict")
@@ -89,8 +89,8 @@ expect_true(d_was_not_touched)
 
 # elements can be discarded
 d <- Dict$new(a = 1)
-expect_false(d$empty())
-expect_true(d$discard("a")$empty())
+expect_false(d$is_empty())
+expect_true(d$discard("a")$is_empty())
 
 
 # -------
@@ -178,11 +178,11 @@ expect_error(d$pop("a"))
 x <- c(a = 1, b = 2)
 d <- as.dict(x)
 v <- numeric(0)
-while (!d$empty()) {
+while (!d$is_empty()) {
     v <- c(v, d$popitem())
 }
 expect_equal(sort(v), as.numeric(x))
-expect_true(d$empty())
+expect_true(d$is_empty())
 expect_error(d$popitem(), "popitem at empty Dict")
 
 

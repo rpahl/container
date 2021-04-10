@@ -12,7 +12,7 @@
 #' or of class `Container` for the `S3` methods.
 #' @name ContainerS3
 #' @seealso For the `Container` class documentation see [Container()].
-#' @details The S3 methods for class `Container` usually come in two versions
+#' @details Methods that alter `Container` objects usually come in two versions
 #' providing either copy or reference semantics where the latter are visible
 #' by an underscore appended to the standard function name, for example,
 #' `add` and `add_`.

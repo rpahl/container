@@ -157,8 +157,6 @@ Set <- R6::R6Class("Set",
         },
         get_hash_value = function(x) {
             lab = get_label(x)
-            #x = unpack(as.list(x))
-            #out = utils::capture.output(print(x))
             paste(length(x), lab, serialize(x, NULL), collapse = "")
         },
         resort_by_hash = function() {

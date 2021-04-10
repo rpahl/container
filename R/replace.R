@@ -29,6 +29,7 @@ replace.default <- function(x, ...)
 #' @return For `Container`, an object of class `Container` (or one of the
 #' respective derived classes).
 #' @examples
+#'
 #' co = container("x", 9)
 #' replace(co, 9, 0)
 #' replace(co, "x", 0)
@@ -52,13 +53,13 @@ replace.Container <- function(x, old, new, add = FALSE)
 #' element `old` and replace it with element `new`. If `old` does not exist,
 #' an error is raised, unless `add` was set to `TRUE`.
 #' @examples
+#'
 #' co = container("x", 9)
 #' replace(co, 9, 0)
 #' replace(co, "x", 0)
 #' \dontrun{
 #' replace(co, "z", 0)              # old element ("z") is not in Container}
 #' replace(co, "z", 0, add = TRUE)  # ok, adds the element
-#'
 NULL
 
 #' @rdname replace
@@ -76,6 +77,7 @@ replace_.Container <- function(x, old, new, add = FALSE)
 #' @return For `Dict` an object of class `Dict`.
 #' @export
 #' @examples
+#'
 #' d = dict(a = 1)
 #' replace(d, "a", 1:5)
 #' \dontrun{
@@ -104,6 +106,7 @@ replace_.Dict <- function(x, key, value, add = FALSE)
 #' at `key`. If `key` does not exist, an error is given unless `add` was set to
 #' `TRUE`.
 #' @examples
+#'
 #' d = dict(a = 1)
 #' replace(d, "a", 1:5)
 #' \dontrun{
@@ -117,6 +120,7 @@ NULL
 #' @return For `dict.table` an object of class `dict.table`.
 #' @export
 #' @examples
+#'
 #' dit = dict.table(a = 1:3)
 #' replace(dit, "a", 3:1)
 #' \dontrun{
@@ -155,6 +159,7 @@ replace_.dict.table <- function(x, key, value, add = FALSE)
 #' values at column `key`. If `key` does not exist, an error is given unless
 #' `add` was set to `TRUE`.
 #' @examples
+#'
 #' dit = dict.table(a = 1:3)
 #' replace(dit, "a", 3:1)
 #' \dontrun{

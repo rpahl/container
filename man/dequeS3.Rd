@@ -64,10 +64,10 @@ returns the \code{\link[=Deque]{Deque()}} object.
 }
 }
 \examples{
+
 d = deque(0)
 add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
 addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
-
 }
 \seealso{
 See \code{\link[=container]{container()}} for all inherited methods. For the full class

@@ -59,6 +59,7 @@ found, unless it is stated to explicitly add the element (see option \code{add})
 \code{replace} uses copy semantics while \code{replace_} works by reference.
 }
 \examples{
+
 co = container("x", 9)
 replace(co, 9, 0)
 replace(co, "x", 0)
@@ -66,11 +67,13 @@ replace(co, "x", 0)
 replace(co, "z", 0)              # old element ("z") is not in Container}
 replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 
+
 d = dict(a = 1)
 replace(d, "a", 1:5)
 \dontrun{
 replace(d, "b", 2)              # key 'b' not in Dict}
 replace(d, "b", 2, add = TRUE)  # ok, adds value
+
 dit = dict.table(a = 1:3)
 replace(dit, "a", 3:1)
 \dontrun{

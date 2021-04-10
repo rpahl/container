@@ -29,12 +29,12 @@ addleft_ <- function(x, ...) UseMethod("addleft_")
 #' can (but must not) be named.
 #' @export
 #' @examples
+#'
 #' co = container(1)
 #' add(co, 1, b = 2, c = container(1:3))
 #'
 #' s = setnew(1)
 #' add(s, 1, 1, b = 2, "1", co = container(1, 1))
-#'
 add.Container <- function(x, ...)
 {
     add_(x$clone(deep = TRUE), ...)
@@ -48,8 +48,12 @@ add.Container <- function(x, ...)
 #' @details
 #' * `add(x, ...)` and `add_(x, ...)` add elements to `x`.
 #' @examples
-#' co = container()
+#'
+#' co = container(1)
 #' add(co, 1, b = 2, c = container(1:3))
+#'
+#' s = setnew(1)
+#' add(s, 1, 1, b = 2, "1", co = container(1, 1))
 NULL
 
 #' @rdname add
@@ -65,6 +69,7 @@ add_.Container <- function(x, ...)
 #' added to the right or left (`addleft`) of `x`.
 #' @export
 #' @examples
+#'
 #' d = deque(0)
 #' add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
 #' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
@@ -82,10 +87,10 @@ addleft.Deque <- function(x, ...)
 #' * `addleft(x, ...)` adds (possibly named) elements to left side of `x`.
 #' * `addleft_(x, ...)` same as `addleft(x, ...)` but adds by reference.
 #' @examples
+#'
 #' d = deque(0)
 #' add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
 #' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
-#'
 NULL
 
 #' @rdname add
@@ -109,7 +114,6 @@ addleft_.Deque <- function(x, ...)
 #'
 #' \dontrun{
 #' add(d, a = 7:9)  # key 'a' already in Dict}
-#'
 add.Dict <- function(x, ...)
 {
     add_(x$clone(deep = TRUE), ...)
@@ -124,6 +128,13 @@ add.Dict <- function(x, ...)
 #' * `add(x, ...)` adds `key = value` pairs to `x`. If one of the
 #' keys already exists, an error is given.
 #' * `add_(x, ...)` same as `add(x, ...)` but adds by reference.
+#' @examples
+#'
+#' d = dict(a = 1)
+#' add(d, b = 2, co = container(1:3))
+#'
+#' \dontrun{
+#' add(d, a = 7:9)  # key 'a' already in Dict}
 NULL
 
 
@@ -152,12 +163,12 @@ add_.Dict <- function(x, ...)
 #' @return For `dict.table`, an object of class `dict.table`.
 #' @export
 #' @examples
+#'
 #' dit = dict.table(a = 1:3)
 #' add(dit, b = 3:1, d = 4:6)
 #'
 #' \dontrun{
 #' add(dit, a = 7:9)  # column 'a' already exists}
-#'
 add.dict.table <- function(x, ...)
 {
     add_(copy(x), ...)
@@ -173,17 +184,25 @@ add.dict.table <- function(x, ...)
 #' * `add(x, ...)` and add_(x, ...) add columns to `x`. If the column name
 #' already exists, an error is given.
 #' @examples
+#'
+#' dit = dict.table(a = 1:3)
+#' add(dit, b = 3:1, d = 4:6)
+#'
+#' \dontrun{
+#' add(dit, a = 7:9)  # column 'a' already exists}
+NULL
+
+
+#' @rdname add
+#' @export
+#' @examples
+#'
 #' dit = dict.table(a = 1:3)
 #' add(dit, b = 3:1, d = 4:6)
 #'
 #' \dontrun{
 #' add(dit, a = 7:9)  # column 'a' already exists}
 #'
-NULL
-
-
-#' @rdname add
-#' @export
 add_.dict.table <- function(x, ...)
 {
     elems = list(...)

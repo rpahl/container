@@ -53,7 +53,7 @@ Deque <- R6::R6Class("Deque",
         #' Delete and return element from the right side of the [Deque()].
         #' @return element 'popped' from the right side of the [Deque()]
         pop = function() {
-            if (self$empty()) stop("pop at empty ", data.class(self))
+            if (self$is_empty()) stop("pop at empty ", data.class(self))
             last <- self$peek()
             private$elems = utils::head(self$values(), n = -1)
             last
@@ -63,7 +63,7 @@ Deque <- R6::R6Class("Deque",
         #' Delete and return element from the left side of the [Deque()].
         #' @return element 'popped' from the left side of the [Deque()]
         popleft = function() {
-            if (self$empty()) stop("popleft at empty ", data.class(self))
+            if (self$is_empty()) stop("popleft at empty ", data.class(self))
             first <- self$peekleft()
             private$elems = utils::tail(self$values(), n = -1)
             first
@@ -82,7 +82,7 @@ Deque <- R6::R6Class("Deque",
         #' @param n `integer` number of steps to rotate
         #' @return returns the `Deque()` object.
         rotate = function(n = 1L) {
-            if (self$empty() || n == 0)
+            if (self$is_empty() || n == 0)
                 return(self)
 
             if (n > 0L) {

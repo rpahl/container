@@ -4,15 +4,12 @@
 \alias{container-deprecated}
 \title{Deprecated Functions in Package container}
 \usage{
-set(...)  ### -- use  setnew(...)  instead to create `Set`s
-
-size(...)  ### -- use  length(...)  instead
-
-sortkey(...)  ### -- `Dict` keys are now always sorted
-
-remove(...)  ### -- use  delete(...)  instead
-
-type(...)  ### -- not of use anymore
+empty(...)       ### -- use `is_empty(...)` instead
+set(...)         ### -- use `setnew(...)` instead to create `Set`s
+size(...)        ### -- use `length(...)` instead
+sortkey(...)     ### -- `Dict` keys are now always sorted
+remove(...)      ### -- use `delete(...)` instead
+type(...)        ### -- not of use anymore
 }
 \arguments{
 \item{...}{(arguments)}
@@ -20,7 +17,4 @@ type(...)  ### -- not of use anymore
 \description{
 These functions are provided for backwards-compatibility and
 may be defunct as soon as the next release.
-}
-\seealso{
-\code{\link[base:Deprecated]{base::Deprecated()}}
 }

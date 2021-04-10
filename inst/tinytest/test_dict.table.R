@@ -79,7 +79,7 @@ expect_false(has(dit, "B"))
 
 ee(c("A", "C"), colnames(dit))
 delete(dit, c("A", "C"))
-expect_true(empty(dit))
+expect_true(is_empty(dit))
 
 
 # columns can be discarded from dict.table
@@ -90,7 +90,7 @@ expect_false(has(dit, "B"))
 
 ee(c("A", "C"), colnames(dit))
 discard(dit, c("A", "C"))
-expect_true(empty(dit))
+expect_true(is_empty(dit))
 
 
 # columns can be discarded by index from dict.table
@@ -101,13 +101,13 @@ expect_false(has(dit, "B"))
 ee(c("A", "C"), colnames(dit))
 
 expect_silent(discard(dit, 1:2))
-expect_true(empty(dit))
+expect_true(is_empty(dit))
 
 
 # discarding non-existing columns works as expected
 dit = dict.table(A = 1:2, B = 2:1, C = 3:4)
 expect_silent(discard(dit, 1:10))
-expect_true(empty(dit))
+expect_true(is_empty(dit))
 expect_silent(discard(dit, c("X", "Y")))
 
 
@@ -168,7 +168,7 @@ ee(pop(dit, "A"), 1:2)
 expect_false(has(dit, "A"))
 
 ee(pop(dit, "B"), 2:1)
-expect_true(empty(dit))
+expect_true(is_empty(dit))
 
 
 # popitem works as expected
@@ -178,7 +178,7 @@ ee(popitem(dit), 1:2)
 expect_false(has(dit, "A"))
 
 ee(popitem(dit), 2:1)
-expect_true(empty(dit))
+expect_true(is_empty(dit))
 
 
 # columns can be renamed

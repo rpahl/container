@@ -20,7 +20,7 @@ expect_equal(names(co$values()), c("A", "B"))
 # add
 # ---
 co <- Container$new()
-expect_true(co$empty())
+expect_true(co$is_empty())
 co$add(1)
 expect_equal(co$values(), list(1))
 
@@ -124,9 +124,9 @@ expect_equal(co, Container$new(1, 2))
 # empty
 # -----
 # it can be checked whether the Container is empty
-expect_true(Container$new()$empty())
-expect_false(Container$new(numeric())$empty())
-expect_false(Container$new(1)$empty())
+expect_true(Container$new()$is_empty())
+expect_false(Container$new(numeric())$is_empty())
+expect_false(Container$new(1)$is_empty())
 
 # ---------------
 # get_compare_fun
@@ -333,6 +333,7 @@ expect_equal(sum(v), sum(as.integer(co$values())))
 # ----------
 # verify that functions are deprecated
 co <- Container$new(1L)
+expect_warning(co$empty(), "deprecated")
 expect_warning(co$remove(), "deprecated")
 expect_warning(co$size(), "deprecated")
 expect_warning(co$type(), "deprecated")

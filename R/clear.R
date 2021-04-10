@@ -16,6 +16,7 @@ clear_ <- function(x, ...) UseMethod("clear_")
 #' respective derived classes).
 #' @export
 #' @examples
+#'
 #' co = container(1, 2, mean)
 #' clear(co)
 #' co
@@ -31,6 +32,7 @@ clear.Container <- function(x) x$clone(deep = TRUE)$clear()
 #' @details
 #' * `clear(x)` and clear_(x) remove all elements from `x`.
 #' @examples
+#'
 #' co = container(1, 2, mean)
 #' clear(co)
 #' co
@@ -50,6 +52,7 @@ clear_.Container <- function(x)
 #' @return For `dict.table` an object of class `dict.table`.
 #' @export
 #' @examples
+#'
 #' dit = dict.table(a = 1, b = 2)
 #' clear(dit)
 #' dit
@@ -65,6 +68,7 @@ clear.dict.table <- function(x) dict.table()
 #' @details
 #' * `clear(x)` and clear_(x) remove all elements from `x`.
 #' @examples
+#'
 #' dit = dict.table(a = 1, b = 2)
 #' clear(dit)
 #' dit

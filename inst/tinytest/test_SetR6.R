@@ -2,7 +2,7 @@
 # initialize
 # ----------
 s = Set$new()
-expect_true(s$empty())
+expect_true(s$is_empty())
 expect_equal(s$length(), 0)
 expect_false(s$has(NULL))
 #expect_false(NULL %e% s) # TODO: %e% operator
@@ -71,10 +71,10 @@ expect_equal(s, Set$new(2, 3))
 # -----
 # empty
 # -----
-expect_true(Set$new()$empty())
-expect_false(Set$new(NULL)$empty())
-expect_false(Set$new(numeric())$empty())
-expect_false(Set$new()$add(NULL)$empty())
+expect_true(Set$new()$is_empty())
+expect_false(Set$new(NULL)$is_empty())
+expect_false(Set$new(numeric())$is_empty())
+expect_false(Set$new()$add(NULL)$is_empty())
 
 # -----
 # has

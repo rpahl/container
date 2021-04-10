@@ -36,11 +36,13 @@ For \code{dict.table} an object of class \code{dict.table}.
 Removes all elements from the container object.
 }
 \examples{
+
 co = container(1, 2, mean)
 clear(co)
 co
 clear_(co)
 co
+
 dit = dict.table(a = 1, b = 2)
 clear(dit)
 dit

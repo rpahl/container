@@ -106,7 +106,7 @@ Dict <- R6::R6Class("Dict",
         #' function can be used to sample randomly (with replacement) from
         #' a `Dict`.
         peekitem = function() {
-            if (self$empty())
+            if (self$is_empty())
                 return(NULL)
 
             key <- sample(self$keys(), size = 1)
@@ -128,7 +128,7 @@ Dict <- R6::R6Class("Dict",
         #' `Dict`. This function can be used to destructively iterate
         #'  over a `Dict`.
         popitem = function() {
-            if (self$empty())
+            if (self$is_empty())
                 stop("popitem at empty ", data.class(self))
 
             key <- sample(self$keys(), size = 1)

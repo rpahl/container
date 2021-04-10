@@ -31,6 +31,7 @@ Roman Pahl
 \item \href{#method-empty}{\code{Container$empty()}}
 \item \href{#method-get_compare_fun}{\code{Container$get_compare_fun()}}
 \item \href{#method-has}{\code{Container$has()}}
+\item \href{#method-is_empty}{\code{Container$is_empty()}}
 \item \href{#method-length}{\code{Container$length()}}
 \item \href{#method-peekitem}{\code{Container$peekitem()}}
 \item \href{#method-popitem}{\code{Container$popitem()}}
@@ -171,14 +172,11 @@ the \code{Container} object
 \if{html}{\out{<a id="method-empty"></a>}}
 \if{latex}{\out{\hypertarget{method-empty}{}}}
 \subsection{Method \code{empty()}}{
-Check whether \code{Container} is empty
+This function is deprecated. Use \code{\link[=is_empty]{is_empty()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$empty()}\if{html}{\out{</div>}}
 }
 
-\subsection{Returns}{
-\code{TRUE} if the \code{Container} is empty else \code{FALSE}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-get_compare_fun"></a>}}
@@ -209,6 +207,19 @@ Determine if \code{Container} has some element.
 }
 \subsection{Returns}{
 \code{TRUE} if \code{Container} contains \code{elem} else \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-is_empty"></a>}}
+\if{latex}{\out{\hypertarget{method-is_empty}{}}}
+\subsection{Method \code{is_empty()}}{
+Check if \code{Container} is empty
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$is_empty()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{TRUE} if the \code{Container} is empty else \code{FALSE}.
 }
 }
 \if{html}{\out{<hr>}}

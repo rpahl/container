@@ -71,7 +71,7 @@ popitem.Container <- function(x) x$popitem()
 #' @export
 popitem.dict.table <- function(x)
 {
-    if (empty(x)) {
+    if (is_empty(x)) {
         stop("popitem at empty ", data.class(x))
     }
     column <- sample(names(x), 1)

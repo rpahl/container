@@ -106,7 +106,7 @@ Container <- R6::R6Class("Container",
         #' found, the operation is ignored and the object is *not* altered.
         #' @return the `Container` object
         discard = function(elem) {
-            if (self$empty())
+            if (self$is_empty())
                 return(self)
 
             pos = private$get_position(elem)
@@ -118,9 +118,12 @@ Container <- R6::R6Class("Container",
             self
         },
 
-        #' @description Check whether `Container` is empty
-        #' @return `TRUE` if the `Container` is empty else `FALSE`
-        empty = function() self$length() == 0,
+        #' @description This function is deprecated. Use [is_empty()] instead.
+        empty = function() {
+            .Deprecated("is_empty")
+            self$is_empty()
+        },
+
 
         #' @description Get comparison function used internally by the
         #' `Container` object to compare elements.
@@ -133,6 +136,10 @@ Container <- R6::R6Class("Container",
             !is.na(private$get_position(elem))
         },
 
+        #' @description Check if `Container` is empty
+        #' @return `TRUE` if the `Container` is empty else `FALSE`.
+        is_empty = function() self$length() == 0,
+
         #' @description Number of elements of the `Container`.
         #' @return `integer` length of the `Container`, that is, the number of
         #' elements it contains.
@@ -143,7 +150,7 @@ Container <- R6::R6Class("Container",
         #' function can be used to sample randomly (with replacement) from
         #' a `Container`.
         peekitem = function() {
-            if (self$empty()) {
+            if (self$is_empty()) {
                 return(NULL)
             }
             pos <- sample(seq_along(private$elems), size = 1)
@@ -155,7 +162,7 @@ Container <- R6::R6Class("Container",
         #' `Container`. This function can be used to destructively iterate
         #'  over a `Container` as often used in set algorithms.
         popitem = function() {
-            if (self$empty()) {
+            if (self$is_empty()) {
                 stop("popitem at empty ", data.class(self))
             }
             pos <- sample(seq_along(private$elems), size = 1)

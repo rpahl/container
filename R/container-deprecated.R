@@ -3,14 +3,35 @@
 #' @description These functions are provided for backwards-compatibility and
 #' may be defunct as soon as the next release.
 #' @param ... (arguments)
-#' @seealso [base::Deprecated()]
-#' @usage set(...)  ### -- use  setnew(...)  instead to create `Set`s
-#' @usage size(...)  ### -- use  length(...)  instead
-#' @usage sortkey(...)  ### -- `Dict` keys are now always sorted
-#' @usage remove(...)  ### -- use  delete(...)  instead
-#' @usage type(...)  ### -- not of use anymore
+#' @usage
+#' empty(...)       ### -- use `is_empty(...)` instead
+#' set(...)         ### -- use `setnew(...)` instead to create `Set`s
+#' size(...)        ### -- use `length(...)` instead
+#' sortkey(...)     ### -- `Dict` keys are now always sorted
+#' remove(...)      ### -- use `delete(...)` instead
+#' type(...)        ### -- not of use anymore
 #' @name container-deprecated
 NULL
+
+#' Check if object is empty
+#'
+#' @param x any `R` object.
+#' @param ... additional arguments to be passed to or from methods.
+#' @return `TRUE` if object is empty otherwise `FALSE`.
+#' @name empty-deprecated
+NULL
+
+#' @rdname empty-deprecated
+#' @export
+empty <- function(x, ...) UseMethod("empty")
+
+#' @rdname empty-deprecated
+#' @export
+empty.Container <- function(x)
+{
+    .Deprecated("is_empty")
+    is_empty(x)
+}
 
 
 #' @title Container size (deprecated)
