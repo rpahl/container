@@ -2,32 +2,39 @@
 % Please edit documentation in R/delete.R
 \name{delete}
 \alias{delete}
-\alias{delete.Dict}
+\alias{delete_}
+\alias{delete.Container}
+\alias{delete_.Container}
 \alias{delete.dict.table}
 \title{Delete elements}
 \usage{
 delete(x, ...)
 
-\method{delete}{Dict}(x, key)
+delete_(x, ...)
 
-\method{delete}{dict.table}(x, column)
+\method{delete}{Container}(x, ...)
+
+\method{delete_}{Container}(x, ...)
+
+\method{delete}{dict.table}(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
 
-\item{...}{additional arguments to be passed to or from methods.}
-
-\item{key}{\code{character} key of the value to delete. If \code{key} does exists,
-the associated key-value pair is deleted, otherwise an error is signaled.}
+\item{...}{elements to be deleted. For \code{Container}, \code{Deque} and \code{Set}
+objects these will be elements contained in the objects. For \code{Dict} these
+are key names. For \code{dict.table} these can be either column names or column
+indices or both.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Dict} the dict object after the key-value pair was removed.
+For \code{Container}, an object of class \code{Container} (or one of the
+respective derived classes).
 
-For \code{dict.table} the dict.table object after the column was removed.
+For \code{dict.table}, an object of class \code{dict.table}.
 }
 \description{
-Search and remove an element from an object. If the element is not found,
-signal an error.
+Search and remove elements from an object. If the element is not found,
+an error is signaled.
 }

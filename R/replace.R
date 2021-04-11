@@ -48,6 +48,8 @@ replace.Container <- function(x, old, new, add = FALSE)
 #' @usage
 #' replace(x, old, new, add = FALSE)
 #' replace_(x, old, new, add = FALSE)
+#' @param old old element to be found and replaced.
+#' @param new the new element replacing the old one.
 #' @details
 #' * `replace(x, old, new, add = FALSE)` and `replace_(x, ...)` try to find
 #' element `old` and replace it with element `new`. If `old` does not exist,

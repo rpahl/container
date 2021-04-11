@@ -6,7 +6,7 @@
 #' base class for [Deque()], [Set()], and [Dict()] objects, users are more
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of these classes.
-#' @param ... initial elements put into the `Container`.
+#' @param ... elements to put into or remove from the `Container`.
 #' @param elem some element of any type
 #' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.

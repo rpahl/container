@@ -3,9 +3,6 @@ ee = expect_equal
 # ----------
 # dict.table
 # ----------
-data.table <- data.table::data.table
-as.data.table <- data.table::as.data.table
-
 # dict.table creation works as expected
 dat = data.table(A = 1, B = 2)
 dit = dict.table(A = 1, B = 2)
@@ -74,11 +71,11 @@ ee(clear(dit), dict.table())
 # columns can be deleted from dict.table
 dit = dict.table(A = 1:2, B = 2:1, C = 3:4)
 expect_true(has(dit, "B"))
-delete(dit, "B")
+delete_(dit, "B")
 expect_false(has(dit, "B"))
 
 ee(c("A", "C"), colnames(dit))
-delete(dit, c("A", "C"))
+delete_(dit, "A", "C")
 expect_true(is_empty(dit))
 
 
@@ -124,7 +121,7 @@ expect_true(identical(dit, dit.copy)) # dit.copy has not changed
 dit = dict.table(A = 1:2, B = 2:1)
 dit.copy = data.table::copy(dit)
 
-expect_error(delete(dit, c("B", "X")), "Column 'X' not in dict.table")
+expect_error(delete(dit, "B", "X"), "Column 'X' not in dict.table")
 ee(dit, dit.copy)
 
 
@@ -161,6 +158,7 @@ expect_true(is.null(peek(dit, "X")))
 ee(peek(dit, "X", default = 9), rep(9, nrow(dit)))
 ee(peek(dit, "X", default = "a"), rep("a", nrow(dit)))
 
+exit_file(msg = "TODO")
 
 # pop works as expected
 dit = dict.table(A = 1:2, B = 2:1)

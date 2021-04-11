@@ -2,13 +2,13 @@
 % Please edit documentation in R/has.R
 \name{has}
 \alias{has}
-\alias{has.Dict}
+\alias{has.Container}
 \alias{has.dict.table}
 \title{Determine if object has some element}
 \usage{
 has(x, ...)
 
-\method{has}{Dict}(x, key)
+\method{has}{Container}(x, elem)
 
 \method{has}{dict.table}(x, column)
 }
@@ -17,16 +17,31 @@ has(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{key}{\code{character} name of key to search for.}
+\item{elem}{some element to be found. For \code{Container}, \code{Deque} and
+\code{Set} objects, the sought element is passed, while for \code{Dict} objects this
+corresponds to the key to be found in the \code{Dict}.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Dict} \code{TRUE} if key is in dict otherwise \code{FALSE}.
+\code{TRUE} if element (or key) is in \code{x} and otherwise \code{FALSE}.
 
 For \code{dict.table} \code{TRUE} if column name or index is in dict.table,
 otherwise \code{FALSE}.
 }
 \description{
 Determine if object has some element
+}
+\examples{
+
+co = container(1, 2, mean)
+has(co, 1)                   # TRUE
+has(co, mean)                # TRUE
+has(co, 1:2)                 # FALSE
+
+dit = dict.table(a = 1, b = 2)
+has(dit, "a")    # TRUE
+has(dit, 1)      # TRUE
+has(dit, "x")    # FALSE
+has(dit, 3)      # FALSE
 }

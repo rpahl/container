@@ -37,3 +37,4 @@ check_name_collision = function(x, y)
     stop("names ", toString(paste0("'", common, "'")), " exist already")
 }
 
+

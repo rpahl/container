@@ -54,11 +54,12 @@ clone(x)
 
 count(x)
 
-\method{delete}{Container}(x, elem, right = FALSE)
+delete(x, ...)
+delete_(x, ...)
 
 \method{discard}{Container}(x, elem)
 
-\method{has}{Container}(x, elem)
+has(x, elem)
 
 is_empty(x)
 
@@ -66,14 +67,16 @@ replace(x, old, new, add = FALSE)
 replace_(x, old, new, add = FALSE)
 }
 \arguments{
-\item{...}{initial elements put into the \code{Container}.}
+\item{...}{elements to put into or remove from the \code{Container}.}
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
 or of class \code{Container} for the \code{S3} methods.}
 
 \item{elem}{some element of any type}
 
-\item{right}{\code{logical} if \code{TRUE}, search from right to left.}
+\item{old}{old element to be found and replaced.}
+
+\item{new}{the new element replacing the old one.}
 }
 \description{
 A \code{\link[=Container]{Container()}} is a data structure with typical member
@@ -132,7 +135,7 @@ the element was contained in \code{x}. The result is always a container.
 }
 
 \itemize{
-\item \code{clear(x)} and clear_(x) remove all elements from \code{x}.
+\item \code{clear(x)} and \code{clear_(x)} remove all elements from \code{x}.
 }
 
 \itemize{
@@ -144,8 +147,8 @@ the element was contained in \code{x}. The result is always a container.
 }
 
 \itemize{
-\item \code{delete(x, elem, right)} finds and removes \code{elem}. If not
-found, an error is signaled.
+\item \code{delete(x, ...)} and \code{delete_(x, ...)} find and remove elements.
+If one or more elements don't exist, an error is signaled.
 }
 
 \itemize{
@@ -153,7 +156,7 @@ found, an error is signaled.
 }
 
 \itemize{
-\item \code{has(x)} \code{TRUE} if element is in \code{x} and otherwise \code{FALSE}.
+\item \code{has(x, elem)} \code{TRUE} if element is in \code{x} and otherwise \code{FALSE}.
 }
 
 \itemize{
@@ -187,6 +190,11 @@ co = container("a", "b", "a", mean, mean)
 count(co, "a")
 count(co, mean)
 count(co, "c")
+
+co = container(1, 2, mean)
+has(co, 1)                   # TRUE
+has(co, mean)                # TRUE
+has(co, 1:2)                 # FALSE
 
 co = container(1, 2)
 is_empty(co)

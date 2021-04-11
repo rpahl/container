@@ -30,6 +30,7 @@ discard.Dict <- function(x, key) x$discard(key)
 discard.dict.table <- function(x, column)
 {
     j = Filter(unique(column), f = function(column) has(x, column))
+
     if (is.numeric(j)) j = as.integer(j)
 
     if (length(j)) {

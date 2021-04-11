@@ -30,7 +30,7 @@ clear.Container <- function(x) x$clone(deep = TRUE)$clear()
 #' clear(x)
 #' clear_(x)
 #' @details
-#' * `clear(x)` and clear_(x) remove all elements from `x`.
+#' * `clear(x)` and `clear_(x)` remove all elements from `x`.
 #' @examples
 #'
 #' co = container(1, 2, mean)
@@ -80,6 +80,8 @@ NULL
 #' @export
 clear_.dict.table <- function(x)
 {
-    delete(x, names(x))
+    data.table::set(x, j = seq_len(ncol(x)), value = NULL)
+
+    x
 }
 

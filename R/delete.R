@@ -1,46 +1,103 @@
 #' Delete elements
 #'
-#' Search and remove an element from an object. If the element is not found,
-#' signal an error.
+#' Search and remove elements from an object. If the element is not found,
+#' an error is signaled.
 #' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
+#' @param ... elements to be deleted. For `Container`, `Deque` and `Set`
+#' objects these will be elements contained in the objects. For `Dict` these
+#' are key names. For `dict.table` these can be either column names or column
+#' indices or both.
 #' @export
 delete <- function(x, ...) UseMethod("delete")
 
-
-#' @rdname ContainerS3
-#' @param right `logical` if `TRUE`, search from right to left.
-#' @param elem some element of any type
-#' @details * `delete(x, elem, right)` finds and removes `elem`. If not
-#' found, an error is signaled.
+#' @rdname delete
 #' @export
-delete.Container <- function(x, elem, right = FALSE) x$delete(elem, right)
+delete_ <- function(x, ...) UseMethod("delete_")
 
 
 #' @rdname delete
-#' @param key `character` key of the value to delete. If `key` does exists,
-#' the associated key-value pair is deleted, otherwise an error is signaled.
-#' @return For `Dict` the dict object after the key-value pair was removed.
+#' @return For `Container`, an object of class `Container` (or one of the
+#' respective derived classes).
 #' @export
-delete.Dict <- function(x, key) x$delete(key)
+delete.Container <- function(x, ...) {
+    delete_(x$clone(deep = TRUE), ...)
+}
+
+#' @name delete.Container
+#' @rdname ContainerS3
+#' @usage
+#' delete(x, ...)
+#' delete_(x, ...)
+#' @details
+#' * `delete(x, ...)` and `delete_(x, ...)` find and remove elements.
+#' If one or more elements don't exist, an error is signaled.
+NULL
+
+#' @rdname delete
+#' @export
+delete_.Container <- function(x, ...)
+{
+    elems = list(...)
+    if (!length(elems))
+        return(x)
+
+    hasElements = sapply(elems, function(e) x$has(e))
+
+    if (any(!hasElements)) {
+        # Throw error by trying to delete first missing element
+        missingElem = elems[!hasElements][[1]]
+        x$delete(missingElem)
+    }
+
+    lapply(elems, function(e) x$delete(e))
+    x
+}
+
 
 
 #' @rdname delete
 #' @param column `character` name or `numeric` index of column.
-#' @return For `dict.table` the dict.table object after the column was removed.
+#' @return For `dict.table`, an object of class `dict.table`.
 #' @export
-delete.dict.table <- function(x, column)
+delete.dict.table <- function(x, ...)
 {
-    has_column <- function(column) has(x, column)
-    missing_cols = Filter(column, f = Negate(has_column))
-    if (length(missing_cols)) {
-        col_str = paste0("'", missing_cols, "'", collapse = ", ")
-        stop("Column", ifelse(length(missing_cols) > 1, "s ", " "),
-             col_str,
-             ifelse(is.character(column),
+    delete_(copy(x), ...)
+}
+
+
+#' @name delete.dict.table
+#' @rdname dict.table
+#' @usage
+#' delete(x, ...)
+#' delete_(x, ...)
+#' @details
+#' * `delete(x, ...)` and `delete_(x, ...)` find and remove columns either by
+#' name or index (or both). If one or more columns don't exist, an error is
+#' signaled.
+#' @export
+delete_.dict.table <- function(x, ...)
+{
+    columns = list(...)
+    if (!length(columns))
+        return(x)
+
+    hasColumns = sapply(columns, function(column) has(x, column))
+
+    if (any(!hasColumns)) {
+        missingCol = columns[!hasColumns][[1]]
+
+        stop("Column '", missingCol, "'",
+             ifelse(is.character(missingCol),
                     paste(" not in", data.class(x)),
                     paste0(" out of range (ncol = ", ncol(x), ")")))
     }
-    discard(x, column)
+
+    tab_names = as.character(Filter(columns, f = is.character))
+    indices = as.integer(Filter(columns, f = is.numeric))
+    if (length(indices))
+        tab_names = c(tab_names, names(d)[indices])
+
+    lapply(tab_names, function(name) discard(x, name))
+    x
 }
 
