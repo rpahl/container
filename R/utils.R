@@ -19,6 +19,8 @@ verify_names = function(x)
 {
     if (!length(x) || !all(sapply(x, is_nonempty_string)))
         stop("all elements must be named")
+
+    invisible(TRUE)
 }
 
 
@@ -26,7 +28,12 @@ check_name_collision = function(x, y)
 {
     common = intersect(x, y)
 
-    if (length(common))
-        stop("name(s) ", toString(paste0("'", common, "'")), " exist(s) already")
+    if (!length(common))
+        return(invisible(TRUE))
+
+    if (length(common) == 1)
+        stop("name ", paste0("'", common, "'"), " exists already")
+
+    stop("names ", toString(paste0("'", common, "'")), " exist already")
 }
 

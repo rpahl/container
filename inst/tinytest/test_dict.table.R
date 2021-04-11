@@ -57,7 +57,7 @@ ee(getval(dit, "a"), rep(1, 4))
 
 # a column cannot be added twice
 dit = dict.table(A = 1:2, B = 2:1)
-expect_error(add(dit, "A" = 1:2), "name\\(s\\) 'A' exist\\(s\\) already")
+expect_error(add(dit, "A" = 1:2), "name 'A' exists already")
 
 
 # it can be checked if a dict.table has a certain column

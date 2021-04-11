@@ -42,14 +42,13 @@ expect_true(d_was_not_touched)
 add_(d, b = 2, d = 4)
 ee(d, dict(a = 1, b = 2, d = 4))
 
-expect_error(add_(d, z = 9, b = 2),
-             "name\\(s\\) 'b' exist\\(s\\) already")
+expect_error(add_(d, z = 9, b = 2), "name 'b' exists already")
 
 d_was_not_touched_upon_error = all.equal(d, dict(a = 1, b = 2, d = 4))
 expect_true(d_was_not_touched_upon_error)
 
 
-expect_error(add(d, a = 2), "name\\(s\\) 'a' exist\\(s\\) already")
+expect_error(add(d, a = 2), "name 'a' exists already")
 expect_error(add(d, 2), "all elements must be named")
 expect_error(add(d, "a", 2), "all elements must be named")
 
@@ -69,8 +68,7 @@ expect_error(add(dit, d = 4, 5), "all elements must be named")
 d_was_not_touched_upon_error = all.equal(dit, dict.table(a = 1, b = 2, c = 3))
 expect_true(d_was_not_touched_upon_error)
 
-expect_error(add(dit, d = 4, a = 5, b = 6),
-             "name\\(s\\) 'a', 'b' exist\\(s\\) already")
+expect_error(add(dit, d = 4, a = 5, b = 6), "names 'a', 'b' exist already")
 
 
 # -------------
