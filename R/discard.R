@@ -1,41 +1,89 @@
 #' Discard elements
 #'
 #' Search and remove an element from an object. If the element is not found,
-#' ignore it.
+#' ignore the attempt.
 #' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
+#' @param ... elements to be discarded. For `Container`, `Deque` and `Set`
+#' objects these will be elements contained in the objects. For `Dict` these
+#' are key names. For `dict.table` these can be either column names or column
+#' indices or both.
 #' @export
 discard <- function(x, ...) UseMethod("discard")
 
-#' @rdname ContainerS3
-#' @details * `discard(x, elem, right)` finds and removes `elem`. If not found, `elem` is ignored.
-#' @param elem some element of any type
+#' @rdname discard
 #' @export
-discard.Container <- function(x, elem) x$discard(elem)
+discard_ <- function(x, ...) UseMethod("discard_")
 
 #' @rdname discard
-#' @param key `character` key of value to discard. If `key` does exist,
-#' the associated key-value pair is deleted, otherwise it is ignored.
-#' @return For `Dict` the dict object after the key-value pair was removed or
-#' the unchanged dict object if the key was not in the dict in the first place.
+#' @return For `Container`, an object of class `Container` (or one of the
+#' respective derived classes).
 #' @export
-discard.Dict <- function(x, key) x$discard(key)
+discard.Container <- function(x, ...) {
+    (discard_(x$clone(deep = TRUE), ...))
+}
+
+#' @name discard.Container
+#' @rdname ContainerS3
+#' @usage
+#' discard(x, ...)
+#' discard_(x, ...)
+#' @details
+#' * `discard(x, ...)` and `discard_(x, ...)` find and discard elements.
+#' Elements that don't exist, are ignored.
+NULL
+
+
+#' @rdname discard
+#' @export
+discard_.Container <- function(x, ...)
+{
+    elems = list(...)
+    if (!length(elems))
+        return(x)
+
+    lapply(elems, function(e) x$discard(e))
+
+    invisible(x)
+}
 
 #' @rdname discard
 #' @param column `character` name or `numeric` index of column.
-#' @return For `dict.table` the dict.table object after the column was removed
-#' or the unchanged dict.table object if the column did not exist in the first
-#' place.
+#' @return For `dict.table`, an object of class `dict.table`.
 #' @export
-discard.dict.table <- function(x, column)
+discard.dict.table <- function(x, ...)
 {
-    j = Filter(unique(column), f = function(column) has(x, column))
+    (discard_(clone(x), ...))
+}
 
-    if (is.numeric(j)) j = as.integer(j)
 
-    if (length(j)) {
-        data.table::set(x, j = j, value = NULL)
-    }
+#' @name discard.dict.table
+#' @rdname dict.table
+#' @usage
+#' discard(x, ...)
+#' discard_(x, ...)
+#' @details
+#' * `discard(x, ...)` and `discard_(x, ...)` find and remove columns either by
+#' name or index (or both). If one or more columns don't exist, an error is
+#' signaled.
+#' @export
+discard_.dict.table <- function(x, ...)
+{
+    columns = list(...)
+    if (!length(columns))
+        return(x)
+
+
+    indices = as.integer(Filter(columns, f = is.numeric))
+    indices = Filter(indices, f = function(i) i <= ncol(x))
+
+    tab_names = as.character(Filter(columns, f = is.character))
+    tab_names = c(tab_names, names(x)[indices])
+
+    to_remove = intersect(tab_names, colnames(x))
+
+    if (length(to_remove))
+        data.table::set(x, j = to_remove, value = NULL)
+
     invisible(x)
 }
 

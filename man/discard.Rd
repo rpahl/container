@@ -2,35 +2,39 @@
 % Please edit documentation in R/discard.R
 \name{discard}
 \alias{discard}
-\alias{discard.Dict}
+\alias{discard_}
+\alias{discard.Container}
+\alias{discard_.Container}
 \alias{discard.dict.table}
 \title{Discard elements}
 \usage{
 discard(x, ...)
 
-\method{discard}{Dict}(x, key)
+discard_(x, ...)
 
-\method{discard}{dict.table}(x, column)
+\method{discard}{Container}(x, ...)
+
+\method{discard_}{Container}(x, elem)
+
+\method{discard}{dict.table}(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
 
-\item{...}{additional arguments to be passed to or from methods.}
-
-\item{key}{\code{character} key of value to discard. If \code{key} does exist,
-the associated key-value pair is deleted, otherwise it is ignored.}
+\item{...}{elements to be discarded. For \code{Container}, \code{Deque} and \code{Set}
+objects these will be elements contained in the objects. For \code{Dict} these
+are key names. For \code{dict.table} these can be either column names or column
+indices or both.}
 
 \item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Dict} the dict object after the key-value pair was removed or
-the unchanged dict object if the key was not in the dict in the first place.
+For \code{Container}, an object of class \code{Container} (or one of the
+respective derived classes).
 
-For \code{dict.table} the dict.table object after the column was removed
-or the unchanged dict.table object if the column did not exist in the first
-place.
+For \code{dict.table}, an object of class \code{dict.table}.
 }
 \description{
 Search and remove an element from an object. If the element is not found,
-ignore it.
+ignore the attempt.
 }

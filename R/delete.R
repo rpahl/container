@@ -20,7 +20,7 @@ delete_ <- function(x, ...) UseMethod("delete_")
 #' respective derived classes).
 #' @export
 delete.Container <- function(x, ...) {
-    delete_(x$clone(deep = TRUE), ...)
+    (delete_(x$clone(deep = TRUE), ...))
 }
 
 #' @name delete.Container
@@ -50,7 +50,7 @@ delete_.Container <- function(x, ...)
     }
 
     lapply(elems, function(e) x$delete(e))
-    x
+    invisible(x)
 }
 
 
@@ -61,7 +61,7 @@ delete_.Container <- function(x, ...)
 #' @export
 delete.dict.table <- function(x, ...)
 {
-    delete_(copy(x), ...)
+    (delete_(clone(x), ...))
 }
 
 
@@ -84,20 +84,14 @@ delete_.dict.table <- function(x, ...)
     hasColumns = sapply(columns, function(column) has(x, column))
 
     if (any(!hasColumns)) {
-        missingCol = columns[!hasColumns][[1]]
+        firstMissing = columns[!hasColumns][[1]]
 
-        stop("Column '", missingCol, "'",
-             ifelse(is.character(missingCol),
+        stop("Column '", firstMissing, "'",
+             ifelse(is.character(firstMissing),
                     paste(" not in", data.class(x)),
                     paste0(" out of range (ncol = ", ncol(x), ")")))
     }
 
-    tab_names = as.character(Filter(columns, f = is.character))
-    indices = as.integer(Filter(columns, f = is.numeric))
-    if (length(indices))
-        tab_names = c(tab_names, names(d)[indices])
-
-    lapply(tab_names, function(name) discard(x, name))
-    x
+    discard_(x, ...)
 }
 

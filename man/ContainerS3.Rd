@@ -57,7 +57,8 @@ count(x)
 delete(x, ...)
 delete_(x, ...)
 
-\method{discard}{Container}(x, elem)
+discard(x, ...)
+discard_(x, ...)
 
 has(x, elem)
 
@@ -152,7 +153,8 @@ If one or more elements don't exist, an error is signaled.
 }
 
 \itemize{
-\item \code{discard(x, elem, right)} finds and removes \code{elem}. If not found, \code{elem} is ignored.
+\item \code{discard(x, ...)} and \code{discard_(x, ...)} find and discard elements.
+Elements that don't exist, are ignored.
 }
 
 \itemize{

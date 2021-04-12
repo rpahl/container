@@ -8,6 +8,7 @@ dat = data.table(A = 1, B = 2)
 dit = dict.table(A = 1, B = 2)
 expect_equivalent(dit, dat)
 
+exit_file(msg = "TODO")
 
 # access of dict.table properities work as expected
 dat = data.table(A = 1, B = 2)
@@ -82,7 +83,7 @@ expect_true(is_empty(dit))
 # columns can be discarded from dict.table
 dit = dict.table(A = 1:2, B = 2:1, C = 3:4)
 expect_true(has(dit, "B"))
-discard(dit, "B")
+discard_(dit, "B")
 expect_false(has(dit, "B"))
 
 ee(c("A", "C"), colnames(dit))
@@ -158,7 +159,6 @@ expect_true(is.null(peek(dit, "X")))
 ee(peek(dit, "X", default = 9), rep(9, nrow(dit)))
 ee(peek(dit, "X", default = "a"), rep("a", nrow(dit)))
 
-exit_file(msg = "TODO")
 
 # pop works as expected
 dit = dict.table(A = 1:2, B = 2:1)
