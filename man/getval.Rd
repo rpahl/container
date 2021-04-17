@@ -10,24 +10,26 @@ getval(x, ...)
 
 \method{getval}{Dict}(x, key)
 
-\method{getval}{dict.table}(x, column)
+\method{getval}{dict.table}(x, key)
 }
 \arguments{
 \item{x}{any \code{R} object.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{key}{\code{character} name of key.}
-
-\item{column}{\code{character} name or \code{numeric} index of column.}
+\item{key}{one or more indices to be accessed. For \code{Dict} objects the keys
+must be of type \code{character} while they can be \code{character} or \code{numeric} for
+\code{dict.table} objects.}
 }
 \value{
-For \code{Dict} returns value at \code{key}, if \code{key} is found in \code{Dict}
-otherwise throws an error.
-
-For \code{dict.table} returns the column if it does exist otherwise
-throws an error.
+If the \code{key} is of length one, the raw value associated with the
+\code{key} is returned, otherwise an object of the same type as the one that was
+accessed.
 }
 \description{
-Try to access elements and signal an error if not found.
+Try to access element and signal an error if not found.
+}
+\examples{
+
+
 }

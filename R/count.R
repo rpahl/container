@@ -21,7 +21,7 @@ count.Container <- function(x, elem) {
 }
 
 
-#' @name clear.Container
+#' @name count.Container
 #' @rdname ContainerS3
 #' @usage
 #' count(x)

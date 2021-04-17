@@ -25,8 +25,6 @@ delete_(x, ...)
 objects these will be elements contained in the objects. For \code{Dict} these
 are key names. For \code{dict.table} these can be either column names or column
 indices or both.}
-
-\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Container}, an object of class \code{Container} (or one of the

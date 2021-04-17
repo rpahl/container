@@ -56,7 +56,6 @@ delete_.Container <- function(x, ...)
 
 
 #' @rdname delete
-#' @param column `character` name or `numeric` index of column.
 #' @return For `dict.table`, an object of class `dict.table`.
 #' @export
 delete.dict.table <- function(x, ...)
