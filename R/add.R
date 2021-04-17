@@ -37,7 +37,7 @@ addleft_ <- function(x, ...) UseMethod("addleft_")
 #' add(s, 1, 1, b = 2, "1", co = container(1, 1))
 add.Container <- function(x, ...)
 {
-    add_(x$clone(deep = TRUE), ...)
+    (add_(x$clone(deep = TRUE), ...))
 }
 
 #' @name add.Container
@@ -60,7 +60,7 @@ NULL
 #' @export
 add_.Container <- function(x, ...)
 {
-    x$add(...)
+    invisible(x$add(...))
 }
 
 
@@ -75,7 +75,7 @@ add_.Container <- function(x, ...)
 #' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 addleft.Deque <- function(x, ...)
 {
-    addleft_(x$clone(deep = TRUE), ...)
+    (addleft_(x$clone(deep = TRUE), ...))
 }
 
 #' @name addleft.Deque
@@ -97,7 +97,7 @@ NULL
 #' @export
 addleft_.Deque <- function(x, ...)
 {
-    x$addleft(...)
+    invisible(x$addleft(...))
 }
 
 
@@ -116,7 +116,7 @@ addleft_.Deque <- function(x, ...)
 #' add(d, a = 7:9)  # key 'a' already in Dict}
 add.Dict <- function(x, ...)
 {
-    add_(x$clone(deep = TRUE), ...)
+    (add_(x$clone(deep = TRUE), ...))
 }
 
 #' @name add.Dict
@@ -154,7 +154,7 @@ add_.Dict <- function(x, ...)
     for (i in seq_along(elems))
         x$add(elem_names[[i]], elems[[i]])
 
-    x
+    invisible(x)
 }
 
 
@@ -171,7 +171,7 @@ add_.Dict <- function(x, ...)
 #' add(dit, a = 7:9)  # column 'a' already exists}
 add.dict.table <- function(x, ...)
 {
-    add_(copy(x), ...)
+    (add_(copy(x), ...))
 }
 
 
@@ -217,6 +217,6 @@ add_.dict.table <- function(x, ...)
     for (i in seq_along(elems))
         replace_.dict.table(x, elem_names[[i]], elems[[i]], add = TRUE)
 
-    x
+    invisible(x)
 }
 

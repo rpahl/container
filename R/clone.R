@@ -14,7 +14,7 @@ clone <- function(x, ...) UseMethod("clone")
 #'
 #' co = container(1, 2, 3)
 #' co2 = clone(co)
-clone.Container <- function(x) x$clone(deep = TRUE)
+clone.Container <- function(x) (x$clone(deep = TRUE))
 
 #' @name clone.Container
 #' @rdname ContainerS3
@@ -27,7 +27,7 @@ clone.Container <- function(x) x$clone(deep = TRUE)
 #'
 #' co = container(1, 2, 3)
 #' co2 = clone(co)
-clone.Container <- function(x) x$clone(deep = TRUE)
+NULL
 
 
 #' @rdname clone
@@ -36,7 +36,7 @@ clone.Container <- function(x) x$clone(deep = TRUE)
 #'
 #' d = dict.table(a = 1:2, b = 3:4)
 #' clone(d)
-clone.dict.table <- function(x) copy(x)
+clone.dict.table <- function(x) (copy(x))
 
 #' @name clone.dict.table
 #' @rdname dict.table

@@ -14,7 +14,7 @@ discard_(x, ...)
 
 \method{discard}{Container}(x, ...)
 
-\method{discard_}{Container}(x, elem)
+\method{discard_}{Container}(x, ...)
 
 \method{discard}{dict.table}(x, ...)
 }

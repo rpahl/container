@@ -22,7 +22,7 @@ clear_ <- function(x, ...) UseMethod("clear_")
 #' co
 #' clear_(co)
 #' co
-clear.Container <- function(x) x$clone(deep = TRUE)$clear()
+clear.Container <- function(x) (x$clone(deep = TRUE)$clear())
 
 #' @name clear.Container
 #' @rdname ContainerS3
@@ -44,7 +44,7 @@ NULL
 #' @export
 clear_.Container <- function(x)
 {
-    x$clear()
+    invisible(x$clear())
 }
 
 
@@ -82,6 +82,6 @@ clear_.dict.table <- function(x)
 {
     data.table::set(x, j = seq_len(ncol(x)), value = NULL)
 
-    x
+    invisible(x)
 }
 

@@ -19,6 +19,8 @@ expect_error(delete_(co, "a", "x"), '"x" is not in Container')
 was_not_touched_on_error = ee(co, co2)
 expect_true(was_not_touched_on_error)
 
+expect_silent(delete_(co, "a"))
+
 # -----------
 # delete.Dict
 # -----------
@@ -38,6 +40,7 @@ expect_error(delete_(d, "a", "x", "y"), "key 'x' not in Dict")
 was_not_touched_on_error = ee(d, d2)
 expect_true(was_not_touched_on_error)
 
+expect_silent(delete_(d, "a"))
 
 # -----------------
 # delete.dict.table
@@ -53,3 +56,6 @@ d_was_not_altered = ee(d, d2)
 expect_true(d_was_not_altered)
 
 ee(delete_(d, "b"), d2[, c(1, 3)])
+
+expect_silent(delete_(d, "a"))
+
