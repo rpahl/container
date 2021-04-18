@@ -1,16 +1,21 @@
 #' Strict element access
 #'
-#' @description Try to access element and signal an error if not found.
+#' @description Try to access elements and signal errors for missing elements.
 #' @param x any `R` object.
-#' @param key one or more indices to be accessed. For `Dict` objects the keys
-#' must be of type `character` while they can be `character` or `numeric` for
+#' @param key one or more indices to be accessed. For `Dict` objects keys
+#' are of type `character` while they can be either `character` or `numeric` for
 #' `dict.table` objects.
 #' @return If the `key` is of length one, the raw value associated with the
 #' `key` is returned, otherwise an object of the same type as the one that was
 #' accessed.
-#' @param ... additional arguments to be passed to or from methods.
+#' @param ... keys or indices to be accessed or additional arguments to be
+#' passed to or from methods.
 #' @export
 getval <- function(x, ...) UseMethod("getval")
+
+#' @rdname getval
+#' @export
+getvalues <- function(x, ...) UseMethod("getvalues")
 
 
 #' @rdname getval
@@ -19,7 +24,7 @@ getval <- function(x, ...) UseMethod("getval")
 #'
 #' d = dict(a = 1, b = 1:3)
 #' getval(d, "b")
-#' getval(d, c("a", "b"))
+#' getval(dit, c("a", "b")) # or alternatively:
 #' getvalues(d, "a", "b")
 getval.Dict <- function(x, key)
 {
@@ -31,6 +36,13 @@ getval.Dict <- function(x, key)
         d$add(k, x$get(k))
 
     d
+}
+
+#' @rdname getval
+#' @export
+getvalues.Dict <- function(x, ...)
+{
+    getval.Dict(x, unlist(list(...)))
 }
 
 
@@ -45,15 +57,19 @@ getval.Dict <- function(x, key)
 #' For a single key the raw value associated with
 #' the key is returned, otherwise a new `dict` object containing all requested
 #' key-value pairs.
+#' * `getvalues(x, ...)` is a convenience version of `getval(x, key)` enabling
+#' to pass several keys separated by commas.
 #' @examples
 #'
 #' d = dict(a = 1, b = 1:3)
 #' getval(d, "b")
-#' getval(dit, c("a", "b")) # or
+#' getval(dit, c("a", "b")) # or alternatively:
 #' getvalues(d, "a", "b")
 NULL
 
 
+
+# Helper function
 .get_dict.table_value <- function(x, key)
 {
     if (!has(x, key))
@@ -69,7 +85,7 @@ NULL
 #'
 #' dit = dict.table(a = 1:3, b = 4:6)
 #' getval(dit, "b")
-#' getval(dit, c("a", "b")) # or
+#' getval(dit, c("a", "b")) # or alternatively
 #' getvalues(dit, "a", "b")
 getval.dict.table <- function(x, key)
 {
@@ -88,6 +104,14 @@ getval.dict.table <- function(x, key)
     d
 }
 
+#' @rdname getval
+#' @export
+getvalues.dict.table <- function(x, ...)
+{
+    getval.dict.table(x, unlist(list(...)))
+}
+
+
 
 #' @name getval.dict.table
 #' @rdname dict.table
@@ -99,6 +123,8 @@ getval.dict.table <- function(x, key)
 #' If a column does not exist, an error is given.
 #' For a single column the raw column vector is
 #' returned, otherwise a new `dict.table` object containing all requested columns.
+#' * `getvalues(x, ...)` is a convenience version of `getval(x, key)` enabling
+#' to pass several keys (i.e. column names) separated by commas.
 #' @examples
 #'
 #' dit = dict.table(a = 1:3, b = 4:6)

@@ -2,23 +2,33 @@
 % Please edit documentation in R/getval.R
 \name{getval}
 \alias{getval}
+\alias{getvalues}
 \alias{getval.Dict}
+\alias{getvalues.Dict}
 \alias{getval.dict.table}
+\alias{getvalues.dict.table}
 \title{Strict element access}
 \usage{
 getval(x, ...)
 
+getvalues(x, ...)
+
 \method{getval}{Dict}(x, key)
 
+\method{getvalues}{Dict}(x, ...)
+
 \method{getval}{dict.table}(x, key)
+
+\method{getvalues}{dict.table}(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
 
-\item{...}{additional arguments to be passed to or from methods.}
+\item{...}{keys or indices to be accessed or additional arguments to be
+passed to or from methods.}
 
-\item{key}{one or more indices to be accessed. For \code{Dict} objects the keys
-must be of type \code{character} while they can be \code{character} or \code{numeric} for
+\item{key}{one or more indices to be accessed. For \code{Dict} objects keys
+are of type \code{character} while they can be either \code{character} or \code{numeric} for
 \code{dict.table} objects.}
 }
 \value{
@@ -27,17 +37,17 @@ If the \code{key} is of length one, the raw value associated with the
 accessed.
 }
 \description{
-Try to access element and signal an error if not found.
+Try to access elements and signal errors for missing elements.
 }
 \examples{
 
 d = dict(a = 1, b = 1:3)
 getval(d, "b")
-getval(d, c("a", "b"))
+getval(dit, c("a", "b")) # or alternatively
 getvalues(d, "a", "b")
 
 dit = dict.table(a = 1:3, b = 4:6)
 getval(dit, "b")
-getval(dit, c("a", "b")) # or
+getval(dit, c("a", "b")) # or alternatively
 getvalues(dit, "a", "b")
 }

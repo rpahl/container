@@ -74,6 +74,8 @@ more character values. If a \code{key} does not exist, an error is given.
 For a single key the raw value associated with
 the key is returned, otherwise a new \code{dict} object containing all requested
 key-value pairs.
+\item \code{getvalues(x, ...)} is a convenience version of \code{getval(x, key)} enabling
+to pass several keys separated by commas.
 }
 
 \itemize{
@@ -102,7 +104,7 @@ add(d, a = 7:9)  # key 'a' already in Dict}
 
 d = dict(a = 1, b = 1:3)
 getval(d, "b")
-getval(dit, c("a", "b")) # or
+getval(dit, c("a", "b")) # or alternatively
 getvalues(d, "a", "b")
 
 d = dict(a = 1)
