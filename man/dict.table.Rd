@@ -153,6 +153,14 @@ dit
 
 d = dict.table(a = 1:2, b = 3:4)
 clone(d)
+
+dit = as.dict.table(head(sleep))
+dit
+delete(dit, "ID")
+delete(dit, "ID", 1)
+\dontrun{
+delete(dit, "foo")   # Column 'foo' not in dict.table}
+discard(dit, "foo")  # ok - command is ignored
 # Some basic examples using some typical data.table and dict operations.
 # The constructor can take the 'key' argument known from data.table():
 dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")

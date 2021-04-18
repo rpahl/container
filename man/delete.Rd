@@ -36,3 +36,21 @@ For \code{dict.table}, an object of class \code{dict.table}.
 Search and remove elements from an object. If the element is not found,
 an error is signaled.
 }
+\examples{
+
+s = setnew("a", 1:3, iris)
+print(s)
+delete(s, 1:3, "a")
+delete(s, iris)
+\dontrun{
+delete(s, "b")  # "b" is not in Set}
+discard(s, "b")  # ok - command is ignored
+
+dit = as.dict.table(head(sleep))
+dit
+delete(dit, "ID")
+delete(dit, "ID", 1)
+\dontrun{
+delete(dit, "foo")   # Column 'foo' not in dict.table}
+discard(dit, "foo")  # ok - command is ignored
+}

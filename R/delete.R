@@ -19,6 +19,15 @@ delete_ <- function(x, ...) UseMethod("delete_")
 #' @return For `Container`, an object of class `Container` (or one of the
 #' respective derived classes).
 #' @export
+#' @examples
+#'
+#' s = setnew("a", 1:3, iris)
+#' print(s)
+#' delete(s, 1:3, "a")
+#' delete(s, iris)
+#' \dontrun{
+#' delete(s, "b")  # "b" is not in Set}
+#' discard(s, "b")  # ok - command is ignored
 delete.Container <- function(x, ...) {
     (delete_(x$clone(deep = TRUE), ...))
 }
@@ -31,6 +40,15 @@ delete.Container <- function(x, ...) {
 #' @details
 #' * `delete(x, ...)` and `delete_(x, ...)` find and remove elements.
 #' If one or more elements don't exist, an error is signaled.
+#' @examples
+#'
+#' s = setnew("a", 1:3, iris)
+#' print(s)
+#' delete(s, 1:3, "a")
+#' delete(s, iris)
+#' \dontrun{
+#' delete(s, "b")   # "b" is not in Set}
+#' discard(s, "b")  # ok - command is ignored
 NULL
 
 #' @rdname delete
@@ -45,8 +63,8 @@ delete_.Container <- function(x, ...)
 
     if (any(!hasElements)) {
         # Throw error by trying to delete first missing element
-        missingElem = elems[!hasElements][[1]]
-        x$delete(missingElem)
+        element = elems[!hasElements][[1]]
+        x$delete(element)
     }
 
     lapply(elems, function(e) x$delete(e))
@@ -58,6 +76,15 @@ delete_.Container <- function(x, ...)
 #' @rdname delete
 #' @return For `dict.table`, an object of class `dict.table`.
 #' @export
+#' @examples
+#'
+#' dit = as.dict.table(head(sleep))
+#' dit
+#' delete(dit, "ID")
+#' delete(dit, "ID", 1)
+#' \dontrun{
+#' delete(dit, "foo")   # Column 'foo' not in dict.table}
+#' discard(dit, "foo")  # ok - command is ignored
 delete.dict.table <- function(x, ...)
 {
     (delete_(clone(x), ...))
@@ -74,6 +101,15 @@ delete.dict.table <- function(x, ...)
 #' name or index (or both). If one or more columns don't exist, an error is
 #' signaled.
 #' @export
+#' @examples
+#'
+#' dit = as.dict.table(head(sleep))
+#' dit
+#' delete(dit, "ID")
+#' delete(dit, "ID", 1)
+#' \dontrun{
+#' delete(dit, "foo")   # Column 'foo' not in dict.table}
+#' discard(dit, "foo")  # ok - command is ignored
 delete_.dict.table <- function(x, ...)
 {
     columns = list(...)
