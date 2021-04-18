@@ -43,7 +43,7 @@ Try to access elements and signal errors for missing elements.
 
 d = dict(a = 1, b = 1:3)
 getval(d, "b")
-getval(dit, c("a", "b")) # or alternatively
+getval(dit, c("a", "b")) # or alternatively:
 getvalues(d, "a", "b")
 
 dit = dict.table(a = 1:3, b = 4:6)

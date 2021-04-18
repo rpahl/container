@@ -222,9 +222,16 @@ value for \code{key} if \code{key} is in the \code{Dict} else \code{default}.
 \subsection{Method \code{peekitem()}}{
 peek random item
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$peekitem()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$peekitem(default = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{default}}{returned default value if \code{Dict} is empty.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 returns an arbitrary element from the \code{Dict}. This
 function can be used to sample randomly (with replacement) from

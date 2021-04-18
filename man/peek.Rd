@@ -2,42 +2,97 @@
 % Please edit documentation in R/peek.R
 \name{peek}
 \alias{peek}
+\alias{peekleft}
+\alias{peekitem}
 \alias{peek.Deque}
+\alias{peekleft.Deque}
 \alias{peek.Dict}
 \alias{peek.dict.table}
-\title{Peek element of an object}
+\alias{peekitem.Container}
+\alias{peekitem.dict.table}
+\title{Peek at elements}
 \usage{
 peek(x, ...)
 
-\method{peek}{Deque}(x)
+peekleft(x, ...)
+
+peekitem(x, ...)
+
+\method{peek}{Deque}(x, default = NULL)
+
+\method{peekleft}{Deque}(x, default = NULL)
 
 \method{peek}{Dict}(x, key, default = NULL)
 
-\method{peek}{dict.table}(x, column, default = NULL)
+\method{peek}{dict.table}(x, key, default = NULL)
+
+\method{peekitem}{Container}(x, default = NULL)
+
+\method{peekitem}{dict.table}(x, default = NULL)
 }
 \arguments{
 \item{x}{any \code{R} object.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{key}{\code{character} key of the value to peek.}
+\item{default}{value to be returned if peeked value does not exist.}
 
-\item{default}{\code{ANY} default value to return if \code{key} not in the dictionary.}
-
-\item{column}{\code{character} name or \code{numeric} index of column.}
+\item{key}{\code{character} name of the value to peek.}
 }
 \value{
-For \code{Deque} the last element at the right side of the deque.
+For \code{Deque} the first (\code{peekleft}) or last (\code{peek}) element.
 
-For \code{Dict} if \code{key} does exists, the associated value is returned
+For \code{Dict}, returns the associated value if \code{key} does exists,
 otherwise the given \code{default} value.
 
-For \code{dict.table} returns the column if it does exist otherwise
+For \code{dict.table}, returns the column named \code{key} if it exist otherwise
 the given \code{default} value. If the default length does not match the number
 of rows, it is recycled accordingly and a warning is given, unless the
-default value had a length of 1.
+default value has a length of 1, in which case recycling is done silently.
 }
 \description{
-Search an element in an object and return a copy of it. If there is no
-element, return \code{NULL} or some default value.
+Try to access element and return some default value if not found.
+The \code{peek} function enables safe element access in cases where elements
+don't exist or the accessed objects might be empty without having to rely
+on additional if-statements.
+}
+\details{
+The \code{peekitem} function can be used to sample randomly (with replacement)
+from a collection of elements.
+
+\code{peek} tries to access specific values.
+
+\code{peekleft} peeks at first element of a \code{Deque}.
+
+\code{peekitem} randomly selects an element from the object.
+}
+\examples{
+# Deque
+d = deque(1, 2, 3)
+peek(d)
+peekleft(d)
+peek(deque())
+peek(deque(), default = 0)
+peekleft(deque(), default = 0)
+
+# Dict
+d = dict(a = 1, b = 1:3)
+peek(d, "b")
+peek(d, "x")
+peek(d, "x", default = 4:7)
+
+# dict.table
+dit = dict.table(a = 1:3, b = 4:6)
+peek(dit, "a")
+peek(dit, 1)
+peek(dit, 3)
+peek(dit, "x")
+peek(dit, "x", default = 0)
+
+# peek items randomly
+peekitem(d)
+peekitem(dit)
+}
+\seealso{
+\code{\link[=pop]{pop()}}, \code{\link[=popitem]{popitem()}}
 }

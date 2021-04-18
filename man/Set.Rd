@@ -19,6 +19,7 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \itemize{
 \item \href{#method-new}{\code{Set$new()}}
 \item \href{#method-add}{\code{Set$add()}}
+\item \href{#method-peekitem}{\code{Set$peekitem()}}
 \item \href{#method-replace}{\code{Set$replace()}}
 \item \href{#method-diff}{\code{Set$diff()}}
 \item \href{#method-intersect}{\code{Set$intersect()}}
@@ -43,7 +44,6 @@ it provides typical set operations such as \code{union} and \code{intersect}.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peekitem">}\href{../../container/html/Container.html#method-peekitem}{\code{container::Container$peekitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="popitem">}\href{../../container/html/Container.html#method-popitem}{\code{container::Container$popitem()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
@@ -90,6 +90,28 @@ Add element
 }
 \subsection{Returns}{
 the \code{Set} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-peekitem"></a>}}
+\if{latex}{\out{\hypertarget{method-peekitem}{}}}
+\subsection{Method \code{peekitem()}}{
+peek random item
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Set$peekitem(default = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{default}}{returned default value if \code{Set} is empty.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+returns an arbitrary element from the \code{Set}. This
+function can be used to sample randomly (with replacement) from
+a \code{Set}.
 }
 }
 \if{html}{\out{<hr>}}

@@ -34,28 +34,34 @@ Deque <- R6::R6Class("Deque",
         },
 
         #' @description Peek at last element on the right without removing it.
+        #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the right
-        peek = function() {
-            len <- self$length()
-            last <- if (len > 0) .subset2(private$elems, len) else NULL
-            last
+        peek = function(default = NULL) {
+            if (self$is_empty())
+                return(default)
+
+            .subset2(private$elems, self$length())
         },
 
         #' @description Peek at first element on the left without removing it.
+        #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the left
-        peekleft = function() {
-            len <- self$length()
-            first <- if (len > 0) .subset2(private$elems, 1) else NULL
-            first
+        peekleft = function(default = NULL) {
+            if (self$is_empty())
+                return(default)
+
+            .subset2(private$elems, 1)
         },
 
         #' @description
         #' Delete and return element from the right side of the [Deque()].
         #' @return element 'popped' from the right side of the [Deque()]
         pop = function() {
-            if (self$is_empty()) stop("pop at empty ", data.class(self))
+            if (self$is_empty())
+                stop("pop at empty ", data.class(self))
+
             last <- self$peek()
-            private$elems = utils::head(self$values(), n = -1)
+            self$delete(last)
             last
         },
 
@@ -63,9 +69,11 @@ Deque <- R6::R6Class("Deque",
         #' Delete and return element from the left side of the [Deque()].
         #' @return element 'popped' from the left side of the [Deque()]
         popleft = function() {
-            if (self$is_empty()) stop("popleft at empty ", data.class(self))
+            if (self$is_empty())
+                stop("popleft at empty ", data.class(self))
+
             first <- self$peekleft()
-            private$elems = utils::tail(self$values(), n = -1)
+            self$delete(first)
             first
         },
 

@@ -242,9 +242,16 @@ elements it contains.
 \subsection{Method \code{peekitem()}}{
 peek random item
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$peekitem()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$peekitem(default = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{default}}{returned default value if \code{Container} is empty.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 returns an arbitrary element from the \code{Container}. This
 function can be used to sample randomly (with replacement) from

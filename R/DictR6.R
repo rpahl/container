@@ -98,16 +98,20 @@ Dict <- R6::R6Class("Dict",
         #' @param default returned default value.
         #' @return value for `key` if `key` is in the `Dict` else `default`.
         peek = function(key, default = NULL) {
-            get0(key, envir = private$elems, ifnotfound = default)
+            if (!self$has(key))
+                return(default)
+
+            get(key, envir = private$elems)
         },
 
         #' @description peek random item
+        #' @param default returned default value if `Dict` is empty.
         #' @return returns an arbitrary element from the `Dict`. This
         #' function can be used to sample randomly (with replacement) from
         #' a `Dict`.
-        peekitem = function() {
+        peekitem = function(default = NULL) {
             if (self$is_empty())
-                return(NULL)
+                return(default)
 
             key <- sample(self$keys(), size = 1)
             self$peek(key)

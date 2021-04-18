@@ -85,9 +85,16 @@ the \code{Deque()} object.
 \subsection{Method \code{peek()}}{
 Peek at last element on the right without removing it.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Deque$peek()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Deque$peek(default = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{default}}{returned default value if \code{Deque} is empty.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 element 'peeked' on the right
 }
@@ -98,9 +105,16 @@ element 'peeked' on the right
 \subsection{Method \code{peekleft()}}{
 Peek at first element on the left without removing it.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Deque$peekleft()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Deque$peekleft(default = NULL)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{default}}{returned default value if \code{Deque} is empty.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 element 'peeked' on the left
 }

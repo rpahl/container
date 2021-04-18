@@ -104,7 +104,7 @@ add(d, a = 7:9)  # key 'a' already in Dict}
 
 d = dict(a = 1, b = 1:3)
 getval(d, "b")
-getval(dit, c("a", "b")) # or alternatively
+getval(dit, c("a", "b")) # or alternatively:
 getvalues(d, "a", "b")
 
 d = dict(a = 1)

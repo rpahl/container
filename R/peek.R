@@ -1,79 +1,144 @@
-#' Peek element of an object
+#' Peek at elements
 #'
-#' Search an element in an object and return a copy of it. If there is no
-#' element, return `NULL` or some default value.
+#' Try to access element and return some default value if not found.
+#' The `peek` function basically enables safe element access in cases where
+#' elements don't exist or the accessed objects is empty, which otherwise
+#' would require some additional if-statements to catch these cases manually.
+#' The `peekitem` function can be used to sample randomly (with replacement)
+#' from a collection of elements.
+#' @details
+#' `peek` tries to access specific values.
+#'
+#' `peekleft` peeks at first element of a `Deque`.
+#'
+#' `peekitem` randomly selects an element from the object.
+#'
 #' @param x any `R` object.
+#' @param default the value that is returned if the intended element does not
+#' exist.
 #' @param ... additional arguments to be passed to or from methods.
+#' @param default value to be returned if peeked value does not exist.
+#' @seealso [pop()], [popitem()]
 #' @export
 peek <- function(x, ...) UseMethod("peek")
 
 #' @rdname peek
-#' @return For `Deque` the last element at the right side of the deque.
 #' @export
-peek.Deque <- function(x) x$peek()
+peekleft <- function(x, ...) UseMethod("peekleft")
 
 #' @rdname peek
-#' @param key `character` key of the value to peek.
-#' @param default `ANY` default value to return if `key` not in the dictionary.
-#' @return For `Dict` if `key` does exists, the associated value is returned
+#' @export
+peekitem <- function(x, ...) UseMethod("peekitem")
+
+
+#' @rdname peek
+#' @return For `Deque` the first (`peekleft`) or last (`peek`) element.
+#' @export
+#' @examples
+#' # Deque
+#' d = deque(1, 2, 3)
+#' peek(d)
+#' peekleft(d)
+#' peek(deque())
+#' peek(deque(), default = 0)
+#' peekleft(deque(), default = 0)
+peek.Deque <- function(x, default = NULL) x$peek(default)
+
+#' @rdname peek
+#' @export
+peekleft.Deque <- function(x, default = NULL) x$peekleft(default)
+
+
+#' @name peek.Deque
+#' @rdname DequeS3
+#' @usage
+#' peek(x)
+#' peekleft(x)
+#' @details
+#' * `peek(x, default = NULL)` peek at last element. If `x` is empty, return
+#' `default`.
+#' * `peekleft(x, default = NULL)` peek at first element. If `x` is empty,
+#' return `default`.
+#' @examples
+#'
+#' d = deque(1, 2, 3)
+#' peek(d)
+#' peekleft(d)
+#' peek(deque())
+#' peek(deque(), default = 0)
+#' peekleft(deque(), default = 0)
+NULL
+
+
+#' @rdname peek
+#' @param key `character` name of the value to peek.
+#' @return For `Dict`, returns the associated value if `key` does exists,
 #' otherwise the given `default` value.
 #' @export
-peek.Dict <- function(x, key, default = NULL) x$peek(key, default)
-
-#' @rdname peek
-#' @param column `character` name or `numeric` index of column.
-#' @return For `dict.table` returns the column if it does exist otherwise
-#' the given `default` value. If the default length does not match the number
-#' of rows, it is recycled accordingly and a warning is given, unless the
-#' default value had a length of 1.
-#' @export
-peek.dict.table <- function(x, column, default = NULL)
+#' @examples
+#'
+#' # Dict
+#' d = dict(a = 1, b = 1:3)
+#' peek(d, "b")
+#' peek(d, "x")
+#' peek(d, "x", default = 4:7)
+peek.Dict <- function(x, key, default = NULL)
 {
-    if (has(x, column)) {
-        as.list(x)[[column]]
-    } else {
-        if (length(default) > 0 && length(default) != nrow(x)) {
-            if (length(default) != 1) {
-                warning("length of 'default' value did not match number ",
-                        "of rows and therefore was recycled")
-            }
-            default = rep_len(default, length.out = nrow(x))
-        }
-        default
-    }
+    x$peek(key, default)
 }
 
 
-
-#' Peek element on left side of an object
+#' @rdname peek
+#' @return For `dict.table`, returns the column named `key` if it exist otherwise
+#' the given `default` value. If the default length does not match the number
+#' of rows, it is recycled accordingly and a warning is given, unless the
+#' default value has a length of 1, in which case recycling is done silently.
+#' @export
+#' @examples
 #'
-#' Search an element in an object from left to right and return a copy of the
-#' first occurence.  If there is no element, return `NULL` or some default value.
-#' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
+#' # dict.table
+#' dit = dict.table(a = 1:3, b = 4:6)
+#' peek(dit, "a")
+#' peek(dit, 1)
+#' peek(dit, 3)
+#' peek(dit, "x")
+#' peek(dit, "x", default = 0)
+peek.dict.table <- function(x, key, default = NULL)
+{
+    if (has(x, key))
+        return(.subset2(x, key))
+
+    if (length(default) && length(default) != nrow(x)) {
+        if (length(default) != 1)
+            warning("length of 'default' value (", length(default), ") ",
+                    "did not match number of rows (", nrow(x), ") ",
+                    "and therefore was recycled")
+
+        default = rep_len(default, length.out = nrow(x))
+    }
+    default
+}
+
+
+#' @rdname peek
 #' @export
-peekleft <- function(x) UseMethod("peekleft")
-
-#' @rdname peekleft
-#' @return For `Deque` the first element at the left side of the deque.
-#' @export
-peekleft.Deque <- function(x) x$peekleft()
-
-
-
-#' Peek random element
+#' @examples
 #'
-#' Randomly select an element from an object and return a copy of it.
-#' If there is no element, return `NULL` or some default value.
-#' This function can be used to sample randomly (with replacement) from a
-#' collection of elements.
-#' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
-#' @export
-peekitem <- function(x) UseMethod("peekitem")
+#' # peek items randomly
+#' peekitem(d)
+peekitem.Container <- function(x, default = NULL) x$peekitem(default)
 
-#' @rdname peekitem
-#' @return For `Container` a randomly peeked element is returned.
+
+#' @rdname peek
 #' @export
-peekitem.Container <- function(x) x$peekitem()
+#' @examples
+#' peekitem(dit)
+peekitem.dict.table <- function(x, default = NULL)
+{
+    if (is_empty(x))
+        return(default)
+
+    key <- sample(names(x), size = 1)
+    peek(x, key)
+}
 

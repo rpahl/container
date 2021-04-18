@@ -50,6 +50,19 @@ Set <- R6::R6Class("Set",
             self
         },
 
+        #' @description peek random item
+        #' @param default returned default value if `Set` is empty.
+        #' @return returns an arbitrary element from the `Set`. This
+        #' function can be used to sample randomly (with replacement) from
+        #' a `Set`.
+        peekitem = function(default = NULL) {
+            if (self$is_empty())
+                return(default)
+
+            pos <- sample(seq_along(private$elems), size = 1)
+            .subset2(private$elems, pos)[[1]]
+        },
+
         #' @description Search for occurence of `elem` in the `Set` and
         #' replace it by `new`. If `elem` does not exist, an error is
         #' signaled, unless `add` was set to `TRUE`, in which case `new` is

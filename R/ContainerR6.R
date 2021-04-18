@@ -149,13 +149,14 @@ Container <- R6::R6Class("Container",
         length = function() length(private$elems),
 
         #' @description peek random item
+        #' @param default returned default value if `Container` is empty.
         #' @return returns an arbitrary element from the `Container`. This
         #' function can be used to sample randomly (with replacement) from
         #' a `Container`.
-        peekitem = function() {
-            if (self$is_empty()) {
-                return(NULL)
-            }
+        peekitem = function(default = NULL) {
+            if (self$is_empty())
+                return(default)
+
             pos <- sample(seq_along(private$elems), size = 1)
             .subset2(private$elems, pos)
         },
@@ -165,13 +166,12 @@ Container <- R6::R6Class("Container",
         #' `Container`. This function can be used to destructively iterate
         #'  over a `Container` as often used in set algorithms.
         popitem = function() {
-            if (self$is_empty()) {
+            if (self$is_empty())
                 stop("popitem at empty ", data.class(self))
-            }
-            pos <- sample(seq_along(private$elems), size = 1)
-            elem <- .subset2(private$elems, pos)
-            private$elems <- .subset(private$elems, -pos)
-            elem
+
+            item <- self$peekitem()
+            self$delete(item)
+            item
         },
 
         #' @description Print object representation
