@@ -5,7 +5,7 @@
 #' methods with some of them being overridden to account for the associative
 #' key-value pair semantic.
 #' @details For a full list of all dict methods see [Dict()].
-#' @param ... initial elements put into the `Dict`.
+#' @param ... elements put into the `Dict`.
 #' @param x `R` object of `ANY` type for [as.dict()] and [is.dict()]
 #' or of class `Dict` for the `S3` methods.
 #' @seealso See [container()] for all inherited methods. For the full class

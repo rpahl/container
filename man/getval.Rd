@@ -31,5 +31,13 @@ Try to access element and signal an error if not found.
 }
 \examples{
 
+d = dict(a = 1, b = 1:3)
+getval(d, "b")
+getval(d, c("a", "b"))
+getvalues(d, "a", "b")
 
+dit = dict.table(a = 1:3, b = 4:6)
+getval(dit, "b")
+getval(dit, c("a", "b")) # or
+getvalues(dit, "a", "b")
 }

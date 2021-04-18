@@ -63,14 +63,14 @@ replace_(x, key, value, add = FALSE)
 \arguments{
 \item{x}{any \code{R} object or a \code{dict.table} object.}
 
-\item{...}{initial elements of the form \code{key = value} to be put into the
+\item{...}{elements of the form \code{key = value} to be put into the
 \code{dict.table} and/or additional arguments to be passed to the
-\code{\link[data.table:data.table]{data.table::data.table()}} constructor. Note that in contrast to
-\code{\link[=data.table]{data.table()}}, \code{\link[=dict.table]{dict.table()}} does not allow duplicated keys and therefore
-always is initialized as \code{data.table(..., check.names = TRUE)}.}
+\code{\link[data.table:data.table]{data.table::data.table()}} constructor.}
 
 \item{copy}{if \code{TRUE} creates a copy of the \code{data.table} object otherwise
 works on the passed object by reference.}
+
+\item{key}{\code{character} or \code{numeric} vector of column names or indices}
 }
 \description{
 The \code{\link[=dict.table]{dict.table()}} is a mix of a dictionary and a
@@ -110,7 +110,7 @@ signaled.
 }
 
 \itemize{
-\item \code{getval(x, key)} get value at column(s) specified via \code{key}.
+\item \code{getval(x, key)} get value(s) at column(s) specified via \code{key}.
 If a column does not exist, an error is given.
 For a single column the raw column vector is
 returned, otherwise a new \code{dict.table} object containing all requested columns.
@@ -136,6 +136,9 @@ returned, otherwise a new \code{dict.table} object containing all requested colu
 values at column \code{key}. If \code{key} does not exist, an error is given unless
 \code{add} was set to \code{TRUE}.
 }
+}
+\note{
+In contrast to \code{\link[=data.table]{data.table()}}, \code{\link[=dict.table]{dict.table()}} does not allow duplicated keys.
 }
 \examples{
 
@@ -221,6 +224,10 @@ rbind(dit, dit)
 dat = dict.table(a = 3:4, b = 3:4)
 dit.dat = rbind(dit, dat)
 
+dit = dict.table(a = 1:3, b = 4:6)
+getval(dit, "b")
+getval(dit, c("a", "b"))
+getvalues(dit, "a", "b")
 
 
 dit = dict.table(a = 1, b = 2)

@@ -28,12 +28,11 @@
 #'
 #' As with [Dict()] objects, it provides reference semantics so that changes
 #' like insertion and deletion of elements are done on the original object.
-#' @param ... initial elements of the form `key = value` to be put into the
+#' @param ... elements of the form `key = value` to be put into the
 #' `dict.table` and/or additional arguments to be passed to the
-#' [data.table::data.table()] constructor. Note that in contrast to
-#' [data.table()], [dict.table()] does not allow duplicated keys and therefore
-#' always is initialized as `data.table(..., check.names = TRUE)`.
+#' [data.table::data.table()] constructor.
 #' @param x any `R` object or a `dict.table` object.
+#' @note In contrast to [data.table()], [dict.table()] does not allow duplicated keys.
 #' @name dict.table
 #' @import data.table
 #' @seealso [dict()], [data.table::data.table()]
