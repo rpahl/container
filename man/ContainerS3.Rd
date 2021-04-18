@@ -165,15 +165,17 @@ Elements that don't exist, are ignored.
 }
 
 \itemize{
-\item \code{getval(x, key)} get value at \code{key}. If one of the \code{key}s does
+\item \code{getval(x, key)} retrieves value at \code{key}. If a \code{key}s does
 not exist, an error is given. For a single key the raw value associated with
 the key is returned, otherwise a new \code{dict} object containing all requested
 key-value pairs.
 }
 
 \itemize{
-\item \code{getvalues(key)} retrieve value at \code{key}. If \code{key} does not exist, an error
-is signaled.
+\item \code{getvalues(x, ...)} retrieve values at the given keys. If a key
+does not exist, an error is given. For a single key the raw value associated
+with the key is returned, otherwise a new \code{dict} object containing all
+requested key-value pairs.
 }
 
 \itemize{

@@ -35,7 +35,7 @@ getval.Dict <- function(x, key)
 #' @usage
 #' getval(x, key)
 #' @details
-#' * `getval(x, key)` get value at `key`. If one of the `key`s does
+#' * `getval(x, key)` retrieves value at `key`. If a `key`s does
 #' not exist, an error is given. For a single key the raw value associated with
 #' the key is returned, otherwise a new `dict` object containing all requested
 #' key-value pairs.
@@ -80,8 +80,9 @@ getval.dict.table <- function(x, key)
 #' @usage
 #' getval(x, key)
 #' @details
-#' * `getval(x, key)` get value at column(s) `key`. If one of the columns dont
-#' exist, an error is given. For a single key the raw column vector is
+#' * `getval(x, key)` get value at column(s) specified via `key`.
+#' If a column does not exist, an error is given.
+#' For a single column the raw column vector is
 #' returned, otherwise a new `dict.table` object containing all requested columns.
 #' @examples
 #'

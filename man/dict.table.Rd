@@ -110,14 +110,17 @@ signaled.
 }
 
 \itemize{
-\item \code{getval(x, key)} get value at column(s) \code{key}. If one of the columns dont
-exist, an error is given. For a single key the raw column vector is
+\item \code{getval(x, key)} get value at column(s) specified via \code{key}.
+If a column does not exist, an error is given.
+For a single column the raw column vector is
 returned, otherwise a new \code{dict.table} object containing all requested columns.
 }
 
 \itemize{
-\item \code{getvalues(x, column)} get value at column. If the column does not exist, an
-error is given.
+\item \code{getvales(x, ...)} retrieve values at specified columns.
+If a column does not exist, an error is given.
+For a single column the raw column vector is
+returned, otherwise a new \code{dict.table} object containing all requested columns.
 }
 
 \itemize{
