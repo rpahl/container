@@ -100,20 +100,3 @@ pop.dict.table <- function(x, column)
 }
 
 
-#' @rdname pop
-#' @export
-#' @return For `Container` a randomly popped element is returned.
-#' @export
-popitem.Container <- function(x) x$popitem()
-
-#' @rdname pop
-#' @export
-popitem.dict.table <- function(x)
-{
-    if (is_empty(x)) {
-        stop("popitem at empty ", data.class(x))
-    }
-    column <- sample(names(x), 1)
-    pop(x, column)
-}
-

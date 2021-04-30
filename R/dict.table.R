@@ -33,7 +33,6 @@
 #' [data.table::data.table()] constructor.
 #' @param x any `R` object or a `dict.table` object.
 #' @note In contrast to [data.table()], [dict.table()] does not allow duplicated keys.
-#' @name dict.table
 #' @import data.table
 #' @seealso [dict()], [data.table::data.table()]
 #' @export

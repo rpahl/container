@@ -1,3 +1,5 @@
+ee = expect_equal
+
 # ------------------
 # peekitem.Container
 # ------------------

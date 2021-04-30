@@ -51,6 +51,7 @@ discard(x, ...)
 discard_(x, ...)
 
 getval(x, key)
+getvalues(x, ...)
 
 has(x, column)
 

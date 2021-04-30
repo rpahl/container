@@ -17,7 +17,7 @@ expect_error(getval(dict(), "x"), "key 'x' not in Dict")
 # getvalues.Dict
 # --------------
 d = dict(a = 1, b = 2)
-ee(getvalues(d, "a"), 1)
+ee(getvalues(d, "a"), dict(a = 1))
 ee(getvalues(d, "a", "b"), d)
 
 # Works also for duplicated keys
@@ -45,11 +45,11 @@ expect_error(getval(d, "x"), "column 'x' not in dict.table")
 expect_error(getval(dict.table(), "x"), "column 'x' not in dict.table")
 
 
-# -----------------
-# getval.dict.table
-# -----------------
+# --------------------
+# getvalues.dict.table
+# --------------------
 d = dict.table(a = 1:2, b = 2:1)
-ee(getvalues(d, "a"), 1:2)
+ee(getvalues(d, "a"), dict.table(a = 1:2))
 ee(getvalues(d, "a", "b"), d)
 
 # Works also for duplicated keys

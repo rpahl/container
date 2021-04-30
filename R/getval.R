@@ -2,7 +2,7 @@
 #'
 #' @description Try to access elements and signal errors for missing elements.
 #' @param x any `R` object.
-#' @param key one or more indices to be accessed. For `Dict` objects keys
+#' @param key one or more indices to be accessed. For `Dict` objects, keys
 #' are of type `character` while they can be either `character` or `numeric` for
 #' `dict.table` objects.
 #' @return If the `key` is of length one, the raw value associated with the
@@ -42,7 +42,13 @@ getval.Dict <- function(x, key)
 #' @export
 getvalues.Dict <- function(x, ...)
 {
-    getval.Dict(x, unlist(list(...)))
+    keys = unlist(list(...))
+
+    d = dict()
+    for (k in unique(keys))
+        d$add(k, x$get(k))
+
+    d
 }
 
 
@@ -51,6 +57,7 @@ getvalues.Dict <- function(x, ...)
 #' @param key `character` single key string or vector of keys
 #' @usage
 #' getval(x, key)
+#' getvalues(x, ...)
 #' @details
 #' * `getval(x, key)` retrieves value at `key`, which can be specified as one ore
 #' more character values. If a `key` does not exist, an error is given.
@@ -58,7 +65,8 @@ getvalues.Dict <- function(x, ...)
 #' the key is returned, otherwise a new `dict` object containing all requested
 #' key-value pairs.
 #' * `getvalues(x, ...)` is a convenience version of `getval(x, key)` enabling
-#' to pass several keys separated by commas.
+#' to pass several keys separated by commas. In contrast to `getval`, it always
+#' returns a `Dict` object, regardless whether one or more keys were specified.
 #' @examples
 #'
 #' d = dict(a = 1, b = 1:3)
@@ -108,7 +116,19 @@ getval.dict.table <- function(x, key)
 #' @export
 getvalues.dict.table <- function(x, ...)
 {
-    getval.dict.table(x, unlist(list(...)))
+    keys = unlist(list(...))
+
+    d = dict.table()
+
+    for (k in unique(keys)) {
+        val = getval(x, k)
+        if (is.numeric(k))
+            k = colnames(x)[k]
+
+        replace_.dict.table(d, k, val, add = TRUE)
+    }
+
+    d
 }
 
 
@@ -118,13 +138,16 @@ getvalues.dict.table <- function(x, ...)
 #' @param key `character` or `numeric` vector of column names or indices
 #' @usage
 #' getval(x, key)
+#' getvalues(x, ...)
 #' @details
 #' * `getval(x, key)` get value(s) at column(s) specified via `key`.
 #' If a column does not exist, an error is given.
 #' For a single column the raw column vector is
 #' returned, otherwise a new `dict.table` object containing all requested columns.
 #' * `getvalues(x, ...)` is a convenience version of `getval(x, key)` enabling
-#' to pass several keys (i.e. column names) separated by commas.
+#' to pass several keys (i.e. column names) separated by commas. In contrast to
+#' `getval`, it always returns a `dict.table` object, regardless whether one or
+#' more keys were specified.
 #' @examples
 #'
 #' dit = dict.table(a = 1:3, b = 4:6)

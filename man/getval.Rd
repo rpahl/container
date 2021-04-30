@@ -27,7 +27,7 @@ getvalues(x, ...)
 \item{...}{keys or indices to be accessed or additional arguments to be
 passed to or from methods.}
 
-\item{key}{one or more indices to be accessed. For \code{Dict} objects keys
+\item{key}{one or more indices to be accessed. For \code{Dict} objects, keys
 are of type \code{character} while they can be either \code{character} or \code{numeric} for
 \code{dict.table} objects.}
 }

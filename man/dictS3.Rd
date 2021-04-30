@@ -22,6 +22,7 @@ add(x, ...)
 add_(x, ...)
 
 getval(x, key)
+getvalues(x, ...)
 
 peek(x, key, default)
 
