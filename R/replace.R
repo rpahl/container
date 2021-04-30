@@ -2,7 +2,7 @@
 #'
 #' @description Try to find and replace elements and signal an error if not
 #' found, unless it is stated to explicitly add the element (see option `add`).
-#' @param x any `R` object.
+#' @param .x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
 #' @param add `logical` if FALSE (default) and element (or key) was not found,
 #' an error is given. In contrast, if set to `TRUE` the new element is added
@@ -10,16 +10,16 @@
 #' just added as a new element.
 #' @details `replace` uses copy semantics while `replace_` works by reference.
 #' @export
-replace <- function(x, ...) UseMethod("replace")
+replace <- function(.x, ...) UseMethod("replace")
 
 #' @rdname replace
 #' @export
-replace_ <- function(x, ...) UseMethod("replace_")
+replace_ <- function(.x, ...) UseMethod("replace_")
 
 #' @export
-replace.default <- function(x, ...)
+replace.default <- function(.x, ...)
 {
-    base::replace(x, ...)
+    base::replace(.x, ...)
 }
 
 
@@ -38,20 +38,20 @@ replace.default <- function(x, ...)
 #' replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 #'
 #' @export
-replace.Container <- function(x, old, new, add = FALSE)
+replace.Container <- function(.x, old, new, add = FALSE)
 {
-    replace_(x$clone(deep = TRUE), old, new, add)
+    replace_(.x$clone(deep = TRUE), old, new, add)
 }
 
 #' @name replace.Container
 #' @rdname ContainerS3
 #' @usage
-#' replace(x, old, new, add = FALSE)
-#' replace_(x, old, new, add = FALSE)
+#' replace(.x, old, new, add = FALSE)
+#' replace_(.x, old, new, add = FALSE)
 #' @param old old element to be found and replaced.
 #' @param new the new element replacing the old one.
 #' @details
-#' * `replace(x, old, new, add = FALSE)` and `replace_(x, ...)` try to find
+#' * `replace(.x, old, new, add = FALSE)` and `replace_(.x, ...)` try to find
 #' element `old` and replace it with element `new`. If `old` does not exist,
 #' an error is raised, unless `add` was set to `TRUE`.
 #' @examples
@@ -66,9 +66,9 @@ NULL
 
 #' @rdname replace
 #' @export
-replace_.Container <- function(x, old, new, add = FALSE)
+replace_.Container <- function(.x, old, new, add = FALSE)
 {
-    x$replace(old, new, add = add)
+    .x$replace(old, new, add = add)
 }
 
 
@@ -85,26 +85,26 @@ replace_.Container <- function(x, old, new, add = FALSE)
 #' \dontrun{
 #' replace(d, "b", 2)              # key 'b' not in Dict}
 #' replace(d, "b", 2, add = TRUE)  # ok, adds value
-replace.Dict <- function(x, key, value, add = FALSE)
+replace.Dict <- function(.x, key, value, add = FALSE)
 {
-    replace_(x$clone(deep = TRUE), key, value, add)
+    replace_(.x$clone(deep = TRUE), key, value, add)
 }
 
 #' @rdname replace
 #' @export
-replace_.Dict <- function(x, key, value, add = FALSE)
+replace_.Dict <- function(.x, key, value, add = FALSE)
 {
-    x$replace(key, value, add)
+    .x$replace(key, value, add)
 }
 
 
 #' @name replace.Dict
 #' @rdname DictS3
 #' @usage
-#' replace(x, key, value, add = FALSE)
-#' replace_(x, key, value, add = FALSE)
+#' replace(.x, key, value, add = FALSE)
+#' replace_(.x, key, value, add = FALSE)
 #' @details
-#' * `replace(x, key, value, add = FALSE)` and `replace_(x, ...)` replace value
+#' * `replace(.x, key, value, add = FALSE)` and `replace_(.x, ...)` replace value
 #' at `key`. If `key` does not exist, an error is given unless `add` was set to
 #' `TRUE`.
 #' @examples
@@ -128,36 +128,36 @@ NULL
 #' \dontrun{
 #' replace(dit, "b", 4:6)               # column 'b' not in dict.table}
 #' replace(dit, "b", 4:6, add = TRUE)   # ok, adds value
-replace.dict.table <- function(x, key, value, add = FALSE)
+replace.dict.table <- function(.x, key, value, add = FALSE)
 {
-    replace_(copy(x), key, value, add)
+    replace_(copy(.x), key, value, add)
 }
 
 #' @rdname replace
 #' @export
-replace_.dict.table <- function(x, key, value, add = FALSE)
+replace_.dict.table <- function(.x, key, value, add = FALSE)
 {
-    if (!add && !has(x, key)) {
+    if (!add && !has(.x, key)) {
         if (is.character(key))
-            stop("column '", key, "' not in ", data.class(x), ". ",
+            stop("column '", key, "' not in ", data.class(.x), ". ",
                  "To add the column, use 'add = TRUE'.")
         else
-            stop(key, " is outside range [1, ncol = ", ncol(x), "]")
+            stop(key, " is outside range [1, ncol = ", ncol(.x), "]")
     }
 
     j <- if (is.numeric(key)) as.integer(key) else key
-    data.table::set(x, j = j, value = value)
+    data.table::set(.x, j = j, value = value)
 
-    x
+    .x
 }
 
 #' @name replace.dict.table
 #' @rdname dict.table
 #' @usage
-#' replace(x, key, value, add = FALSE)
-#' replace_(x, key, value, add = FALSE)
+#' replace(.x, key, value, add = FALSE)
+#' replace_(.x, key, value, add = FALSE)
 #' @details
-#' * `replace(x, key, value, add = FALSE)` and `replace_(x, ...)` replace
+#' * `replace(.x, key, value, add = FALSE)` and `replace_(.x, ...)` replace
 #' values at column `key`. If `key` does not exist, an error is given unless
 #' `add` was set to `TRUE`.
 #' @examples

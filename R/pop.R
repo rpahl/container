@@ -12,19 +12,19 @@
 #'
 #' `popitem` randomly pops an element from the object.
 #'
-#' @param x any `R` object.
+#' @param .x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
 #' @seealso [peek()], [peekitem()]
 #' @export
-pop <- function(x, ...) UseMethod("pop")
+pop <- function(.x, ...) UseMethod("pop")
 
 #' @rdname pop
 #' @export
-popleft <- function(x, ...) UseMethod("popleft")
+popleft <- function(.x, ...) UseMethod("popleft")
 
 #' @rdname pop
 #' @export
-popitem <- function(x, ...) UseMethod("popitem")
+popitem <- function(.x, ...) UseMethod("popitem")
 
 
 #' @rdname pop
@@ -39,20 +39,20 @@ popitem <- function(x, ...) UseMethod("popitem")
 #'
 #' \dontrun{
 #' pop(deque())  # pop at empty Deque}
-pop.Deque <- function(x) x$pop()
+pop.Deque <- function(.x) .x$pop()
 
 #' @rdname pop
 #' @export
-popleft.Deque <- function(x) x$popleft()
+popleft.Deque <- function(.x) .x$popleft()
 
 #' @name pop.Deque
 #' @rdname DequeS3
 #' @usage
-#' pop(x)
-#' popleft(x)
+#' pop(.x)
+#' popleft(.x)
 #' @details
-#' * `pop(x)` pop last element. If `x` is empty, an error is given.
-#' * `popleft(x)` pop first element. If `x` is empty, an error is given.
+#' * `pop(.x)` pop last element. If `.x` is empty, an error is given.
+#' * `popleft(.x)` pop first element. If `.x` is empty, an error is given.
 #' @examples
 #' d = deque(1, 2, 3)
 #' pop(d)
@@ -78,7 +78,7 @@ NULL
 #'
 #' \dontrun{
 #' pop(d, "x")  # key 'x' not in Dict}
-pop.Dict <- function(x, key) x$pop(key)
+pop.Dict <- function(.x, key) .x$pop(key)
 
 #' @rdname pop
 #' @return For `dict.table`, returns the column named `key` after it was
@@ -92,10 +92,10 @@ pop.Dict <- function(x, key) x$pop(key)
 #' print(dit)
 #' \dontrun{
 #' pop(dit, "x")  # Column 'x' not in dict.table}
-pop.dict.table <- function(x, column)
+pop.dict.table <- function(.x, column)
 {
-    elem <- peek(x, column)
-    delete_(x, column)
+    elem <- peek(.x, column)
+    delete_(.x, column)
     elem
 }
 

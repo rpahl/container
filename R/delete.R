@@ -2,17 +2,17 @@
 #'
 #' Search and remove elements from an object. If the element is not found,
 #' an error is signaled.
-#' @param x any `R` object.
+#' @param .x any `R` object.
 #' @param ... elements to be deleted. For `Container`, `Deque` and `Set`
 #' objects these will be elements contained in the objects. For `Dict` these
 #' are key names. For `dict.table` these can be either column names or column
 #' indices or both.
 #' @export
-delete <- function(x, ...) UseMethod("delete")
+delete <- function(.x, ...) UseMethod("delete")
 
 #' @rdname delete
 #' @export
-delete_ <- function(x, ...) UseMethod("delete_")
+delete_ <- function(.x, ...) UseMethod("delete_")
 
 
 #' @rdname delete
@@ -28,17 +28,17 @@ delete_ <- function(x, ...) UseMethod("delete_")
 #' \dontrun{
 #' delete(s, "b")  # "b" is not in Set}
 #' discard(s, "b")  # ok - command is ignored
-delete.Container <- function(x, ...) {
-    (delete_(x$clone(deep = TRUE), ...))
+delete.Container <- function(.x, ...) {
+    (delete_(.x$clone(deep = TRUE), ...))
 }
 
 #' @name delete.Container
 #' @rdname ContainerS3
 #' @usage
-#' delete(x, ...)
-#' delete_(x, ...)
+#' delete(.x, ...)
+#' delete_(.x, ...)
 #' @details
-#' * `delete(x, ...)` and `delete_(x, ...)` find and remove elements.
+#' * `delete(.x, ...)` and `delete_(.x, ...)` find and remove elements.
 #' If one or more elements don't exist, an error is signaled.
 #' @examples
 #'
@@ -53,22 +53,22 @@ NULL
 
 #' @rdname delete
 #' @export
-delete_.Container <- function(x, ...)
+delete_.Container <- function(.x, ...)
 {
     elems = list(...)
     if (!length(elems))
-        return(x)
+        return(.x)
 
-    hasElements = sapply(elems, function(e) x$has(e))
+    hasElements = sapply(elems, function(e) .x$has(e))
 
     if (any(!hasElements)) {
         # Throw error by trying to delete first missing element
         element = elems[!hasElements][[1]]
-        x$delete(element)
+        .x$delete(element)
     }
 
-    lapply(elems, function(e) x$delete(e))
-    invisible(x)
+    lapply(elems, function(e) .x$delete(e))
+    invisible(.x)
 }
 
 
@@ -85,19 +85,19 @@ delete_.Container <- function(x, ...)
 #' \dontrun{
 #' delete(dit, "foo")   # Column 'foo' not in dict.table}
 #' discard(dit, "foo")  # ok - command is ignored
-delete.dict.table <- function(x, ...)
+delete.dict.table <- function(.x, ...)
 {
-    (delete_(clone(x), ...))
+    (delete_(clone(.x), ...))
 }
 
 
 #' @name delete.dict.table
 #' @rdname dict.table
 #' @usage
-#' delete(x, ...)
-#' delete_(x, ...)
+#' delete(.x, ...)
+#' delete_(.x, ...)
 #' @details
-#' * `delete(x, ...)` and `delete_(x, ...)` find and remove columns either by
+#' * `delete(.x, ...)` and `delete_(.x, ...)` find and remove columns either by
 #' name or index (or both). If one or more columns don't exist, an error is
 #' signaled.
 #' @export
@@ -110,23 +110,23 @@ delete.dict.table <- function(x, ...)
 #' \dontrun{
 #' delete(dit, "foo")   # Column 'foo' not in dict.table}
 #' discard(dit, "foo")  # ok - command is ignored
-delete_.dict.table <- function(x, ...)
+delete_.dict.table <- function(.x, ...)
 {
     columns = list(...)
     if (!length(columns))
-        return(x)
+        return(.x)
 
-    hasColumns = sapply(columns, function(column) has(x, column))
+    hasColumns = sapply(columns, function(column) has(.x, column))
 
     if (any(!hasColumns)) {
         firstMissing = columns[!hasColumns][[1]]
 
         stop("Column '", firstMissing, "'",
              ifelse(is.character(firstMissing),
-                    paste(" not in", data.class(x)),
-                    paste0(" out of range (ncol = ", ncol(x), ")")))
+                    paste(" not in", data.class(.x)),
+                    paste0(" out of range (ncol = ", ncol(.x), ")")))
     }
 
-    discard_(x, ...)
+    discard_(.x, ...)
 }
 

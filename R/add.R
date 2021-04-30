@@ -1,31 +1,31 @@
 #' Add elements
 #'
 #' Add elements to container-like objects.
-#' @param x an `R` object of the respective class.
+#' @param .x an `R` object of the respective class.
 #' @param ... elements to be added.
 #' @details Both `add` and `addleft` use copy semantics while `add_` and
 #' `addleft_` work by reference.
 #' @export
-add <- function(x, ...) UseMethod("add")
+add <- function(.x, ...) UseMethod("add")
 
 #' @rdname add
 #' @export
-add_ <- function(x, ...) UseMethod("add_")
+add_ <- function(.x, ...) UseMethod("add_")
 
 #' @rdname add
 #' @export
-addleft <- function(x, ...) UseMethod("addleft")
+addleft <- function(.x, ...) UseMethod("addleft")
 
 #' @rdname add
 #' @export
-addleft_ <- function(x, ...) UseMethod("addleft_")
+addleft_ <- function(.x, ...) UseMethod("addleft_")
 
 
 #' @rdname add
 #' @return For `Container`, an object of class `Container` (or one of the
 #' respective derived classes).
 #' @details
-#' If `x` is a `Container`, `Set` or `Deque` object, the elements being added
+#' If `.x` is a `Container`, `Set` or `Deque` object, the elements being added
 #' can (but must not) be named.
 #' @export
 #' @examples
@@ -35,18 +35,18 @@ addleft_ <- function(x, ...) UseMethod("addleft_")
 #'
 #' s = setnew(1)
 #' add(s, 1, 1, b = 2, "1", co = container(1, 1))
-add.Container <- function(x, ...)
+add.Container <- function(.x, ...)
 {
-    (add_(x$clone(deep = TRUE), ...))
+    (add_(.x$clone(deep = TRUE), ...))
 }
 
 #' @name add.Container
 #' @rdname ContainerS3
 #' @usage
-#' add(x, ...)
-#' add_(x, ...)
+#' add(.x, ...)
+#' add_(.x, ...)
 #' @details
-#' * `add(x, ...)` and `add_(x, ...)` add elements to `x`.
+#' * `add(.x, ...)` and `add_(.x, ...)` add elements to `.x`.
 #' @examples
 #'
 #' co = container(1)
@@ -58,34 +58,34 @@ NULL
 
 #' @rdname add
 #' @export
-add_.Container <- function(x, ...)
+add_.Container <- function(.x, ...)
 {
-    invisible(x$add(...))
+    invisible(.x$add(...))
 }
 
 
 #' @rdname add
 #' @return For `Deque`, an object of class `Deque` with the elements being
-#' added to the right or left (`addleft`) of `x`.
+#' added to the right or left (`addleft`) of `.x`.
 #' @export
 #' @examples
 #'
 #' d = deque(0)
 #' add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
 #' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
-addleft.Deque <- function(x, ...)
+addleft.Deque <- function(.x, ...)
 {
-    (addleft_(x$clone(deep = TRUE), ...))
+    (addleft_(.x$clone(deep = TRUE), ...))
 }
 
 #' @name addleft.Deque
 #' @rdname DequeS3
 #' @usage
-#' addleft(x, ...)
-#' addleft_(x, ...)
+#' addleft(.x, ...)
+#' addleft_(.x, ...)
 #' @details
-#' * `addleft(x, ...)` adds (possibly named) elements to left side of `x`.
-#' * `addleft_(x, ...)` same as `addleft(x, ...)` but adds by reference.
+#' * `addleft(.x, ...)` adds (possibly named) elements to left side of `.x`.
+#' * `addleft_(.x, ...)` same as `addleft(.x, ...)` but adds by reference.
 #' @examples
 #'
 #' d = deque(0)
@@ -95,16 +95,16 @@ NULL
 
 #' @rdname add
 #' @export
-addleft_.Deque <- function(x, ...)
+addleft_.Deque <- function(.x, ...)
 {
-    invisible(x$addleft(...))
+    invisible(.x$addleft(...))
 }
 
 
 #' @rdname add
 #' @return For `Dict`, an object of class `Dict`.
 #' @details
-#' If `x` is a `Dict` or `dict.table` object, all elements *must* be of the
+#' If `.x` is a `Dict` or `dict.table` object, all elements *must* be of the
 #' form `key = value`. If one of the keys already exists, an error is given.
 #' @export
 #' @examples
@@ -114,20 +114,20 @@ addleft_.Deque <- function(x, ...)
 #'
 #' \dontrun{
 #' add(d, a = 7:9)  # key 'a' already in Dict}
-add.Dict <- function(x, ...)
+add.Dict <- function(.x, ...)
 {
-    (add_(x$clone(deep = TRUE), ...))
+    (add_(.x$clone(deep = TRUE), ...))
 }
 
 #' @name add.Dict
 #' @rdname DictS3
 #' @usage
-#' add(x, ...)
-#' add_(x, ...)
+#' add(.x, ...)
+#' add_(.x, ...)
 #' @details
-#' * `add(x, ...)` adds `key = value` pairs to `x`. If one of the
+#' * `add(.x, ...)` adds `key = value` pairs to `.x`. If one of the
 #' keys already exists, an error is given.
-#' * `add_(x, ...)` same as `add(x, ...)` but adds by reference.
+#' * `add_(.x, ...)` same as `add(.x, ...)` but adds by reference.
 #' @examples
 #'
 #' d = dict(a = 1)
@@ -140,21 +140,21 @@ NULL
 
 #' @rdname add
 #' @export
-add_.Dict <- function(x, ...)
+add_.Dict <- function(.x, ...)
 {
     elems = list(...)
     if (length(elems) == 0)
-        return(x)
+        return(.x)
 
     elem_names = names(elems)
 
     verify_names(elem_names)
-    check_name_collision(names(x), elem_names)
+    check_name_collision(names(.x), elem_names)
 
     for (i in seq_along(elems))
-        x$add(elem_names[[i]], elems[[i]])
+        .x$add(elem_names[[i]], elems[[i]])
 
-    invisible(x)
+    invisible(.x)
 }
 
 
@@ -169,19 +169,19 @@ add_.Dict <- function(x, ...)
 #'
 #' \dontrun{
 #' add(dit, a = 7:9)  # column 'a' already exists}
-add.dict.table <- function(x, ...)
+add.dict.table <- function(.x, ...)
 {
-    (add_(copy(x), ...))
+    (add_(copy(.x), ...))
 }
 
 
 #' @name add.dict.table
 #' @rdname dict.table
 #' @usage
-#' add(x, ...)
-#' add_(x, ...)
+#' add(.x, ...)
+#' add_(.x, ...)
 #' @details
-#' * `add(x, ...)` and add_(x, ...) add columns to `x`. If the column name
+#' * `add(.x, ...)` and add_(.x, ...) add columns to `.x`. If the column name
 #' already exists, an error is given.
 #' @examples
 #'
@@ -203,20 +203,20 @@ NULL
 #' \dontrun{
 #' add(dit, a = 7:9)  # column 'a' already exists}
 #'
-add_.dict.table <- function(x, ...)
+add_.dict.table <- function(.x, ...)
 {
     elems = list(...)
     if (length(elems) == 0)
-        return(x)
+        return(.x)
 
     elem_names = names(elems)
 
     verify_names(elem_names)
-    check_name_collision(colnames(x), elem_names)
+    check_name_collision(colnames(.x), elem_names)
 
     for (i in seq_along(elems))
-        replace_.dict.table(x, elem_names[[i]], elems[[i]], add = TRUE)
+        replace_.dict.table(.x, elem_names[[i]], elems[[i]], add = TRUE)
 
-    invisible(x)
+    invisible(.x)
 }
 
