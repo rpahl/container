@@ -3,20 +3,15 @@
 \name{peek}
 \alias{peek}
 \alias{peekleft}
-\alias{peekitem}
 \alias{peek.Deque}
 \alias{peekleft.Deque}
 \alias{peek.Dict}
 \alias{peek.dict.table}
-\alias{peekitem.Container}
-\alias{peekitem.dict.table}
-\title{Peek at elements}
+\title{Peek at element}
 \usage{
 peek(x, ...)
 
 peekleft(x, ...)
-
-peekitem(x, ...)
 
 \method{peek}{Deque}(x, default = NULL)
 
@@ -25,13 +20,9 @@ peekitem(x, ...)
 \method{peek}{Dict}(x, key, default = NULL)
 
 \method{peek}{dict.table}(x, key, default = NULL)
-
-\method{peekitem}{Container}(x, default = NULL)
-
-\method{peekitem}{dict.table}(x, default = NULL)
 }
 \arguments{
-\item{x}{any \code{R} object.}
+\item{x}{an \code{R} object of the respective class.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 
@@ -52,19 +43,15 @@ default value has a length of 1, in which case recycling is done silently.
 }
 \description{
 Try to access element and return some default value if not found.
-The \code{peek} function enables safe element access in cases where elements
-don't exist or the accessed objects might be empty without having to rely
-on additional if-statements.
+The \code{peek} function basically enables safe element access in cases where
+elements don't exist or the accessed objects is empty, thereby freeing the
+user from additional effort (like if-statements) that would be required to
+catch these cases manually.
 }
 \details{
-The \code{peekitem} function can be used to sample randomly (with replacement)
-from a collection of elements.
-
 \code{peek} tries to access specific values.
 
 \code{peekleft} peeks at first element of a \code{Deque}.
-
-\code{peekitem} randomly selects an element from the object.
 }
 \examples{
 # Deque
@@ -88,11 +75,7 @@ peek(dit, 1)
 peek(dit, 3)
 peek(dit, "x")
 peek(dit, "x", default = 0)
-
-# peek items randomly
-peekitem(d)
-peekitem(dit)
 }
 \seealso{
-\code{\link[=pop]{pop()}}, \code{\link[=popitem]{popitem()}}
+\code{\link[=peekitem]{peekitem()}}, \code{\link[=pop]{pop()}}
 }

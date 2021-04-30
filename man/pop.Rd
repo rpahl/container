@@ -2,39 +2,92 @@
 % Please edit documentation in R/pop.R
 \name{pop}
 \alias{pop}
+\alias{popleft}
+\alias{popitem}
 \alias{pop.Deque}
+\alias{popleft.Deque}
 \alias{pop.Dict}
 \alias{pop.dict.table}
+\alias{popitem.Container}
+\alias{popitem.dict.table}
 \title{Pop element}
 \usage{
 pop(x, ...)
 
+popleft(x, ...)
+
+popitem(x, ...)
+
 \method{pop}{Deque}(x)
+
+\method{popleft}{Deque}(x)
 
 \method{pop}{Dict}(x, key)
 
 \method{pop}{dict.table}(x, column)
+
+\method{popitem}{Container}(x)
+
+\method{popitem}{dict.table}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{key}{\code{character} key of the value to pop. If \code{key} does exists,
+\item{key}{\code{character} name of the value to pop.
 the associated key-value pair is deleted and it's value returned.}
-
-\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
-For \code{Deque} the element from the right side of the deque after it
-was removed.
+For \code{Deque} the first (\code{popleft}) or last (\code{pop}) element of the
+deque after it was removed.
 
 For \code{Dict} the value associated with the key after the key-value
-pair was removed from the dict.
+pair was removed from the dict. If \code{key} is not found, an error is raised.
 
-For \code{dict.table} the column after it was removed from the dict.table.
+For \code{dict.table}, returns the column named \code{key} after it was
+removed from the dict.table. If column does not exist, an error is raised.
+
+For \code{Container} a randomly popped element is returned.
 }
 \description{
-Search and remove an element from an object and return a copy of the
-element. If the element is not found, signal an error.
+Search and return an element and remove it afterwards from the object.
+If the element is not found, signal an error.
+The \code{popitem} function can be used to sample randomly (without replacement)
+from a collection of elements and this way to destructively iterate over
+collections as often used in set algorithms.
+}
+\details{
+\code{pop} tries to access specific values.
+
+\code{popleft} pops first element of a \code{Deque}.
+
+\code{popitem} randomly pops an element from the object.
+}
+\examples{
+# Deque
+d = deque(1, 2, 3)
+pop(d)
+popleft(d)
+
+\dontrun{
+pop(deque())  # pop at empty Deque}
+
+# Dict
+d = dict(a = 1, b = 1:3)
+pop(d, "b")
+print(d)
+
+\dontrun{
+pop(d, "x")  # key 'x' not in Dict}
+
+# dict.table
+dit = dict.table(a = 1:3, b = 4:6)
+pop(dit, "a")
+print(dit)
+\dontrun{
+pop(dit, "x")  # Column 'x' not in dict.table}
+}
+\seealso{
+\code{\link[=peek]{peek()}}, \code{\link[=peekitem]{peekitem()}}
 }
