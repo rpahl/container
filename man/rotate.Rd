@@ -2,12 +2,18 @@
 % Please edit documentation in R/rotate.R
 \name{rotate}
 \alias{rotate}
+\alias{rotate_}
 \alias{rotate.Deque}
+\alias{rotate_.Deque}
 \title{Rotate elements}
 \usage{
 rotate(x, ...)
 
+rotate_(x, ...)
+
 \method{rotate}{Deque}(x, n = 1L)
+
+\method{rotate_}{Deque}(x, n = 1L)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -17,9 +23,18 @@ rotate(x, ...)
 \item{n}{\code{integer} number of steps to rotate}
 }
 \value{
-For \code{Deque} invisibly returns the \code{\link[=Deque]{Deque()}} object rotated in place.
+For \code{Deque} returns the rotated \code{\link[=Deque]{Deque()}} object.
 }
 \description{
 Rotate all elements \code{n} steps to the right. If n is
 negative, rotate to the left.
+}
+\details{
+While \code{rotate} uses copy semantics, \code{rotate_} works by reference,
+that is, rotates in place on the original object.
+}
+\examples{
+d = deque(1, 2, 3, 4)
+rotate(d)
+rotate(d, n = 2)
 }
