@@ -19,14 +19,14 @@ is.deque(x)
 
 \method{rev}{Deque}(x)
 
-addleft(x, ...)
-addleft_(x, ...)
+addleft(.x, ...)
+addleft_(.x, ...)
 
-peek(x, default)
-peekleft(x, default)
+peek(.x, default)
+peekleft(.x, default)
 
-pop(x)
-popleft(x)
+pop(.x)
+popleft(.x)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Deque}.}
@@ -67,20 +67,20 @@ returns the \code{\link[=Deque]{Deque()}} object.
 }
 
 \itemize{
-\item \code{addleft(x, ...)} adds (possibly named) elements to left side of \code{x}.
-\item \code{addleft_(x, ...)} same as \code{addleft(x, ...)} but adds by reference.
+\item \code{addleft(.x, ...)} adds (possibly named) elements to left side of \code{.x}.
+\item \code{addleft_(.x, ...)} same as \code{addleft(.x, ...)} but adds by reference.
 }
 
 \itemize{
-\item \code{peek(x, default = NULL)} peek at last element. If \code{x} is empty, return
+\item \code{peek(.x, default = NULL)} peek at last element. If \code{.x} is empty, return
 \code{default}.
-\item \code{peekleft(x, default = NULL)} peek at first element. If \code{x} is empty,
+\item \code{peekleft(.x, default = NULL)} peek at first element. If \code{.x} is empty,
 return \code{default}.
 }
 
 \itemize{
-\item \code{pop(x)} pop last element. If \code{x} is empty, an error is given.
-\item \code{popleft(x)} pop first element. If \code{x} is empty, an error is given.
+\item \code{pop(.x)} pop last element. If \code{.x} is empty, an error is given.
+\item \code{popleft(.x)} pop first element. If \code{.x} is empty, an error is given.
 }
 }
 \examples{

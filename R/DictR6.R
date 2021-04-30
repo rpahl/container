@@ -154,8 +154,7 @@ Dict <- R6::R6Class("Dict",
         #' @param new `character` new key name.
         #' @return the `Dict` object
         rename = function(old, new) {
-            if (length(old) != length(new))
-                stop("old and new must be of same length")
+            .rename_check_names(self, old, new)
 
             if (length(old) > 1) {
                 mapply(self$rename, old, new)
@@ -164,12 +163,6 @@ Dict <- R6::R6Class("Dict",
 
             if (identical(old, new))
                 return(self)
-
-            if (!self$has(old))
-                stop("key '", old, "' not found")
-
-            if (self$has(new))
-                stop("rename failed because '", new, "' exists already")
 
             self$add(key = new, value = self$get(old))
             self$delete(old)

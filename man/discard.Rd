@@ -8,18 +8,18 @@
 \alias{discard.dict.table}
 \title{Discard elements}
 \usage{
-discard(x, ...)
+discard(.x, ...)
 
-discard_(x, ...)
+discard_(.x, ...)
 
-\method{discard}{Container}(x, ...)
+\method{discard}{Container}(.x, ...)
 
-\method{discard_}{Container}(x, ...)
+\method{discard_}{Container}(.x, ...)
 
-\method{discard}{dict.table}(x, ...)
+\method{discard}{dict.table}(.x, ...)
 }
 \arguments{
-\item{x}{any \code{R} object.}
+\item{.x}{any \code{R} object.}
 
 \item{...}{elements to be discarded. For \code{Container}, \code{Deque} and \code{Set}
 objects these will be elements contained in the objects. For \code{Dict} these

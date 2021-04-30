@@ -11,24 +11,24 @@
 \alias{replace_.dict.table}
 \title{Strict element replacement}
 \usage{
-replace(x, ...)
+replace(.x, ...)
 
-replace_(x, ...)
+replace_(.x, ...)
 
-\method{replace}{Container}(x, old, new, add = FALSE)
+\method{replace}{Container}(.x, old, new, add = FALSE)
 
-\method{replace_}{Container}(x, old, new, add = FALSE)
+\method{replace_}{Container}(.x, old, new, add = FALSE)
 
-\method{replace}{Dict}(x, key, value, add = FALSE)
+\method{replace}{Dict}(.x, key, value, add = FALSE)
 
-\method{replace_}{Dict}(x, key, value, add = FALSE)
+\method{replace_}{Dict}(.x, key, value, add = FALSE)
 
-\method{replace}{dict.table}(x, key, value, add = FALSE)
+\method{replace}{dict.table}(.x, key, value, add = FALSE)
 
-\method{replace_}{dict.table}(x, key, value, add = FALSE)
+\method{replace_}{dict.table}(.x, key, value, add = FALSE)
 }
 \arguments{
-\item{x}{any \code{R} object.}
+\item{.x}{any \code{R} object.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 

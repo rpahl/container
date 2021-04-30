@@ -6,14 +6,14 @@
 \alias{rename.dict.table}
 \title{Rename elements safely}
 \usage{
-rename(x, old, new, ...)
+rename(.x, old, new, ...)
 
-\method{rename}{Dict}(x, old, new)
+\method{rename}{Dict}(.x, old, new)
 
-\method{rename}{dict.table}(x, old, new)
+\method{rename}{dict.table}(.x, old, new, ...)
 }
 \arguments{
-\item{x}{any \code{R} object with names.}
+\item{.x}{any \code{R} object with names.}
 
 \item{old}{\code{character} vector of old names.}
 
@@ -25,11 +25,11 @@ rename(x, old, new, ...)
 For standard \code{R} vectors renames \code{old} to \code{new} and returns the
 renamed vector.
 
-For \code{Dict} renames key \code{old} to \code{new} in place and invisibly returns
-the \code{\link[=Dict]{Dict()}} object.
+For \code{Dict} renames key \code{old} to \code{new} in place (i.e. by reference)
+and invisibly returns the \code{\link[=Dict]{Dict()}} object.
 
-For \code{dict.table} renames key \code{old} to \code{new} in place and invisibly
-returns the \code{\link[=dict.table]{dict.table()}} object.
+For \code{dict.table} renames key \code{old} to \code{new} in place (i.e. by
+reference) and invisibly returns the \code{\link[=dict.table]{dict.table()}} object.
 }
 \description{
 Search for old name and replace it by new name. If either the
@@ -39,4 +39,14 @@ already existing name, an error is signaled.
 \details{
 The passed old and new names can be vectors but always must have
 the same length and must be unique to prevent double-renaming.
+}
+\examples{
+
+# Dict
+d = dict(a = 1, b = 2, c = 3)
+(rename(d, c("a", "b"), c("a1", "y")))
+
+# dict.table
+dit = dict.table(a = 1, b = 2, c = 3)
+(rename(dit, c("a", "b"), c("a1", "y")))
 }

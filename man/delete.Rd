@@ -8,18 +8,18 @@
 \alias{delete.dict.table}
 \title{Delete elements}
 \usage{
-delete(x, ...)
+delete(.x, ...)
 
-delete_(x, ...)
+delete_(.x, ...)
 
-\method{delete}{Container}(x, ...)
+\method{delete}{Container}(.x, ...)
 
-\method{delete_}{Container}(x, ...)
+\method{delete_}{Container}(.x, ...)
 
-\method{delete}{dict.table}(x, ...)
+\method{delete}{dict.table}(.x, ...)
 }
 \arguments{
-\item{x}{any \code{R} object.}
+\item{.x}{any \code{R} object.}
 
 \item{...}{elements to be deleted. For \code{Container}, \code{Deque} and \code{Set}
 objects these will be elements contained in the objects. For \code{Dict} these

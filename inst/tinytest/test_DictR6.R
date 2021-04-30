@@ -190,11 +190,12 @@ expect_error(d$popitem(), "popitem at empty Dict")
 # rename
 # ------
 d <- Dict$new(A = 1, B = 2)
-expect_error(d$rename(1, "C"), "key must be character")
-expect_error(d$rename("A", 1), "key must be character")
-expect_error(d$rename("A", c("C", "D")), "must be of same length")
-expect_error(d$rename("A", "B"), "rename failed because 'B' exists already")
-expect_error(d$rename("Z", "B"), "key 'Z' not found")
+expect_error(d$rename(1, "C"), "'old' must be character")
+expect_error(d$rename("A", 1), "'new' must be character")
+expect_error(d$rename("A", c("C", "D")),
+             "'old' and 'new' names must be of the same length")
+expect_error(d$rename("A", "B"), "key 'B' already in Dict")
+expect_error(d$rename("Z", "B"), "Items of 'old' not found in names: Z")
 
 vals = as.numeric(d$values())
 d$rename("A", "a")
@@ -210,8 +211,8 @@ d$rename(c("a", "B"), c("x", "y"))
 expect_equal(d$keys(), c("x", "y"))
 
 # Renaming same key multiple times is possible
-d$rename(c("x", "x2"), c("x2", "x3"))
-expect_equal(d$keys(), c("x3", "y"))
+expect_error(d$rename(c("x", "x2"), c("x2", "x3")),
+             "Items of 'old' not found in names: x2")
 
 
 # -------

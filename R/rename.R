@@ -1,3 +1,24 @@
+.rename_check_names = function(.x, old, new)
+{
+    if (!is.character(old)) stop("'old' must be character")
+    if (!is.character(new)) stop("'new' must be character")
+
+    if (length(old) != length(new))
+        stop("'old' and 'new' names must be of the same length")
+
+    if (any(duplicated(old)))
+        stop("'old' has duplicated names: ", toString(old[duplicated(old)]))
+
+    if (any(duplicated(new)))
+        stop("'new' has duplicated names: ", toString(new[duplicated(new)]))
+
+    if (any(!(hasName(.x, old))))
+        stop("Items of 'old' not found in names: ",
+             toString(Filter(old, f = function(name) !hasName(.x, name))))
+
+    invisible()
+}
+
 #' Rename elements safely
 #'
 #' @description Search for old name and replace it by new name. If either the
@@ -14,47 +35,68 @@
 #' @export
 rename <- function(.x, old, new, ...)
 {
-    if (!is.character(old)) stop("'old' must be character")
-    if (!is.character(new)) stop("'new' must be character")
-    if (length(old) != length(new)) {
-        stop("'old' and 'new' names must be of the same length")
-    }
-    if (any(duplicated(old))) {
-        stop("'old' has duplicated names: ", toString(old[duplicated(old)]))
-    }
-    if (any(duplicated(new))) {
-        stop("'new' has duplicated names: ", toString(new[duplicated(new)]))
-    }
-
+    .rename_check_names(.x, old, new)
     UseMethod("rename")
 }
 
 #' @rdname rename
-#' @return For `Dict` renames key `old` to `new` in place and invisibly returns
-#' the [Dict()] object.
+#' @return For `Dict` renames key `old` to `new` in place (i.e. by reference)
+#' and invisibly returns the [Dict()] object.
 #' @export
+#' @examples
+#'
+#' # Dict
+#' d = dict(a = 1, b = 2, c = 3)
+#' (rename(d, c("a", "b"), c("a1", "y")))
 rename.Dict <- function(.x, old, new) .x$rename(old, new)
 
+
+#' @name rename.Dict
+#' @rdname DictS3
+#' @usage
+#' * rename(.x, old, new)
+#' @details
+#' `rename(.x, old, new)` renames one or more keys from `old` to `new`.
+#' @examples
+#' d = dict(a = 1, b = 2, c = 3)
+#' (rename(d, c("a", "b"), c("a1", "y")))
+NULL
+
+
 #' @rdname rename
-#' @return For `dict.table` renames key `old` to `new` in place and invisibly
-#' returns the [dict.table()] object.
+#' @return For `dict.table` renames key `old` to `new` in place (i.e. by
+#' reference) and invisibly returns the [dict.table()] object.
 #' @export
-rename.dict.table <- function(.x, old, new)
+#' @examples
+#'
+#' # dict.table
+#' dit = dict.table(a = 1, b = 2, c = 3)
+#' (rename(dit, c("a", "b"), c("a1", "y")))
+rename.dict.table <- function(.x, old, new, ...)
 {
-    data.table::setnames(.x, old, new)
+    data.table::setnames(.x, old, new, ...)
 }
 
 
+#' @name rename.dict.table
+#' @rdname dict.table
+#' @usage
+#' * rename(.x, old, new)
+#' @details
+#' `rename(.x, old, new)` renames one or more columns from `old` to `new`.
+#' @examples
+#' dit = dict.table(a = 1, b = 2, c = 3)
+#' (rename(dit, c("a", "b"), c("a1", "y")))
+NULL
+
+
+
 #' @export
-rename.default <- function(.x, old, new)
+rename.default <- function(.x, old, new, ...)
 {
     if (!is.vector(.x)) {
         stop("no applicable method for 'rename' applied to an object ",
              "of class '", data.class(.x), "'")
-    }
-
-    if (!all(old %in% names(.x))) {
-        stop("name(s) not found: ", toString(old[!(old %in% names(.x))]))
     }
 
     pos <- match(old, names(.x))

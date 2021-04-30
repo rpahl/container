@@ -15,32 +15,32 @@
 \alias{add_.dict.table}
 \title{Add elements}
 \usage{
-add(x, ...)
+add(.x, ...)
 
-add_(x, ...)
+add_(.x, ...)
 
-addleft(x, ...)
+addleft(.x, ...)
 
-addleft_(x, ...)
+addleft_(.x, ...)
 
-\method{add}{Container}(x, ...)
+\method{add}{Container}(.x, ...)
 
-\method{add_}{Container}(x, ...)
+\method{add_}{Container}(.x, ...)
 
-\method{addleft}{Deque}(x, ...)
+\method{addleft}{Deque}(.x, ...)
 
-\method{addleft_}{Deque}(x, ...)
+\method{addleft_}{Deque}(.x, ...)
 
-\method{add}{Dict}(x, ...)
+\method{add}{Dict}(.x, ...)
 
-\method{add_}{Dict}(x, ...)
+\method{add_}{Dict}(.x, ...)
 
-\method{add}{dict.table}(x, ...)
+\method{add}{dict.table}(.x, ...)
 
-\method{add_}{dict.table}(x, ...)
+\method{add_}{dict.table}(.x, ...)
 }
 \arguments{
-\item{x}{an \code{R} object of the respective class.}
+\item{.x}{an \code{R} object of the respective class.}
 
 \item{...}{elements to be added.}
 }
@@ -49,7 +49,7 @@ For \code{Container}, an object of class \code{Container} (or one of the
 respective derived classes).
 
 For \code{Deque}, an object of class \code{Deque} with the elements being
-added to the right or left (\code{addleft}) of \code{x}.
+added to the right or left (\code{addleft}) of \code{.x}.
 
 For \code{Dict}, an object of class \code{Dict}.
 
@@ -62,10 +62,10 @@ Add elements to container-like objects.
 Both \code{add} and \code{addleft} use copy semantics while \code{add_} and
 \code{addleft_} work by reference.
 
-If \code{x} is a \code{Container}, \code{Set} or \code{Deque} object, the elements being added
+If \code{.x} is a \code{Container}, \code{Set} or \code{Deque} object, the elements being added
 can (but must not) be named.
 
-If \code{x} is a \code{Dict} or \code{dict.table} object, all elements \emph{must} be of the
+If \code{.x} is a \code{Dict} or \code{dict.table} object, all elements \emph{must} be of the
 form \code{key = value}. If one of the keys already exists, an error is given.
 }
 \examples{

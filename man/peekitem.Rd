@@ -6,14 +6,14 @@
 \alias{peekitem.dict.table}
 \title{Peek at random item}
 \usage{
-peekitem(x, ...)
+peekitem(.x, ...)
 
-\method{peekitem}{Container}(x, default = NULL)
+\method{peekitem}{Container}(.x, default = NULL)
 
-\method{peekitem}{dict.table}(x, default = NULL)
+\method{peekitem}{dict.table}(.x, default = NULL)
 }
 \arguments{
-\item{x}{an \code{R} object of the respective class.}
+\item{.x}{an \code{R} object of the respective class.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 

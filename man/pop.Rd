@@ -8,30 +8,24 @@
 \alias{popleft.Deque}
 \alias{pop.Dict}
 \alias{pop.dict.table}
-\alias{popitem.Container}
-\alias{popitem.dict.table}
 \title{Pop element}
 \usage{
-pop(x, ...)
+pop(.x, ...)
 
-popleft(x, ...)
+popleft(.x, ...)
 
-popitem(x, ...)
+popitem(.x, ...)
 
-\method{pop}{Deque}(x)
+\method{pop}{Deque}(.x)
 
-\method{popleft}{Deque}(x)
+\method{popleft}{Deque}(.x)
 
-\method{pop}{Dict}(x, key)
+\method{pop}{Dict}(.x, key)
 
-\method{pop}{dict.table}(x, column)
-
-\method{popitem}{Container}(x)
-
-\method{popitem}{dict.table}(x)
+\method{pop}{dict.table}(.x, column)
 }
 \arguments{
-\item{x}{any \code{R} object.}
+\item{.x}{any \code{R} object.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 
@@ -47,8 +41,6 @@ pair was removed from the dict. If \code{key} is not found, an error is raised.
 
 For \code{dict.table}, returns the column named \code{key} after it was
 removed from the dict.table. If column does not exist, an error is raised.
-
-For \code{Container} a randomly popped element is returned.
 }
 \description{
 Search and return an element and remove it afterwards from the object.
