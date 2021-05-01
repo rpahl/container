@@ -1,54 +1,56 @@
+ee = expect_equal
+
 # ---------
 # container
 # ---------
-expect_equal(container(), Container$new())
-expect_equal(container(NULL), Container$new(NULL))
-expect_equal(container(NA), Container$new(NA))
-expect_equal(container(numeric(0)), Container$new(numeric(0)))
-expect_equal(container(list()), Container$new(list()))
-expect_equal(container(1, 2, NULL), Container$new(1, 2, NULL))
+ee(container(), Container$new())
+ee(container(NULL), Container$new(NULL))
+ee(container(NA), Container$new(NA))
+ee(container(numeric(0)), Container$new(numeric(0)))
+ee(container(list()), Container$new(list()))
+ee(container(1, 2, NULL), Container$new(1, 2, NULL))
 co = container(1, 2)
-expect_equal(container(co), Container$new(co))
+ee(container(co), Container$new(co))
 
 # Ensure container objects are passed as copies as well
 coco = container(co)
-expect_equal(unpack(coco), 1:2)
+ee(unpack(coco), 1:2)
 co$add(3)
-expect_equal(unpack(coco), 1:2)
+ee(unpack(coco), 1:2)
 
 # ------------
 # as.container
 # ------------
-expect_equal(as.container(numeric()), container())
-expect_equal(as.container(NULL), container())
-expect_equal(as.container(list()), container())
-expect_equal(as.container(1), container(1))
-expect_equal(as.container(1:2), container(1, 2))
-expect_equal(as.container(container(1)), container(1))
+ee(as.container(numeric()), container())
+ee(as.container(NULL), container())
+ee(as.container(list()), container())
+ee(as.container(1), container(1))
+ee(as.container(1:2), container(1, 2))
+ee(as.container(container(1)), container(1))
 
 # container is created as copy from another container
 co = container(1, 2)
 co2 = as.container(co)
-expect_equal(co, co2)
+ee(co, co2)
 co$clear()
-expect_equal(length(co), 0)
-expect_equal(length(co2), 2)
+ee(length(co), 0)
+ee(length(co2), 2)
 
 # a data.frame can be converted to a container
 daf = data.frame(A = 1:2, B = 3:4)
-expect_equal(as.list(as.container(daf)), as.list(daf))
+ee(as.list(as.container(daf)), as.list(daf))
 
 # a set can be converted to a container
 s = setnew(1, 2)
-expect_equal(as.list(as.container(s)), list(1, 2))
+ee(as.list(as.container(s)), list(1, 2))
 
 # a deque can be converted to a container
 d = deque(1, 2)
-expect_equal(as.list(as.container(d)), list(1, 2))
+ee(as.list(as.container(d)), list(1, 2))
 
 # a dict can be converted to a container
 d = dict(a = 1, b = 2)
-expect_equal(as.list(as.container(d)), list(a = 1, b = 2))
+ee(as.list(as.container(d)), list(a = 1, b = 2))
 
 # ------------
 # is.container
@@ -70,77 +72,77 @@ expect_true(is.list(as.list(container())))
 
 co = container(a = 1, 2)
 l = list(1, numeric(0), NULL, co)
-expect_equal(as.list(as.container(l)), l)
+ee(as.list(as.container(l)), l)
 
 # Ensure nested containers are always converted as copies
 c1 = container(1)
 cc1 = container(c1)
 ccc1 = container(cc1)
 l = as.list(ccc1)
-expect_equal(l, list(container(container(1))))
+ee(l, list(container(container(1))))
 c1$add(2)
 cc1$add(2)
-expect_equal(ccc1, container(container(container(1))))
-expect_equal(l, list(container(container(1))))  # not changed
+ee(ccc1, container(container(container(1))))
+ee(l, list(container(container(1))))  # not changed
 
 
 # -----------
 # c.Container
 # -----------
 # standard non-recursive
-expect_equal(as.list(c(container())), c(list()))
-expect_equal(as.list(c(container(1))), c(list(1)))
-expect_equal(as.list(c(container(NULL))), c(list(NULL)))
+ee(as.list(c(container())), c(list()))
+ee(as.list(c(container(1))), c(list(1)))
+ee(as.list(c(container(NULL))), c(list(NULL)))
 
-expect_equal(as.list(c(container(), container())),
-                     c(     list(),      list()))
-expect_equal(as.list(c(container(1), container())),
+ee(as.list(c(container(), container())),
+           c(     list(),      list()))
+ee(as.list(c(container(1), container())),
                      c(     list(1),      list()))
-expect_equal(as.list(c(container(1), container(2))),
-                     c(     list(1),      list(2)))
-expect_equal(as.list(c(container(1), container(2, list(a = 3)))),
-                     c(     list(1),      list(2, list(a = 3))))
-expect_equal(as.list(c(container(1), container(2, container(a = 3)))),
-                     c(     list(1),      list(2, container(a = 3))))
-expect_equal(c(container(1), dict(a = 2, b = container(a = 3))),
-               container(1,       a = 2, b = container(a = 3)))
+ee(as.list(c(container(1), container(2))),
+           c(     list(1),      list(2)))
+ee(as.list(c(container(1), container(2, list(a = 3)))),
+           c(     list(1),      list(2, list(a = 3))))
+ee(as.list(c(container(1), container(2, container(a = 3)))),
+           c(     list(1),      list(2, container(a = 3))))
+ee(c(container(1), dict(a = 2, b = container(a = 3))),
+     container(1,       a = 2, b = container(a = 3)))
 
-expect_equal(c(container(1), dict(a = 2, b = container(a = 3)), use.names = FALSE),
-               container(1,           2,     container(a = 3)))
-expect_equal(as.list(c(a = container(1), b = container(2, list(a = 3)), use.names = FALSE)),
-                     c(         list(1),          list(2, list(a = 3)), use.names = FALSE))
+ee(c(container(1), dict(a = 2, b = container(a = 3)), use.names = FALSE),
+     container(1,           2,     container(a = 3)))
+ee(as.list(c(a = container(1), b = container(2, list(a = 3)), use.names = FALSE)),
+           c(         list(1),          list(2, list(a = 3)), use.names = FALSE))
 
 
 # recursive
 cr = function(...) c(..., recursive = TRUE)
-expect_equal(cr(container()),
-             cr(     list()))
-expect_equal(cr(container(1)),
-             cr(     list(1)))
-expect_equal(cr(container(NULL)),
-             cr(     list(NULL)))
+ee(cr(container()),
+   cr(     list()))
+ee(cr(container(1)),
+   cr(     list(1)))
+ee(cr(container(NULL)),
+   cr(     list(NULL)))
 
-expect_equal(cr(container(), container()),
-             cr(     list(),      list()))
-expect_equal(cr(container(1), container()),
-             cr(     list(1),      list()))
-expect_equal(cr(container(1), container(2)),
-             cr(     list(1),      list(2)))
-expect_equal(cr(container(1), container(2, 3)),
-             cr(     list(1),      list(2, 3)))
-expect_equal(cr(container(1), container(2, list(a = 3))),
-             cr(     list(1),      list(2, list(a = 3))))
-expect_equal(cr(container(1), container(2, container(a = 3))),
-             cr(     list(1),      list(2, list(a = 3))))
-expect_equal(cr(container(1),      list(2, container(a = 3))),
-             cr(     list(1),      list(2, list(a = 3))))
-expect_equal(cr(container(1),      list(2, dict(a = 3))),
-             cr(     list(1),      list(2, list(a = 3))))
-expect_equal(cr(container(),       list(2, dict(a = 3))),
-             cr(     list(),       list(2, list(a = 3))))
+ee(cr(container(), container()),
+   cr(     list(),      list()))
+ee(cr(container(1), container()),
+   cr(     list(1),      list()))
+ee(cr(container(1), container(2)),
+   cr(     list(1),      list(2)))
+ee(cr(container(1), container(2, 3)),
+   cr(     list(1),      list(2, 3)))
+ee(cr(container(1), container(2, list(a = 3))),
+   cr(     list(1),      list(2, list(a = 3))))
+ee(cr(container(1), container(2, container(a = 3))),
+   cr(     list(1),      list(2, list(a = 3))))
+ee(cr(container(1),      list(2, container(a = 3))),
+   cr(     list(1),      list(2, list(a = 3))))
+ee(cr(container(1),      list(2, dict(a = 3))),
+   cr(     list(1),      list(2, list(a = 3))))
+ee(cr(container(),       list(2, dict(a = 3))),
+   cr(     list(),       list(2, list(a = 3))))
 
-expect_equal(c(container(1), dict(a = 2, b = container(a = 3)), recursive = TRUE),
-             c(1, a = 2, b.a = 3))
+ee(c(container(1), dict(a = 2, b = container(a = 3)), recursive = TRUE),
+   c(1, a = 2, b.a = 3))
 
 
 # Ensure concatenated objects are always copies
@@ -149,26 +151,31 @@ c2 = container(2)
 c1c1 = container(c1 = c1)
 
 cc = c(c1, c1c1, c2)
-expect_equal(unpack(cc), c(1, c1 = 1, 2))
+ee(unpack(cc), c(1, c1 = 1, 2))
 c1$add(2)
-expect_equal(unpack(cc), c(1, c1 = 1, 2)) # still the same
-
+ee(unpack(cc), c(1, c1 = 1, 2)) # still the same
 
 
 # ----------------
 # length.Container
 # ----------------
-expect_equal(length(container()), 0)
-expect_equal(length(container(1)), 1)
-expect_equal(length(container(NULL)), 1)
-expect_equal(length(container(1, as.container(1:10))), 2)
+ee(length(container()), 0)
+ee(length(container(1)), 1)
+ee(length(container(NULL)), 1)
+ee(length(container(1, as.container(1:10))), 2)
 
 # ---------------
 # names.Container
 # ---------------
-expect_equal(names(container()), NULL)
-expect_equal(names(container(numeric())), NULL)
-expect_equal(names(container(list())), NULL)
-expect_equal(names(container(1, 2, 3)), NULL)
-expect_equal(names(container(a = 1, 2, x = 5)), c("a", "", "x"))
+ee(names(container()), NULL)
+ee(names(container(numeric())), NULL)
+ee(names(container(list())), NULL)
+ee(names(container(1, 2, 3)), NULL)
+ee(names(container(a = 1, 2, x = 5)), c("a", "", "x"))
+
+# -----------------
+# na.omit.Container
+# -----------------
+co = container(1, NA, d = dict(a = 1, b = 2))
+ee(na.omit(co), container(1, d = dict(a = 1, b = 2)))
 

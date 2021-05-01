@@ -10,6 +10,7 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
+\alias{na.omit.Container}
 \alias{iter.Container}
 \alias{+.Container}
 \alias{-.Container}
@@ -40,6 +41,8 @@ as.list(x)
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
+
+\method{na.omit}{Container}(x)
 
 \method{iter}{Container}(x)
 
@@ -131,6 +134,10 @@ the container's elements will copied (deeply) during the conversion.
 
 \itemize{
 \item \code{names(x)} returns the names of the elements contained in \code{x}.
+}
+
+\itemize{
+\item \code{na.omit(x)} omits all \code{NA} values contained in \code{x}.
 }
 
 \itemize{

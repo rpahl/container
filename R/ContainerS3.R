@@ -87,7 +87,16 @@ length.Container <- function(x) x$length()
 #' @export
 names.Container <- function(x) names(x$values())
 
+
 # TODO: implement generic %in%
 
-# TODO: implement na.omit
+
+#' @rdname ContainerS3
+#' @details * `na.omit(x)` omits all `NA` values contained in `x`.
+#' @export
+na.omit.Container <- function(x)
+{
+    l = as.list(x)
+    as.container(l[!is.na(l)])
+}
 
