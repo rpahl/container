@@ -2,15 +2,24 @@
 % Please edit documentation in R/rename.R
 \name{rename}
 \alias{rename}
+\alias{rename_}
 \alias{rename.Dict}
+\alias{rename_.Dict}
 \alias{rename.dict.table}
+\alias{rename_.dict.table}
 \title{Rename elements safely}
 \usage{
 rename(.x, old, new, ...)
 
+rename_(.x, old, new, ...)
+
 \method{rename}{Dict}(.x, old, new)
 
+\method{rename_}{Dict}(.x, old, new)
+
 \method{rename}{dict.table}(.x, old, new, ...)
+
+\method{rename_}{dict.table}(.x, old, new, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object with names.}
@@ -39,6 +48,8 @@ already existing name, an error is signaled.
 \details{
 The passed old and new names can be vectors but always must have
 the same length and must be unique to prevent double-renaming.
+
+\code{rename} uses copy semantics while \code{rename_} works by reference.
 }
 \examples{
 
@@ -49,4 +60,6 @@ d = dict(a = 1, b = 2, c = 3)
 # dict.table
 dit = dict.table(a = 1, b = 2, c = 3)
 (rename(dit, c("a", "b"), c("a1", "y")))
+rename_(dit, c("a", "b"), c("a1", "y"))
+print(dit)
 }

@@ -28,6 +28,7 @@ getvalues(x, ...)
 peek(.x, key, default)
 
 * rename(.x, old, new)
+* rename_(.x, old, new)
 
 replace(.x, key, value, add = FALSE)
 replace_(.x, key, value, add = FALSE)
@@ -92,7 +93,8 @@ returns a \code{Dict} object, regardless whether one or more keys were specified
 otherwise the given \code{default} value.
 }
 
-\code{rename(.x, old, new)} renames one or more keys from \code{old} to \code{new}.
+\code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
+from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
 
 \itemize{
 \item \code{replace(.x, key, value, add = FALSE)} and \code{replace_(.x, ...)} replace value

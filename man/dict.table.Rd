@@ -65,15 +65,14 @@ peekitem(.x, default)
 
 popitem(.x)
 
-* rename(.x, old, new)
+* rename(.x, old, new, ...)
+* rename_(.x, old, new, ...)
 
 replace(.x, key, value, add = FALSE)
 replace_(.x, key, value, add = FALSE)
 }
 \arguments{
-\item{...}{elements of the form \code{key = value} to be put into the
-\code{dict.table} and/or additional arguments to be passed to the
-\code{\link[data.table:data.table]{data.table::data.table()}} constructor.}
+\item{...}{further arguments passed to \code{\link[data.table:setattr]{data.table::setnames()}}}
 
 \item{x}{any \code{R} object or a \code{dict.table} object.}
 
@@ -155,7 +154,8 @@ columns, the \code{default} value is returned.
 columns, an error is signaled.
 }
 
-\code{rename(.x, old, new)} renames one or more columns from \code{old} to \code{new}.
+\code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
+from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
 
 \itemize{
 \item \code{replace(.x, key, value, add = FALSE)} and \code{replace_(.x, ...)} replace
@@ -280,6 +280,8 @@ while (!is_empty(dit))
     print(popitem(dit))
 dit = dict.table(a = 1, b = 2, c = 3)
 (rename(dit, c("a", "b"), c("a1", "y")))
+rename_(dit, c("a", "b"), c("a1", "y"))
+print(dit)
 
 dit = dict.table(a = 1:3)
 replace(dit, "a", 3:1)

@@ -13,7 +13,11 @@ expect_error(rename(d, c("A", "A"), c("a", "a")),
              "'old' has duplicated names: A")
 
 vals = as.numeric(as.list(d))
-rename(d, "A", "a")
+ee(rename(d, "A", "a"), dict(a = 1, B = 2))
+ee(d, dict(A = 1, B = 2))   # names were changed by value
+rename_(d, "A", "a")
+ee(d, dict(a = 1, B = 2))   # now names were changed by reference
+
 expect_true(has(d, "a"))
 expect_false(has(d, "A"))
 
@@ -21,10 +25,10 @@ expect_false(has(d, "A"))
 expect_equal(vals, as.numeric(as.list(d)))
 
 # Several keys at once
-rename(d, c("a", "B"), c("x", "y"))
-expect_equal(names(d), c("x", "y"))
+ee(rename(d, c("a", "B"), c("x", "y")),dict(x = 1, y = 2))
 
 # Renaming same key multiple times is not possible
+d = dict(x = 1, y = 2)
 expect_error(rename(d, c("x", "x2"), c("x2", "x3")),
              "Items of 'old' not found in names: x2")
 
@@ -32,9 +36,12 @@ expect_error(rename(d, c("x", "x2"), c("x2", "x3")),
 # rename.dict.table
 # -----------------
 dit = dict.table(A = 1:2, B = 2:1)
-rename(dit, "A", "X")
+ee(rename(dit, "A", "X"), dict.table(X = 1:2, B = 2:1))
+ee(dit, dict.table(A = 1:2, B = 2:1))
+rename_(dit, "A", "X")
+
 ee(colnames(dit), c("X", "B"))
-rename(dit, c("X", "B"), c("y", "z"))
+rename_(dit, c("X", "B"), c("y", "z"))
 ee(colnames(dit), c("y", "z"))
 expect_error(rename(dit, "A", "b"))
 
