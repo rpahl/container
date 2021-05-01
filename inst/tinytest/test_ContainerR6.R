@@ -328,14 +328,3 @@ while(it$has_next())
 expect_equal(sum(v), sum(as.integer(co$values())))
 
 
-# ----------
-# deprecated
-# ----------
-# verify that functions are deprecated
-co <- Container$new(1L)
-expect_warning(co$empty(), "deprecated")
-expect_warning(co$remove(), "deprecated")
-expect_warning(co$size(), "deprecated")
-expect_warning(co$type(), "deprecated")
-
-

@@ -287,22 +287,3 @@ expect_equal(ddd.deep,
              Dict$new(d2 = Dict$new(d1 = Dict$new(a = 1, b = 2, c = 3))))
 
 
-# ----------
-# deprecated
-# ----------
-# verify that functions are deprecated
-
-# Dict set is deprecated and replaced by replace
-d <- Dict$new(a = 1, b = 2)
-expect_warning(d$set("b", 9), "Use 'replace' instead.")
-expect_equal(d$peek("b"), 9)
-
-# Dict remove is deprecated and replaced by delete
-d <- Dict$new(a = 1, b = 2)
-expect_warning(d$remove("b"), "Use 'delete' instead.")
-expect_false(d$has("b"))
-
-# Dict sort is deprecated
-d <- Dict$new(b = 1, a = 2)
-expect_warning(d$sort(), "'sort' is deprecated - keys are now always sorted")
-

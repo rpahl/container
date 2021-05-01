@@ -11,7 +11,6 @@ expect_true(is_empty(dict()))
 expect_equal(mode(as.list(dict())), "list")
 expect_error(dict(1:2), "all elements must be named")
 expect_error(dict(x = 1, y = 2, x = 3), "duplicated keys")
-expect_warning(keys(dict()), "'keys' is deprecated.")
 
 # dict of dict is also a copy throughout
 d1 = dict(a = 1)
@@ -273,8 +272,4 @@ expect_equal(as.dict(c(a = 1)), dict(a = 1))
 df <- data.frame(A = 1:5, B = 1:5)
 d <- as.dict(df)
 expect_equal(as.data.frame(as.list(d)), df)
-
-# Dict sort is deprecated
-d <- Dict$new(b = 1, a = 2)
-expect_warning(sortkey(d), "'sort' is deprecated - keys are now always sorted")
 
