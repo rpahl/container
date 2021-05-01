@@ -10,6 +10,7 @@
 #' sortkey(...)     ### -- `Dict` keys are now always sorted
 #' remove(...)      ### -- use `delete(...)` instead
 #' type(...)        ### -- not of use anymore
+#' values(...)      ### -- use `as.list(...)` instead
 #' @name container-deprecated
 NULL
 
@@ -54,7 +55,8 @@ size.Container <- function(x)
 }
 
 
-#' @title Sort Dict keys (deprecated)
+#' Sort Dict keys (deprecated)
+#'
 #' @description Re-order elements according to key-order. This function
 #' is deprecated as keys are now always sorted.
 #' @param x any `R` object.
@@ -76,4 +78,33 @@ sortkey.Dict <- function(x, decr = FALSE) {
     invisible(x)
 }
 
+
+#' Get raw values of an object (deprecated)
+#'
+#' @param x any `R` object.
+#' @param ... additional arguments to be passed to or from methods.
+#' @return a copy of all elements as a basic `list`.
+#' @name values-deprecated
+NULL
+
+#' @rdname values-deprecated
+#' @export
+values <- function(x, ...)
+    UseMethod("values")
+
+#' @rdname values-deprecated
+#' @export
+values.Container <- function(x)
+{
+    .Deprecated("as.list")
+    as.list(x)
+}
+
+#' @rdname values-deprecated
+#' @export
+values.dict.table <- function(x)
+{
+    .Deprecated("as.list")
+    as.list(x)
+}
 

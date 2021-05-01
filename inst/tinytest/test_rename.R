@@ -12,13 +12,13 @@ expect_error(rename(d, "Z", "B"), "Items of 'old' not found in names: Z")
 expect_error(rename(d, c("A", "A"), c("a", "a")),
              "'old' has duplicated names: A")
 
-vals = as.numeric(values(d))
+vals = as.numeric(as.list(d))
 rename(d, "A", "a")
 expect_true(has(d, "a"))
 expect_false(has(d, "A"))
 
 # Verify that values did not change
-expect_equal(vals, as.numeric(values(d)))
+expect_equal(vals, as.numeric(as.list(d)))
 
 # Several keys at once
 rename(d, c("a", "B"), c("x", "y"))

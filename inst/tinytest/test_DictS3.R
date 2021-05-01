@@ -8,7 +8,7 @@ expect_equal(names(d), NULL)
 expect_equal(attr(d, "class"), c("Dict", "Container", "Iterable", "R6"))
 
 expect_true(is_empty(dict()))
-expect_equal(mode(values(dict())), "list")
+expect_equal(mode(as.list(dict())), "list")
 expect_error(dict(1:2), "all elements must be named")
 expect_error(dict(x = 1, y = 2, x = 3), "duplicated keys")
 expect_warning(keys(dict()), "'keys' is deprecated.")
@@ -144,7 +144,7 @@ expect_error(add(d, 1, 1), 'key must be character')
 # added elements must have distinct keys and cannot be added twice
 d <- dict()
 add(d, "a", 1)
-expect_equal(values(d), list(a = 1))
+expect_equal(as.list(d), list(a = 1))
 expect_error(add(d, "a", 1), "key 'a' already in Dict")
 expect_error(add(d, "a", 2), "key 'a' already in Dict")
 expect_error(add(d, "a", NULL), "key 'a' already in Dict")
@@ -154,7 +154,7 @@ expect_error(add(d, "a", NULL), "key 'a' already in Dict")
 d <- dict()
 add(d, "empty-list", list())
 add(d, "null", NULL)
-expect_equal(values(d), list("empty-list" = list(), "null" = NULL))
+expect_equal(as.list(d), list("empty-list" = list(), "null" = NULL))
 
 
 # elements can be deleted from a Dict
@@ -184,9 +184,9 @@ expect_true(is_empty(discard(d, "a")))
 
 # discard ignores non-existing elements without error
 d <- dict(a = 1)
-expect_equal(values(d), list(a = 1))
+expect_equal(as.list(d), list(a = 1))
 discard(d, "b")
-expect_equal(values(d), list(a = 1))
+expect_equal(as.list(d), list(a = 1))
 
 
 # only one key can be discarded at a time
@@ -261,7 +261,7 @@ d1 <- dict(A = 1, B = 2, C = 12)
 d2 <- dict(              C = 3, D = 4)
 expect_error(update(d1, list()), "'other' must be a Dict")
 expect_equal(update(d1, dict()), d1)
-expect_equal(values(update(d1, d2)), list(A = 1, B = 2, C = 3, D = 4))
+expect_equal(as.list(update(d1, d2)), list(A = 1, B = 2, C = 3, D = 4))
 expect_equal(update(dict(), d2), d2)
 
 

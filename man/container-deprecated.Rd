@@ -10,6 +10,7 @@ size(...)        ### -- use `length(...)` instead
 sortkey(...)     ### -- `Dict` keys are now always sorted
 remove(...)      ### -- use `delete(...)` instead
 type(...)        ### -- not of use anymore
+values(...)      ### -- use `as.list(...)` instead
 }
 \arguments{
 \item{...}{(arguments)}
