@@ -2,13 +2,25 @@
 % Please edit documentation in R/update.R
 \name{update}
 \alias{update}
+\alias{update_}
 \alias{update.Dict}
+\alias{update_.Dict}
+\alias{update.dict.table}
+\alias{update_.dict.table}
 \alias{update.list}
 \title{Update elements}
 \usage{
 update(x, other, ...)
 
+update_(x, other, ...)
+
 \method{update}{Dict}(x, other)
+
+\method{update_}{Dict}(x, other)
+
+\method{update}{dict.table}(x, other)
+
+\method{update_}{dict.table}(x, other)
 
 \method{update}{list}(x, other)
 }
@@ -20,15 +32,40 @@ update(x, other, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-For \code{Dict} adds elements of \code{other} dict for keys not yet in
-the dict and replaces the values of existing keys otherwise.
+For \code{Dict}, an updated object of class \code{Dict}.
 
-For \code{list} adds elements of \code{other} for names not yet in the
-list and replaces the values of existing names otherwise.
+For \code{dict.table} an object of class \code{dict.table}.
+
+For \code{list}, an updated object of class \code{list}.
 }
 \description{
 Takes an object and updates it with values from another object
 by replacing the values at existing keys and adding values for new keys of
 the other object. For example, this can be used to update some parameter
 lists.
+}
+\details{
+Note that \code{update} uses copy semantics while \code{update_} works by
+reference, that is, updates in place.
+
+When applied to \code{list}s, \code{update} adds elements of \code{other} for names
+not yet in the list and replaces the values of existing names.
+}
+\examples{
+
+d1 = dict(a = 1, b = 2)
+d2 = dict(       b = 0, c = 3)
+update(d1, d2)  # {a = 1, b = 0, c = 3}
+update(d2, d1)  # {a = 1, b = 2, c = 3}
+
+dit1 = dict.table(a = 1:2, b = 3:4)
+dit2 = dict.table(         b = 5:6, c = 8:9)
+update(d1, d2)
+update(d2, d1)
+
+l1 = list(1, b = 2)
+l2 = list(   b = 0, c = 3)
+update(l1, l2)
+\dontrun{
+update(l2, l1)  # all elements of 'other' must be named}
 }

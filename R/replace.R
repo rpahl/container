@@ -4,7 +4,7 @@
 #' found, unless it is stated to explicitly add the element (see option `add`).
 #' @param .x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
-#' @param add `logical` if FALSE (default) and element (or key) was not found,
+#' @param add `logical` if `FALSE` (default) and element (or key) was not found,
 #' an error is given. In contrast, if set to `TRUE` the new element is added
 #' regardless of whether it is used as a replacement for an existing element or
 #' just added as a new element.
@@ -45,11 +45,15 @@ replace.Container <- function(.x, old, new, add = FALSE)
 
 #' @name replace.Container
 #' @rdname ContainerS3
+#' @param old old element to be found and replaced.
+#' @param new the new element replacing the old one.
+#' @param add `logical` if FALSE (default) and `old` element was not found,
+#' an error is given. In contrast, if set to `TRUE` the new element is added
+#' regardless of whether it is used as a replacement for an existing or
+#' just as a new element, respectively.
 #' @usage
 #' replace(.x, old, new, add = FALSE)
 #' replace_(.x, old, new, add = FALSE)
-#' @param old old element to be found and replaced.
-#' @param new the new element replacing the old one.
 #' @details
 #' * `replace(.x, old, new, add = FALSE)` and `replace_(.x, ...)` try to find
 #' element `old` and replace it with element `new`. If `old` does not exist,
@@ -77,7 +81,6 @@ replace_.Container <- function(.x, old, new, add = FALSE)
 #' @param key `character` name of key. For `dict.table` the `key` can also be a
 #' numeric index.
 #' @return For `Dict` an object of class `Dict`.
-#' @export
 #' @examples
 #'
 #' d = dict(a = 1)
@@ -85,6 +88,7 @@ replace_.Container <- function(.x, old, new, add = FALSE)
 #' \dontrun{
 #' replace(d, "b", 2)              # key 'b' not in Dict}
 #' replace(d, "b", 2, add = TRUE)  # ok, adds value
+#' @export
 replace.Dict <- function(.x, key, value, add = FALSE)
 {
     replace_(.x$clone(deep = TRUE), key, value, add)
@@ -99,6 +103,11 @@ replace_.Dict <- function(.x, key, value, add = FALSE)
 
 
 #' @name replace.Dict
+#' @param value `any` R object
+#' @param add `logical` if `FALSE` (default) and `key` was not found,
+#' an error is given. In contrast, if set to `TRUE` the `value` is added
+#' regardless of whether it is used as a replacement for an existing or
+#' added as a new value, respectively.
 #' @rdname DictS3
 #' @usage
 #' replace(.x, key, value, add = FALSE)

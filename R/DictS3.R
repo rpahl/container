@@ -11,11 +11,10 @@
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Dict()] and it's superclass [Container()].
 #' @name DictS3
-#' @details While the [Dict()] class is based on the `R6` framework and
-#' provides reference semantics, the methods described here provide an `S3`
-#' interface with copy semantics. Note that any `S3` methods defined for the
-#' `Container` class also work with `Dict` objects, even if not overwritten
-#' explicitly.
+#' @details Methods that alter `Dict` objects usually come in two versions
+#' providing either copy or reference semantics where the latter are visible
+#' by an underscore appended to the standard function name, for example,
+#' `add` and `add_`.
 #' ## Methods
 NULL
 

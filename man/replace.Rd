@@ -36,7 +36,7 @@ replace_(.x, ...)
 
 \item{new}{the new element replacing the old one.}
 
-\item{add}{\code{logical} if FALSE (default) and element (or key) was not found,
+\item{add}{\code{logical} if \code{FALSE} (default) and element (or key) was not found,
 an error is given. In contrast, if set to \code{TRUE} the new element is added
 regardless of whether it is used as a replacement for an existing element or
 just added as a new element.}

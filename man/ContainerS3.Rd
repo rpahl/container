@@ -85,6 +85,11 @@ or of class \code{Container} for the \code{S3} methods.}
 \item{old}{old element to be found and replaced.}
 
 \item{new}{the new element replacing the old one.}
+
+\item{add}{\code{logical} if FALSE (default) and \code{old} element was not found,
+an error is given. In contrast, if set to \code{TRUE} the new element is added
+regardless of whether it is used as a replacement for an existing or
+just as a new element, respectively.}
 }
 \description{
 A \code{\link[=Container]{Container()}} is a data structure with typical member

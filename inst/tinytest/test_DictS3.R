@@ -255,15 +255,6 @@ expect_equal(getval(d, "b"), list(1, 2))
 expect_error(setval(d, "x", 1), "key 'x' not in Dict")
 
 
-# a Dict can be updated by another Dict object
-d1 <- dict(A = 1, B = 2, C = 12)
-d2 <- dict(              C = 3, D = 4)
-expect_error(update(d1, list()), "'other' must be a Dict")
-expect_equal(update(d1, dict()), d1)
-expect_equal(as.list(update(d1, d2)), list(A = 1, B = 2, C = 3, D = 4))
-expect_equal(update(dict(), d2), d2)
-
-
 # Conversion
 expect_equal(as.dict(NULL), dict())
 expect_equal(as.dict(c(a = 1)), dict(a = 1))

@@ -67,8 +67,8 @@ rename.Dict <- function(.x, old, new)
 #' @name rename.Dict
 #' @rdname DictS3
 #' @usage
-#' * rename(.x, old, new)
-#' * rename_(.x, old, new)
+#' rename(.x, old, new)
+#' rename_(.x, old, new)
 #' @details
 #' `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
 #' from `old` to `new`, respectively, by copy and in place (i.e. by reference).
@@ -107,8 +107,8 @@ rename.dict.table <- function(.x, old, new, ...)
 #' @param ... further arguments passed to [data.table::setnames()]
 #' @rdname dict.table
 #' @usage
-#' * rename(.x, old, new, ...)
-#' * rename_(.x, old, new, ...)
+#' rename(.x, old, new, ...)
+#' rename_(.x, old, new, ...)
 #' @details
 #' `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
 #' from `old` to `new`, respectively, by copy and in place (i.e. by reference).
