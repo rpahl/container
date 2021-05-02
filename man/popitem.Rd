@@ -2,15 +2,16 @@
 % Please edit documentation in R/popitem.R
 \name{popitem}
 \alias{popitem}
-\alias{popitem.Container}
-\alias{popitem.dict.table}
+\alias{popitem_}
+\alias{popitem_.Container}
+\alias{popitem_.dict.table}
 \title{Pop a random item}
 \usage{
-popitem(.x, ...)
+popitem_(.x, ...)
 
-\method{popitem}{Container}(.x)
+\method{popitem_}{Container}(.x)
 
-\method{popitem}{dict.table}(.x)
+\method{popitem_}{dict.table}(.x)
 }
 \arguments{
 \item{.x}{an \code{R} object of the respective class.}
@@ -30,12 +31,12 @@ collections as often used in set algorithms.
 \examples{
 co = container(1, 2, 3)
 while (!is_empty(co))
-    print(popitem(co))
+    print(popitem_(co))
 
 # dict.table
 dit = dict.table(a = 1:3, b = 3:1)
 while (!is_empty(dit))
-    print(popitem(dit))
+    print(popitem_(dit))
 }
 \seealso{
 \code{\link[=pop]{pop()}}, \code{\link[=peekitem]{peekitem()}}

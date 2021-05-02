@@ -72,7 +72,7 @@ is_empty(x)
 
 peekitem(.x, default)
 
-popitem(.x)
+popitem_(.x)
 
 replace(.x, old, new, add = FALSE)
 replace_(.x, old, new, add = FALSE)
@@ -190,7 +190,7 @@ return \code{default}.
 }
 
 \itemize{
-\item \code{popitem(.x)} pop random element from \code{.x}. If \code{.x} is empty, an error is
+\item \code{popitem_(.x)} pop random element from \code{.x}. If \code{.x} is empty, an error is
 signaled.
 }
 
@@ -250,7 +250,7 @@ peekitem(container(), default = 9)
 
 co = container(1, 2, 3)
 while (!is_empty(co))
-    print(popitem(co))
+    print(popitem_(co))
 
 co = container("x", 9)
 replace(co, 9, 0)

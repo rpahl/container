@@ -2,27 +2,25 @@
 % Please edit documentation in R/pop.R
 \name{pop}
 \alias{pop}
-\alias{popleft}
-\alias{popitem}
-\alias{pop.Deque}
-\alias{popleft.Deque}
-\alias{pop.Dict}
-\alias{pop.dict.table}
+\alias{pop_}
+\alias{popleft_}
+\alias{pop_.Deque}
+\alias{popleft_.Deque}
+\alias{pop_.Dict}
+\alias{pop_.dict.table}
 \title{Pop element}
 \usage{
-pop(.x, ...)
+pop_(.x, ...)
 
-popleft(.x, ...)
+popleft_(.x, ...)
 
-popitem(.x, ...)
+\method{pop_}{Deque}(.x)
 
-\method{pop}{Deque}(.x)
+\method{popleft_}{Deque}(.x)
 
-\method{popleft}{Deque}(.x)
+\method{pop_}{Dict}(.x, key)
 
-\method{pop}{Dict}(.x, key)
-
-\method{pop}{dict.table}(.x, column)
+\method{pop_}{dict.table}(.x, key)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
@@ -33,7 +31,7 @@ popitem(.x, ...)
 the associated key-value pair is deleted and it's value returned.}
 }
 \value{
-For \code{Deque} the first (\code{popleft}) or last (\code{pop}) element of the
+For \code{Deque} the first (\code{popleft_}) or last (\code{pop_}) element of the
 deque after it was removed.
 
 For \code{Dict} the value associated with the key after the key-value
@@ -45,40 +43,41 @@ removed from the dict.table. If column does not exist, an error is raised.
 \description{
 Search and return an element and remove it afterwards from the object.
 If the element is not found, signal an error.
-The \code{popitem} function can be used to sample randomly (without replacement)
+The \code{popitem_} function can be used to sample randomly (without replacement)
 from a collection of elements and this way to destructively iterate over
 collections as often used in set algorithms.
 }
 \details{
-\code{pop} tries to access specific values.
+All functions work by reference, that is, the original object is altered.
+\code{pop_(.x)} tries to access specific values.
 
-\code{popleft} pops first element of a \code{Deque}.
+\code{popleft_(.x)} pops first element of a \code{Deque}.
 
-\code{popitem} randomly pops an element from the object.
+\code{popitem_(.x)} randomly pops an element from the object.
 }
 \examples{
 # Deque
 d = deque(1, 2, 3)
-pop(d)
-popleft(d)
+pop_(d)
+popleft_(d)
 
 \dontrun{
-pop(deque())  # pop at empty Deque}
+pop_(deque())  # pop at empty Deque}
 
 # Dict
 d = dict(a = 1, b = 1:3)
-pop(d, "b")
+pop_(d, "b")
 print(d)
 
 \dontrun{
-pop(d, "x")  # key 'x' not in Dict}
+pop_(d, "x")  # key 'x' not in Dict}
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)
-pop(dit, "a")
+pop_(dit, "a")
 print(dit)
 \dontrun{
-pop(dit, "x")  # Column 'x' not in dict.table}
+pop_(dit, "x")  # Column 'x' not in dict.table}
 }
 \seealso{
 \code{\link[=peek]{peek()}}, \code{\link[=peekitem]{peekitem()}}

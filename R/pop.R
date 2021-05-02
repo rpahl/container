@@ -2,64 +2,61 @@
 #'
 #' Search and return an element and remove it afterwards from the object.
 #' If the element is not found, signal an error.
-#' The `popitem` function can be used to sample randomly (without replacement)
+#' The `popitem_` function can be used to sample randomly (without replacement)
 #' from a collection of elements and this way to destructively iterate over
 #' collections as often used in set algorithms.
+#' @name pop
 #' @details
-#' `pop` tries to access specific values.
+#' All functions work by reference, that is, the original object is altered.
+#' `pop_(.x)` tries to access specific values.
 #'
-#' `popleft` pops first element of a `Deque`.
+#' `popleft_(.x)` pops first element of a `Deque`.
 #'
-#' `popitem` randomly pops an element from the object.
+#' `popitem_(.x)` randomly pops an element from the object.
 #'
 #' @param .x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
 #' @seealso [peek()], [peekitem()]
 #' @export
-pop <- function(.x, ...) UseMethod("pop")
+pop_ <- function(.x, ...) UseMethod("pop_")
 
 #' @rdname pop
 #' @export
-popleft <- function(.x, ...) UseMethod("popleft")
+popleft_ <- function(.x, ...) UseMethod("popleft_")
 
 #' @rdname pop
-#' @export
-popitem <- function(.x, ...) UseMethod("popitem")
-
-
-#' @rdname pop
-#' @return For `Deque` the first (`popleft`) or last (`pop`) element of the
+#' @return For `Deque` the first (`popleft_`) or last (`pop_`) element of the
 #' deque after it was removed.
 #' @export
 #' @examples
 #' # Deque
 #' d = deque(1, 2, 3)
-#' pop(d)
-#' popleft(d)
+#' pop_(d)
+#' popleft_(d)
 #'
 #' \dontrun{
-#' pop(deque())  # pop at empty Deque}
-pop.Deque <- function(.x) .x$pop()
+#' pop_(deque())  # pop at empty Deque}
+pop_.Deque <- function(.x) .x$pop()
 
 #' @rdname pop
 #' @export
-popleft.Deque <- function(.x) .x$popleft()
+popleft_.Deque <- function(.x) .x$popleft()
 
 #' @name pop.Deque
 #' @rdname DequeS3
 #' @usage
-#' pop(.x)
-#' popleft(.x)
+#' pop_(.x)
+#' popleft_(.x)
 #' @details
-#' * `pop(.x)` pop last element. If `.x` is empty, an error is given.
-#' * `popleft(.x)` pop first element. If `.x` is empty, an error is given.
+#' * `pop_(.x)` pop last element. If `.x` is empty, an error is given.
+#' * `popleft_(.x)` pop first element. If `.x` is empty, an error is given.
 #' @examples
 #' d = deque(1, 2, 3)
-#' pop(d)
-#' popleft(d)
+#' pop_(d)
+#' popleft_(d)
 #'
 #' \dontrun{
-#' pop(deque())  # pop at empty Deque}
+#' pop_(deque())  # pop at empty Deque}
 NULL
 
 
@@ -73,12 +70,12 @@ NULL
 #'
 #' # Dict
 #' d = dict(a = 1, b = 1:3)
-#' pop(d, "b")
+#' pop_(d, "b")
 #' print(d)
 #'
 #' \dontrun{
-#' pop(d, "x")  # key 'x' not in Dict}
-pop.Dict <- function(.x, key) .x$pop(key)
+#' pop_(d, "x")  # key 'x' not in Dict}
+pop_.Dict <- function(.x, key) .x$pop(key)
 
 #' @rdname pop
 #' @return For `dict.table`, returns the column named `key` after it was
@@ -88,14 +85,14 @@ pop.Dict <- function(.x, key) .x$pop(key)
 #'
 #' # dict.table
 #' dit = dict.table(a = 1:3, b = 4:6)
-#' pop(dit, "a")
+#' pop_(dit, "a")
 #' print(dit)
 #' \dontrun{
-#' pop(dit, "x")  # Column 'x' not in dict.table}
-pop.dict.table <- function(.x, column)
+#' pop_(dit, "x")  # Column 'x' not in dict.table}
+pop_.dict.table <- function(.x, key)
 {
-    elem <- peek(.x, column)
-    delete_(.x, column)
+    elem <- peek(.x, key)
+    delete_(.x, key)
     elem
 }
 

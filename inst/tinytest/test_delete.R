@@ -57,7 +57,7 @@ ee(d, d2)
 expect_true(is_empty(delete(d, colnames(d))))
 
 expect_error(delete_(d, "a", 4),
-             "indices out of range \\(ncol = 3\\): 4")
+             "index out of range \\(ncol = 3\\): 4")
 expect_error(delete_(d, "a", "z"),
              "column\\(s\\) not found: z")
 

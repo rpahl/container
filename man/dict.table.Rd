@@ -62,7 +62,7 @@ peek(.x, key, default)
 
 peekitem(.x, default)
 
-popitem(.x)
+popitem_(.x)
 
 rename(.x, old, new, ...)
 rename_(.x, old, new, ...)
@@ -153,7 +153,7 @@ columns, the \code{default} value is returned.
 }
 
 \itemize{
-\item \code{popitem(.x)} return a randomly chosen column. If there are no
+\item \code{popitem_(.x)} return a randomly chosen column. If there are no
 columns, an error is signaled.
 }
 
@@ -289,7 +289,7 @@ peekitem(dit)
 
 dit = dict.table(a = 1:3, b = 3:1)
 while (!is_empty(dit))
-    print(popitem(dit))
+    print(popitem_(dit))
 dit = dict.table(a = 1, b = 2, c = 3)
 (rename(dit, c("a", "b"), c("a1", "y")))
 rename_(dit, c("a", "b"), c("a1", "y"))

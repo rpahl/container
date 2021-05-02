@@ -1,51 +1,51 @@
 ee = expect_equal
 
 # ------------------
-# popitem.Container
+# popitem_.Container
 # ------------------
 co = container()
-expect_error(popitem(container()))
+expect_error(popitem_(container()))
 
 co = container(1, 2, 3)
-expect_true(popitem(co) %in% 1:3)
+expect_true(popitem_(co) %in% 1:3)
 expect_equal(length(co), 2)
 
 # ------------
-# popitem.Set
+# popitem_.Set
 # ------------
 s = setnew()
-expect_error(popitem(setnew()))
+expect_error(popitem_(setnew()))
 
 s = setnew(1, 2, 3)
-expect_true(popitem(s) %in% 1:3)
+expect_true(popitem_(s) %in% 1:3)
 expect_equal(length(s), 2)
 
 
 # --------------
-# popitem.Deque
+# popitem_.Deque
 # --------------
 d = deque()
-expect_error(popitem(deque()))
+expect_error(popitem_(deque()))
 
 d = deque(1, 2, 3)
-expect_true(popitem(d) %in% 1:3)
+expect_true(popitem_(d) %in% 1:3)
 expect_equal(length(d), 2)
 
 # -------------
-# popitem.Dict
+# popitem_.Dict
 # -------------
-expect_error(popitem(dict()))
+expect_error(popitem_(dict()))
 
 d = dict(a = 1, b = 2, c = 3)
-expect_true(popitem(d) %in% 1:3)
+expect_true(popitem_(d) %in% 1:3)
 expect_equal(length(d), 2)
 
 # -------------------
-# popitem.dict.table
+# popitem_.dict.table
 # -------------------
-expect_error(popitem(dict.table()))
+expect_error(popitem_(dict.table()))
 
 dit = dict.table(a = 1, b = 4)
-expect_true(popitem(dit) %in% c(1, 4))
+expect_true(popitem_(dit) %in% c(1, 4))
 expect_equal(length(dit), 1)
 

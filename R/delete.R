@@ -132,7 +132,7 @@ delete_.Dict <- function(.x, ...)
     if (allValid)
         return(TRUE)
 
-    stop("indices out of range (ncol = ", ncol(.x), "): ", bad_indices)
+    stop("index out of range (ncol = ", ncol(.x), "): ", bad_indices)
 }
 
 

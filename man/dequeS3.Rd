@@ -27,8 +27,8 @@ addleft_(.x, ...)
 peek(.x, default)
 peekleft(.x, default)
 
-pop(.x)
-popleft(.x)
+pop_(.x)
+popleft_(.x)
 
 rotate(x, n)
 }
@@ -83,8 +83,8 @@ return \code{default}.
 }
 
 \itemize{
-\item \code{pop(.x)} pop last element. If \code{.x} is empty, an error is given.
-\item \code{popleft(.x)} pop first element. If \code{.x} is empty, an error is given.
+\item \code{pop_(.x)} pop last element. If \code{.x} is empty, an error is given.
+\item \code{popleft_(.x)} pop first element. If \code{.x} is empty, an error is given.
 }
 
 \itemize{
@@ -105,11 +105,11 @@ peek(deque())
 peek(deque(), default = 0)
 peekleft(deque(), default = 0)
 d = deque(1, 2, 3)
-pop(d)
-popleft(d)
+pop_(d)
+popleft_(d)
 
 \dontrun{
-pop(deque())  # pop at empty Deque}
+pop_(deque())  # pop at empty Deque}
 
 }
 \seealso{
