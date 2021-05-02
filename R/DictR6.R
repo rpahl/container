@@ -107,23 +107,16 @@ Dict <- R6::R6Class("Dict",
         #' @param default returned default value.
         #' @return value for `key` if `key` is in the `Dict` else `default`.
         peek = function(key, default = NULL) {
+            if (self$is_empty())
+                return(default)
+
+            if (missing(key))
+                key = utils::tail(self$keys(), 1)
+
             if (!self$has(key))
                 return(default)
 
             get(key, envir = private$elems)
-        },
-
-        #' @description peek random item
-        #' @param default returned default value if `Dict` is empty.
-        #' @return returns an arbitrary element from the `Dict`. This
-        #' function can be used to sample randomly (with replacement) from
-        #' a `Dict`.
-        peekitem = function(default = NULL) {
-            if (self$is_empty())
-                return(default)
-
-            key <- sample(self$keys(), size = 1)
-            self$peek(key)
         },
 
         #' @description Get value and delete key-value pair from `Dict`.
@@ -134,18 +127,6 @@ Dict <- R6::R6Class("Dict",
             elem <- self$peek(key)
             self$delete(key)
             elem
-        },
-
-        #' @description pop random item
-        #' @return deletes and return an arbitrary element from the
-        #' `Dict`. This function can be used to destructively iterate
-        #'  over a `Dict`.
-        popitem = function() {
-            if (self$is_empty())
-                stop("popitem at empty ", data.class(self))
-
-            key <- sample(self$keys(), size = 1)
-            self$pop(key)
         },
 
         #' @description This function is deprecated. Use [delete()] instead.

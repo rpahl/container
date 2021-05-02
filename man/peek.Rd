@@ -77,5 +77,5 @@ peek(dit, "x")
 peek(dit, "x", default = 0)
 }
 \seealso{
-\code{\link[=peekitem]{peekitem()}}, \code{\link[=pop]{pop()}}
+\code{\link[=pop]{pop()}}
 }

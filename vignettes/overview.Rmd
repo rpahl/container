@@ -58,8 +58,6 @@ The following table shows member methods divided by class. The top half contains
 | discard(elem)              |               |                      | discard(key)                 |
 | has(elem)                  |               |                      | has(key)                     |
 | is_empty()                 |               |                      |                              |
-| peekitem()                 |               |                      |                              |
-| popitem()                  |               |                      |                              |
 | replace(old, new, add = F) |               |                      | replace(key, value, add = F) |
 | values()                   |               |                      |                              |
 |                            |               |                      |                              |
@@ -99,7 +97,7 @@ On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/
 |                              |  count(d, elem)     |  s1 / s2         |  keys(d)                       |
 |                              |  peek(d)            |  s1 == s2        |  peek(d, key, default=NULL)    |
 |                              |  peekleft(d)        |  s1 < s2         |  pop(d, key)                   |
-|                              |  pop(d)             |  s1 > s2         |  popitem(d)                    |
+|                              |  pop(d)             |  s1 > s2         |                                |
 |                              |  popleft(d)         |  s1 + s2         |  rename(d, old, new)           |
 |                              |  reverse(d)         |                  |  setval(d, key, val, add=FALSE)|
 |                              |  rotate(d, n=1L)    |                  |  sortkey(decr=FALSE)           |

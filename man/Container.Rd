@@ -33,8 +33,6 @@ Roman Pahl
 \item \href{#method-has}{\code{Container$has()}}
 \item \href{#method-is_empty}{\code{Container$is_empty()}}
 \item \href{#method-length}{\code{Container$length()}}
-\item \href{#method-peekitem}{\code{Container$peekitem()}}
-\item \href{#method-popitem}{\code{Container$popitem()}}
 \item \href{#method-print}{\code{Container$print()}}
 \item \href{#method-replace}{\code{Container$replace()}}
 \item \href{#method-remove}{\code{Container$remove()}}
@@ -234,43 +232,6 @@ Number of elements of the \code{Container}.
 \subsection{Returns}{
 \code{integer} length of the \code{Container}, that is, the number of
 elements it contains.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-peekitem"></a>}}
-\if{latex}{\out{\hypertarget{method-peekitem}{}}}
-\subsection{Method \code{peekitem()}}{
-peek random item
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$peekitem(default = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{default}}{returned default value if \code{Container} is empty.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-returns an arbitrary element from the \code{Container}. This
-function can be used to sample randomly (with replacement) from
-a \code{Container}.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-popitem"></a>}}
-\if{latex}{\out{\hypertarget{method-popitem}{}}}
-\subsection{Method \code{popitem()}}{
-pop random item
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$popitem()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-deletes and return an arbitrary element from the
-\code{Container}. This function can be used to destructively iterate
-over a \code{Container} as often used in set algorithms.
 }
 }
 \if{html}{\out{<hr>}}

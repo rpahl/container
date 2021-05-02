@@ -30,9 +30,7 @@ Key-value pairs internally are stored in a hash-table.
 \item \href{#method-has}{\code{Dict$has()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-peek}{\code{Dict$peek()}}
-\item \href{#method-peekitem}{\code{Dict$peekitem()}}
 \item \href{#method-pop}{\code{Dict$pop()}}
-\item \href{#method-popitem}{\code{Dict$popitem()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-replace}{\code{Dict$replace()}}
@@ -238,28 +236,6 @@ value for \code{key} if \code{key} is in the \code{Dict} else \code{default}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-peekitem"></a>}}
-\if{latex}{\out{\hypertarget{method-peekitem}{}}}
-\subsection{Method \code{peekitem()}}{
-peek random item
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$peekitem(default = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{default}}{returned default value if \code{Dict} is empty.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-returns an arbitrary element from the \code{Dict}. This
-function can be used to sample randomly (with replacement) from
-a \code{Dict}.
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-pop"></a>}}
 \if{latex}{\out{\hypertarget{method-pop}{}}}
 \subsection{Method \code{pop()}}{
@@ -278,21 +254,6 @@ If \code{key} not found, raise an error.
 }
 \subsection{Returns}{
 If \code{key} in \code{Dict}, return its value.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-popitem"></a>}}
-\if{latex}{\out{\hypertarget{method-popitem}{}}}
-\subsection{Method \code{popitem()}}{
-pop random item
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$popitem()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-deletes and return an arbitrary element from the
-\code{Dict}. This function can be used to destructively iterate
-over a \code{Dict}.
 }
 }
 \if{html}{\out{<hr>}}

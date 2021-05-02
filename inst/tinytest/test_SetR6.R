@@ -1,3 +1,5 @@
+ee = expect_equal
+
 # ----------
 # initialize
 # ----------
@@ -116,23 +118,14 @@ expect_true(s$has(co))
 expect_true(s.ident$has(co))
 
 
-# --------
-# peekitem
-# --------
+# ----
+# peek
+# ----
 s = Set$new(1, 2, 3)
-expect_true(s$peekitem() %in% 1:3)
-expect_equal(s$length(), 3)
-expect_true(is.null(Set$new()$peekitem()))
+expect_equal(s$peek(), 3)
+expect_equal(setnew()$peek(), NULL)
+expect_equal(setnew()$peek("foo"), "foo")
 
-# -------
-# popitem
-# -------
-s = Set$new(1, 2)
-expect_true(s$popitem() %in% 1:2)
-expect_equal(s$length(), 1)
-expect_true(s$popitem() %in% 1:2)
-expect_equal(s$length(), 0)
-expect_error(s$popitem())
 
 # -----
 # print

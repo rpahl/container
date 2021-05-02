@@ -154,13 +154,6 @@ expect_equal(d$peek("a"), d$at("a"))
 expect_true(is.null(d$peek("x")))
 expect_equal(d$peek("x", default = 9), 9)
 
-# --------
-# peekitem
-# --------
-d <- Dict$new(a = 1, b = 2)
-expect_equal(length(d$peekitem()), 1)
-expect_true(d$peekitem() %in% 1:2)
-expect_equal(d$length(), 2)
 
 # ---
 # pop
@@ -170,20 +163,6 @@ d <- Dict$new(a = 1, b = 2)
 expect_equal(d$pop("a"), 1)
 expect_false(d$has("a"))
 expect_error(d$pop("a"))
-
-# -------
-# popitem
-# -------
-# elements can be popped randomly
-x <- c(a = 1, b = 2)
-d <- as.dict(x)
-v <- numeric(0)
-while (!d$is_empty()) {
-    v <- c(v, d$popitem())
-}
-expect_equal(sort(v), as.numeric(x))
-expect_true(d$is_empty())
-expect_error(d$popitem(), "popitem at empty Dict")
 
 
 # ------

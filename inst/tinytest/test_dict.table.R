@@ -169,16 +169,6 @@ ee(pop(dit, "B"), 2:1)
 expect_true(is_empty(dit))
 
 
-# popitem works as expected
-set.seed(123)
-dit = dict.table(A = 1:2, B = 2:1)
-ee(popitem(dit), 1:2)
-expect_false(has(dit, "A"))
-
-ee(popitem(dit), 2:1)
-expect_true(is_empty(dit))
-
-
 # columns can be renamed
 dit = dict.table(A = 1:2, B = 2:1)
 rename(dit, "A", "X")

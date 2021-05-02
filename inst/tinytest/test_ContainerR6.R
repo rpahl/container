@@ -173,25 +173,6 @@ expect_equal(Container$new()$length(), 0)
 co <- Container$new(1, 2, 3)
 expect_equal(co$length(), length(co$values()))
 
-# --------
-# peekitem
-# --------
-co = Container$new(1, 2, 3)
-expect_true(co$peekitem() %in% 1:3)
-expect_equal(length(co$peekitem()), 1)
-expect_equal(co$length(), 3)
-expect_true(is.null(Container$new()$peekitem()))
-
-
-# -------
-# popitem
-# -------
-co = Container$new(1, 2)
-expect_true(co$popitem() %in% 1:2)
-expect_equal(co$length(), 1)
-expect_true(co$popitem() %in% 1:2)
-expect_equal(co$length(), 0)
-expect_error(co$popitem())
 
 # -----
 # print

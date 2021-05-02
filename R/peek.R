@@ -14,7 +14,7 @@
 #' exist.
 #' @param ... additional arguments to be passed to or from methods.
 #' @param default value to be returned if peeked value does not exist.
-#' @seealso [peekitem()], [pop()]
+#' @seealso [pop()]
 #' @export
 peek <- function(x, ...) UseMethod("peek")
 

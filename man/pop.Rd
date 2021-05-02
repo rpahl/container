@@ -43,17 +43,12 @@ removed from the dict.table. If column does not exist, an error is raised.
 \description{
 Search and return an element and remove it afterwards from the object.
 If the element is not found, signal an error.
-The \code{popitem_} function can be used to sample randomly (without replacement)
-from a collection of elements and this way to destructively iterate over
-collections as often used in set algorithms.
 }
 \details{
 All functions work by reference, that is, the original object is altered.
 \code{pop_(.x)} tries to access specific values.
 
 \code{popleft_(.x)} pops first element of a \code{Deque}.
-
-\code{popitem_(.x)} randomly pops an element from the object.
 }
 \examples{
 # Deque
@@ -80,5 +75,5 @@ print(dit)
 pop_(dit, "x")  # Column 'x' not in dict.table}
 }
 \seealso{
-\code{\link[=peek]{peek()}}, \code{\link[=peekitem]{peekitem()}}
+\code{\link[=peek]{peek()}}
 }

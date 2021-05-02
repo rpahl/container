@@ -2,9 +2,6 @@
 #'
 #' Search and return an element and remove it afterwards from the object.
 #' If the element is not found, signal an error.
-#' The `popitem_` function can be used to sample randomly (without replacement)
-#' from a collection of elements and this way to destructively iterate over
-#' collections as often used in set algorithms.
 #' @name pop
 #' @details
 #' All functions work by reference, that is, the original object is altered.
@@ -12,11 +9,9 @@
 #'
 #' `popleft_(.x)` pops first element of a `Deque`.
 #'
-#' `popitem_(.x)` randomly pops an element from the object.
-#'
 #' @param .x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
-#' @seealso [peek()], [peekitem()]
+#' @seealso [peek()]
 #' @export
 pop_ <- function(.x, ...) UseMethod("pop_")
 
