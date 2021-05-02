@@ -30,11 +30,11 @@ getvalues <- function(.x, ...) UseMethod("getvalues")
 getval.Dict <- function(.x, key)
 {
     if (length(key) == 1)
-        return(.x$get(key))
+        return(.x$at(key))
 
     d = dict()
     for (k in unique(key))
-        d$add(k, .x$get(k))
+        d$add(k, .x$at(k))
 
     d
 }
@@ -47,7 +47,7 @@ getvalues.Dict <- function(.x, ...)
 
     d = dict()
     for (k in unique(keys))
-        d$add(k, .x$get(k))
+        d$add(k, .x$at(k))
 
     d
 }

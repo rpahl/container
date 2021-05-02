@@ -116,14 +116,14 @@ expect_true(d_was_not_touched)
 # -------
 # trying to extract from non-existing key throws an error
 d <- Dict$new(a = 1, b = 2, n = NULL)
-expect_equal(d$get("a"), 1)
-expect_true(is.null(d$get("n")))
-expect_error(d$get("x"), "key 'x' not in Dict")
+expect_equal(d$at("a"), 1)
+expect_true(is.null(d$at("n")))
+expect_error(d$at("x"), "key 'x' not in Dict")
 
 
 # only one key at a time can be accessed
 d <- Dict$new(a = 1, b = 2)
-expect_error(d$get(c("a", "b")), "key must be of length 1")
+expect_error(d$at(c("a", "b")), "key must be of length 1")
 
 
 # ---
@@ -150,7 +150,7 @@ expect_equal(d$keys(), "b")
 # ----
 # elements can be peeked and return default value if key does not exist
 d <- Dict$new(a = 1, b = 2)
-expect_equal(d$peek("a"), d$get("a"))
+expect_equal(d$peek("a"), d$at("a"))
 expect_true(is.null(d$peek("x")))
 expect_equal(d$peek("x", default = 9), 9)
 
@@ -221,7 +221,7 @@ expect_error(d$rename(c("x", "x2"), c("x2", "x3")),
 # values at keys can be replaced
 d <- Dict$new(a = 1, b = NULL)
 d$replace("b", list(1, 2))
-expect_equal(d$get("b"), list(1, 2))
+expect_equal(d$at("b"), list(1, 2))
 expect_error(d$replace("x", 1), "key 'x' not in Dict")
 
 

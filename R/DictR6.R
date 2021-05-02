@@ -42,6 +42,17 @@ Dict <- R6::R6Class("Dict",
             self$replace(key, value, add = TRUE)
         },
 
+        #' @description Access value at key.
+        #' @param key `character` name of key.
+        #' @return If `key` in `Dict`, return value at `key`, else throw error.
+        at = function(key) {
+            if (self$has(key))
+                self$peek(key)
+            else
+                stop("key '", key, "' not in ", data.class(self))
+        },
+
+
         #' @description If key in `Dict`, delete associated key-value pair.
         #' @param key `character` key of value to delete. If `key` does exist,
         #' the associated key-value pair is deleted, otherwise an error is
@@ -65,14 +76,12 @@ Dict <- R6::R6Class("Dict",
             self
         },
 
-        #' @description Access value at key.
+        #' @description This function is deprecated. Use [at()] instead.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return value at `key`, else throw error.
         get = function(key) {
-            if (self$has(key))
-                self$peek(key)
-            else
-                stop("key '", key, "' not in ", data.class(self))
+            .Deprecated("at")
+            self$at(key)
         },
 
         #' @description Determine if `Dict` has a `key`.
@@ -164,7 +173,7 @@ Dict <- R6::R6Class("Dict",
             if (identical(old, new))
                 return(self)
 
-            self$add(key = new, value = self$get(old))
+            self$add(key = new, value = self$at(old))
             self$delete(old)
             self
         },
@@ -215,7 +224,7 @@ Dict <- R6::R6Class("Dict",
                 stop("arg must be a ", data.class(self))
 
             for (key in other$keys())
-                self$replace(key, other$get(key), add = TRUE)
+                self$replace(key, other$at(key), add = TRUE)
 
             self
         },
