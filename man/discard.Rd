@@ -5,7 +5,10 @@
 \alias{discard_}
 \alias{discard.Container}
 \alias{discard_.Container}
+\alias{discard.Dict}
+\alias{discard_.Dict}
 \alias{discard.dict.table}
+\alias{discard_.dict.table}
 \title{Discard elements}
 \usage{
 discard(.x, ...)
@@ -16,7 +19,13 @@ discard_(.x, ...)
 
 \method{discard_}{Container}(.x, ...)
 
+\method{discard}{Dict}(.x, ...)
+
+\method{discard_}{Dict}(.x, ...)
+
 \method{discard}{dict.table}(.x, ...)
+
+\method{discard_}{dict.table}(.x, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
@@ -32,9 +41,29 @@ indices or both.}
 For \code{Container}, an object of class \code{Container} (or one of the
 respective derived classes).
 
+For \code{Dict}, an object of class \code{Dict}.
+
 For \code{dict.table}, an object of class \code{dict.table}.
 }
 \description{
 Search and remove an element from an object. If the element is not found,
 ignore the attempt.
+}
+\examples{
+
+s = setnew("a", 1:3, iris)
+print(s)
+discard(s, 1:3, "a")
+discard(s, iris)
+discard(s, "b")  # ignored
+
+d = dict(a = 1, b = 2)
+discard(d, "a", "b")
+discard(d, c("a", "b"))
+discard(d, "c")          # ignored
+
+dit = as.dict.table(head(sleep))
+discard(dit, "ID")
+discard(dit, "ID", 1)
+discard(dit, "foo")  # ignored
 }

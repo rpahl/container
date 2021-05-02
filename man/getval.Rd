@@ -9,20 +9,20 @@
 \alias{getvalues.dict.table}
 \title{Strict element access}
 \usage{
-getval(x, ...)
+getval(.x, ...)
 
-getvalues(x, ...)
+getvalues(.x, ...)
 
-\method{getval}{Dict}(x, key)
+\method{getval}{Dict}(.x, key)
 
-\method{getvalues}{Dict}(x, ...)
+\method{getvalues}{Dict}(.x, ...)
 
-\method{getval}{dict.table}(x, key)
+\method{getval}{dict.table}(.x, key)
 
-\method{getvalues}{dict.table}(x, ...)
+\method{getvalues}{dict.table}(.x, ...)
 }
 \arguments{
-\item{x}{any \code{R} object.}
+\item{.x}{any \code{R} object.}
 
 \item{...}{keys or indices to be accessed or additional arguments to be
 passed to or from methods.}
@@ -50,4 +50,7 @@ dit = dict.table(a = 1:3, b = 4:6)
 getval(dit, "b")
 getval(dit, c("a", "b")) # or alternatively
 getvalues(dit, "a", "b")
+}
+\seealso{
+\code{\link[=peek]{peek()}} for less strict element access.
 }

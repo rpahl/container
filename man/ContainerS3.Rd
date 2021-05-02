@@ -228,7 +228,12 @@ delete(s, 1:3, "a")
 delete(s, iris)
 \dontrun{
 delete(s, "b")   # "b" is not in Set}
-discard(s, "b")  # ok - command is ignored
+
+s = setnew("a", 1:3, iris)
+print(s)
+discard(s, 1:3, "a")
+discard(s, iris)
+discard(s, "b")  # ignored
 
 co = container(1, 2, mean)
 has(co, 1)                   # TRUE

@@ -1,6 +1,6 @@
 #' Extract Operators for Containers
 #'
-#' @description Extract parts of Container and dict.table objects.
+#' @description Extract parts of `Container` and `dict.table` objects.
 #' @name OpsExtract
 #' @param x `Container` or `dict.table` object from which to extract
 #' elements or columns.
@@ -10,13 +10,13 @@ NULL
 #' @param key `character` vector with key(s).
 #' @param default A suitable default value.
 #' @return For `Dict`, `[[` returns the element found at key. If not found, an
-#' error is signaled, unless `default` was specified, which then would be
+#' error is signaled, unless `default` was specified, which in this case is
 #' returned instead.
 #' @export
 `[[.Dict` <- function(x, key, default = NULL)
 {
     if (missing(default)) {
-        x$getval(key)
+        x$get(key)
     } else {
         x$peek(key, default)
     }
@@ -25,19 +25,16 @@ NULL
 #' @rdname OpsExtract
 #' @return For `Dict`, `[` returns a new dict containing the extracted elements
 #' found at the keys. If one or more keys are not found, an error is signaled,
-#' unless `default` was specified, which then would be put in place for all
+#' unless `default` was specified, which in this case is put in place for all
 #' missing keys.
 #' @export
 `[.Dict` <- function(x, key, default = NULL)
 {
     d = dict()
     for (k in unique(key)) {
-        value = if (missing(default)) {
-            x$getval(k)
-        } else {
-            x$peek(k, default = default)
-        }
-        d$add(k, value)
+        val = if (missing(default)) x$get(k) else x$peek(k, default)
+
+        d$add(k, val)
     }
     d
 }
@@ -60,8 +57,8 @@ NULL
 
 
 #' @rdname OpsExtract
-#' @return For `dict.table`, `$` returns the selected column. If the
-#' column does not exist, an error is signaled.
+#' @return For `dict.table`, `$` returns the selected column using partial
+#' string matching. If no column is found, an error is signaled.
 #' @export
 `$.dict.table` <- function(x, key)
 {

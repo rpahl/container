@@ -5,7 +5,10 @@
 \alias{delete_}
 \alias{delete.Container}
 \alias{delete_.Container}
+\alias{delete.Dict}
+\alias{delete_.Dict}
 \alias{delete.dict.table}
+\alias{delete_.dict.table}
 \title{Delete elements}
 \usage{
 delete(.x, ...)
@@ -16,7 +19,13 @@ delete_(.x, ...)
 
 \method{delete_}{Container}(.x, ...)
 
+\method{delete}{Dict}(.x, ...)
+
+\method{delete_}{Dict}(.x, ...)
+
 \method{delete}{dict.table}(.x, ...)
+
+\method{delete_}{dict.table}(.x, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
@@ -29,6 +38,8 @@ indices or both.}
 \value{
 For \code{Container}, an object of class \code{Container} (or one of the
 respective derived classes).
+
+For \code{Dict}, an object of class \code{Dict}.
 
 For \code{dict.table}, an object of class \code{dict.table}.
 }
@@ -44,7 +55,12 @@ delete(s, 1:3, "a")
 delete(s, iris)
 \dontrun{
 delete(s, "b")  # "b" is not in Set}
-discard(s, "b")  # ok - command is ignored
+
+d = dict(a = 1, b = 2)
+delete(d, "a", "b")
+delete(d, c("a", "b"))
+\dontrun{
+delete(d, "c")   # key 'c' not in Dict}
 
 dit = as.dict.table(head(sleep))
 dit
@@ -52,5 +68,4 @@ delete(dit, "ID")
 delete(dit, "ID", 1)
 \dontrun{
 delete(dit, "foo")   # Column 'foo' not in dict.table}
-discard(dit, "foo")  # ok - command is ignored
 }

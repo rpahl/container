@@ -38,7 +38,8 @@ ee(update_(dit1, dit2), dict.table(a = 1:2, b = 5:6, c = 8:9))
 dit1_was_changed = ee(dit1, dict.table(a = 1:2, b = 5:6, c = 8:9))
 expect_true(dit1_was_changed)
 
-
+dit3 = dict.table(a = 1:3, b = 3:5)
+expect_error(update(dit1, dit3))
 
 # -----------
 # update.list

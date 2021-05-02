@@ -18,7 +18,6 @@ delete_ <- function(.x, ...) UseMethod("delete_")
 #' @rdname delete
 #' @return For `Container`, an object of class `Container` (or one of the
 #' respective derived classes).
-#' @export
 #' @examples
 #'
 #' s = setnew("a", 1:3, iris)
@@ -27,8 +26,9 @@ delete_ <- function(.x, ...) UseMethod("delete_")
 #' delete(s, iris)
 #' \dontrun{
 #' delete(s, "b")  # "b" is not in Set}
-#' discard(s, "b")  # ok - command is ignored
-delete.Container <- function(.x, ...) {
+#' @export
+delete.Container <- function(.x, ...)
+{
     (delete_(.x$clone(deep = TRUE), ...))
 }
 
@@ -48,7 +48,6 @@ delete.Container <- function(.x, ...) {
 #' delete(s, iris)
 #' \dontrun{
 #' delete(s, "b")   # "b" is not in Set}
-#' discard(s, "b")  # ok - command is ignored
 NULL
 
 #' @rdname delete
@@ -74,8 +73,83 @@ delete_.Container <- function(.x, ...)
 
 
 #' @rdname delete
-#' @return For `dict.table`, an object of class `dict.table`.
+#' @return For `Dict`, an object of class `Dict`.
+#' @examples
+#'
+#' d = dict(a = 1, b = 2)
+#' delete(d, "a", "b")
+#' delete(d, c("a", "b"))
+#' \dontrun{
+#' delete(d, "c")   # key 'c' not in Dict}
 #' @export
+delete.Dict <- function(.x, ...) {
+    (delete_.Dict(.x$clone(deep = TRUE), ...))
+}
+
+#' @name delete.Dict
+#' @rdname DictS3
+#' @usage
+#' delete(.x, ...)
+#' delete(.x, ...)
+#' @details
+#' * `delete(.x, ...)` and `delete(.x, ...)` find and remove values at given
+#' keys. Keys that don't exist are ignored.
+#' @examples
+#'
+#' d = dict(a = 1, b = 2)
+#' delete(d, "a", "b")
+#' delete(d, c("a", "b"))
+#' \dontrun{
+#' delete(d, "c")   # key 'c' not in Dict}
+NULL
+
+#' @rdname delete
+#' @export
+delete_.Dict <- function(.x, ...)
+{
+    keys = unlist(list(...))
+    if (!length(keys))
+        return(.x)
+
+    bad_keys = setdiff(keys, names(.x))
+    if (length(bad_keys))
+        stop("key(s) not found: ", toString(bad_keys))
+
+    lapply(keys, function(key) .x$delete(key))
+
+    invisible(.x)
+}
+
+
+
+
+
+.has_valid_indices <- function(.x, indices)
+{
+    bad_indices = setdiff(indices, seq_len(ncol(.x)))
+
+    allValid = length(bad_indices) == 0
+    if (allValid)
+        return(TRUE)
+
+    stop("indices out of range (ncol = ", ncol(.x), "): ", bad_indices)
+}
+
+
+.has_valid_col_names <- function(.x, col_names)
+{
+    bad_names = setdiff(col_names, colnames(.x))
+
+    allValid = length(bad_names) == 0
+    if (allValid)
+        return(TRUE)
+
+    stop("column(s) not found: ", toString(bad_names))
+}
+
+
+#' @rdname delete
+#' @return For `dict.table`, an object of class `dict.table`.
 #' @examples
 #'
 #' dit = as.dict.table(head(sleep))
@@ -84,7 +158,7 @@ delete_.Container <- function(.x, ...)
 #' delete(dit, "ID", 1)
 #' \dontrun{
 #' delete(dit, "foo")   # Column 'foo' not in dict.table}
-#' discard(dit, "foo")  # ok - command is ignored
+#' @export
 delete.dict.table <- function(.x, ...)
 {
     (delete_(clone(.x), ...))
@@ -100,7 +174,6 @@ delete.dict.table <- function(.x, ...)
 #' * `delete(.x, ...)` and `delete_(.x, ...)` find and remove columns either by
 #' name or index (or both). If one or more columns don't exist, an error is
 #' signaled.
-#' @export
 #' @examples
 #'
 #' dit = as.dict.table(head(sleep))
@@ -109,24 +182,30 @@ delete.dict.table <- function(.x, ...)
 #' delete(dit, "ID", 1)
 #' \dontrun{
 #' delete(dit, "foo")   # Column 'foo' not in dict.table}
-#' discard(dit, "foo")  # ok - command is ignored
+NULL
+
+
+#' @rdname delete
+#' @export
 delete_.dict.table <- function(.x, ...)
 {
-    columns = list(...)
-    if (!length(columns))
+    args = list(...)
+    if (!length(args))
         return(.x)
 
-    hasColumns = sapply(columns, function(column) has(.x, column))
+    # Indices
+    indices = as.integer(unlist(Filter(args, f = is.numeric)))
+    stopifnot(.has_valid_indices(.x, indices))
 
-    if (any(!hasColumns)) {
-        firstMissing = columns[!hasColumns][[1]]
+    # Names
+    valid_names = names(.x)[indices]
+    col_names = c(valid_names, unlist(Filter(args, f = is.character)))
+    col_names = unique(col_names)
+    stopifnot(.has_valid_col_names(.x, col_names))
 
-        stop("Column '", firstMissing, "'",
-             ifelse(is.character(firstMissing),
-                    paste(" not in", data.class(.x)),
-                    paste0(" out of range (ncol = ", ncol(.x), ")")))
-    }
+    if (length(col_names))
+        data.table::set(.x, j = col_names, value = NULL)
 
-    discard_(.x, ...)
+    invisible(.x)
 }
 

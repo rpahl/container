@@ -7,7 +7,6 @@
 \alias{clear.dict.table}
 \alias{clone.dict.table}
 \alias{delete.dict.table}
-\alias{delete_.dict.table}
 \alias{dict.table}
 \alias{as.dict.table}
 \alias{as.dict.table.data.table}
@@ -15,7 +14,6 @@
 \alias{as.data.table.dict.table}
 \alias{rbind.dict.table}
 \alias{discard.dict.table}
-\alias{discard_.dict.table}
 \alias{getval.dict.table}
 \alias{has.dict.table}
 \alias{is_empty.dict.table}
@@ -53,8 +51,8 @@ is.dict.table(x)
 discard(.x, ...)
 discard_(.x, ...)
 
-getval(x, key)
-getvalues(x, ...)
+getval(.x, key)
+getvalues(.x, ...)
 
 has(x, column)
 
@@ -120,16 +118,15 @@ signaled.
 
 \itemize{
 \item \code{discard(.x, ...)} and \code{discard_(.x, ...)} find and remove columns either by
-name or index (or both). If one or more columns don't exist, an error is
-signaled.
+name or index (or both). Columns that don't exist are ignored.
 }
 
 \itemize{
-\item \code{getval(x, key)} get value(s) at column(s) specified via \code{key}.
+\item \code{getval(.x, key)} get value(s) at column(s) specified via \code{key}.
 If a column does not exist, an error is given.
 For a single column the raw column vector is
 returned, otherwise a new \code{dict.table} object containing all requested columns.
-\item \code{getvalues(x, ...)} is a convenience version of \code{getval(x, key)} enabling
+\item \code{getvalues(.x, ...)} is a convenience version of \code{getval(.x, key)} enabling
 to pass several keys (i.e. column names) separated by commas. In contrast to
 \code{getval}, it always returns a \code{dict.table} object, regardless whether one or
 more keys were specified.
@@ -200,7 +197,6 @@ delete(dit, "ID")
 delete(dit, "ID", 1)
 \dontrun{
 delete(dit, "foo")   # Column 'foo' not in dict.table}
-discard(dit, "foo")  # ok - command is ignored
 # Some basic examples using some typical data.table and dict operations.
 # The constructor can take the 'key' argument known from data.table():
 dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
@@ -260,6 +256,11 @@ rbind(dit, dit)
 # Also works with data.tables
 dat = dict.table(a = 3:4, b = 3:4)
 dit.dat = rbind(dit, dat)
+
+dit = as.dict.table(head(sleep))
+discard(dit, "ID")
+discard(dit, "ID", 1)
+discard(dit, "foo")  # ignored
 
 dit = dict.table(a = 1:3, b = 4:6)
 getval(dit, "b")

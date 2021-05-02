@@ -28,21 +28,21 @@ elements or columns.}
 }
 \value{
 For \code{Dict}, \code{[[} returns the element found at key. If not found, an
-error is signaled, unless \code{default} was specified, which then would be
+error is signaled, unless \code{default} was specified, which in this case is
 returned instead.
 
 For \code{Dict}, \code{[} returns a new dict containing the extracted elements
 found at the keys. If one or more keys are not found, an error is signaled,
-unless \code{default} was specified, which then would be put in place for all
+unless \code{default} was specified, which in this case is put in place for all
 missing keys.
 
 For \code{dict.table}, \code{[[} returns the selected column. If the
 column does not exist, an error is signaled, unless \code{default} was specified,
 which then would be returned instead.
 
-For \code{dict.table}, \code{$} returns the selected column. If the
-column does not exist, an error is signaled.
+For \code{dict.table}, \code{$} returns the selected column using partial
+string matching. If no column is found, an error is signaled.
 }
 \description{
-Extract parts of Container and dict.table objects.
+Extract parts of \code{Container} and \code{dict.table} objects.
 }
