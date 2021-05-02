@@ -9,18 +9,18 @@
 #' `peek` tries to access specific values.
 #'
 #' `peekleft` peeks at first element of a `Deque`.
-#' @param .x an `R` object of the respective class.
+#' @param x an `R` object of the respective class.
 #' @param default the value that is returned if the intended element does not
 #' exist.
 #' @param ... additional arguments to be passed to or from methods.
 #' @param default value to be returned if peeked value does not exist.
 #' @seealso [peekitem()], [pop()]
 #' @export
-peek <- function(.x, ...) UseMethod("peek")
+peek <- function(x, ...) UseMethod("peek")
 
 #' @rdname peek
 #' @export
-peekleft <- function(.x, ...) UseMethod("peekleft")
+peekleft <- function(x, ...) UseMethod("peekleft")
 
 
 #' @rdname peek
@@ -34,22 +34,22 @@ peekleft <- function(.x, ...) UseMethod("peekleft")
 #' peek(deque())
 #' peek(deque(), default = 0)
 #' peekleft(deque(), default = 0)
-peek.Deque <- function(.x, default = NULL) .x$peek(default)
+peek.Deque <- function(x, default = NULL) x$peek(default)
 
 #' @rdname peek
 #' @export
-peekleft.Deque <- function(.x, default = NULL) .x$peekleft(default)
+peekleft.Deque <- function(x, default = NULL) x$peekleft(default)
 
 
 #' @name peek.Deque
 #' @rdname DequeS3
 #' @usage
-#' peek(.x, default)
-#' peekleft(.x, default)
+#' peek(x, default)
+#' peekleft(x, default)
 #' @details
-#' * `peek(.x, default = NULL)` peek at last element. If `.x` is empty, return
+#' * `peek(x, default = NULL)` peek at last element. If `x` is empty, return
 #' `default`.
-#' * `peekleft(.x, default = NULL)` peek at first element. If `.x` is empty,
+#' * `peekleft(x, default = NULL)` peek at first element. If `x` is empty,
 #' return `default`.
 #' @examples
 #'
@@ -74,17 +74,17 @@ NULL
 #' peek(d, "b")
 #' peek(d, "x")
 #' peek(d, "x", default = 4:7)
-peek.Dict <- function(.x, key, default = NULL)
+peek.Dict <- function(x, key, default = NULL)
 {
-    .x$peek(key, default)
+    x$peek(key, default)
 }
 
 #' @name peek.Dict
 #' @rdname DictS3
 #' @usage
-#' peek(.x, key, default)
+#' peek(x, key, default)
 #' @details
-#' * `peek(.x, key, default)` returns the associated value if `key` does exists,
+#' * `peek(x, key, default)` returns the associated value if `key` does exists,
 #' otherwise the given `default` value.
 #' @examples
 #'
@@ -110,18 +110,18 @@ NULL
 #' peek(dit, 3)
 #' peek(dit, "x")
 #' peek(dit, "x", default = 0)
-peek.dict.table <- function(.x, key, default = NULL)
+peek.dict.table <- function(x, key, default = NULL)
 {
-    if (has(.x, key))
-        return(.subset2(.x, key))
+    if (has(x, key))
+        return(.subset2(x, key))
 
-    if (length(default) && length(default) != nrow(.x)) {
+    if (length(default) && length(default) != nrow(x)) {
         if (length(default) != 1)
             warning("length of 'default' value (", length(default), ") ",
-                    "did not match number of rows (", nrow(.x), ") ",
+                    "did not match number of rows (", nrow(x), ") ",
                     "and therefore was recycled")
 
-        default = rep_len(default, length.out = nrow(.x))
+        default = rep_len(default, length.out = nrow(x))
     }
     default
 }
@@ -130,9 +130,9 @@ peek.dict.table <- function(.x, key, default = NULL)
 #' @name peek.dict.table
 #' @rdname dict.table
 #' @usage
-#' peek(.x, key, default)
+#' peek(x, key, default)
 #' @details
-#' * `peek(.x, key, default)` return column named `key` if it exist otherwise
+#' * `peek(x, key, default)` return column named `key` if it exist otherwise
 #' the given `default` value. If the default length does not match the number
 #' of rows, it is recycled accordingly and a warning is given, unless the
 #' default value has a length of 1, in which case recycling is done silently.

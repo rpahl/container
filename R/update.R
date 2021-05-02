@@ -90,7 +90,7 @@ update_.dict.table <- function(x, other)
         stop("arg must be a ", data.class(x))
 
     for (key in colnames(other))
-        replace_(x, key, value = getval(other, key), add = TRUE)
+        replace_(x, key, value = other[[key]], add = TRUE)
 
     x
 }

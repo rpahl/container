@@ -9,20 +9,20 @@
 \alias{peek.dict.table}
 \title{Peek at element}
 \usage{
-peek(.x, ...)
+peek(x, ...)
 
-peekleft(.x, ...)
+peekleft(x, ...)
 
-\method{peek}{Deque}(.x, default = NULL)
+\method{peek}{Deque}(x, default = NULL)
 
-\method{peekleft}{Deque}(.x, default = NULL)
+\method{peekleft}{Deque}(x, default = NULL)
 
-\method{peek}{Dict}(.x, key, default = NULL)
+\method{peek}{Dict}(x, key, default = NULL)
 
-\method{peek}{dict.table}(.x, key, default = NULL)
+\method{peek}{dict.table}(x, key, default = NULL)
 }
 \arguments{
-\item{.x}{an \code{R} object of the respective class.}
+\item{x}{an \code{R} object of the respective class.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 

@@ -24,8 +24,8 @@ is.deque(x)
 addleft(.x, ...)
 addleft_(.x, ...)
 
-peek(.x, default)
-peekleft(.x, default)
+peek(x, default)
+peekleft(x, default)
 
 pop_(.x)
 popleft_(.x)
@@ -76,9 +76,9 @@ returns the \code{\link[=Deque]{Deque()}} object.
 }
 
 \itemize{
-\item \code{peek(.x, default = NULL)} peek at last element. If \code{.x} is empty, return
+\item \code{peek(x, default = NULL)} peek at last element. If \code{x} is empty, return
 \code{default}.
-\item \code{peekleft(.x, default = NULL)} peek at first element. If \code{.x} is empty,
+\item \code{peekleft(x, default = NULL)} peek at first element. If \code{x} is empty,
 return \code{default}.
 }
 

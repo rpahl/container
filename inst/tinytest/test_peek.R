@@ -25,8 +25,8 @@ ee(peek(d, "x", default = 4:6), 4:6)
 # peek.dict.table
 # ---------------
 dit = dict.table(a = 1:3, b = 4:6)
-ee(peek(dit, "a"), getval(dit, "a"))
-ee(peek(dit, 1), getval(dit, 1))
+ee(peek(dit, "a"), 1:3)
+ee(peek(dit, 1), 1:3)
 ee(peek(dit, 3), NULL)
 ee(peek(dit, "x"), NULL)
 ee(peek(dit, "x", default = 0), rep(0, 3))

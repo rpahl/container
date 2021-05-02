@@ -23,6 +23,7 @@ Key-value pairs internally are stored in a hash-table.
 \itemize{
 \item \href{#method-new}{\code{Dict$new()}}
 \item \href{#method-add}{\code{Dict$add()}}
+\item \href{#method-at}{\code{Dict$at()}}
 \item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
@@ -99,6 +100,26 @@ otherwise signal an error.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-at"></a>}}
+\if{latex}{\out{\hypertarget{method-at}{}}}
+\subsection{Method \code{at()}}{
+Access value at key.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Dict$at(key)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{key}}{\code{character} name of key.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-delete"></a>}}
 \if{latex}{\out{\hypertarget{method-delete}{}}}
 \subsection{Method \code{delete()}}{
@@ -145,7 +166,7 @@ the \code{Dict}
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-Access value at key.
+This function is deprecated. Use \code{\link[=at]{at()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$get(key)}\if{html}{\out{</div>}}
 }
