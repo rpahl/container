@@ -1,19 +1,21 @@
+ee = expect_equal
+
 # ----------
 # initialize
 # ----------
 co <- Container$new()
-expect_equal(attr(co, "class"), c("Container", "Iterable", "R6"))
-expect_equal(mode(co$values()), "list")
+ee(attr(co, "class"), c("Container", "Iterable", "R6"))
+ee(mode(co$values()), "list")
 
 co <- Container$new(environment())
-expect_equal(co$length(), 1)
+ee(co$length(), 1)
 
 co <- Container$new(environment(), foo = identity)
-expect_equal(co$length(), 2)
+ee(co$length(), 2)
 
 # initialized names are kept
 co <- Container$new(A = 1, B = 2)
-expect_equal(names(co$values()), c("A", "B"))
+ee(names(co$values()), c("A", "B"))
 
 
 # ---
@@ -22,7 +24,7 @@ expect_equal(names(co$values()), c("A", "B"))
 co <- Container$new()
 expect_true(co$is_empty())
 co$add(1)
-expect_equal(co$values(), list(1))
+ee(co$values(), list(1))
 
 
 # NULL and empty lists can be added to a Container
@@ -32,7 +34,7 @@ co$add(list())
 co$add(0)
 co$add(NULL)
 co$add(list())
-expect_equal(co$values(), list(NULL, list(), 0, NULL, list()))
+ee(co$values(), list(NULL, list(), 0, NULL, list()))
 
 # non-trivial objects are added correctly
 v <- 1:10
@@ -43,37 +45,37 @@ collection <- c(list(v), list(env), list(ll), list(foo))
 
 co <- Container$new()
 co$add(v)$add(env)$add(ll)$add(foo)
-expect_equal(co$values(), collection)
-expect_equal(co$length(), length(collection))
+ee(co$values(), collection)
+ee(co$length(), length(collection))
 
 # a Container can be added to a Container
 co <- Container$new(1, 2)
 coco <- Container$new()
 coco$add(co)
-expect_equal(coco$values()[[1]], co)
-expect_equal(coco$values()[[1]]$values(), list(1, 2))
+ee(coco$values()[[1]], co)
+ee(coco$values()[[1]]$values(), list(1, 2))
 
 # named elements can be added to a Container
 co <- Container$new()
 co$add(a = 1, 2, b = 3)
-expect_equal(co$values(), list(a = 1, 2, b = 3))
+ee(co$values(), list(a = 1, 2, b = 3))
 
 # -----
 # clear
 # -----
-expect_equal(Container$new()$clear(), Container$new())
-expect_equal(Container$new(1, 2)$clear(), Container$new())
-expect_equal(Container$new(a = 1, b = 2)$clear(), Container$new())
+ee(Container$new()$clear(), Container$new())
+ee(Container$new(1, 2)$clear(), Container$new())
+ee(Container$new(a = 1, b = 2)$clear(), Container$new())
 
 # -----
 # count
 # -----
 # number of element occurrences can be counted
 co <- Container$new("a", "a", "b", "a", "c")
-expect_equal(co$count("a"), 3)
-expect_equal(co$count("b"), 1)
-expect_equal(co$count("c"), 1)
-expect_equal(co$count("d"), 0)
+ee(co$count("a"), 3)
+ee(co$count("b"), 1)
+ee(co$count("c"), 1)
+ee(co$count("d"), 0)
 
 
 # ------
@@ -82,10 +84,10 @@ expect_equal(co$count("d"), 0)
 # elements can be deleted from a Container
 co <- Container$new(1, 2, 3)
 co$delete(3)
-expect_equal(co$values(), list(1, 2))
+ee(co$values(), list(1, 2))
 
 co <- Container$new(mean, identity)
-expect_equal(co$delete(mean)$values(), list(identity))
+ee(co$delete(mean)$values(), list(identity))
 expect_error(co$delete(), 'argument "elem" is missing, with no default')
 
 # Container gives an error if trying to delete non-existing element
@@ -97,7 +99,7 @@ expect_error(co$delete(li), "list\\(1, 2\\) is not in Container")
 # If duplicates, only one element is deleted
 co <- Container$new(1, 2, 1)
 co$delete(1)
-expect_equal(co, Container$new(1, 2))
+ee(co, Container$new(1, 2))
 
 # -------
 # discard
@@ -105,10 +107,10 @@ expect_equal(co, Container$new(1, 2))
 # elements can be discarded from a Container
 co <- Container$new(1, 2, 3)
 co$discard(3)
-expect_equal(co$values(), list(1, 2))
+ee(co$values(), list(1, 2))
 
 co <- Container$new(mean, identity)
-expect_equal(co$discard(mean)$values(), list(identity))
+ee(co$discard(mean)$values(), list(identity))
 expect_error(co$discard(), 'argument "elem" is missing, with no default')
 
 # Container is not changed when trying to discard non-existing element
@@ -118,7 +120,7 @@ expect_silent(co$discard(5))
 # Multiple elements are all discarded
 co <- Container$new(1, 2, 1)
 co$discard(1)
-expect_equal(co, Container$new(1, 2))
+ee(co, Container$new(1, 2))
 
 # -----
 # empty
@@ -169,33 +171,33 @@ container_options(.reset = TRUE)
 # length
 # ------
 # the length of a Container can be retrieved
-expect_equal(Container$new()$length(), 0)
+ee(Container$new()$length(), 0)
 co <- Container$new(1, 2, 3)
-expect_equal(co$length(), length(co$values()))
+ee(co$length(), length(co$values()))
 
 
 # -----
 # print
 # -----
 out = capture.output(print(Container$new()))
-expect_equal(out, "[]")
+ee(out, "[]")
 
 co = Container$new(1, 1L, NULL, integer())
 out = capture.output(print(co))
-expect_equal(out, "[1, 1L, NULL, integer()]")
+ee(out, "[1, 1L, NULL, integer()]")
 
 co2 = Container$new(list(), 3:5, co)
 out = capture.output(print(co2))
-expect_equal(out, "[list(), (3L 4L 5L), [1, 1L, NULL, integer()]]")
+ee(out, "[list(), (3L 4L 5L), [1, 1L, NULL, integer()]]")
 
 # Increasing the size of the first container alters the output
 co$add(1)$add(2)$add(3)
 out = capture.output(print(co2))
-expect_equal(out, "[list(), (3L 4L 5L), <<Container(7)>>]")
+ee(out, "[list(), (3L 4L 5L), <<Container(7)>>]")
 
 co2$add(data.frame(A = 1:3, B = 3:1))
 out = capture.output(print(co2))
-expect_equal(out, "[list(), (3L 4L 5L), <<Container(7)>>, <<data.frame(3x2)>>]")
+ee(out, "[list(), (3L 4L 5L), <<Container(7)>>, <<data.frame(3x2)>>]")
 
 # -------
 # replace
@@ -215,32 +217,32 @@ expect_error(Container$new(0)$replace(1, 2),
              "old element \\(1\\) is not in Container")
 
 # If add == TRUE element is always added
-expect_equal(Container$new()$replace(0, 1, add = TRUE), Container$new(1))
-expect_equal(Container$new(1)$delete(1)$replace(0, 2, TRUE), Container$new(2))
+ee(Container$new()$replace(0, 1, add = TRUE), Container$new(1))
+ee(Container$new(1)$delete(1)$replace(0, 2, TRUE), Container$new(2))
 
 # If multiple occurcenes, only one of them is replaced starting from the right
 co = Container$new(1, 2, 1, 3)
 co$replace(1, 0)
-expect_equal(co, Container$new(1, 2, 0, 3))
+ee(co, Container$new(1, 2, 0, 3))
 
 co = Container$new(1, 1L, "1")
 co$replace(1, 0)
-expect_equal(co, Container$new(1, 0, "1"))
+ee(co, Container$new(1, 0, "1"))
 
 # Replace can replace special elements of basic type
 co = Container$new(NULL, numeric(0), list(), NULL, numeric(0), list())
 co$replace(NULL, 0)
-expect_equal(co, Container$new(NULL, numeric(), list(), 0, numeric(), list()))
+ee(co, Container$new(NULL, numeric(), list(), 0, numeric(), list()))
 co$replace(numeric(0), 0)
-expect_equal(co, Container$new(NULL, numeric(), list(), 0, 0, list()))
+ee(co, Container$new(NULL, numeric(), list(), 0, 0, list()))
 co$replace(list(), 0)
-expect_equal(co, Container$new(NULL, numeric(), list(), 0, 0, 0))
+ee(co, Container$new(NULL, numeric(), list(), 0, 0, 0))
 
 # Replace can replace by special elements of basic type
 co = Container$new(0)
-expect_equal(co$replace(0, NULL), container(NULL))
-expect_equal(co$replace(NULL, numeric()), container(numeric()))
-expect_equal(co$replace(numeric(), list()), container(list()))
+ee(co$replace(0, NULL), container(NULL))
+ee(co$replace(NULL, numeric()), container(numeric()))
+ee(co$replace(numeric(), list()), container(list()))
 
 
 # Replace works on Container objects
@@ -248,17 +250,17 @@ co1 = Container$new(1)
 co2 = Container$new(2)
 co = Container$new(co1, co2, co1, co2)
 co$replace(co1, 1)
-expect_equal(co, Container$new(co1, co2, 1, co2))
+ee(co, Container$new(co1, co2, 1, co2))
 co$replace(co2, 2)
-expect_equal(co, Container$new(co1, co2, 1, 2))
+ee(co, Container$new(co1, co2, 1, 2))
 
 
 # ------
 # values
 # ------
 # the internal list of values of a Container can be retrieved
-expect_equal(Container$new()$values(), list())
-expect_equal(Container$new(1, 2, NULL)$values(), list(1, 2, NULL))
+ee(Container$new()$values(), list())
+ee(Container$new(1, 2, NULL)$values(), list(1, 2, NULL))
 
 
 # -----
@@ -270,8 +272,8 @@ c2 <- c1
 cc <- c1$clone()
 expect_true(identical(c1, c2))
 expect_false(identical(c1, cc))
-expect_equal(c1$length(), cc$length())
-expect_equal(c1, cc)
+ee(c1$length(), cc$length())
+ee(c1, cc)
 
 c1$delete(3)
 expect_true(identical(c1, c2))
@@ -280,19 +282,19 @@ expect_true(c1$length() < cc$length())
 # Container objects can be even cloned deeply
 c1 = Container$new(a = 1)
 cc.deep = c1$clone(deep = TRUE)
-expect_equal(c1$values(), cc.deep$values())
+ee(c1$values(), cc.deep$values())
 
 c2 = Container$new(c1)
 
 cc = c2$clone()
-expect_equal(cc, Container$new(Container$new(a = 1)))
+ee(cc, Container$new(Container$new(a = 1)))
 c1$add(2)   # since it was not a deep clone, this will affect cc
-expect_equal(cc, Container$new(Container$new(a = 1, 2)))
+ee(cc, Container$new(Container$new(a = 1, 2)))
 
 cc.deep = c2$clone(deep = TRUE)
 c1$add(3)   # this again affects cc but not cc.deep
-expect_equal(cc, Container$new(Container$new(a = 1, 2, 3)))
-expect_equal(cc.deep, Container$new(Container$new(a = 1, 2)))
+ee(cc, Container$new(Container$new(a = 1, 2, 3)))
+ee(cc.deep, Container$new(Container$new(a = 1, 2)))
 
 
 # --------
@@ -306,6 +308,6 @@ sum <- 0
 while(it$has_next())
     sum <- sum + it$get_next()[[1]]
 
-expect_equal(sum(v), sum(as.integer(co$values())))
+ee(sum(v), sum(as.integer(co$values())))
 
 

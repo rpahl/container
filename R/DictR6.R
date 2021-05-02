@@ -124,6 +124,12 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return its value.
         pop = function(key) {
+            if (self$is_empty())
+                stop("pop at empty ", data.class(self))
+
+            if (missing(key))
+                key = utils::tail(self$keys(), 1)
+
             elem <- self$peek(key)
             self$delete(key)
             elem

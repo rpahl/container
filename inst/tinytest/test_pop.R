@@ -16,10 +16,11 @@ expect_error(popleft_(deque()), "popleft at empty Deque")
 # pop_.Dict
 # ---------
 d = dict(a = 1, b = 1:3)
+expect_error(pop_(d, "x"), "key 'x' not in Dict")
 
 ee(pop_(d, "b"), 1:3)
 ee(pop_(d, "a"), 1)
-expect_error(pop_(d, "x"), "key 'x' not in Dict")
+expect_error(pop_(d, "x"), "pop at empty Dict")
 
 
 # ---------------
