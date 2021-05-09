@@ -35,9 +35,9 @@ clear.Container <- function(x) (x$clone(deep = TRUE)$clear())
 #'
 #' co = container(1, 2, mean)
 #' clear(co)
-#' co
-#' clear_(co)
-#' co
+#' print(co)    # Original was not touched
+#' clear_(co)   # Clears original
+#' print(co)
 NULL
 
 #' @rdname clear

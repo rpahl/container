@@ -27,6 +27,7 @@ Creates a copy of the object.
 
 co = container(1, 2, 3)
 co2 = clone(co)
+co == co2
 
 d = dict.table(a = 1:2, b = 3:4)
 clone(d)

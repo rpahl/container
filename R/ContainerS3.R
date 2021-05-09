@@ -6,10 +6,11 @@
 #' base class for [Deque()], [Set()], and [Dict()] objects, users are more
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of these classes.
-#' @param ... elements to put into or remove from the `Container`.
+#' @param ... elements to be put into or removed from the `Container`.
 #' @param elem some element of any type
 #' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.
+#' @param .x `object of class `Container`
 #' @name ContainerS3
 #' @seealso For the `Container` class documentation see [Container()].
 #' @details Methods that alter `Container` objects usually come in two versions
@@ -43,17 +44,9 @@ as.container <- function(x)
 is.container <- function(x) inherits(x, "Container")
 
 
-#' @name as.list.Container
 #' @rdname ContainerS3
-#' @usage
-#' ## S3 methods for class 'Container'
-#' ## --------------------------------
-#'
-#' as.list(x)
 #' @details * `as.list(x)` converts container `x` to a base `R` list. All of
 #' the container's elements will copied (deeply) during the conversion.
-NULL
-
 #' @export
 `as.list.Container` <- function(x) x$clone(deep = TRUE)$values()
 
@@ -88,9 +81,6 @@ length.Container <- function(x) x$length()
 names.Container <- function(x) names(x$values())
 
 
-# TODO: implement generic %in%
-
-
 #' @rdname ContainerS3
 #' @details * `na.omit(x)` omits all `NA` values contained in `x`.
 #' @export
@@ -99,4 +89,7 @@ na.omit.Container <- function(x)
     l = as.list(x)
     as.container(l[!is.na(l)])
 }
+
+
+# TODO: implement generic %in%
 

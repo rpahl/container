@@ -1,3 +1,9 @@
+#' @name ContainerS3methods
+#' @rdname ContainerS3
+#' @usage
+#' ## Container S3 methods
+NULL
+
 #' Add elements
 #'
 #' Add elements to container-like objects.
@@ -27,7 +33,6 @@ addleft_ <- function(.x, ...) UseMethod("addleft_")
 #' @details
 #' If `.x` is a `Container`, `Set` or `Deque` object, the elements being added
 #' can (but must not) be named.
-#' @export
 #' @examples
 #'
 #' co = container(1)
@@ -35,6 +40,7 @@ addleft_ <- function(.x, ...) UseMethod("addleft_")
 #'
 #' s = setnew(1)
 #' add(s, 1, 1, b = 2, "1", co = container(1, 1))
+#' @export
 add.Container <- function(.x, ...)
 {
     (add_(.x$clone(deep = TRUE), ...))
@@ -48,12 +54,8 @@ add.Container <- function(.x, ...)
 #' @details
 #' * `add(.x, ...)` and `add_(.x, ...)` add elements to `.x`.
 #' @examples
-#'
 #' co = container(1)
 #' add(co, 1, b = 2, c = container(1:3))
-#'
-#' s = setnew(1)
-#' add(s, 1, 1, b = 2, "1", co = container(1, 1))
 NULL
 
 #' @rdname add

@@ -14,6 +14,7 @@
 \alias{iter.Container}
 \alias{+.Container}
 \alias{-.Container}
+\alias{ContainerS3methods}
 \alias{add.Container}
 \alias{clear.Container}
 \alias{clone.Container}
@@ -31,10 +32,7 @@ as.container(x)
 
 is.container(x)
 
-## S3 methods for class 'Container'
-## --------------------------------
-
-as.list(x)
+\method{as.list}{Container}(x)
 
 \method{length}{Container}(x)
 
@@ -47,6 +45,8 @@ as.list(x)
 \method{+}{Container}(x, y)
 
 \method{-}{Container}(x, y)
+
+## Container S3 methods
 
 add(.x, ...)
 add_(.x, ...)
@@ -72,10 +72,12 @@ replace(.x, old, new, add = FALSE)
 replace_(.x, old, new, add = FALSE)
 }
 \arguments{
-\item{...}{elements to put into or remove from the \code{Container}.}
+\item{...}{elements to be put into or removed from the \code{Container}.}
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
 or of class \code{Container} for the \code{S3} methods.}
+
+\item{.x}{\verb{object of class }Container`}
 
 \item{elem}{some element of any type}
 
@@ -179,45 +181,43 @@ Elements that don't exist, are ignored.
 }
 
 \itemize{
-\item \code{replace(.x, old, new, add = FALSE)} and \code{replace_(.x, ...)} try to find
-element \code{old} and replace it with element \code{new}. If \code{old} does not exist,
-an error is raised, unless \code{add} was set to \code{TRUE}.
+\item \code{replace(.x, old, new, add = FALSE)} and
+\code{replace_(.x, old, new, add = FALSE)} try to find element \code{old} and
+replace it with element \code{new}. If \code{old} does not exist, an error is raised,
+unless \code{add} was set to \code{TRUE}.
 }
 }
 \examples{
-
 co = container(1)
 add(co, 1, b = 2, c = container(1:3))
 
-s = setnew(1)
-add(s, 1, 1, b = 2, "1", co = container(1, 1))
-
 co = container(1, 2, mean)
 clear(co)
-co
-clear_(co)
-co
+print(co)    # Original was not touched
+clear_(co)   # Clears original
+print(co)
 
 co = container(1, 2, 3)
 co2 = clone(co)
+co == co2
 
 co = container("a", "b", "a", mean, mean)
 count(co, "a")
 count(co, mean)
 count(co, "c")
 
-s = setnew("a", 1:3, iris)
-print(s)
-delete(s, 1:3, "a")
-delete(s, iris)
+co = container("a", 1:3, iris)
+print(co)
+delete(co, 1:3, "a")
+delete(co, iris)
 \dontrun{
-delete(s, "b")   # "b" is not in Set}
+delete(co, "b")   # "b" is not in Container}
 
-s = setnew("a", 1:3, iris)
-print(s)
-discard(s, 1:3, "a")
-discard(s, iris)
-discard(s, "b")  # ignored
+co = container("a", 1:3, iris)
+print(co)
+discard(co, 1:3, "a")
+discard(co, iris)
+discard(co, "b")  # ignored
 
 co = container(1, 2, mean)
 has(co, 1)                   # TRUE

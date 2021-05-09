@@ -81,7 +81,7 @@ The \code{\link[=dict.table]{dict.table()}} is a mix of a dictionary and a
 \code{data.table}, that is, it can be considered as a dictionary with
 all elements having the same length or as a data.table with extended
 functionality to manage its data columns.
-Basically a dict.table behaves like both a dict and a data.table, so that
+A dict.table object behaves like both a dict and a data.table, so that
 all dict and data.table functions and operators are available.
 
 As with \code{\link[=Dict]{Dict()}} objects, it provides reference semantics so that changes
@@ -136,9 +136,9 @@ default value has a length of 1, in which case recycling is done silently.
 from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
 
 \itemize{
-\item \code{replace(.x, key, value, add = FALSE)} and \code{replace_(.x, ...)} replace
-values at column \code{key}. If \code{key} does not exist, an error is given unless
-\code{add} was set to \code{TRUE}.
+\item \code{replace(.x, key, value, add = FALSE)} and
+\code{replace_(.x, key, value, add = FALSE)} replace values at column \code{key}.
+If \code{key} does not exist, an error is given unless \code{add} was set to \code{TRUE}.
 }
 
 \itemize{

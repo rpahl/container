@@ -23,7 +23,7 @@
 #' `data.table`, that is, it can be considered as a dictionary with
 #' all elements having the same length or as a data.table with extended
 #' functionality to manage its data columns.
-#' Basically a dict.table behaves like both a dict and a data.table, so that
+#' A dict.table object behaves like both a dict and a data.table, so that
 #' all dict and data.table functions and operators are available.
 #'
 #' As with [Dict()] objects, it provides reference semantics so that changes

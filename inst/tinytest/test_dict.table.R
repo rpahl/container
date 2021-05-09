@@ -46,7 +46,8 @@ expect_true(hasName(add(dit, "b" = 2), "b"))
 
 # the length of added columns must match or be of length 1
 dit = dict.table(A = 1:4, B = 4:1)
-expect_error(add(dit, a = 1:3), "Supplied 3 items to be assigned to 4 items of column 'a'")
+expect_error(add(dit, a = 1:3),
+             "Supplied 3 items to be assigned to 4 items of column 'a'")
 expect_error(add(dit, a = 1:2))
 expect_false(has(dit, "a"))
 dit = add(dit, a = 1)

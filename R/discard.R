@@ -40,11 +40,11 @@ discard.Container <- function(.x, ...) {
 #' Elements that don't exist, are ignored.
 #' @examples
 #'
-#' s = setnew("a", 1:3, iris)
-#' print(s)
-#' discard(s, 1:3, "a")
-#' discard(s, iris)
-#' discard(s, "b")  # ignored
+#' co = container("a", 1:3, iris)
+#' print(co)
+#' discard(co, 1:3, "a")
+#' discard(co, iris)
+#' discard(co, "b")  # ignored
 NULL
 
 #' @rdname discard

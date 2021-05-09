@@ -14,6 +14,7 @@ clone <- function(x, ...) UseMethod("clone")
 #'
 #' co = container(1, 2, 3)
 #' co2 = clone(co)
+#' co == co2
 clone.Container <- function(x) (x$clone(deep = TRUE))
 
 #' @name clone.Container
@@ -27,6 +28,7 @@ clone.Container <- function(x) (x$clone(deep = TRUE))
 #'
 #' co = container(1, 2, 3)
 #' co2 = clone(co)
+#' co == co2
 NULL
 
 

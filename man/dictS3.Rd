@@ -118,9 +118,9 @@ otherwise the given \code{default} value.
 from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
 
 \itemize{
-\item \code{replace(.x, key, value, add = FALSE)} and \code{replace_(.x, ...)} replace value
-at \code{key}. If \code{key} does not exist, an error is given unless \code{add} was set to
-\code{TRUE}.
+\item \code{replace(.x, key, value, add = FALSE)} and
+\code{replace_(.x, key, value, add = FALSE)} replace value at \code{key}.
+If \code{key} does not exist, an error is given unless \code{add} was set to \code{TRUE}.
 }
 
 \itemize{

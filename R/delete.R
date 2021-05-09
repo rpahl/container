@@ -42,12 +42,12 @@ delete.Container <- function(.x, ...)
 #' If one or more elements don't exist, an error is signaled.
 #' @examples
 #'
-#' s = setnew("a", 1:3, iris)
-#' print(s)
-#' delete(s, 1:3, "a")
-#' delete(s, iris)
+#' co = container("a", 1:3, iris)
+#' print(co)
+#' delete(co, 1:3, "a")
+#' delete(co, iris)
 #' \dontrun{
-#' delete(s, "b")   # "b" is not in Set}
+#' delete(co, "b")   # "b" is not in Container}
 NULL
 
 #' @rdname delete

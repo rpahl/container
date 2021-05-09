@@ -55,9 +55,10 @@ replace.Container <- function(.x, old, new, add = FALSE)
 #' replace(.x, old, new, add = FALSE)
 #' replace_(.x, old, new, add = FALSE)
 #' @details
-#' * `replace(.x, old, new, add = FALSE)` and `replace_(.x, ...)` try to find
-#' element `old` and replace it with element `new`. If `old` does not exist,
-#' an error is raised, unless `add` was set to `TRUE`.
+#' * `replace(.x, old, new, add = FALSE)` and
+#'   `replace_(.x, old, new, add = FALSE)` try to find element `old` and
+#' replace it with element `new`. If `old` does not exist, an error is raised,
+#' unless `add` was set to `TRUE`.
 #' @examples
 #'
 #' co = container("x", 9)
@@ -113,9 +114,9 @@ replace_.Dict <- function(.x, key, value, add = FALSE)
 #' replace(.x, key, value, add = FALSE)
 #' replace_(.x, key, value, add = FALSE)
 #' @details
-#' * `replace(.x, key, value, add = FALSE)` and `replace_(.x, ...)` replace value
-#' at `key`. If `key` does not exist, an error is given unless `add` was set to
-#' `TRUE`.
+#' * `replace(.x, key, value, add = FALSE)` and
+#' `replace_(.x, key, value, add = FALSE)` replace value at `key`.
+#' If `key` does not exist, an error is given unless `add` was set to `TRUE`.
 #' @examples
 #'
 #' d = dict(a = 1)
@@ -166,9 +167,9 @@ replace_.dict.table <- function(.x, key, value, add = FALSE)
 #' replace(.x, key, value, add = FALSE)
 #' replace_(.x, key, value, add = FALSE)
 #' @details
-#' * `replace(.x, key, value, add = FALSE)` and `replace_(.x, ...)` replace
-#' values at column `key`. If `key` does not exist, an error is given unless
-#' `add` was set to `TRUE`.
+#' * `replace(.x, key, value, add = FALSE)` and
+#' `replace_(.x, key, value, add = FALSE)` replace values at column `key`.
+#' If `key` does not exist, an error is given unless `add` was set to `TRUE`.
 #' @examples
 #'
 #' dit = dict.table(a = 1:3)
