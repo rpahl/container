@@ -40,7 +40,7 @@ NULL
 }
 
 
-#' @rdname OpsArith
+#' @rdname DequeS3
 #' @return For `Deque`, `+` returns a new [Deque()] object with all elements
 #' from `x` and `y` combined. If `x` is not a [Deque()], it's elements will
 #' be added to the left of `y`.
@@ -56,7 +56,7 @@ NULL
 }
 
 
-#' @rdname OpsArith
+#' @rdname DequeS3
 #' @details * `x - y` element-wise removes all items of `y` from `x`, given
 #' the element was contained in `x`.
 #' @return For `Deque`, `-` returns x - y
@@ -74,7 +74,7 @@ NULL
 }
 
 
-#' @rdname OpsArith
+#' @rdname DictS3
 #' @return For `Dict`, `+` returns a copy of `x` updated by `y`.
 #' @examples
 #' d1 = dict(a = 1, b = list(1, 2))
@@ -93,7 +93,7 @@ NULL
 }
 
 
-#' @rdname OpsArith
+#' @rdname DictS3
 #' @return For `Dict`, `-` returns `x` after all keys were discarded
 #' that appear in `y`.
 #' @examples
@@ -113,22 +113,30 @@ NULL
     d1
 }
 
-#' @rdname OpsArith
+#' @rdname SetS3
 #' @return For `Set`, `+` returns the set union of x and y. Result is always a
 #' valid set.
+#' @examples
+#' s1 = setnew(1, 1:2)
+#' s2 = setnew(2, 1:2)
+#' s1 + s2     # same as s1 | s2 or c(c1, s2)
+#' s2 + s1     # same
 #' @export
 `+.Set` <- function(x, y)
 {
     x | y
 }
 
-#' @rdname OpsArith
+#' @rdname SetS3
 #' @return For `Set`, `-` returns the set-difference of x and y. Result is
 #' always a valid set.
+#' @examples
+#' s1 - s2
+#' s2 - s1
+#'
 #' @export
 `-.Set` <- function(x, y)
 {
     as.set(x)$diff(as.set(y))
 }
-
 

@@ -14,6 +14,16 @@
 #' interface with copy semantics. Note that any `S3` methods defined for the
 #' `Container` class also work with `Set` objects.
 #' ## Methods
+#' @examples
+#' s = setnew(1, b = NA, 1:3, c = container("a", 1))
+#' is.set(s)
+#' print(s)
+#' length(s)
+#' names(s)
+#' as.list(s)
+#' na.omit(s)
+#' unpack(s)   # flatten recursively similar to unlist
+#'
 NULL
 
 #' @rdname SetS3
