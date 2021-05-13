@@ -48,7 +48,9 @@ popleft_.Deque <- function(.x) .x$popleft()
 #' @examples
 #' d = deque(1, 2, 3)
 #' pop_(d)
+#' print(d)
 #' popleft_(d)
+#' print(d)
 #'
 #' \dontrun{
 #' pop_(deque())  # pop at empty Deque}

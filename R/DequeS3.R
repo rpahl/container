@@ -7,14 +7,34 @@
 #' @param ... initial elements put into the `Deque`.
 #' @param x `R` object of `ANY` type for [as.deque()] and [is.deque()]
 #' or of class `Deque` for the `S3` methods.
+#' @param .x `object of class `Deque`
+#' @param default value to be returned if peeked value does not exist.
+#' @param n `integer` number of steps to rotate
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Deque()] and it's superclass [Container()].
 #' @name DequeS3
-#' @details While the [Deque()] class is based on the `R6` framework and
-#' provides reference semantics, the methods described here provide an `S3`
-#' interface with copy semantics. Note that any `S3` methods defined for the
-#' `Container` class also work with `Deque` objects.
+#' @details Methods that alter `Deque` objects usually come in two versions
+#' providing either copy or reference semantics where the latter are visible
+#' by an underscore appended to the standard function name, for example,
+#' `addleft` and `addleft_`.
 #' ## Methods
+#' @examples
+#' d = deque(1, 2, s = "a", v = 1:3)
+#' is.deque(d)
+#' print(d)
+#' length(d)
+#' names(d)
+#' as.list(d)
+#' rev(d)
+#'
+#' l = list(0, 1)
+#' d2 = as.deque(l)
+#' d + d2
+#' c(d, d2) # same as d + d2
+#' d2 + d
+#' d - d2
+#' c(d2, d) # same as d2 + d
+#' d2 - d
 NULL
 
 #' @rdname DequeS3

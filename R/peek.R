@@ -10,10 +10,8 @@
 #'
 #' `peekleft` peeks at first element of a `Deque`.
 #' @param x an `R` object of the respective class.
-#' @param default the value that is returned if the intended element does not
-#' exist.
-#' @param ... additional arguments to be passed to or from methods.
 #' @param default value to be returned if peeked value does not exist.
+#' @param ... additional arguments to be passed to or from methods.
 #' @seealso [pop()]
 #' @export
 peek <- function(x, ...) UseMethod("peek")

@@ -30,6 +30,8 @@
 #' l = list(1, NA)
 #' co2 = as.container(l)
 #' co + co2
+#' c(co, co2)  # same as co + co2
+#' c(co, l)    # same
 #' co - co2
 #'
 NULL

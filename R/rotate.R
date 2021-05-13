@@ -36,6 +36,10 @@ rotate.Deque <- function(x, n = 1L)
 #' negative, rotate to the left.
 #' @examples
 #'
+#' d = deque(1, 2, 3, 4)
+#' rotate(d)
+#' rotate(d, n = 2)
+#'
 NULL
 
 #' @rdname rotate

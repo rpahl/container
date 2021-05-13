@@ -75,7 +75,6 @@ add(co, 1, b = 2, c = container(1:3))
 
 s = setnew(1)
 add(s, 1, 1, b = 2, "1", co = container(1, 1))
-
 d = deque(0)
 add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
 addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|

@@ -18,6 +18,13 @@ add <- function(.x, ...) UseMethod("add")
 #' @export
 add_ <- function(.x, ...) UseMethod("add_")
 
+
+#' @name DequeS3methods
+#' @rdname DequeS3
+#' @usage
+#' ## Deque S3 methods
+NULL
+
 #' @rdname add
 #' @export
 addleft <- function(.x, ...) UseMethod("addleft")
@@ -71,7 +78,6 @@ add_.Container <- function(.x, ...)
 #' added to the right or left (`addleft`) of `.x`.
 #' @export
 #' @examples
-#'
 #' d = deque(0)
 #' add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
 #' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|

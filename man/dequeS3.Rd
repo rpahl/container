@@ -7,6 +7,7 @@
 \alias{as.deque}
 \alias{is.deque}
 \alias{rev.Deque}
+\alias{DequeS3methods}
 \alias{addleft.Deque}
 \alias{peek.Deque}
 \alias{pop.Deque}
@@ -20,6 +21,8 @@ as.deque(x)
 is.deque(x)
 
 \method{rev}{Deque}(x)
+
+## Deque S3 methods
 
 addleft(.x, ...)
 addleft_(.x, ...)
@@ -37,6 +40,12 @@ rotate(x, n)
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.deque]{as.deque()}} and \code{\link[=is.deque]{is.deque()}}
 or of class \code{Deque} for the \code{S3} methods.}
+
+\item{.x}{\verb{object of class }Deque`}
+
+\item{default}{value to be returned if peeked value does not exist.}
+
+\item{n}{\code{integer} number of steps to rotate}
 }
 \description{
 Deques are a generalization of stacks and queues typically
@@ -45,10 +54,10 @@ underlying data sequence. As such, the \code{\link[=deque]{deque()}} can also be
 both stacks and queues.
 }
 \details{
-While the \code{\link[=Deque]{Deque()}} class is based on the \code{R6} framework and
-provides reference semantics, the methods described here provide an \code{S3}
-interface with copy semantics. Note that any \code{S3} methods defined for the
-\code{Container} class also work with \code{Deque} objects.
+Methods that alter \code{Deque} objects usually come in two versions
+providing either copy or reference semantics where the latter are visible
+by an underscore appended to the standard function name, for example,
+\code{addleft} and \code{addleft_}.
 \subsection{Methods}{
 }
 
@@ -93,6 +102,22 @@ negative, rotate to the left.
 }
 }
 \examples{
+d = deque(1, 2, s = "a", v = 1:3)
+is.deque(d)
+print(d)
+length(d)
+names(d)
+as.list(d)
+rev(d)
+
+l = list(0, 1)
+d2 = as.deque(l)
+d + d2
+c(d, d2) # same as d + d2
+d2 + d
+d - d2
+c(d2, d) # same as d2 + d
+d2 - d
 
 d = deque(0)
 add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
@@ -106,10 +131,16 @@ peek(deque(), default = 0)
 peekleft(deque(), default = 0)
 d = deque(1, 2, 3)
 pop_(d)
+print(d)
 popleft_(d)
+print(d)
 
 \dontrun{
 pop_(deque())  # pop at empty Deque}
+
+d = deque(1, 2, 3, 4)
+rotate(d)
+rotate(d, n = 2)
 
 }
 \seealso{
