@@ -6,6 +6,7 @@
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
+\alias{DictS3methods}
 \alias{add.Dict}
 \alias{delete.Dict}
 \alias{discard.Dict}
@@ -21,6 +22,8 @@ dict(...)
 as.dict(x)
 
 is.dict(x)
+
+## Dict S3 methods
 
 add(.x, ...)
 add_(.x, ...)
@@ -50,6 +53,8 @@ update_(x, other)
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.dict]{as.dict()}} and \code{\link[=is.dict]{is.dict()}}
 or of class \code{Dict} for the \code{S3} methods.}
 
+\item{key}{\code{character} name of key.}
+
 \item{value}{\code{any} R object}
 
 \item{add}{\code{logical} if \code{FALSE} (default) and \code{key} was not found,
@@ -71,7 +76,7 @@ For a full list of all dict methods see \code{\link[=Dict]{Dict()}}.
 Methods that alter \code{Dict} objects usually come in two versions
 providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,
-\code{add} and \code{add_}.
+\verb{[delete()]} and \verb{[delete_()]}.
 \subsection{Methods}{
 }
 
@@ -95,7 +100,7 @@ keys already exists, an error is given.
 }
 
 \itemize{
-\item \code{delete(.x, ...)} and \code{delete(.x, ...)} find and remove values at given
+\item \code{delete(.x, ...)} and \code{delete_(.x, ...)} find and remove values at given
 keys. Keys that don't exist are ignored.
 }
 
@@ -114,8 +119,10 @@ exist, an error is given.
 otherwise the given \code{default} value.
 }
 
-\code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
+\itemize{
+\item \code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
 from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
+}
 
 \itemize{
 \item \code{replace(.x, key, value, add = FALSE)} and
@@ -129,12 +136,23 @@ for keys not yet in \code{x} and replaces the values of existing keys.
 }
 }
 \examples{
-d = dict(a = 1, b = "one", f = mean)
+d = dict(a = 1, b = "one", f = mean, na = NA)
 print(d)
-print(values(d))
+names(d)
+as.list(d)
+na.omit(d)
+na.omit(as.list(d)) # does not work with lists
+
+d2 = dict(a = 2, b = list("one"))
+d + d2  # same as update(d, d2)
+d2 + d  # same as update(d2, d)
+d - d2
+d2 - d
+d - d
 
 \dontrun{
-dict(a = 1, 2)                       # all elements must be named}
+c(d, d2)         # duplicated keys are not allowed for Dict
+dict(a = 1, 2)   # all elements must be named}
 
 # Coercion
 as.dict(list(A = 1:3, B = "b"))

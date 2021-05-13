@@ -108,7 +108,6 @@ addleft_.Deque <- function(.x, ...)
     invisible(.x$addleft(...))
 }
 
-
 #' @rdname add
 #' @return For `Dict`, an object of class `Dict`.
 #' @details
@@ -126,6 +125,12 @@ add.Dict <- function(.x, ...)
 {
     (add_(.x$clone(deep = TRUE), ...))
 }
+
+#' @name DictS3methods
+#' @rdname DictS3
+#' @usage
+#' ## Dict S3 methods
+NULL
 
 #' @name add.Dict
 #' @rdname DictS3

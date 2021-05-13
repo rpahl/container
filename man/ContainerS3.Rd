@@ -102,7 +102,7 @@ create objects of these classes.
 Methods that alter \code{Container} objects usually come in two versions
 providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,
-\code{add} and \code{add_}.
+\verb{[add()]} and \verb{[add_()]}.
 \subsection{Methods}{
 }
 
@@ -195,6 +195,7 @@ length(co)
 names(co)
 as.list(co)
 na.omit(co)
+unpack(co)   # flatten recursively similar to unlist
 
 l = list(1, NA)
 co2 = as.container(l)

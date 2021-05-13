@@ -16,7 +16,7 @@
 #' @details Methods that alter `Deque` objects usually come in two versions
 #' providing either copy or reference semantics where the latter are visible
 #' by an underscore appended to the standard function name, for example,
-#' `addleft` and `addleft_`.
+#' `[addleft()]` and `[addleft_()]`.
 #' ## Methods
 #' @examples
 #' d = deque(1, 2, s = "a", v = 1:3)
@@ -64,8 +64,6 @@ c.Deque <- function(..., recursive = FALSE, use.names = TRUE)
     else
         as.deque(concat)
 }
-
-
 
 
 #' @rdname DequeS3

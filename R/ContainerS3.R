@@ -16,7 +16,7 @@
 #' @details Methods that alter `Container` objects usually come in two versions
 #' providing either copy or reference semantics where the latter are visible
 #' by an underscore appended to the standard function name, for example,
-#' `add` and `add_`.
+#' `[add()]` and `[add_()]`.
 #' ## Methods
 #' @examples
 #' co = container(1, b = NA, 1:3, c = container("a", 1))
@@ -26,6 +26,7 @@
 #' names(co)
 #' as.list(co)
 #' na.omit(co)
+#' unpack(co)   # flatten recursively similar to unlist
 #'
 #' l = list(1, NA)
 #' co2 = as.container(l)

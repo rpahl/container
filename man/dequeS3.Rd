@@ -57,7 +57,7 @@ both stacks and queues.
 Methods that alter \code{Deque} objects usually come in two versions
 providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,
-\code{addleft} and \code{addleft_}.
+\verb{[addleft()]} and \verb{[addleft_()]}.
 \subsection{Methods}{
 }
 

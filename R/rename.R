@@ -70,7 +70,7 @@ rename.Dict <- function(.x, old, new)
 #' rename(.x, old, new)
 #' rename_(.x, old, new)
 #' @details
-#' `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
+#' * `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
 #' from `old` to `new`, respectively, by copy and in place (i.e. by reference).
 #' @examples
 #' d = dict(a = 1, b = 2, c = 3)
@@ -110,7 +110,7 @@ rename.dict.table <- function(.x, old, new, ...)
 #' rename(.x, old, new, ...)
 #' rename_(.x, old, new, ...)
 #' @details
-#' `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
+#' * `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
 #' from `old` to `new`, respectively, by copy and in place (i.e. by reference).
 #' @examples
 #' dit = dict.table(a = 1, b = 2, c = 3)

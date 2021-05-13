@@ -132,8 +132,10 @@ of rows, it is recycled accordingly and a warning is given, unless the
 default value has a length of 1, in which case recycling is done silently.
 }
 
-\code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
+\itemize{
+\item \code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
 from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
+}
 
 \itemize{
 \item \code{replace(.x, key, value, add = FALSE)} and

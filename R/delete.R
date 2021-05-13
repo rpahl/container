@@ -92,7 +92,7 @@ delete.Dict <- function(.x, ...) {
 #' delete(.x, ...)
 #' delete(.x, ...)
 #' @details
-#' * `delete(.x, ...)` and `delete(.x, ...)` find and remove values at given
+#' * `delete(.x, ...)` and `delete_(.x, ...)` find and remove values at given
 #' keys. Keys that don't exist are ignored.
 #' @examples
 #'

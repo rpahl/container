@@ -8,23 +8,35 @@
 #' @param ... elements put into the `Dict`.
 #' @param x `R` object of `ANY` type for [as.dict()] and [is.dict()]
 #' or of class `Dict` for the `S3` methods.
+#' @param key `character` name of key.
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Dict()] and it's superclass [Container()].
 #' @name DictS3
 #' @details Methods that alter `Dict` objects usually come in two versions
 #' providing either copy or reference semantics where the latter are visible
 #' by an underscore appended to the standard function name, for example,
-#' `add` and `add_`.
+#' `[delete()]` and `[delete_()]`.
 #' ## Methods
-NULL
-
 #' @examples
-#' d = dict(a = 1, b = "one", f = mean)
+#' d = dict(a = 1, b = "one", f = mean, na = NA)
 #' print(d)
-#' print(values(d))
+#' names(d)
+#' as.list(d)
+#' na.omit(d)
+#' na.omit(as.list(d)) # does not work with lists
+#'
+#' d2 = dict(a = 2, b = list("one"))
+#' d + d2  # same as update(d, d2)
+#' d2 + d  # same as update(d2, d)
+#' d - d2
+#' d2 - d
+#' d - d
 #'
 #' \dontrun{
-#' dict(a = 1, 2)                       # all elements must be named}
+#' c(d, d2)         # duplicated keys are not allowed for Dict
+#' dict(a = 1, 2)   # all elements must be named}
+NULL
+
 #' @rdname DictS3
 #' @details * `dict(...)` initializes and returns an object of class `Dict`
 #' @export
