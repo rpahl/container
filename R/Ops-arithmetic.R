@@ -11,6 +11,11 @@ NULL
 #' @rdname ContainerS3
 #' @details * `x + y` combines `x` and `y` into a new container by appending `y`
 #' to `x`.
+#' @examples
+#' c1 = container(1, 1:2)
+#' c2 = container(2, 1:2)
+#' c1 + c2     # same as c(c1, c2)
+#' c2 + c1     # same as c(c2, c1)
 #' @export
 `+.Container` <- function(x, y)
 {
@@ -20,6 +25,11 @@ NULL
 #' @rdname ContainerS3
 #' @details * `x - y` element-wise discards all items of `y` from `x`, given
 #' the element was contained in `x`. The result is always a container.
+#' @examples
+#' c1 - c2
+#' c2 - c1
+#' c1 - c1
+#'
 #' @export
 `-.Container` <- function(x, y)
 {
@@ -34,6 +44,11 @@ NULL
 #' @return For `Deque`, `+` returns a new [Deque()] object with all elements
 #' from `x` and `y` combined. If `x` is not a [Deque()], it's elements will
 #' be added to the left of `y`.
+#' @examples
+#' d1 = deque(1, 1:2)
+#' d2 = deque(2, 1:2)
+#' d1 + d2     # same as c(d1, d2)
+#' d2 + d1     # same as c(d2, d1)
 #' @export
 `+.Deque` <- function(x, y)
 {
@@ -45,6 +60,11 @@ NULL
 #' @details * `x - y` element-wise removes all items of `y` from `x`, given
 #' the element was contained in `x`.
 #' @return For `Deque`, `-` returns x - y
+#' @examples
+#' d1 - d2
+#' d2 - d1
+#' d1 - d1
+#'
 #' @export
 `-.Deque` <- function(x, y)
 {
@@ -56,6 +76,14 @@ NULL
 
 #' @rdname OpsArith
 #' @return For `Dict`, `+` returns a copy of `x` updated by `y`.
+#' @examples
+#' d1 = dict(a = 1, b = list(1, 2))
+#' d2 = dict(a = 2, b = list(1, 2))
+#' d1 + d2      # same as update(d, d2)
+#' d2 + d1      # same as update(d2, d)
+#' \dontrun{
+#' c(d1, d2)    # duplicated keys are not allowed for Dict}
+#'
 #' @export
 `+.Dict` <- function(x, y)
 {
@@ -68,6 +96,11 @@ NULL
 #' @rdname OpsArith
 #' @return For `Dict`, `-` returns `x` after all keys were discarded
 #' that appear in `y`.
+#' @examples
+#' d - d2
+#' d2 - d
+#' d - d
+#'
 #' @export
 `-.Dict` <- function(x, y)
 {

@@ -197,12 +197,13 @@ as.list(co)
 na.omit(co)
 unpack(co)   # flatten recursively similar to unlist
 
-l = list(1, NA)
-co2 = as.container(l)
-co + co2
-c(co, co2)  # same as co + co2
-c(co, l)    # same
-co - co2
+c1 = container(1, 1:2)
+c2 = container(2, 1:2)
+c1 + c2     # same as c(c1, c2)
+c2 + c1     # same as c(c2, c1)
+c1 - c2
+c2 - c1
+c1 - c1
 
 co = container(1)
 add(co, 1, b = 2, c = container(1:3))

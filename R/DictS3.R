@@ -25,15 +25,7 @@
 #' na.omit(d)
 #' na.omit(as.list(d)) # does not work with lists
 #'
-#' d2 = dict(a = 2, b = list("one"))
-#' d + d2  # same as update(d, d2)
-#' d2 + d  # same as update(d2, d)
-#' d - d2
-#' d2 - d
-#' d - d
-#'
 #' \dontrun{
-#' c(d, d2)         # duplicated keys are not allowed for Dict
 #' dict(a = 1, 2)   # all elements must be named}
 NULL
 

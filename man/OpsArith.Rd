@@ -55,3 +55,24 @@ derived classes.
 the element was contained in \code{x}.
 }
 }
+\examples{
+d1 = deque(1, 1:2)
+d2 = deque(2, 1:2)
+d1 + d2     # same as c(d1, d2)
+d2 + d1     # same as c(d2, d1)
+d1 - d2
+d2 - d1
+d1 - d1
+
+d1 = dict(a = 1, b = list(1, 2))
+d2 = dict(a = 2, b = list(1, 2))
+d1 + d2      # same as update(d, d2)
+d2 + d1      # same as update(d2, d)
+\dontrun{
+c(d1, d2)    # duplicated keys are not allowed for Dict}
+
+d - d2
+d2 - d
+d - d
+
+}
