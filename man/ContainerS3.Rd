@@ -72,7 +72,7 @@ replace(.x, old, new, add = FALSE)
 replace_(.x, old, new, add = FALSE)
 }
 \arguments{
-\item{...}{elements to be put into or removed from the \code{Container}.}
+\item{...}{(possibly named) elements to be put into or removed from the \code{Container}.}
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
 or of class \code{Container} for the \code{S3} methods.}
@@ -188,6 +188,19 @@ unless \code{add} was set to \code{TRUE}.
 }
 }
 \examples{
+co = container(1, b = NA, 1:3, c = container("a", 1))
+is.container(co)
+print(co)
+length(co)
+names(co)
+as.list(co)
+na.omit(co)
+
+l = list(1, NA)
+co2 = as.container(l)
+co + co2
+co - co2
+
 co = container(1)
 add(co, 1, b = 2, c = container(1:3))
 

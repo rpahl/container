@@ -6,7 +6,7 @@
 #' base class for [Deque()], [Set()], and [Dict()] objects, users are more
 #' likley to use the corresponding [deque()], [set()], and [dict()] methods to
 #' create objects of these classes.
-#' @param ... elements to be put into or removed from the `Container`.
+#' @param ... (possibly named) elements to be put into or removed from the `Container`.
 #' @param elem some element of any type
 #' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.
@@ -18,6 +18,20 @@
 #' by an underscore appended to the standard function name, for example,
 #' `add` and `add_`.
 #' ## Methods
+#' @examples
+#' co = container(1, b = NA, 1:3, c = container("a", 1))
+#' is.container(co)
+#' print(co)
+#' length(co)
+#' names(co)
+#' as.list(co)
+#' na.omit(co)
+#'
+#' l = list(1, NA)
+#' co2 = as.container(l)
+#' co + co2
+#' co - co2
+#'
 NULL
 
 #' @rdname ContainerS3
