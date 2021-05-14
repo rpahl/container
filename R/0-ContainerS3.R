@@ -48,6 +48,10 @@ as.container <- function(x)
     do.call(container, args = as.list(x))
 }
 
+methods::setOldClass("Container")
+methods::setAs("list", "Container", function(from) as.container(from))
+
+
 #' @rdname ContainerS3
 #' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`
 #' and `FALSE` otherwise.

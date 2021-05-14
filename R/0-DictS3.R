@@ -12,7 +12,9 @@
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Dict()] and it's superclass [Container()].
 #' @name DictS3
-#' @details Methods that alter `Dict` objects usually come in two versions
+#' @details Internally, all key-value pairs are stored in a hash-table and the
+#' elements are sorted lexicographically by their keys.
+#' Methods that alter `Dict` objects usually come in two versions
 #' providing either copy or reference semantics where the latter are visible
 #' by an underscore appended to the standard function name, for example,
 #' `[delete()]` and `[delete_()]`.

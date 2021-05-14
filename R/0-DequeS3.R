@@ -47,6 +47,9 @@ deque <- function(...) Deque$new(...)$clone(deep = TRUE)
 #' @export
 as.deque <- function(x) do.call(deque, args = as.list(x))
 
+methods::setOldClass("Deque")
+methods::setAs("list", "Deque", function(from) as.deque(from))
+
 
 #' @rdname DequeS3
 #' @details * `is.deque(x)` returns `TRUE` if `x` is of class `Deque`

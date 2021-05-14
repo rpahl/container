@@ -79,6 +79,8 @@ key-value pair semantic.
 \details{
 For a full list of all dict methods see \code{\link[=Dict]{Dict()}}.
 
+Internally, all key-value pairs are stored in a hash-table and the
+elements are sorted lexicographically by their keys.
 Methods that alter \code{Dict} objects usually come in two versions
 providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,

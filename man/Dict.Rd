@@ -10,7 +10,8 @@ methods with some of them being overriden to account for the associative
 key-value pair semantic.
 }
 \details{
-Key-value pairs internally are stored in a hash-table.
+Internally, all key-value pairs are stored in a hash-table and the
+elements are sorted lexicographically by their keys.
 }
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=dict]{dict()}}

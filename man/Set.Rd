@@ -8,6 +8,11 @@ The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 \code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and
 it provides typical set operations such as \code{union} and \code{intersect}.
 }
+\details{
+All set elements internally are stored in a hash-table and the
+elements are always sorted, first considering length of the element and in
+case of a tie, their lexicographical representation.
+}
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=set]{set()}}
 }

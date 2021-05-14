@@ -30,8 +30,11 @@ The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 typical set operations such as \code{union} and \code{intersect}.
 }
 \details{
-Basic methods such as adding and removing elements from \code{Set}
-objects are described in the documentation for \code{\link[=container]{container()}}.
+Under the hood, elements of a set object are stored in a hash-table
+and sorted, first considering the length and, in case of a ties, a
+lexicographical representation of the elements.
+For a description of basic methods such as adding and removing elements,
+see the help of \code{\link[=container]{container()}}.
 \subsection{Methods}{
 }
 

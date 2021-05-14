@@ -75,6 +75,20 @@ Container <- R6::R6Class("Container",
             self
         },
 
+        #' @description Access value at index. If index is invalid, an error is
+        #' signaled.
+        #' @param index `numeric` or `character` indices to be accessed.
+        #' @return If given as a number, the element at the corresponding
+        #' position is returned. If given as a string, the element at the first
+        #' name matching the given string is returned.
+        at = function(index) {
+            if (is.numeric(index))
+                return(sapply(index, private$get_at_position))
+            if (is.character(index))
+                return(sapply(index, private$get_at_name))
+            stop("type of index must be either numeric or character")
+        },
+
         #' @description delete all elements from the `Container`
         #' @return the cleared `Container` object
         clear = function() {
@@ -221,7 +235,12 @@ Container <- R6::R6Class("Container",
     private = list(
         compare_fun = NULL,
         elems = list(),
-        create_iter = function() Iterator$new(self, private$.subset),
+        create_iter = function() {
+            Iterator$new(self, private$.subset)
+        },
+        compare_predicate = function(x) {
+            function(y) isTRUE(private$compare_fun(x, y))
+        },
         deep_clone = function(name, value) {
             if (name != "elems")
                 return(value)
@@ -232,8 +251,12 @@ Container <- R6::R6Class("Container",
             }
             lapply(value, clone_deep_if_container)
         },
-        compare_predicate = function(x) {
-            function(y) isTRUE(private$compare_fun(x, y))
+        get_at_position = function(index) {
+            if (index > self$length())
+                stop("index ", index, " exceeds length of ",
+                     data.class(self), " (", self$length(), ")")
+            .subset2(private$elems, index)
+
         },
         get_position = function(x, right = TRUE, ...) {
             Position(f = private$compare_predicate(x),
