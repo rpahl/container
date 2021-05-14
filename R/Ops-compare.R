@@ -8,6 +8,29 @@
 #' one of the derived classes) while the other must be at least iterable.
 NULL
 
+#' @name OpsLogic
+#' @rdname ContainerS3
+#' @details * `x == y` is `TRUE` if the contents of `x` and `y` are
+#' lexicographically *equal*.
+#' @details * `x != y` is `TRUE` if the contents of `x` and `y` are
+#' not equal.
+#' @details * `x < y` is `TRUE` if the contents of x are lexicographically
+#' *less* than the contents of y.
+#' @details * `x <= y` is `TRUE` if the contents of x are lexicographically
+#' *less* than or *equal* to the contents of y.
+#' @examples
+#' c1 = container(1, 2, 3)
+#' c2 = container(1, 3, 2)
+#' c1 == c1            # TRUE
+#' c1 != c2            # TRUE
+#' c1 <= c1            # TRUE
+#' c1 == c2            # FALSE
+#' c1 < c2             # TRUE
+#' c1 < container(2)   # TRUE
+#' c1 < container()    # FALSE
+#'
+NULL
+
 #' @export
 `==.Container` <- function(x, y) isTRUE(all.equal(x, y))
 

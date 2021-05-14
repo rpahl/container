@@ -35,7 +35,7 @@ Iterable <- R6::R6Class("Iterable",
 #'
 #' @description This class implements a container data structure with typical
 #' member functions to insert, delete and access elements from the container.
-#' While it can be used to create [Container()] objects, it mainly serves as the
+#' While it can be used to create [Container()] objects, it also serves as the
 #' base class for [Deque()], [Set()], and [Dict()].
 #' @author Roman Pahl
 #' @docType class

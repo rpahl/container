@@ -2,17 +2,18 @@
 #'
 #' @description A [Container()] is a data structure with typical member
 #' functions to insert, delete and access elements from the container
-#' object. Since the [Container()] class mainly serves as the
-#' base class for [Deque()], [Set()], and [Dict()] objects, users are more
-#' likley to use the corresponding [deque()], [set()], and [dict()] methods to
-#' create objects of these classes.
+#' object. The [Container()] class serves as the base class for [Deque()],
+#' '[Set()], and [Dict()] objects, which can be created by calls to
+#' '[deque()], [setnew()], and [dict()], respectively.
 #' @param ... (possibly named) elements to be put into or removed from the `Container`.
 #' @param elem some element of any type
 #' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.
 #' @param .x `object of class `Container`
 #' @name ContainerS3
-#' @seealso For the `Container` class documentation see [Container()].
+#' @seealso For the `Container` class documentation see [Container()]. To
+#' create objects of the derived classes see [deque()], [setnew()], and
+#' [dict()].
 #' @details Methods that alter `Container` objects usually come in two versions
 #' providing either copy or reference semantics where the latter are visible
 #' by an underscore appended to the standard function name, for example,

@@ -7,7 +7,7 @@
 \description{
 This class implements a container data structure with typical
 member functions to insert, delete and access elements from the container.
-While it can be used to create \code{\link[=Container]{Container()}} objects, it mainly serves as the
+While it can be used to create \code{\link[=Container]{Container()}} objects, it also serves as the
 base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}.
 }
 \seealso{
