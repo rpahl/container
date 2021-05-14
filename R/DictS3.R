@@ -6,7 +6,7 @@
 #' key-value pair semantic.
 #' @details For a full list of all dict methods see [Dict()].
 #' @param ... elements put into the `Dict`.
-#' @param x `R` object of `ANY` type for [as.dict()] and [is.dict()]
+#' @param x,y `R` object of `ANY` type for [as.dict()] and [is.dict()]
 #' or of class `Dict` for the `S3` methods.
 #' @param key `character` name of key.
 #' @seealso See [container()] for all inherited methods. For the full class

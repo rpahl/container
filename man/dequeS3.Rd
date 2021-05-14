@@ -84,6 +84,11 @@ returns the \code{\link[=Deque]{Deque()}} object.
 }
 
 \itemize{
+\item \code{x + y} combines \code{x} and \code{y} into a new deque by appending \code{y}
+to \code{x}.
+}
+
+\itemize{
 \item \code{x - y} element-wise removes all items of \code{y} from \code{x}, given
 the element was contained in \code{x}.
 }

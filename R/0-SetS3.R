@@ -9,10 +9,8 @@
 #' @name SetS3
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Set()] and it's superclass [Container()].
-#' @details While the [Set()] class is based on the `R6` framework and
-#' provides reference semantics, the methods described here provide an `S3`
-#' interface with copy semantics. Note that any `S3` methods defined for the
-#' `Container` class also work with `Set` objects.
+#' @details Basic methods such as adding and removing elements from `Set`
+#' objects are described in the documentation for [container()].
 #' ## Methods
 #' @examples
 #' s = setnew(1, b = NA, 1:3, c = container("a", 1))

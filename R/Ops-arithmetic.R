@@ -48,6 +48,8 @@ NULL
 
 #' @name OpsArith
 #' @rdname DequeS3
+#' @details * `x + y` combines `x` and `y` into a new deque by appending `y`
+#' to `x`.
 #' @examples
 #' d1 = deque(1, 1:2)
 #' d2 = deque(2, 1:2)
@@ -84,6 +86,8 @@ NULL
 
 #' @name OpsArith
 #' @rdname DictS3
+#' @details * `x + y` combines `x` and `y` into a new dict by updating `x`
+#' by `y` (see also `[update()]`).
 #' @examples
 #' d1 = dict(a = 1, b = list(1, 2))
 #' d2 = dict(a = 2, b = list(1, 2))
@@ -104,6 +108,7 @@ NULL
 
 #' @name OpsArith
 #' @rdname DictS3
+#' @details * `x - y` removes all keys from `x` that appear in `y`.
 #' @examples
 #' d - d2
 #' d2 - d
