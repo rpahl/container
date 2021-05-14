@@ -49,6 +49,9 @@ as.dict <- function(x)
     do.call(dict, args = as.list(x))
 }
 
+methods::setOldClass("Dict")
+methods::setAs("list", "Dict", function(from) as.deque(from))
+
 #' @rdname DictS3
 #' @details * `is.dict(x)` returns `TRUE` if `x` is of class `Dict`
 #' and `FALSE` otherwise.
