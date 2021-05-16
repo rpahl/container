@@ -34,6 +34,7 @@ Roman Pahl
 \item \href{#method-has}{\code{Container$has()}}
 \item \href{#method-is_empty}{\code{Container$is_empty()}}
 \item \href{#method-length}{\code{Container$length()}}
+\item \href{#method-peek}{\code{Container$peek()}}
 \item \href{#method-print}{\code{Container$print()}}
 \item \href{#method-replace}{\code{Container$replace()}}
 \item \href{#method-remove}{\code{Container$remove()}}
@@ -95,8 +96,10 @@ the \code{Container} object
 \if{latex}{\out{\hypertarget{method-at}{}}}
 \subsection{Method \code{at()}}{
 Access value at index. If index is invalid, an error is
-signaled. Negative numeric indices are allowed and mean select
-everything \emph{except} the given index.
+signaled. If given as a string, the element matching the name is
+returned. If the name is not found, again, an error is signalled.
+If there are two or more identical names, the value of the first
+match (i.e. \emph{leftmost} element) is returned.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$at(index)}\if{html}{\out{</div>}}
 }
@@ -104,14 +107,14 @@ everything \emph{except} the given index.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{index}}{\code{numeric} or \code{character} indices to be accessed.}
+\item{\code{index}}{\code{numeric} or \code{character} index to be accessed.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
 If given as a number, the element at the corresponding
-position is returned. If given as a string, the element at the first
-name matching the given string is returned.
+position, and if given as a string, the element at the
+corresponding name matching the given string is returned.
 }
 }
 \if{html}{\out{<hr>}}
@@ -257,6 +260,30 @@ Number of elements of the \code{Container}.
 \subsection{Returns}{
 \code{integer} length of the \code{Container}, that is, the number of
 elements it contains.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-peek"></a>}}
+\if{latex}{\out{\hypertarget{method-peek}{}}}
+\subsection{Method \code{peek()}}{
+Peek at index. If not found, return \code{default} value.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$peek(index, default = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{\code{numeric} or \code{character} index to be accessed.}
+
+\item{\code{default}}{the default value to return in case the value at
+\code{index} is not found.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the value at the given index or (if not found) the given
+default value.
 }
 }
 \if{html}{\out{<hr>}}

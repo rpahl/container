@@ -87,11 +87,7 @@ Container <- R6::R6Class("Container",
         #' position, and if given as a string, the element at the
         #' corresponding name matching the given string is returned.
         at = function(index) {
-            if (!(is.numeric(index) || is.character(index)))
-                stop("invalid index type '", data.class(index), "'", call. = FALSE)
-
-            if (length(index) != 1)
-                stop("index must be of length 1", call. = FALSE)
+            private$verify_index(index)
 
             if (is.numeric(index))
                 private$assert_position(index)
@@ -176,6 +172,24 @@ Container <- R6::R6Class("Container",
         #' elements it contains.
         length = function() length(private$elems),
 
+        #' @description Peek at index. If not found, return `default` value.
+        #' @param index `numeric` or `character` index to be accessed.
+        #' @param default the default value to return in case the value at
+        #' `index` is not found.
+        #' @return the value at the given index or (if not found) the given
+        #' default value.
+        peek = function(index, default = NULL) {
+            if (missing(index))
+                return(self$peek(self$length()))
+
+            private$verify_index(index)
+
+            if (self$is_empty())
+                return(default)
+
+            tryCatch(self$at(index), error = function(e) default)
+        },
+
         #' @description Print object representation
         #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
@@ -252,9 +266,6 @@ Container <- R6::R6Class("Container",
         elems = list(),
 
         assert_position = function(index) {
-            if (index < 1)
-                stop("index must be > 0", call. = FALSE)
-
             if (index > self$length())
                 stop("index ", index, " exceeds length of ",
                      data.class(self), " (", self$length(), ")", call. = FALSE)
@@ -299,6 +310,20 @@ Container <- R6::R6Class("Container",
         set_compare_fun = function(x) {
             f = if (is.character(x)) match.fun(x) else x
             private$compare_fun = f
+        },
+
+        verify_index = function(index) {
+            if (!(is.numeric(index) || is.character(index)))
+                stop("invalid index type '", data.class(index), "'", call. = FALSE)
+
+            if (length(index) != 1)
+                stop("index must be of length 1", call. = FALSE)
+
+            if (is.na(index))
+                stop("index must not be 'NA'", call. = FALSE)
+
+            if (isTRUE(index < 1))
+                stop("index must be > 0", call. = FALSE)
         },
 
         verify_same_class = function(x) {

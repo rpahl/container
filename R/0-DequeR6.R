@@ -33,7 +33,7 @@ Deque <- R6::R6Class("Deque",
             self
         },
 
-        #' @description Peek at last element on the right without removing it.
+        #' @description Peek at last element of the `Deque`.
         #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the right
         peek = function(default = NULL) {
@@ -43,7 +43,7 @@ Deque <- R6::R6Class("Deque",
             private$.subset2(self, self$length())
         },
 
-        #' @description Peek at first element on the left without removing it.
+        #' @description Peek at first element of the `Deque`.
         #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the left
         peekleft = function(default = NULL) {

@@ -109,9 +109,6 @@ Dict <- R6::R6Class("Dict",
         #' @param default returned default value.
         #' @return value for `key` if `key` is in the `Dict` else `default`.
         peek = function(key, default = NULL) {
-            if (self$is_empty())
-                return(default)
-
             if (missing(key))
                 key = utils::tail(self$keys(), 1)
 

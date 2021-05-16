@@ -36,6 +36,7 @@ expect_error(co$at(1:2), "index must be of length 1")
 expect_error(co$at(0), "index must be > 0")
 expect_error(co$at(-1), "index must be > 0")
 expect_error(co$at(5), "index 5 exceeds length of Container \\(4\\)")
+expect_error(co$at(as.numeric(NA)), "index must not be 'NA'")
 
 ee(co$at("a"), co$at(match("a", names(co))))
 ee(co$at("b"), co$at(match("b", names(co))))
@@ -92,7 +93,6 @@ ee(co$count("a"), 3)
 ee(co$count("b"), 1)
 ee(co$count("c"), 1)
 ee(co$count("d"), 0)
-
 
 # ------
 # delete
@@ -190,6 +190,27 @@ container_options(.reset = TRUE)
 ee(Container$new()$length(), 0)
 co <- Container$new(1, 2, 3)
 ee(co$length(), length(co$values()))
+
+# ----
+# peek
+# ----
+co = container(a = 1, 2, b = 3, 4)
+ee(co$peek(1), 1)
+ee(co$peek(2), 2)
+expect_error(co$peek(1:2), "index must be of length 1")
+expect_error(co$peek(0), "index must be > 0")
+expect_error(co$peek(-1), "index must be > 0")
+expect_error(co$peek(as.numeric(NA)), "index must not be 'NA'")
+
+ee(co$peek(5), NULL)
+ee(co$peek(5, default = "foo"), "foo")
+
+ee(co$peek("a"), co$peek(match("a", names(co))))
+ee(co$peek("b"), co$peek(match("b", names(co))))
+expect_error(co$peek(c("a", "b")), "index must be of length 1")
+
+ee(co$peek("c"), NULL)
+ee(co$peek("c", "bar"), "bar")
 
 
 # -----
