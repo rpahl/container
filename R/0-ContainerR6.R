@@ -21,11 +21,13 @@ Iterable <- R6::R6Class("Iterable",
         iter = function() {
             it <- private$create_iter()
             hasIterator <- inherits(it, "Iterator")
-            if (!hasIterator) stop("Iterable did not create an Iterator")
+            if (!hasIterator)
+                stop("Iterable did not create an Iterator", call. = FALSE)
             it
         }
     ),
-    private = list(create_iter = function() stop("abstract method")),
+    private = list(create_iter = function()
+        stop("abstract method", call. = FALSE)),
     lock_class=TRUE
 )
 
@@ -86,10 +88,10 @@ Container <- R6::R6Class("Container",
         #' corresponding name matching the given string is returned.
         at = function(index) {
             if (!(is.numeric(index) || is.character(index)))
-                stop("invalid index type '", data.class(index), "'")
+                stop("invalid index type '", data.class(index), "'", call. = FALSE)
 
             if (length(index) != 1)
-                stop("index must be of length 1")
+                stop("index must be of length 1", call. = FALSE)
 
             if (is.numeric(index))
                 private$assert_position(index)
@@ -124,7 +126,8 @@ Container <- R6::R6Class("Container",
         #' @return the `Container` object
         delete = function(elem) {
             if (!self$has(elem))
-                stop(get_label(elem), " is not in ", data.class(self))
+                stop(get_label(elem), " is not in ", data.class(self),
+                     call. = FALSE)
 
             self$discard(elem)
         },
@@ -152,7 +155,6 @@ Container <- R6::R6Class("Container",
             .Deprecated("is_empty")
             self$is_empty()
         },
-
 
         #' @description Get comparison function used internally by the
         #' `Container` object to compare elements.
@@ -206,7 +208,7 @@ Container <- R6::R6Class("Container",
 
             if (!hasElem)
                 stop("old element (", get_label(old),
-                     ") is not in ", data.class(self))
+                     ") is not in ", data.class(self), call. = FALSE)
 
             new_elem = if (length(new)) new else list(new)
             private$elems <- replace(self$values(), pos, new_elem)

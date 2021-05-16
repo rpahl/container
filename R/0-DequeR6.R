@@ -58,7 +58,7 @@ Deque <- R6::R6Class("Deque",
         #' @return element 'popped' from the right side of the [Deque()]
         pop = function() {
             if (self$is_empty())
-                stop("pop at empty ", data.class(self))
+                stop("pop at empty ", data.class(self), call. = FALSE)
 
             last <- self$peek()
             self$delete(last)
@@ -70,7 +70,7 @@ Deque <- R6::R6Class("Deque",
         #' @return element 'popped' from the left side of the [Deque()]
         popleft = function() {
             if (self$is_empty())
-                stop("popleft at empty ", data.class(self))
+                stop("popleft at empty ", data.class(self), call. = FALSE)
 
             first <- self$peekleft()
             self$delete(first)

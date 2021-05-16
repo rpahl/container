@@ -38,7 +38,8 @@ Dict <- R6::R6Class("Dict",
         #' @param value the value to be added to the `Dict`.
         add = function(key, value) {
             if (self$has(key))
-                stop("key '", key, "' already in ", data.class(self))
+                stop("key '", key, "' already in ", data.class(self),
+                     call. = FALSE)
 
             self$replace(key, value, add = TRUE)
         },
@@ -50,7 +51,7 @@ Dict <- R6::R6Class("Dict",
             if (self$has(key))
                 self$peek(key)
             else
-                stop("key '", key, "' not in ", data.class(self))
+                stop("key '", key, "' not in ", data.class(self), call. = FALSE)
         },
 
 
@@ -61,7 +62,7 @@ Dict <- R6::R6Class("Dict",
         #' @return the `Dict` object
         delete = function(key) {
             if (!self$has(key))
-                stop("key '", key, "' not in ", data.class(self))
+                stop("key '", key, "' not in ", data.class(self), call. = FALSE)
 
             self$discard(key)
         },
@@ -89,10 +90,10 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @return `TRUE` if `key` in `Dict`, otherwise `FALSE`.
         has = function(key) {
-            if (length(key) != 1) stop("key must be of length 1")
-            if (!is.character(key)) stop("key must be character")
-            if (is.na(key)) stop("undefined key")
-            if (isTRUE(nchar(key) == 0)) stop("zero-length key")
+            if (length(key) != 1) stop("key must be of length 1", call. = F)
+            if (!is.character(key)) stop("key must be character", call. = F)
+            if (is.na(key)) stop("undefined key", call. = F)
+            if (isTRUE(nchar(key) == 0)) stop("zero-length key", call. = F)
 
             utils::hasName(private$elems, key)
         },
@@ -126,7 +127,7 @@ Dict <- R6::R6Class("Dict",
         #' @return If `key` in `Dict`, return its value.
         pop = function(key) {
             if (self$is_empty())
-                stop("pop at empty ", data.class(self))
+                stop("pop at empty ", data.class(self), call. = FALSE)
 
             if (missing(key))
                 key = utils::tail(self$keys(), 1)
@@ -176,7 +177,7 @@ Dict <- R6::R6Class("Dict",
         #' @return returns the `Dict`
         replace = function(key, value, add = FALSE) {
             if (!add && !self$has(key))
-                stop("key '", key, "' not in ", data.class(self))
+                stop("key '", key, "' not in ", data.class(self), call. = FALSE)
 
             assign(key, value, envir = private$elems)
             self
@@ -209,7 +210,7 @@ Dict <- R6::R6Class("Dict",
         #' @return returns the `Dict`
         update = function(other = Dict$new()) {
             if (!inherits(other, data.class(self)))
-                stop("arg must be a ", data.class(self))
+                stop("arg must be a ", data.class(self), call. = FALSE)
 
             for (key in other$keys())
                 self$replace(key, other$at(key), add = TRUE)
