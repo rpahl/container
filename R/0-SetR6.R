@@ -3,9 +3,9 @@
 #' @description The [Set()] is considered and implemented as a specialized
 #' [Container()], that is, elements are always unique in the [Container()] and
 #' it provides typical set operations such as `union` and `intersect`.
-#' @details All set elements internally are stored in a hash-table and the
-#' elements are always sorted, first considering length of the element and in
-#' case of a tie, their lexicographical representation.
+#' @details Under the hood, elements of a set object are stored in a hash-table
+#' and sorted, first considering the length and, in case of a ties, a
+#' lexicographical representation of the elements.
 #' @seealso [Container()], [set()]
 #' @export
 Set <- R6::R6Class("Set",

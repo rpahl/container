@@ -24,6 +24,7 @@ Roman Pahl
 \itemize{
 \item \href{#method-new}{\code{Container$new()}}
 \item \href{#method-add}{\code{Container$add()}}
+\item \href{#method-at}{\code{Container$at()}}
 \item \href{#method-clear}{\code{Container$clear()}}
 \item \href{#method-count}{\code{Container$count()}}
 \item \href{#method-delete}{\code{Container$delete()}}
@@ -87,6 +88,30 @@ add element
 }
 \subsection{Returns}{
 the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-at"></a>}}
+\if{latex}{\out{\hypertarget{method-at}{}}}
+\subsection{Method \code{at()}}{
+Access value at index. If index is invalid, an error is
+signaled. Negative numeric indices are allowed and mean select
+everything \emph{except} the given index.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$at(index)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{\code{numeric} or \code{character} indices to be accessed.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If given as a number, the element at the corresponding
+position is returned. If given as a string, the element at the first
+name matching the given string is returned.
 }
 }
 \if{html}{\out{<hr>}}

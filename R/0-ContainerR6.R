@@ -76,17 +76,29 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Access value at index. If index is invalid, an error is
-        #' signaled.
-        #' @param index `numeric` or `character` indices to be accessed.
+        #' signaled. If given as a string, the element matching the name is
+        #' returned. If the name is not found, again, an error is signalled.
+        #' If there are two or more identical names, the value of the first
+        #' match (i.e. *leftmost* element) is returned.
+        #' @param index `numeric` or `character` index to be accessed.
         #' @return If given as a number, the element at the corresponding
-        #' position is returned. If given as a string, the element at the first
-        #' name matching the given string is returned.
+        #' position, and if given as a string, the element at the
+        #' corresponding name matching the given string is returned.
         at = function(index) {
+            if (!(is.numeric(index) || is.character(index)))
+                stop("invalid index type '", data.class(index), "'")
+
+            if (length(index) != 1)
+                stop("index must be of length 1")
+
             if (is.numeric(index))
-                return(sapply(index, private$get_at_position))
-            if (is.character(index))
-                return(sapply(index, private$get_at_name))
-            stop("type of index must be either numeric or character")
+                private$assert_position(index)
+            else
+                private$assert_name(index)
+
+            #l = private$.subset(self, index)
+            #methods::as(l, data.class(self))
+            private$.subset2(self, index)
         },
 
         #' @description delete all elements from the `Container`
@@ -234,13 +246,36 @@ Container <- R6::R6Class("Container",
     ),
     private = list(
         compare_fun = NULL,
+
         elems = list(),
+
+        assert_position = function(index) {
+            if (index < 1)
+                stop("index must be > 0", call. = FALSE)
+
+            if (index > self$length())
+                stop("index ", index, " exceeds length of ",
+                     data.class(self), " (", self$length(), ")", call. = FALSE)
+
+            invisible(TRUE)
+        },
+
+        assert_name = function(name) {
+            if (!(name %in% names(self)))
+                stop("index '", name, "' not found", call. = FALSE)
+
+            invisible(TRUE)
+        },
+
+
         create_iter = function() {
             Iterator$new(self, private$.subset)
         },
+
         compare_predicate = function(x) {
             function(y) isTRUE(private$compare_fun(x, y))
         },
+
         deep_clone = function(name, value) {
             if (name != "elems")
                 return(value)
@@ -251,29 +286,27 @@ Container <- R6::R6Class("Container",
             }
             lapply(value, clone_deep_if_container)
         },
-        get_at_position = function(index) {
-            if (index > self$length())
-                stop("index ", index, " exceeds length of ",
-                     data.class(self), " (", self$length(), ")")
-            .subset2(private$elems, index)
 
-        },
         get_position = function(x, right = TRUE, ...) {
             Position(f = private$compare_predicate(x),
                      x = self$values(),
                      right = right,
                      ...)
         },
+
         set_compare_fun = function(x) {
             f = if (is.character(x)) match.fun(x) else x
             private$compare_fun = f
         },
+
         verify_same_class = function(x) {
             if (!inherits(x, data.class(self))) {
-                stop("arg must be a ", data.class(self))
+                stop("arg must be a ", data.class(self), call. = FALSE)
             }
         },
-        .subset = function(x, ...) .subset(x$values(), ...)
+
+        .subset = function(x, ...) .subset(x$values(), ...),
+        .subset2 = function(x, ...) .subset2(x$values(), ...)
     ),
     lock_class = TRUE
 )

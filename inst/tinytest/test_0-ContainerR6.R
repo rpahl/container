@@ -26,6 +26,22 @@ expect_true(co$is_empty())
 co$add(1)
 ee(co$values(), list(1))
 
+# --
+# at
+# --
+co = container(a = 1, 2, b = 3, 4)
+ee(co$at(1), 1)
+ee(co$at(2), 2)
+expect_error(co$at(1:2), "index must be of length 1")
+expect_error(co$at(0), "index must be > 0")
+expect_error(co$at(-1), "index must be > 0")
+expect_error(co$at(5), "index 5 exceeds length of Container \\(4\\)")
+
+ee(co$at("a"), co$at(match("a", names(co))))
+ee(co$at("b"), co$at(match("b", names(co))))
+expect_error(co$at(c("a", "b")), "index must be of length 1")
+expect_error(co$at("c"), "index 'c' not found")
+
 
 # NULL and empty lists can be added to a Container
 co <- Container$new()
