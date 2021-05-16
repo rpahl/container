@@ -182,10 +182,10 @@ Container <- R6::R6Class("Container",
             if (missing(index))
                 return(self$peek(self$length()))
 
-            private$verify_index(index)
-
             if (self$is_empty())
                 return(default)
+
+            private$verify_index(index)
 
             tryCatch(self$at(index), error = function(e) default)
         },

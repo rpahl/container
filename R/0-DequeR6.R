@@ -37,20 +37,14 @@ Deque <- R6::R6Class("Deque",
         #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the right
         peek = function(default = NULL) {
-            if (self$is_empty())
-                return(default)
-
-            private$.subset2(self, self$length())
+            super$peek(self$length(), default)
         },
 
         #' @description Peek at first element of the `Deque`.
         #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the left
         peekleft = function(default = NULL) {
-            if (self$is_empty())
-                return(default)
-
-            private$.subset2(self, 1)
+            super$peek(1, default)
         },
 
         #' @description
