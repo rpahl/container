@@ -40,7 +40,7 @@ Deque <- R6::R6Class("Deque",
             if (self$is_empty())
                 return(default)
 
-            .subset2(private$elems, self$length())
+            private$.subset2(self, self$length())
         },
 
         #' @description Peek at first element on the left without removing it.
@@ -50,7 +50,7 @@ Deque <- R6::R6Class("Deque",
             if (self$is_empty())
                 return(default)
 
-            .subset2(private$elems, 1)
+            private$.subset2(self, 1)
         },
 
         #' @description

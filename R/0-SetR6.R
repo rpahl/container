@@ -60,7 +60,7 @@ Set <- R6::R6Class("Set",
             if (self$is_empty())
                 return(default)
 
-            .subset2(private$elems, self$length())[[1]]
+            private$.subset2(self, self$length())
         },
 
         #' @description Search for occurence of `elem` in the `Set` and
