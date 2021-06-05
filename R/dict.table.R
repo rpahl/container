@@ -164,9 +164,13 @@ print.dict.table <- function(x, ...)
 #' dit = dict.table(a = 1:2, b = 1:2)
 #' rbind(dit, dit)
 #'
+#' dit = dict.table(a = 1:2, b = 1:2)
+#' rbind(dit, dit)
+#'
 #' # Also works with data.tables
-#' dat = dict.table(a = 3:4, b = 3:4)
-#' dit.dat = rbind(dit, dat)
+#' dat = data.table(a = 3:4, b = 3:4)
+#' rbind(dit, dat)  # yields a dict.table
+#' rbind(dat, dit)  # yields a data.table
 rbind.dict.table <- function(x, ...)
 {
     dots <- list(...)
@@ -175,4 +179,30 @@ rbind.dict.table <- function(x, ...)
 }
 
 
+#' @rdname dict.table
+#' @export
+#' @examples
+#' dit = dict.table(a = 1:2, b = 1:2)
+#' dit2 = dict.table(c = 3:4, d = 5:6)
+#' cbind(dit, dit2)
+#'
+#' # Also works with data.tables
+#' dit = dict.table(a = 1:2, b = 3:4)
+#' rbind(dit, dit)
+cbind.dict.table <- function(x, ...)
+{
+    dots <- list(...)
+    res <- do.call(cbind, args = c(list(as.data.table(x)), dots))
+
+    if (any(duplicated(colnames(res)))) {
+        cnames = colnames(res)
+        dups = duplicated(cnames)
+        stop("found duplicated column names: ",
+             toString(cnames[dups]), call. = FALSE)
+    }
+
+    .set_class(res)
+}
+
+# TODO: implement c.dict.table()
 

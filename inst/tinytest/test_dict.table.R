@@ -226,6 +226,16 @@ dit.dat <- rbind(dit, dat)
 expect_true(is.dict.table(dit.dat))
 ee(as.data.table(dit.dat), dat2)
 
+# cbind works as expected for dict.tables
+expect_error(cbind(dit, dit), "found duplicated column names")
+ee(cbind(dit[, 1], dit[, 2]), dit)
+
+# cbind works with data.tables
+ee(cbind(dict.table(a = 1:2), data.table(b = 1:2)),
+   dict.table(a = 1:2, b = 1:2))
+
+ee(cbind(data.table(a = 1:2), dict.table(b = 1:2)),
+   data.table(a = 1:2, b = 1:2))
 
 # dict.table coercion works as expected
 dit = dict.table(A = 1:2, B = 3:4)
