@@ -16,9 +16,9 @@ NULL
 `[[.Dict` <- function(x, key, default = NULL)
 {
     if (missing(default))
-        x$at(key)
+        x$at2(key)
     else
-        x$peek(key, default)
+        x$peek_at2(key, default)
 }
 
 #' @rdname OpsExtract
@@ -29,13 +29,10 @@ NULL
 #' @export
 `[.Dict` <- function(x, key, default = NULL)
 {
-    d = dict()
-    for (k in unique(key)) {
-        value = if (missing(default)) x$at(k) else x$peek(k, default)
-
-        d$add(k, value)
-    }
-    d
+    if (missing(default))
+        x$at(key)
+    else
+        x$peek_at(key, default)
 }
 
 
@@ -48,9 +45,9 @@ NULL
 `[[.dict.table` <- function(x, j, default = NULL)
 {
     if (missing(default))
-        .subset2(get_at(x, j), 1)
+        at2(x, j)
     else
-        peek(x, j, default)
+        peek_at2(x, j, default)
 }
 
 
@@ -61,8 +58,9 @@ NULL
 `$.dict.table` <- function(x, key)
 {
     j = pmatch(key, names(x))
-    if (is.na(j)) j = key
+    if (is.na(j))
+        j = key
 
-    .subset2(get_at(x, j), 1)
+    at2(x, j)
 }
 

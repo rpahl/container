@@ -25,6 +25,7 @@ Roman Pahl
 \item \href{#method-new}{\code{Container$new()}}
 \item \href{#method-add}{\code{Container$add()}}
 \item \href{#method-at}{\code{Container$at()}}
+\item \href{#method-at2}{\code{Container$at2()}}
 \item \href{#method-clear}{\code{Container$clear()}}
 \item \href{#method-count}{\code{Container$count()}}
 \item \href{#method-delete}{\code{Container$delete()}}
@@ -34,7 +35,8 @@ Roman Pahl
 \item \href{#method-has}{\code{Container$has()}}
 \item \href{#method-is_empty}{\code{Container$is_empty()}}
 \item \href{#method-length}{\code{Container$length()}}
-\item \href{#method-peek}{\code{Container$peek()}}
+\item \href{#method-peek_at}{\code{Container$peek_at()}}
+\item \href{#method-peek_at2}{\code{Container$peek_at2()}}
 \item \href{#method-print}{\code{Container$print()}}
 \item \href{#method-replace}{\code{Container$replace()}}
 \item \href{#method-remove}{\code{Container$remove()}}
@@ -95,11 +97,8 @@ the \code{Container} object
 \if{html}{\out{<a id="method-at"></a>}}
 \if{latex}{\out{\hypertarget{method-at}{}}}
 \subsection{Method \code{at()}}{
-Access value at index. If index is invalid, an error is
-signaled. If given as a string, the element matching the name is
-returned. If the name is not found, again, an error is signalled.
-If there are two or more identical names, the value of the first
-match (i.e. \emph{leftmost} element) is returned.
+Same as \code{at2} (see below) but accepts a vector of
+indices and always returns a \code{Container} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$at(index)}\if{html}{\out{</div>}}
 }
@@ -107,7 +106,31 @@ match (i.e. \emph{leftmost} element) is returned.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{index}}{\code{numeric} or \code{character} index to be accessed.}
+\item{\code{index}}{vector of indices.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{Container} object with the extracted elements.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-at2"></a>}}
+\if{latex}{\out{\hypertarget{method-at2}{}}}
+\subsection{Method \code{at2()}}{
+Extract value at index. If index is invalid or not
+found, an error is signaled. If given as a string, the element
+matching the name is returned. If there are two or more identical
+names, the value of the first match (i.e. \emph{leftmost} element) is
+returned.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$at2(index)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{Must be a single number > 0 or a string.}
 }
 \if{html}{\out{</div>}}
 }
@@ -263,12 +286,37 @@ elements it contains.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-peek"></a>}}
-\if{latex}{\out{\hypertarget{method-peek}{}}}
-\subsection{Method \code{peek()}}{
-Peek at index. If not found, return \code{default} value.
+\if{html}{\out{<a id="method-peek_at"></a>}}
+\if{latex}{\out{\hypertarget{method-peek_at}{}}}
+\subsection{Method \code{peek_at()}}{
+Same as \code{peek_at2} (see below) but accepts a vector of
+indices and always returns a \code{Container} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$peek(index, default = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$peek_at(index, default = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{vector of indices.}
+
+\item{\code{default}}{the default value to return in case the value at
+\code{index} is not found.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{Container} object with the extracted elements.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-peek_at2"></a>}}
+\if{latex}{\out{\hypertarget{method-peek_at2}{}}}
+\subsection{Method \code{peek_at2()}}{
+Peek at index and extract value. If index is invalid,
+missing, or not not found, return \code{default} value.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$peek_at2(index, default = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

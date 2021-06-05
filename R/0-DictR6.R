@@ -25,8 +25,7 @@ Dict <- R6::R6Class("Dict",
                 stop("all elements must be named", call. = FALSE)
 
             if (any(duplicated(keys)))
-                stop("duplicated keys are not allowed for ",
-                     data.class(self), call. = FALSE)
+                stop("duplicated keys are not allowed", call. = FALSE)
 
             private$elems <- list2env(elems, parent = emptyenv(), hash = TRUE)
             self
@@ -42,16 +41,6 @@ Dict <- R6::R6Class("Dict",
                      call. = FALSE)
 
             self$replace(key, value, add = TRUE)
-        },
-
-        #' @description Access value at key.
-        #' @param key `character` name of key.
-        #' @return If `key` in `Dict`, return value at `key`, else throw error.
-        at = function(key) {
-            if (self$has(key))
-                self$peek(key)
-            else
-                stop("key '", key, "' not in ", data.class(self), call. = FALSE)
         },
 
 
@@ -78,12 +67,12 @@ Dict <- R6::R6Class("Dict",
             self
         },
 
-        #' @description This function is deprecated. Use [at()] instead.
+        #' @description This function is deprecated. Use [at2()] instead.
         #' @param key `character` name of key.
         #' @return If `key` in `Dict`, return value at `key`, else throw error.
         get = function(key) {
             .Deprecated("at")
-            self$at(key)
+            self$at2(key)
         },
 
         #' @description Determine if `Dict` has a `key`.
@@ -104,20 +93,6 @@ Dict <- R6::R6Class("Dict",
             ls(envir = private$elems)
         },
 
-        #' @description Peek for value in `Dict`.
-        #' @param key `character` name of key.
-        #' @param default returned default value.
-        #' @return value for `key` if `key` is in the `Dict` else `default`.
-        peek = function(key, default = NULL) {
-            if (missing(key))
-                key = utils::tail(self$keys(), 1)
-
-            if (!self$has(key))
-                return(default)
-
-            get(key, envir = private$elems)
-        },
-
         #' @description Get value and delete key-value pair from `Dict`.
         #' If `key` not found, raise an error.
         #' @param key `character` name of key.
@@ -129,7 +104,7 @@ Dict <- R6::R6Class("Dict",
             if (missing(key))
                 key = utils::tail(self$keys(), 1)
 
-            elem <- self$peek(key)
+            elem <- self$at2(key)
             self$delete(key)
             elem
         },
@@ -159,7 +134,7 @@ Dict <- R6::R6Class("Dict",
             if (identical(old, new))
                 return(self)
 
-            self$add(key = new, value = self$at(old))
+            self$add(key = new, value = self$at2(old))
             self$delete(old)
             self
         },
@@ -210,7 +185,7 @@ Dict <- R6::R6Class("Dict",
                 stop("arg must be a ", data.class(self), call. = FALSE)
 
             for (key in other$keys())
-                self$replace(key, other$at(key), add = TRUE)
+                self$replace(key, other$at2(key), add = TRUE)
 
             self
         },

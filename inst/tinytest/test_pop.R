@@ -16,7 +16,7 @@ expect_error(popleft_(deque()), "popleft at empty Deque")
 # pop_.Dict
 # ---------
 d = dict(a = 1, b = 1:3)
-expect_error(pop_(d, "x"), "key 'x' not in Dict")
+expect_error(pop_(d, "x"), "index 'x' not found")
 
 ee(pop_(d, "b"), 1:3)
 ee(pop_(d, "a"), 1)
@@ -30,6 +30,6 @@ dit = dict.table(a = 1:3, b = 4:6)
 
 ee(pop_(dit, "a"), 1:3)
 ee(pop_(dit, 1), 4:6)
-expect_error(pop_(dit, 1), "index out of range \\(ncol = 0\\): 1")
-expect_error(pop_(dit, "z"), "column\\(s\\) not found: z")
+expect_error(pop_(dit, 1), "index 1 exceeds length of dict.table, which is 0")
+expect_error(pop_(dit, "z"), "index 'z' not found")
 

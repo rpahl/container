@@ -26,24 +26,6 @@ expect_true(co$is_empty())
 co$add(1)
 ee(co$values(), list(1))
 
-# --
-# at
-# --
-co = container(a = 1, 2, b = 3, 4)
-ee(co$at(1), 1)
-ee(co$at(2), 2)
-expect_error(co$at(1:2), "index must be of length 1")
-expect_error(co$at(0), "index must be > 0")
-expect_error(co$at(-1), "index must be > 0")
-expect_error(co$at(5), "index 5 exceeds length of Container \\(4\\)")
-expect_error(co$at(as.numeric(NA)), "index must not be 'NA'")
-
-ee(co$at("a"), co$at(match("a", names(co))))
-ee(co$at("b"), co$at(match("b", names(co))))
-expect_error(co$at(c("a", "b")), "index must be of length 1")
-expect_error(co$at("c"), "index 'c' not found")
-
-
 # NULL and empty lists can be added to a Container
 co <- Container$new()
 co$add(NULL)
@@ -76,6 +58,50 @@ ee(coco$values()[[1]]$values(), list(1, 2))
 co <- Container$new()
 co$add(a = 1, 2, b = 3)
 ee(co$values(), list(a = 1, 2, b = 3))
+
+
+# --
+# at
+# --
+co = Container$new(a = 1, 2, b = 3, 4)
+ee(co$at(1), Container$new(a = 1))
+ee(co$at(2), Container$new(2))
+ee(co$at(c("a", "b")), Container$new(a = 1, b = 3))
+ee(co$at(list(1, "b")), Container$new(a = 1, b = 3))
+
+ee(co$at(1:2), Container$new(a = 1, 2))
+ee(co$at("a"), co$at(match("a", names(co))))
+ee(co$at("b"), co$at(match("b", names(co))))
+
+ee(co$at(c(1, 1)), Container$new(a = 1, a = 1))
+ee(co$at(c("a", "a")), Container$new(a = 1, a = 1))
+ee(co$at(NULL), Container$new())
+
+expect_error(co$at(), "'index' is missing")
+expect_error(co$at(0), "index must be > 0")
+expect_error(co$at(-1), "index must be > 0")
+expect_error(co$at("c"), "index 'c' not found")
+expect_error(co$at(as.numeric(NA)), "index must not be 'NA'")
+
+
+# ---
+# at2
+# ---
+co = Container$new(a = 1, 2, b = 3, 4)
+ee(co$at2(1), 1)
+ee(co$at2(2), 2)
+ee(co$at2("a"), 1)
+expect_error(co$at2(NULL), "index must be of length 1")
+expect_error(co$at2(), "'index' is missing")
+expect_error(co$at2(1:2), "index must be of length 1")
+expect_error(co$at2(0), "index must be > 0")
+expect_error(co$at2(-1), "index must be > 0")
+expect_error(co$at2(5), "index 5 exceeds length of Container, which is 4")
+expect_error(co$at2(as.numeric(NA)), "index must not be 'NA'")
+expect_error(co$at2(c("a", "b")), "index must be of length 1")
+expect_error(co$at2("c"), "index 'c' not found")
+
+
 
 # -----
 # clear
@@ -191,26 +217,69 @@ ee(Container$new()$length(), 0)
 co <- Container$new(1, 2, 3)
 ee(co$length(), length(co$values()))
 
-# ----
-# peek
-# ----
+# -------
+# peek_at
+# -------
 co = container(a = 1, 2, b = 3, 4)
-ee(co$peek(1), 1)
-ee(co$peek(2), 2)
-expect_error(co$peek(1:2), "index must be of length 1")
-expect_error(co$peek(0), "index must be > 0")
-expect_error(co$peek(-1), "index must be > 0")
-expect_error(co$peek(as.numeric(NA)), "index must not be 'NA'")
+ee(co$peek_at(1), container(a = 1))
+ee(co$peek_at(2), container(2))
+ee(co$peek_at(c("a", "b")), container(a = 1, b = 3))
+ee(co$peek_at(list(1, "b")), container(a = 1, b = 3))
+ee(co$peek_at(), co)
+ee(co$peek_at(default = 1), co)
 
-ee(co$peek(5), NULL)
-ee(co$peek(5, default = "foo"), "foo")
+ee(co$peek_at(c(1, 1)), Container$new(a = 1, a = 1))
+ee(co$peek_at(c("a", "a")), Container$new(a = 1, a = 1))
 
-ee(co$peek("a"), co$peek(match("a", names(co))))
-ee(co$peek("b"), co$peek(match("b", names(co))))
-expect_error(co$peek(c("a", "b")), "index must be of length 1")
+ee(co$peek_at(1:2), container(a = 1, 2))
+ee(co$peek_at("a"), co$peek_at(match("a", names(co))))
+ee(co$peek_at("b"), co$peek_at(match("b", names(co))))
 
-ee(co$peek("c"), NULL)
-ee(co$peek("c", "bar"), "bar")
+ee(co$peek_at(0), container())
+ee(co$peek_at(-1), container())
+ee(co$peek_at("c"), container())
+ee(co$peek_at(as.numeric(NA)), container())
+ee(co$peek_at(0, default = "foo"), container("foo"))
+ee(co$peek_at("z", default = "foo"), container(z = "foo"))
+
+ee(co$peek_at(list("a", "x", 9), default = 0), container(a = 1, x = 0, 0))
+ee(co$peek_at(c("a", "x", 9), default = 0), container(a = 1, x = 0, "9" = 0))
+ee(co$peek_at(c(NA, NA), default = 0), container(0, 0))
+ee(co$peek_at(NULL), container())
+ee(co$peek_at(NULL, default = 0), container())
+ee(co$peek_at(list(a = NULL), default = 0), container())
+ee(co$peek_at(c(NULL, NA), default = 0), container(0))
+ee(co$peek_at(c(NA, NULL), default = 0), container(0))
+
+ee(co$peek_at(list("s1" = "a", "s2" = "x", "s3" = NULL), default = 0),
+   container(a = 1, x = 0))
+
+ee(co$peek_at("x", default = 1:3), container(x = 1:3))
+ee(co$peek_at(list("s1" = "a", "s2" = "x", "s3" = 9), default = 1:3),
+   container(a = 1, x = 1:3, s3 = 1:3))
+
+# --------
+# peek_at2
+# --------
+co = container(a = 1, 2, b = 3, 4)
+ee(co$peek_at2(1), 1)
+ee(co$peek_at2(2), 2)
+ee(co$peek_at2("a"), 1)
+ee(container()$peek_at2(1), NULL)
+ee(container()$peek_at2(1, default = 0), 0)
+ee(co$peek_at2(), NULL)
+ee(co$peek_at2(default = 1), 1)
+
+ee(co$peek_at2(1:2), NULL)
+ee(co$peek_at2(1:2, default = 0), 0)
+ee(co$peek_at2(0), NULL)
+ee(co$peek_at2(0, default = "foo"), "foo")
+ee(co$peek_at2(-1), NULL)
+ee(co$peek_at2(-1, default = "foo"), "foo")
+ee(co$peek_at2(5, default = 0), 0)
+ee(co$peek_at2(as.numeric(NA), default = 0), 0)
+ee(co$peek_at2(c("a", "b"), 0), 0)
+ee(co$peek_at2("c", 0), 0)
 
 
 # -----

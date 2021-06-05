@@ -36,6 +36,44 @@ ee(as.list(s$values()), list(list(), NULL))
 s$add(numeric(0))
 ee(as.list(s$values()), list(list(), NULL, numeric()))
 
+# --
+# at
+# --
+s = Set$new(a = 1, 2, b = 3, 4)
+ee(s$at(1), Set$new(a = 1))
+ee(s$at(2), Set$new(2))
+ee(s$at(c("a", "b")), Set$new(a = 1, b = 3))
+ee(s$at(list(1, "b")), Set$new(a = 1, b = 3))
+
+ee(s$at(1:2), Set$new(a = 1, 2))
+ee(s$at("a"), s$at(match("a", names(s))))
+ee(s$at("b"), s$at(match("b", names(s))))
+
+expect_error(s$at(0), "index must be > 0")
+expect_error(s$at(-1), "index must be > 0")
+expect_error(s$at("c"), "index 'c' not found")
+expect_error(s$at(as.numeric(NA)), "index must not be 'NA'")
+
+s = Set$new(a = 10, b = 1)
+ee(s$at(1), Set$new(b = 1))
+
+# ---
+# at2
+# ---
+s = Set$new(a = 1, 2, b = 3, 4)
+ee(s$at2(1), 1)
+ee(s$at2(2), 2)
+ee(s$at2("a"), 1)
+
+expect_error(s$at2(1:2), "index must be of length 1")
+expect_error(s$at2(0), "index must be > 0")
+expect_error(s$at2(-1), "index must be > 0")
+expect_error(s$at2(5), "index 5 exceeds length of Set, which is 4")
+expect_error(s$at2(as.numeric(NA)), "index must not be 'NA'")
+expect_error(s$at2(c("a", "b")), "index must be of length 1")
+expect_error(s$at2("c"), "index 'c' not found")
+
+
 # -----
 # clear
 # -----
@@ -117,14 +155,65 @@ co$add("a")
 expect_true(s$has(co))
 expect_true(s.ident$has(co))
 
+# -------
+# peek_at
+# -------
+s = Set$new(a = 1, 2, b = 3, 4)
+ee(s$peek_at(1), Set$new(a = 1))
+ee(s$peek_at(2), Set$new(2))
+ee(s$peek_at(c("a", "b")), Set$new(a = 1, b = 3))
+ee(s$peek_at(list(1, "b")), Set$new(a = 1, b = 3))
+ee(s$peek_at(), s)
 
-# ----
-# peek
-# ----
-s = Set$new(1, 2, 3)
-ee(s$peek(), 3)
-ee(setnew()$peek(), NULL)
-ee(setnew()$peek("foo"), "foo")
+ee(s$peek_at(c(1, 1)), Set$new(a = 1, a = 1))
+ee(s$peek_at(c("a", "a")), Set$new(a = 1, a = 1))
+
+ee(s$peek_at(1:2), Set$new(a = 1, 2))
+ee(s$peek_at("a"), s$peek_at(match("a", names(s))))
+ee(s$peek_at("b"), s$peek_at(match("b", names(s))))
+
+ee(s$peek_at(0), Set$new())
+ee(s$peek_at(-1), Set$new())
+ee(s$peek_at("c"), Set$new())
+ee(s$peek_at(as.numeric(NA)), Set$new())
+ee(s$peek_at(0, default = "foo"), Set$new("foo"))
+ee(s$peek_at("z", default = "foo"), Set$new(z = "foo"))
+
+ee(s$peek_at(list("a", "x", 9), default = 0), Set$new(a = 1, x = 0, 0))
+ee(s$peek_at(c("a", "x", 9), default = 0), Set$new(a = 1, x = 0, "9" = 0))
+ee(s$peek_at(c(NA, NA), default = 0), Set$new(0, 0))
+ee(s$peek_at(NULL), Set$new())
+ee(s$peek_at(NULL, default = 0), Set$new())
+ee(s$peek_at(list(a = NULL), default = 0), Set$new())
+ee(s$peek_at(c(NULL, NA), default = 0), Set$new(0))
+ee(s$peek_at(c(NA, NULL), default = 0), Set$new(0))
+
+ee(s$peek_at(list("s1" = "a", "s2" = "x", "s3" = NULL), default = 0),
+   Set$new(a = 1, x = 0))
+
+
+# --------
+# peek_at2
+# --------
+s = Set$new(a = 1, 2, b = 3, 4)
+ee(s$peek_at2(1), 1)
+ee(s$peek_at2(2), 2)
+ee(s$peek_at2("a"), 1)
+ee(Set$new()$peek_at2(1), NULL)
+ee(Set$new()$peek_at2(1, default = 0), 0)
+ee(s$peek_at2(), NULL)
+
+ee(s$peek_at2(1:2), NULL)
+ee(s$peek_at2(1:2, default = 0), 0)
+ee(s$peek_at2(0), NULL)
+ee(s$peek_at2(0, default = "foo"), "foo")
+ee(s$peek_at2(-1), NULL)
+ee(s$peek_at2(-1, default = "foo"), "foo")
+ee(s$peek_at2(5, default = 0), 0)
+ee(s$peek_at2(as.numeric(NA), default = 0), 0)
+ee(s$peek_at2(c("a", "b"), 0), 0)
+ee(s$peek_at2("c", 0), 0)
+
 
 
 # -----

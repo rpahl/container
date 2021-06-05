@@ -24,13 +24,11 @@ elements are sorted lexicographically by their keys.
 \itemize{
 \item \href{#method-new}{\code{Dict$new()}}
 \item \href{#method-add}{\code{Dict$add()}}
-\item \href{#method-at}{\code{Dict$at()}}
 \item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
 \item \href{#method-has}{\code{Dict$has()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
-\item \href{#method-peek}{\code{Dict$peek()}}
 \item \href{#method-pop}{\code{Dict$pop()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
@@ -46,12 +44,16 @@ elements are sorted lexicographically by their keys.
 \out{<details ><summary>Inherited methods</summary>}
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at">}\href{../../container/html/Container.html#method-at}{\code{container::Container$at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2">}\href{../../container/html/Container.html#method-at2}{\code{container::Container$at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
@@ -96,26 +98,6 @@ otherwise signal an error.
 \item{\code{value}}{the value to be added to the \code{Dict}.}
 }
 \if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-at"></a>}}
-\if{latex}{\out{\hypertarget{method-at}{}}}
-\subsection{Method \code{at()}}{
-Access value at key.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$at(key)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{key}}{\code{character} name of key.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
 }
 }
 \if{html}{\out{<hr>}}
@@ -165,7 +147,7 @@ the \code{Dict}
 \if{html}{\out{<a id="method-get"></a>}}
 \if{latex}{\out{\hypertarget{method-get}{}}}
 \subsection{Method \code{get()}}{
-This function is deprecated. Use \code{\link[=at]{at()}} instead.
+This function is deprecated. Use \code{\link[=at2]{at2()}} instead.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Dict$get(key)}\if{html}{\out{</div>}}
 }
@@ -212,28 +194,6 @@ Get all keys.
 
 \subsection{Returns}{
 \code{character} vector of all keys.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-peek"></a>}}
-\if{latex}{\out{\hypertarget{method-peek}{}}}
-\subsection{Method \code{peek()}}{
-Peek for value in \code{Dict}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$peek(key, default = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{key}}{\code{character} name of key.}
-
-\item{\code{default}}{returned default value.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-value for \code{key} if \code{key} is in the \code{Dict} else \code{default}.
 }
 }
 \if{html}{\out{<hr>}}

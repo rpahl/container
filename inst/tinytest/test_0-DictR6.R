@@ -30,8 +30,7 @@ ee(Dict$new(x = env)$values(), list(x = env))
 
 # Two (or more) elements
 d <- Dict$new(x = 1:2, y = 2:3)
-ee(d$values(),
-             Container$new(x = 1:2, y = 2:3)$values())
+ee(d$values(), Container$new(x = 1:2, y = 2:3)$values())
 ee(names(d$values()), c("x", "y"))
 
 # a Dict's keys are always sorted
@@ -67,6 +66,46 @@ d <- Dict$new()
 d$add("empty-list", list())
 d$add("null", NULL)
 ee(d$values(), list("empty-list" = list(), "null" = NULL))
+
+# --
+# at
+# --
+d = Dict$new(a = 1, b = 3)
+ee(d$at(1), Dict$new(a = 1))
+ee(d$at(2), Dict$new(b = 3))
+ee(d$at(c("a", "b")), Dict$new(a = 1, b = 3))
+ee(d$at(list(1, "b")), Dict$new(a = 1, b = 3))
+
+expect_error(d$at(c(1, 1)), "duplicated keys are not allowed")
+
+ee(d$at(1:2), Dict$new(a = 1, b = 3))
+ee(d$at("a"), d$at(match("a", names(d))))
+ee(d$at("b"), d$at(match("b", names(d))))
+
+expect_error(d$at(0), "index must be > 0")
+expect_error(d$at(-1), "index must be > 0")
+expect_error(d$at("c"), "index 'c' not found")
+expect_error(d$at(as.numeric(NA)), "index must not be 'NA'")
+
+d = Dict$new(x = 1, b = 3)
+ee(d$at(1), Dict$new(b = 3))
+ee(d$at(2), Dict$new(x = 1))
+
+# ---
+# at2
+# ---
+d = Dict$new(a = 1, b = 3)
+ee(d$at2(1), 1)
+ee(d$at2(2), 3)
+ee(d$at2("a"), 1)
+
+expect_error(d$at2(1:2), "index must be of length 1")
+expect_error(d$at2(0), "index must be > 0")
+expect_error(d$at2(-1), "index must be > 0")
+expect_error(d$at2(5), "index 5 exceeds length of Dict, which is 2")
+expect_error(d$at2(as.numeric(NA)), "index must not be 'NA'")
+expect_error(d$at2(c("a", "b")), "index must be of length 1")
+expect_error(d$at2("c"), "index 'c' not found")
 
 
 # ------
@@ -113,21 +152,6 @@ d_was_not_touched <- d$length() == 2
 expect_true(d_was_not_touched)
 
 
-# -------
-# discard
-# -------
-# trying to extract from non-existing key throws an error
-d <- Dict$new(a = 1, b = 2, n = NULL)
-ee(d$at("a"), 1)
-expect_true(is.null(d$at("n")))
-expect_error(d$at("x"), "key 'x' not in Dict")
-
-
-# only one key at a time can be accessed
-d <- Dict$new(a = 1, b = 2)
-expect_error(d$at(c("a", "b")), "key must be of length 1")
-
-
 # ---
 # has
 # ---
@@ -147,14 +171,78 @@ d$delete("a")
 ee(d$keys(), "b")
 
 
-# ----
-# peek
-# ----
-# elements can be peeked and return default value if key does not exist
-d <- Dict$new(a = 1, b = 2)
-ee(d$peek("a"), d$at("a"))
-expect_true(is.null(d$peek("x")))
-ee(d$peek("x", default = 9), 9)
+# -------
+# peek_at
+# -------
+d = Dict$new(a = 1, b = 3)
+ee(d$peek_at(1), Dict$new(a = 1))
+ee(d$peek_at(2), Dict$new(b = 3))
+ee(d$peek_at(c("a", "b")), d)
+ee(d$peek_at(list(1, "b")), d)
+ee(d$peek_at(), d)
+
+expect_error(d$peek_at(c(1, 1)), "duplicated keys are not allowed")
+
+ee(d$peek_at(1:2), d)
+ee(d$peek_at("a"), d$peek_at(match("a", names(d))))
+ee(d$peek_at("b"), d$peek_at(match("b", names(d))))
+
+ee(d$peek_at(0), Dict$new())
+ee(d$peek_at(-1), Dict$new())
+ee(d$peek_at("c"), Dict$new())
+ee(d$peek_at(as.numeric(NA)), Dict$new())
+
+expect_error(d$peek_at(0, default = "foo"), "all elements must be named")
+expect_error(d$peek_at(9, default = "foo"), "all elements must be named")
+expect_error(d$peek_at(NA, default = "foo"), "all elements must be named")
+ee(d$peek_at(NULL, default = "foo"), Dict$new())
+
+ee(d$peek_at("z", default = "foo"), Dict$new(z = "foo"))
+
+ee(d$peek_at(list("a", "x", 9)), Dict$new(a = 1))
+ee(d$peek_at(c("a", "x", "z"), default = 0),
+   Dict$new(a = 1, x = 0, z = 0))
+
+ee(d$peek_at(list(a = NULL), default = 0), Dict$new())
+
+ee(d$peek_at(list("s1" = "a", "s2" = "x", "s3" = 9), default = -1),
+   Dict$new(a = 1, s3 = -1, x = -1))
+
+ee(d$peek_at(list(s1 = "a", s2 = "x", s3 = NULL, s4 = 9), default = 0),
+   Dict$new(a = 1, x = 0, s4 = 0))
+
+ee(d$peek_at(c(s1 = "a", s2 = "x"), default = -1),
+   Dict$new(a = 1, x = -1))
+
+ee(d$peek_at(c(s1 = 1, s2 = 2, s3 = 9), default = -1),
+   Dict$new(s1.a = 1, s2.b = 3, s3 = -1))
+
+ee(d$peek_at(c(s1 = "a", s2 = 2, s3 = 9), default = -1),
+   Dict$new(a = 1, "2" = -1, "9" = -1))
+
+
+# --------
+# peek_at2
+# --------
+d = Dict$new(a = 1, b = 3)
+ee(d$peek_at2(1), 1)
+ee(d$peek_at2(2), 3)
+ee(d$peek_at2("a"), 1)
+ee(Dict$new()$peek_at2(1), NULL)
+ee(Dict$new()$peek_at2(1, default = 0), 0)
+ee(d$peek_at2(), d$peek_at2(NULL))
+
+ee(d$peek_at2(1:2), NULL)
+ee(d$peek_at2(1:2, default = 0), 0)
+ee(d$peek_at2(0), NULL)
+ee(d$peek_at2(0, default = "foo"), "foo")
+ee(d$peek_at2(-1), NULL)
+ee(d$peek_at2(-1, default = "foo"), "foo")
+ee(d$peek_at2(5, default = 0), 0)
+ee(d$peek_at2(as.numeric(NA), default = 0), 0)
+ee(d$peek_at2(c("a", "b"), 0), 0)
+ee(d$peek_at2("c", 0), 0)
+
 
 
 # ---
@@ -205,7 +293,7 @@ expect_error(d$rename(c("x", "x2"), c("x2", "x3")),
 # values at keys can be replaced
 d <- Dict$new(a = 1, b = NULL)
 d$replace("b", list(1, 2))
-ee(d$at("b"), list(1, 2))
+ee(d$at2("b"), list(1, 2))
 expect_error(d$replace("x", 1), "key 'x' not in Dict")
 
 

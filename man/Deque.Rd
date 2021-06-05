@@ -11,8 +11,7 @@ both stacks and queues.
 }
 \details{
 This class inherits from class \code{\link[=Container]{Container()}} and extends it by
-\code{pop} and \code{peek} methods, element counting, and reverse and rotate
-functionality.
+\code{pop} and \code{peek} methods, and reverse and rotate functionality.
 }
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=deque]{deque()}}
@@ -39,6 +38,7 @@ functionality.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="add">}\href{../../container/html/Container.html#method-add}{\code{container::Container$add()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at">}\href{../../container/html/Container.html#method-at}{\code{container::Container$at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2">}\href{../../container/html/Container.html#method-at2}{\code{container::Container$at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
@@ -49,6 +49,8 @@ functionality.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="initialize">}\href{../../container/html/Container.html#method-initialize}{\code{container::Container$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace">}\href{../../container/html/Container.html#method-replace}{\code{container::Container$replace()}}\out{</span>}
@@ -82,7 +84,7 @@ the \code{Deque()} object.
 \if{html}{\out{<a id="method-peek"></a>}}
 \if{latex}{\out{\hypertarget{method-peek}{}}}
 \subsection{Method \code{peek()}}{
-Peek at last element on the right without removing it.
+Peek at last element of the \code{Deque}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Deque$peek(default = NULL)}\if{html}{\out{</div>}}
 }
@@ -102,7 +104,7 @@ element 'peeked' on the right
 \if{html}{\out{<a id="method-peekleft"></a>}}
 \if{latex}{\out{\hypertarget{method-peekleft}{}}}
 \subsection{Method \code{peekleft()}}{
-Peek at first element on the left without removing it.
+Peek at first element of the \code{Deque}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Deque$peekleft(default = NULL)}\if{html}{\out{</div>}}
 }

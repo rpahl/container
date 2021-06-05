@@ -50,7 +50,7 @@ as.dict <- function(x)
 }
 
 methods::setOldClass("Dict")
-methods::setAs("list", "Dict", function(from) as.deque(from))
+methods::setAs("list", "Dict", function(from) as.dict(from))
 
 #' @rdname DictS3
 #' @details * `is.dict(x)` returns `TRUE` if `x` is of class `Dict`

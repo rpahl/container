@@ -22,7 +22,7 @@ clone.Container <- function(x) (x$clone(deep = TRUE))
 #' @usage
 #' clone(x)
 #' @details
-#' * clone(x) create a copy of `x`.
+#' * `clone(x)` create a copy of `x`.
 #' @export
 #' @examples
 #'
@@ -45,7 +45,7 @@ clone.dict.table <- function(x) (copy(x))
 #' @usage
 #' clone(x, ...)
 #' @details
-#' * clone(x) create a copy of `x`.
+#' * `clone(x)` create a copy of `x`.
 #' @export
 #' @examples
 #'

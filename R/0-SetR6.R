@@ -53,15 +53,6 @@ Set <- R6::R6Class("Set",
             self
         },
 
-        #' @description peek last item
-        #' @param default returned default value if `Set` is empty.
-        #' @return last element (according to internal order) in the `Set`.
-        peek = function(default = NULL) {
-            if (self$is_empty())
-                return(default)
-
-            private$.subset2(self, self$length())
-        },
 
         #' @description Search for occurence of `elem` in the `Set` and
         #' replace it by `new`. If `elem` does not exist, an error is

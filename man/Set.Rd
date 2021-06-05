@@ -24,7 +24,6 @@ lexicographical representation of the elements.
 \itemize{
 \item \href{#method-new}{\code{Set$new()}}
 \item \href{#method-add}{\code{Set$add()}}
-\item \href{#method-peek}{\code{Set$peek()}}
 \item \href{#method-replace}{\code{Set$replace()}}
 \item \href{#method-diff}{\code{Set$diff()}}
 \item \href{#method-intersect}{\code{Set$intersect()}}
@@ -41,6 +40,7 @@ lexicographical representation of the elements.
 \itemize{
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at">}\href{../../container/html/Container.html#method-at}{\code{container::Container$at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2">}\href{../../container/html/Container.html#method-at2}{\code{container::Container$at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
@@ -50,6 +50,8 @@ lexicographical representation of the elements.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
@@ -95,26 +97,6 @@ Add element
 }
 \subsection{Returns}{
 the \code{Set} object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-peek"></a>}}
-\if{latex}{\out{\hypertarget{method-peek}{}}}
-\subsection{Method \code{peek()}}{
-peek last item
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$peek(default = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{default}}{returned default value if \code{Set} is empty.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-last element (according to internal order) in the \code{Set}.
 }
 }
 \if{html}{\out{<hr>}}

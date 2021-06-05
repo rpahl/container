@@ -1,2 +1,3 @@
 Implement S3 generics for data.frame
 Implement head/tail for container classes and dict.table
+Implement coapply to be used like lapply

@@ -49,7 +49,7 @@ as.set <- function(x) {
 }
 
 methods::setOldClass("Set")
-methods::setAs("list", "Set", function(from) as.deque(from))
+methods::setAs("list", "Set", function(from) as.set(from))
 
 #' @rdname SetS3
 #' @details * `is.set(x)` returns `TRUE` if `x` is of class `Set` and `FALSE`

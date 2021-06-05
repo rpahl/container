@@ -88,7 +88,7 @@ pop_.Dict <- function(.x, key) .x$pop(key)
 #' pop_(dit, "x")  # Column 'x' not in dict.table}
 pop_.dict.table <- function(.x, key)
 {
-    elem <- peek(.x, key)
+    elem <- at2(.x, key)
     delete_(.x, key)
     elem
 }

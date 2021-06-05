@@ -8,7 +8,7 @@ expect_warning(co$type(), "deprecated")
 # Dict set is deprecated and replaced by replace
 d <- Dict$new(a = 1, b = 2)
 expect_warning(d$set("b", 9), "Use 'replace' instead.")
-expect_equal(d$peek("b"), 9)
+expect_equal(d$at2("b"), 9)
 
 # Dict remove is deprecated and replaced by delete
 d <- Dict$new(a = 1, b = 2)

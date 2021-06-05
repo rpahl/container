@@ -5,8 +5,7 @@
 #' underlying data sequence. As such, the [Deque()] can also be used to mimic
 #' both stacks and queues.
 #' @details This class inherits from class [Container()] and extends it by
-#' `pop` and `peek` methods, element counting, and reverse and rotate
-#' functionality.
+#' `pop` and `peek` methods, and reverse and rotate functionality.
 #' @importFrom R6 R6Class
 #' @seealso [Container()], [deque()]
 #' @export
@@ -37,14 +36,14 @@ Deque <- R6::R6Class("Deque",
         #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the right
         peek = function(default = NULL) {
-            super$peek(self$length(), default)
+            super$peek_at2(self$length(), default)
         },
 
         #' @description Peek at first element of the `Deque`.
         #' @param default returned default value if `Deque` is empty.
         #' @return element 'peeked' on the left
         peekleft = function(default = NULL) {
-            super$peek(1, default)
+            super$peek_at2(1, default)
         },
 
         #' @description

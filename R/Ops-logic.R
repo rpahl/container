@@ -48,7 +48,7 @@ NULL
     d2 = as.dict(y)
     key_diff <- setdiff(d2$keys(), d1$keys())
     for (key in key_diff) {
-        d1$add(key, d2$at(key))
+        d1$add(key, d2$at2(key))
     }
     d1
 }

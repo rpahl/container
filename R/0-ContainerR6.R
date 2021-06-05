@@ -77,25 +77,40 @@ Container <- R6::R6Class("Container",
             self
         },
 
-        #' @description Access value at index. If index is invalid, an error is
-        #' signaled. If given as a string, the element matching the name is
-        #' returned. If the name is not found, again, an error is signalled.
-        #' If there are two or more identical names, the value of the first
-        #' match (i.e. *leftmost* element) is returned.
-        #' @param index `numeric` or `character` index to be accessed.
+        #' @description Same as `at2` (see below) but accepts a vector of
+        #' indices and always returns a `Container` object.
+        #' @param index vector of indices.
+        #' @return `Container` object with the extracted elements.
+        at = function(index) {
+
+            if (missing(index))
+                stop("'index' is missing", call. = FALSE)
+
+            lapply(index, .assert_index, x = self)
+
+            l = lapply(index, function(x) private$.subset(self, x))
+            if (!length(l))
+                return(methods::as(l, data.class(self)))
+
+            ul = unlist(l, recursive = FALSE)
+            methods::as(ul, data.class(self))
+        },
+
+        #' @description Extract value at index. If index is invalid or not
+        #' found, an error is signaled. If given as a string, the element
+        #' matching the name is returned. If there are two or more identical
+        #' names, the value of the first match (i.e. *leftmost* element) is
+        #' returned.
+        #' @param index Must be a single number > 0 or a string.
         #' @return If given as a number, the element at the corresponding
         #' position, and if given as a string, the element at the
         #' corresponding name matching the given string is returned.
-        at = function(index) {
-            private$verify_index(index)
+        at2 = function(index) {
 
-            if (is.numeric(index))
-                private$assert_position(index)
-            else
-                private$assert_name(index)
+            if (missing(index))
+                stop("'index' is missing", call. = FALSE)
 
-            #l = private$.subset(self, index)
-            #methods::as(l, data.class(self))
+            .assert_index(self, index)
             private$.subset2(self, index)
         },
 
@@ -172,22 +187,48 @@ Container <- R6::R6Class("Container",
         #' elements it contains.
         length = function() length(private$elems),
 
-        #' @description Peek at index. If not found, return `default` value.
+        #' @description Same as `peek_at2` (see below) but accepts a vector of
+        #' indices and always returns a `Container` object.
+        #' @param index vector of indices.
+        #' @param default the default value to return in case the value at
+        #' `index` is not found.
+        #' @return `Container` object with the extracted elements.
+        peek_at = function(index, default = NULL) {
+            if (missing(index))
+                return(self)
+
+            try_at = function(index)
+                as.list(tryCatch(self$at(index),
+                                 error = function(e) list(default)))
+
+            l = lapply(index, try_at)
+            if (identical(l, list()))
+                return(methods::as(l, data.class(self)))
+
+            # Determine positions where names need to be set
+            isChar = as.logical(sapply(index, is.character))
+            hasLen = as.logical(sapply(l, function(x) length(x) > 0))
+            pos = which(isChar & hasLen)
+
+            ul = unlist(l, recursive = FALSE)
+            names(ul)[pos] <- as.character(index[pos])
+            ul = Filter(ul, f = Negate(is.null))
+
+            methods::as(ul, data.class(self))
+        },
+
+        #' @description Peek at index and extract value. If index is invalid,
+        #' missing, or not not found, return `default` value.
         #' @param index `numeric` or `character` index to be accessed.
         #' @param default the default value to return in case the value at
         #' `index` is not found.
         #' @return the value at the given index or (if not found) the given
         #' default value.
-        peek = function(index, default = NULL) {
-            if (missing(index))
-                return(self$peek(self$length()))
-
-            if (self$is_empty())
+        peek_at2 = function(index, default = NULL) {
+            if (missing(index) || self$is_empty())
                 return(default)
 
-            private$verify_index(index)
-
-            tryCatch(self$at(index), error = function(e) default)
+            tryCatch(self$at2(index), error = function(e) default)
         },
 
         #' @description Print object representation
@@ -262,24 +303,7 @@ Container <- R6::R6Class("Container",
     ),
     private = list(
         compare_fun = NULL,
-
         elems = list(),
-
-        assert_position = function(index) {
-            if (index > self$length())
-                stop("index ", index, " exceeds length of ",
-                     data.class(self), " (", self$length(), ")", call. = FALSE)
-
-            invisible(TRUE)
-        },
-
-        assert_name = function(name) {
-            if (!(name %in% names(self)))
-                stop("index '", name, "' not found", call. = FALSE)
-
-            invisible(TRUE)
-        },
-
 
         create_iter = function() {
             Iterator$new(self, private$.subset)
@@ -310,20 +334,6 @@ Container <- R6::R6Class("Container",
         set_compare_fun = function(x) {
             f = if (is.character(x)) match.fun(x) else x
             private$compare_fun = f
-        },
-
-        verify_index = function(index) {
-            if (!(is.numeric(index) || is.character(index)))
-                stop("invalid index type '", data.class(index), "'", call. = FALSE)
-
-            if (length(index) != 1)
-                stop("index must be of length 1", call. = FALSE)
-
-            if (is.na(index))
-                stop("index must not be 'NA'", call. = FALSE)
-
-            if (isTRUE(index < 1))
-                stop("index must be > 0", call. = FALSE)
         },
 
         verify_same_class = function(x) {
