@@ -1,14 +1,3 @@
-.hasPosition = function(x, pos)
-{
-    length(x) >= pos
-}
-
-.has_index = function(x, index)
-{
-    utils::hasName(x, index)
-}
-
-
 .assert_index = function(x, index, ...)
 {
     if (missing(index))
@@ -24,7 +13,7 @@
            "character" = .assert_index.character(x, index),
            "numeric" = .assert_index.numeric(x, index),
            "integer" = .assert_index.numeric(x, index),
-           "default" = .assert_index.default(x, index))
+           .assert_index.default(x, index))
 }
 
 
@@ -41,7 +30,7 @@
     if (isTRUE(index < 1))
         stop("index must be > 0", call. = FALSE)
 
-    if (!.hasPosition(x, index))
+    if (index > length(x))
         stop("index ", index, " exceeds length of ",
              data.class(x), ", which is ", length(x), call. = FALSE)
 
@@ -50,7 +39,7 @@
 
 .assert_index.default = function(x, index, ...)
 {
-    stop("invalid index type '", data.class(index), "'")
+    stop("invalid index type '", data.class(index), "'", call. = FALSE)
 }
 
 
