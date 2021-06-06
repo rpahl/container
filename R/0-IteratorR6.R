@@ -6,8 +6,8 @@
 #' @export
 is.subsettable <- function(x, .subset = .subset2)
 {
-    if (length(x) == 0) return(FALSE)
-    stopifnot(is.function(.subset))
+    if (!is.function(.subset))
+        stop("'.subset' argument must be a function", call. = FALSE)
 
     res = tryCatch(.subset(x, 1), error = identity)
     !inherits(res, "error")
@@ -43,7 +43,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @return invisibly returns the `Iterator` object
         initialize = function(x, .subset = .subset2) {
             if (!(is.iterable(x) || is.subsettable(x, .subset)))
-                stop("x must be iterable or subsettable")
+                stop("x must be iterable or subsettable", call. = FALSE)
 
             private$object <- x
             private$.subset <- .subset

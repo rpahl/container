@@ -8,6 +8,7 @@
 #' @param x an object of class [Iterable()] or any other `R` object. In the
 #' latter case, `x` will always be coerced to a base `R` list prior to creating
 #' the `iterator`.
+#' @param ... parameters passed to or from methods
 #' @param it `Iterator` object
 #' @name iterS3
 #' @seealso [Iterator()]
@@ -15,7 +16,7 @@ NULL
 
 #' @rdname iterS3
 #' @export
-iter <- function(x) UseMethod("iter")
+iter <- function(x, ...) UseMethod("iter")
 
 #' @rdname ContainerS3
 #' @export
@@ -23,7 +24,7 @@ iter.Container <- function(x) x$clone(deep = TRUE)$iter()
 
 #' @rdname iterS3
 #' @export
-iter.default <- function(x) Iterator$new(x)
+iter.default <- function(x, ...) Iterator$new(x, ...)
 
 #' @rdname iterS3
 #' @export

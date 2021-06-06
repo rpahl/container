@@ -13,21 +13,21 @@ expect_true(is.subsettable(1))
 expect_true(is.subsettable(data.frame(a = 1)))
 expect_true(is.subsettable(expression(x + 1)))
 
-expect_false(is.subsettable(NULL))
 expect_false(is.subsettable(list()))
-expect_false(is.subsettable(numeric()))
-expect_false(is.subsettable(data.frame()))
-expect_false(is.subsettable(dict.table()))
+expect_true(is.subsettable(list(), .subset = .subset))
 
 
 # Iterator constructor works as expected
-expect_error(Iterator$new())
-expect_error(Iterator$new(list()), "must be iterable or subsettable")
-expect_error(Iterator$new(NULL), "must be iterable or subsettable")
+expect_error(Iterator$new(), 'argument "x" is missing')
+expect_error(Iterator$new(list()), "x must be iterable or subsettable")
 e = new.env()
 e$a = 1
 expect_error(Iterator$new(e), "must be iterable or subsettable")
 
+expect_equal(Iterator$new(NULL)$length(), 0)
+expect_false(Iterator$new(NULL)$has_next())
+expect_equal(Iterator$new(list(), .subset = .subset)$length(), 0)
+expect_false(Iterator$new(list(), .subset = .subset)$has_next())
 expect_equal(Iterator$new(1:3)$length(), 3)
 expect_equal(Iterator$new(factor(1:2))$length(), 2)
 expect_equal(Iterator$new(list("a", mean))$length(), 2)

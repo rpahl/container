@@ -5,11 +5,11 @@ expect_true(is.iterable(container()))
 # iter initialization works as expected
 expect_error(iter())
 expect_error(iter(list()), "must be iterable or subsettable")
-expect_error(iter(NULL), "must be iterable or subsettable")
 e = new.env()
 e$a = 1
 expect_error(iter(e), "must be iterable or subsettable")
 
+expect_equal(length(iter(list(), .subset = .subset)), 0)
 expect_equal(iter(1:3)$length(), 3)
 expect_equal(iter(factor(1:2))$length(), 2)
 expect_equal(iter(list("a", mean))$length(), 2)
