@@ -28,6 +28,7 @@ Iterable <- R6::R6Class("Iterable",
     ),
     private = list(create_iter = function()
         stop("abstract method", call. = FALSE)),
+
     lock_class=TRUE
 )
 
@@ -58,22 +59,15 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description add element
-        #' @param ... elements to be added to the `Container`
+        #' @param value value of `ANY` type to be added to the `Container`.
+        #' @param name `character` optional name attribute of the value.
         #' @return the `Container` object
-        add = function(...) {
-            elems = list(...)
+        add = function(value, name = NULL) {
 
-            if (length(elems) == 0)
-                return(self)
+            elem = list(value)
+            names(elem) = name
 
-            if (length(elems) > 1) {
-                for (i in seq_along(elems))
-                    do.call(self$add, elems[i])
-
-                return(self)
-            }
-
-            private$elems <- c(private$elems, elems)
+            private$elems <- c(private$elems, elem)
             self
         },
 
@@ -178,6 +172,31 @@ Container <- R6::R6Class("Container",
             !is.na(private$get_position(elem))
         },
 
+        #' @description Determine if `Container` object contains an element
+        #' with the given name. If called with no argument, the function
+        #' determines whether *any* element is named.
+        #' @param name `character` the name
+        #' @return `TRUE` if `Container` has the `name` otherwise `FALSE`
+        has_name = function(name) {
+            if (missing(name))
+                return(isTRUE(length(names(self$values())) > 0))
+
+            if (!is.character(name))
+                stop("expected a character string, but got '",
+                     data.class(name), "'", call. = FALSE)
+
+            if (length(name) != 1)
+                stop("name must be of length 1", call. = FALSE)
+
+            if (is.na(name))
+                stop("undefined name", call. = FALSE)
+
+            if (isTRUE(nchar(name) == 0))
+                stop("name must consist of at least one character", call. = F)
+
+            isTRUE(utils::hasName(self$values(), name))
+        },
+
         #' @description Check if `Container` is empty
         #' @return `TRUE` if the `Container` is empty else `FALSE`.
         is_empty = function() self$length() == 0,
@@ -241,6 +260,9 @@ Container <- R6::R6Class("Container",
 
             writeLines(strwrap(format(x, ...), exdent = 1L))
             invisible(self)
+        },
+
+        replace2 = function(index, value, add = FALSE) {
         },
 
         #' @description Replace one element by another element.

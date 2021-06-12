@@ -35,6 +35,7 @@ ee(x, deque(1, 2))
 # add.Dict
 # --------
 d = dict(a = 1)
+ee(add(d), d)
 ee(add(d, b = 2, x = 4), dict(a = 1, b = 2, x = 4))
 d_was_not_touched = all.equal(d, dict(a = 1))
 expect_true(d_was_not_touched)
@@ -56,6 +57,7 @@ expect_error(add(d, "a", 2), "all elements must be named")
 # add.dict.table
 # --------------
 dit = dict.table(a = 1)
+ee(add(dit), dit)
 ee(add(dit, b = 2, x = 3), dict.table(a = 1, b = 2, x = 3))
 dit_was_not_touched = all.equal(dit, dict.table(a = 1))
 expect_true(dit_was_not_touched)

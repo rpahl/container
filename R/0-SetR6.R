@@ -16,43 +16,35 @@ Set <- R6::R6Class("Set",
         #' @return returns the `Set` object
         initialize = function(...) {
 
-            elems = list(...)
             super$initialize()
 
-            if (length(elems))
-                do.call(self$add, args = elems)
+            it = iter(list(...), .subset = .subset)
+            while (has_next(it)) {
+                value = get_next(it)
+                self$add(value[[1]], name = names(value))
+            }
 
             self
         },
 
         #' @description Add element
-        #' @param ... elements to be added to the `Set`
+        #' @param value value of `ANY` type to be added to the `Set`.
+        #' @param name `character` optional name attribute of the value.
         #' @return the `Set` object.
-        add = function(...) {
-            elems = list(...)
+        add = function(value, name = NULL) {
 
-            if (length(elems) == 0)
-                return(self)
-
-            if (length(elems) > 1) {
-                for (i in seq_along(elems))
-                    do.call(self$add, elems[i])
-
-                return(self)
-            }
-
-            value = elems[[1]]
             if (self$has(value))
                 return(self)
 
-            named_value = elems[1]
+            elem = list(value)
+            names(elem) = name
+
             hash_value = private$get_hash_value(value)
-            private$elems[[hash_value]] = named_value
+            private$elems[[hash_value]] = elem
             private$resort_by_hash()
 
             self
         },
-
 
         #' @description Search for occurence of `elem` in the `Set` and
         #' replace it by `new`. If `elem` does not exist, an error is
@@ -102,8 +94,11 @@ Set <- R6::R6Class("Set",
             private$verify_same_class(s)
 
             it = s$iter()
-            while (it$has_next())
-                do.call(self$add, args = it$get_next())
+
+            while (has_next(it)) {
+                value = get_next(it)
+                self$add(value[[1]], name = names(value))
+            }
 
             self
         },

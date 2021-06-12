@@ -27,7 +27,6 @@ elements are sorted lexicographically by their keys.
 \item \href{#method-delete}{\code{Dict$delete()}}
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
-\item \href{#method-has}{\code{Dict$has()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-pop}{\code{Dict$pop()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
@@ -50,11 +49,14 @@ elements are sorted lexicographically by their keys.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name">}\href{../../container/html/Container.html#method-has_name}{\code{container::Container$has_name()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace2">}\href{../../container/html/Container.html#method-replace2}{\code{container::Container$replace2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
 }
@@ -161,26 +163,6 @@ This function is deprecated. Use \code{\link[=at2]{at2()}} instead.
 }
 \subsection{Returns}{
 If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-has"></a>}}
-\if{latex}{\out{\hypertarget{method-has}{}}}
-\subsection{Method \code{has()}}{
-Determine if \code{Dict} has a \code{key}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$has(key)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{key}}{\code{character} name of key.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if \code{key} in \code{Dict}, otherwise \code{FALSE}.
 }
 }
 \if{html}{\out{<hr>}}

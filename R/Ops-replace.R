@@ -9,30 +9,16 @@ NULL
 
 
 #' @rdname OpsReplace
-#' @param add `logical` If `FALSE` and key is not yet in the dict, an
-#'  error is signaled. This is different from standard R lists, where instead
-#'  just a new entry would be generated. To behave like standard R lists, set
-#'  `add = TRUE`, which also sets the value at the key, but will also add a
-#'  new key-value pair if the key is not yet in the dictionary.
 #' @param value A suitable replacement value.
 #' @return For `Dict` `[[<-` replaces the value associated with `key`. If `key`
 #' is not in the dict, by default, an error is raised, unless the `add`
 #' argument was set to `TRUE` (see details at `add` description).
 #' @export
-`[[<-.Dict` <- function(x, key, add = FALSE, value)
+`[[<-.Dict` <- function(x, key, value)
 {
-    x$setval(key, value, add)
+    x$replace(key, value)
 }
 
-
-#' @rdname OpsReplace
-#' @return For `Dict` `$` replaces the value associated with `key`. If `key`
-#' is not in the dict, the value is added.
-#' @export
-`$<-.Dict` <- function(x, key, value)
-{
-    x$setval(key, value, add = TRUE)
-}
 
 
 #' @rdname OpsReplace
@@ -40,7 +26,7 @@ NULL
 #' more keys are not found, an error is signaled, unless `add` was set to
 #' `TRUE`.
 #' @export
-`[<-.Dict` <- function(x, key, add = FALSE, value)
+`[<-.Dict` <- function(x, key, value)
 {
     if (length(key) != length(value)) {
         if (length(value) == 1) {
@@ -83,27 +69,11 @@ NULL
 #' @rdname OpsReplace
 #' @param j `numeric` or `character` column index.
 #' @return For `dict.table`, `[[` replaces the selected column. If the column
-#' does not exist, an error is signaled, unless `add` was set to `TRUE`.
+#' does not exist, an error is signaled.
 #' @export
-`[[<-.dict.table` <- function(x, j, add = FALSE, value)
+`[[<-.dict.table` <- function(x, j, value)
 {
-    # setval(x, j, value, add)
-    # the above crashes due to memory issue so we need to work on a copy
-    setval(copy(x), j, value, add)
+    replace(copy(x), j, value)
 }
 
-
-#' @rdname OpsReplace
-#' @return For `dict.table` `$` replaces the selected column. If the column
-#' does not exist, it is added to the `dict.table`.
-#' @export
-`$<-.dict.table` <- function(x, key, value)
-{
-    if (has(x, key)) {
-        setval(x, key, value)
-    }
-    else {
-        setval(copy(x), key, value, add = TRUE)
-    }
-}
 

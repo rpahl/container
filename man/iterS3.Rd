@@ -16,9 +16,9 @@
 \alias{length.Iterator}
 \title{Iterator}
 \usage{
-iter(x)
+iter(x, ...)
 
-\method{iter}{default}(x)
+\method{iter}{default}(x, ...)
 
 is.iterator(x)
 
@@ -44,6 +44,8 @@ reset_iter(it)
 \item{x}{an object of class \code{\link[=Iterable]{Iterable()}} or any other \code{R} object. In the
 latter case, \code{x} will always be coerced to a base \code{R} list prior to creating
 the \code{iterator}.}
+
+\item{...}{parameters passed to or from methods}
 
 \item{it}{\code{Iterator} object}
 }

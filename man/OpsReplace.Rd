@@ -3,36 +3,24 @@
 \name{OpsReplace}
 \alias{OpsReplace}
 \alias{[[<-.Dict}
-\alias{$<-.Dict}
 \alias{[<-.Dict}
 \alias{[[<-.Set}
 \alias{[[<-.dict.table}
-\alias{$<-.dict.table}
 \title{Replace Operators for Containers}
 \usage{
-\method{[[}{Dict}(x, key, add = FALSE) <- value
+\method{[[}{Dict}(x, key) <- value
 
-\method{$}{Dict}(x, key) <- value
-
-\method{[}{Dict}(x, key, add = FALSE) <- value
+\method{[}{Dict}(x, key) <- value
 
 \method{[[}{Set}(x, element) <- value
 
-\method{[[}{dict.table}(x, j, add = FALSE) <- value
-
-\method{$}{dict.table}(x, key) <- value
+\method{[[}{dict.table}(x, j) <- value
 }
 \arguments{
 \item{x}{\code{Container} or \code{dict.table} object in which to replace elements or}
 
 \item{key}{\code{character} name of key or column.
 columns.}
-
-\item{add}{\code{logical} If \code{FALSE} and key is not yet in the dict, an
-error is signaled. This is different from standard R lists, where instead
-just a new entry would be generated. To behave like standard R lists, set
-\code{add = TRUE}, which also sets the value at the key, but will also add a
-new key-value pair if the key is not yet in the dictionary.}
 
 \item{value}{A suitable replacement value.}
 
@@ -45,9 +33,6 @@ For \code{Dict} \verb{[[<-} replaces the value associated with \code{key}. If \c
 is not in the dict, by default, an error is raised, unless the \code{add}
 argument was set to \code{TRUE} (see details at \code{add} description).
 
-For \code{Dict} \code{$} replaces the value associated with \code{key}. If \code{key}
-is not in the dict, the value is added.
-
 For \code{Dict}, \verb{[<-} replaces the values at the given \code{keys}. If one or
 more keys are not found, an error is signaled, unless \code{add} was set to
 \code{TRUE}.
@@ -57,10 +42,7 @@ does not exist, an error is signaled, unless you pass \code{NULL}, in which case
 the value is just added to the \code{Set}.
 
 For \code{dict.table}, \code{[[} replaces the selected column. If the column
-does not exist, an error is signaled, unless \code{add} was set to \code{TRUE}.
-
-For \code{dict.table} \code{$} replaces the selected column. If the column
-does not exist, it is added to the \code{dict.table}.
+does not exist, an error is signaled.
 }
 \description{
 Replace parts of \code{Container} or \code{dict.table} objects.

@@ -16,6 +16,9 @@ Dict <- R6::R6Class("Dict",
         #' @param ... initial elements put into the `Dict`
         #' @return returns the `Dict`
         initialize = function(...) {
+
+            super$initialize()
+
             elems <- list(...)
 
             keys <- names(elems)
@@ -36,7 +39,7 @@ Dict <- R6::R6Class("Dict",
         #' @param key `character` name of key.
         #' @param value the value to be added to the `Dict`.
         add = function(key, value) {
-            if (self$has(key))
+            if (self$has_name(key))
                 stop("key '", key, "' already in ", data.class(self),
                      call. = FALSE)
 
@@ -50,7 +53,7 @@ Dict <- R6::R6Class("Dict",
         #' signaled.
         #' @return the `Dict` object
         delete = function(key) {
-            if (!self$has(key))
+            if (!self$has_name(key))
                 stop("key '", key, "' not in ", data.class(self), call. = FALSE)
 
             self$discard(key)
@@ -61,7 +64,7 @@ Dict <- R6::R6Class("Dict",
         #' the associated key-value pair is deleted, otherwise it is ignored.
         #' @return the `Dict`
         discard = function(key) {
-            if (self$has(key))
+            if (self$has_name(key))
                 remove(list = key, envir = private$elems)
 
             self
@@ -75,17 +78,6 @@ Dict <- R6::R6Class("Dict",
             self$at2(key)
         },
 
-        #' @description Determine if `Dict` has a `key`.
-        #' @param key `character` name of key.
-        #' @return `TRUE` if `key` in `Dict`, otherwise `FALSE`.
-        has = function(key) {
-            if (length(key) != 1) stop("key must be of length 1", call. = F)
-            if (!is.character(key)) stop("key must be character", call. = F)
-            if (is.na(key)) stop("undefined key", call. = F)
-            if (isTRUE(nchar(key) == 0)) stop("zero-length key", call. = F)
-
-            utils::hasName(private$elems, key)
-        },
 
         #' @description Get all keys.
         #' @return `character` vector of all keys.
@@ -148,7 +140,7 @@ Dict <- R6::R6Class("Dict",
         #' `key` does not exists.
         #' @return returns the `Dict`
         replace = function(key, value, add = FALSE) {
-            if (!add && !self$has(key))
+            if (!add && !self$has_name(key))
                 stop("key '", key, "' not in ", data.class(self), call. = FALSE)
 
             assign(key, value, envir = private$elems)

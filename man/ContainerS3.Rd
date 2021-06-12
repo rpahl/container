@@ -2,8 +2,8 @@
 % Please edit documentation in R/0-ContainerS3.R, R/0-IteratorS3.R,
 %   R/GroupGenericMath.R, R/GroupGenericSummary.R, R/Ops-arithmetic.R,
 %   R/Ops-compare.R, R/add.R, R/at.R, R/at2.R, R/clear.R, R/clone.R, R/count.R,
-%   R/delete.R, R/discard.R, R/has.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R,
-%   R/replace.R
+%   R/delete.R, R/discard.R, R/has.R, R/has_name.R, R/is_empty.R, R/peek_at.R,
+%   R/peek_at2.R, R/replace.R
 \name{ContainerS3}
 \alias{ContainerS3}
 \alias{container}
@@ -28,6 +28,7 @@
 \alias{delete.Container}
 \alias{discard.Container}
 \alias{has.Container}
+\alias{has_name.Container}
 \alias{is_empty.Container}
 \alias{peek_at.Container}
 \alias{peek_at2.Container}
@@ -74,6 +75,8 @@ discard_(.x, ...)
 
 has(x, elem)
 
+has_name(x, name)
+
 is_empty(x)
 
 peek_at(x, ..., .default = NULL)
@@ -92,6 +95,8 @@ or of class \code{Container} for the \code{S3} methods.}
 \item{.x}{\verb{object of class }Container`}
 
 \item{elem}{some element of any type}
+
+\item{name}{\code{character} the name to be found.}
 
 \item{old}{old element to be found and replaced.}
 
@@ -218,6 +223,10 @@ Elements that don't exist, are ignored.
 }
 
 \itemize{
+\item \code{has_name(x, name)} check if \code{name} is in \code{x}
+}
+
+\itemize{
 \item \code{is_empty(x)} \code{TRUE} if object is empty otherwise \code{FALSE}
 }
 
@@ -330,6 +339,11 @@ co = container(1, 2, mean)
 has(co, 1)                   # TRUE
 has(co, mean)                # TRUE
 has(co, 1:2)                 # FALSE
+
+co = container(a = 1, 2, f = mean)
+has_name(co, "a")    # TRUE
+has_name(co, "f")    # TRUE
+has_name(co, "2")    # FALSE
 
 co = container(1, 2)
 is_empty(co)

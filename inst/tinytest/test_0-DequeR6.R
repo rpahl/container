@@ -14,8 +14,8 @@ expect_equal(Deque$new(mean)$addleft(median)$values(), list(median, mean))
 
 # several named elements can be added to the left
 d = Deque$new(0)
-d$addleft(a = 1, b = 2)
-expect_equal(d, Deque$new(b = 2, a = 1, 0))
+d$addleft(1, "a")$addleft(2)
+expect_equal(d, Deque$new(2, a = 1, 0))
 
 
 # -----------------
@@ -57,9 +57,8 @@ expect_equal(Deque$new(1, 2, 3)$rev()$values(), rev(v))
 # rev works also on empty elements
 d <- Deque$new(list(), NULL, NA, numeric())
 l <- as.list(d)
-d$rev()
 expect_equal(d$length(), 4)
-expect_equal(as.list(d), rev(l))
+expect_equal(as.list(d$rev()), rev(l))
 
 # ------
 # rotate

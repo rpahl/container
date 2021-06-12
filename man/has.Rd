@@ -4,7 +4,7 @@
 \alias{has}
 \alias{has.Container}
 \alias{has.dict.table}
-\title{Determine if object has some element}
+\title{Check if object has some element}
 \usage{
 has(x, ...)
 
@@ -17,20 +17,18 @@ has(x, ...)
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{elem}{some element to be found. For \code{Container}, \code{Deque} and
-\code{Set} objects, the sought element is passed, while for \code{Dict} objects this
-corresponds to the key to be found in the \code{Dict}.}
+\item{elem}{some element to be found.}
 
-\item{column}{\code{character} name or \code{numeric} index of column.}
+\item{column}{vector of values with the same length as the number of rows
+of the \code{dict.table}.}
 }
 \value{
-\code{TRUE} if element (or key) is in \code{x} and otherwise \code{FALSE}.
+\code{TRUE} if element is in \code{x} and otherwise \code{FALSE}.
 
-For \code{dict.table} \code{TRUE} if column name or index is in dict.table,
-otherwise \code{FALSE}.
+For \code{dict.table}, \code{TRUE} if column exists in \code{x} otherwise \code{FALSE}.
 }
 \description{
-Determine if object has some element
+Check if object has some element
 }
 \examples{
 
@@ -39,9 +37,11 @@ has(co, 1)                   # TRUE
 has(co, mean)                # TRUE
 has(co, 1:2)                 # FALSE
 
-dit = dict.table(a = 1, b = 2)
-has(dit, "a")    # TRUE
-has(dit, 1)      # TRUE
-has(dit, "x")    # FALSE
-has(dit, 3)      # FALSE
+dit = dict.table(a = 1:3, b = as.list(4:6))
+has(dit, 1:3)            # TRUE
+has(dit, 4:6)            # FALSE
+has(dit, as.list(4:6))   # TRUE
+}
+\seealso{
+\code{\link[=has_name]{has_name()}}
 }

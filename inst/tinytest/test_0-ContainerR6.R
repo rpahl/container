@@ -56,9 +56,8 @@ ee(coco$values()[[1]]$values(), list(1, 2))
 
 # named elements can be added to a Container
 co <- Container$new()
-co$add(a = 1, 2, b = 3)
+co$add(1, "a")$add(2)$add(3, "b")
 ee(co$values(), list(a = 1, 2, b = 3))
-
 
 # --
 # at
@@ -208,6 +207,25 @@ co.ident = Container$new(co$values())
 expect_false(co.ident$has(numeric()))
 expect_false(co.ident$has(1L))
 container_options(.reset = TRUE)
+
+# --------
+# has_name
+# --------
+expect_false(Container$new()$has_name())
+expect_false(Container$new(1)$has_name())
+expect_false(Container$new("a")$has_name())
+expect_true(Container$new(a = 1)$has_name())
+co = Container$new(a = 1, 2, b = 3, 4)
+expect_true(co$has_name("a"))
+expect_true(co$has_name("b"))
+expect_false(co$has_name("2"))
+
+EE = expect_error
+EE(co$has_name(NULL), "expected a character string, but got 'NULL'")
+EE(co$has_name(c("a", "b")), "name must be of length 1")
+EE(co$has_name(as.character(NA)), "undefined name")
+EE(co$has_name(""), "name must consist of at least one character")
+
 
 # ------
 # length

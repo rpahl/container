@@ -1,16 +1,15 @@
-#' Determine if object has some element
+#' Check if object has some element
 #'
 #' @param x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
+#' @seealso [has_name()]
 #' @export
 has <- function(x, ...) UseMethod("has")
 
 
 #' @rdname has
-#' @param elem some element to be found. For `Container`, `Deque` and
-#' `Set` objects, the sought element is passed, while for `Dict` objects this
-#' corresponds to the key to be found in the `Dict`.
-#' @return `TRUE` if element (or key) is in `x` and otherwise `FALSE`.
+#' @param elem some element to be found.
+#' @return `TRUE` if element is in `x` and otherwise `FALSE`.
 #' @export
 #' @examples
 #'
@@ -37,31 +36,30 @@ NULL
 
 
 #' @rdname has
-#' @param column `character` name or `numeric` index of column.
-#' @return For `dict.table` `TRUE` if column name or index is in dict.table,
-#' otherwise `FALSE`.
+#' @param column vector of values with the same length as the number of rows
+#' of the `dict.table`.
+#' @return For `dict.table`, `TRUE` if column exists in `x` otherwise `FALSE`.
 #' @export
 #' @examples
 #'
-#' dit = dict.table(a = 1, b = 2)
-#' has(dit, "a")    # TRUE
-#' has(dit, 1)      # TRUE
-#' has(dit, "x")    # FALSE
-#' has(dit, 3)      # FALSE
+#' dit = dict.table(a = 1:3, b = as.list(4:6))
+#' has(dit, 1:3)            # TRUE
+#' has(dit, 4:6)            # FALSE
+#' has(dit, as.list(4:6))   # TRUE
 has.dict.table <- function(x, column)
 {
-    if (length(column) != 1)
-        stop("column index must be of length 1")
+    if (!length(x))
+        return(FALSE)
 
-    if (is.na(column))
-        stop("undefined column")
+    if (length(column) != nrow(x)) {
+        warning("length of column vector (", length(column), ") ",
+                "does not match number of rows (", nrow(x), ")", call. = FALSE)
+        return(FALSE)
+    }
 
-    switch(data.class(column),
-           "character" = column %in% names(x),
-           "numeric" = column > 0 && ncol(x) >= column,
-           stop("column must be character or numeric")
-    )
+    has(as.container(x), column)
 }
+
 
 #' @name has.dict.table
 #' @rdname dict.table
@@ -71,10 +69,9 @@ has.dict.table <- function(x, column)
 #' * `has(x, column)` check if some `column` is in dict.table object.
 #' @examples
 #'
-#' dit = dict.table(a = 1, b = 2)
-#' has(dit, "a")    # TRUE
-#' has(dit, 1)      # TRUE
-#' has(dit, "x")    # FALSE
-#' has(dit, 3)      # FALSE
+#' dit = dict.table(a = 1:3, b = as.list(4:6))
+#' has(dit, 1:3)            # TRUE
+#' has(dit, 4:6)            # FALSE
+#' has(dit, as.list(4:6))   # TRUE
 NULL
 

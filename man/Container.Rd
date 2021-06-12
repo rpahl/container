@@ -33,11 +33,13 @@ Roman Pahl
 \item \href{#method-empty}{\code{Container$empty()}}
 \item \href{#method-get_compare_fun}{\code{Container$get_compare_fun()}}
 \item \href{#method-has}{\code{Container$has()}}
+\item \href{#method-has_name}{\code{Container$has_name()}}
 \item \href{#method-is_empty}{\code{Container$is_empty()}}
 \item \href{#method-length}{\code{Container$length()}}
 \item \href{#method-peek_at}{\code{Container$peek_at()}}
 \item \href{#method-peek_at2}{\code{Container$peek_at2()}}
 \item \href{#method-print}{\code{Container$print()}}
+\item \href{#method-replace2}{\code{Container$replace2()}}
 \item \href{#method-replace}{\code{Container$replace()}}
 \item \href{#method-remove}{\code{Container$remove()}}
 \item \href{#method-size}{\code{Container$size()}}
@@ -79,13 +81,15 @@ the \code{Container} object
 \subsection{Method \code{add()}}{
 add element
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$add(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Container$add(value, name = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{elements to be added to the \code{Container}}
+\item{\code{value}}{value of \code{ANY} type to be added to the \code{Container}.}
+
+\item{\code{name}}{\code{character} optional name attribute of the value.}
 }
 \if{html}{\out{</div>}}
 }
@@ -259,6 +263,28 @@ Determine if \code{Container} has some element.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-has_name"></a>}}
+\if{latex}{\out{\hypertarget{method-has_name}{}}}
+\subsection{Method \code{has_name()}}{
+Determine if \code{Container} object contains an element
+with the given name. If called with no argument, the function
+determines whether \emph{any} element is named.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$has_name(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{\code{character} the name}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if \code{Container} has the \code{name} otherwise \code{FALSE}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-is_empty"></a>}}
 \if{latex}{\out{\hypertarget{method-is_empty}{}}}
 \subsection{Method \code{is_empty()}}{
@@ -353,6 +379,15 @@ Print object representation
 \subsection{Returns}{
 invisibly returns the \code{Container} object
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-replace2"></a>}}
+\if{latex}{\out{\hypertarget{method-replace2}{}}}
+\subsection{Method \code{replace2()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$replace2(index, value, add = FALSE)}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-replace"></a>}}

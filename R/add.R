@@ -69,7 +69,13 @@ NULL
 #' @export
 add_.Container <- function(.x, ...)
 {
-    invisible(.x$add(...))
+    elems = list(...)
+    elem_names = names(elems)
+
+    for (i in seq_along(elems))
+        .x$add(elems[[i]], name = elem_names[[i]])
+
+    invisible(.x)
 }
 
 
@@ -105,7 +111,13 @@ NULL
 #' @export
 addleft_.Deque <- function(.x, ...)
 {
-    invisible(.x$addleft(...))
+    elems = list(...)
+    elem_names = names(elems)
+
+    for (i in seq_along(elems))
+        .x$addleft(elems[[i]], name = elem_names[[i]])
+
+    invisible(.x)
 }
 
 #' @rdname add
@@ -156,7 +168,7 @@ NULL
 add_.Dict <- function(.x, ...)
 {
     elems = list(...)
-    if (length(elems) == 0)
+    if (!length(elems))
         return(.x)
 
     elem_names = names(elems)

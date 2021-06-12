@@ -46,6 +46,7 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name">}\href{../../container/html/Container.html#method-has_name}{\code{container::Container$has_name()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="initialize">}\href{../../container/html/Container.html#method-initialize}{\code{container::Container$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
@@ -54,6 +55,7 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace">}\href{../../container/html/Container.html#method-replace}{\code{container::Container$replace()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace2">}\href{../../container/html/Container.html#method-replace2}{\code{container::Container$replace2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}
@@ -66,18 +68,20 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \subsection{Method \code{addleft()}}{
 Add element to left side of the \code{Deque}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Deque$addleft(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Deque$addleft(value, name = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{elements to be added.}
+\item{\code{value}}{value of \code{ANY} type to be added to the \code{Deque}.}
+
+\item{\code{name}}{\code{character} optional name attribute of the value.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-the \code{Deque()} object.
+the \code{Deque} object.
 }
 }
 \if{html}{\out{<hr>}}

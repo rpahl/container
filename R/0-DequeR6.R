@@ -13,22 +13,15 @@ Deque <- R6::R6Class("Deque",
     inherit = Container,
     public = list(
         #' @description Add element to left side of the `Deque`.
-        #' @param ... elements to be added.
-        #' @return the `Deque()` object.
-        addleft = function(...) {
-            elems = list(...)
+        #' @param value value of `ANY` type to be added to the `Deque`.
+        #' @param name `character` optional name attribute of the value.
+        #' @return the `Deque` object.
+        addleft = function(value, name = NULL) {
 
-            if (length(elems) == 0)
-                return(self)
+            elem = list(value)
+            names(elem) = name
 
-            if (length(elems) > 1) {
-                for (i in seq_along(elems))
-                    do.call(self$addleft, elems[i])
-
-                return(self)
-            }
-
-            private$elems <- c(elems, private$elems)
+            private$elems <- c(elem, private$elems)
             self
         },
 

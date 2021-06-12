@@ -1,66 +1,37 @@
-#' Extract Operators for Containers
+#' Extract or Replace Part of a Container Object
 #'
-#' @description Extract parts of `Container` and `dict.table` objects.
+#' @description Extract or replace parts of a `Container` object similar
+#' to R's base extract operators on lists.
 #' @name OpsExtract
-#' @param x `Container` or `dict.table` object from which to extract
-#' elements or columns.
+#' @param x `Container` object for which to extract or replace elements.
+#' @param j `numeric` or `character` indices to extract.
+#' @param name a literal character string or a name (possibly backtick quoted).
+#' @return the values at the given indices.
 NULL
 
-#' @rdname OpsExtract
-#' @param key `character` vector with key(s).
-#' @param default A suitable default value.
-#' @return For `Dict`, `[[` returns the element found at key. If not found, an
-#' error is signaled, unless `default` was specified, which in this case is
-#' returned instead.
 #' @export
-`[[.Dict` <- function(x, key, default = NULL)
+`[.Container` <- function(x, j)
 {
-    if (missing(default))
-        x$at2(key)
-    else
-        x$peek_at2(key, default)
-}
-
-#' @rdname OpsExtract
-#' @return For `Dict`, `[` returns a new dict containing the extracted elements
-#' found at the keys. If one or more keys are not found, an error is signaled,
-#' unless `default` was specified, which in this case is put in place for all
-#' missing keys.
-#' @export
-`[.Dict` <- function(x, key, default = NULL)
-{
-    if (missing(default))
-        x$at(key)
-    else
-        x$peek_at(key, default)
+    peek_at(x, j)
 }
 
 
-#' @rdname OpsExtract
-#' @param j `numeric` or `character` column index.
-#' @return For `dict.table`, `[[` returns the selected column. If the
-#' column does not exist, an error is signaled, unless `default` was specified,
-#' which then would be returned instead.
 #' @export
-`[[.dict.table` <- function(x, j, default = NULL)
+`[[.Container` <- function(x, j)
 {
-    if (missing(default))
-        at2(x, j)
-    else
-        peek_at2(x, j, default)
+    peek_at2(x, j)
 }
 
 
-#' @rdname OpsExtract
-#' @return For `dict.table`, `$` returns the selected column using partial
-#' string matching. If no column is found, an error is signaled.
-#' @export
-`$.dict.table` <- function(x, key)
-{
-    j = pmatch(key, names(x))
-    if (is.na(j))
-        j = key
+#`$.Container` <- function(x, name)
+#{
+#    as.list(x)$name
+#}
 
-    at2(x, j)
+#' @export
+"$<-.Container" = function(x, name, value)
+{
+    x = clone(x)
+    x
 }
 
