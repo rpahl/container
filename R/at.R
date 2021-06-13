@@ -83,7 +83,7 @@ at.dict.table <- function(.x, ...)
     if (length(args) == 1 && is.null(args[[1]]))
         return(dict.table())
 
-    lapply(args, function(index) lapply(index, .assert_index, x = .x))
+    lapply(args, function(index) lapply(index, assert_index, x = .x))
 
     # Apply first on dict object to determine all the column names
     d = at(as.dict(.x), ...)

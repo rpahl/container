@@ -79,7 +79,7 @@ NULL
 #' at2(dit, 5)       # index 5 exceeds length of dict.table}
 at2.dict.table <- function(x, index)
 {
-    .assert_index(x, index)
+    assert_index(x, index)
     .subset2(x, index)
 }
 
