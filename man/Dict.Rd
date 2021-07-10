@@ -24,8 +24,7 @@ elements are sorted lexicographically by their keys.
 \itemize{
 \item \href{#method-new}{\code{Dict$new()}}
 \item \href{#method-add}{\code{Dict$add()}}
-\item \href{#method-delete}{\code{Dict$delete()}}
-\item \href{#method-discard}{\code{Dict$discard()}}
+\item \href{#method-discard_at}{\code{Dict$discard_at()}}
 \item \href{#method-get}{\code{Dict$get()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
@@ -46,8 +45,9 @@ elements are sorted lexicographically by their keys.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2">}\href{../../container/html/Container.html#method-at2}{\code{container::Container$at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at">}\href{../../container/html/Container.html#method-delete_at}{\code{container::Container$delete_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard_at">}\href{../../container/html/Container.html#method-discard_at}{\code{container::Container$discard_at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
@@ -88,37 +88,18 @@ returns the \code{Dict}
 \if{html}{\out{<a id="method-add"></a>}}
 \if{latex}{\out{\hypertarget{method-add}{}}}
 \subsection{Method \code{add()}}{
-If \code{key} not yet in \code{Dict}, insert \code{value} at \code{key},
+If \code{name} not yet in \code{Dict}, insert \code{value} at \code{name},
 otherwise signal an error.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$add(key, value)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$add(name, value)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{key}}{\code{character} name of key.}
+\item{\code{name}}{\code{character} variable name under which to store \code{value}.}
 
 \item{\code{value}}{the value to be added to the \code{Dict}.}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-delete"></a>}}
-\if{latex}{\out{\hypertarget{method-delete}{}}}
-\subsection{Method \code{delete()}}{
-If key in \code{Dict}, delete associated key-value pair.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$delete(key)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{key}}{\code{character} key of value to delete. If \code{key} does exist,
-the associated key-value pair is deleted, otherwise an error is
-signaled.}
 }
 \if{html}{\out{</div>}}
 }
@@ -127,24 +108,24 @@ the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-discard"></a>}}
-\if{latex}{\out{\hypertarget{method-discard}{}}}
-\subsection{Method \code{discard()}}{
-If key in \code{Dict}, discard associated key-value pair.
+\if{html}{\out{<a id="method-discard_at"></a>}}
+\if{latex}{\out{\hypertarget{method-discard_at}{}}}
+\subsection{Method \code{discard_at()}}{
+Discard value at given index. If index is not found,
+the operation is ignored.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$discard(key)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$discard_at(index)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{key}}{\code{character} key of value to discard. If \code{key} does exist,
-the associated key-value pair is deleted, otherwise it is ignored.}
+\item{\code{index}}{\code{character} or \code{numeric} index}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-the \code{Dict}
+the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}
@@ -228,27 +209,24 @@ the \code{Dict} object
 \if{html}{\out{<a id="method-replace"></a>}}
 \if{latex}{\out{\hypertarget{method-replace}{}}}
 \subsection{Method \code{replace()}}{
-Overrides \code{value} at \code{key} if \code{key} is already in the
-\code{Dict}. If \code{key} not in \code{Dict}, an error is thrown unless \code{add} was
-set to \code{TRUE}.
+Replace one element by another element.
+Search for occurence of \code{old} and, if found, replace it by \code{new}.
+If \code{old} does not exist, an error is signaled.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$replace(key, value, add = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$replace(old, new)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{key}}{\code{character} name of key.}
+\item{\code{old}}{element to be replaced}
 
-\item{\code{value}}{the value to be set}
-
-\item{\code{add}}{\code{logical} if \code{TRUE} the \code{value} is added in case
-\code{key} does not exists.}
+\item{\code{new}}{element to be put instead of old}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-returns the \code{Dict}
+the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}

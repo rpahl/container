@@ -200,7 +200,7 @@ Container <- R6::R6Class("Container",
                 return(any(nzchar(names(self$values()))))
 
             if (!is.character(name))
-                stop("expected a character string, but got '",
+                stop("name must be a character string, but got '",
                      data.class(name), "'", call. = FALSE)
 
             if (length(name) != 1)
@@ -343,7 +343,7 @@ Container <- R6::R6Class("Container",
                 if (is.character(index))
                     name = index
 
-                return(self$add(value, name = name))
+                return(self$add(value = value, name = name))
             }
 
             if (!hasIndex)

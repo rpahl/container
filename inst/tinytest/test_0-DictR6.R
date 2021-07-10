@@ -1,4 +1,5 @@
 ee = expect_equal
+EE = expect_error
 
 # ----------
 # initialize
@@ -44,22 +45,18 @@ ee(d$keys(), sort(names(v)))
 # ---
 # adding elements to a Dict requires a character key and a value
 d <- Dict$new()
-expect_error(d$add(1), "key must be character")
-expect_error(d$add("", 1, "zero-length key"))
-expect_error(d$add("a"), 'argument "value" is missing')
-expect_error(d$add(value = 1), 'argument "key" is missing')
-expect_error(d$add(c("a", "b"), 1:2), 'key must be of length 1')
-expect_error(d$add(1, 1), 'key must be character')
-
+EE(d$add(1), 'argument "value" is missing')
+EE(d$add(name = "a"), 'argument "value" is missing')
+EE(d$add("", 1), "name must consist of at least one character")
+EE(d$add(1, 1), "name must be a character string, but got 'numeric'")
+EE(d$add(c("a", "b"), 1:2), "name must be of length 1")
 
 # added elements must have distinct keys and cannot be added twice
 d <- Dict$new()
-d$add("a", 1)
-ee(d$values(), list(a = 1))
-expect_error(d$add("a", 1), "key 'a' already in Dict")
-expect_error(d$add("a", 2), "key 'a' already in Dict")
-expect_error(d$add("a", NULL), "key 'a' already in Dict")
-
+ee(d$add("a", 1), Dict$new(a = 1))
+EE(d$add("a", 1), "name 'a' already in Dict")
+EE(d$add("a", 2), "name 'a' already in Dict")
+EE(d$add("a", NULL), "name 'a' already in Dict")
 
 # NULL and empty lists can be added
 d <- Dict$new()
@@ -112,44 +109,82 @@ expect_error(d$at2("c"), "index 'c' not found")
 # delete
 # ------
 # elements can be deleted from a Dict
+d <- Dict$new(a = 1, b = 2, c = 3)
+ee(d$delete(3), Dict$new(a = 1, b = 2))
+
+d <- Dict$new(a = mean, b = identity)
+ee(d$delete(mean), Dict$new(b = identity))
+expect_error(d$delete(), 'argument "elem" is missing, with no default')
+
+# Dict gives an error if trying to delete non-existing element
 d <- Dict$new(a = 1)
-expect_false(d$is_empty())
-expect_true(d$delete("a")$is_empty())
+expect_error(d$delete(5), "5 is not in Dict")
+li = list(1, 2)
+expect_error(d$delete(li), "list\\(1, 2\\) is not in Dict")
+
+# If duplicates, only one element is deleted
+d <- Dict$new(a = 1, b = 2, c = 1)
+ee(d$delete(1), Dict$new(b = 2, c = 1))
+
+
+# ---------
+# delete_at
+# ---------
+d <- Dict$new(a = 1)
+expect_true(d$delete_at("a")$is_empty())
 
 # if key not in Dict, trying to delete it gives an error
-expect_error(Dict$new(a = 1)$delete("b"), "key 'b' not in Dict")
+d <- Dict$new(a = 1, b = 2)
+expect_error(Dict$new(a = 1)$delete_at("x"), "index 'x' not found")
 
 # only one key can be deleted at a time
-d <- Dict$new(a = 1, b = 2)
-expect_error(d$delete(c("a", "b"), "key must be of length 1"),
-             "key must be of length 1")
+expect_error(d$delete_at(c("a", "b")), "index must be of length 1")
 
 # failed delete does not alter the dict object
 d_was_not_touched <- d$length() == 2
 expect_true(d_was_not_touched)
 
-# elements can be discarded
-d <- Dict$new(a = 1)
-expect_false(d$is_empty())
-expect_true(d$discard("a")$is_empty())
 
 
 # -------
 # discard
 # -------
-# discard ignores non-existing elements without error
+ee(Dict$new()$discard(1), Dict$new())
+
+# elements can be discarded from a Dict
+d <- Dict$new(a = 1, b = 2, c = 3)
+ee(d$discard(3), Dict$new(a = 1, b = 2))
+ee(d$discard(1), Dict$new(b = 2))
+
+d <- Dict$new(a = mean, b = identity)
+ee(d$discard(mean), Dict$new(b = identity))
+expect_error(d$discard(), 'argument "elem" is missing, with no default')
+
+# Dict is not changed when trying to discard non-existing element
 d <- Dict$new(a = 1)
-ee(d$values(), list(a = 1))
-d$discard("b")
-ee(d$values(), list(a = 1))
+expect_silent(ee(d$discard(5), d))
 
 
-# only one key can be discarded at a time
-d <- Dict$new(a = 1, b = 2)
-expect_error(d$discard(c("a", "b"), "key must be of length 1"),
-             "key must be of length 1")
-d_was_not_touched <- d$length() == 2
-expect_true(d_was_not_touched)
+# ----------
+# discard_at
+# ----------
+d = Dict$new()
+ee(Dict$new()$discard_at(1), Dict$new())
+
+# elements can be discarded from a Dict
+d <- Dict$new(a = 1, b = 2, c = 3)
+ee(d$discard_at(3), Dict$new(a = 1, b = 2))
+ee(d$discard_at("a"), Dict$new(b = 2))
+
+d <- Dict$new(a = mean, b = identity)
+ee(d$discard_at(1), Dict$new(b = identity))
+expect_error(d$discard_at(), "'index' is missing")
+
+# Dict is not changed when trying to discard non-existing element
+d <- Dict$new(a = 1)
+expect_silent(ee(d$discard_at(5), d))
+expect_silent(ee(d$discard_at(0), d))
+expect_silent(ee(d$discard_at("x"), d))
 
 
 # ---
@@ -157,9 +192,9 @@ expect_true(d_was_not_touched)
 # ---
 # it can be checked if Dict has a certain key
 d <- Dict$new(a = 1, b = 2)
-expect_true(d$has("a"))
-expect_false(d$has("x"))
-expect_error(d$has(c("a", "b")), "key must be of length 1")
+expect_true(d$has_name("a"))
+expect_false(d$has_name("x"))
+expect_error(d$has_name(c("a", "b")), "name must be of length 1")
 
 # ----
 # keys
@@ -290,11 +325,75 @@ expect_error(d$rename(c("x", "x2"), c("x2", "x3")),
 # -------
 # replace
 # -------
-# values at keys can be replaced
-d <- Dict$new(a = 1, b = NULL)
-d$replace("b", list(1, 2))
-ee(d$at2("b"), list(1, 2))
-expect_error(d$replace("x", 1), "key 'x' not in Dict")
+# Signals an error if elem does not exist unless add == TRUE
+d = Dict$new()
+expect_error(d$replace(0, 1), "old element \\(0\\) is not in Dict")
+expect_error(d$replace(NULL, 1), "old element \\(NULL\\) is not in Dict")
+
+d = Dict$new(a = 0)
+expect_error(d$replace(1, 2), "old element \\(1\\) is not in Dict")
+
+# add == TRUE is not supported for Dict objects
+expect_error(d$replace(1, 2, add = TRUE), "unused argument")
+
+
+# Replacing by new element works as expected
+d = Dict$new(a = 1, b = 2)
+ee(d$replace(1, 2), Dict$new(a = 2, b = 2))
+
+d = Dict$new(a = 1, b = "1")
+ee(d$replace(1, 0), Dict$new(a = 0, b = "1"))
+
+# Replace works on special elements of basic type
+d = Dict$new(a = NULL, b = numeric(0), c = list())
+ee(d$replace(NULL, 0), Dict$new(a = 0, b = numeric(), c = list()))
+ee(d$replace(numeric(0), 0), Dict$new(a = 0, b = 0, c = list()))
+ee(d$replace(list(), 0), Dict$new(a = 0, b = 0, c = 0))
+
+# Replace works on non-basic objects
+d1 = Dict$new(a = 1, b = "1")
+d2 = Dict$new(a = 2, b = "2")
+co = Container$new(NULL)
+d = Dict$new(d1 = d1, d2 = d2, co = co)
+ee(d$replace(d1, 1), Dict$new(d1 = 1, d2 = d2, co = co))
+ee(d$replace(d2, 2), Dict$new(d1 = 1, d2 = 2, co = co))
+ee(d$replace(co, 0), Dict$new(d1 = 1, d2 = 2, co = 0))
+
+# ----------
+# replace_at
+# ----------
+EE = expect_error
+d = Dict$new(a = 1, b = 2)
+
+# Requires two arguments index and value
+EE(d$replace_at(1), 'argument "value" is missing, with no default')
+EE(d$replace_at(value = 1), "'index' is missing")
+
+# Signals invalid indices
+EE(d$replace_at(0, 9), "index must be > 0")
+EE(d$replace_at(4, 9), "index 4 exceeds length of Dict, which is 2")
+EE(d$replace_at("x", 9), "index 'x' not found")
+expect_error(d$replace_at(0, 0), "index must be > 0")
+
+# If add == TRUE element is always added
+d = Dict$new()
+ee(d$replace_at("a", 9, add = TRUE), Dict$new(a = 9))
+
+
+#ee(co$replace_at("b", 7, add = TRUE), Container$new(9, b = 7))
+#ee(co$replace_at(10, NULL, add = TRUE), Container$new(9, b = 7, NULL))
+
+# Standard cases work as expected
+ee(d$replace_at("a", 0), Dict$new(a = 0, b = 2))
+ee(d$replace_at(1, 9), Dict$new(a = 9, b = 2))
+ee(d$replace_at("b", 0), Dict$new(a = 9, b = 0))
+ee(d$replace_at(2, 9), Dict$new(a = 9, b = 9))
+
+# Replace can replace by special elements of basic type
+d = Dict$new(a = NULL, b = numeric(0))
+ee(d$replace_at("a", integer()), Dict$new(a = integer(), b = numeric(0)))
+ee(d$replace_at(1, list()), Dict$new(a = list(), b = numeric(0)))
+ee(d$replace_at(2, NULL), Dict$new(a = list(), b = NULL))
 
 
 # ------

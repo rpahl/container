@@ -34,38 +34,31 @@ Dict <- R6::R6Class("Dict",
             self
         },
 
-        #' @description If `key` not yet in `Dict`, insert `value` at `key`,
+        #' @description If `name` not yet in `Dict`, insert `value` at `name`,
         #' otherwise signal an error.
-        #' @param key `character` name of key.
+        #' @param name `character` variable name under which to store `value`.
         #' @param value the value to be added to the `Dict`.
-        add = function(key, value) {
-            if (self$has_name(key))
-                stop("key '", key, "' already in ", data.class(self),
+        #' @return the `Dict` object
+        add = function(name, value) {
+            force(value)
+            if (self$has_name(name))
+                stop("name '", name, "' already in ", data.class(self),
                      call. = FALSE)
 
-            self$replace(key, value, add = TRUE)
+            assign(name, value, envir = private$elems)
+            self
         },
 
-
-        #' @description If key in `Dict`, delete associated key-value pair.
-        #' @param key `character` key of value to delete. If `key` does exist,
-        #' the associated key-value pair is deleted, otherwise an error is
-        #' signaled.
+        #' @description Discard value at given index. If index is not found,
+        #' the operation is ignored.
+        #' @param index `character` or `numeric` index
         #' @return the `Dict` object
-        delete = function(key) {
-            if (!self$has_name(key))
-                stop("key '", key, "' not in ", data.class(self), call. = FALSE)
+        discard_at = function(index) {
 
-            self$discard(key)
-        },
+            pos = private$.get_index_position(index)
 
-        #' @description If key in `Dict`, discard associated key-value pair.
-        #' @param key `character` key of value to discard. If `key` does exist,
-        #' the associated key-value pair is deleted, otherwise it is ignored.
-        #' @return the `Dict`
-        discard = function(key) {
-            if (self$has_name(key))
-                remove(list = key, envir = private$elems)
+            if (has_index(self, pos))
+                base::remove(list = self$keys()[pos], envir = private$elems)
 
             self
         },
@@ -109,27 +102,31 @@ Dict <- R6::R6Class("Dict",
             if (identical(old, new))
                 return(self)
 
-            self$add(key = new, value = self$at2(old))
+            self$add(name = new, value = self$at2(old))
             self$delete(old)
             self
         },
 
-        #' @description Overrides `value` at `key` if `key` is already in the
-        #' `Dict`. If `key` not in `Dict`, an error is thrown unless `add` was
-        #' set to `TRUE`.
-        #' @param key `character` name of key.
-        #' @param value the value to be set
-        #' @param add `logical` if `TRUE` the `value` is added in case
-        #' `key` does not exists.
-        #' @return returns the `Dict`
-        replace = function(key, value, add = FALSE) {
-            if (!add && !self$has_name(key))
-                stop("key '", key, "' not in ", data.class(self), call. = FALSE)
+        #' @description Replace one element by another element.
+        #' Search for occurence of `old` and, if found, replace it by `new`.
+        #' If `old` does not exist, an error is signaled.
+        #' @param old element to be replaced
+        #' @param new element to be put instead of old
+        #' @return the `Dict` object
+        replace = function(old, new) {
 
-            assign(key, value, envir = private$elems)
+            pos = private$.get_element_position(old)
+            force(new)
+
+            hasElem = !is.na(pos)
+            if (!hasElem)
+                stop("old element (", get_label(old),
+                     ") is not in ", data.class(self), call. = FALSE)
+
+            name = names(self)[[pos]]
+            private$.replace_value_at(pos, new, name)
             self
         },
-
 
         #' @description This function is deprecated. Use [replace()] instead.
         #' @param key `character` name of key.
@@ -139,7 +136,7 @@ Dict <- R6::R6Class("Dict",
         #' @return returns the `Dict`
         set = function(key, value, add = FALSE) {
             .Deprecated("replace")
-            self$replace(key, value, add)
+            self$replace_at(key, value, add)
         },
 
         #' @description Sort elements according to their keys. This function
@@ -160,7 +157,7 @@ Dict <- R6::R6Class("Dict",
                 stop("arg must be a ", data.class(self), call. = FALSE)
 
             for (key in other$keys())
-                self$replace(key, other$at2(key), add = TRUE)
+                self$replace_at(key, other$at2(key), add = TRUE)
 
             self
         },
@@ -184,7 +181,12 @@ Dict <- R6::R6Class("Dict",
             l = as.list.environment(value, all.names = TRUE)
             list2env(lapply(l, clone_deep_if_container),
                      parent = emptyenv())
+        },
+
+        .replace_value_at = function(pos, value, name) {
+            assign(name, value, envir = private$elems)
         }
+
     ),
     lock_class = TRUE,
 )

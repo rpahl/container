@@ -272,6 +272,13 @@ ee(Container$new()$length(), 0)
 co <- Container$new(1, 2, 3)
 ee(co$length(), length(co$values()))
 
+# -----
+# names
+# -----
+# all names can be listed
+co <- Container$new(a = 1, 2, y = 3)
+ee(co$names(), c("a", "", "y"))
+
 # -------
 # peek_at
 # -------
@@ -449,7 +456,7 @@ ee(co$replace(1, 0), Container$new(a = 0, b = 2))
 EE = expect_error
 co = Container$new(1, b = 2, 3)
 
-# Requires two arguments old and new
+# Requires two arguments index and value
 EE(co$replace_at(1), 'argument "value" is missing, with no default')
 EE(co$replace_at(value = 1), "'index' is missing")
 

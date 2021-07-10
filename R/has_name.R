@@ -57,7 +57,7 @@ has_name.dict.table <- function(x, name)
         return(isTRUE(length(names(x)) > 0))
 
     if (!is.character(name))
-        stop("expected a character string, but got '",
+        stop("name must be a character string, but got '",
              data.class(name), "'", call. = FALSE)
 
     if (length(name) != 1)
