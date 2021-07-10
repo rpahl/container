@@ -399,6 +399,10 @@ expect_error(Container$new()$replace(NULL, 1),
 expect_error(Container$new(0)$replace(1, 2),
              "old element \\(1\\) is not in Container")
 
+co = Container$new(a = 0)
+expect_error(Container$new(0)$replace(1, 2),
+             "old element \\(1\\) is not in Container")
+
 # If add == TRUE element is always added
 ee(Container$new()$replace(0, 1, add = TRUE), Container$new(1))
 ee(Container$new(1)$delete(1)$replace(0, 2, TRUE), Container$new(2))
@@ -435,12 +439,15 @@ co = Container$new(co1, co2, co1, co2)
 ee(co$replace(co1, 1), Container$new(1, co2, co1, co2))
 ee(co$replace(co2, 2), Container$new(1, 2, co1, co2))
 
+# Replacing a named element preserves the name
+co = Container$new(a = 1, b = 2)
+ee(co$replace(1, 0), Container$new(a = 0, b = 2))
 
 # ----------
 # replace_at
 # ----------
-co = Container$new(1, b = 2, 3)
 EE = expect_error
+co = Container$new(1, b = 2, 3)
 
 # Requires two arguments old and new
 EE(co$replace_at(1), 'argument "value" is missing, with no default')

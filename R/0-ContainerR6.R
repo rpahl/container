@@ -310,7 +310,6 @@ Container <- R6::R6Class("Container",
         replace = function(old, new, add = FALSE) {
 
             pos = private$.get_element_position(old)
-            name = names(self)[[pos]]
             force(new)
 
             hasElem = !is.na(pos)
@@ -322,6 +321,7 @@ Container <- R6::R6Class("Container",
                      ") is not in ", data.class(self), call. = FALSE)
 
             #self$replace_at(index = pos, value = new)
+            name = names(self)[[pos]]
             private$.replace_value_at(pos, new, name)
             self
         },
@@ -337,15 +337,20 @@ Container <- R6::R6Class("Container",
         #' @return the `Container` object
         replace_at = function(index, value, add = FALSE) {
 
-            pos = private$.get_index_position(index)
-            name = names(self)[[pos]]
-
             hasIndex = has_index(self, index)
-            if (!hasIndex && add)
+            if (!hasIndex && add) {
+                name = NULL
+                if (is.character(index))
+                    name = index
+
                 return(self$add(value, name = name))
+            }
 
             if (!hasIndex)
                 assert_index(self, index)
+
+            pos = private$.get_index_position(index)
+            name = names(self)[[pos]]
 
             private$.replace_value_at(pos, value, name)
 

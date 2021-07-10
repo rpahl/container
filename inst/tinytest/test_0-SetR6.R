@@ -334,7 +334,6 @@ ee(s$replace(Co, 0), Set$new(0, 1, 2))
 s = Set$new()
 expect_error(s$replace_at(1, 1), "index 1 exceeds length of Set, which is 0")
 expect_error(s$replace_at(NULL, 1), "index must be of length 1")
-expect_error(s$add(0)$replace_at(1, 2))
 ee(Set$new()$replace_at(0, 1, add = TRUE), Set$new(1))
 
 # Replacing to an existing element, reduces the set
