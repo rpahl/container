@@ -42,7 +42,9 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at">}\href{../../container/html/Container.html#method-delete_at}{\code{container::Container$delete_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard_at">}\href{../../container/html/Container.html#method-discard_at}{\code{container::Container$discard_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
@@ -55,7 +57,7 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace">}\href{../../container/html/Container.html#method-replace}{\code{container::Container$replace()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace2">}\href{../../container/html/Container.html#method-replace2}{\code{container::Container$replace2()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at">}\href{../../container/html/Container.html#method-replace_at}{\code{container::Container$replace_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}

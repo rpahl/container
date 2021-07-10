@@ -142,13 +142,33 @@ co <- Container$new(1, 2, 1)
 co$delete(1)
 ee(co, Container$new(1, 2))
 
+
+# ---------
+# delete_at
+# ---------
+# elements can be deleted from a Container
+co <- Container$new(a = 1, 2, 3)
+ee(co$delete_at(3), Container$new(a = 1, 2))
+ee(co$delete_at("a")$values(), list(2))
+
+co <- Container$new(mean, identity)
+ee(co$delete_at(1), Container$new(identity))
+expect_error(co$delete_at(), "'index' is missing")
+
+# Container gives an error if indices does not exist
+co <- Container$new(1)
+expect_error(co$delete_at(5), "index 5 exceeds length of Container, which is 1")
+expect_error(co$delete_at("a"), "index 'a' not found")
+
+
 # -------
 # discard
 # -------
+ee(Container$new()$discard(1), Container$new())
+
 # elements can be discarded from a Container
 co <- Container$new(1, 2, 3)
-co$discard(3)
-ee(co$values(), list(1, 2))
+ee(co$discard(3)$values(), list(1, 2))
 
 co <- Container$new(mean, identity)
 ee(co$discard(mean)$values(), list(identity))
@@ -156,12 +176,29 @@ expect_error(co$discard(), 'argument "elem" is missing, with no default')
 
 # Container is not changed when trying to discard non-existing element
 co <- Container$new(1)
-expect_silent(co$discard(5))
+expect_silent(ee(co$discard(5), co))
+co <- Container$new()
+expect_silent(ee(co$discard(0), co))
 
-# Multiple elements are all discarded
-co <- Container$new(1, 2, 1)
-co$discard(1)
-ee(co, Container$new(1, 2))
+# ----------
+# discard_at
+# ----------
+ee(Container$new()$discard_at(1), Container$new())
+
+# elements can be discarded from a Container
+co <- Container$new(1, 2, 3)
+ee(co$discard_at(3), Container$new(1, 2))
+
+co <- Container$new(mean, identity)
+ee(co$discard_at(1), Container$new(identity))
+expect_error(co$discard(), 'argument "elem" is missing, with no default')
+
+# Container is not changed when trying to discard non-existing element
+co <- Container$new(1)
+expect_silent(ee(co$discard_at(5), co))
+co <- Container$new()
+expect_silent(ee(co$discard_at(0), co))
+
 
 # -----
 # empty
@@ -299,6 +336,28 @@ ee(co$peek_at2(as.numeric(NA), default = 0), 0)
 ee(co$peek_at2(c("a", "b"), 0), 0)
 ee(co$peek_at2("c", 0), 0)
 
+# ---
+# pop
+# ---
+co = container(a = 1, 2, b = 3, 4)
+
+ee(co$pop("a"), 1)
+ee(co, container(2, b = 3, 4))
+
+ee(co$pop(1), 2)
+ee(co, container(b = 3, 4))
+
+ee(co$pop(), 4)
+ee(co, container(b = 3))
+
+expect_error(co$pop(0), "index must be > 0")
+expect_error(co$pop(3), "index 3 exceeds length of Container, which is 1")
+
+ee(co$pop(), 3)
+ee(co, container())
+
+expect_error(co$pop(), "pop at empty Container")
+
 
 # -----
 # print
@@ -344,23 +403,23 @@ expect_error(Container$new(0)$replace(1, 2),
 ee(Container$new()$replace(0, 1, add = TRUE), Container$new(1))
 ee(Container$new(1)$delete(1)$replace(0, 2, TRUE), Container$new(2))
 
-# If multiple occurcenes, only one of them is replaced starting from the right
+# If multiple occurcenes, only one of them is replaced starting from the left
 co = Container$new(1, 2, 1, 3)
-co$replace(1, 0)
-ee(co, Container$new(1, 2, 0, 3))
+ee(co$replace_at(1, 0), Container$new(0, 2, 1, 3))
 
-co = Container$new(1, 1L, "1")
-co$replace(1, 0)
-ee(co, Container$new(1, 0, "1"))
+co = Container$new("1", 1L, 1)
+ee(co$replace(1, 0), Container$new("1", 0, 1))
 
 # Replace can replace special elements of basic type
 co = Container$new(NULL, numeric(0), list(), NULL, numeric(0), list())
-co$replace(NULL, 0)
-ee(co, Container$new(NULL, numeric(), list(), 0, numeric(), list()))
-co$replace(numeric(0), 0)
-ee(co, Container$new(NULL, numeric(), list(), 0, 0, list()))
-co$replace(list(), 0)
-ee(co, Container$new(NULL, numeric(), list(), 0, 0, 0))
+ee(co$replace(NULL, 0),
+   Container$new(0, numeric(), list(), NULL, numeric(), list()))
+
+ee(co$replace(numeric(0), 0),
+   Container$new(0, 0, list(), NULL, numeric(), list()))
+
+ee(co$replace(list(), 0),
+   Container$new(0, 0, 0, NULL, numeric(), list()))
 
 # Replace can replace by special elements of basic type
 co = Container$new(0)
@@ -368,15 +427,40 @@ ee(co$replace(0, NULL), container(NULL))
 ee(co$replace(NULL, numeric()), container(numeric()))
 ee(co$replace(numeric(), list()), container(list()))
 
-
 # Replace works on Container objects
 co1 = Container$new(1)
 co2 = Container$new(2)
 co = Container$new(co1, co2, co1, co2)
-co$replace(co1, 1)
-ee(co, Container$new(co1, co2, 1, co2))
-co$replace(co2, 2)
-ee(co, Container$new(co1, co2, 1, 2))
+
+ee(co$replace(co1, 1), Container$new(1, co2, co1, co2))
+ee(co$replace(co2, 2), Container$new(1, 2, co1, co2))
+
+
+# ----------
+# replace_at
+# ----------
+co = Container$new(1, b = 2, 3)
+EE = expect_error
+
+# Requires two arguments old and new
+EE(co$replace_at(1), 'argument "value" is missing, with no default')
+EE(co$replace_at(value = 1), "'index' is missing")
+
+# Signals invalid indices
+EE(co$replace_at(0, 9), "index must be > 0")
+EE(co$replace_at(4, 9), "index 4 exceeds length of Container, which is 3")
+EE(co$replace_at("a", 9), "index 'a' not found")
+
+# If add == TRUE element is always added
+co = Container$new()
+ee(co$replace_at(1, 9, add = TRUE), Container$new(9))
+ee(co$replace_at("b", 7, add = TRUE), Container$new(9, b = 7))
+ee(co$replace_at(10, NULL, add = TRUE), Container$new(9, b = 7, NULL))
+
+# Replace can replace by special elements of basic type
+co = Container$new(1, b = 2, 3)
+ee(co$replace_at("b", NULL), Container$new(1, b = NULL, 3))
+ee(co$replace_at(3, numeric(0)), Container$new(1, b = NULL, numeric(0)))
 
 
 # ------
@@ -385,7 +469,11 @@ ee(co, Container$new(co1, co2, 1, 2))
 # the internal list of values of a Container can be retrieved
 ee(Container$new()$values(), list())
 ee(Container$new(1, 2, NULL)$values(), list(1, 2, NULL))
+co = Container$new(a = 1, 2, 3)
+ee(co$values(), list(a = 1, 2, 3))
 
+# Ensure that names NULL if no name exists
+ee(co$delete_at("a")$values(), list(2, 3))
 
 # -----
 # clone

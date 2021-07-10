@@ -28,7 +28,6 @@ elements are sorted lexicographically by their keys.
 \item \href{#method-discard}{\code{Dict$discard()}}
 \item \href{#method-get}{\code{Dict$get()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
-\item \href{#method-pop}{\code{Dict$pop()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
 \item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-replace}{\code{Dict$replace()}}
@@ -47,6 +46,8 @@ elements are sorted lexicographically by their keys.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2">}\href{../../container/html/Container.html#method-at2}{\code{container::Container$at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at">}\href{../../container/html/Container.html#method-delete_at}{\code{container::Container$delete_at()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard_at">}\href{../../container/html/Container.html#method-discard_at}{\code{container::Container$discard_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
@@ -55,8 +56,9 @@ elements are sorted lexicographically by their keys.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace2">}\href{../../container/html/Container.html#method-replace2}{\code{container::Container$replace2()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at">}\href{../../container/html/Container.html#method-replace_at}{\code{container::Container$replace_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
 }
@@ -176,27 +178,6 @@ Get all keys.
 
 \subsection{Returns}{
 \code{character} vector of all keys.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pop"></a>}}
-\if{latex}{\out{\hypertarget{method-pop}{}}}
-\subsection{Method \code{pop()}}{
-Get value and delete key-value pair from \code{Dict}.
-If \code{key} not found, raise an error.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$pop(key)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{key}}{\code{character} name of key.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-If \code{key} in \code{Dict}, return its value.
 }
 }
 \if{html}{\out{<hr>}}

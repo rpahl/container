@@ -54,7 +54,7 @@ Container <- R6::R6Class("Container",
         initialize = function(...) {
             private$elems <- list(...)
             f.cmp = container_options("compare")[[1]]
-            private$set_compare_fun(f.cmp)
+            private$.set_compare_fun(f.cmp)
             self
         },
 
@@ -80,7 +80,7 @@ Container <- R6::R6Class("Container",
             if (missing(index))
                 stop("'index' is missing", call. = FALSE)
 
-            lapply(index, .assert_index, x = self)
+            lapply(index, assert_index, x = self)
 
             l = lapply(index, function(x) private$.subset(self, x))
             if (!length(l))
@@ -104,7 +104,7 @@ Container <- R6::R6Class("Container",
             if (missing(index))
                 stop("'index' is missing", call. = FALSE)
 
-            .assert_index(self, index)
+            assert_index(self, index)
             private$.subset2(self, index)
         },
 
@@ -137,19 +137,37 @@ Container <- R6::R6Class("Container",
             self$discard(elem)
         },
 
+        #' @description Delete value at given index. If index is not found, an
+        #' error is signaled.
+        #' @param index `character` or `numeric` index
+        #' @return the `Container` object
+        delete_at = function(index) {
+            assert_index(self, index)
+
+            self$discard_at(index)
+        },
+
         #' @description Search for occurence(s) of `elem` in `Container` and
         #' remove first one that is found.
         #' @param elem element to be discarded from the `Container`. If not
         #' found, the operation is ignored and the object is *not* altered.
         #' @return the `Container` object
         discard = function(elem) {
-            if (self$is_empty())
-                return(self)
 
-            pos = private$get_position(elem)
+            pos = private$.get_element_position(elem, nomatch = 0)
 
-            hasElem = !is.na(pos)
-            if (hasElem)
+            self$discard_at(pos)
+        },
+
+        #' @description Discard value at given index. If index is not found,
+        #' the operation is ignored.
+        #' @param index `character` or `numeric` index
+        #' @return the `Container` object
+        discard_at = function(index) {
+
+            pos = private$.get_index_position(index)
+
+            if (has_index(self, pos))
                 private$elems <- .subset(private$elems, -pos)
 
             self
@@ -169,7 +187,7 @@ Container <- R6::R6Class("Container",
         #' @param elem element to search for
         #' @return `TRUE` if `Container` contains `elem` else `FALSE`
         has = function(elem) {
-            !is.na(private$get_position(elem))
+            !is.na(private$.get_element_position(elem))
         },
 
         #' @description Determine if `Container` object contains an element
@@ -179,7 +197,7 @@ Container <- R6::R6Class("Container",
         #' @return `TRUE` if `Container` has the `name` otherwise `FALSE`
         has_name = function(name) {
             if (missing(name))
-                return(isTRUE(length(names(self$values())) > 0))
+                return(any(nzchar(names(self$values()))))
 
             if (!is.character(name))
                 stop("expected a character string, but got '",
@@ -250,6 +268,24 @@ Container <- R6::R6Class("Container",
             tryCatch(self$at2(index), error = function(e) default)
         },
 
+        #' @description Get value at index and remove it from `Container`.
+        #' If `index` is not found, raise an error.
+        #' @param index Must be a single number > 0 or a string.
+        #' @return If given as a number, the element at the corresponding
+        #' position, and if given as a string, the element at the
+        #' corresponding name matching the given string is returned.
+        pop = function(index) {
+            if (self$is_empty())
+                stop("pop at empty ", data.class(self), call. = FALSE)
+
+            if (missing(index))
+                return(self$pop(self$length()))
+
+            value <- self$at2(index)
+            self$delete_at(index)
+            value
+        },
+
         #' @description Print object representation
         #' @param ... further arguments passed to [format()]
         #' @return invisibly returns the `Container` object
@@ -262,14 +298,10 @@ Container <- R6::R6Class("Container",
             invisible(self)
         },
 
-        replace2 = function(index, value, add = FALSE) {
-        },
-
         #' @description Replace one element by another element.
-        #' Search for occurence of `old` in `Container` and, if found,
-        #' replace it by `new`. If `old` does not exist, an error is
-        #' signaled, unless `add` was set to `TRUE`, in which case `new` is
-        #' added.
+        #' Search for occurence of `old` and, if found, replace it by `new`.
+        #' If `old` does not exist, an error is signaled, unless `add` was
+        #' set to `TRUE`, in which case `new` is added.
         #' @param old element to be replaced
         #' @param new element to be put instead of old
         #' @param add `logical` if `TRUE` the `new` element is added in case
@@ -277,7 +309,9 @@ Container <- R6::R6Class("Container",
         #' @return the `Container` object
         replace = function(old, new, add = FALSE) {
 
-            pos = private$get_position(old)
+            pos = private$.get_element_position(old)
+            name = names(self)[[pos]]
+            force(new)
 
             hasElem = !is.na(pos)
             if (!hasElem && add)
@@ -287,8 +321,34 @@ Container <- R6::R6Class("Container",
                 stop("old element (", get_label(old),
                      ") is not in ", data.class(self), call. = FALSE)
 
-            new_elem = if (length(new)) new else list(new)
-            private$elems <- replace(self$values(), pos, new_elem)
+            #self$replace_at(index = pos, value = new)
+            private$.replace_value_at(pos, new, name)
+            self
+        },
+
+        #' @description Replace value at given index.
+        #' Replace value at index by given value. If index is not found, an
+        #' error is signalled, unless `add` was set to `TRUE`, in which case
+        #' `new` is added.
+        #' @param index `character` or `numeric` index
+        #' @param value `ANY` new value to replace the old one.
+        #' @param add `logical` if `TRUE` the new `value` element would be added
+        #' in case `index` did not exists.
+        #' @return the `Container` object
+        replace_at = function(index, value, add = FALSE) {
+
+            pos = private$.get_index_position(index)
+            name = names(self)[[pos]]
+
+            hasIndex = has_index(self, index)
+            if (!hasIndex && add)
+                return(self$add(value, name = name))
+
+            if (!hasIndex)
+                assert_index(self, index)
+
+            private$.replace_value_at(pos, value, name)
+
             self
         },
 
@@ -321,7 +381,12 @@ Container <- R6::R6Class("Container",
 
         #' @description Get `Container` values
         #' @return elements of the container as a base list
-        values = function() private$elems
+        values = function() {
+            l = private$elems
+            if (!any(nzchar(names(l))))
+                names(l) <- NULL
+            l
+        }
     ),
     private = list(
         compare_fun = NULL,
@@ -346,19 +411,32 @@ Container <- R6::R6Class("Container",
             lapply(value, clone_deep_if_container)
         },
 
-        get_position = function(x, right = TRUE, ...) {
+        .get_element_position = function(x, ...) {
             Position(f = private$compare_predicate(x),
                      x = self$values(),
-                     right = right,
                      ...)
         },
 
-        set_compare_fun = function(x) {
+        .get_index_position = function(index) {
+            .assert_index_arg(index)
+            if (is.numeric(index))
+                return(index)
+
+            match(index, names(self), nomatch = 0)
+        },
+
+        .replace_value_at = function(pos, value, name) {
+
+            value = if (length(value)) value else list(value)
+            private$elems = base::replace(private$elems, pos, value)
+        },
+
+        .set_compare_fun = function(x) {
             f = if (is.character(x)) match.fun(x) else x
             private$compare_fun = f
         },
 
-        verify_same_class = function(x) {
+        .verify_same_class = function(x) {
             if (!inherits(x, data.class(self))) {
                 stop("arg must be a ", data.class(self), call. = FALSE)
             }

@@ -29,7 +29,9 @@ Roman Pahl
 \item \href{#method-clear}{\code{Container$clear()}}
 \item \href{#method-count}{\code{Container$count()}}
 \item \href{#method-delete}{\code{Container$delete()}}
+\item \href{#method-delete_at}{\code{Container$delete_at()}}
 \item \href{#method-discard}{\code{Container$discard()}}
+\item \href{#method-discard_at}{\code{Container$discard_at()}}
 \item \href{#method-empty}{\code{Container$empty()}}
 \item \href{#method-get_compare_fun}{\code{Container$get_compare_fun()}}
 \item \href{#method-has}{\code{Container$has()}}
@@ -38,9 +40,10 @@ Roman Pahl
 \item \href{#method-length}{\code{Container$length()}}
 \item \href{#method-peek_at}{\code{Container$peek_at()}}
 \item \href{#method-peek_at2}{\code{Container$peek_at2()}}
+\item \href{#method-pop}{\code{Container$pop()}}
 \item \href{#method-print}{\code{Container$print()}}
-\item \href{#method-replace2}{\code{Container$replace2()}}
 \item \href{#method-replace}{\code{Container$replace()}}
+\item \href{#method-replace_at}{\code{Container$replace_at()}}
 \item \href{#method-remove}{\code{Container$remove()}}
 \item \href{#method-size}{\code{Container$size()}}
 \item \href{#method-type}{\code{Container$type()}}
@@ -200,6 +203,27 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-delete_at"></a>}}
+\if{latex}{\out{\hypertarget{method-delete_at}{}}}
+\subsection{Method \code{delete_at()}}{
+Delete value at given index. If index is not found, an
+error is signaled.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$delete_at(index)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{\code{character} or \code{numeric} index}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-discard"></a>}}
 \if{latex}{\out{\hypertarget{method-discard}{}}}
 \subsection{Method \code{discard()}}{
@@ -214,6 +238,27 @@ remove first one that is found.
 \describe{
 \item{\code{elem}}{element to be discarded from the \code{Container}. If not
 found, the operation is ignored and the object is \emph{not} altered.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-discard_at"></a>}}
+\if{latex}{\out{\hypertarget{method-discard_at}{}}}
+\subsection{Method \code{discard_at()}}{
+Discard value at given index. If index is not found,
+the operation is ignored.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$discard_at(index)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{\code{character} or \code{numeric} index}
 }
 \if{html}{\out{</div>}}
 }
@@ -361,6 +406,29 @@ default value.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-pop"></a>}}
+\if{latex}{\out{\hypertarget{method-pop}{}}}
+\subsection{Method \code{pop()}}{
+Get value at index and remove it from \code{Container}.
+If \code{index} is not found, raise an error.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$pop(index)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{Must be a single number > 0 or a string.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If given as a number, the element at the corresponding
+position, and if given as a string, the element at the
+corresponding name matching the given string is returned.
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
 \if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
@@ -381,23 +449,13 @@ invisibly returns the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-replace2"></a>}}
-\if{latex}{\out{\hypertarget{method-replace2}{}}}
-\subsection{Method \code{replace2()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Container$replace2(index, value, add = FALSE)}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-replace"></a>}}
 \if{latex}{\out{\hypertarget{method-replace}{}}}
 \subsection{Method \code{replace()}}{
 Replace one element by another element.
-Search for occurence of \code{old} in \code{Container} and, if found,
-replace it by \code{new}. If \code{old} does not exist, an error is
-signaled, unless \code{add} was set to \code{TRUE}, in which case \code{new} is
-added.
+Search for occurence of \code{old} and, if found, replace it by \code{new}.
+If \code{old} does not exist, an error is signaled, unless \code{add} was
+set to \code{TRUE}, in which case \code{new} is added.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$replace(old, new, add = FALSE)}\if{html}{\out{</div>}}
 }
@@ -411,6 +469,34 @@ added.
 
 \item{\code{add}}{\code{logical} if \code{TRUE} the \code{new} element is added in case
 \code{old} does not exists.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-replace_at"></a>}}
+\if{latex}{\out{\hypertarget{method-replace_at}{}}}
+\subsection{Method \code{replace_at()}}{
+Replace value at given index.
+Replace value at index by given value. If index is not found, an
+error is signalled, unless \code{add} was set to \code{TRUE}, in which case
+\code{new} is added.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$replace_at(index, value, add = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{index}}{\code{character} or \code{numeric} index}
+
+\item{\code{value}}{\code{ANY} new value to replace the old one.}
+
+\item{\code{add}}{\code{logical} if \code{TRUE} the new \code{value} element would be added
+in case \code{index} did not exists.}
 }
 \if{html}{\out{</div>}}
 }

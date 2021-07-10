@@ -39,29 +39,10 @@ Set <- R6::R6Class("Set",
             elem = list(value)
             names(elem) = name
 
-            hash_value = private$get_hash_value(value)
+            hash_value = private$.get_hash_value(value)
             private$elems[[hash_value]] = elem
-            private$resort_by_hash()
+            private$.resort_by_hash()
 
-            self
-        },
-
-        #' @description Search for occurence of `elem` in the `Set` and
-        #' replace it by `new`. If `elem` does not exist, an error is
-        #' signaled, unless `add` was set to `TRUE`, in which case `new` is
-        #' added.
-        #' @param old element to be replaced
-        #' @param new element to be put instead of old
-        #' @param add `logical` if `TRUE` the `new` element is added in case
-        #' `old` does not exists.
-        #' @return the `Set` object
-        replace = function(old, new, add = FALSE) {
-            if (add)
-                self$discard(old)
-            else
-                self$delete(old)
-
-            self$add(new)
             self
         },
 
@@ -70,7 +51,7 @@ Set <- R6::R6Class("Set",
         #' @return the `Set` object updated as a result of the set difference
         #' between this and s.
         diff = function(s) {
-            private$verify_same_class(s)
+            private$.verify_same_class(s)
             lapply(s$values(), self$discard)
             self
         },
@@ -79,7 +60,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to 'intersect'
         #' @return the `Set` object as a result of the intersection of this and s.
         intersect = function(s) {
-            private$verify_same_class(s)
+            private$.verify_same_class(s)
             for (elem in self$values()) {
                 if (!s$has(elem))
                     self$discard(elem)
@@ -91,7 +72,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to be 'unified'
         #' @return the `Set` object as a result of the union of this and s.
         union = function(s) {
-            private$verify_same_class(s)
+            private$.verify_same_class(s)
 
             it = s$iter()
 
@@ -107,7 +88,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is equal to `s`, otherwise `FALSE`
         is_equal = function(s) {
-            private$verify_same_class(s)
+            private$.verify_same_class(s)
             self == s
         },
 
@@ -115,7 +96,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is subset of `s`, otherwise `FALSE`
         is_subset = function(s) {
-            private$verify_same_class(s)
+            private$.verify_same_class(s)
             self <= s
         },
 
@@ -123,7 +104,7 @@ Set <- R6::R6Class("Set",
         #' @param s `Set` object to compare against
         #' @return `TRUE` if this is proper subset of `s`, otherwise `FALSE`
         is_proper_subset = function(s) {
-            private$verify_same_class(s)
+            private$.verify_same_class(s)
             self < s
         },
 
@@ -132,10 +113,15 @@ Set <- R6::R6Class("Set",
         values = function() {
             l = private$elems
             names(l) = NULL
-            if (length(l))
+            res = if (length(l))
                 unlist(l, recursive = FALSE)
             else
                 l
+
+            if (!any(nzchar(names(res))))
+                names(res) <- NULL
+
+            res
         }
     ),
     private = list(
@@ -154,11 +140,18 @@ Set <- R6::R6Class("Set",
             }
             lapply(value, clone_deep_if_container)
         },
-        get_hash_value = function(x) {
+        .get_hash_value = function(x) {
             lab = get_label(x)
             paste(length(x), lab, serialize(x, NULL), collapse = "")
         },
-        resort_by_hash = function() {
+
+        .replace_value_at = function(pos, value, name) {
+            self$discard_at(pos)
+            self$add(value, name)
+            self
+        },
+
+        .resort_by_hash = function() {
             new_order = order(lengths(self$values()), names(private$elems))
             private$elems = private$elems[new_order]
         }

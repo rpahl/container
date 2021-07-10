@@ -108,6 +108,19 @@ expect_silent(s$discard(co))
 s$discard(s2)
 ee(s, Set$new(2, 3))
 
+# ----------
+# discard_at
+# ----------
+co = Container$new(1, 2)
+s2 = Set$new(3, 4)
+s = Set$new(1, 2, 3, co = co, s = s2)
+ee(s$discard_at(1), Set$new(2, 3, co = co, s = s2))
+
+ee(s$discard_at("co"), Set$new(2, 3, s = s2))
+expect_silent(s$discard_at("co"))
+ee(s$discard_at("s")$values(), list(2, 3))
+
+
 # -----
 # empty
 # -----
@@ -215,6 +228,28 @@ ee(s$peek_at2(c("a", "b"), 0), 0)
 ee(s$peek_at2("c", 0), 0)
 
 
+# ---
+# pop
+# ---
+s = setnew(a = 1, 2, b = 3, 4)
+
+ee(s$pop("a"), 1)
+ee(s, setnew(2, b = 3, 4))
+
+ee(s$pop(1), 2)
+ee(s, setnew(b = 3, 4))
+
+ee(s$pop(), 4)
+ee(s, setnew(b = 3))
+
+expect_error(s$pop(0), "index must be > 0")
+expect_error(s$pop(3), "index 3 exceeds length of Set, which is 1")
+
+ee(s$pop(), 3)
+ee(s, setnew())
+
+expect_error(s$pop(), "pop at empty Set")
+
 
 # -----
 # print
@@ -254,48 +289,82 @@ ee(out, "{list(), <<data.frame(3x2)>>, (3L 4L 5L), <<Set(6)>>}")
 # replace
 # -------
 # Signals an error if elem does not exist unless add == TRUE
-expect_error(Set$new()$replace(0, 1))
-expect_error(Set$new()$replace(NULL, 1))
-expect_error(Set$new(0)$replace(1, 2))
-
+s = Set$new()
+expect_error(s$replace(0, 1), "old element \\(0\\) is not in Set")
+expect_error(s$replace(NULL, 1), "old element \\(NULL\\) is not in Set")
+expect_error(s$add(0)$replace(1, 2), "old element \\(1\\) is not in Set")
 ee(Set$new()$replace(0, 1, add = TRUE), Set$new(1))
 
 # Replacing to an existing element, reduces the set
 s = Set$new(1, 2)
-s$replace(2, 1)
-ee(s, Set$new(1))
-s$replace(1, NULL)
-ee(s, Set$new(NULL))
+ee(s$replace(2, 1), Set$new(1))
+ee(s$replace(1, NULL), Set$new(NULL))
 
-# Replacing to non-existing element works as expected
-s = Set$new(1, 2, 3)
-s$replace(1, 4)
-ee(s, Set$new(2, 3, 4))
+# Replacing a named element preserves the name
+s = Set$new(a = 1, b = 2)
+ee(s$replace(1, 0), Set$new(a = 0, b = 2))
+
+# Replacing by new element works as expected
+s = Set$new(a = 1, 2, 3)
+ee(s$replace(1, 4), Set$new(2, 3, a = 4))
 
 s = Set$new(1, "1")
-s$replace(1, 0)
-ee(s, Set$new(0, "1"))
+ee(s$replace(1, 0), Set$new(0, "1"))
 
 # Replace works on special elements of basic type
 s = Set$new(NULL, numeric(0), list())
-s$replace(NULL, 0)
-ee(s, Set$new(0, numeric(), list()))
-s$replace(numeric(0), 0)
-ee(s, Set$new(0, list()))
-s$replace(list(), 0)
-ee(s, Set$new(0))
+ee(s$replace(NULL, 0), Set$new(0, numeric(), list()))
+ee(s$replace(numeric(0), 0), Set$new(0, list()))
+ee(s$replace(list(), 0), Set$new(0))
 
 # Replace works on non-basic objects
 S1 = Set$new(1, "1")
 S2 = Set$new(2, "2")
 Co = Container$new(NULL)
 s = Set$new(S1, S2, Co)
-s$replace(S1, 1)
-ee(s, Set$new(1, S2, Co))
-s$replace(S2, 2)
-ee(s, Set$new(1, 2, Co))
-s$replace(Co, 0)
-ee(s, Set$new(0, 1, 2))
+ee(s$replace(S1, 1), Set$new(1, S2, Co))
+ee(s$replace(S2, 2), Set$new(1, 2, Co))
+ee(s$replace(Co, 0), Set$new(0, 1, 2))
+
+
+# ----------
+# replace_at
+# ----------
+# Signals an error for invalid index unless add == TRUE
+s = Set$new()
+expect_error(s$replace_at(1, 1), "index 1 exceeds length of Set, which is 0")
+expect_error(s$replace_at(NULL, 1), "index must be of length 1")
+expect_error(s$add(0)$replace_at(1, 2))
+ee(Set$new()$replace_at(0, 1, add = TRUE), Set$new(1))
+
+# Replacing to an existing element, reduces the set
+s = Set$new(1, 2)
+ee(s$replace_at(2, 1), Set$new(1))
+ee(s$replace_at(1, NULL), Set$new(NULL))
+
+# Replacing a named element preserves the name
+s = Set$new(a = 1, b = 2)
+ee(s$replace_at(1, 0), Set$new(a = 0, b = 2))
+
+# Replacing by new element works as expected
+s = Set$new(a = 1, 2, 3)
+ee(s$replace_at(1, 4), Set$new(2, 3, a = 4))
+ee(s$replace_at("a", 5), Set$new(2, 3, a = 5))
+
+# Replace works on special elements of basic type
+s = Set$new(list(), NULL, numeric(0))
+ee(s$replace_at(1, 0), Set$new(NULL, numeric(), 0))
+ee(s$replace_at(1, 0), Set$new(numeric(), 0))
+ee(s$replace_at(1, 0), Set$new(0))
+
+# Replace works on non-basic objects
+S1 = Set$new(1, "1")
+S2 = Set$new(2, "2")
+Co = Container$new(NULL)
+s = Set$new(co = Co, s1 = S1, s2 = S2)
+ee(s$replace_at(1, 1), Set$new(co = 1, s1 = S1, s2 = S2))
+
+
 
 # ------
 # values

@@ -24,7 +24,6 @@ lexicographical representation of the elements.
 \itemize{
 \item \href{#method-new}{\code{Set$new()}}
 \item \href{#method-add}{\code{Set$add()}}
-\item \href{#method-replace}{\code{Set$replace()}}
 \item \href{#method-diff}{\code{Set$diff()}}
 \item \href{#method-intersect}{\code{Set$intersect()}}
 \item \href{#method-union}{\code{Set$union()}}
@@ -44,7 +43,9 @@ lexicographical representation of the elements.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at">}\href{../../container/html/Container.html#method-delete_at}{\code{container::Container$delete_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard_at">}\href{../../container/html/Container.html#method-discard_at}{\code{container::Container$discard_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
@@ -53,9 +54,11 @@ lexicographical representation of the elements.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace2">}\href{../../container/html/Container.html#method-replace2}{\code{container::Container$replace2()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace">}\href{../../container/html/Container.html#method-replace}{\code{container::Container$replace()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at">}\href{../../container/html/Container.html#method-replace_at}{\code{container::Container$replace_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
 }
@@ -101,34 +104,6 @@ Add element
 }
 \subsection{Returns}{
 the \code{Set} object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-replace"></a>}}
-\if{latex}{\out{\hypertarget{method-replace}{}}}
-\subsection{Method \code{replace()}}{
-Search for occurence of \code{elem} in the \code{Set} and
-replace it by \code{new}. If \code{elem} does not exist, an error is
-signaled, unless \code{add} was set to \code{TRUE}, in which case \code{new} is
-added.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Set$replace(old, new, add = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{old}}{element to be replaced}
-
-\item{\code{new}}{element to be put instead of old}
-
-\item{\code{add}}{\code{logical} if \code{TRUE} the \code{new} element is added in case
-\code{old} does not exists.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-the \code{Set} object
 }
 }
 \if{html}{\out{<hr>}}

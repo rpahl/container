@@ -78,27 +78,10 @@ Dict <- R6::R6Class("Dict",
             self$at2(key)
         },
 
-
         #' @description Get all keys.
         #' @return `character` vector of all keys.
         keys = function() {
             ls(envir = private$elems)
-        },
-
-        #' @description Get value and delete key-value pair from `Dict`.
-        #' If `key` not found, raise an error.
-        #' @param key `character` name of key.
-        #' @return If `key` in `Dict`, return its value.
-        pop = function(key) {
-            if (self$is_empty())
-                stop("pop at empty ", data.class(self), call. = FALSE)
-
-            if (missing(key))
-                key = utils::tail(self$keys(), 1)
-
-            elem <- self$at2(key)
-            self$delete(key)
-            elem
         },
 
         #' @description This function is deprecated. Use [delete()] instead.
