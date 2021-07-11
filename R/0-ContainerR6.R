@@ -320,7 +320,6 @@ Container <- R6::R6Class("Container",
                 stop("old element (", get_label(old),
                      ") is not in ", data.class(self), call. = FALSE)
 
-            #self$replace_at(index = pos, value = new)
             name = names(self)[[pos]]
             private$.replace_value_at(pos, new, name)
             self
@@ -378,8 +377,7 @@ Container <- R6::R6Class("Container",
         type = function() {
             old = as.character(sys.call(sys.parent()))[1L]
             object <- strsplit(old, split = "$", fixed = TRUE)[[1]][1]
-            msg <- paste0("'", old, "()' is deprecated and not useful anymore.\n",
-                          "You can use 'mode(", object, "$values())' instead.")
+            msg <- paste0("'", old, "()' is deprecated and not useful anymore")
             .Deprecated("mode", msg = msg)
             mode(private$elems)
         },
