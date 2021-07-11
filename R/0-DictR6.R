@@ -148,18 +148,16 @@ Dict <- R6::R6Class("Dict",
             self
         },
 
-        #' @description Add elements of other dict to the `Dict` if the key is
-        #' not in the `Dict` and update the key with the new value otherwise.
-        #' @param other `Dict` dictionary used to update the `Dict`
-        #' @return returns the `Dict`
-        update = function(other = Dict$new()) {
-            if (!inherits(other, data.class(self)))
-                stop("arg must be a ", data.class(self), call. = FALSE)
+        #' @description Add elements of `other` to this if the name is
+        #' not in the `Dict` and update elements with existing names.
+        #' @param other `Iterable` object used to update this.
+        #' @return returns the updated `Dict` object.
+        update = function(other) {
 
-            for (key in other$keys())
-                self$replace_at(key, other$at2(key), add = TRUE)
+            if (length(other) != sum(nzchar(names(other))))
+                stop("all elements of 'other' must be named")
 
-            self
+            super$update(other)
         },
 
         #' @description Get `Container` values

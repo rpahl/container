@@ -186,12 +186,13 @@ expect_silent(ee(co$discard(0), co))
 ee(Container$new()$discard_at(1), Container$new())
 
 # elements can be discarded from a Container
-co <- Container$new(1, 2, 3)
-ee(co$discard_at(3), Container$new(1, 2))
+co <- Container$new(a = 1, 2, 3)
+ee(co$discard_at(3), Container$new(a = 1, 2))
+ee(co$discard_at("a"), Container$new(2))
 
 co <- Container$new(mean, identity)
 ee(co$discard_at(1), Container$new(identity))
-expect_error(co$discard(), 'argument "elem" is missing, with no default')
+expect_error(co$discard_at(), "'index' is missing")
 
 # Container is not changed when trying to discard non-existing element
 co <- Container$new(1)
@@ -476,6 +477,29 @@ co = Container$new(1, b = 2, 3)
 ee(co$replace_at("b", NULL), Container$new(1, b = NULL, 3))
 ee(co$replace_at(3, numeric(0)), Container$new(1, b = NULL, numeric(0)))
 
+# ------
+# update
+# ------
+# a Container can be updated by another Container object
+c0 <- Container$new(A = 0)
+c1 <- Container$new(A = 1, B = 2, C = 12)
+c2 <- Container$new(              C = 3, D = 4)
+
+ee(c0$update(c0),         Container$new(A = 0))
+ee(c0$update(Container$new()), Container$new(A = 0))
+ee(Container$new()$update(c0), Container$new(A = 0))
+
+expect_error(c1$update(list()), "arg must be iterable")
+ee(c1$update(Container$new()), c1)
+ee(c1$update(c2)$values(), list(A = 1, B = 2, C = 3, D = 4))
+ee(Container$new()$update(c2), c2)
+
+# a Container can be updated by another Container object with unnamed elements
+ee(Container$new(a = 0)$update(Container$new(2, a = 1, 1)),
+   Container$new(a = 1, 2, 1))
+
+ee(Container$new(a = 0)$update(Container$new(2, a = 1, 1, b = 2, a = 5)),
+   Container$new(a = 5, 2, 1, b = 2))
 
 # ------
 # values

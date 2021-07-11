@@ -279,21 +279,21 @@ returns the \code{Dict}
 \if{html}{\out{<a id="method-update"></a>}}
 \if{latex}{\out{\hypertarget{method-update}{}}}
 \subsection{Method \code{update()}}{
-Add elements of other dict to the \code{Dict} if the key is
-not in the \code{Dict} and update the key with the new value otherwise.
+Add elements of \code{other} to this if the name is
+not in the \code{Dict} and update elements with existing names.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$update(other = Dict$new())}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Dict$update(other)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{other}}{\code{Dict} dictionary used to update the \code{Dict}}
+\item{\code{other}}{\code{Iterable} object used to update this.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-returns the \code{Dict}
+returns the updated \code{Dict} object.
 }
 }
 \if{html}{\out{<hr>}}

@@ -60,6 +60,7 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at">}\href{../../container/html/Container.html#method-replace_at}{\code{container::Container$replace_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="update">}\href{../../container/html/Container.html#method-update}{\code{container::Container$update()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values">}\href{../../container/html/Container.html#method-values}{\code{container::Container$values()}}\out{</span>}
 }
 \out{</details>}

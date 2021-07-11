@@ -47,6 +47,7 @@ Roman Pahl
 \item \href{#method-remove}{\code{Container$remove()}}
 \item \href{#method-size}{\code{Container$size()}}
 \item \href{#method-type}{\code{Container$type()}}
+\item \href{#method-update}{\code{Container$update()}}
 \item \href{#method-values}{\code{Container$values()}}
 \item \href{#method-clone}{\code{Container$clone()}}
 }
@@ -549,6 +550,27 @@ This function is deprecated and of no real use anymore.
 
 \subsection{Returns}{
 type (or mode) of internal vector containing the elements
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-update"></a>}}
+\if{latex}{\out{\hypertarget{method-update}{}}}
+\subsection{Method \code{update()}}{
+Add elements of \code{other} to this if the name is
+not in the \code{Container} and update elements with existing names.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$update(other)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{other}}{\code{Iterable} object used to update this.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+returns the \code{Container}
 }
 }
 \if{html}{\out{<hr>}}

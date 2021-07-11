@@ -364,6 +364,29 @@ s = Set$new(co = Co, s1 = S1, s2 = S2)
 ee(s$replace_at(1, 1), Set$new(co = 1, s1 = S1, s2 = S2))
 
 
+# ------
+# update
+# ------
+# a Set can be updated by another Set object
+s0 <- Set$new(A = 0)
+s1 <- Set$new(A = 1, B = 2, C = 12)
+s2 <- Set$new(              C = 3, D = 4)
+
+ee(s0$update(s0),        Set$new(A = 0))
+ee(s0$update(Set$new()), Set$new(A = 0))
+ee(Set$new()$update(s0), Set$new(A = 0))
+
+ee(s1$update(Set$new()), s1)
+ee(s1$update(s2)$values(), list(A = 1, B = 2, C = 3, D = 4))
+ee(Set$new()$update(s2), s2)
+
+# a Set can be updated by another Container object with partially unnamed elements
+ee(Set$new(a = 0)$update(Container$new(2, a = 1, 1)),
+   Set$new(a = 1, 2))
+
+ee(Set$new(a = 0)$update(Container$new(2, a = 1, 1, b = 2, x = 5, a = 3)),
+   Set$new(a = 3, 2, x = 5))
+
 
 # ------
 # values

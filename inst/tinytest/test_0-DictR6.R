@@ -408,10 +408,17 @@ ee(d0$update(d0),         Dict$new(A = 0))
 ee(d0$update(Dict$new()), Dict$new(A = 0))
 ee(Dict$new()$update(d0), Dict$new(A = 0))
 
-expect_error(d1$update(list()), "arg must be a Dict")
 ee(d1$update(Dict$new()), d1)
 ee(d1$update(d2)$values(), list(A = 1, B = 2, C = 3, D = 4))
 ee(Dict$new()$update(d2), d2)
+
+# a Dict can be updated by another Container object if all elements are named
+d <- Dict$new(A = 0)
+co = Container$new(A = 1, B = 2)
+ee(d$update(co), Dict$new(A = 1, B = 2))
+
+co = Container$new(C = 1, 2)
+expect_error(d$update(co), "all elements of 'other' must be named")
 
 # -----
 # clone

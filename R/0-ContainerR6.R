@@ -339,7 +339,7 @@ Container <- R6::R6Class("Container",
             hasIndex = has_index(self, index)
             if (!hasIndex && add) {
                 name = NULL
-                if (is.character(index))
+                if (is.character(index) && !is.na(index) && nzchar(index))
                     name = index
 
                 return(self$add(value = value, name = name))
@@ -380,6 +380,26 @@ Container <- R6::R6Class("Container",
             msg <- paste0("'", old, "()' is deprecated and not useful anymore")
             .Deprecated("mode", msg = msg)
             mode(private$elems)
+        },
+
+        #' @description Add elements of `other` to this if the name is
+        #' not in the `Container` and update elements with existing names.
+        #' @param other `Iterable` object used to update this.
+        #' @return returns the `Container`
+        update = function(other) {
+            if (!is.iterable(other))
+                stop("arg must be iterable", call. = FALSE)
+
+            it = other$iter()
+
+            while (it$has_next()) {
+                elem = it$get_next()
+                self$replace_at(index = names(elem),
+                                value = elem[[1]],
+                                add = TRUE)
+            }
+
+            self
         },
 
         #' @description Get `Container` values
