@@ -38,3 +38,6 @@ expect_error(f(co, index = 1:2), "index must be of length 1")
 expect_error(f(co, index = NA), "index must not be 'NA'")
 
 
+l = list(a = 1, 2)
+expect_false(.has_index(l, ""))
+

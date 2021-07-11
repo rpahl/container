@@ -51,7 +51,7 @@ assert_index = function(x, index)
 
 .has_index.character = function(x, index)
 {
-    utils::hasName(x, index)
+    nzchar(index) && utils::hasName(x, index)
 }
 
 .has_index.numeric = function(x, index)
