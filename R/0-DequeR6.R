@@ -40,18 +40,6 @@ Deque <- R6::R6Class("Deque",
         },
 
         #' @description
-        #' Delete and return element from the right side of the [Deque()].
-        #' @return element 'popped' from the right side of the [Deque()]
-        pop = function() {
-            if (self$is_empty())
-                stop("pop at empty ", data.class(self), call. = FALSE)
-
-            last <- self$peek()
-            self$delete(last)
-            last
-        },
-
-        #' @description
         #' Delete and return element from the left side of the [Deque()].
         #' @return element 'popped' from the left side of the [Deque()]
         popleft = function() {
