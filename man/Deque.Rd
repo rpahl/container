@@ -25,7 +25,6 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \href{#method-addleft}{\code{Deque$addleft()}}
 \item \href{#method-peek}{\code{Deque$peek()}}
 \item \href{#method-peekleft}{\code{Deque$peekleft()}}
-\item \href{#method-pop}{\code{Deque$pop()}}
 \item \href{#method-popleft}{\code{Deque$popleft()}}
 \item \href{#method-rev}{\code{Deque$rev()}}
 \item \href{#method-rotate}{\code{Deque$rotate()}}
@@ -54,6 +53,7 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace">}\href{../../container/html/Container.html#method-replace}{\code{container::Container$replace()}}\out{</span>}
@@ -125,19 +125,6 @@ Peek at first element of the \code{Deque}.
 }
 \subsection{Returns}{
 element 'peeked' on the left
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pop"></a>}}
-\if{latex}{\out{\hypertarget{method-pop}{}}}
-\subsection{Method \code{pop()}}{
-Delete and return element from the right side of the \code{\link[=Deque]{Deque()}}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Deque$pop()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-element 'popped' from the right side of the \code{\link[=Deque]{Deque()}}
 }
 }
 \if{html}{\out{<hr>}}
