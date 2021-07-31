@@ -103,7 +103,7 @@ Dict <- R6::R6Class("Dict",
                 return(self)
 
             self$add(name = new, value = self$at2(old))
-            self$delete(old)
+            self$delete_at(old)
             self
         },
 

@@ -202,7 +202,7 @@ expect_error(d$has_name(c("a", "b")), "name must be of length 1")
 # all keys can be listed
 d <- Dict$new(a = 1, b = 2)
 ee(d$keys(), c("a", "b"))
-d$delete("a")
+d$delete_at("a")
 ee(d$keys(), "b")
 
 
@@ -301,13 +301,13 @@ expect_error(d$rename(1, "C"), "'old' must be character")
 expect_error(d$rename("A", 1), "'new' must be character")
 expect_error(d$rename("A", c("C", "D")),
              "'old' and 'new' names must be of the same length")
-expect_error(d$rename("A", "B"), "key 'B' already in Dict")
+expect_error(d$rename("A", "B"), "name 'B' already in Dict")
 expect_error(d$rename("Z", "B"), "Items of 'old' not found in names: Z")
 
 vals = as.numeric(d$values())
 d$rename("A", "a")
-expect_true(d$has("a"))
-expect_false(d$has("A"))
+expect_true(d$has_name("a"))
+expect_false(d$has_name("A"))
 
 # Verify that values did not change
 values_did_not_change = all.equal(vals, as.numeric(d$values()))
@@ -379,11 +379,8 @@ expect_error(d$replace_at(0, 0), "index must be > 0")
 d = Dict$new()
 ee(d$replace_at("a", 9, add = TRUE), Dict$new(a = 9))
 
-
-#ee(co$replace_at("b", 7, add = TRUE), Container$new(9, b = 7))
-#ee(co$replace_at(10, NULL, add = TRUE), Container$new(9, b = 7, NULL))
-
 # Standard cases work as expected
+d = Dict$new(a = 1, b = 2)
 ee(d$replace_at("a", 0), Dict$new(a = 0, b = 2))
 ee(d$replace_at(1, 9), Dict$new(a = 9, b = 2))
 ee(d$replace_at("b", 0), Dict$new(a = 9, b = 0))
@@ -434,7 +431,7 @@ expect_false(identical(d1, dd))
 ee(d1$values(), dd$values())
 ee(d1$values(), dd.deep$values())
 
-d1$delete("c")
+d1$delete_at("c")
 expect_true(identical(d1, d2))
 ee(d1$values(), dd$values())
 ee(dd$values(), list(a = 1, b = 2))

@@ -140,7 +140,7 @@ expect_error(co$delete(li), "list\\(1, 2\\) is not in Container")
 # If duplicates, only one element is deleted
 co <- Container$new(1, 2, 1)
 co$delete(1)
-ee(co, Container$new(1, 2))
+ee(co, Container$new(2, 1))
 
 
 # ---------
@@ -259,7 +259,7 @@ expect_true(co$has_name("b"))
 expect_false(co$has_name("2"))
 
 EE = expect_error
-EE(co$has_name(NULL), "expected a character string, but got 'NULL'")
+EE(co$has_name(NULL), "name must be a character string, but got 'NULL'")
 EE(co$has_name(c("a", "b")), "name must be of length 1")
 EE(co$has_name(as.character(NA)), "undefined name")
 EE(co$has_name(""), "name must consist of at least one character")
@@ -278,7 +278,6 @@ ee(co$length(), length(co$values()))
 # -----
 # all names can be listed
 co <- Container$new(a = 1, 2, y = 3)
-ee(co$names(), c("a", "", "y"))
 
 # -------
 # peek_at
