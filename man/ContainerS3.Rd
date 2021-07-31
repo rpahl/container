@@ -2,8 +2,8 @@
 % Please edit documentation in R/0-ContainerS3.R, R/0-IteratorS3.R,
 %   R/GroupGenericMath.R, R/GroupGenericSummary.R, R/Ops-arithmetic.R,
 %   R/Ops-compare.R, R/add.R, R/at.R, R/at2.R, R/clear.R, R/clone.R, R/count.R,
-%   R/delete.R, R/discard.R, R/has.R, R/has_name.R, R/is_empty.R, R/peek_at.R,
-%   R/peek_at2.R, R/replace.R
+%   R/delete.R, R/delete_at.R, R/discard.R, R/has.R, R/has_name.R, R/is_empty.R,
+%   R/peek_at.R, R/peek_at2.R, R/replace.R
 \name{ContainerS3}
 \alias{ContainerS3}
 \alias{container}
@@ -69,6 +69,9 @@ count(x)
 
 delete(.x, ...)
 delete_(.x, ...)
+
+delete_at(.x, ...)
+delete_at_(.x, ...)
 
 discard(.x, ...)
 discard_(.x, ...)
@@ -214,6 +217,11 @@ If one or more elements don't exist, an error is signaled.
 }
 
 \itemize{
+\item \code{delete_at(.x, ...)} and \code{delete_at_(.x, ...)} find and remove values at
+given indices. If any given index is invalid, an error is signaled.
+}
+
+\itemize{
 \item \code{discard(.x, ...)} and \code{discard_(.x, ...)} find and discard elements.
 Elements that don't exist, are ignored.
 }
@@ -328,6 +336,14 @@ delete(co, 1:3, "a")
 delete(co, iris)
 \dontrun{
 delete(co, "b")   # "b" is not in Container}
+
+co = container(a = 1, b = 2, 3)
+delete_at(co, "a", "b")          # [3]
+delete_at(co, 1:2)               # [3]
+delete_at(co, "a", 3)            # [b = 2]
+\dontrun{
+delete_at(co, 4)                 # index out of range
+delete_at(co, "x")               # names(s) not found: 'x'}
 
 co = container("a", 1:3, iris)
 print(co)
