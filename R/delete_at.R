@@ -77,21 +77,22 @@ NULL
 #' @export
 delete_at_.Container <- function(.x, ...)
 {
-    args = list(...)
-    if (!length(args))
+    indices = list(...)
+    if (!length(indices))
         return(.x)
 
     # Numeric indices
-    num_indices = as.integer(unlist(Filter(args, f = is.numeric)))
+    num_indices = as.integer(unlist(Filter(indices, f = is.numeric)))
     stopifnot(.has_valid_num_indices.Container(.x, num_indices))
 
     # Character indices
-    char_indices = unlist(Filter(args, f = is.character))
+    char_indices = unlist(Filter(indices, f = is.character))
     stopifnot(.has_valid_char_indices.Container(.x, char_indices))
 
+    # Transform all into numeric indices and start deleting from the end
     num_indices = unique(c(num_indices, match(char_indices, names(.x))))
-
     lapply(sort(num_indices, decreasing = TRUE), function(i) .x$delete_at(i))
+
     invisible(.x)
 }
 

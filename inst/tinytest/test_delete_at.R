@@ -14,7 +14,7 @@ ee(delete_at(co, "a"), delete_at(co, 1))
 ee(delete_at(co, "b"), delete_at(co, 2))
 ee(delete_at(co, 1:4), container())
 
-ee(delete_at(co, "b", "a", 4:3), container())
+ee(delete_at(co, "b", "a", 4:3, 1), container())
 ee(delete_at(co, "a", 1), delete_at(co, 1))
 
 expect_error(delete_at(co, "a", "x"), "names\\(s\\) not found: 'x'")

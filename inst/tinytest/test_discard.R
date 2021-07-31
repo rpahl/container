@@ -6,58 +6,23 @@ ee = expect_equal
 co = container("a", "b", "a", mean, mean, NULL)
 co2 = clone(co)
 ee(discard(co), co2)
-ee(discard(co, "a", mean, NULL), container("a", "b", mean))
+ee(discard(co, "a", mean, NULL), container("b", "a", mean))
 original_was_not_touched = ee(co, co2)
 expect_true(original_was_not_touched)
 
-ee(discard_(co, "a", mean, NULL), container("a", "b", mean))
-discard_was_done_on_original = ee(co, container("a", "b", mean))
+ee(discard_(co, "a", mean, NULL), container("b", "a", mean))
+discard_was_done_on_original = ee(co, container("b", "a", mean))
 expect_true(discard_was_done_on_original)
+ee(discard(co, "x"), co)
 
 co2 = clone(co)
-expect_silent(discard_(co, "x"))
 nothing_was_removed = ee(co, co2)
 expect_true(nothing_was_removed)
 
-# ------------
-# discard.Dict
-# ------------
 d = dict(a = 1, b = 2, f = mean)
 d2 = clone(d)
-ee(discard(d, "a", "f", "b"), dict())
+ee(discard(d, 1, 2, mean), dict())
 original_was_not_touched = ee(d, d2)
 expect_true(original_was_not_touched)
-
-# args as character vector
-expect_true(is_empty(discard(d, names(d))))
-
-ee(discard_(d, "a", "f", "b"), dict())
-discard_was_done_on_original = ee(d, dict())
-expect_true(discard_was_done_on_original)
-
-d = dict(a = 1, b = 2, f = mean)
-d2 = clone(d)
-
-expect_silent(discard_(d, "x", "y"))
-nothing_was_removed = ee(d, d2)
-expect_true(nothing_was_removed)
-
-
-# ------------------
-# discard.dict.table
-# ------------------
-d = dict.table(a = 1, b = 2, f = mean)
-d2 = clone(d)
-expect_true(is_empty(discard(d, "a", 2, "f")))
-ee(d, d2)
-
-# args as character vector
-expect_true(is_empty(discard(d, colnames(d))))
-
-expect_silent(discard_(d, "x", 4, 11))
-d_was_not_altered = ee(d, d2)
-expect_true(d_was_not_altered)
-
-ee(discard_(d, "b"), d2[, c(1, 3)])
-expect_silent(discard_(d, "a"))
+ee(discard(d, "x"), d)
 
