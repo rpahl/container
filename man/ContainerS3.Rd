@@ -3,7 +3,8 @@
 %   R/GroupGenericMath.R, R/GroupGenericSummary.R, R/Ops-arithmetic.R,
 %   R/Ops-compare.R, R/add.R, R/at.R, R/at2.R, R/clear.R, R/clone.R,
 %   R/count.R, R/delete.R, R/delete_at.R, R/discard.R, R/discard_at.R, R/has.R,
-%   R/has_name.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R, R/replace.R
+%   R/has_name.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R, R/replace.R,
+%   R/replace_at.R
 \name{ContainerS3}
 \alias{ContainerS3}
 \alias{container}
@@ -91,6 +92,9 @@ peek_at2(x, index, default)
 
 replace(.x, old, new, add = FALSE)
 replace_(.x, old, new, add = FALSE)
+
+replace_at(.x, old, new, add = FALSE)
+replace_at_(.x, old, new, add = FALSE)
 }
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the \code{Container}.}
@@ -262,6 +266,13 @@ not found) the given default value.
 replace it with element \code{new}. If \code{old} does not exist, an error is raised,
 unless \code{add} was set to \code{TRUE}.
 }
+
+\itemize{
+\item \code{replace_at(.x, old, new, add = FALSE)} and
+\code{replace_at_(.x, old, new, add = FALSE)} try to find element \code{old} and
+replace_at it with element \code{new}. If \code{old} does not exist, an error is raised,
+unless \code{add} was set to \code{TRUE}.
+}
 }
 \examples{
 co = container(1, b = NA, 1:3, c = container("a", 1))
@@ -398,6 +409,13 @@ replace(co, "x", 0)
 \dontrun{
 replace(co, "z", 0)              # old element ("z") is not in Container}
 replace(co, "z", 0, add = TRUE)  # ok, adds the element
+
+co = container("x", 9)
+replace_at(co, 9, 0)
+replace_at(co, "x", 0)
+\dontrun{
+replace_at(co, "z", 0)              # old element ("z") is not in Container}
+replace_at(co, "z", 0, add = TRUE)  # ok, adds the element
 }
 \seealso{
 For the \code{Container} class documentation see \code{\link[=Container]{Container()}}. To

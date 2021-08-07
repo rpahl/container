@@ -4,7 +4,7 @@
 #' found, unless it is stated to explicitly add the element (see option `add`).
 #' @param .x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
-#' @param add `logical` if `FALSE` (default) and element (or key) was not found,
+#' @param add `logical` if `FALSE` (default) and element was not found,
 #' an error is given. In contrast, if set to `TRUE` the new element is added
 #' regardless of whether it is used as a replacement for an existing element or
 #' just added as a new element.
@@ -79,103 +79,44 @@ replace_.Container <- function(.x, old, new, add = FALSE)
 
 
 #' @rdname replace
-#' @param key `character` name of key. For `dict.table` the `key` can also be a
-#' numeric index.
 #' @return For `Dict` an object of class `Dict`.
 #' @examples
 #'
-#' d = dict(a = 1)
-#' replace(d, "a", 1:5)
+#' d = dict(a = 1, b = "z")
+#' replace(d, 1, 1:5)
+#' replace(d, "z", "a")
 #' \dontrun{
-#' replace(d, "b", 2)              # key 'b' not in Dict}
-#' replace(d, "b", 2, add = TRUE)  # ok, adds value
+#' replace(d, "a", 2)              # old element ("a") is not in Dict}
 #' @export
-replace.Dict <- function(.x, key, value, add = FALSE)
+replace.Dict <- function(.x, old, new)
 {
-    replace_(.x$clone(deep = TRUE), key, value, add)
+    replace_(.x$clone(deep = TRUE), old, new)
 }
 
 #' @rdname replace
 #' @export
-replace_.Dict <- function(.x, key, value, add = FALSE)
+replace_.Dict <- function(.x, old, new)
 {
-    .x$replace(key, value, add)
+    .x$replace(old, new)
 }
-
 
 #' @name replace.Dict
-#' @param value `any` R object
-#' @param add `logical` if `FALSE` (default) and `key` was not found,
-#' an error is given. In contrast, if set to `TRUE` the `value` is added
-#' regardless of whether it is used as a replacement for an existing or
-#' added as a new value, respectively.
+#' @param old old element to be found and replaced.
+#' @param new the new element replacing the old one.
 #' @rdname DictS3
 #' @usage
-#' replace(.x, key, value, add = FALSE)
-#' replace_(.x, key, value, add = FALSE)
+#' replace(.x, old, new)
+#' replace_(.x, old, new)
 #' @details
-#' * `replace(.x, key, value, add = FALSE)` and
-#' `replace_(.x, key, value, add = FALSE)` replace value at `key`.
-#' If `key` does not exist, an error is given unless `add` was set to `TRUE`.
+#' * `replace(.x, old, new)` and `replace_(.x, old)` try to find element `old`
+#'  and replace it with element `new`. If `old` does not exist, an error is
+#'  raised.
 #' @examples
 #'
-#' d = dict(a = 1)
-#' replace(d, "a", 1:5)
+#' d = dict(a = 1, b = "z")
+#' replace(d, 1, 1:5)
+#' replace(d, "z", "a")
 #' \dontrun{
-#' replace(d, "b", 2)              # key 'b' not in Dict}
-#' replace(d, "b", 2, add = TRUE)  # ok, adds value
-NULL
-
-
-#' @rdname replace
-#' @param key `character` name or `numeric` index of column.
-#' @return For `dict.table` an object of class `dict.table`.
-#' @export
-#' @examples
-#'
-#' dit = dict.table(a = 1:3)
-#' replace(dit, "a", 3:1)
-#' \dontrun{
-#' replace(dit, "b", 4:6)               # column 'b' not in dict.table}
-#' replace(dit, "b", 4:6, add = TRUE)   # ok, adds value
-replace.dict.table <- function(.x, key, value, add = FALSE)
-{
-    replace_(copy(.x), key, value, add)
-}
-
-#' @rdname replace
-#' @export
-replace_.dict.table <- function(.x, key, value, add = FALSE)
-{
-    if (!add && !has(.x, key)) {
-        if (is.character(key))
-            stop("column '", key, "' not in ", data.class(.x), ". ",
-                 "To add the column, use 'add = TRUE'.")
-        else
-            stop(key, " is outside range [1, ncol = ", ncol(.x), "]")
-    }
-
-    j <- if (is.numeric(key)) as.integer(key) else key
-    data.table::set(.x, j = j, value = value)
-
-    .x
-}
-
-#' @name replace.dict.table
-#' @rdname dict.table
-#' @usage
-#' replace(.x, key, value, add = FALSE)
-#' replace_(.x, key, value, add = FALSE)
-#' @details
-#' * `replace(.x, key, value, add = FALSE)` and
-#' `replace_(.x, key, value, add = FALSE)` replace values at column `key`.
-#' If `key` does not exist, an error is given unless `add` was set to `TRUE`.
-#' @examples
-#'
-#' dit = dict.table(a = 1:3)
-#' replace(dit, "a", 3:1)
-#' \dontrun{
-#' replace(dit, "b", 4:6)               # column 'b' not in dict.table}
-#' replace(dit, "b", 4:6, add = TRUE)   # ok, adds value
+#' replace(d, "a", 2)              # old element ("a") is not in Dict}
 NULL
 

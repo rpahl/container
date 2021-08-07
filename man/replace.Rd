@@ -7,8 +7,6 @@
 \alias{replace_.Container}
 \alias{replace.Dict}
 \alias{replace_.Dict}
-\alias{replace.dict.table}
-\alias{replace_.dict.table}
 \title{Strict element replacement}
 \usage{
 replace(.x, ...)
@@ -19,13 +17,9 @@ replace_(.x, ...)
 
 \method{replace_}{Container}(.x, old, new, add = FALSE)
 
-\method{replace}{Dict}(.x, key, value, add = FALSE)
+\method{replace}{Dict}(.x, old, new)
 
-\method{replace_}{Dict}(.x, key, value, add = FALSE)
-
-\method{replace}{dict.table}(.x, key, value, add = FALSE)
-
-\method{replace_}{dict.table}(.x, key, value, add = FALSE)
+\method{replace_}{Dict}(.x, old, new)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
@@ -36,20 +30,16 @@ replace_(.x, ...)
 
 \item{new}{the new element replacing the old one.}
 
-\item{add}{\code{logical} if \code{FALSE} (default) and element (or key) was not found,
+\item{add}{\code{logical} if \code{FALSE} (default) and element was not found,
 an error is given. In contrast, if set to \code{TRUE} the new element is added
 regardless of whether it is used as a replacement for an existing element or
 just added as a new element.}
-
-\item{key}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Container}, an object of class \code{Container} (or one of the
 respective derived classes).
 
 For \code{Dict} an object of class \code{Dict}.
-
-For \code{dict.table} an object of class \code{dict.table}.
 }
 \description{
 Try to find and replace elements and signal an error if not
@@ -73,10 +63,4 @@ replace(d, "a", 1:5)
 \dontrun{
 replace(d, "b", 2)              # key 'b' not in Dict}
 replace(d, "b", 2, add = TRUE)  # ok, adds value
-
-dit = dict.table(a = 1:3)
-replace(dit, "a", 3:1)
-\dontrun{
-replace(dit, "b", 4:6)               # column 'b' not in dict.table}
-replace(dit, "b", 4:6, add = TRUE)   # ok, adds value
 }
