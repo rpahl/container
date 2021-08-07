@@ -450,8 +450,10 @@ Container <- R6::R6Class("Container",
 
         .replace_value_at = function(pos, value, name) {
 
-            value = if (length(value)) value else list(value)
-            private$elems = base::replace(private$elems, pos, value)
+            if (length(value))
+                private$elems[[pos]] = value
+            else
+                private$elems[pos] = list(value)
         },
 
         .set_compare_fun = function(x) {

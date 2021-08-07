@@ -59,6 +59,12 @@ co <- Container$new()
 co$add(1, "a")$add(2)$add(3, "b")
 ee(co$values(), list(a = 1, 2, b = 3))
 
+# vectors are added correctly
+co <- Container$new()
+ee(co$add(1:5), Container$new(1:5))
+ee(co$add(NULL), Container$new(1:5, NULL))
+ee(co$add(list(1, 2)), Container$new(1:5, NULL, list(1, 2)))
+
 # --
 # at
 # --
@@ -475,6 +481,11 @@ ee(co$replace_at(10, NULL, add = TRUE), Container$new(9, b = 7, NULL))
 co = Container$new(1, b = 2, 3)
 ee(co$replace_at("b", NULL), Container$new(1, b = NULL, 3))
 ee(co$replace_at(3, numeric(0)), Container$new(1, b = NULL, numeric(0)))
+
+# Replace can replace by vectors
+co = Container$new(1, b = 2, 3)
+ee(co$replace_at(1, 1:5), Container$new(1:5, b = 2, 3))
+ee(co$replace_at("b", list(2, 3, 4)), Container$new(1:5, b = list(2, 3, 4), 3))
 
 # ------
 # update
