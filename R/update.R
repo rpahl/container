@@ -1,14 +1,13 @@
 #' Update elements
 #'
 #' @description Takes an object and updates it with values from another object
-#' by replacing the values at existing keys and adding values for new keys of
-#' the other object. For example, this can be used to update some parameter
-#' lists.
+#' by replacing the values at existing names and adding values at new names of
+#' the other object. A common use case is to update parameter lists.
 #' @param x any `R` object
 #' @param other any object of the same type as `x`
 #' @param ... additional arguments to be passed to or from methods.
-#' @details Note that `update` uses copy semantics while `update_` works by
-#' reference, that is, updates in place.
+#' @details `update` uses copy semantics while `update_` works by reference,
+#' that is, updates in place.
 #' @export
 update <- function(x, other, ...)
 {
@@ -29,7 +28,8 @@ update_ <- function(x, other, ...)
 }
 
 #' @rdname update
-#' @return For `Dict`, an updated object of class `Dict`.
+#' @return For `Container`, an object of class `Container` (or one of the
+#' respective derived classes).
 #' @examples
 #'
 #' d1 = dict(a = 1, b = 2)
@@ -37,14 +37,14 @@ update_ <- function(x, other, ...)
 #' update(d1, d2)  # {a = 1, b = 0, c = 3}
 #' update(d2, d1)  # {a = 1, b = 2, c = 3}
 #' @export
-update.Dict <- function(x, other)
+update.Container <- function(x, other)
 {
-    update_.Dict(x$clone(deep = TRUE), other$clone(deep = TRUE))
+    update_.Container(x$clone(deep = TRUE), other$clone(deep = TRUE))
 }
 
 #' @rdname update
 #' @export
-update_.Dict <- function(x, other)
+update_.Container <- function(x, other)
 {
     x$update(other)
 }
@@ -90,7 +90,7 @@ update_.dict.table <- function(x, other)
         stop("arg must be a ", data.class(x))
 
     for (key in colnames(other))
-        replace_(x, key, value = other[[key]], add = TRUE)
+        replace_at_(x, key, other[[key]], .add = TRUE)
 
     x
 }
@@ -114,8 +114,6 @@ NULL
 
 #' @rdname update
 #' @return For `list`, an updated object of class `list`.
-#' @details When applied to `list`s, `update` adds elements of `other` for names
-#' not yet in the list and replaces the values of existing names.
 #' @examples
 #'
 #' l1 = list(1, b = 2)

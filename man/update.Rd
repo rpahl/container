@@ -3,8 +3,8 @@
 \name{update}
 \alias{update}
 \alias{update_}
-\alias{update.Dict}
-\alias{update_.Dict}
+\alias{update.Container}
+\alias{update_.Container}
 \alias{update.dict.table}
 \alias{update_.dict.table}
 \alias{update.list}
@@ -14,9 +14,9 @@ update(x, other, ...)
 
 update_(x, other, ...)
 
-\method{update}{Dict}(x, other)
+\method{update}{Container}(x, other)
 
-\method{update_}{Dict}(x, other)
+\method{update_}{Container}(x, other)
 
 \method{update}{dict.table}(x, other)
 
@@ -32,7 +32,8 @@ update_(x, other, ...)
 \item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
-For \code{Dict}, an updated object of class \code{Dict}.
+For \code{Container}, an object of class \code{Container} (or one of the
+respective derived classes).
 
 For \code{dict.table} an object of class \code{dict.table}.
 
@@ -40,16 +41,12 @@ For \code{list}, an updated object of class \code{list}.
 }
 \description{
 Takes an object and updates it with values from another object
-by replacing the values at existing keys and adding values for new keys of
-the other object. For example, this can be used to update some parameter
-lists.
+by replacing the values at existing names and adding values at new names of
+the other object. A common use case is to update parameter lists.
 }
 \details{
-Note that \code{update} uses copy semantics while \code{update_} works by
-reference, that is, updates in place.
-
-When applied to \code{list}s, \code{update} adds elements of \code{other} for names
-not yet in the list and replaces the values of existing names.
+\code{update} uses copy semantics while \code{update_} works by reference,
+that is, updates in place.
 }
 \examples{
 
