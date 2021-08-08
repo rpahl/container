@@ -34,7 +34,8 @@ For \code{dict.table}, an object of class \code{dict.table}.
 }
 \description{
 Search and remove values at given indices, which can be numeric or character
-or both. If any given index is invalid, an error is signaled.
+or both. If any given index is invalid, an error is signaled. Indices can be
+numbers or names or both.
 }
 \examples{
 

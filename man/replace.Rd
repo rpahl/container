@@ -58,9 +58,9 @@ replace(co, "z", 0)              # old element ("z") is not in Container}
 replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 
 
-d = dict(a = 1)
-replace(d, "a", 1:5)
+d = dict(a = 1, b = "z")
+replace(d, 1, 1:5)
+replace(d, "z", "a")
 \dontrun{
-replace(d, "b", 2)              # key 'b' not in Dict}
-replace(d, "b", 2, add = TRUE)  # ok, adds value
+replace(d, "a", 2)              # old element ("a") is not in Dict}
 }

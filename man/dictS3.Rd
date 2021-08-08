@@ -32,8 +32,8 @@ add_(.x, ...)
 rename(.x, old, new)
 rename_(.x, old, new)
 
-replace(.x, key, value, add = FALSE)
-replace_(.x, key, value, add = FALSE)
+replace(.x, old, new)
+replace_(.x, old, new)
 
 update(x, other)
 update_(x, other)
@@ -46,12 +46,9 @@ or of class \code{Dict} for the \code{S3} methods.}
 
 \item{key}{\code{character} name of key.}
 
-\item{value}{\code{any} R object}
+\item{old}{old element to be found and replaced.}
 
-\item{add}{\code{logical} if \code{FALSE} (default) and \code{key} was not found,
-an error is given. In contrast, if set to \code{TRUE} the \code{value} is added
-regardless of whether it is used as a replacement for an existing or
-added as a new value, respectively.}
+\item{new}{the new element replacing the old one.}
 
 \item{other}{another \code{Dict} object}
 }
@@ -119,9 +116,9 @@ from \code{old} to \code{new}, respectively, by copy and in place (i.e. by refer
 }
 
 \itemize{
-\item \code{replace(.x, key, value, add = FALSE)} and
-\code{replace_(.x, key, value, add = FALSE)} replace value at \code{key}.
-If \code{key} does not exist, an error is given unless \code{add} was set to \code{TRUE}.
+\item \code{replace(.x, old, new)} and \code{replace_(.x, old)} try to find element \code{old}
+and replace it with element \code{new}. If \code{old} does not exist, an error is
+raised.
 }
 
 \itemize{
@@ -180,11 +177,11 @@ add(d, a = 7:9)  # key 'a' already in Dict}
 d = dict(a = 1, b = 2, c = 3)
 (rename(d, c("a", "b"), c("a1", "y")))
 
-d = dict(a = 1)
-replace(d, "a", 1:5)
+d = dict(a = 1, b = "z")
+replace(d, 1, 1:5)
+replace(d, "z", "a")
 \dontrun{
-replace(d, "b", 2)              # key 'b' not in Dict}
-replace(d, "b", 2, add = TRUE)  # ok, adds value
+replace(d, "a", 2)              # old element ("a") is not in Dict}
 
 d1 = dict(a = 1, b = 2)
 d2 = dict(       b = 0, c = 3)

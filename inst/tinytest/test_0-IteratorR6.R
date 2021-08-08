@@ -109,7 +109,7 @@ d = dict(a = 1, b = 2)
 it = d$iter()
 it$next_iter()
 expect_equal(it$get_value(), list(a = 1))
-d$discard("a")
+d$discard_at("a")
 expect_equal(it$get_value(), list(b = 2))
 
 # Iterator works by reference on Set object

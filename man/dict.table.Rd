@@ -72,8 +72,8 @@ peek_at2(x, index, default)
 rename(.x, old, new, ...)
 rename_(.x, old, new, ...)
 
-replace_at(.x, key, value, add = FALSE)
-replace_at_(.x, key, value, add = FALSE)
+replace_at(.x, ..., .add = FALSE)
+replace_at_(.x, ..., .add = FALSE)
 
 update(x, other)
 update_(x, other)
@@ -166,9 +166,9 @@ from \code{old} to \code{new}, respectively, by copy and in place (i.e. by refer
 }
 
 \itemize{
-\item \code{replace_at(.x, key, value, add = FALSE)} and
-\code{replace_at_(.x, key, value, add = FALSE)} replace_at values at column \code{key}.
-If \code{key} does not exist, an error is given unless \code{add} was set to \code{TRUE}.
+\item \code{replace_at(.x, .., .add = FALSE)} and \code{replace_at_(.x, ..., .add = FALSE)}
+replace values at given indices. If a given index is invalid, an error is
+signaled unless \code{.add} was set to \code{TRUE}.
 }
 
 \itemize{

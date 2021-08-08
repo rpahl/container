@@ -1,7 +1,8 @@
 #' Delete elements at index
 #'
 #' Search and remove values at given indices, which can be numeric or character
-#' or both. If any given index is invalid, an error is signaled.
+#' or both. If any given index is invalid, an error is signaled. Indices can be
+#' numbers or names or both.
 #' @param .x any `R` object.
 #' @param ... indices at which values are to be deleted.
 #' @export
@@ -54,7 +55,7 @@ delete_at.Container <- function(.x, ...)
     (delete_at_(.x$clone(deep = TRUE), ...))
 }
 
-#' @name delete.Container
+#' @name delete_at.Container
 #' @rdname ContainerS3
 #' @usage
 #' delete_at(.x, ...)

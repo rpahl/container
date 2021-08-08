@@ -27,6 +27,7 @@
 \alias{clone.Container}
 \alias{count.Container}
 \alias{delete.Container}
+\alias{delete_at.Container}
 \alias{discard.Container}
 \alias{has.Container}
 \alias{has_name.Container}
@@ -34,6 +35,7 @@
 \alias{peek_at.Container}
 \alias{peek_at2.Container}
 \alias{replace.Container}
+\alias{replace_at.Container}
 \title{Container methods}
 \usage{
 container(...)
@@ -93,8 +95,8 @@ peek_at2(x, index, default)
 replace(.x, old, new, add = FALSE)
 replace_(.x, old, new, add = FALSE)
 
-replace_at(.x, old, new, add = FALSE)
-replace_at_(.x, old, new, add = FALSE)
+replace_at(.x, ..., .add = FALSE)
+replace_at_(.x, ..., .add = FALSE)
 }
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the \code{Container}.}
@@ -116,6 +118,12 @@ or of class \code{Container} for the \code{S3} methods.}
 an error is given. In contrast, if set to \code{TRUE} the new element is added
 regardless of whether it is used as a replacement for an existing or
 just as a new element, respectively.}
+
+\item{.add}{\code{logical} if \code{FALSE} (default) and index is invalid, an error is
+given. If set to \code{TRUE} the new element is added at the given index
+regardless whether the index existed or not. Indices can consist of numbers
+or names or both, except when adding values at nex indices, which is only
+allowed for names.}
 }
 \description{
 A \code{\link[=Container]{Container()}} is a data structure with typical member
@@ -268,10 +276,9 @@ unless \code{add} was set to \code{TRUE}.
 }
 
 \itemize{
-\item \code{replace_at(.x, old, new, add = FALSE)} and
-\code{replace_at_(.x, old, new, add = FALSE)} try to find element \code{old} and
-replace_at it with element \code{new}. If \code{old} does not exist, an error is raised,
-unless \code{add} was set to \code{TRUE}.
+\item \code{replace_at(.x, .., .add = FALSE)} and \code{replace_at_(.x, ..., .add = FALSE)}
+replace values at given indices. If a given index is invalid, an error is
+signaled unless \code{.add} was set to \code{TRUE}.
 }
 }
 \examples{
@@ -410,12 +417,14 @@ replace(co, "x", 0)
 replace(co, "z", 0)              # old element ("z") is not in Container}
 replace(co, "z", 0, add = TRUE)  # ok, adds the element
 
-co = container("x", 9)
-replace_at(co, 9, 0)
-replace_at(co, "x", 0)
+co = container(a = 0, b = "z")
+replace_at(co, a = 1)
+replace_at(co, 1, 1)                 # same
+replace_at(co, "a", 1)               # same
+
 \dontrun{
-replace_at(co, "z", 0)              # old element ("z") is not in Container}
-replace_at(co, "z", 0, add = TRUE)  # ok, adds the element
+replace_at(co, x = 1)                # names(s) not found: 'x'}
+replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
 }
 \seealso{
 For the \code{Container} class documentation see \code{\link[=Container]{Container()}}. To
