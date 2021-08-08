@@ -161,8 +161,9 @@ done silently.
 }
 
 \itemize{
-\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more keys
-from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
+\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more
+columns from \code{old} to \code{new}, respectively, by copy and in place (i.e. by
+reference).
 }
 
 \itemize{
@@ -325,7 +326,8 @@ peek_at2(dit, 3, default = 9)
 peek_at2(dit, "x")
 peek_at2(dit, "x", default = 0)
 dit = dict.table(a = 1, b = 2, c = 3)
-(rename(dit, c("a", "b"), c("a1", "y")))
+rename(dit, c("a", "b"), c("a1", "y"))
+print(dit)
 ref_rename(dit, c("a", "b"), c("a1", "y"))
 print(dit)
 

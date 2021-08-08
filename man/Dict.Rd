@@ -28,7 +28,6 @@ elements are sorted lexicographically by their keys.
 \item \href{#method-get}{\code{Dict$get()}}
 \item \href{#method-keys}{\code{Dict$keys()}}
 \item \href{#method-remove}{\code{Dict$remove()}}
-\item \href{#method-rename}{\code{Dict$rename()}}
 \item \href{#method-replace}{\code{Dict$replace()}}
 \item \href{#method-set}{\code{Dict$set()}}
 \item \href{#method-sort}{\code{Dict$sort()}}
@@ -58,6 +57,7 @@ elements are sorted lexicographically by their keys.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="rename">}\href{../../container/html/Container.html#method-rename}{\code{container::Container$rename()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at">}\href{../../container/html/Container.html#method-replace_at}{\code{container::Container$replace_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
@@ -179,30 +179,6 @@ This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 }
 \subsection{Returns}{
 If \code{key} in \code{Dict}, remove it, otherwise raise an error.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-rename"></a>}}
-\if{latex}{\out{\hypertarget{method-rename}{}}}
-\subsection{Method \code{rename()}}{
-Rename a \code{key} in the \code{Dict}. An error is signaled, if
-either the \code{old} key is not in the \code{Dict} or the \code{new} key results
-in a name-clash with an existing key.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Dict$rename(old, new)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{old}}{\code{character} name of key to be renamed.}
-
-\item{\code{new}}{\code{character} new key name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}

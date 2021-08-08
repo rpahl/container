@@ -85,28 +85,6 @@ Dict <- R6::R6Class("Dict",
             self$delete(key)
         },
 
-        #' @description Rename a `key` in the `Dict`. An error is signaled, if
-        #' either the `old` key is not in the `Dict` or the `new` key results
-        #' in a name-clash with an existing key.
-        #' @param old `character` name of key to be renamed.
-        #' @param new `character` new key name.
-        #' @return the `Dict` object
-        rename = function(old, new) {
-            .rename_check_names(self, old, new)
-
-            if (length(old) > 1) {
-                mapply(self$rename, old, new)
-                return(self)
-            }
-
-            if (identical(old, new))
-                return(self)
-
-            self$add(name = new, value = self$at2(old))
-            self$delete_at(old)
-            self
-        },
-
         #' @description Replace one element by another element.
         #' Search for occurence of `old` and, if found, replace it by `new`.
         #' If `old` does not exist, an error is signaled.
@@ -179,6 +157,11 @@ Dict <- R6::R6Class("Dict",
             l = as.list.environment(value, all.names = TRUE)
             list2env(lapply(l, clone_deep_if_container),
                      parent = emptyenv())
+        },
+
+        .rename = function(old, new) {
+            self$add(name = new, value = self$at2(old))
+            self$delete_at(old)
         },
 
         .replace_value_at = function(pos, value, name) {

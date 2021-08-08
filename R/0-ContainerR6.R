@@ -298,6 +298,30 @@ Container <- R6::R6Class("Container",
             invisible(self)
         },
 
+        #' @description Rename a `key` in the `Container`. An error is signaled,
+        #' if either the `old` key is not in the `Container` or the `new` key results
+        #' in a name-clash with an existing key.
+        #' @param old `character` name of key to be renamed.
+        #' @param new `character` new key name.
+        #' @return the `Container` object
+        rename = function(old, new) {
+            .rename_check_names(self, old, new)
+
+            if (length(old) > 1) {
+                mapply(self$rename, old, new)
+                return(self)
+            }
+
+            if (identical(old, new))
+                return(self)
+
+            if (new %in% names(self))
+                stop("name '", new, "' already in ", data.class(self))
+
+            private$.rename(old, new)
+            self
+        },
+
         #' @description Replace one element by another element.
         #' Search for occurence of `old` and, if found, replace it by `new`.
         #' If `old` does not exist, an error is signaled, unless `add` was
@@ -446,6 +470,11 @@ Container <- R6::R6Class("Container",
                 return(index)
 
             match(index, names(self), nomatch = 0)
+        },
+
+        .rename = function(old, new) {
+            pos = match(old, names(self))
+            names(private$elems)[pos] = new
         },
 
         .replace_value_at = function(pos, value, name) {

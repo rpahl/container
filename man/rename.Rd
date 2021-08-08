@@ -3,8 +3,8 @@
 \name{rename}
 \alias{rename}
 \alias{ref_rename}
-\alias{rename.Dict}
-\alias{ref_rename.Dict}
+\alias{rename.Container}
+\alias{ref_rename.Container}
 \alias{rename.dict.table}
 \alias{ref_rename.dict.table}
 \title{Rename elements safely}
@@ -13,9 +13,9 @@ rename(.x, old, new, ...)
 
 ref_rename(.x, old, new, ...)
 
-\method{rename}{Dict}(.x, old, new)
+\method{rename}{Container}(.x, old, new)
 
-\method{ref_rename}{Dict}(.x, old, new)
+\method{ref_rename}{Container}(.x, old, new)
 
 \method{rename}{dict.table}(.x, old, new, ...)
 
@@ -34,8 +34,8 @@ ref_rename(.x, old, new, ...)
 For standard \code{R} vectors renames \code{old} to \code{new} and returns the
 renamed vector.
 
-For \code{Dict} renames key \code{old} to \code{new} in place (i.e. by reference)
-and invisibly returns the \code{\link[=Dict]{Dict()}} object.
+For \code{Container}, an object of class \code{Container} (or one of the
+respective derived classes).
 
 For \code{dict.table} renames key \code{old} to \code{new} in place (i.e. by
 reference) and invisibly returns the \code{\link[=dict.table]{dict.table()}} object.
@@ -49,17 +49,22 @@ already existing name, an error is signaled.
 The passed old and new names can be vectors but always must have
 the same length and must be unique to prevent double-renaming.
 
-\code{rename} uses copy semantics while \code{ref_rename} works by reference.
+\code{rename} uses copy semantics while \code{ref_rename} works by reference,
+that is, it renames elements in place.
 }
 \examples{
 
-# Dict
-d = dict(a = 1, b = 2, c = 3)
-(rename(d, c("a", "b"), c("a1", "y")))
+# Container
+co = container(a = 1, b = 2, 3)
+rename(co, c("a", "b"), c("a1", "y"))
+print(co)
+ref_rename(co, c("a", "b"), c("a1", "y"))
+print(co)
 
 # dict.table
 dit = dict.table(a = 1, b = 2, c = 3)
-(rename(dit, c("a", "b"), c("a1", "y")))
+rename(dit, c("a", "b"), c("a1", "y"))
+print(dit)
 ref_rename(dit, c("a", "b"), c("a1", "y"))
 print(dit)
 }

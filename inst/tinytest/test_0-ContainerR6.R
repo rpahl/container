@@ -456,6 +456,38 @@ ee(co$replace(co2, 2), Container$new(1, 2, co1, co2))
 co = Container$new(a = 1, b = 2)
 ee(co$replace(1, 0), Container$new(a = 0, b = 2))
 
+# ------
+# rename
+# ------
+x <- Container$new(A = 1, B = 2, 3, D = 4)
+expect_error(x$rename(1, "C"), "'old' must be character")
+expect_error(x$rename("A", 1), "'new' must be character")
+expect_error(x$rename("A", c("C", "D")),
+             "'old' and 'new' names must be of the same length")
+expect_error(x$rename("A", "B"), "name 'B' already in Container")
+expect_error(x$rename("Z", "B"), "Items of 'old' not found in names: Z")
+
+vals = as.numeric(x$values())
+x$rename("A", "a")
+expect_true(x$has_name("a"))
+expect_false(x$has_name("A"))
+
+# Verify that values did not change
+values_did_not_change = all.equal(vals, as.numeric(x$values()))
+expect_true(values_did_not_change)
+
+# Several keys at once
+x$rename(c("a", "B"), c("x", "y"))
+ee(names(x), c("x", "y", "", "D"))
+
+x$rename("D", "4")
+ee(names(x), c("x", "y", "", "4"))
+
+# Renaming same key multiple times is possible
+expect_error(d$rename(c("x", "x2"), c("x2", "x3")),
+             "Items of 'old' not found in names: x2")
+
+
 # ----------
 # replace_at
 # ----------

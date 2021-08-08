@@ -174,8 +174,11 @@ add(d, b = 2, co = container(1:3))
 
 \dontrun{
 add(d, a = 7:9)  # key 'a' already in Dict}
-d = dict(a = 1, b = 2, c = 3)
-(rename(d, c("a", "b"), c("a1", "y")))
+co = container(a = 1, b = 2, 3)
+rename(co, c("a", "b"), c("a1", "y"))
+print(co)
+ref_rename(co, c("a", "b"), c("a1", "y"))
+print(co)
 
 d = dict(a = 1, b = "z")
 replace(d, 1, 1:5)

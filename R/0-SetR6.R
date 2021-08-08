@@ -145,6 +145,11 @@ Set <- R6::R6Class("Set",
             paste(length(x), lab, serialize(x, NULL), collapse = "")
         },
 
+        .rename = function(old, new) {
+            pos = match(old, names(self))
+            names(private$elems[[pos]]) = new
+        },
+
         .replace_value_at = function(pos, value, name) {
             self$discard_at(pos)
             self$add(value, name)

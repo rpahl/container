@@ -326,6 +326,27 @@ ee(s$replace(S1, 1), Set$new(1, S2, Co))
 ee(s$replace(S2, 2), Set$new(1, 2, Co))
 ee(s$replace(Co, 0), Set$new(0, 1, 2))
 
+# ------
+# rename
+# ------
+x <- Set$new(A = 1, B = 2, 3, D = 4)
+
+vals = as.numeric(x$values())
+x$rename("A", "a")
+expect_true(x$has_name("a"))
+expect_false(x$has_name("A"))
+
+# Verify that values did not change
+values_did_not_change = all.equal(vals, as.numeric(x$values()))
+expect_true(values_did_not_change)
+
+# Several keys at once
+x$rename(c("a", "B"), c("x", "y"))
+ee(names(x), c("x", "y", "", "D"))
+
+x$rename("D", "4")
+ee(names(x), c("x", "y", "", "4"))
+
 
 # ----------
 # replace_at

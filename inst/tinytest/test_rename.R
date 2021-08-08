@@ -1,35 +1,35 @@
 ee = expect_equal
 
-# -----------
-# rename.Dict
-# -----------
-d <- dict(A = 1, B = 2)
-expect_error(rename(d, 1, "C"), "'old' must be character")
-expect_error(rename(d, "A", 1), "'new' must be character")
-expect_error(rename(d, "A", c("C", "D")), "must be of the same length")
-expect_error(rename(d, "A", "B"), "name 'B' already in Dict")
-expect_error(rename(d, "Z", "B"), "Items of 'old' not found in names: Z")
-expect_error(rename(d, c("A", "A"), c("a", "a")),
+# ----------------
+# rename.Container
+# ----------------
+x <- container(A = 1, B = 2)
+expect_error(rename(x, 1, "C"), "'old' must be character")
+expect_error(rename(x, "A", 1), "'new' must be character")
+expect_error(rename(x, "A", c("C", "D")), "must be of the same length")
+expect_error(rename(x, "A", "B"), "name 'B' already in Container")
+expect_error(rename(x, "Z", "B"), "Items of 'old' not found in names: Z")
+expect_error(rename(x, c("A", "A"), c("a", "a")),
              "'old' has duplicated names: A")
 
-vals = as.numeric(as.list(d))
-ee(rename(d, "A", "a"), dict(a = 1, B = 2))
-ee(d, dict(A = 1, B = 2))   # names were changed by value
-ref_rename(d, "A", "a")
-ee(d, dict(a = 1, B = 2))   # now names were changed by reference
+vals = as.numeric(as.list(x))
+ee(rename(x, "A", "a"), container(a = 1, B = 2))
+ee(x, container(A = 1, B = 2))   # names were changed by value
+ref_rename(x, "A", "a")
+ee(x, container(a = 1, B = 2))   # now names were changed by reference
 
-expect_true(has_name(d, "a"))
-expect_false(has_name(d, "A"))
+expect_true(has_name(x, "a"))
+expect_false(has_name(x, "A"))
 
 # Verify that values did not change
-expect_equal(vals, as.numeric(as.list(d)))
+expect_equal(vals, as.numeric(as.list(x)))
 
 # Several keys at once
-ee(rename(d, c("a", "B"), c("x", "y")),dict(x = 1, y = 2))
+ee(rename(x, c("a", "B"), c("x", "y")),container(x = 1, y = 2))
 
 # Renaming same key multiple times is not possible
-d = dict(x = 1, y = 2)
-expect_error(rename(d, c("x", "x2"), c("x2", "x3")),
+x = container(x = 1, y = 2)
+expect_error(rename(x, c("x", "x2"), c("x2", "x3")),
              "Items of 'old' not found in names: x2")
 
 # -----------------

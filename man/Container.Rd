@@ -42,6 +42,7 @@ Roman Pahl
 \item \href{#method-peek_at2}{\code{Container$peek_at2()}}
 \item \href{#method-pop}{\code{Container$pop()}}
 \item \href{#method-print}{\code{Container$print()}}
+\item \href{#method-rename}{\code{Container$rename()}}
 \item \href{#method-replace}{\code{Container$replace()}}
 \item \href{#method-replace_at}{\code{Container$replace_at()}}
 \item \href{#method-remove}{\code{Container$remove()}}
@@ -447,6 +448,30 @@ Print object representation
 }
 \subsection{Returns}{
 invisibly returns the \code{Container} object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-rename"></a>}}
+\if{latex}{\out{\hypertarget{method-rename}{}}}
+\subsection{Method \code{rename()}}{
+Rename a \code{key} in the \code{Container}. An error is signaled,
+if either the \code{old} key is not in the \code{Container} or the \code{new} key results
+in a name-clash with an existing key.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$rename(old, new)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{old}}{\code{character} name of key to be renamed.}
+
+\item{\code{new}}{\code{character} new key name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
