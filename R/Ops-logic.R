@@ -26,7 +26,7 @@ NULL
     d2 = as.dict(y)
     key_diff <- setdiff(d1$keys(), d2$keys())
     for (key in key_diff) {
-        d1$delete(key)
+        d1$delete_at(key)
     }
     d1
 }

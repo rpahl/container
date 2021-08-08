@@ -125,7 +125,7 @@ NULL
 #' peek_at2(dit, "x", default = 0)
 peek_at2.dict.table <- function(x, index, default = NULL)
 {
-    if (has(x, index))
+    if (has_index(x, index))
         return(.subset2(x, index))
 
     if (length(default) && length(default) != nrow(x)) {

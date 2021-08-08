@@ -59,6 +59,11 @@ assert_index = function(x, index)
     isTRUE(index >= 1) && isTRUE(index <= length(x))
 }
 
+.has_index.integer = function(x, index)
+{
+    isTRUE(index >= 1) && isTRUE(index <= length(x))
+}
+
 setGeneric(".has_index", function(x, index) standardGeneric(".has_index"))
 
 setMethod(".has_index",
@@ -66,6 +71,9 @@ setMethod(".has_index",
 
 setMethod(".has_index",
           signature("ANY", "numeric"), .has_index.numeric)
+
+setMethod(".has_index",
+          signature("ANY", "integer"), .has_index.integer)
 
 has_index = function(x, index)
 {

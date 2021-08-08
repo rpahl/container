@@ -123,7 +123,7 @@ NULL
     d2 = as.dict(y)
 
     for (key in d2$keys()) {
-        d1$discard(key)
+        d1$discard_at(key)
     }
     d1
 }

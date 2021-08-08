@@ -104,16 +104,4 @@ expect_equal(x - as.list(y), dict(a = 1))
 expect_equal(y - x, dict(c = 1))
 expect_equal(y - as.list(x), dict(c = 1))
 
-# x & y returns a copy of the first dict with all keys being removed that are
-# not common in both x and y
-x <- dict(a = 1, b = 2)
-y <- dict(       b = 9, c = 1)
-expect_equal(x & x, x)
-expect_equal(x & dict(), dict())
-expect_equal(dict() & x, dict())
-expect_equal(x & list(), dict())
-expect_equal(list() & x, dict())
-expect_equal(x & y, dict(b = 2))
-expect_equal(y & x, dict(b = 9))
-
 

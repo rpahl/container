@@ -26,6 +26,12 @@ ee(peek_at(co, .default = 1), co)
 # peek_at.Dict
 # ------------
 d = dict(a = 1, b = 1:3)
+
+expect_error(peek_at(d, "a", "a"), "duplicated keys")
+expect_error(peek_at(d, 1, 1), "duplicated keys")
+ee(peek_at(d), d)
+ee(peek_at(d, NULL), dict())
+
 ee(peek_at(d, "b"), dict(b = 1:3))
 ee(peek_at(d, "x"), dict())
 ee(peek_at(d, 1), dict(a = 1))

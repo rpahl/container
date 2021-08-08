@@ -485,7 +485,7 @@ ee(names(x), c("x", "y", "", "4"))
 
 # Renaming same key multiple times is possible
 expect_error(d$rename(c("x", "x2"), c("x2", "x3")),
-             "Items of 'old' not found in names: x2")
+             "Items of 'old' not found in names: x, x2")
 
 
 # ----------

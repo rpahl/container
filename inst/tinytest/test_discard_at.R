@@ -62,5 +62,5 @@ expect_true(d_was_not_altered)
 
 ee(ref_discard_at(d, "b"), d2[, c(1, 3)])
 expect_silent(ref_discard_at(d, "a"))
-expect_false(ee(d, d2))
+expect_false(ncol(d) == ncol(d2))
 

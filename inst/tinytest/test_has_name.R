@@ -20,7 +20,7 @@ expect_true(has_name(dit, "a"))
 expect_false(has_name(dit, "x"))
 
 EE = expect_error
-EE(has_name(dit, NULL), "expected a character string, but got 'NULL'")
+EE(has_name(dit, NULL), "name must be a character string, but got 'NULL'")
 EE(has_name(dit, c("a", "b")), "name must be of length 1")
 EE(has_name(dit, as.character(NA)), "undefined name")
 EE(has_name(dit, ""), "name must consist of at least one character")
