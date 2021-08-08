@@ -22,7 +22,7 @@ ee(discard_at(co, "x", "a"), discard_at(co, "a"))
 ee(discard_at(co, "a", 5), discard_at(co, "a"))
 ee(discard_at(co, 6, "a", 5), discard_at(co, "a"))
 
-ee(discard_at_(co, 1:4), container())
+ee(ref_discard_at(co, 1:4), container())
 ee(co, container())
 
 # discard_at.Dict
@@ -35,7 +35,7 @@ expect_true(original_was_not_touched)
 # args as character vector
 expect_true(is_empty(discard_at(d, names(d))))
 
-ee(delete_at_(d, "a", "f", "b"), dict())
+ee(ref_discard_at(d, "a", "f", "b"), dict())
 discard_was_done_on_original = ee(d, dict())
 expect_true(discard_was_done_on_original)
 
@@ -56,11 +56,11 @@ expect_true(is_empty(discard_at(d, colnames(d))))
 expect_true(is_empty(discard_at(d, rev(colnames(d)))))
 ee(d, d2)
 
-expect_silent(discard_at_(d, "x", 4, 11))
+expect_silent(ref_discard_at(d, "x", 4, 11))
 d_was_not_altered = ee(d, d2)
 expect_true(d_was_not_altered)
 
-ee(discard_at_(d, "b"), d2[, c(1, 3)])
-expect_silent(discard_at_(d, "a"))
+ee(ref_discard_at(d, "b"), d2[, c(1, 3)])
+expect_silent(ref_discard_at(d, "a"))
 expect_false(ee(d, d2))
 

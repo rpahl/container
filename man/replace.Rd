@@ -2,24 +2,24 @@
 % Please edit documentation in R/replace.R
 \name{replace}
 \alias{replace}
-\alias{replace_}
+\alias{ref_replace}
 \alias{replace.Container}
-\alias{replace_.Container}
+\alias{ref_replace.Container}
 \alias{replace.Dict}
-\alias{replace_.Dict}
+\alias{ref_replace.Dict}
 \title{Strict element replacement}
 \usage{
 replace(.x, ...)
 
-replace_(.x, ...)
+ref_replace(.x, ...)
 
 \method{replace}{Container}(.x, old, new, add = FALSE)
 
-\method{replace_}{Container}(.x, old, new, add = FALSE)
+\method{ref_replace}{Container}(.x, old, new, add = FALSE)
 
 \method{replace}{Dict}(.x, old, new)
 
-\method{replace_}{Dict}(.x, old, new)
+\method{ref_replace}{Dict}(.x, old, new)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
@@ -46,7 +46,7 @@ Try to find and replace elements and signal an error if not
 found, unless it is stated to explicitly add the element (see option \code{add}).
 }
 \details{
-\code{replace} uses copy semantics while \code{replace_} works by reference.
+\code{replace} uses copy semantics while \code{ref_replace} works by reference.
 }
 \examples{
 

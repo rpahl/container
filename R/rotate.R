@@ -5,14 +5,14 @@
 #' @param x any `R` object.
 #' @param n `integer` number of steps to rotate
 #' @param ... additional arguments to be passed to or from methods.
-#' @details While `rotate` uses copy semantics, `rotate_` works by reference,
+#' @details While `rotate` uses copy semantics, `ref_rotate` works by reference,
 #' that is, rotates in place on the original object.
 #' @export
 rotate <- function(x, ...) UseMethod("rotate")
 
 #' @rdname rotate
 #' @export
-rotate_ <- function(x, ...) UseMethod("rotate_")
+ref_rotate <- function(x, ...) UseMethod("ref_rotate")
 
 
 #' @rdname rotate
@@ -24,7 +24,7 @@ rotate_ <- function(x, ...) UseMethod("rotate_")
 #' rotate(d, n = 2)
 rotate.Deque <- function(x, n = 1L)
 {
-    (rotate_(x$clone(deep = TRUE), n))
+    (ref_rotate(x$clone(deep = TRUE), n))
 }
 
 #' @name rotate.Deque
@@ -44,7 +44,7 @@ NULL
 
 #' @rdname rotate
 #' @export
-rotate_.Deque <- function(x, n = 1L)
+ref_rotate.Deque <- function(x, n = 1L)
 {
     invisible(x$rotate(n))
 }

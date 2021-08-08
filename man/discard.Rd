@@ -2,18 +2,18 @@
 % Please edit documentation in R/discard.R
 \name{discard}
 \alias{discard}
-\alias{discard_}
+\alias{ref_discard}
 \alias{discard.Container}
-\alias{discard_.Container}
+\alias{ref_discard.Container}
 \title{Discard elements}
 \usage{
 discard(.x, ...)
 
-discard_(.x, ...)
+ref_discard(.x, ...)
 
 \method{discard}{Container}(.x, ...)
 
-\method{discard_}{Container}(.x, ...)
+\method{ref_discard}{Container}(.x, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}

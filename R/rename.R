@@ -32,7 +32,7 @@
 #' @param ... additional arguments to be passed to or from methods.
 #' @return For standard `R` vectors renames `old` to `new` and returns the
 #' renamed vector.
-#' @details `rename` uses copy semantics while `rename_` works by reference.
+#' @details `rename` uses copy semantics while `ref_rename` works by reference.
 #' @export
 rename <- function(.x, old, new, ...)
 {
@@ -43,10 +43,10 @@ rename <- function(.x, old, new, ...)
 
 #' @rdname rename
 #' @export
-rename_ <- function(.x, old, new, ...)
+ref_rename <- function(.x, old, new, ...)
 {
     .rename_check_names(.x, old, new)
-    UseMethod("rename_")
+    UseMethod("ref_rename")
 }
 
 
@@ -61,16 +61,16 @@ rename_ <- function(.x, old, new, ...)
 #' @export
 rename.Dict <- function(.x, old, new)
 {
-    (rename_(.x$clone(deep = TRUE), old, new))
+    (ref_rename(.x$clone(deep = TRUE), old, new))
 }
 
 #' @name rename.Dict
 #' @rdname DictS3
 #' @usage
 #' rename(.x, old, new)
-#' rename_(.x, old, new)
+#' ref_rename(.x, old, new)
 #' @details
-#' * `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
+#' * `rename(.x, old, new)` and `ref_rename(.x, old, new)` rename one or more keys
 #' from `old` to `new`, respectively, by copy and in place (i.e. by reference).
 #' @examples
 #' d = dict(a = 1, b = 2, c = 3)
@@ -79,7 +79,7 @@ NULL
 
 #' @name rename
 #' @export
-rename_.Dict <- function(.x, old, new)
+ref_rename.Dict <- function(.x, old, new)
 {
     .x$rename(old, new)
 }
@@ -95,11 +95,11 @@ rename_.Dict <- function(.x, old, new)
 #' # dict.table
 #' dit = dict.table(a = 1, b = 2, c = 3)
 #' (rename(dit, c("a", "b"), c("a1", "y")))
-#' rename_(dit, c("a", "b"), c("a1", "y"))
+#' ref_rename(dit, c("a", "b"), c("a1", "y"))
 #' print(dit)
 rename.dict.table <- function(.x, old, new, ...)
 {
-    (rename_(copy(.x), old, new, ...))
+    (ref_rename(copy(.x), old, new, ...))
 }
 
 
@@ -108,20 +108,20 @@ rename.dict.table <- function(.x, old, new, ...)
 #' @rdname dict.table
 #' @usage
 #' rename(.x, old, new, ...)
-#' rename_(.x, old, new, ...)
+#' ref_rename(.x, old, new, ...)
 #' @details
-#' * `rename(.x, old, new)` and `rename_(.x, old, new)` rename one or more keys
+#' * `rename(.x, old, new)` and `ref_rename(.x, old, new)` rename one or more keys
 #' from `old` to `new`, respectively, by copy and in place (i.e. by reference).
 #' @examples
 #' dit = dict.table(a = 1, b = 2, c = 3)
 #' (rename(dit, c("a", "b"), c("a1", "y")))
-#' rename_(dit, c("a", "b"), c("a1", "y"))
+#' ref_rename(dit, c("a", "b"), c("a1", "y"))
 #' print(dit)
 NULL
 
 #' @name rename
 #' @export
-rename_.dict.table <- function(.x, old, new, ...)
+ref_rename.dict.table <- function(.x, old, new, ...)
 {
     data.table::setnames(.x, old, new, ...)
 }

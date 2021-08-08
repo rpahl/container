@@ -2,24 +2,24 @@
 % Please edit documentation in R/discard_at.R
 \name{discard_at}
 \alias{discard_at}
-\alias{discard_at_}
+\alias{ref_discard_at}
 \alias{discard_at.Container}
-\alias{discard_at_.Container}
+\alias{ref_discard_at.Container}
 \alias{discard_at.dict.table}
-\alias{discard_at_.dict.table}
+\alias{ref_discard_at.dict.table}
 \title{Discard elements at index}
 \usage{
 discard_at(.x, ...)
 
-discard_at_(.x, ...)
+ref_discard_at(.x, ...)
 
 \method{discard_at}{Container}(.x, ...)
 
-\method{discard_at_}{Container}(.x, ...)
+\method{ref_discard_at}{Container}(.x, ...)
 
 \method{discard_at}{dict.table}(.x, ...)
 
-\method{discard_at_}{dict.table}(.x, ...)
+\method{ref_discard_at}{dict.table}(.x, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}

@@ -9,7 +9,7 @@ discard <- function(.x, ...) UseMethod("discard")
 
 #' @rdname discard
 #' @export
-discard_ <- function(.x, ...) UseMethod("discard_")
+ref_discard <- function(.x, ...) UseMethod("ref_discard")
 
 
 #' @rdname discard
@@ -24,16 +24,16 @@ discard_ <- function(.x, ...) UseMethod("discard_")
 #' discard(s, "b")  # ignored
 #' @export
 discard.Container <- function(.x, ...) {
-    (discard_(.x$clone(deep = TRUE), ...))
+    (ref_discard(.x$clone(deep = TRUE), ...))
 }
 
 #' @name discard.Container
 #' @rdname ContainerS3
 #' @usage
 #' discard(.x, ...)
-#' discard_(.x, ...)
+#' ref_discard(.x, ...)
 #' @details
-#' * `discard(.x, ...)` and `discard_(.x, ...)` find and discard elements.
+#' * `discard(.x, ...)` and `ref_discard(.x, ...)` find and discard elements.
 #' Elements that don't exist, are ignored.
 #' @examples
 #'
@@ -46,7 +46,7 @@ NULL
 
 #' @rdname discard
 #' @export
-discard_.Container <- function(.x, ...)
+ref_discard.Container <- function(.x, ...)
 {
     elems = list(...)
     if (!length(elems))

@@ -9,14 +9,14 @@ NULL
 #' Add elements to container-like objects.
 #' @param .x an `R` object of the respective class.
 #' @param ... elements to be added.
-#' @details Both `add` and `addleft` use copy semantics while `add_` and
-#' `addleft_` work by reference.
+#' @details Both `add` and `addleft` use copy semantics while `ref_add` and
+#' `ref_addleft` work by reference.
 #' @export
 add <- function(.x, ...) UseMethod("add")
 
 #' @rdname add
 #' @export
-add_ <- function(.x, ...) UseMethod("add_")
+ref_add <- function(.x, ...) UseMethod("ref_add")
 
 
 #' @name DequeS3methods
@@ -31,7 +31,7 @@ addleft <- function(.x, ...) UseMethod("addleft")
 
 #' @rdname add
 #' @export
-addleft_ <- function(.x, ...) UseMethod("addleft_")
+ref_addleft <- function(.x, ...) UseMethod("ref_addleft")
 
 
 #' @rdname add
@@ -50,16 +50,16 @@ addleft_ <- function(.x, ...) UseMethod("addleft_")
 #' @export
 add.Container <- function(.x, ...)
 {
-    (add_(.x$clone(deep = TRUE), ...))
+    (ref_add(.x$clone(deep = TRUE), ...))
 }
 
 #' @name add.Container
 #' @rdname ContainerS3
 #' @usage
 #' add(.x, ...)
-#' add_(.x, ...)
+#' ref_add(.x, ...)
 #' @details
-#' * `add(.x, ...)` and `add_(.x, ...)` add elements to `.x`.
+#' * `add(.x, ...)` and `ref_add(.x, ...)` add elements to `.x`.
 #' @examples
 #' co = container(1)
 #' add(co, 1, b = 2, c = container(1:3))
@@ -67,7 +67,7 @@ NULL
 
 #' @rdname add
 #' @export
-add_.Container <- function(.x, ...)
+ref_add.Container <- function(.x, ...)
 {
     elems = list(...)
     elem_names = names(elems)
@@ -89,17 +89,17 @@ add_.Container <- function(.x, ...)
 #' addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 addleft.Deque <- function(.x, ...)
 {
-    (addleft_(.x$clone(deep = TRUE), ...))
+    (ref_addleft(.x$clone(deep = TRUE), ...))
 }
 
 #' @name addleft.Deque
 #' @rdname DequeS3
 #' @usage
 #' addleft(.x, ...)
-#' addleft_(.x, ...)
+#' ref_addleft(.x, ...)
 #' @details
 #' * `addleft(.x, ...)` adds (possibly named) elements to left side of `.x`.
-#' * `addleft_(.x, ...)` same as `addleft(.x, ...)` but adds by reference.
+#' * `ref_addleft(.x, ...)` same as `addleft(.x, ...)` but adds by reference.
 #' @examples
 #'
 #' d = deque(0)
@@ -109,7 +109,7 @@ NULL
 
 #' @rdname add
 #' @export
-addleft_.Deque <- function(.x, ...)
+ref_addleft.Deque <- function(.x, ...)
 {
     elems = list(...)
     elem_names = names(elems)
@@ -135,7 +135,7 @@ addleft_.Deque <- function(.x, ...)
 #' add(d, a = 7:9)  # key 'a' already in Dict}
 add.Dict <- function(.x, ...)
 {
-    (add_(.x$clone(deep = TRUE), ...))
+    (ref_add(.x$clone(deep = TRUE), ...))
 }
 
 #' @name DictS3methods
@@ -148,11 +148,11 @@ NULL
 #' @rdname DictS3
 #' @usage
 #' add(.x, ...)
-#' add_(.x, ...)
+#' ref_add(.x, ...)
 #' @details
 #' * `add(.x, ...)` adds `key = value` pairs to `.x`. If one of the
 #' keys already exists, an error is given.
-#' * `add_(.x, ...)` same as `add(.x, ...)` but adds by reference.
+#' * `ref_add(.x, ...)` same as `add(.x, ...)` but adds by reference.
 #' @examples
 #'
 #' d = dict(a = 1)
@@ -165,7 +165,7 @@ NULL
 
 #' @rdname add
 #' @export
-add_.Dict <- function(.x, ...)
+ref_add.Dict <- function(.x, ...)
 {
     elems = list(...)
     if (!length(elems))
@@ -196,7 +196,7 @@ add_.Dict <- function(.x, ...)
 #' add(dit, a = 7:9)  # column 'a' already exists}
 add.dict.table <- function(.x, ...)
 {
-    (add_(copy(.x), ...))
+    (ref_add.dict.table(copy(.x), ...))
 }
 
 
@@ -204,9 +204,9 @@ add.dict.table <- function(.x, ...)
 #' @rdname dict.table
 #' @usage
 #' add(.x, ...)
-#' add_(.x, ...)
+#' ref_add(.x, ...)
 #' @details
-#' * `add(.x, ...)` and add_(.x, ...) add columns to `.x`. If the column name
+#' * `add(.x, ...)` and ref_add(.x, ...) add columns to `.x`. If the column name
 #' already exists, an error is given.
 #' @examples
 #'
@@ -228,7 +228,7 @@ NULL
 #' \dontrun{
 #' add(dit, a = 7:9)  # column 'a' already exists}
 #'
-add_.dict.table <- function(.x, ...)
+ref_add.dict.table <- function(.x, ...)
 {
     elems = list(...)
     if (length(elems) == 0)
@@ -240,7 +240,7 @@ add_.dict.table <- function(.x, ...)
     check_name_collision(colnames(.x), elem_names)
 
     for (i in seq_along(elems))
-        replace_.dict.table(.x, elem_names[[i]], elems[[i]], add = TRUE)
+        ref_replace_at.dict.table(.x, elem_names[[i]], elems[[i]], .add = TRUE)
 
     invisible(.x)
 }

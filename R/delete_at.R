@@ -10,7 +10,7 @@ delete_at <- function(.x, ...) UseMethod("delete_at")
 
 #' @rdname delete_at
 #' @export
-delete_at_ <- function(.x, ...) UseMethod("delete_at_")
+ref_delete_at <- function(.x, ...) UseMethod("ref_delete_at")
 
 
 .has_valid_num_indices.Container <- function(.x, indices)
@@ -52,16 +52,16 @@ delete_at_ <- function(.x, ...) UseMethod("delete_at_")
 #' @export
 delete_at.Container <- function(.x, ...)
 {
-    (delete_at_(.x$clone(deep = TRUE), ...))
+    (ref_delete_at(.x$clone(deep = TRUE), ...))
 }
 
 #' @name delete_at.Container
 #' @rdname ContainerS3
 #' @usage
 #' delete_at(.x, ...)
-#' delete_at_(.x, ...)
+#' ref_delete_at(.x, ...)
 #' @details
-#' * `delete_at(.x, ...)` and `delete_at_(.x, ...)` find and remove values at
+#' * `delete_at(.x, ...)` and `ref_delete_at(.x, ...)` find and remove values at
 #' given indices. If any given index is invalid, an error is signaled.
 #' @examples
 #'
@@ -76,7 +76,7 @@ NULL
 
 #' @rdname delete_at
 #' @export
-delete_at_.Container <- function(.x, ...)
+ref_delete_at.Container <- function(.x, ...)
 {
     indices = list(...)
     if (!length(indices))
@@ -135,7 +135,7 @@ delete_at_.Container <- function(.x, ...)
 #' @export
 delete_at.dict.table <- function(.x, ...)
 {
-    (delete_at_(clone(.x), ...))
+    (ref_delete_at(clone(.x), ...))
 }
 
 
@@ -143,9 +143,9 @@ delete_at.dict.table <- function(.x, ...)
 #' @rdname dict.table
 #' @usage
 #' delete_at(.x, ...)
-#' delete_at_(.x, ...)
+#' ref_delete_at(.x, ...)
 #' @details
-#' * `delete_at(.x, ...)` and `delete_at_(.x, ...)` find and remove columns either by
+#' * `delete_at(.x, ...)` and `ref_delete_at(.x, ...)` find and remove columns either by
 #' name or index (or both). If one or more columns don't exist, an error is signaled.
 #' @examples
 #'
@@ -160,7 +160,7 @@ NULL
 
 #' @rdname delete_at
 #' @export
-delete_at_.dict.table <- function(.x, ...)
+ref_delete_at.dict.table <- function(.x, ...)
 {
     args = list(...)
     if (!length(args))

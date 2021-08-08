@@ -2,42 +2,42 @@
 % Please edit documentation in R/add.R
 \name{add}
 \alias{add}
-\alias{add_}
+\alias{ref_add}
 \alias{addleft}
-\alias{addleft_}
+\alias{ref_addleft}
 \alias{add.Container}
-\alias{add_.Container}
+\alias{ref_add.Container}
 \alias{addleft.Deque}
-\alias{addleft_.Deque}
+\alias{ref_addleft.Deque}
 \alias{add.Dict}
-\alias{add_.Dict}
+\alias{ref_add.Dict}
 \alias{add.dict.table}
-\alias{add_.dict.table}
+\alias{ref_add.dict.table}
 \title{Add elements}
 \usage{
 add(.x, ...)
 
-add_(.x, ...)
+ref_add(.x, ...)
 
 addleft(.x, ...)
 
-addleft_(.x, ...)
+ref_addleft(.x, ...)
 
 \method{add}{Container}(.x, ...)
 
-\method{add_}{Container}(.x, ...)
+\method{ref_add}{Container}(.x, ...)
 
 \method{addleft}{Deque}(.x, ...)
 
-\method{addleft_}{Deque}(.x, ...)
+\method{ref_addleft}{Deque}(.x, ...)
 
 \method{add}{Dict}(.x, ...)
 
-\method{add_}{Dict}(.x, ...)
+\method{ref_add}{Dict}(.x, ...)
 
 \method{add}{dict.table}(.x, ...)
 
-\method{add_}{dict.table}(.x, ...)
+\method{ref_add}{dict.table}(.x, ...)
 }
 \arguments{
 \item{.x}{an \code{R} object of the respective class.}
@@ -59,8 +59,8 @@ For \code{dict.table}, an object of class \code{dict.table}.
 Add elements to container-like objects.
 }
 \details{
-Both \code{add} and \code{addleft} use copy semantics while \code{add_} and
-\code{addleft_} work by reference.
+Both \code{add} and \code{addleft} use copy semantics while \code{ref_add} and
+\code{ref_addleft} work by reference.
 
 If \code{.x} is a \code{Container}, \code{Set} or \code{Deque} object, the elements being added
 can (but must not) be named.

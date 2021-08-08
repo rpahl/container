@@ -8,7 +8,7 @@ clear <- function(x, ...) UseMethod("clear")
 
 #' @rdname clear
 #' @export
-clear_ <- function(x, ...) UseMethod("clear_")
+ref_clear <- function(x, ...) UseMethod("ref_clear")
 
 
 #' @rdname clear
@@ -20,7 +20,7 @@ clear_ <- function(x, ...) UseMethod("clear_")
 #' co = container(1, 2, mean)
 #' clear(co)
 #' co
-#' clear_(co)
+#' ref_clear(co)
 #' co
 clear.Container <- function(x) (x$clone(deep = TRUE)$clear())
 
@@ -28,21 +28,21 @@ clear.Container <- function(x) (x$clone(deep = TRUE)$clear())
 #' @rdname ContainerS3
 #' @usage
 #' clear(x)
-#' clear_(x)
+#' ref_clear(x)
 #' @details
-#' * `clear(x)` and `clear_(x)` remove all elements from `x`.
+#' * `clear(x)` and `ref_clear(x)` remove all elements from `x`.
 #' @examples
 #'
 #' co = container(1, 2, mean)
 #' clear(co)
 #' print(co)    # Original was not touched
-#' clear_(co)   # Clears original
+#' ref_clear(co)   # Clears original
 #' print(co)
 NULL
 
 #' @rdname clear
 #' @export
-clear_.Container <- function(x)
+ref_clear.Container <- function(x)
 {
     invisible(x$clear())
 }
@@ -56,7 +56,7 @@ clear_.Container <- function(x)
 #' dit = dict.table(a = 1, b = 2)
 #' clear(dit)
 #' dit
-#' clear_(dit)
+#' ref_clear(dit)
 #' dit
 clear.dict.table <- function(x) dict.table()
 
@@ -64,21 +64,21 @@ clear.dict.table <- function(x) dict.table()
 #' @rdname dict.table
 #' @usage
 #' clear(x)
-#' clear_(x)
+#' ref_clear(x)
 #' @details
-#' * `clear(x)` and clear_(x) remove all elements from `x`.
+#' * `clear(x)` and ref_clear(x) remove all elements from `x`.
 #' @examples
 #'
 #' dit = dict.table(a = 1, b = 2)
 #' clear(dit)
 #' dit
-#' clear_(dit)
+#' ref_clear(dit)
 #' dit
 NULL
 
 #' @rdname clear
 #' @export
-clear_.dict.table <- function(x)
+ref_clear.dict.table <- function(x)
 {
     data.table::set(x, j = seq_len(ncol(x)), value = NULL)
 

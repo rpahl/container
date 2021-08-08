@@ -2,18 +2,18 @@
 % Please edit documentation in R/rotate.R
 \name{rotate}
 \alias{rotate}
-\alias{rotate_}
+\alias{ref_rotate}
 \alias{rotate.Deque}
-\alias{rotate_.Deque}
+\alias{ref_rotate.Deque}
 \title{Rotate elements}
 \usage{
 rotate(x, ...)
 
-rotate_(x, ...)
+ref_rotate(x, ...)
 
 \method{rotate}{Deque}(x, n = 1L)
 
-\method{rotate_}{Deque}(x, n = 1L)
+\method{ref_rotate}{Deque}(x, n = 1L)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -30,7 +30,7 @@ Rotate all elements \code{n} steps to the right. If n is
 negative, rotate to the left.
 }
 \details{
-While \code{rotate} uses copy semantics, \code{rotate_} works by reference,
+While \code{rotate} uses copy semantics, \code{ref_rotate} works by reference,
 that is, rotates in place on the original object.
 }
 \examples{

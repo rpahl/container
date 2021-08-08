@@ -28,19 +28,19 @@
 \title{dict.table}
 \usage{
 add(.x, ...)
-add_(.x, ...)
+ref_add(.x, ...)
 
 at(.x, ...)
 
 at2(x, index)
 
 clear(x)
-clear_(x)
+ref_clear(x)
 
 clone(x, ...)
 
 delete_at(.x, ...)
-delete_at_(.x, ...)
+ref_delete_at(.x, ...)
 
 dict.table(...)
 
@@ -57,7 +57,7 @@ is.dict.table(x)
 \method{cbind}{dict.table}(x, ...)
 
 discard_at(.x, ...)
-discard_at_(.x, ...)
+ref_discard_at(.x, ...)
 
 has(x, column)
 
@@ -70,13 +70,13 @@ peek_at(.x, ..., .default = NULL)
 peek_at2(x, index, default)
 
 rename(.x, old, new, ...)
-rename_(.x, old, new, ...)
+ref_rename(.x, old, new, ...)
 
 replace_at(.x, ..., .add = FALSE)
-replace_at_(.x, ..., .add = FALSE)
+ref_replace_at(.x, ..., .add = FALSE)
 
 update(x, other)
-update_(x, other)
+ref_update(x, other)
 }
 \arguments{
 \item{...}{further arguments passed to \code{\link[data.table:setattr]{data.table::setnames()}}}
@@ -103,7 +103,7 @@ like insertion and deletion of elements are done on the original object.
 }
 \details{
 \itemize{
-\item \code{add(.x, ...)} and add_(.x, ...) add columns to \code{.x}. If the column name
+\item \code{add(.x, ...)} and ref_add(.x, ...) add columns to \code{.x}. If the column name
 already exists, an error is given.
 }
 
@@ -118,7 +118,7 @@ an error if not found.
 }
 
 \itemize{
-\item \code{clear(x)} and clear_(x) remove all elements from \code{x}.
+\item \code{clear(x)} and ref_clear(x) remove all elements from \code{x}.
 }
 
 \itemize{
@@ -126,13 +126,13 @@ an error if not found.
 }
 
 \itemize{
-\item \code{delete_at(.x, ...)} and \code{delete_at_(.x, ...)} find and remove columns either by
+\item \code{delete_at(.x, ...)} and \code{ref_delete_at(.x, ...)} find and remove columns either by
 name or index (or both). If one or more columns don't exist, an error is signaled.
 }
 
 \itemize{
-\item \code{discard_at(.x, ...)} and \code{discard_at_(.x, ...)} find and remove columns either by
-name or index (or both). Invalid column indices are ignored.
+\item \code{discard_at(.x, ...)} and \code{ref_discard_at(.x, ...)} find and remove columns
+either by name or index (or both). Invalid column indices are ignored.
 }
 
 \itemize{
@@ -161,18 +161,18 @@ done silently.
 }
 
 \itemize{
-\item \code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
+\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more keys
 from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
 }
 
 \itemize{
-\item \code{replace_at(.x, .., .add = FALSE)} and \code{replace_at_(.x, ..., .add = FALSE)}
+\item \code{replace_at(.x, .., .add = FALSE)} and \code{ref_replace_at(.x, ..., .add = FALSE)}
 replace values at given indices. If a given index is invalid, an error is
 signaled unless \code{.add} was set to \code{TRUE}.
 }
 
 \itemize{
-\item \code{update(x, other)} and \code{update_(x, other)} adds columns of \code{other} dict
+\item \code{update(x, other)} and \code{ref_update(x, other)} adds columns of \code{other} dict
 that are not yet in \code{x} and replaces the values at existing columns.
 }
 }
@@ -206,7 +206,7 @@ at2(dit, 5)       # index 5 exceeds length of dict.table}
 dit = dict.table(a = 1, b = 2)
 clear(dit)
 dit
-clear_(dit)
+ref_clear(dit)
 dit
 
 d = dict.table(a = 1:2, b = 3:4)
@@ -326,7 +326,7 @@ peek_at2(dit, "x")
 peek_at2(dit, "x", default = 0)
 dit = dict.table(a = 1, b = 2, c = 3)
 (rename(dit, c("a", "b"), c("a1", "y")))
-rename_(dit, c("a", "b"), c("a1", "y"))
+ref_rename(dit, c("a", "b"), c("a1", "y"))
 print(dit)
 
 dit = dict.table(a = 1:3)

@@ -27,16 +27,16 @@ is.dict(x)
 ## Dict S3 methods
 
 add(.x, ...)
-add_(.x, ...)
+ref_add(.x, ...)
 
 rename(.x, old, new)
-rename_(.x, old, new)
+ref_rename(.x, old, new)
 
 replace(.x, old, new)
-replace_(.x, old, new)
+ref_replace(.x, old, new)
 
 update(x, other)
-update_(x, other)
+ref_update(x, other)
 }
 \arguments{
 \item{...}{elements put into the \code{Dict}.}
@@ -107,22 +107,22 @@ combining the keys of both objects (set union of keys).
 \itemize{
 \item \code{add(.x, ...)} adds \code{key = value} pairs to \code{.x}. If one of the
 keys already exists, an error is given.
-\item \code{add_(.x, ...)} same as \code{add(.x, ...)} but adds by reference.
+\item \code{ref_add(.x, ...)} same as \code{add(.x, ...)} but adds by reference.
 }
 
 \itemize{
-\item \code{rename(.x, old, new)} and \code{rename_(.x, old, new)} rename one or more keys
+\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more keys
 from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
 }
 
 \itemize{
-\item \code{replace(.x, old, new)} and \code{replace_(.x, old)} try to find element \code{old}
+\item \code{replace(.x, old, new)} and \code{ref_replace(.x, old)} try to find element \code{old}
 and replace it with element \code{new}. If \code{old} does not exist, an error is
 raised.
 }
 
 \itemize{
-\item \code{update(x, other)} and \code{update_(x, other)} adds elements of \code{other} dict
+\item \code{update(x, other)} and \code{ref_update(x, other)} adds elements of \code{other} dict
 for keys not yet in \code{x} and replaces the values of existing keys.
 }
 }

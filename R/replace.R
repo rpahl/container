@@ -8,13 +8,13 @@
 #' an error is given. In contrast, if set to `TRUE` the new element is added
 #' regardless of whether it is used as a replacement for an existing element or
 #' just added as a new element.
-#' @details `replace` uses copy semantics while `replace_` works by reference.
+#' @details `replace` uses copy semantics while `ref_replace` works by reference.
 #' @export
 replace <- function(.x, ...) UseMethod("replace")
 
 #' @rdname replace
 #' @export
-replace_ <- function(.x, ...) UseMethod("replace_")
+ref_replace <- function(.x, ...) UseMethod("ref_replace")
 
 #' @export
 replace.default <- function(.x, ...)
@@ -40,7 +40,7 @@ replace.default <- function(.x, ...)
 #' @export
 replace.Container <- function(.x, old, new, add = FALSE)
 {
-    replace_(.x$clone(deep = TRUE), old, new, add)
+    ref_replace(.x$clone(deep = TRUE), old, new, add)
 }
 
 #' @name replace.Container
@@ -53,10 +53,10 @@ replace.Container <- function(.x, old, new, add = FALSE)
 #' just as a new element, respectively.
 #' @usage
 #' replace(.x, old, new, add = FALSE)
-#' replace_(.x, old, new, add = FALSE)
+#' ref_replace(.x, old, new, add = FALSE)
 #' @details
 #' * `replace(.x, old, new, add = FALSE)` and
-#'   `replace_(.x, old, new, add = FALSE)` try to find element `old` and
+#'   `ref_replace(.x, old, new, add = FALSE)` try to find element `old` and
 #' replace it with element `new`. If `old` does not exist, an error is raised,
 #' unless `add` was set to `TRUE`.
 #' @examples
@@ -71,7 +71,7 @@ NULL
 
 #' @rdname replace
 #' @export
-replace_.Container <- function(.x, old, new, add = FALSE)
+ref_replace.Container <- function(.x, old, new, add = FALSE)
 {
     .x$replace(old, new, add = add)
 }
@@ -90,12 +90,12 @@ replace_.Container <- function(.x, old, new, add = FALSE)
 #' @export
 replace.Dict <- function(.x, old, new)
 {
-    replace_(.x$clone(deep = TRUE), old, new)
+    ref_replace(.x$clone(deep = TRUE), old, new)
 }
 
 #' @rdname replace
 #' @export
-replace_.Dict <- function(.x, old, new)
+ref_replace.Dict <- function(.x, old, new)
 {
     .x$replace(old, new)
 }
@@ -106,9 +106,9 @@ replace_.Dict <- function(.x, old, new)
 #' @rdname DictS3
 #' @usage
 #' replace(.x, old, new)
-#' replace_(.x, old, new)
+#' ref_replace(.x, old, new)
 #' @details
-#' * `replace(.x, old, new)` and `replace_(.x, old)` try to find element `old`
+#' * `replace(.x, old, new)` and `ref_replace(.x, old)` try to find element `old`
 #'  and replace it with element `new`. If `old` does not exist, an error is
 #'  raised.
 #' @examples

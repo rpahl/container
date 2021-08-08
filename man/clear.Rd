@@ -2,24 +2,24 @@
 % Please edit documentation in R/clear.R
 \name{clear}
 \alias{clear}
-\alias{clear_}
+\alias{ref_clear}
 \alias{clear.Container}
-\alias{clear_.Container}
+\alias{ref_clear.Container}
 \alias{clear.dict.table}
-\alias{clear_.dict.table}
+\alias{ref_clear.dict.table}
 \title{Clear a container}
 \usage{
 clear(x, ...)
 
-clear_(x, ...)
+ref_clear(x, ...)
 
 \method{clear}{Container}(x)
 
-\method{clear_}{Container}(x)
+\method{ref_clear}{Container}(x)
 
 \method{clear}{dict.table}(x)
 
-\method{clear_}{dict.table}(x)
+\method{ref_clear}{dict.table}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -40,12 +40,12 @@ Removes all elements from the container object.
 co = container(1, 2, mean)
 clear(co)
 co
-clear_(co)
+ref_clear(co)
 co
 
 dit = dict.table(a = 1, b = 2)
 clear(dit)
 dit
-clear_(dit)
+ref_clear(dit)
 dit
 }

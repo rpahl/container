@@ -17,7 +17,7 @@ d1_was_not_touched = ee(co1, co1.copy)
 expect_true(d1_was_not_touched)
 
 # Update by reference
-ee(update_(co1, co2), container(A = 1, B = 2, C = 3, 99, 100, D = 4))
+ee(ref_update(co1, co2), container(A = 1, B = 2, C = 3, 99, 100, D = 4))
 d1_was_changed_by_reference = ee(co1, container(A = 1, B = 2, C = 3, 99, 100, D = 4))
 expect_true(d1_was_changed_by_reference)
 
@@ -38,7 +38,7 @@ d1_was_not_touched = ee(d1, d1.copy)
 expect_true(d1_was_not_touched)
 
 # Update by reference
-ee(update_(d1, d2), dict(A = 1, B = 2, C = 3, D = 4))
+ee(ref_update(d1, d2), dict(A = 1, B = 2, C = 3, D = 4))
 d1_was_changed_by_reference = ee(d1, dict(A = 1, B = 2, C = 3, D = 4))
 expect_true(d1_was_changed_by_reference)
 
@@ -56,7 +56,7 @@ dit1_was_not_touched = ee(dit1, dit1.copy)
 expect_true(dit1_was_not_touched)
 
 # Update by reference
-ee(update_(dit1, dit2), dict.table(a = 1:2, b = 5:6, c = 8:9))
+ee(ref_update(dit1, dit2), dict.table(a = 1:2, b = 5:6, c = 8:9))
 dit1_was_changed = ee(dit1, dict.table(a = 1:2, b = 5:6, c = 8:9))
 expect_true(dit1_was_changed)
 

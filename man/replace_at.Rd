@@ -2,24 +2,24 @@
 % Please edit documentation in R/replace_at.R
 \name{replace_at}
 \alias{replace_at}
-\alias{replace_at_}
+\alias{ref_replace_at}
 \alias{replace_at.Container}
-\alias{replace_at_.Container}
+\alias{ref_replace_at.Container}
 \alias{replace_at.dict.table}
-\alias{replace_at_.dict.table}
+\alias{ref_replace_at.dict.table}
 \title{Strict element replacement at index}
 \usage{
 replace_at(.x, ...)
 
-replace_at_(.x, ...)
+ref_replace_at(.x, ...)
 
 \method{replace_at}{Container}(.x, ..., .add = FALSE)
 
-\method{replace_at_}{Container}(.x, ..., .add = FALSE)
+\method{ref_replace_at}{Container}(.x, ..., .add = FALSE)
 
 \method{replace_at}{dict.table}(.x, ..., .add = FALSE)
 
-\method{replace_at_}{dict.table}(.x, ..., .add = FALSE)
+\method{ref_replace_at}{dict.table}(.x, ..., .add = FALSE)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
@@ -46,7 +46,8 @@ error if not found, unless it is stated to explicitly add the element (see
 option \code{add}).
 }
 \details{
-\code{replace_at} uses copy semantics while \code{replace_at_} works by reference.
+\code{replace_at} uses copy semantics while \code{ref_replace_at} works by
+reference.
 }
 \examples{
 

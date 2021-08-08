@@ -9,7 +9,7 @@ delete <- function(.x, ...) UseMethod("delete")
 
 #' @rdname delete
 #' @export
-delete_ <- function(.x, ...) UseMethod("delete_")
+ref_delete <- function(.x, ...) UseMethod("ref_delete")
 
 
 #' @rdname delete
@@ -26,16 +26,16 @@ delete_ <- function(.x, ...) UseMethod("delete_")
 #' @export
 delete.Container <- function(.x, ...)
 {
-    (delete_(.x$clone(deep = TRUE), ...))
+    (ref_delete(.x$clone(deep = TRUE), ...))
 }
 
 #' @name delete.Container
 #' @rdname ContainerS3
 #' @usage
 #' delete(.x, ...)
-#' delete_(.x, ...)
+#' ref_delete(.x, ...)
 #' @details
-#' * `delete(.x, ...)` and `delete_(.x, ...)` find and remove elements.
+#' * `delete(.x, ...)` and `ref_delete(.x, ...)` find and remove elements.
 #' If one or more elements don't exist, an error is signaled.
 #' @examples
 #'
@@ -49,7 +49,7 @@ NULL
 
 #' @rdname delete
 #' @export
-delete_.Container <- function(.x, ...)
+ref_delete.Container <- function(.x, ...)
 {
     elems = list(...)
     if (!length(elems))

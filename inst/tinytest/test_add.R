@@ -8,7 +8,7 @@ ee(add(x, 2, x = 3), container(1, 2, x = 3))
 x_was_not_touched = all.equal(x, container(1))
 expect_true(x_was_not_touched)
 
-add_(x, 2)
+ref_add(x, 2)
 ee(x, container(1, 2))
 
 # set
@@ -18,7 +18,7 @@ ee(add(x, 2, x = 3), setnew(1, 2, x = 3))
 x_was_not_touched = all.equal(x, setnew(1))
 expect_true(x_was_not_touched)
 
-add_(x, 2)
+ref_add(x, 2)
 ee(x, setnew(1, 2))
 
 # deque
@@ -28,7 +28,7 @@ ee(add(x, 2, b = 3), deque(1, 2, b = 3))
 x_was_not_touched = all.equal(x, deque(1))
 expect_true(x_was_not_touched)
 
-add_(x, 2)
+ref_add(x, 2)
 ee(x, deque(1, 2))
 
 # --------
@@ -40,10 +40,10 @@ ee(add(d, b = 2, x = 4), dict(a = 1, b = 2, x = 4))
 d_was_not_touched = all.equal(d, dict(a = 1))
 expect_true(d_was_not_touched)
 
-add_(d, b = 2, d = 4)
+ref_add(d, b = 2, d = 4)
 ee(d, dict(a = 1, b = 2, d = 4))
 
-expect_error(add_(d, z = 9, b = 2), "name 'b' exists already")
+expect_error(ref_add(d, z = 9, b = 2), "name 'b' exists already")
 
 d_was_not_touched_upon_error = all.equal(d, dict(a = 1, b = 2, d = 4))
 expect_true(d_was_not_touched_upon_error)
@@ -62,7 +62,7 @@ ee(add(dit, b = 2, x = 3), dict.table(a = 1, b = 2, x = 3))
 dit_was_not_touched = all.equal(dit, dict.table(a = 1))
 expect_true(dit_was_not_touched)
 
-add_(dit, b = 2, c = 3)
+ref_add(dit, b = 2, c = 3)
 ee(dit, dict.table(a = 1, b = 2, c = 3))
 
 
@@ -83,6 +83,6 @@ ee(addleft(d, n0 = 0, n1 = 1),
 d_was_not_touched = all.equal(d, as.deque(1:3))
 expect_true(d_was_not_touched)
 
-addleft_(d, 4)
+ref_addleft(d, 4)
 ee(d, deque(4, 1, 2, 3))
 

@@ -6,7 +6,7 @@
 #' @param x any `R` object
 #' @param other any object of the same type as `x`
 #' @param ... additional arguments to be passed to or from methods.
-#' @details `update` uses copy semantics while `update_` works by reference,
+#' @details `update` uses copy semantics while `ref_update` works by reference,
 #' that is, updates in place.
 #' @export
 update <- function(x, other, ...)
@@ -19,12 +19,12 @@ update <- function(x, other, ...)
 
 #' @rdname update
 #' @export
-update_ <- function(x, other, ...)
+ref_update <- function(x, other, ...)
 {
     if (!inherits(other, data.class(x))) {
         stop("'other' must be a ", data.class(x))
     }
-    UseMethod("update_")
+    UseMethod("ref_update")
 }
 
 #' @rdname update
@@ -39,12 +39,12 @@ update_ <- function(x, other, ...)
 #' @export
 update.Container <- function(x, other)
 {
-    update_.Container(x$clone(deep = TRUE), other$clone(deep = TRUE))
+    ref_update.Container(x$clone(deep = TRUE), other$clone(deep = TRUE))
 }
 
 #' @rdname update
 #' @export
-update_.Container <- function(x, other)
+ref_update.Container <- function(x, other)
 {
     x$update(other)
 }
@@ -54,9 +54,9 @@ update_.Container <- function(x, other)
 #' @rdname DictS3
 #' @usage
 #' update(x, other)
-#' update_(x, other)
+#' ref_update(x, other)
 #' @details
-#' * `update(x, other)` and `update_(x, other)` adds elements of `other` dict
+#' * `update(x, other)` and `ref_update(x, other)` adds elements of `other` dict
 #' for keys not yet in `x` and replaces the values of existing keys.
 #' @examples
 #'
@@ -78,19 +78,19 @@ NULL
 #' @export
 update.dict.table <- function(x, other)
 {
-    (update_.dict.table(copy(x), copy(other)))
+    (ref_update.dict.table(copy(x), copy(other)))
 }
 
 
 #' @rdname update
 #' @export
-update_.dict.table <- function(x, other)
+ref_update.dict.table <- function(x, other)
 {
     if (!inherits(other, data.class(x)))
         stop("arg must be a ", data.class(x))
 
     for (key in colnames(other))
-        replace_at_(x, key, other[[key]], .add = TRUE)
+        ref_replace_at(x, key, other[[key]], .add = TRUE)
 
     x
 }
@@ -100,9 +100,9 @@ update_.dict.table <- function(x, other)
 #' @param other another `dict.table` object
 #' @usage
 #' update(x, other)
-#' update_(x, other)
+#' ref_update(x, other)
 #' @details
-#' * `update(x, other)` and `update_(x, other)` adds columns of `other` dict
+#' * `update(x, other)` and `ref_update(x, other)` adds columns of `other` dict
 #' that are not yet in `x` and replaces the values at existing columns.
 #' @examples
 #' dit1 = dict.table(a = 1:2, b = 3:4)

@@ -9,7 +9,7 @@ discard_at <- function(.x, ...) UseMethod("discard_at")
 
 #' @rdname discard_at
 #' @export
-discard_at_ <- function(.x, ...) UseMethod("discard_at_")
+ref_discard_at <- function(.x, ...) UseMethod("ref_discard_at")
 
 
 #' @rdname discard_at
@@ -24,16 +24,16 @@ discard_at_ <- function(.x, ...) UseMethod("discard_at_")
 #' discard_at(co, "x")              # ignored
 #' @export
 discard_at.Container <- function(.x, ...) {
-    (discard_at_(.x$clone(deep = TRUE), ...))
+    (ref_discard_at(.x$clone(deep = TRUE), ...))
 }
 
 #' @name discard.Container
 #' @rdname ContainerS3
 #' @usage
 #' discard_at(.x, ...)
-#' discard_at_(.x, ...)
+#' ref_discard_at(.x, ...)
 #' @details
-#' * `discard_at(.x, ...)` and `discard_at_(.x, ...)` find and discard values
+#' * `discard_at(.x, ...)` and `ref_discard_at(.x, ...)` find and discard values
 #' at given indices. Invalid indices are ignored.
 #' @examples
 #'
@@ -46,7 +46,7 @@ NULL
 
 #' @rdname discard_at
 #' @export
-discard_at_.Container <- function(.x, ...)
+ref_discard_at.Container <- function(.x, ...)
 {
     indices = list(...)
     if (!length(indices))
@@ -80,17 +80,17 @@ discard_at_.Container <- function(.x, ...)
 #' @export
 discard_at.dict.table <- function(.x, ...)
 {
-    (discard_at_(clone(.x), ...))
+    (ref_discard_at(clone(.x), ...))
 }
 
 #' @name discard.dict.table
 #' @rdname dict.table
 #' @usage
 #' discard_at(.x, ...)
-#' discard_at_(.x, ...)
+#' ref_discard_at(.x, ...)
 #' @details
-#' * `discard_at(.x, ...)` and `discard_at_(.x, ...)` find and remove columns either by
-#' name or index (or both). Invalid column indices are ignored.
+#' * `discard_at(.x, ...)` and `ref_discard_at(.x, ...)` find and remove columns
+#' either by name or index (or both). Invalid column indices are ignored.
 #' @examples
 #'
 #' dit = as.dict.table(head(sleep))
@@ -102,7 +102,7 @@ NULL
 
 #' @rdname discard_at
 #' @export
-discard_at_.dict.table <- function(.x, ...)
+ref_discard_at.dict.table <- function(.x, ...)
 {
     args = list(...)
     if (!length(args))

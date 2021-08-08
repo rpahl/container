@@ -2,24 +2,24 @@
 % Please edit documentation in R/rename.R
 \name{rename}
 \alias{rename}
-\alias{rename_}
+\alias{ref_rename}
 \alias{rename.Dict}
-\alias{rename_.Dict}
+\alias{ref_rename.Dict}
 \alias{rename.dict.table}
-\alias{rename_.dict.table}
+\alias{ref_rename.dict.table}
 \title{Rename elements safely}
 \usage{
 rename(.x, old, new, ...)
 
-rename_(.x, old, new, ...)
+ref_rename(.x, old, new, ...)
 
 \method{rename}{Dict}(.x, old, new)
 
-\method{rename_}{Dict}(.x, old, new)
+\method{ref_rename}{Dict}(.x, old, new)
 
 \method{rename}{dict.table}(.x, old, new, ...)
 
-\method{rename_}{dict.table}(.x, old, new, ...)
+\method{ref_rename}{dict.table}(.x, old, new, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object with names.}
@@ -49,7 +49,7 @@ already existing name, an error is signaled.
 The passed old and new names can be vectors but always must have
 the same length and must be unique to prevent double-renaming.
 
-\code{rename} uses copy semantics while \code{rename_} works by reference.
+\code{rename} uses copy semantics while \code{ref_rename} works by reference.
 }
 \examples{
 
@@ -60,6 +60,6 @@ d = dict(a = 1, b = 2, c = 3)
 # dict.table
 dit = dict.table(a = 1, b = 2, c = 3)
 (rename(dit, c("a", "b"), c("a1", "y")))
-rename_(dit, c("a", "b"), c("a1", "y"))
+ref_rename(dit, c("a", "b"), c("a1", "y"))
 print(dit)
 }

@@ -2,25 +2,25 @@
 % Please edit documentation in R/pop.R
 \name{pop}
 \alias{pop}
-\alias{pop_}
-\alias{popleft_}
-\alias{pop_.Deque}
-\alias{popleft_.Deque}
-\alias{pop_.Dict}
-\alias{pop_.dict.table}
+\alias{ref_pop}
+\alias{ref_popleft}
+\alias{ref_pop.Deque}
+\alias{ref_popleft.Deque}
+\alias{ref_pop.Dict}
+\alias{ref_pop.dict.table}
 \title{Pop element}
 \usage{
-pop_(.x, ...)
+ref_pop(.x, ...)
 
-popleft_(.x, ...)
+ref_popleft(.x, ...)
 
-\method{pop_}{Deque}(.x)
+\method{ref_pop}{Deque}(.x)
 
-\method{popleft_}{Deque}(.x)
+\method{ref_popleft}{Deque}(.x)
 
-\method{pop_}{Dict}(.x, key)
+\method{ref_pop}{Dict}(.x, key)
 
-\method{pop_}{dict.table}(.x, key)
+\method{ref_pop}{dict.table}(.x, key)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
@@ -31,8 +31,8 @@ popleft_(.x, ...)
 the associated key-value pair is deleted and it's value returned.}
 }
 \value{
-For \code{Deque} the first (\code{popleft_}) or last (\code{pop_}) element of the
-deque after it was removed.
+For \code{Deque} the first (\code{ref_popleft}) or last (\code{ref_pop}) element of
+the deque after it was removed.
 
 For \code{Dict} the value associated with the key after the key-value
 pair was removed from the dict. If \code{key} is not found, an error is raised.
@@ -46,33 +46,33 @@ If the element is not found, signal an error.
 }
 \details{
 All functions work by reference, that is, the original object is altered.
-\code{pop_(.x)} tries to access specific values.
+\code{ref_pop(.x)} tries to access specific values.
 
-\code{popleft_(.x)} pops first element of a \code{Deque}.
+\code{ref_poplefref_popleft(.x)} pops first element of a \code{Deque}.
 }
 \examples{
 # Deque
 d = deque(1, 2, 3)
-pop_(d)
-popleft_(d)
+ref_pop(d)
+ref_popleft(d)
 
 \dontrun{
-pop_(deque())  # pop at empty Deque}
+ref_pop(deque())  # pop at empty Deque}
 
 # Dict
 d = dict(a = 1, b = 1:3)
-pop_(d, "b")
+ref_pop(d, "b")
 print(d)
 
 \dontrun{
-pop_(d, "x")  # key 'x' not in Dict}
+ref_pop(d, "x")  # key 'x' not in Dict}
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)
-pop_(dit, "a")
+ref_pop(dit, "a")
 print(dit)
 \dontrun{
-pop_(dit, "x")  # Column 'x' not in dict.table}
+ref_pop(dit, "x")  # Column 'x' not in dict.table}
 }
 \seealso{
 \code{\link[=peek]{peek()}}

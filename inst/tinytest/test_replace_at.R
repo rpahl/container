@@ -54,17 +54,17 @@ EE(replace_at(x, 1:4, 1:4, .add = TRUE), "index out of range \\(length = 2\\): 3
 
 
 # Replace by reference
-ee(replace_at_(x, 1, 1), container(a = 1, b = "z"))
+ee(ref_replace_at(x, 1, 1), container(a = 1, b = "z"))
 was_changed_by_reference = all.equal(x, container(a = 1, b = "z"))
 expect_true(was_changed_by_reference)
 
-EE(replace_at_(x, 1:3, 1:3), "index out of range \\(length = 2\\): 3")
+EE(ref_replace_at(x, 1:3, 1:3), "index out of range \\(length = 2\\): 3")
 x_was_not_touched = all.equal(x, container(a = 1, b = "z"))
 expect_true(x_was_not_touched)
 
 # Ensure there are no partial operations done when indices are invalid
 x = container(a = 0, b = "z")
-EE(replace_at_(x, a = 1, x = 1), "names\\(s\\) not found: 'x'")
+EE(ref_replace_at(x, a = 1, x = 1), "names\\(s\\) not found: 'x'")
 x_was_not_touched = all.equal(x, container(a = 0, b = "z"))
 expect_true(x_was_not_touched)
 
@@ -123,13 +123,13 @@ ee(replace_at(dit3, c("a", "x"), 1:2, .add = TRUE),
 
 # Replace by reference
 dit = dict.table(a = 1:2, b = 3:4)
-ee(replace_at_(dit, "a", 2:1), dict.table(a = 2:1, b = 3:4))
+ee(ref_replace_at(dit, "a", 2:1), dict.table(a = 2:1, b = 3:4))
 
 was_changed_by_referene = ee(dit, dict.table(a = 2:1, b = 3:4))
 expect_true(was_changed_by_referene)
 
 # Ensure there are no partial operations done when indices are invalid
-EE(replace_at_(dit, a = 0, x = 2:1))
+EE(ref_replace_at(dit, a = 0, x = 2:1))
 is_unchanged = ee(dit, dict.table(a = 2:1, b = 3:4))
 has_partial_operations = !is_unchanged
 expect_false(has_partial_operations)

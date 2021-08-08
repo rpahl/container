@@ -2,25 +2,25 @@
 % Please edit documentation in R/update.R
 \name{update}
 \alias{update}
-\alias{update_}
+\alias{ref_update}
 \alias{update.Container}
-\alias{update_.Container}
+\alias{ref_update.Container}
 \alias{update.dict.table}
-\alias{update_.dict.table}
+\alias{ref_update.dict.table}
 \alias{update.list}
 \title{Update elements}
 \usage{
 update(x, other, ...)
 
-update_(x, other, ...)
+ref_update(x, other, ...)
 
 \method{update}{Container}(x, other)
 
-\method{update_}{Container}(x, other)
+\method{ref_update}{Container}(x, other)
 
 \method{update}{dict.table}(x, other)
 
-\method{update_}{dict.table}(x, other)
+\method{ref_update}{dict.table}(x, other)
 
 \method{update}{list}(x, other)
 }
@@ -45,7 +45,7 @@ by replacing the values at existing names and adding values at new names of
 the other object. A common use case is to update parameter lists.
 }
 \details{
-\code{update} uses copy semantics while \code{update_} works by reference,
+\code{update} uses copy semantics while \code{ref_update} works by reference,
 that is, updates in place.
 }
 \examples{

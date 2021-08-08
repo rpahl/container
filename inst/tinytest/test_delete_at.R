@@ -26,7 +26,7 @@ expect_error(delete_at(co, "a", 1, 5), "index out of range \\(length = 4\\): 5")
 was_not_touched_on_error = ee(co, co2)
 expect_true(was_not_touched_on_error)
 
-ee(delete_at_(co, 1:4), container())
+ee(ref_delete_at(co, 1:4), container())
 ee(co, container())
 
 
@@ -40,13 +40,13 @@ expect_true(original_was_not_touched)
 # args as character vector
 expect_true(is_empty(delete_at(d, names(d))))
 
-ee(delete_at_(d, "a", "f", "b"), dict())
+ee(ref_delete_at(d, "a", "f", "b"), dict())
 delete_was_done_on_original = ee(d, dict())
 expect_true(delete_was_done_on_original)
 
 d = dict(a = 1, b = 2, f = mean)
 d2 = clone(d)
-expect_error(delete_at_(d, "a", "x", "y"), "names\\(s\\) not found: 'x', 'y'")
+expect_error(ref_delete_at(d, "a", "x", "y"), "names\\(s\\) not found: 'x', 'y'")
 was_not_touched_on_error = ee(d, d2)
 expect_true(was_not_touched_on_error)
 
@@ -68,15 +68,15 @@ ee(delete_at(d, 1:3), delete_at(d, 3:1))
 # args as character vector
 expect_true(is_empty(delete_at(d, colnames(d))))
 
-expect_error(delete_at_(d, "a", 4),
+expect_error(ref_delete_at(d, "a", 4),
              "index out of range \\(ncol = 3\\): 4")
-expect_error(delete_at_(d, "a", "z"),
+expect_error(ref_delete_at(d, "a", "z"),
              "column\\(s\\) not found: 'z'")
 
 d_was_not_altered = ee(d, d2)
 expect_true(d_was_not_altered)
 
-ee(delete_at_(d, "b"), d2[, c(1, 3)])
+ee(ref_delete_at(d, "b"), d2[, c(1, 3)])
 
-expect_silent(delete_at_(d, "a"))
+expect_silent(ref_delete_at(d, "a"))
 

@@ -2,24 +2,24 @@
 % Please edit documentation in R/delete_at.R
 \name{delete_at}
 \alias{delete_at}
-\alias{delete_at_}
+\alias{ref_delete_at}
 \alias{delete_at.Container}
-\alias{delete_at_.Container}
+\alias{ref_delete_at.Container}
 \alias{delete_at.dict.table}
-\alias{delete_at_.dict.table}
+\alias{ref_delete_at.dict.table}
 \title{Delete elements at index}
 \usage{
 delete_at(.x, ...)
 
-delete_at_(.x, ...)
+ref_delete_at(.x, ...)
 
 \method{delete_at}{Container}(.x, ...)
 
-\method{delete_at_}{Container}(.x, ...)
+\method{ref_delete_at}{Container}(.x, ...)
 
 \method{delete_at}{dict.table}(.x, ...)
 
-\method{delete_at_}{dict.table}(.x, ...)
+\method{ref_delete_at}{dict.table}(.x, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}

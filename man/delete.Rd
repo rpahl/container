@@ -2,18 +2,18 @@
 % Please edit documentation in R/delete.R
 \name{delete}
 \alias{delete}
-\alias{delete_}
+\alias{ref_delete}
 \alias{delete.Container}
-\alias{delete_.Container}
+\alias{ref_delete.Container}
 \title{Delete elements}
 \usage{
 delete(.x, ...)
 
-delete_(.x, ...)
+ref_delete(.x, ...)
 
 \method{delete}{Container}(.x, ...)
 
-\method{delete_}{Container}(.x, ...)
+\method{ref_delete}{Container}(.x, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}

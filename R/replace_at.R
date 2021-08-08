@@ -10,13 +10,14 @@
 #' regardless whether the index existed or not. Indices can consist of numbers
 #' or names or both, except when adding values at nex indices, which is only
 #' allowed for names.
-#' @details `replace_at` uses copy semantics while `replace_at_` works by reference.
+#' @details `replace_at` uses copy semantics while `ref_replace_at` works by
+#' reference.
 #' @export
 replace_at <- function(.x, ...) UseMethod("replace_at")
 
 #' @rdname replace_at
 #' @export
-replace_at_ <- function(.x, ...) UseMethod("replace_at_")
+ref_replace_at <- function(.x, ...) UseMethod("ref_replace_at")
 
 
 #' @rdname replace_at
@@ -30,14 +31,14 @@ replace_at_ <- function(.x, ...) UseMethod("replace_at_")
 #' replace_at(co, "a", 1)               # same
 #'
 #' \dontrun{
-#' replace_at(co, x = 1)                # names(s) not found: 'x'
+#' replace_at(co, x = 1)                # names(s) not found: 'x'}
 #' replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
 #'
 #' @export
 replace_at.Container <- function(.x, ..., .add = FALSE)
 {
 
-    (replace_at_(.x$clone(deep = TRUE), ..., .add = .add))
+    (ref_replace_at(.x$clone(deep = TRUE), ..., .add = .add))
 }
 
 #' @name replace_at.Container
@@ -49,9 +50,9 @@ replace_at.Container <- function(.x, ..., .add = FALSE)
 #' allowed for names.
 #' @usage
 #' replace_at(.x, ..., .add = FALSE)
-#' replace_at_(.x, ..., .add = FALSE)
+#' ref_replace_at(.x, ..., .add = FALSE)
 #' @details
-#' * `replace_at(.x, .., .add = FALSE)` and `replace_at_(.x, ..., .add = FALSE)`
+#' * `replace_at(.x, .., .add = FALSE)` and `ref_replace_at(.x, ..., .add = FALSE)`
 #' replace values at given indices. If a given index is invalid, an error is
 #' signaled unless `.add` was set to `TRUE`.
 #' @examples
@@ -93,7 +94,7 @@ NULL
 
 #' @rdname replace_at
 #' @export
-replace_at_.Container <- function(.x, ..., .add = FALSE)
+ref_replace_at.Container <- function(.x, ..., .add = FALSE)
 {
     res = .dissect_and_verify_values(list(...))
     indices = res[["indices"]]
@@ -137,12 +138,12 @@ replace_at_.Container <- function(.x, ..., .add = FALSE)
 #' replace_at(dit, x = 1, .add = TRUE)      # ok (adds column)
 replace_at.dict.table <- function(.x, ..., .add = FALSE)
 {
-    (replace_at_(copy(.x), ..., .add = .add))
+    (ref_replace_at(copy(.x), ..., .add = .add))
 }
 
 #' @rdname replace_at
 #' @export
-replace_at_.dict.table <- function(.x, ..., .add = FALSE)
+ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
 {
     if (F) {
         if (!add && !has(.x, key)) {
@@ -185,9 +186,9 @@ replace_at_.dict.table <- function(.x, ..., .add = FALSE)
 #' @rdname dict.table
 #' @usage
 #' replace_at(.x, ..., .add = FALSE)
-#' replace_at_(.x, ..., .add = FALSE)
+#' ref_replace_at(.x, ..., .add = FALSE)
 #' @details
-#' * `replace_at(.x, .., .add = FALSE)` and `replace_at_(.x, ..., .add = FALSE)`
+#' * `replace_at(.x, .., .add = FALSE)` and `ref_replace_at(.x, ..., .add = FALSE)`
 #' replace values at given indices. If a given index is invalid, an error is
 #' signaled unless `.add` was set to `TRUE`.
 #' @examples

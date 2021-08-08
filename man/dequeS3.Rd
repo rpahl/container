@@ -29,13 +29,13 @@ is.deque(x)
 ## Deque S3 methods
 
 addleft(.x, ...)
-addleft_(.x, ...)
+ref_addleft(.x, ...)
 
 peek(x, default)
 peekleft(x, default)
 
-pop_(.x)
-popleft_(.x)
+ref_pop(.x)
+ref_popleft(.x)
 
 rotate(x, n)
 }
@@ -95,7 +95,7 @@ the element was contained in \code{x}.
 
 \itemize{
 \item \code{addleft(.x, ...)} adds (possibly named) elements to left side of \code{.x}.
-\item \code{addleft_(.x, ...)} same as \code{addleft(.x, ...)} but adds by reference.
+\item \code{ref_addleft(.x, ...)} same as \code{addleft(.x, ...)} but adds by reference.
 }
 
 \itemize{
@@ -106,8 +106,8 @@ return \code{default}.
 }
 
 \itemize{
-\item \code{pop_(.x)} pop last element. If \code{.x} is empty, an error is given.
-\item \code{popleft_(.x)} pop first element. If \code{.x} is empty, an error is given.
+\item \code{ref_pop(.x)} pop last element. If \code{.x} is empty, an error is given.
+\item \code{ref_popleft(.x)} pop first element. If \code{.x} is empty, an error is given.
 }
 
 \itemize{
@@ -166,13 +166,13 @@ peek(deque())
 peek(deque(), default = 0)
 peekleft(deque(), default = 0)
 d = deque(1, 2, 3)
-pop_(d)
+ref_pop(d)
 print(d)
-popleft_(d)
+ref_popleft(d)
 print(d)
 
 \dontrun{
-pop_(deque())  # pop at empty Deque}
+ref_pop(deque())  # pop at empty Deque}
 
 d = deque(1, 2, 3, 4)
 rotate(d)

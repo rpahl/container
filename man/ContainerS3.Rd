@@ -57,30 +57,30 @@ is.container(x)
 ## Container S3 methods
 
 add(.x, ...)
-add_(.x, ...)
+ref_add(.x, ...)
 
 at(.x, ...,)
 
 at2(x, index)
 
 clear(x)
-clear_(x)
+ref_clear(x)
 
 clone(x)
 
 count(x)
 
 delete(.x, ...)
-delete_(.x, ...)
+ref_delete(.x, ...)
 
 delete_at(.x, ...)
-delete_at_(.x, ...)
+ref_delete_at(.x, ...)
 
 discard(.x, ...)
-discard_(.x, ...)
+ref_discard(.x, ...)
 
 discard_at(.x, ...)
-discard_at_(.x, ...)
+ref_discard_at(.x, ...)
 
 has(x, elem)
 
@@ -93,10 +93,10 @@ peek_at(x, ..., .default = NULL)
 peek_at2(x, index, default)
 
 replace(.x, old, new, add = FALSE)
-replace_(.x, old, new, add = FALSE)
+ref_replace(.x, old, new, add = FALSE)
 
 replace_at(.x, ..., .add = FALSE)
-replace_at_(.x, ..., .add = FALSE)
+ref_replace_at(.x, ..., .add = FALSE)
 }
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the \code{Container}.}
@@ -201,7 +201,7 @@ not equal.
 }
 
 \itemize{
-\item \code{add(.x, ...)} and \code{add_(.x, ...)} add elements to \code{.x}.
+\item \code{add(.x, ...)} and \code{ref_add(.x, ...)} add elements to \code{.x}.
 }
 
 \itemize{
@@ -215,7 +215,7 @@ if not found.
 }
 
 \itemize{
-\item \code{clear(x)} and \code{clear_(x)} remove all elements from \code{x}.
+\item \code{clear(x)} and \code{ref_clear(x)} remove all elements from \code{x}.
 }
 
 \itemize{
@@ -227,22 +227,22 @@ if not found.
 }
 
 \itemize{
-\item \code{delete(.x, ...)} and \code{delete_(.x, ...)} find and remove elements.
+\item \code{delete(.x, ...)} and \code{ref_delete(.x, ...)} find and remove elements.
 If one or more elements don't exist, an error is signaled.
 }
 
 \itemize{
-\item \code{delete_at(.x, ...)} and \code{delete_at_(.x, ...)} find and remove values at
+\item \code{delete_at(.x, ...)} and \code{ref_delete_at(.x, ...)} find and remove values at
 given indices. If any given index is invalid, an error is signaled.
 }
 
 \itemize{
-\item \code{discard(.x, ...)} and \code{discard_(.x, ...)} find and discard elements.
+\item \code{discard(.x, ...)} and \code{ref_discard(.x, ...)} find and discard elements.
 Elements that don't exist, are ignored.
 }
 
 \itemize{
-\item \code{discard_at(.x, ...)} and \code{discard_at_(.x, ...)} find and discard values
+\item \code{discard_at(.x, ...)} and \code{ref_discard_at(.x, ...)} find and discard values
 at given indices. Invalid indices are ignored.
 }
 
@@ -270,13 +270,13 @@ not found) the given default value.
 
 \itemize{
 \item \code{replace(.x, old, new, add = FALSE)} and
-\code{replace_(.x, old, new, add = FALSE)} try to find element \code{old} and
+\code{ref_replace(.x, old, new, add = FALSE)} try to find element \code{old} and
 replace it with element \code{new}. If \code{old} does not exist, an error is raised,
 unless \code{add} was set to \code{TRUE}.
 }
 
 \itemize{
-\item \code{replace_at(.x, .., .add = FALSE)} and \code{replace_at_(.x, ..., .add = FALSE)}
+\item \code{replace_at(.x, .., .add = FALSE)} and \code{ref_replace_at(.x, ..., .add = FALSE)}
 replace values at given indices. If a given index is invalid, an error is
 signaled unless \code{.add} was set to \code{TRUE}.
 }
@@ -344,7 +344,7 @@ at2(co, 5)       # index 5 exceeds length of Container}
 co = container(1, 2, mean)
 clear(co)
 print(co)    # Original was not touched
-clear_(co)   # Clears original
+ref_clear(co)   # Clears original
 print(co)
 
 co = container(1, 2, 3)
