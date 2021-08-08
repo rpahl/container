@@ -50,6 +50,16 @@ option \code{add}).
 }
 \examples{
 
+co = container(a = 0, b = "z")
+replace_at(co, a = 1)
+replace_at(co, 1, 1)                 # same
+replace_at(co, "a", 1)               # same
+
+\dontrun{
+replace_at(co, x = 1)                # names(s) not found: 'x'}
+replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
+
+
 dit = dict.table(a = 1:3, b = 4:6)
 replace_at(dit, a = 3:1)
 replace_at(dit, 1, 3:1)                  # same
