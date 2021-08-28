@@ -41,7 +41,7 @@ container <- function(...)
 }
 
 #' @rdname ContainerS3
-#' @details * `as.container(x)` coerces `x` to a container.
+#' @details * `as.container(x)` coerces `x` to a `container`
 #' @export
 as.container <- function(x)
 {
@@ -53,8 +53,7 @@ methods::setAs("list", "Container", function(from) as.container(from))
 
 
 #' @rdname ContainerS3
-#' @details * `is.container(x)` returns `TRUE` if `x` is of class `Container`
-#' and `FALSE` otherwise.
+#' @details * `is.container(x)` check if `x` is `container`
 #' @export
 is.container <- function(x) inherits(x, "Container")
 

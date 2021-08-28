@@ -59,14 +59,11 @@ methods with some of them being overridden to account for the associative
 key-value pair semantic.
 }
 \details{
-For a full list of all dict methods see \code{\link[=Dict]{Dict()}}.
-
 Internally, all key-value pairs are stored in a hash-table and the
 elements are sorted lexicographically by their keys.
 Methods that alter \code{Dict} objects usually come in two versions
-providing either copy or reference semantics where the latter are visible
-by an underscore appended to the standard function name, for example,
-\verb{[delete()]} and \verb{[delete_()]}.
+providing either copy or reference semantics where the latter start with
+\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
 \subsection{Methods}{
 }
 
@@ -174,6 +171,7 @@ add(d, b = 2, co = container(1:3))
 
 \dontrun{
 add(d, a = 7:9)  # key 'a' already in Dict}
+
 co = container(a = 1, b = 2, 3)
 rename(co, c("a", "b"), c("a1", "y"))
 print(co)
@@ -183,8 +181,10 @@ print(co)
 d = dict(a = 1, b = "z")
 replace(d, 1, 1:5)
 replace(d, "z", "a")
+
 \dontrun{
 replace(d, "a", 2)              # old element ("a") is not in Dict}
+
 
 d1 = dict(a = 1, b = 2)
 d2 = dict(       b = 0, c = 3)

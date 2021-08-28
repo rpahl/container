@@ -66,7 +66,7 @@ clear.dict.table <- function(x) dict.table()
 #' clear(x)
 #' ref_clear(x)
 #' @details
-#' * `clear(x)` and ref_clear(x) remove all elements from `x`.
+#' * `clear(x)` and `ref_clear(x)` remove all elements from `x`.
 #' @examples
 #'
 #' dit = dict.table(a = 1, b = 2)

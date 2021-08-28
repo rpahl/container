@@ -59,23 +59,43 @@ NULL
 
 
 #' @rdname pop
-#' @return For `Dict` the value at the given index after it was removed from
-#' the dict. If `index` is not found, an error is raised.
+#' @return For `Container` the value at the given index after it was removed from
+#' the `Container` object. If `index` is not found, an error is raised.
 #' @export
 #' @examples
 #'
-#' # Dict
-#' d = dict(a = 1, b = 1:3)
-#' ref_pop(d, "b")
-#' ref_pop(d, 1)
+#' # Container
+#' co = container(a = 1, b = 1:3, d = "foo")
+#' ref_pop(co, "b")
+#' ref_pop(co, 1)
 #'
 #' \dontrun{
-#' ref_pop(d, "x")  # index 'x' not found}
-ref_pop.Dict <- function(.x, index) .x$pop(index)
+#' ref_pop(co, "x")  # index 'x' not found}
+#'
+ref_pop.Container <- function(.x, index) .x$pop(index)
+
+#' @name pop.Container
+#' @rdname ContainerS3
+#' @usage
+#' ref_pop(.x, index)
+#' @details
+#' * `ref_pop(.x, index)` return element at given index and remove it
+#' from the `container` object.
+#' @examples
+#'
+#' co = container(a = 1, b = 1:3, d = "foo")
+#' ref_pop(co, "b")
+#' ref_pop(co, 1)
+#'
+#' \dontrun{
+#' ref_pop(co, "x")  # index 'x' not found}
+#'
+NULL
+
 
 #' @rdname pop
 #' @return For `dict.table`, returns the column at the given `index` after it was
-#' removed from the dict.table. If column does not exist, an error is raised.
+#' removed from the `dict.table`. If column does not exist, an error is raised.
 #' @export
 #' @examples
 #'
@@ -98,7 +118,7 @@ ref_pop.dict.table <- function(.x, index)
 #' @name pop.dict.table
 #' @rdname dict.table
 #' @usage
-#' ref_pop(.x)
+#' ref_pop(.x, index)
 #' @details
 #' * `ref_pop(.x, index)` return element at given column index and remove the
 #' column from the dict.table object.

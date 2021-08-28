@@ -143,7 +143,7 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 
 #' @name peek_at2.dict.table
 #' @rdname dict.table
-#' @param index `character` name or `numeric` position of the sought value.
+#' @param index `character` column name or `numeric` position of column
 #' @usage
 #' peek_at2(x, index, default = NULL)
 #' @details

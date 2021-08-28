@@ -133,6 +133,7 @@ ref_addleft.Deque <- function(.x, ...)
 #'
 #' \dontrun{
 #' add(d, a = 7:9)  # key 'a' already in Dict}
+#'
 add.Dict <- function(.x, ...)
 {
     (ref_add(.x$clone(deep = TRUE), ...))
@@ -160,6 +161,7 @@ NULL
 #'
 #' \dontrun{
 #' add(d, a = 7:9)  # key 'a' already in Dict}
+#'
 NULL
 
 
@@ -206,7 +208,7 @@ add.dict.table <- function(.x, ...)
 #' add(.x, ...)
 #' ref_add(.x, ...)
 #' @details
-#' * `add(.x, ...)` and ref_add(.x, ...) add columns to `.x`. If the column name
+#' * `add(.x, ...)` and `ref_add(.x, ...)` add columns to `.x`. If the column name
 #' already exists, an error is given.
 #' @examples
 #'

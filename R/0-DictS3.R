@@ -4,7 +4,6 @@
 #' as a specialized associative [Container()] thus sharing all [container()]
 #' methods with some of them being overridden to account for the associative
 #' key-value pair semantic.
-#' @details For a full list of all dict methods see [Dict()].
 #' @param ... elements put into the `Dict`.
 #' @param x,y `R` object of `ANY` type for [as.dict()] and [is.dict()]
 #' or of class `Dict` for the `S3` methods.
@@ -15,9 +14,8 @@
 #' @details Internally, all key-value pairs are stored in a hash-table and the
 #' elements are sorted lexicographically by their keys.
 #' Methods that alter `Dict` objects usually come in two versions
-#' providing either copy or reference semantics where the latter are visible
-#' by an underscore appended to the standard function name, for example,
-#' `[delete()]` and `[delete_()]`.
+#' providing either copy or reference semantics where the latter start with
+#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
 #' ## Methods
 #' @examples
 #' d = dict(a = 1, b = "one", f = mean, na = NA)

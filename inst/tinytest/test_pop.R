@@ -12,9 +12,19 @@ expect_error(ref_pop(deque()), "pop at empty Deque")
 expect_error(ref_popleft(deque()), "popleft at empty Deque")
 
 
-# ---------
-# pop_.Dict
-# ---------
+# -----------------
+# ref_pop.Container
+# -----------------
+co = container(a = 1, b = 1:3, d = "foo")
+
+ee(ref_pop(co, "b"), 1:3)
+ee(ref_pop(co, "a"), 1)
+expect_error(ref_pop(co, "x"), "index 'x' not found")
+
+
+# ------------
+# ref_pop.Dict
+# ------------
 d = dict(a = 1, b = 1:3)
 expect_error(ref_pop(d, "x"), "index 'x' not found")
 
@@ -23,9 +33,9 @@ ee(ref_pop(d, "a"), 1)
 expect_error(ref_pop(d, "x"), "pop at empty Dict")
 
 
-# ---------------
-# pop_.dict.table
-# ---------------
+# ------------------
+# ref_pop.dict.table
+# ------------------
 dit = dict.table(a = 1:3, b = 4:6)
 
 ee(ref_pop(dit, "a"), 1:3)

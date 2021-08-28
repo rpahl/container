@@ -85,6 +85,7 @@ add(d, b = 2, co = container(1:3))
 \dontrun{
 add(d, a = 7:9)  # key 'a' already in Dict}
 
+
 dit = dict.table(a = 1:3)
 add(dit, b = 3:1, d = 4:6)
 

@@ -85,8 +85,10 @@ ref_replace.Container <- function(.x, old, new, add = FALSE)
 #' d = dict(a = 1, b = "z")
 #' replace(d, 1, 1:5)
 #' replace(d, "z", "a")
+#'
 #' \dontrun{
 #' replace(d, "a", 2)              # old element ("a") is not in Dict}
+#'
 #' @export
 replace.Dict <- function(.x, old, new)
 {
@@ -116,7 +118,9 @@ ref_replace.Dict <- function(.x, old, new)
 #' d = dict(a = 1, b = "z")
 #' replace(d, 1, 1:5)
 #' replace(d, "z", "a")
+#'
 #' \dontrun{
 #' replace(d, "a", 2)              # old element ("a") is not in Dict}
+#'
 NULL
 

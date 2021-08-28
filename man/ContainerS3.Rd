@@ -3,7 +3,7 @@
 %   R/GroupGenericMath.R, R/GroupGenericSummary.R, R/Ops-arithmetic.R,
 %   R/Ops-compare.R, R/add.R, R/at.R, R/at2.R, R/clear.R, R/clone.R,
 %   R/count.R, R/delete.R, R/delete_at.R, R/discard.R, R/discard_at.R, R/has.R,
-%   R/has_name.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R, R/replace.R,
+%   R/has_name.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R, R/pop.R, R/replace.R,
 %   R/replace_at.R
 \name{ContainerS3}
 \alias{ContainerS3}
@@ -34,6 +34,7 @@
 \alias{is_empty.Container}
 \alias{peek_at.Container}
 \alias{peek_at2.Container}
+\alias{pop.Container}
 \alias{replace.Container}
 \alias{replace_at.Container}
 \title{Container methods}
@@ -92,6 +93,8 @@ peek_at(x, ..., .default = NULL)
 
 peek_at2(x, index, default)
 
+ref_pop(.x, index)
+
 replace(.x, old, new, add = FALSE)
 ref_replace(.x, old, new, add = FALSE)
 
@@ -147,12 +150,11 @@ by an underscore appended to the standard function name, for example,
 }
 
 \itemize{
-\item \code{as.container(x)} coerces \code{x} to a container.
+\item \code{as.container(x)} coerces \code{x} to a \code{container}
 }
 
 \itemize{
-\item \code{is.container(x)} returns \code{TRUE} if \code{x} is of class \code{Container}
-and \code{FALSE} otherwise.
+\item \code{is.container(x)} check if \code{x} is \code{container}
 }
 
 \itemize{
@@ -268,6 +270,11 @@ or (if not found) the given default value.
 \itemize{
 \item \code{peek_at2(x, index, default)} returns the value at the given index or (if
 not found) the given default value.
+}
+
+\itemize{
+\item \code{ref_pop(.x, index)} return element at given index and remove it
+from the \code{container} object.
 }
 
 \itemize{
@@ -411,6 +418,14 @@ peek_at2(co, 1)
 peek_at2(co, "a")
 peek_at2(co, "x")
 peek_at2(co, "x", default = 0)
+
+co = container(a = 1, b = 1:3, d = "foo")
+ref_pop(co, "b")
+ref_pop(co, 1)
+
+\dontrun{
+ref_pop(co, "x")  # index 'x' not found}
+
 
 co = container("x", 9)
 replace(co, 9, 0)

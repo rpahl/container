@@ -75,7 +75,7 @@ has_name.dict.table <- function(x, name)
 
 #' @name has.dict.table
 #' @rdname dict.table
-#' @param name `character` the name to be found.
+#' @param name `character` a column name
 #' @usage
 #' has_name(x, name)
 #' @details

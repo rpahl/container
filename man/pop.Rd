@@ -6,7 +6,7 @@
 \alias{ref_popleft}
 \alias{ref_pop.Deque}
 \alias{ref_popleft.Deque}
-\alias{ref_pop.Dict}
+\alias{ref_pop.Container}
 \alias{ref_pop.dict.table}
 \title{Pop element}
 \usage{
@@ -18,7 +18,7 @@ ref_popleft(.x, ...)
 
 \method{ref_popleft}{Deque}(.x)
 
-\method{ref_pop}{Dict}(.x, index)
+\method{ref_pop}{Container}(.x, index)
 
 \method{ref_pop}{dict.table}(.x, index)
 }
@@ -33,11 +33,11 @@ ref_popleft(.x, ...)
 For \code{Deque} the first (\code{ref_popleft}) or last (\code{ref_pop}) element of
 the deque after it was removed.
 
-For \code{Dict} the value at the given index after it was removed from
-the dict. If \code{index} is not found, an error is raised.
+For \code{Container} the value at the given index after it was removed from
+the \code{Container} object. If \code{index} is not found, an error is raised.
 
 For \code{dict.table}, returns the column at the given \code{index} after it was
-removed from the dict.table. If column does not exist, an error is raised.
+removed from the \code{dict.table}. If column does not exist, an error is raised.
 }
 \description{
 Search and return an element and remove it afterwards from the object.
@@ -58,13 +58,14 @@ ref_popleft(d)
 \dontrun{
 ref_pop(deque())  # pop at empty Deque}
 
-# Dict
-d = dict(a = 1, b = 1:3)
-ref_pop(d, "b")
-ref_pop(d, 1)
+# Container
+co = container(a = 1, b = 1:3, d = "foo")
+ref_pop(co, "b")
+ref_pop(co, 1)
 
 \dontrun{
-ref_pop(d, "x")  # index 'x' not found}
+ref_pop(co, "x")  # index 'x' not found}
+
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)

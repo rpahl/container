@@ -17,25 +17,23 @@
 }
 
 
-#' dict.table
+#' @title dict.table
 #'
-#' @description The [dict.table()] is a mix of a dictionary and a
-#' `data.table`, that is, it can be considered as a dictionary with
-#' all elements having the same length or as a data.table with extended
+#' @description The [dict.table()] is a mix of a [dict()] and a
+#' `data.table`, that is, it can be considered as a data.table with extended
 #' functionality to manage its data columns.
-#' A dict.table object behaves like both a dict and a data.table, so that
-#' all dict and data.table functions and operators are available.
+#' As a result, a dict.table object provides all [dict()] and [data.table()]
+#' functions and operators at the same time.
 #'
-#' As with [Dict()] objects, it provides reference semantics so that changes
-#' like insertion and deletion of elements are done on the original object.
-#' @param ... elements of the form `key = value` to be put into the
-#' `dict.table` and/or additional arguments to be passed to the
-#' [data.table::data.table()] constructor.
+#' @param ... elements put into the `dict.table` and/or additional arguments
+#' to be passed on.
 #' @param x any `R` object or a `dict.table` object.
+#' @name dict.table
 #' @note In contrast to [data.table()], [dict.table()] does not allow duplicated keys.
 #' @import data.table
 #' @seealso [dict()], [data.table::data.table()]
-#' @export
+#' @details
+#' ## Methods
 #' @examples
 #' # Some basic examples using some typical data.table and dict operations.
 #' # The constructor can take the 'key' argument known from data.table():
@@ -56,6 +54,14 @@
 #' has_name(dit, "x")                           # TRUE
 #' ref_pop(dit, "x")                            # get column and remove it
 #' has_name(dit, "x")                           # FALSE
+#'
+NULL
+
+
+#' @rdname dict.table
+#' @details
+#' * `dict.table(...)` initializes and returns a [dict()] object.
+#' @export
 dict.table <- function(...)
 {
     dat <- data.table::data.table(..., check.names = TRUE)
@@ -68,6 +74,8 @@ dict.table <- function(...)
 }
 
 #' @rdname dict.table
+#' @details
+#' * `as.dict.table(x, ...)` coerces `x` to a `dict.table`
 #' @export
 as.dict.table <- function(x, ...)
 {
@@ -116,6 +124,7 @@ as.dict.table.default <- function(x, ...)
 }
 
 #' @rdname dict.table
+#' @details * `is.dict.table(x)` check if `x` is a `dict.table`
 #' @export
 is.dict.table <- function(x) inherits(x, "dict.table")
 
