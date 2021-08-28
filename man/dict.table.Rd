@@ -112,7 +112,7 @@ functions and operators at the same time.
 }
 
 \itemize{
-\item \code{as.dict.table(x, ...)} coerces x to a \code{dict.table}
+\item \code{as.dict.table(x, ...)} coerces \code{x} to a \code{dict.table}
 }
 
 \itemize{

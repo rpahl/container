@@ -12,6 +12,10 @@ ee(peek_at2(container(), 1, default = 0), 0)
 ee(peek_at2(co), NULL)
 ee(peek_at2(co, default = 1), 1)
 
+expect_error(peek_at2(co, 1:2), "index must be of length 1")
+expect_error(peek_at2(co, c("a", "b")), "index must be of length 1")
+expect_error(peek_at2(co, NA), "index must not be 'NA'")
+
 # -------------
 # peek_at2.Dict
 # -------------
@@ -48,6 +52,9 @@ ee(peek_at2(dit, 1), 1:3)
 ee(peek_at2(dit, 3), NULL)
 ee(peek_at2(dit, "x"), NULL)
 ee(peek_at2(dit, "x", default = 0), rep(0, 3))
+
+expect_error(peek_at2(dit, 1:2), "index must be of length 1")
+expect_error(peek_at2(dit, NA), "index must not be 'NA'")
 
 expect_warning(peek_at2(dit, "x", default = 1:2),
                "did not match number of rows")

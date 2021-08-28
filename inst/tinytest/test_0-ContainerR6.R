@@ -338,16 +338,17 @@ ee(container()$peek_at2(1, default = 0), 0)
 ee(co$peek_at2(), NULL)
 ee(co$peek_at2(default = 1), 1)
 
-ee(co$peek_at2(1:2), NULL)
-ee(co$peek_at2(1:2, default = 0), 0)
+expect_error(co$peek_at2(1:2), "index must be of length 1")
+expect_error(co$peek_at2(c("a", "b")), "index must be of length 1")
+expect_error(co$peek_at2(NA), "index must not be 'NA'")
+
 ee(co$peek_at2(0), NULL)
 ee(co$peek_at2(0, default = "foo"), "foo")
 ee(co$peek_at2(-1), NULL)
 ee(co$peek_at2(-1, default = "foo"), "foo")
 ee(co$peek_at2(5, default = 0), 0)
-ee(co$peek_at2(as.numeric(NA), default = 0), 0)
-ee(co$peek_at2(c("a", "b"), 0), 0)
 ee(co$peek_at2("c", 0), 0)
+
 
 # ---
 # pop

@@ -265,6 +265,8 @@ Container <- R6::R6Class("Container",
             if (missing(index) || self$is_empty())
                 return(default)
 
+            .assert_index_arg(index)
+
             tryCatch(self$at2(index), error = function(e) default)
         },
 

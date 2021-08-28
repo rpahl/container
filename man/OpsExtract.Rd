@@ -8,6 +8,8 @@
 
 \item{j}{\code{numeric} or \code{character} indices to extract.}
 
+\item{...}{indices of elements to be extracted}
+
 \item{name}{a literal character string or a name (possibly backtick quoted).}
 }
 \value{
