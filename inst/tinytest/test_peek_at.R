@@ -32,6 +32,8 @@ expect_error(peek_at(d, 1, 1), "duplicated keys")
 ee(peek_at(d), d)
 ee(peek_at(d, NULL), dict())
 
+ee(peek_at(d, 1:2, "x", "y"), d)
+
 ee(peek_at(d, "b"), dict(b = 1:3))
 ee(peek_at(d, "x"), dict())
 ee(peek_at(d, 1), dict(a = 1))
@@ -82,9 +84,9 @@ ee(peek_at(dit, list(x = "a")), dit[, 1])
 ee(peek_at(dit, list("a", "b", z = 9), .default = 9),
    cbind(dit, dict.table(z = c(9, 9, 9))))
 # The above does not work if specified outside a list unless default is NULL
-expect_error(peek_at(d, "a", "b", z = 9, .default = 9),
+expect_error(peek_at(dit, "a", "b", z = 9, .default = 9),
              "all elements must be named")
-ee(peek_at(d, "a", "b", z = 9), d)
+ee(peek_at(dit, "a", "b", z = 9), dit)
 
 suppressWarnings({
     ee(peek_at(dit, "x", .default = 1:2), dict.table(x = c(1, 2, 1)))
