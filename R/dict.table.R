@@ -40,21 +40,22 @@
 #' # Some basic examples using some typical data.table and dict operations.
 #' # The constructor can take the 'key' argument known from data.table():
 #' dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
-#' dit
+#' print(dit)
 #' setkey(dit, "x")                             # sort by 'x'
-#' dit
-#' (add(dit, "v", 1:9))                         # add column v = 1:9
+#' print(dit)
+#' (add(dit, "v" = 1:9))                        # add column v = 1:9
 #' dit[y > 5]
-#' (discard(dit, "x"))                          # discard column 'x'
+#' (ref_discard_at(dit, "x"))                   # discard column 'x'
+#'
 #' \dontrun{
-#'     getval(dit, "x")                         # column 'x' does not exist
-#'     setval(dit, "x", 0)                      # cannot be set, if not exist
-#' }
-#' (setval(dit, "x", 0, add = TRUE))            # ok - re-adds column 'x' with all 0s
-#' peek(dit, "x")                               # glance at column 'x'
-#' has(dit, "x")                                # TRUE
-#' pop(dit, "x")                                # get column and remove it
-#' has(dit, "x")                                # FALSE
+#' at(dit, "x")                                 # index 'x' not found
+#' replace_at(dit, "x" = 0)                     # cannot be replaced, if it does not exist}
+#'
+#' dit = replace_at(dit, "x" = 0, .add = TRUE)  # ok - re-adds column 'x' with all 0s
+#' peek_at(dit, "x")                            # glance at column 'x'
+#' has_name(dit, "x")                           # TRUE
+#' ref_pop(dit, "x")                            # get column and remove it
+#' has_name(dit, "x")                           # FALSE
 dict.table <- function(...)
 {
     dat <- data.table::data.table(..., check.names = TRUE)
@@ -122,7 +123,7 @@ is.dict.table <- function(x) inherits(x, "dict.table")
 #' @export
 #' @examples
 #'
-#' Copy and reference semantics when coercing *to* a data.table
+#' # Copy and reference semantics when coercing *to* a data.table
 #' dit = dict.table(a = 1, b = 2)
 #' dat = as.data.table(dit)
 #' is.data.table(dat)                           # TRUE
@@ -164,10 +165,11 @@ print.dict.table <- function(x, ...)
 #' dit = dict.table(a = 1:2, b = 1:2)
 #' rbind(dit, dit)
 #'
+#' # rbind ...
 #' dit = dict.table(a = 1:2, b = 1:2)
 #' rbind(dit, dit)
 #'
-#' # Also works with data.tables
+#' # ... can be mixed with data.tables
 #' dat = data.table(a = 3:4, b = 3:4)
 #' rbind(dit, dat)  # yields a dict.table
 #' rbind(dat, dit)  # yields a data.table
@@ -182,13 +184,15 @@ rbind.dict.table <- function(x, ...)
 #' @rdname dict.table
 #' @export
 #' @examples
+#'
+#' # cbind ...
 #' dit = dict.table(a = 1:2, b = 1:2)
 #' dit2 = dict.table(c = 3:4, d = 5:6)
 #' cbind(dit, dit2)
 #'
-#' # Also works with data.tables
-#' dit = dict.table(a = 1:2, b = 3:4)
-#' rbind(dit, dit)
+#' # ... can be mixed with data.tables
+#' dat = data.table(x = 3:4, y = 3:4)
+#' cbind(dit, dat)
 cbind.dict.table <- function(x, ...)
 {
     dots <- list(...)

@@ -10,7 +10,7 @@
 #'
 #' `peekleft` peek at first element of a `Deque`.
 #' @param .x an `R` object of the respective class.
-#' @param index vector of indices.
+#' @param index `character` name or `numeric` position of the sought value.
 #' @param default value to be returned if peeked value does not exist.
 #' @param ... additional arguments to be passed to or from methods.
 #' @seealso [at2()] for strict element extraction
@@ -52,6 +52,7 @@ peek_at2.Container <- function(x, index, default = NULL)
 
 #' @name peek_at2.Container
 #' @rdname ContainerS3
+#' @param index `character` name or `numeric` position of the sought value.
 #' @usage
 #' peek_at2(x, index, default)
 #' @details
@@ -142,10 +143,11 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 
 #' @name peek_at2.dict.table
 #' @rdname dict.table
+#' @param index `character` name or `numeric` position of the sought value.
 #' @usage
-#' peek_at2(x, index, default)
+#' peek_at2(x, index, default = NULL)
 #' @details
-#' * `peek_at2(x, index, default)` return column named `index` if it exist
+#' * `peek_at2(x, index, default = NULL)` return column named `index` if it exist
 #' otherwise the given `default` value. If the default length does not match
 #' the number of rows, it is recycled accordingly and a warning is given,
 #' unless the default value has a length of 1, in which case recycling is

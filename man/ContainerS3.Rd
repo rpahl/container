@@ -110,6 +110,8 @@ or of class \code{Container} for the \code{S3} methods.}
 
 \item{name}{\code{character} the name to be found.}
 
+\item{index}{\code{character} name or \code{numeric} position of the sought value.}
+
 \item{old}{old element to be found and replaced.}
 
 \item{new}{the new element replacing the old one.}

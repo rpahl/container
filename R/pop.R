@@ -7,9 +7,10 @@
 #' All functions work by reference, that is, the original object is altered.
 #' `ref_pop(.x)` tries to access specific values.
 #'
-#' `ref_poplefref_popleft(.x)` pops first element of a `Deque`.
+#' `ref_popleft(.x)` pops first element of a `Deque`.
 #'
 #' @param .x any `R` object.
+#' @param index `character` name or `numeric` position of value to be popped
 #' @param ... additional arguments to be passed to or from methods.
 #' @seealso [peek()]
 #' @export
@@ -58,24 +59,22 @@ NULL
 
 
 #' @rdname pop
-#' @param key `character` name of the value to pop.
-#' the associated key-value pair is deleted and it's value returned.
-#' @return For `Dict` the value associated with the key after the key-value
-#' pair was removed from the dict. If `key` is not found, an error is raised.
+#' @return For `Dict` the value at the given index after it was removed from
+#' the dict. If `index` is not found, an error is raised.
 #' @export
 #' @examples
 #'
 #' # Dict
 #' d = dict(a = 1, b = 1:3)
 #' ref_pop(d, "b")
-#' print(d)
+#' ref_pop(d, 1)
 #'
 #' \dontrun{
-#' ref_pop(d, "x")  # key 'x' not in Dict}
-ref_pop.Dict <- function(.x, key) .x$pop(key)
+#' ref_pop(d, "x")  # index 'x' not found}
+ref_pop.Dict <- function(.x, index) .x$pop(index)
 
 #' @rdname pop
-#' @return For `dict.table`, returns the column named `key` after it was
+#' @return For `dict.table`, returns the column at the given `index` after it was
 #' removed from the dict.table. If column does not exist, an error is raised.
 #' @export
 #' @examples
@@ -83,14 +82,33 @@ ref_pop.Dict <- function(.x, key) .x$pop(key)
 #' # dict.table
 #' dit = dict.table(a = 1:3, b = 4:6)
 #' ref_pop(dit, "a")
-#' print(dit)
+#' ref_pop(dit, 1)
+#'
 #' \dontrun{
-#' ref_pop(dit, "x")  # Column 'x' not in dict.table}
-ref_pop.dict.table <- function(.x, key)
+#' ref_pop(dit, "x")  # index 'x' not found}
+#'
+ref_pop.dict.table <- function(.x, index)
 {
-    elem <- at2(.x, key)
-    ref_delete_at.dict.table(.x, key)
+    elem <- at2(.x, index)
+    ref_delete_at.dict.table(.x, index)
     elem
 }
 
 
+#' @name pop.dict.table
+#' @rdname dict.table
+#' @usage
+#' ref_pop(.x)
+#' @details
+#' * `ref_pop(.x, index)` return element at given column index and remove the
+#' column from the dict.table object.
+#' @examples
+#'
+#' dit = dict.table(a = 1:3, b = 4:6)
+#' ref_pop(dit, "a")
+#' ref_pop(dit, 1)
+#'
+#' \dontrun{
+#' ref_pop(dit, "x")  # index 'x' not found}
+#'
+NULL

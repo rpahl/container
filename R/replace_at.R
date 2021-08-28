@@ -195,8 +195,10 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
 #'
 #' dit = dict.table(a = 1:3)
 #' replace_at(dit, "a", 3:1)
+#'
 #' \dontrun{
 #' replace_at(dit, "b", 4:6)               # column 'b' not in dict.table}
-#' replace_at(dit, "b", 4:6, add = TRUE)   # ok, adds value
+#'
+#' replace_at(dit, "b", 4:6, add = TRUE)   # ok, adds column
 NULL
 

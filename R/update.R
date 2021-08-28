@@ -105,10 +105,12 @@ ref_update.dict.table <- function(x, other)
 #' * `update(x, other)` and `ref_update(x, other)` adds columns of `other` dict
 #' that are not yet in `x` and replaces the values at existing columns.
 #' @examples
+#'
+#' # Update parts of tables (second overwrites columns of the first)
 #' dit1 = dict.table(a = 1:2, b = 3:4)
 #' dit2 = dict.table(         b = 5:6, c = 8:9)
-#' update(d1, d2)
-#' update(d2, d1)
+#' update(dit1, dit2)
+#' update(dit2, dit1)
 NULL
 
 

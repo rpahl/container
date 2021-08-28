@@ -55,9 +55,9 @@ ref_clear.Container <- function(x)
 #'
 #' dit = dict.table(a = 1, b = 2)
 #' clear(dit)
-#' dit
+#' dit              # original was not touched
 #' ref_clear(dit)
-#' dit
+#' dit              # original was cleared
 clear.dict.table <- function(x) dict.table()
 
 #' @name clear.dict.table

@@ -21,7 +21,8 @@ ref_delete_at <- function(.x, ...) UseMethod("ref_delete_at")
     if (allValid)
         return(TRUE)
 
-    stop("index out of range (length = ", length(.x), "): ", bad_indices[1])
+    stop("index out of range (length = ", length(.x), "): ", bad_indices[1],
+         call. = FALSE)
 }
 
 .has_valid_char_indices.Container <- function(.x, indices)
@@ -32,7 +33,8 @@ ref_delete_at <- function(.x, ...) UseMethod("ref_delete_at")
     if (allValid)
         return(TRUE)
 
-    stop("names(s) not found: ", paste0("'", bad_names, "'", collapse = ", "))
+    stop("names(s) not found: ", paste0("'", bad_names, "'", collapse = ", "),
+         call. = FALSE)
 }
 
 
@@ -106,7 +108,8 @@ ref_delete_at.Container <- function(.x, ...)
     if (allValid)
         return(TRUE)
 
-    stop("index out of range (ncol = ", ncol(.x), "): ", bad_indices[1])
+    stop("index out of range (ncol = ", ncol(.x), "): ", bad_indices[1],
+         call. = FALSE)
 }
 
 
@@ -118,7 +121,9 @@ ref_delete_at.Container <- function(.x, ...)
     if (allValid)
         return(TRUE)
 
-    stop("column(s) not found: ", paste0("'", bad_names, "'", collapse = ", "))
+    stop("column(s) not found: ",
+         paste0("'", bad_names, "'", collapse = ", "),
+         call. = FALSE)
 }
 
 
@@ -149,12 +154,13 @@ delete_at.dict.table <- function(.x, ...)
 #' name or index (or both). If one or more columns don't exist, an error is signaled.
 #' @examples
 #'
-#' dit = as.dict.table(head(sleep))
-#' dit
+#' (dit = as.dict.table(head(sleep)))
 #' delete_at(dit, "ID")
 #' delete_at(dit, "ID", 1)
+#'
 #' \dontrun{
 #' delete_at(dit, "foo")   # Column 'foo' not in dict.table}
+#'
 NULL
 
 

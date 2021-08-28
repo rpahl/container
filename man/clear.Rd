@@ -45,7 +45,7 @@ co
 
 dit = dict.table(a = 1, b = 2)
 clear(dit)
-dit
+dit              # original was not touched
 ref_clear(dit)
-dit
+dit              # original was cleared
 }

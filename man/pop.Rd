@@ -18,26 +18,25 @@ ref_popleft(.x, ...)
 
 \method{ref_popleft}{Deque}(.x)
 
-\method{ref_pop}{Dict}(.x, key)
+\method{ref_pop}{Dict}(.x, index)
 
-\method{ref_pop}{dict.table}(.x, key)
+\method{ref_pop}{dict.table}(.x, index)
 }
 \arguments{
 \item{.x}{any \code{R} object.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 
-\item{key}{\code{character} name of the value to pop.
-the associated key-value pair is deleted and it's value returned.}
+\item{index}{\code{character} name or \code{numeric} position of value to be popped}
 }
 \value{
 For \code{Deque} the first (\code{ref_popleft}) or last (\code{ref_pop}) element of
 the deque after it was removed.
 
-For \code{Dict} the value associated with the key after the key-value
-pair was removed from the dict. If \code{key} is not found, an error is raised.
+For \code{Dict} the value at the given index after it was removed from
+the dict. If \code{index} is not found, an error is raised.
 
-For \code{dict.table}, returns the column named \code{key} after it was
+For \code{dict.table}, returns the column at the given \code{index} after it was
 removed from the dict.table. If column does not exist, an error is raised.
 }
 \description{
@@ -48,7 +47,7 @@ If the element is not found, signal an error.
 All functions work by reference, that is, the original object is altered.
 \code{ref_pop(.x)} tries to access specific values.
 
-\code{ref_poplefref_popleft(.x)} pops first element of a \code{Deque}.
+\code{ref_popleft(.x)} pops first element of a \code{Deque}.
 }
 \examples{
 # Deque
@@ -62,17 +61,19 @@ ref_pop(deque())  # pop at empty Deque}
 # Dict
 d = dict(a = 1, b = 1:3)
 ref_pop(d, "b")
-print(d)
+ref_pop(d, 1)
 
 \dontrun{
-ref_pop(d, "x")  # key 'x' not in Dict}
+ref_pop(d, "x")  # index 'x' not found}
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)
 ref_pop(dit, "a")
-print(dit)
+ref_pop(dit, 1)
+
 \dontrun{
-ref_pop(dit, "x")  # Column 'x' not in dict.table}
+ref_pop(dit, "x")  # index 'x' not found}
+
 }
 \seealso{
 \code{\link[=peek]{peek()}}

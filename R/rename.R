@@ -112,7 +112,6 @@ rename.dict.table <- function(.x, old, new, ...)
 
 
 #' @name rename.dict.table
-#' @param ... further arguments passed to [data.table::setnames()]
 #' @rdname dict.table
 #' @usage
 #' rename(.x, old, new, ...)
@@ -122,6 +121,7 @@ rename.dict.table <- function(.x, old, new, ...)
 #' columns from `old` to `new`, respectively, by copy and in place (i.e. by
 #' reference).
 #' @examples
+#'
 #' dit = dict.table(a = 1, b = 2, c = 3)
 #' rename(dit, c("a", "b"), c("a1", "y"))
 #' print(dit)

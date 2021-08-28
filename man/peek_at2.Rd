@@ -25,7 +25,7 @@ peek(x, ...)
 \method{peek_at2}{dict.table}(x, index, default = NULL)
 }
 \arguments{
-\item{index}{vector of indices.}
+\item{index}{\code{character} name or \code{numeric} position of the sought value.}
 
 \item{...}{additional arguments to be passed to or from methods.}
 

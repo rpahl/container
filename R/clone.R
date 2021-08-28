@@ -37,7 +37,9 @@ NULL
 #' @examples
 #'
 #' d = dict.table(a = 1:2, b = 3:4)
-#' clone(d)
+#' d2 = clone(d)
+#' ref_clear(d)
+#' print(d2)
 clone.dict.table <- function(x) (copy(x))
 
 #' @name clone.dict.table
@@ -51,5 +53,7 @@ clone.dict.table <- function(x) (copy(x))
 #'
 #' d = dict.table(a = 1:2, b = 3:4)
 #' clone(d)
+#' ref_clear(d)
+#' print(d2)
 NULL
 
