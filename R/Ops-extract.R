@@ -1,24 +1,57 @@
 #' Extract or Replace Parts of a Container Object
 #'
 #' @description Extract or replace parts of a `Container` object similar
-#' to R's base extract operators on lists.
+#' to R's base extract and replace operators on lists.
 #' @name ExtractContainer
 #' @param x `Container` object for which to extract or replace elements.
 #' @param i,...  indices specifying elements to extract or replace. Indices
 #' are `numeric` or `character` vectors or a `list` containing both.
 #' @param name `character` string (possibly backtick quoted)
 #' @param value the replacing value of `ANY` type
-NULL
-
-#' @rdname ExtractContainer
-#' @export
 #' @usage
 #' x[i]
 #' x[[i]]
 #' x[...]
-`[.Container` <- function(x, ...)
+#'
+#' x[i] <- value
+#' x[[i]] <- value
+#' x$name <- value
+#' @details
+#' `[` selects multiple values. The indices can be `numeric` or
+#' `character` or both. They can be passed as a `vector` or `list` or,
+#' for convenience, just as a comma-separated sequence (see Examples).
+#' Non-existing indices are ignored.
+#'
+#' `[[` selects a single value using a `numeric` or `character` index.
+#'
+#'  `[<-` replaces multiple values. The indices can be `numeric` or
+#' `character` or both. They can be passed as a `vector` or `list`. Values can
+#' be added by 'replacing' at new indices, which only works for `character`
+#' indices.
+#'
+#' `[[<-` replaces a single value at a given `numeric` or `character` index.
+#' Instead of an index, it is also possible to pass an element as a `list`. In
+#' this case, the object is searched for the element and then the element is
+#' replaced by the value (see Examples).
+#'
+#' `$<-` replaces a single element at a given name.
+NULL
+
+#' @name ExtractContainer
+#' @examples
+#' co = container(a = 1, b = 2, c = 3, d = 4)
+#' co[1:2]
+#' co[1, 4]
+#' co["d", 2]
+#' co[list("d", 2)]
+#' co[0:10]
+NULL
+
+#' @export
+"[.Container" <- function(x, ...)
 {
-    dots = tryCatch(list(...), error = identity)
+    dots = tryCatch(as.list(...), error = identity)
+
     if (inherits(dots, "error"))
         return(x)
 
@@ -26,34 +59,63 @@ NULL
 }
 
 
+#' @name ExtractContainer
+#' @examples
+#'
+#' co = container(a = 1, b = 2)
+#' co[[1]]
+#' co[["a"]]
+#' co[["x"]]
+NULL
+
 #' @export
-`[[.Container` <- function(x, i)
+"[[.Container" <- function(x, i)
 {
     x$peek_at2(i)
 }
 
 
-#' @rdname ExtractContainer
 #' @export
-#' @usage
-#' x[i] <- value
-#' x[[i]] <- value
-#' x$name <- value
-`[<-.Container` = function(x, name, value)
+"[<-.Container" = function(x, i, value)
 {
-    #clone(x)$replace_at(name, value, add = TRUE)
+    ref_replace_at(x, i, value, .add = TRUE)
 }
 
-#' @export
-`[[<-.Container` = function(x, name, value)
-{
-    #clone(x)$replace_at(name, value, add = TRUE)
-}
+#' @name ExtractContainer
+#' @examples
+#'
+#' co = container(a = 1, b = 2)
+#' co[[1]] <- 9
+#' co[["b"]] <- 8
+#' co[["x"]] <- 7
+#' co$z <- 99
+#' print(co)
+#'
+#' # Replace 8 by 0
+#' co[[{8}]] <- 0
+#' print(co)
+NULL
 
 #' @export
-`$<-.Container` = function(x, name, value)
+"[[<-.Container" = function(x, i, value)
 {
-    clone(x)$replace_at(name, value, add = TRUE)
+    if (length(i) != 1)
+        stop("index must be of length 1", call. = FALSE)
+
+    isub = substitute(i)
+    char1 = as.character(isub)[1]
+
+    if (grepl(char1, pattern = "{", fixed = TRUE))
+        ref_replace(x, old = i, new = value)
+    else
+        ref_replace_at(x, i, value, .add = TRUE)
+}
+
+
+#' @export
+"$<-.Container" = function(x, name, value)
+{
+    ref_replace_at(x, name, value, .add = TRUE)
 }
 
 

@@ -10,6 +10,9 @@ ee(co["a"], container(a = 1))
 ee(container()[1], container())
 ee(co[""], container())
 ee(co[NULL], container())
+ee(co[integer(0)], container())
+ee(co[0], container())
+ee(co[6], container())
 ee(co[], co)
 
 ee(co["x"], container())
@@ -30,18 +33,22 @@ ee(co[list("b", 1, 4)], co["b", 1, 4])
 # --------------------
 # Container [[ operator
 # --------------------
-co = container(a = 1, 2, b = 3, 4, foo = "bar")
+co = container(a = 1, 2, b = 3, 4, b = "bar")
 
 ee(co[[1]], 1)
 ee(co[[2]], 2)
 ee(co[["a"]], 1)
 ee(container()[[1]], NULL)
 ee(co[[]], NULL)
+ee(co[[0]], NULL)
 ee(co[[""]], NULL)
-expect_error(co[[NULL]], "index must be of length 1")
+ee(co[[6]], NULL)
+ee(co[[NULL]], NULL)
+ee(co[[integer(0)]], NULL)
 
 # list inconsistency
 l = list(a = 1, 2, e = 3)
+#l[[0]] # gives error
 ee(l[[]], 2)
 ee(l[[""]], NULL)
 
@@ -49,16 +56,51 @@ expect_error(co[[1:2]], "index must be of length 1")
 expect_error(co[[c("a", "b")]], "index must be of length 1")
 expect_error(co[[NA]], "index must not be 'NA'")
 
+# ----------------------
+# Container [<- operator
+# ----------------------
+co = container(a = 1, b = "bar")
+co[1:2] <- 1:2
+ee(co, container(a = 1, b = 2))
+expect_error(co[3] <- 3, "index out of range")
+
+co[list(1, "b")] <- 3:4
+ee(co, container(a = 3, b = 4))
+
+# -----------------------
+# Container [[<- operator
+# -----------------------
+co = container(a = 1, b = "bar")
+co[[1]] <- 2
+ee(co, container(a = 2, b = "bar"))
+co[[2]] <- 9
+ee(co, container(a = 2, b = 9))
+
+co[["b"]] <- 0
+co[["x"]] <- 0
+ee(co, container(a = 2, b = 0, x = 0))
+expect_error(co[[4]] <- 1, "index out of range")
+
+co[[{2}]] <- 9
+ee(co, container(a = 9, b = 0, x = 0))
+
+co[[{0}]] <- 9
+ee(co, container(a = 9, b = 9, x = 0))
+
+expect_error(co[[{ 1 }]] <- 9, "old element \\(1\\) is not in Container")
+expect_error(co[[1, 2]] <- 3:4)
+expect_error(co[[1:2]] <- 3:4, "index must be of length 1")
 
 # ----------------------
 # Container $<- operator
 # ----------------------
-co = container(a = 1, foo = "bar")
+co = container(a = 1, b = "bar")
 co$f <- 3
-ee(co, container(a = 1, foo = "bar", f = 3))
-co$foo <- 2
-ee(co, container(a = 1, foo = 2, f = 3))
+ee(co, container(a = 1, b = "bar", f = 3))
+co$b <- 2
+ee(co, container(a = 1, b = 2, f = 3))
 
 co$`x 2` <- 0
 ee(co[["x 2"]], 0)
+
 

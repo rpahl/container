@@ -8,7 +8,7 @@
 #' @param .add `logical` if `FALSE` (default) and index is invalid, an error is
 #' given. If set to `TRUE` the new element is added at the given index
 #' regardless whether the index existed or not. Indices can consist of numbers
-#' or names or both, except when adding values at nex indices, which is only
+#' or names or both, except when adding values at new indices, which is only
 #' allowed for names.
 #' @details `replace_at` uses copy semantics while `ref_replace_at` works by
 #' reference.
@@ -122,7 +122,6 @@ ref_replace_at.Container <- function(.x, ..., .add = FALSE)
 
 
 #' @rdname replace_at
-#' @param key `character` name or `numeric` index of column.
 #' @return For `dict.table` an object of class `dict.table`.
 #' @export
 #' @examples

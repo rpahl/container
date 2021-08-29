@@ -262,7 +262,7 @@ Container <- R6::R6Class("Container",
         #' @return the value at the given index or (if not found) the given
         #' default value.
         peek_at2 = function(index, default = NULL) {
-            if (missing(index) || self$is_empty())
+            if (missing(index) || !length(index) || self$is_empty())
                 return(default)
 
             .assert_index_arg(index)

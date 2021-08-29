@@ -29,10 +29,8 @@ ref_replace_at(.x, ...)
 \item{.add}{\code{logical} if \code{FALSE} (default) and index is invalid, an error is
 given. If set to \code{TRUE} the new element is added at the given index
 regardless whether the index existed or not. Indices can consist of numbers
-or names or both, except when adding values at nex indices, which is only
+or names or both, except when adding values at new indices, which is only
 allowed for names.}
-
-\item{key}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Container}, an object of class \code{Container} (or one of the
