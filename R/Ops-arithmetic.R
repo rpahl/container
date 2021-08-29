@@ -2,13 +2,12 @@
 #'
 #' @description Binary arithmetic operators for [Container()] objects and
 #' derived classes.
-#' @name OpsArith
+#' @name ArithmeticContainer
 #' @param x,y Depending on the operator at least one must be of class
 #' [Container()] or the respective derived class and the other at least be
 #' coercible to the respective class.
 NULL
 
-#' @name OpsArith
 #' @rdname ContainerS3
 #' @details * `x + y` combines `x` and `y` into a new container by appending `y`
 #' to `x`.
@@ -17,15 +16,13 @@ NULL
 #' c2 = container(2, 1:2)
 #' c1 + c2     # same as c(c1, c2)
 #' c2 + c1     # same as c(c2, c1)
-NULL
-
+#'
 #' @export
 `+.Container` <- function(x, y)
 {
     c(as.container(x), as.container(y))
 }
 
-#' @name OpsArith
 #' @rdname ContainerS3
 #' @details * `x - y` element-wise discards all items of `y` from `x`, given
 #' the element was contained in `x`. The result is always a container.
@@ -34,8 +31,6 @@ NULL
 #' c2 - c1
 #' c1 - c1
 #'
-NULL
-
 #' @export
 `-.Container` <- function(x, y)
 {
@@ -46,7 +41,6 @@ NULL
 }
 
 
-#' @name OpsArith
 #' @rdname DequeS3
 #' @details * `x + y` combines `x` and `y` into a new deque by appending `y`
 #' to `x`.
@@ -55,8 +49,7 @@ NULL
 #' d2 = deque(2, 1:2)
 #' d1 + d2     # same as c(d1, d2)
 #' d2 + d1     # same as c(d2, d1)
-NULL
-
+#'
 #' @export
 `+.Deque` <- function(x, y)
 {
@@ -64,7 +57,6 @@ NULL
 }
 
 
-#' @name OpsArith
 #' @rdname DequeS3
 #' @details * `x - y` element-wise removes all items of `y` from `x`, given
 #' the element was contained in `x`.
@@ -73,8 +65,6 @@ NULL
 #' d2 - d1
 #' d1 - d1
 #'
-NULL
-
 #' @export
 `-.Deque` <- function(x, y)
 {
@@ -84,7 +74,6 @@ NULL
 }
 
 
-#' @name OpsArith
 #' @rdname DictS3
 #' @details * `x + y` combines `x` and `y` into a new dict by updating `x`
 #' by `y` (see also `[update()]`).
@@ -95,8 +84,7 @@ NULL
 #' d2 + d1      # same as update(d2, d)
 #' \dontrun{
 #' c(d1, d2)    # duplicated keys are not allowed for Dict}
-NULL
-
+#'
 #' @export
 `+.Dict` <- function(x, y)
 {
@@ -106,7 +94,6 @@ NULL
 }
 
 
-#' @name OpsArith
 #' @rdname DictS3
 #' @details * `x - y` removes all keys from `x` that appear in `y`.
 #' @examples
@@ -114,8 +101,6 @@ NULL
 #' d2 - d
 #' d - d
 #'
-NULL
-
 #' @export
 `-.Dict` <- function(x, y)
 {
@@ -128,29 +113,24 @@ NULL
     d1
 }
 
-#' @name OpsArith
 #' @rdname SetS3
 #' @examples
 #' s1 = setnew(1, 1:2)
 #' s2 = setnew(2, 1:2)
 #' s1 + s2     # same as s1 | s2 or c(c1, s2)
 #' s2 + s1     # same
-NULL
-
+#'
 #' @export
 `+.Set` <- function(x, y)
 {
     x | y
 }
 
-#' @name OpsArith
 #' @rdname SetS3
 #' @examples
 #' s1 - s2
 #' s2 - s1
 #'
-NULL
-
 #' @export
 `-.Set` <- function(x, y)
 {

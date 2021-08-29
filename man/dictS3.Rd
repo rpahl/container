@@ -9,8 +9,10 @@
 \alias{is.dict}
 \alias{OpsMath}
 \alias{OpsSummary}
-\alias{OpsArith}
-\alias{OpsLogic}
+\alias{+.Dict}
+\alias{-.Dict}
+\alias{&.Dict}
+\alias{|.Dict}
 \alias{DictS3methods}
 \alias{add.Dict}
 \alias{rename.Dict}
@@ -23,6 +25,14 @@ dict(...)
 as.dict(x)
 
 is.dict(x)
+
+\method{+}{Dict}(x, y)
+
+\method{-}{Dict}(x, y)
+
+\method{&}{Dict}(x, y)
+
+\method{|}{Dict}(x, y)
 
 ## Dict S3 methods
 
@@ -157,6 +167,7 @@ d1 + d2      # same as update(d, d2)
 d2 + d1      # same as update(d2, d)
 \dontrun{
 c(d1, d2)    # duplicated keys are not allowed for Dict}
+
 d - d2
 d2 - d
 d - d
@@ -164,7 +175,9 @@ d - d
 d1 = dict(a = 1, b = 2)
 d2 = dict(a = 10, x = 4)
 d1 & d2      # {a = 1}
+
 d1 | d2      # {a = 1, b = 2, x = 4}
+
 
 d = dict(a = 1)
 add(d, b = 2, co = container(1:3))

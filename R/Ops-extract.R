@@ -1,16 +1,21 @@
-#' Extract or Replace Part of a Container Object
+#' Extract or Replace Parts of a Container Object
 #'
 #' @description Extract or replace parts of a `Container` object similar
 #' to R's base extract operators on lists.
-#' @name OpsExtract
+#' @name ExtractContainer
 #' @param x `Container` object for which to extract or replace elements.
-#' @param j `numeric` or `character` indices to extract.
-#' @param ... indices of elements to be extracted
-#' @param name a literal character string or a name (possibly backtick quoted).
-#' @return the values at the given indices.
+#' @param i,...  indices specifying elements to extract or replace. Indices
+#' are `numeric` or `character` vectors or a `list` containing both.
+#' @param name `character` string (possibly backtick quoted)
+#' @param value the replacing value of `ANY` type
 NULL
 
+#' @rdname ExtractContainer
 #' @export
+#' @usage
+#' x[i]
+#' x[[i]]
+#' x[...]
 `[.Container` <- function(x, ...)
 {
     dots = tryCatch(list(...), error = identity)
@@ -22,16 +27,33 @@ NULL
 
 
 #' @export
-`[[.Container` <- function(x, j)
+`[[.Container` <- function(x, i)
 {
-    x$peek_at2(j)
+    x$peek_at2(i)
 }
 
+
+#' @rdname ExtractContainer
+#' @export
+#' @usage
+#' x[i] <- value
+#' x[[i]] <- value
+#' x$name <- value
+`[<-.Container` = function(x, name, value)
+{
+    #clone(x)$replace_at(name, value, add = TRUE)
+}
+
+#' @export
+`[[<-.Container` = function(x, name, value)
+{
+    #clone(x)$replace_at(name, value, add = TRUE)
+}
 
 #' @export
 `$<-.Container` = function(x, name, value)
 {
-    x = clone(x)
-    x
+    clone(x)$replace_at(name, value, add = TRUE)
 }
+
 

@@ -4,7 +4,7 @@
 #' error if not found, unless it is stated to explicitly add the element (see
 #' option `add`).
 #' @param .x any `R` object.
-#' @param ... indices at which values are to be deleted.
+#' @param ... indices at which values are to be replaced.
 #' @param .add `logical` if `FALSE` (default) and index is invalid, an error is
 #' given. If set to `TRUE` the new element is added at the given index
 #' regardless whether the index existed or not. Indices can consist of numbers
@@ -64,6 +64,7 @@ replace_at.Container <- function(.x, ..., .add = FALSE)
 #'
 #' \dontrun{
 #' replace_at(co, x = 1)                # names(s) not found: 'x'}
+#'
 #' replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
 NULL
 

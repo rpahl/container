@@ -17,8 +17,9 @@
 \alias{iter.Container}
 \alias{OpsMath}
 \alias{OpsSummary}
-\alias{OpsArith}
-\alias{OpsLogic}
+\alias{+.Container}
+\alias{-.Container}
+\alias{==.Container}
 \alias{ContainerS3methods}
 \alias{add.Container}
 \alias{at.Container}
@@ -54,6 +55,12 @@ is.container(x)
 \method{na.omit}{Container}(x)
 
 \method{iter}{Container}(x)
+
+\method{+}{Container}(x, y)
+
+\method{-}{Container}(x, y)
+
+\method{==}{Container}(x, y)
 
 ## Container S3 methods
 
@@ -104,7 +111,7 @@ ref_replace_at(.x, ..., .add = FALSE)
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the \code{Container}.}
 
-\item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
+\item{x, y}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
 or of class \code{Container} for the \code{S3} methods.}
 
 \item{.x}{\verb{object of class }Container`}
@@ -318,6 +325,7 @@ c1 = container(1, 1:2)
 c2 = container(2, 1:2)
 c1 + c2     # same as c(c1, c2)
 c2 + c1     # same as c(c2, c1)
+
 c1 - c2
 c2 - c1
 c1 - c1
@@ -441,6 +449,7 @@ replace_at(co, "a", 1)               # same
 
 \dontrun{
 replace_at(co, x = 1)                # names(s) not found: 'x'}
+
 replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
 }
 \seealso{

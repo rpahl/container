@@ -2,13 +2,12 @@
 #'
 #' @description Binary logic operators for [Container()] objects and
 #' derived classes.
-#' @name OpsLogic
+#' @name LogicContainer
 #' @param x,y Depending on the operator at least one must be of class
 #' [Container()] or the respective derived class and the other at least be
 #' coercible to the respective class.
 NULL
 
-#' @name OpsLogic
 #' @rdname DictS3
 #' @details * `x` `&` `y` returns a copy of `x` keeping only the keys that
 #' are common in both (key intersection), that is, all keys in `x` that do not
@@ -17,8 +16,7 @@ NULL
 #' d1 = dict(a = 1, b = 2)
 #' d2 = dict(a = 10, x = 4)
 #' d1 & d2      # {a = 1}
-NULL
-
+#'
 #' @export
 `&.Dict` <- function(x, y)
 {
@@ -32,15 +30,13 @@ NULL
 }
 
 
-#' @name OpsLogic
 #' @rdname DictS3
 #' @details * `x` `|` `y` returns a copy of `x` extended by all elements of
 #' `y` that are stored at keys (or names) that do not exist in `x`, thereby
 #' combining the keys of both objects (set union of keys).
 #' @examples
 #' d1 | d2      # {a = 1, b = 2, x = 4}
-NULL
-
+#'
 #' @export
 `|.Dict` <- function(x, y)
 {
@@ -54,16 +50,13 @@ NULL
 }
 
 
-#' @name OpsLogic
 #' @rdname SetS3
 #' @details * `x` `&` `y` performs the set intersection of x and y
 #' @examples
 #' s1 = setnew(1, b = 2)
 #' s2 = setnew(1, b = 4)
 #' s1 & s2     # {1}
-NULL
-
-
+#'
 #' @export
 `&.Set` <- function(x, y)
 {
@@ -72,13 +65,11 @@ NULL
     s1$intersect(s2)
 }
 
-#' @name OpsLogic
 #' @rdname SetS3
 #' @details * `x` `|` `y` performs the set union of x and y
 #' @examples
 #' s1 | s2     # {1, b = 2, b = 4}
-NULL
-
+#'
 #' @export
 `|.Set` <- function(x, y)
 {

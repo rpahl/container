@@ -24,7 +24,7 @@ ref_replace_at(.x, ...)
 \arguments{
 \item{.x}{any \code{R} object.}
 
-\item{...}{indices at which values are to be deleted.}
+\item{...}{indices at which values are to be replaced.}
 
 \item{.add}{\code{logical} if \code{FALSE} (default) and index is invalid, an error is
 given. If set to \code{TRUE} the new element is added at the given index

@@ -24,6 +24,7 @@ ee(co[c(1, 1)], c(co[1], co[1]))
 ee(co[1, 3], container(a = 1, b = 3))
 ee(co[c(1, 3)], container(a = 1, b = 3))
 ee(co["b", 1, 4], container(b = 3, a = 1, 4))
+ee(co[list("b", 1, 4)], co["b", 1, 4])
 
 
 # --------------------
@@ -47,4 +48,17 @@ ee(l[[""]], NULL)
 expect_error(co[[1:2]], "index must be of length 1")
 expect_error(co[[c("a", "b")]], "index must be of length 1")
 expect_error(co[[NA]], "index must not be 'NA'")
+
+
+# ----------------------
+# Container $<- operator
+# ----------------------
+co = container(a = 1, foo = "bar")
+co$f <- 3
+ee(co, container(a = 1, foo = "bar", f = 3))
+co$foo <- 2
+ee(co, container(a = 1, foo = 2, f = 3))
+
+co$`x 2` <- 0
+ee(co[["x 2"]], 0)
 

@@ -2,13 +2,12 @@
 #'
 #' @description Binary comparison operators for [Container()] objects and
 #' derived classes.
-#' @name OpsComp
+#' @name ComparisonContainer
 #' @param x, y objects of class [Container()] or one of the derived classes.
 #' @param x,y at least one must be a [Container()] object (or an object of
 #' one of the derived classes) while the other must be at least iterable.
 NULL
 
-#' @name OpsLogic
 #' @rdname ContainerS3
 #' @details * `x == y` is `TRUE` if the contents of `x` and `y` are
 #' lexicographically *equal*.
@@ -29,8 +28,6 @@ NULL
 #' c1 < container(2)   # TRUE
 #' c1 < container()    # FALSE
 #'
-NULL
-
 #' @export
 `==.Container` <- function(x, y) isTRUE(all.equal(x, y))
 

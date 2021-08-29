@@ -7,7 +7,7 @@
 #' '[deque()], [setnew()], and [dict()], respectively.
 #' @param ... (possibly named) elements to be put into or removed from the `Container`.
 #' @param elem some element of any type
-#' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
+#' @param x,y `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.
 #' @param .x `object of class `Container`
 #' @name ContainerS3

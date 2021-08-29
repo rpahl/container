@@ -8,8 +8,10 @@
 \alias{is.set}
 \alias{OpsMath}
 \alias{OpsSummary}
-\alias{OpsArith}
-\alias{OpsLogic}
+\alias{+.Set}
+\alias{-.Set}
+\alias{&.Set}
+\alias{|.Set}
 \title{Set methods}
 \usage{
 setnew(...)
@@ -17,6 +19,14 @@ setnew(...)
 as.set(x)
 
 is.set(x)
+
+\method{+}{Set}(x, y)
+
+\method{-}{Set}(x, y)
+
+\method{&}{Set}(x, y)
+
+\method{|}{Set}(x, y)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Set}.}
@@ -87,13 +97,16 @@ s1 = setnew(1, 1:2)
 s2 = setnew(2, 1:2)
 s1 + s2     # same as s1 | s2 or c(c1, s2)
 s2 + s1     # same
+
 s1 - s2
 s2 - s1
 
 s1 = setnew(1, b = 2)
 s2 = setnew(1, b = 4)
 s1 & s2     # {1}
+
 s1 | s2     # {1, b = 2, b = 4}
+
 }
 \seealso{
 See \code{\link[=container]{container()}} for all inherited methods. For the full class

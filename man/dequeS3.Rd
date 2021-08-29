@@ -10,7 +10,8 @@
 \alias{rev.Deque}
 \alias{OpsMath}
 \alias{OpsSummary}
-\alias{OpsArith}
+\alias{+.Deque}
+\alias{-.Deque}
 \alias{DequeS3methods}
 \alias{addleft.Deque}
 \alias{peek.Deque}
@@ -25,6 +26,10 @@ as.deque(x)
 is.deque(x)
 
 \method{rev}{Deque}(x)
+
+\method{+}{Deque}(x, y)
+
+\method{-}{Deque}(x, y)
 
 ## Deque S3 methods
 
@@ -150,6 +155,7 @@ d1 = deque(1, 1:2)
 d2 = deque(2, 1:2)
 d1 + d2     # same as c(d1, d2)
 d2 + d1     # same as c(d2, d1)
+
 d1 - d2
 d2 - d1
 d1 - d1
