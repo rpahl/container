@@ -2,15 +2,23 @@
 % Please edit documentation in R/options.R
 \name{container_options}
 \alias{container_options}
+\alias{getContainerOption}
 \title{Set container package options}
 \usage{
 container_options(..., .reset = FALSE)
+
+getContainerOption(x, default = NULL)
 }
 \arguments{
 \item{...}{any options can be defined, using name = value.}
 
 \item{.reset}{\code{logical} if TRUE, the options are reset to their default and
 returned.}
+
+\item{x}{a character string holding an option name.}
+
+\item{default}{if the specified option is not set in the options list, this
+value is returned.}
 }
 \value{
 \itemize{

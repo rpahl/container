@@ -2,43 +2,40 @@
 # container_options
 # -----------------
 
-#exit_file(msg = "options")
-
+defaults = container:::.default_options
 co = container_options
 co(.reset = TRUE)
 
-# With no arg all options should be returned
-expect_equal(co(), .default_options())
 
-# Retrieve options one by one
-#for (name in names(.default_options())) expect_equal(co(name), .default_options()[[name]])
+# With no arg all options should be returned
+expect_equal(co(), defaults())
 
 # Several at once
 expect_equal(co("compare", "vec.len"),
-             .default_options()[c("compare", "vec.len")])
-expect_equal(co("compare", "foo"), .default_options()["compare"])
+             defaults()[c("compare", "vec.len")])
+expect_equal(co("compare", "foo"), defaults()["compare"])
 
 co("zzz" = "foo")
 expect_equal(co("zzz"), list(zzz = "foo"))
 
-expect_equal(co(), c(.default_options(), list(zzz = "foo")))
+expect_equal(co(), c(defaults(), list(zzz = "foo")))
 co(zzz = NULL)
-expect_equal(co(), .default_options())
+expect_equal(co(), defaults())
 
 # Set several options at once
 old = co(compare = "identical", useDots = FALSE)
-expect_equal(old, .default_options())
+expect_equal(old, defaults())
 
-expect_equal(co(), replace(.default_options(),
+expect_equal(co(), replace(defaults(),
                            c("compare", "useDots"),
                            list("identical", FALSE)))
 
 co(.reset = TRUE)
-expect_equal(co(), .default_options())
+expect_equal(co(), defaults())
 
 # Verify that options are sorted
 container_options(".aa" = 1, "zzz" = 2)
-expect_equal(co(), c(list(.aa = 1), .default_options(), list(zzz = 2)))
+expect_equal(co(), c(list(.aa = 1), defaults(), list(zzz = 2)))
 
 
 # ------------------

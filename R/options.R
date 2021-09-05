@@ -14,8 +14,12 @@
 #' Set container package options
 #'
 #' @param ... any options can be defined, using name = value.
+#' @param x a character string holding an option name.
+#' @param default if the specified option is not set in the options list, this
+#' value is returned.
 #' @param .reset `logical` if TRUE, the options are reset to their default and
 #' returned.
+#' @param ... any options can be defined, using name = value.
 #' @return
 #' * container_options() returns a list of all set options sorted by name.
 #' * container_options(name), a list of length one containing the set value,
@@ -59,6 +63,8 @@ function(..., .reset = FALSE)
 }
 
 
+#' @rdname container_options
+#' @export
 getContainerOption = function(x, default = NULL)
 {
     if (!is_string(x))
