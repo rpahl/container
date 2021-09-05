@@ -1,4 +1,5 @@
 ee = expect_equal
+data.table = data.table::data.table
 
 # ----------
 # dict.table

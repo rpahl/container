@@ -247,7 +247,7 @@ expect_true(co$has(1L))
 
 # This can be changed by using identical as the comparison function:
 container_options(compare = identical)
-co.ident = Container$new(co$values())
+co.ident = as.container(co$values())
 expect_false(co.ident$has(numeric()))
 expect_false(co.ident$has(1L))
 container_options(.reset = TRUE)

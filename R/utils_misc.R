@@ -1,3 +1,4 @@
+#' @export
 is_string = function(x)
 {
     if (is.null(x))
@@ -9,12 +10,14 @@ is_string = function(x)
     isTRUE(is.character(x) && !is.na(x))
 }
 
+#' @export
 is_nonempty_string = function(x)
 {
     isTRUE(is_string(x) && nchar(x) > 0)
 }
 
 
+#' @export
 verify_names = function(x)
 {
     if (!length(x) || !all(sapply(x, is_nonempty_string)))
@@ -24,6 +27,7 @@ verify_names = function(x)
 }
 
 
+#' @export
 check_name_collision = function(x, y)
 {
     common = intersect(x, y)

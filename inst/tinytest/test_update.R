@@ -48,7 +48,7 @@ expect_true(d1_was_changed_by_reference)
 # update.dict.table
 # -----------------
 dit1 = dict.table(a = 1:2, b = 3:4)
-dit1.copy = copy(dit1)
+dit1.copy = data.table::copy(dit1)
 dit2 = dict.table(         b = 5:6, c = 8:9)
 ee(update(dit1, dit2), dict.table(a = 1:2, b = 5:6, c = 8:9))
 
