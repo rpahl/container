@@ -1,3 +1,5 @@
+.env = new.env()
+
 .default_options = function()
 {
     list(".copy"   = TRUE,
@@ -6,7 +8,7 @@
          "vec.len" = 4L)
 }
 
-options = .default_options()
+.env[["options"]] = .default_options()
 
 
 #' Set container package options
@@ -33,22 +35,25 @@ options = .default_options()
 container_options <-
 function(..., .reset = FALSE)
 {
-    if (.reset)
-        return(options <<- .default_options())
+    if (.reset) {
+        .env[["options"]] = .default_options()
+        return(.env[["options"]])
+    }
 
     args = list(...)
     if (!length(args))
-        return(options)
+        return(.env[["options"]])
 
     arg.names = names(args)
     if (is.null(arg.names))
-        return(Filter(x = options[as.character(args)], f = Negate(is.null)))
+        return(Filter(x = .env[["options"]][as.character(args)],
+                      f = Negate(is.null)))
 
-    old = options
-    new = replace(options, arg.names, args)
+    old = .env[["options"]]
+    new = replace(.env[["options"]], arg.names, args)
     new = Filter(x = new, f = Negate(is.null))
     new = new[sort(names(new))]
-    options <<- new
+    .env[["options"]] = new
 
     invisible(old)
 }

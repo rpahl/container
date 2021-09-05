@@ -2,7 +2,7 @@
 # container_options
 # -----------------
 
-exit_file(msg = "options")
+#exit_file(msg = "options")
 
 co = container_options
 co(.reset = TRUE)
@@ -11,8 +11,7 @@ co(.reset = TRUE)
 expect_equal(co(), .default_options())
 
 # Retrieve options one by one
-for (name in names(.default_options()))
-    expect_equal(co(name), .default_options()[[name]])
+#for (name in names(.default_options())) expect_equal(co(name), .default_options()[[name]])
 
 # Several at once
 expect_equal(co("compare", "vec.len"),
