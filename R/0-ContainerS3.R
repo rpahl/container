@@ -47,6 +47,7 @@ as.container <- function(x)
     do.call(container, args = as.list(x))
 }
 
+#' @import methods
 methods::setOldClass("Container")
 methods::setAs("list", "Container", function(from) as.container(from))
 
