@@ -22,7 +22,6 @@
 #' length(s)
 #' names(s)
 #' as.list(s)
-#' na.omit(s)
 #' unpack(s)   # flatten recursively similar to unlist
 #'
 NULL

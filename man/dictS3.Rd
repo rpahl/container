@@ -138,8 +138,6 @@ d = dict(a = 1, b = "one", f = mean, na = NA)
 print(d)
 names(d)
 as.list(d)
-na.omit(d)
-na.omit(as.list(d)) # does not work with lists
 
 \dontrun{
 dict(a = 1, 2)   # all elements must be named}

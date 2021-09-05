@@ -13,7 +13,6 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
-\alias{na.omit.Container}
 \alias{iter.Container}
 \alias{OpsMath}
 \alias{OpsSummary}
@@ -51,8 +50,6 @@ is.container(x)
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
-
-\method{na.omit}{Container}(x)
 
 \method{iter}{Container}(x)
 
@@ -178,10 +175,6 @@ the container's elements will copied (deeply) during the conversion.
 }
 
 \itemize{
-\item \code{na.omit(x)} omits all \code{NA} values contained in \code{x}.
-}
-
-\itemize{
 \item \code{x + y} combines \code{x} and \code{y} into a new container by appending \code{y}
 to \code{x}.
 }
@@ -304,7 +297,6 @@ print(co)
 length(co)
 names(co)
 as.list(co)
-na.omit(co)
 unpack(co)   # flatten recursively similar to unlist
 
 

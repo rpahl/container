@@ -173,9 +173,3 @@ ee(names(container(list())), NULL)
 ee(names(container(1, 2, 3)), NULL)
 ee(names(container(a = 1, 2, x = 5)), c("a", "", "x"))
 
-# -----------------
-# na.omit.Container
-# -----------------
-co = container(1, NA, d = dict(a = 1, b = 2))
-ee(na.omit(co), container(1, d = dict(a = 1, b = 2)))
-

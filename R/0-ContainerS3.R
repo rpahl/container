@@ -26,7 +26,6 @@
 #' length(co)
 #' names(co)
 #' as.list(co)
-#' na.omit(co)
 #' unpack(co)   # flatten recursively similar to unlist
 #'
 NULL
@@ -93,16 +92,6 @@ length.Container <- function(x) x$length()
 #' @details * `names(x)` returns the names of the elements contained in `x`.
 #' @export
 names.Container <- function(x) names(x$values())
-
-
-#' @rdname ContainerS3
-#' @details * `na.omit(x)` omits all `NA` values contained in `x`.
-#' @export
-na.omit.Container <- function(x)
-{
-    l = as.list(x)
-    as.container(l[!is.na(l)])
-}
 
 
 # TODO: implement generic %in%
