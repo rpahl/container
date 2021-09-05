@@ -2,13 +2,12 @@
 #'
 #' Removes all elements from the container object.
 #' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
 #' @export
-clear <- function(x, ...) UseMethod("clear")
+clear <- function(x) UseMethod("clear")
 
 #' @rdname clear
 #' @export
-ref_clear <- function(x, ...) UseMethod("ref_clear")
+ref_clear <- function(x) UseMethod("ref_clear")
 
 
 #' @rdname clear

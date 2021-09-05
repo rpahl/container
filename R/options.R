@@ -71,7 +71,7 @@ getContainerOption = function(x, default = NULL)
         stop("'x' must be a character string")
 
 
-    if (hasName(container_options(), x))
+    if (utils::hasName(container_options(), x))
         container_options()[[x]]
     else
         default

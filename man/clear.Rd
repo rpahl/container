@@ -9,9 +9,9 @@
 \alias{ref_clear.dict.table}
 \title{Clear a container}
 \usage{
-clear(x, ...)
+clear(x)
 
-ref_clear(x, ...)
+ref_clear(x)
 
 \method{clear}{Container}(x)
 
@@ -23,8 +23,6 @@ ref_clear(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 For \code{Container}, an object of class \code{Container} (or one of the

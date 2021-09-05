@@ -32,11 +32,11 @@ ref_popleft <- function(.x, ...) UseMethod("ref_popleft")
 #'
 #' \dontrun{
 #' ref_pop(deque())  # pop at empty Deque}
-ref_pop.Deque <- function(.x) .x$pop()
+ref_pop.Deque <- function(.x, ...) .x$pop()
 
 #' @rdname pop
 #' @export
-ref_popleft.Deque <- function(.x) .x$popleft()
+ref_popleft.Deque <- function(.x, ...) .x$popleft()
 
 #' @name pop.Deque
 #' @rdname DequeS3
@@ -72,7 +72,7 @@ NULL
 #' \dontrun{
 #' ref_pop(co, "x")  # index 'x' not found}
 #'
-ref_pop.Container <- function(.x, index) .x$pop(index)
+ref_pop.Container <- function(.x, index, ...) .x$pop(index)
 
 #' @name pop.Container
 #' @rdname ContainerS3
@@ -107,7 +107,7 @@ NULL
 #' \dontrun{
 #' ref_pop(dit, "x")  # index 'x' not found}
 #'
-ref_pop.dict.table <- function(.x, index)
+ref_pop.dict.table <- function(.x, index, ...)
 {
     elem <- at2(.x, index)
     ref_delete_at.dict.table(.x, index)

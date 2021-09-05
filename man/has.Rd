@@ -8,9 +8,9 @@
 \usage{
 has(x, ...)
 
-\method{has}{Container}(x, elem)
+\method{has}{Container}(x, elem, ...)
 
-\method{has}{dict.table}(x, column)
+\method{has}{dict.table}(x, column, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}

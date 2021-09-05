@@ -6,7 +6,7 @@
 \alias{is_empty.dict.table}
 \title{Check if object is empty}
 \usage{
-is_empty(x, ...)
+is_empty(x)
 
 \method{is_empty}{Container}(x)
 
@@ -14,8 +14,6 @@ is_empty(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 \code{TRUE} if object is empty otherwise \code{FALSE}.

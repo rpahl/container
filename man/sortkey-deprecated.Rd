@@ -6,7 +6,7 @@
 \alias{sortkey.Dict}
 \title{Sort Dict keys (deprecated)}
 \usage{
-sortkey(x, decr = FALSE, ...)
+sortkey(x, decr = FALSE)
 
 \method{sortkey}{Dict}(x, decr = FALSE)
 }
@@ -14,8 +14,6 @@ sortkey(x, decr = FALSE, ...)
 \item{x}{any \code{R} object.}
 
 \item{decr}{\code{logical} Should the sort be increasing or decreasing?}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 For \code{Dict} sorts the elements in place and inivisbly returns the

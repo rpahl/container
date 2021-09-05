@@ -62,7 +62,7 @@ is.container <- function(x) inherits(x, "Container")
 #' @details * `as.list(x)` converts container `x` to a base `R` list. All of
 #' the container's elements will copied (deeply) during the conversion.
 #' @export
-`as.list.Container` <- function(x) x$clone(deep = TRUE)$values()
+`as.list.Container` <- function(x, ...) x$clone(deep = TRUE)$values()
 
 
 #' @export

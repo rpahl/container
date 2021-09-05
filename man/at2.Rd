@@ -8,9 +8,9 @@
 \usage{
 at2(x, ...)
 
-\method{at2}{Container}(x, index)
+\method{at2}{Container}(x, index, ...)
 
-\method{at2}{dict.table}(x, index)
+\method{at2}{dict.table}(x, index, ...)
 }
 \arguments{
 \item{x}{an \code{R} object of the respective class.}

@@ -2,10 +2,9 @@
 #'
 #' @param x any `R` object.
 #' @param name `character` the name to be found.
-#' @param ... additional arguments to be passed to or from methods.
 #' @seealso [has()]
 #' @export
-has_name <- function(x, ...) UseMethod("has_name")
+has_name <- function(x, name) UseMethod("has_name")
 
 
 #' @rdname has_name

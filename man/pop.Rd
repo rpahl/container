@@ -14,13 +14,13 @@ ref_pop(.x, ...)
 
 ref_popleft(.x, ...)
 
-\method{ref_pop}{Deque}(.x)
+\method{ref_pop}{Deque}(.x, ...)
 
-\method{ref_popleft}{Deque}(.x)
+\method{ref_popleft}{Deque}(.x, ...)
 
-\method{ref_pop}{Container}(.x, index)
+\method{ref_pop}{Container}(.x, index, ...)
 
-\method{ref_pop}{dict.table}(.x, index)
+\method{ref_pop}{dict.table}(.x, index, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}

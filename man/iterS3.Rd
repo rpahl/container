@@ -45,7 +45,7 @@ reset_iter(it)
 latter case, \code{x} will always be coerced to a base \code{R} list prior to creating
 the \code{iterator}.}
 
-\item{...}{parameters passed to or from methods}
+\item{...}{other parameters passed to or from methods}
 
 \item{it}{\code{Iterator} object}
 }

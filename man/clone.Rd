@@ -6,7 +6,7 @@
 \alias{clone.dict.table}
 \title{Clone an object}
 \usage{
-clone(x, ...)
+clone(x)
 
 \method{clone}{Container}(x)
 
@@ -14,8 +14,6 @@ clone(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 A copy of the object.

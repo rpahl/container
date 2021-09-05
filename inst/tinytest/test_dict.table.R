@@ -42,7 +42,7 @@ expect_true(dit == dat2)
 # a column can be addded to a dict.table if name is specified as character
 dit = dict.table(A = 1)
 expect_false("x" %in% colnames(dit))
-expect_true(hasName(add(dit, "b" = 2), "b"))
+expect_true(utils::hasName(add(dit, "b" = 2), "b"))
 
 
 # the length of added columns must match or be of length 1

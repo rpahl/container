@@ -376,7 +376,7 @@ replace_at(dit, "a", 3:1)
 \dontrun{
 replace_at(dit, "b", 4:6)               # column 'b' not in dict.table}
 
-replace_at(dit, "b", 4:6, add = TRUE)   # ok, adds column
+replace_at(dit, "b", 4:6, .add = TRUE)  # ok, adds column
 
 # Update parts of tables (second overwrites columns of the first)
 dit1 = dict.table(a = 1:2, b = 3:4)

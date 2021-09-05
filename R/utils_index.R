@@ -40,7 +40,6 @@ setMethod(".assert_index",
           signature("ANY", "numeric"), .assert_index.numeric)
 
 
-#' @export
 assert_index = function(x, index)
 {
     .assert_index_arg(index)
@@ -48,26 +47,22 @@ assert_index = function(x, index)
 }
 
 
-#' @export
 .has_index = function(x, index)
 {
     stop("not supported for index of type '", data.class(index), "'")
 }
 
 
-#' @export
 .has_index.character = function(x, index)
 {
     nzchar(index) && utils::hasName(x, index)
 }
 
-#' @export
 .has_index.numeric = function(x, index)
 {
     isTRUE(index >= 1) && isTRUE(index <= length(x))
 }
 
-#' @export
 .has_index.integer = function(x, index)
 {
     isTRUE(index >= 1) && isTRUE(index <= length(x))
@@ -84,7 +79,6 @@ setMethod(".has_index",
 setMethod(".has_index",
           signature("ANY", "integer"), .has_index.integer)
 
-#' @export
 has_index = function(x, index)
 {
     .assert_index_arg(index)

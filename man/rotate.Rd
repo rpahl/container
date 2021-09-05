@@ -7,9 +7,9 @@
 \alias{ref_rotate.Deque}
 \title{Rotate elements}
 \usage{
-rotate(x, ...)
+rotate(x, n = 1L)
 
-ref_rotate(x, ...)
+ref_rotate(x, n = 1L)
 
 \method{rotate}{Deque}(x, n = 1L)
 
@@ -18,9 +18,9 @@ ref_rotate(x, ...)
 \arguments{
 \item{x}{any \code{R} object.}
 
-\item{...}{additional arguments to be passed to or from methods.}
-
 \item{n}{\code{integer} number of steps to rotate}
+
+\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 For \code{Deque} returns the rotated \code{\link[=Deque]{Deque()}} object.

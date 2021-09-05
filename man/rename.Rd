@@ -13,9 +13,9 @@ rename(.x, old, new, ...)
 
 ref_rename(.x, old, new, ...)
 
-\method{rename}{Container}(.x, old, new)
+\method{rename}{Container}(.x, old, new, ...)
 
-\method{ref_rename}{Container}(.x, old, new)
+\method{ref_rename}{Container}(.x, old, new, ...)
 
 \method{rename}{dict.table}(.x, old, new, ...)
 

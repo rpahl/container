@@ -14,15 +14,15 @@ update(x, other, ...)
 
 ref_update(x, other, ...)
 
-\method{update}{Container}(x, other)
+\method{update}{Container}(x, other, ...)
 
-\method{ref_update}{Container}(x, other)
+\method{ref_update}{Container}(x, other, ...)
 
-\method{update}{dict.table}(x, other)
+\method{update}{dict.table}(x, other, ...)
 
-\method{ref_update}{dict.table}(x, other)
+\method{ref_update}{dict.table}(x, other, ...)
 
-\method{update}{list}(x, other)
+\method{update}{list}(x, other, ...)
 }
 \arguments{
 \item{x}{any \code{R} object}

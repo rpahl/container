@@ -7,7 +7,7 @@
 \alias{values.dict.table}
 \title{Get raw values of an object (deprecated)}
 \usage{
-values(x, ...)
+values(x)
 
 \method{values}{Container}(x)
 
@@ -15,8 +15,6 @@ values(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 a copy of all elements as a basic \code{list}.

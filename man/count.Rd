@@ -6,7 +6,7 @@
 \alias{count.Set}
 \title{Count elements}
 \usage{
-count(x, elem, ...)
+count(x, elem)
 
 \method{count}{Container}(x, elem)
 
@@ -16,8 +16,6 @@ count(x, elem, ...)
 \item{x}{any \code{R} object.}
 
 \item{elem}{element to counted.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 \code{integer} number of how many times \code{elem} occurs in the object.

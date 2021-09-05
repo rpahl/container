@@ -1,10 +1,9 @@
 #' Check if object is empty
 #'
 #' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
 #' @return `TRUE` if object is empty otherwise `FALSE`.
 #' @export
-is_empty <- function(x, ...) UseMethod("is_empty")
+is_empty <- function(x) UseMethod("is_empty")
 
 #' @rdname is_empty
 #' @export

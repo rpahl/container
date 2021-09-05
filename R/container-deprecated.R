@@ -17,14 +17,13 @@ NULL
 #' Check if object is empty
 #'
 #' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
 #' @return `TRUE` if object is empty otherwise `FALSE`.
 #' @name empty-deprecated
 NULL
 
 #' @rdname empty-deprecated
 #' @export
-empty <- function(x, ...) UseMethod("empty")
+empty <- function(x) UseMethod("empty")
 
 #' @rdname empty-deprecated
 #' @export
@@ -44,7 +43,7 @@ NULL
 
 #' @rdname size-deprecated
 #' @export
-size <- function(x, ...) UseMethod("size")
+size <- function(x) UseMethod("size")
 
 #' @rdname size-deprecated
 #' @export
@@ -60,14 +59,13 @@ size.Container <- function(x)
 #' @description Re-order elements according to key-order. This function
 #' is deprecated as keys are now always sorted.
 #' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
 #' @param decr `logical` Should the sort be increasing or decreasing?
 #' @name sortkey-deprecated
 NULL
 
 #' @rdname sortkey-deprecated
 #' @export
-sortkey <- function(x, decr = FALSE, ...) UseMethod("sortkey")
+sortkey <- function(x, decr = FALSE) UseMethod("sortkey")
 
 #' @rdname sortkey-deprecated
 #' @return For `Dict` sorts the elements in place and inivisbly returns the
@@ -82,14 +80,13 @@ sortkey.Dict <- function(x, decr = FALSE) {
 #' Get raw values of an object (deprecated)
 #'
 #' @param x any `R` object.
-#' @param ... additional arguments to be passed to or from methods.
 #' @return a copy of all elements as a basic `list`.
 #' @name values-deprecated
 NULL
 
 #' @rdname values-deprecated
 #' @export
-values <- function(x, ...)
+values <- function(x)
     UseMethod("values")
 
 #' @rdname values-deprecated

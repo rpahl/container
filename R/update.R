@@ -37,14 +37,14 @@ ref_update <- function(x, other, ...)
 #' update(d1, d2)  # {a = 1, b = 0, c = 3}
 #' update(d2, d1)  # {a = 1, b = 2, c = 3}
 #' @export
-update.Container <- function(x, other)
+update.Container <- function(x, other, ...)
 {
     ref_update.Container(x$clone(deep = TRUE), other$clone(deep = TRUE))
 }
 
 #' @rdname update
 #' @export
-ref_update.Container <- function(x, other)
+ref_update.Container <- function(x, other, ...)
 {
     x$update(other)
 }
@@ -76,7 +76,7 @@ NULL
 #' update(d1, d2)
 #' update(d2, d1)
 #' @export
-update.dict.table <- function(x, other)
+update.dict.table <- function(x, other, ...)
 {
     (ref_update.dict.table(copy(x), copy(other)))
 }
@@ -84,7 +84,7 @@ update.dict.table <- function(x, other)
 
 #' @rdname update
 #' @export
-ref_update.dict.table <- function(x, other)
+ref_update.dict.table <- function(x, other, ...)
 {
     if (!inherits(other, data.class(x)))
         stop("arg must be a ", data.class(x))
@@ -124,7 +124,7 @@ NULL
 #' \dontrun{
 #' update(l2, l1)  # all elements of 'other' must be named}
 #' @export
-update.list <- function(x, other)
+update.list <- function(x, other, ...)
 {
     if (!all(nzchar(names(other)))) {
         stop("all elements of 'other' must be named")

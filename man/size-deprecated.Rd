@@ -6,7 +6,7 @@
 \alias{size.Container}
 \title{Container size (deprecated)}
 \usage{
-size(x, ...)
+size(x)
 
 \method{size}{Container}(x)
 }

@@ -13,19 +13,6 @@
 #' @name container-pkg
 NULL
 
-
-.ask_data.table_install = function()
-{
-    question = "Do you want to install the 'data.table' package now?"
-    choice = utils::menu(c("Yes", "No"), title = question)
-
-    if (choice == 1)
-        install.packages("data.table")
-
-    invisible()
-}
-
-
 .onLoad <- function(libname, pkgname)
 {
     invisible()

@@ -3,10 +3,9 @@
 #' @description Count the number of occurences of some element.
 #' @param x any `R` object.
 #' @param elem element to counted.
-#' @param ... additional arguments to be passed to or from methods.
 #' @return `integer` number of how many times `elem` occurs in the object.
 #' @export
-count <- function(x, elem, ...) UseMethod("count")
+count <- function(x, elem) UseMethod("count")
 
 #' @rdname count
 #' @export

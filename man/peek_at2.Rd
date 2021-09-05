@@ -10,11 +10,11 @@
 \alias{peek_at2.dict.table}
 \title{Peek at one element}
 \usage{
-peek_at2(x, index, ...)
+peek_at2(x, index, default = NULL)
 
-peekleft(x, ...)
+peekleft(x, default = NULL)
 
-peek(x, ...)
+peek(x, default = NULL)
 
 \method{peek_at2}{Container}(x, index, default = NULL)
 
@@ -26,8 +26,6 @@ peek(x, ...)
 }
 \arguments{
 \item{index}{\code{character} name or \code{numeric} position of the sought value.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 
 \item{default}{value to be returned if peeked value does not exist.}
 

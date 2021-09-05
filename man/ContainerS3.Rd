@@ -45,13 +45,13 @@ as.container(x)
 
 is.container(x)
 
-\method{as.list}{Container}(x)
+\method{as.list}{Container}(x, ...)
 
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
 
-\method{iter}{Container}(x)
+\method{iter}{Container}(x, ...)
 
 \method{+}{Container}(x, y)
 

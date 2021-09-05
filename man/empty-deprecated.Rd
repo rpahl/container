@@ -6,14 +6,12 @@
 \alias{empty.Container}
 \title{Check if object is empty}
 \usage{
-empty(x, ...)
+empty(x)
 
 \method{empty}{Container}(x)
 }
 \arguments{
 \item{x}{any \code{R} object.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 \code{TRUE} if object is empty otherwise \code{FALSE}.

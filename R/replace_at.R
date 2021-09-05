@@ -145,19 +145,6 @@ replace_at.dict.table <- function(.x, ..., .add = FALSE)
 #' @export
 ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
 {
-    if (F) {
-        if (!add && !has(.x, key)) {
-            if (is.character(key))
-                stop("column '", key, "' not in ", data.class(.x), ". ",
-                     "To add the column, use 'add = TRUE'.")
-            else
-                stop(key, " is outside range [1, ncol = ", ncol(.x), "]")
-        }
-
-        j <- if (is.numeric(key)) as.integer(key) else key
-        data.table::set(.x, j = j, value = value)
-    }
-
     res = .dissect_and_verify_values(list(...))
     indices = res[["indices"]]
     values = res[["values"]]
@@ -199,6 +186,6 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
 #' \dontrun{
 #' replace_at(dit, "b", 4:6)               # column 'b' not in dict.table}
 #'
-#' replace_at(dit, "b", 4:6, add = TRUE)   # ok, adds column
+#' replace_at(dit, "b", 4:6, .add = TRUE)  # ok, adds column
 NULL
 

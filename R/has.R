@@ -17,7 +17,7 @@ has <- function(x, ...) UseMethod("has")
 #' has(co, 1)                   # TRUE
 #' has(co, mean)                # TRUE
 #' has(co, 1:2)                 # FALSE
-has.Container <- function(x, elem) x$has(elem)
+has.Container <- function(x, elem, ...) x$has(elem)
 
 #' @name has.Container
 #' @rdname ContainerS3
@@ -46,7 +46,7 @@ NULL
 #' has(dit, 1:3)            # TRUE
 #' has(dit, 4:6)            # FALSE
 #' has(dit, as.list(4:6))   # TRUE
-has.dict.table <- function(x, column)
+has.dict.table <- function(x, column, ...)
 {
     if (!length(x))
         return(FALSE)

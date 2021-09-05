@@ -12,18 +12,17 @@
 #' @param .x an `R` object of the respective class.
 #' @param index `character` name or `numeric` position of the sought value.
 #' @param default value to be returned if peeked value does not exist.
-#' @param ... additional arguments to be passed to or from methods.
 #' @seealso [at2()] for strict element extraction
 #' @export
-peek_at2 <- function(x, index, ...) UseMethod("peek_at2")
+peek_at2 <- function(x, index, default = NULL) UseMethod("peek_at2")
 
 #' @rdname peek_at2
 #' @export
-peekleft <- function(x, ...) UseMethod("peekleft")
+peekleft <- function(x, default = NULL) UseMethod("peekleft")
 
 #' @rdname peek_at2
 #' @export
-peek <- function(x, ...) UseMethod("peek")
+peek <- function(x, default = NULL) UseMethod("peek")
 
 
 #' @rdname peek_at2

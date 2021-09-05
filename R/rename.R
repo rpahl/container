@@ -12,9 +12,9 @@
     if (any(duplicated(new)))
         stop("'new' has duplicated names: ", toString(new[duplicated(new)]))
 
-    if (any(!(hasName(.x, old))))
+    if (any(!(utils::hasName(.x, old))))
         stop("Items of 'old' not found in names: ",
-             toString(Filter(old, f = function(name) !hasName(.x, name))))
+             toString(Filter(old, f = function(name) !utils::hasName(.x, name))))
 
     invisible()
 }
@@ -63,7 +63,7 @@ ref_rename <- function(.x, old, new, ...)
 #' ref_rename(co, c("a", "b"), c("a1", "y"))
 #' print(co)
 #' @export
-rename.Container <- function(.x, old, new)
+rename.Container <- function(.x, old, new, ...)
 {
     (ref_rename(.x$clone(deep = TRUE), old, new))
 }
@@ -86,7 +86,7 @@ NULL
 
 #' @name rename
 #' @export
-ref_rename.Container <- function(.x, old, new)
+ref_rename.Container <- function(.x, old, new, ...)
 {
     .x$rename(old, new)
 }

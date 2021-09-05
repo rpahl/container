@@ -6,7 +6,7 @@
 \alias{has_name.dict.table}
 \title{Check if object has some name}
 \usage{
-has_name(x, ...)
+has_name(x, name)
 
 \method{has_name}{Container}(x, name)
 
@@ -14,8 +14,6 @@ has_name(x, ...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
-
-\item{...}{additional arguments to be passed to or from methods.}
 
 \item{name}{\code{character} the name to be found.}
 }

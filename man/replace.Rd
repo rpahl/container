@@ -13,13 +13,13 @@ replace(.x, ...)
 
 ref_replace(.x, ...)
 
-\method{replace}{Container}(.x, old, new, add = FALSE)
+\method{replace}{Container}(.x, old, new, add = FALSE, ...)
 
-\method{ref_replace}{Container}(.x, old, new, add = FALSE)
+\method{ref_replace}{Container}(.x, old, new, add = FALSE, ...)
 
-\method{replace}{Dict}(.x, old, new)
+\method{replace}{Dict}(.x, old, new, ...)
 
-\method{ref_replace}{Dict}(.x, old, new)
+\method{ref_replace}{Dict}(.x, old, new, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object.}

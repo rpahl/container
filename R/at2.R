@@ -38,7 +38,7 @@ at2 <- function(x, ...) UseMethod("at2")
 #' at2(d, "x")     # index 'x' not found
 #' at2(d, 5)       # index 5 exceeds length of Dict}
 #' @export
-at2.Container <- function(x, index)
+at2.Container <- function(x, index, ...)
 {
     x$at2(index)
 }
@@ -77,7 +77,7 @@ NULL
 #' \dontrun{
 #' at2(dit, "x")     # index 'x' not found
 #' at2(dit, 5)       # index 5 exceeds length of dict.table}
-at2.dict.table <- function(x, index)
+at2.dict.table <- function(x, index, ...)
 {
     assert_index(x, index)
     .subset2(x, index)

@@ -8,11 +8,11 @@
 #' @details While `rotate` uses copy semantics, `ref_rotate` works by reference,
 #' that is, rotates in place on the original object.
 #' @export
-rotate <- function(x, ...) UseMethod("rotate")
+rotate <- function(x, n = 1L) UseMethod("rotate")
 
 #' @rdname rotate
 #' @export
-ref_rotate <- function(x, ...) UseMethod("ref_rotate")
+ref_rotate <- function(x, n = 1L) UseMethod("ref_rotate")
 
 
 #' @rdname rotate

@@ -38,7 +38,7 @@ replace.default <- function(.x, ...)
 #' replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 #'
 #' @export
-replace.Container <- function(.x, old, new, add = FALSE)
+replace.Container <- function(.x, old, new, add = FALSE, ...)
 {
     ref_replace(.x$clone(deep = TRUE), old, new, add)
 }
@@ -71,7 +71,7 @@ NULL
 
 #' @rdname replace
 #' @export
-ref_replace.Container <- function(.x, old, new, add = FALSE)
+ref_replace.Container <- function(.x, old, new, add = FALSE, ...)
 {
     .x$replace(old, new, add = add)
 }
@@ -90,14 +90,14 @@ ref_replace.Container <- function(.x, old, new, add = FALSE)
 #' replace(d, "a", 2)              # old element ("a") is not in Dict}
 #'
 #' @export
-replace.Dict <- function(.x, old, new)
+replace.Dict <- function(.x, old, new, ...)
 {
     ref_replace(.x$clone(deep = TRUE), old, new)
 }
 
 #' @rdname replace
 #' @export
-ref_replace.Dict <- function(.x, old, new)
+ref_replace.Dict <- function(.x, old, new, ...)
 {
     .x$replace(old, new)
 }
