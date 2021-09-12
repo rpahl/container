@@ -4,9 +4,7 @@
 \alias{rename}
 \alias{ref_rename}
 \alias{rename.Container}
-\alias{ref_rename.Container}
 \alias{rename.dict.table}
-\alias{ref_rename.dict.table}
 \title{Rename elements safely}
 \usage{
 rename(.x, old, new, ...)
@@ -15,11 +13,7 @@ ref_rename(.x, old, new, ...)
 
 \method{rename}{Container}(.x, old, new, ...)
 
-\method{ref_rename}{Container}(.x, old, new, ...)
-
 \method{rename}{dict.table}(.x, old, new, ...)
-
-\method{ref_rename}{dict.table}(.x, old, new, ...)
 }
 \arguments{
 \item{.x}{any \code{R} object with names.}

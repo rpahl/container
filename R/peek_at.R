@@ -47,7 +47,7 @@ peek_at.Container <- function(.x, ..., .default = NULL)
 }
 
 
-#' @name peek_at.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' peek_at(x, ..., .default = NULL)
@@ -91,7 +91,7 @@ peek_at.dict.table <- function(.x, ..., .default = NULL)
 }
 
 
-#' @name peek_at.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' peek_at(.x, ..., .default = NULL)

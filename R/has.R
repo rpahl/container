@@ -19,7 +19,7 @@ has <- function(x, ...) UseMethod("has")
 #' has(co, 1:2)                 # FALSE
 has.Container <- function(x, elem, ...) x$has(elem)
 
-#' @name has.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @param elem some element of any type
 #' @usage
@@ -61,7 +61,7 @@ has.dict.table <- function(x, column, ...)
 }
 
 
-#' @name has.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' has(x, column)

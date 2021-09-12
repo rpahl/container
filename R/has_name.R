@@ -25,7 +25,7 @@ has_name.Container <- function(x, name)
 }
 
 
-#' @name has_name.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @param name `character` the name to be found.
 #' @usage
@@ -72,7 +72,7 @@ has_name.dict.table <- function(x, name)
 }
 
 
-#' @name has.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @param name `character` a column name
 #' @usage

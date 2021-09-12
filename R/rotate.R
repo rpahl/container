@@ -27,7 +27,7 @@ rotate.Deque <- function(x, n = 1L)
     (ref_rotate(x$clone(deep = TRUE), n))
 }
 
-#' @name rotate.Deque
+#' @name DequeS3methods
 #' @rdname DequeS3
 #' @usage
 #' rotate(x, n)

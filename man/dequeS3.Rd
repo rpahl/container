@@ -8,15 +8,10 @@
 \alias{as.deque}
 \alias{is.deque}
 \alias{rev.Deque}
-\alias{OpsMath}
-\alias{OpsSummary}
+\alias{DequeS3methods}
 \alias{+.Deque}
 \alias{-.Deque}
-\alias{DequeS3methods}
-\alias{addleft.Deque}
-\alias{peek.Deque}
 \alias{pop.Deque}
-\alias{rotate.Deque}
 \title{Deque (double-ended queue)}
 \usage{
 deque(...)
@@ -31,7 +26,7 @@ is.deque(x)
 
 \method{-}{Deque}(x, y)
 
-## Deque S3 methods
+## More deque S3 methods
 
 addleft(.x, ...)
 ref_addleft(.x, ...)
@@ -68,6 +63,8 @@ providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,
 \verb{[addleft()]} and \verb{[addleft_()]}.
 \subsection{Methods}{
+
+Description of \code{deque} methods:
 }
 
 \itemize{

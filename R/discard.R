@@ -27,7 +27,7 @@ discard.Container <- function(.x, ...) {
     (ref_discard(.x$clone(deep = TRUE), ...))
 }
 
-#' @name discard.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' discard(.x, ...)

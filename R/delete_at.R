@@ -57,7 +57,7 @@ delete_at.Container <- function(.x, ...)
     (ref_delete_at(.x$clone(deep = TRUE), ...))
 }
 
-#' @name delete_at.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' delete_at(.x, ...)
@@ -144,7 +144,7 @@ delete_at.dict.table <- function(.x, ...)
 }
 
 
-#' @name delete.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' delete_at(.x, ...)

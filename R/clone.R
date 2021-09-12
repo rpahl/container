@@ -16,7 +16,7 @@ clone <- function(x) UseMethod("clone")
 #' co == co2
 clone.Container <- function(x) (x$clone(deep = TRUE))
 
-#' @name clone.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' clone(x)
@@ -41,7 +41,7 @@ NULL
 #' print(d2)
 clone.dict.table <- function(x) (copy(x))
 
-#' @name clone.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' clone(x, ...)

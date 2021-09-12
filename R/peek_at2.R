@@ -49,7 +49,7 @@ peek_at2.Container <- function(x, index, default = NULL)
 }
 
 
-#' @name peek_at2.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @param index `character` name or `numeric` position of the sought value.
 #' @usage
@@ -85,7 +85,7 @@ peek.Deque <- function(x, default = NULL) x$peek(default)
 peekleft.Deque <- function(x, default = NULL) x$peekleft(default)
 
 
-#' @name peek.Deque
+#' @name DequeS3methods
 #' @rdname DequeS3
 #' @usage
 #' peek(x, default)
@@ -140,7 +140,7 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 }
 
 
-#' @name peek_at2.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @param index `character` column name or `numeric` position of column
 #' @usage

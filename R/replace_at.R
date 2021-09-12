@@ -41,7 +41,7 @@ replace_at.Container <- function(.x, ..., .add = FALSE)
     (ref_replace_at(.x$clone(deep = TRUE), ..., .add = .add))
 }
 
-#' @name replace_at.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @param .add `logical` if `FALSE` (default) and index is invalid, an error is
 #' given. If set to `TRUE` the new element is added at the given index
@@ -169,7 +169,7 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
     invisible(.x)
 }
 
-#' @name replace_at.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' replace_at(.x, ..., .add = FALSE)

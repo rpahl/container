@@ -7,17 +7,11 @@
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
-\alias{OpsMath}
-\alias{OpsSummary}
+\alias{DictS3methods}
 \alias{+.Dict}
 \alias{-.Dict}
 \alias{&.Dict}
 \alias{|.Dict}
-\alias{DictS3methods}
-\alias{add.Dict}
-\alias{rename.Dict}
-\alias{replace.Dict}
-\alias{update.Dict}
 \title{Dict methods}
 \usage{
 dict(...)
@@ -34,10 +28,7 @@ is.dict(x)
 
 \method{|}{Dict}(x, y)
 
-## Dict S3 methods
-
-add(.x, ...)
-ref_add(.x, ...)
+## More dict S3 methods
 
 rename(.x, old, new)
 ref_rename(.x, old, new)
@@ -75,6 +66,8 @@ Methods that alter \code{Dict} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
 \code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
 \subsection{Methods}{
+
+Description of \code{dict} methods:
 }
 
 \itemize{
@@ -109,12 +102,6 @@ exist in \code{y} are removed.
 \item \code{x} \code{|} \code{y} returns a copy of \code{x} extended by all elements of
 \code{y} that are stored at keys (or names) that do not exist in \code{x}, thereby
 combining the keys of both objects (set union of keys).
-}
-
-\itemize{
-\item \code{add(.x, ...)} adds \code{key = value} pairs to \code{.x}. If one of the
-keys already exists, an error is given.
-\item \code{ref_add(.x, ...)} same as \code{add(.x, ...)} but adds by reference.
 }
 
 \itemize{
@@ -175,13 +162,6 @@ d2 = dict(a = 10, x = 4)
 d1 & d2      # {a = 1}
 
 d1 | d2      # {a = 1, b = 2, x = 4}
-
-
-d = dict(a = 1)
-add(d, b = 2, co = container(1:3))
-
-\dontrun{
-add(d, a = 7:9)  # key 'a' already in Dict}
 
 co = container(a = 1, b = 2, 3)
 rename(co, c("a", "b"), c("a1", "y"))

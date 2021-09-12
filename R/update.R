@@ -49,7 +49,7 @@ ref_update.Container <- function(x, other, ...)
     x$update(other)
 }
 
-#' @name update.Dict
+#' @name DictS3methods
 #' @param other another `Dict` object
 #' @rdname DictS3
 #' @usage
@@ -95,7 +95,7 @@ ref_update.dict.table <- function(x, other, ...)
     x
 }
 
-#' @name update.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @param other another `dict.table` object
 #' @usage

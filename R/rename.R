@@ -68,7 +68,7 @@ rename.Container <- function(.x, old, new, ...)
     (ref_rename(.x$clone(deep = TRUE), old, new))
 }
 
-#' @name rename.Dict
+#' @name DictS3methods
 #' @rdname DictS3
 #' @usage
 #' rename(.x, old, new)
@@ -84,7 +84,6 @@ rename.Container <- function(.x, old, new, ...)
 #' print(co)
 NULL
 
-#' @name rename
 #' @export
 ref_rename.Container <- function(.x, old, new, ...)
 {
@@ -111,7 +110,7 @@ rename.dict.table <- function(.x, old, new, ...)
 }
 
 
-#' @name rename.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' rename(.x, old, new, ...)
@@ -129,7 +128,6 @@ rename.dict.table <- function(.x, old, new, ...)
 #' print(dit)
 NULL
 
-#' @name rename
 #' @export
 ref_rename.dict.table <- function(.x, old, new, ...)
 {

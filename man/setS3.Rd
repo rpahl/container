@@ -6,8 +6,7 @@
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
-\alias{OpsMath}
-\alias{OpsSummary}
+\alias{SetS3methods}
 \alias{+.Set}
 \alias{-.Set}
 \alias{&.Set}
@@ -46,6 +45,8 @@ lexicographical representation of the elements.
 For a description of basic methods such as adding and removing elements,
 see the help of \code{\link[=container]{container()}}.
 \subsection{Methods}{
+
+Description of \code{set} methods:
 }
 
 \itemize{

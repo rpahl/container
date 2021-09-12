@@ -19,6 +19,7 @@
 #' by an underscore appended to the standard function name, for example,
 #' `[add()]` and `[add_()]`.
 #' ## Methods
+#' Description of `container` methods:
 #' @examples
 #' co = container(1, b = NA, 1:3, c = container("a", 1))
 #' is.container(co)

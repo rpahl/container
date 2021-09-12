@@ -1,7 +1,7 @@
 #' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
-#' ## Container S3 methods
+#' ## More container S3 methods
 NULL
 
 #' Add elements
@@ -22,7 +22,7 @@ ref_add <- function(.x, ...) UseMethod("ref_add")
 #' @name DequeS3methods
 #' @rdname DequeS3
 #' @usage
-#' ## Deque S3 methods
+#' ## More deque S3 methods
 NULL
 
 #' @rdname add
@@ -53,7 +53,7 @@ add.Container <- function(.x, ...)
     (ref_add(.x$clone(deep = TRUE), ...))
 }
 
-#' @name add.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' add(.x, ...)
@@ -92,7 +92,7 @@ addleft.Deque <- function(.x, ...)
     (ref_addleft(.x$clone(deep = TRUE), ...))
 }
 
-#' @name addleft.Deque
+#' @name DequeS3methods
 #' @rdname DequeS3
 #' @usage
 #' addleft(.x, ...)
@@ -142,10 +142,9 @@ add.Dict <- function(.x, ...)
 #' @name DictS3methods
 #' @rdname DictS3
 #' @usage
-#' ## Dict S3 methods
+#' ## More dict S3 methods
 NULL
 
-#' @name add.Dict
 #' @rdname DictS3
 #' @usage
 #' add(.x, ...)
@@ -202,7 +201,7 @@ add.dict.table <- function(.x, ...)
 }
 
 
-#' @name add.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' add(.x, ...)

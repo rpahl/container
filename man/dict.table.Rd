@@ -11,21 +11,8 @@
 \alias{as.data.table.dict.table}
 \alias{rbind.dict.table}
 \alias{cbind.dict.table}
-\alias{add.dict.table}
-\alias{at.dict.table}
-\alias{at2.dict.table}
-\alias{clear.dict.table}
-\alias{clone.dict.table}
-\alias{delete.dict.table}
-\alias{discard.dict.table}
-\alias{has.dict.table}
-\alias{is_empty.dict.table}
-\alias{peek_at.dict.table}
-\alias{peek_at2.dict.table}
+\alias{dict.tableMethods}
 \alias{pop.dict.table}
-\alias{rename.dict.table}
-\alias{replace_at.dict.table}
-\alias{update.dict.table}
 \title{dict.table}
 \usage{
 dict.table(...)
@@ -105,6 +92,8 @@ functions and operators at the same time.
 }
 \details{
 \subsection{Methods}{
+
+Description of \code{dict.table} methods:
 }
 
 \itemize{

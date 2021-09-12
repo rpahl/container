@@ -44,7 +44,7 @@ at2.Container <- function(x, index, ...)
 }
 
 
-#' @name at2.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' at2(x, index)
@@ -84,7 +84,7 @@ at2.dict.table <- function(x, index, ...)
 }
 
 
-#' @name at2.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' at2(x, index)

@@ -27,7 +27,7 @@ discard_at.Container <- function(.x, ...) {
     (ref_discard_at(.x$clone(deep = TRUE), ...))
 }
 
-#' @name discard.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' discard_at(.x, ...)
@@ -83,7 +83,7 @@ discard_at.dict.table <- function(.x, ...)
     (ref_discard_at(clone(.x), ...))
 }
 
-#' @name discard.dict.table
+#' @name dict.tableMethods
 #' @rdname dict.table
 #' @usage
 #' discard_at(.x, ...)

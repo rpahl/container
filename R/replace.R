@@ -43,7 +43,7 @@ replace.Container <- function(.x, old, new, add = FALSE, ...)
     ref_replace(.x$clone(deep = TRUE), old, new, add)
 }
 
-#' @name replace.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @param old old element to be found and replaced.
 #' @param new the new element replacing the old one.
@@ -102,7 +102,7 @@ ref_replace.Dict <- function(.x, old, new, ...)
     .x$replace(old, new)
 }
 
-#' @name replace.Dict
+#' @name DictS3methods
 #' @param old old element to be found and replaced.
 #' @param new the new element replacing the old one.
 #' @rdname DictS3

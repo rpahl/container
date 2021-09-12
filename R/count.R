@@ -20,7 +20,7 @@ count.Container <- function(x, elem) {
 }
 
 
-#' @name count.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' count(x)

@@ -29,7 +29,7 @@ delete.Container <- function(.x, ...)
     (ref_delete(.x$clone(deep = TRUE), ...))
 }
 
-#' @name delete.Container
+#' @name ContainerS3methods
 #' @rdname ContainerS3
 #' @usage
 #' delete(.x, ...)

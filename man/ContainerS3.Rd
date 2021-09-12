@@ -14,29 +14,11 @@
 \alias{length.Container}
 \alias{names.Container}
 \alias{iter.Container}
-\alias{OpsMath}
-\alias{OpsSummary}
+\alias{ContainerS3methods}
 \alias{+.Container}
 \alias{-.Container}
 \alias{==.Container}
-\alias{ContainerS3methods}
-\alias{add.Container}
-\alias{at.Container}
-\alias{at2.Container}
-\alias{clear.Container}
-\alias{clone.Container}
-\alias{count.Container}
-\alias{delete.Container}
-\alias{delete_at.Container}
-\alias{discard.Container}
-\alias{has.Container}
-\alias{has_name.Container}
-\alias{is_empty.Container}
-\alias{peek_at.Container}
-\alias{peek_at2.Container}
 \alias{pop.Container}
-\alias{replace.Container}
-\alias{replace_at.Container}
 \title{Container methods}
 \usage{
 container(...)
@@ -59,7 +41,7 @@ is.container(x)
 
 \method{==}{Container}(x, y)
 
-## Container S3 methods
+## More container S3 methods
 
 add(.x, ...)
 ref_add(.x, ...)
@@ -147,6 +129,8 @@ providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,
 \verb{[add()]} and \verb{[add_()]}.
 \subsection{Methods}{
+
+Description of \code{container} methods:
 }
 
 \itemize{
