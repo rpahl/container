@@ -4,7 +4,6 @@
 #' negative, rotate to the left.
 #' @param x any `R` object.
 #' @param n `integer` number of steps to rotate
-#' @param ... additional arguments to be passed to or from methods.
 #' @details While `rotate` uses copy semantics, `ref_rotate` works by reference,
 #' that is, rotates in place on the original object.
 #' @export
@@ -29,8 +28,6 @@ rotate.Deque <- function(x, n = 1L)
 
 #' @name DequeS3
 #' @rdname DequeS3
-#' @usage
-#' rotate(x, n)
 #' @details
 #' * `rotate(x, n)` rotate all elements `n` steps to the right, If `n` is
 #' negative, rotate to the left.

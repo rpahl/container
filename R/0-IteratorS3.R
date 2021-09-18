@@ -32,6 +32,14 @@ is.iterator <- function(x) inherits(x, "Iterator")
 
 #' @rdname iterS3
 #' @export
+is.iterable <- function(x)
+{
+    inherits(x, "Iterable")
+}
+
+
+#' @rdname iterS3
+#' @export
 begin <- function(it)
 {
     if (!is.iterator(it)) stop("arg must be an Iterator")

@@ -2,7 +2,20 @@
 % Please edit documentation in R/Ops-logic.R
 \name{OpsLogic}
 \alias{OpsLogic}
+\alias{&.Dict}
+\alias{|.Dict}
+\alias{&.Set}
+\alias{|.Set}
 \title{Logic Operators for Containers}
+\usage{
+\method{&}{Dict}(x, y)
+
+\method{|}{Dict}(x, y)
+
+\method{&}{Set}(x, y)
+
+\method{|}{Set}(x, y)
+}
 \arguments{
 \item{x, y}{Depending on the operator at least one must be of class
 \code{\link[=Container]{Container()}} or the respective derived class and the other at least be
@@ -11,4 +24,10 @@ coercible to the respective class.}
 \description{
 Binary logic operators for \code{\link[=Container]{Container()}} objects and
 derived classes.
+}
+\examples{
+d1 = dict(a = 1, b = 2)
+d2 = dict(a = 10, x = 4)
+d1 & d2      # {a = 1}
+
 }

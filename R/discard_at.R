@@ -66,7 +66,6 @@ ref_discard_at.Container <- function(.x, ...)
 
 
 #' @rdname discard_at
-#' @param column `character` name or `numeric` index of column.
 #' @return For `dict.table`, an object of class `dict.table`.
 #' @examples
 #'

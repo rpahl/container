@@ -25,11 +25,11 @@ peek(x, default = NULL)
 \method{peek_at2}{dict.table}(x, index, default = NULL)
 }
 \arguments{
+\item{x}{an \code{R} object of the respective class.}
+
 \item{index}{\code{character} name or \code{numeric} position of the sought value.}
 
 \item{default}{value to be returned if peeked value does not exist.}
-
-\item{.x}{an \code{R} object of the respective class.}
 }
 \value{
 For \code{Container}, returns the value at the given index or (if not

@@ -14,17 +14,6 @@ is.subsettable <- function(x, .subset = .subset2)
 }
 
 
-#' Check if object is iterable
-#'
-#' @param any `R` object
-#' @return returns `TRUE` if object is iterable otherwise `FALSE`
-#' @export
-is.iterable <- function(x)
-{
-    inherits(x, "Iterable")
-}
-
-
 #' @title Iterator
 #'
 #' @description An `Iterator` is an object that allows to iterate over

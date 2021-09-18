@@ -6,6 +6,7 @@
 \alias{iter.Container}
 \alias{iter.default}
 \alias{is.iterator}
+\alias{is.iterable}
 \alias{begin}
 \alias{get_value}
 \alias{get_next}
@@ -24,6 +25,8 @@ iter(x, ...)
 \method{iter}{default}(x, ...)
 
 is.iterator(x)
+
+is.iterable(x)
 
 begin(it)
 

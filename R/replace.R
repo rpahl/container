@@ -45,12 +45,6 @@ replace.Container <- function(.x, old, new, add = FALSE, ...)
 
 #' @name ContainerS3
 #' @rdname ContainerS3
-#' @param old old element to be found and replaced.
-#' @param new the new element replacing the old one.
-#' @param add `logical` if FALSE (default) and `old` element was not found,
-#' an error is given. In contrast, if set to `TRUE` the new element is added
-#' regardless of whether it is used as a replacement for an existing or
-#' just as a new element, respectively.
 #' @details
 #' * `replace(.x, old, new, add = FALSE)` and
 #'   `ref_replace(.x, old, new, add = FALSE)` try to find element `old` and
@@ -100,8 +94,6 @@ ref_replace.Dict <- function(.x, old, new, ...)
 }
 
 #' @name DictS3
-#' @param old old element to be found and replaced.
-#' @param new the new element replacing the old one.
 #' @rdname DictS3
 #' @details
 #' * `replace(.x, old, new)` and `ref_replace(.x, old)` try to find element `old`

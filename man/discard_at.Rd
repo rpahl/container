@@ -25,8 +25,6 @@ ref_discard_at(.x, ...)
 \item{.x}{any \code{R} object.}
 
 \item{...}{indices at which values are to be discarded.}
-
-\item{column}{\code{character} name or \code{numeric} index of column.}
 }
 \value{
 For \code{Container}, an object of class \code{Container} (or one of the

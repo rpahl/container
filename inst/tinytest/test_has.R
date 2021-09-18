@@ -9,7 +9,6 @@ expect_true(has(co, mean))
 expect_false(has(co, 1:2))
 expect_false(has(co, NA))
 expect_false(has(co, NULL))
-expect_error(has(co, 1, 2), "unused argument")
 
 # --------
 # has.Dict

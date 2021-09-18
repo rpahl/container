@@ -21,7 +21,6 @@ has.Container <- function(x, elem, ...) x$has(elem)
 
 #' @name ContainerS3
 #' @rdname ContainerS3
-#' @param elem some element of any type
 #' @details
 #' * `has(x, elem)` `TRUE` if element is in `x` and otherwise `FALSE`.
 #' @examples

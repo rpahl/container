@@ -19,8 +19,6 @@ ref_rotate(x, n = 1L)
 \item{x}{any \code{R} object.}
 
 \item{n}{\code{integer} number of steps to rotate}
-
-\item{...}{additional arguments to be passed to or from methods.}
 }
 \value{
 For \code{Deque} returns the rotated \code{\link[=Deque]{Deque()}} object.

@@ -18,14 +18,14 @@ NULL
 #'
 #' @param x any `R` object.
 #' @return `TRUE` if object is empty otherwise `FALSE`.
-#' @name empty-deprecated
+#' @name container-deprecated
 NULL
 
-#' @rdname empty-deprecated
+#' @rdname container-deprecated
 #' @export
 empty <- function(x) UseMethod("empty")
 
-#' @rdname empty-deprecated
+#' @rdname container-deprecated
 #' @export
 empty.Container <- function(x)
 {
@@ -38,14 +38,14 @@ empty.Container <- function(x)
 #' @description This function is deprecated. Use [length()] instead.
 #' @return `integer` size of the `Container`, that is, the number of
 #' elements it contains.
-#' @name size-deprecated
+#' @name container-deprecated
 NULL
 
-#' @rdname size-deprecated
+#' @rdname container-deprecated
 #' @export
 size <- function(x) UseMethod("size")
 
-#' @rdname size-deprecated
+#' @rdname container-deprecated
 #' @export
 size.Container <- function(x)
 {
@@ -60,14 +60,14 @@ size.Container <- function(x)
 #' is deprecated as keys are now always sorted.
 #' @param x any `R` object.
 #' @param decr `logical` Should the sort be increasing or decreasing?
-#' @name sortkey-deprecated
+#' @name container-deprecated
 NULL
 
-#' @rdname sortkey-deprecated
+#' @rdname container-deprecated
 #' @export
 sortkey <- function(x, decr = FALSE) UseMethod("sortkey")
 
-#' @rdname sortkey-deprecated
+#' @rdname container-deprecated
 #' @return For `Dict` sorts the elements in place and inivisbly returns the
 #' [Dict()] object.
 #' @export
@@ -81,15 +81,15 @@ sortkey.Dict <- function(x, decr = FALSE) {
 #'
 #' @param x any `R` object.
 #' @return a copy of all elements as a basic `list`.
-#' @name values-deprecated
+#' @name container-deprecated
 NULL
 
-#' @rdname values-deprecated
+#' @rdname container-deprecated
 #' @export
 values <- function(x)
     UseMethod("values")
 
-#' @rdname values-deprecated
+#' @rdname container-deprecated
 #' @export
 values.Container <- function(x)
 {
@@ -97,11 +97,21 @@ values.Container <- function(x)
     as.list(x)
 }
 
-#' @rdname values-deprecated
+#' @rdname container-deprecated
 #' @export
 values.dict.table <- function(x)
 {
     .Deprecated("as.list")
     as.list(x)
 }
+
+
+#' @rdname container-deprecated
+#' @export
+keys <- function(x)
+{
+    .Deprecated("names")
+    names(x)
+}
+
 

@@ -43,7 +43,6 @@ add.Container <- function(.x, ...)
 
 #' @name ContainerS3
 #' @rdname ContainerS3
-#' @param .x `R` object of class `Container`.
 #' @details
 #' * `add(.x, ...)` and `ref_add(.x, ...)` add elements to `.x`.
 #' @examples

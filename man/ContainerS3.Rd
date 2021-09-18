@@ -3,8 +3,8 @@
 %   R/GroupGenericSummary.R, R/Ops-arithmetic.R, R/Ops-compare.R,
 %   R/Ops-extract.R, R/add.R, R/at.R, R/at2.R, R/clear.R, R/clone.R,
 %   R/count.R, R/delete.R, R/delete_at.R, R/discard.R, R/discard_at.R, R/has.R,
-%   R/has_name.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R, R/pop.R, R/replace.R,
-%   R/replace_at.R
+%   R/has_name.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R, R/pop.R, R/rename.R,
+%   R/replace.R, R/replace_at.R
 \name{ContainerS3}
 \alias{ContainerS3}
 \alias{container}
@@ -31,31 +31,8 @@ is.container(x)
 \item{...}{(possibly named) elements to be put into or removed from the
 \code{Container}, or additional arguments passed from and to methods.}
 
-\item{x, y}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
+\item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
 or of class \code{Container} for the \code{S3} methods.}
-
-\item{.x}{\code{R} object of class \code{Container}.}
-
-\item{elem}{some element of any type}
-
-\item{name}{\code{character} the name to be found.}
-
-\item{index}{\code{character} name or \code{numeric} position of the sought value.}
-
-\item{old}{old element to be found and replaced.}
-
-\item{new}{the new element replacing the old one.}
-
-\item{add}{\code{logical} if FALSE (default) and \code{old} element was not found,
-an error is given. In contrast, if set to \code{TRUE} the new element is added
-regardless of whether it is used as a replacement for an existing or
-just as a new element, respectively.}
-
-\item{.add}{\code{logical} if \code{FALSE} (default) and index is invalid, an error is
-given. If set to \code{TRUE} the new element is added at the given index
-regardless whether the index existed or not. Indices can consist of numbers
-or names or both, except when adding values at nex indices, which is only
-allowed for names.}
 }
 \description{
 A \code{\link[=Container]{Container()}} is a data structure with typical member
@@ -196,6 +173,11 @@ not found) the given default value.
 \itemize{
 \item \code{ref_pop(.x, index)} return element at given index and remove it
 from the \code{container} object.
+}
+
+\itemize{
+\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more keys
+from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
 }
 
 \itemize{
@@ -386,6 +368,11 @@ ref_pop(co, 1)
 \dontrun{
 ref_pop(co, "x")  # index 'x' not found}
 
+co = container(a = 1, b = 2, 3)
+rename(co, c("a", "b"), c("a1", "y"))
+print(co)
+ref_rename(co, c("a", "b"), c("a1", "y"))
+print(co)
 
 co = container("x", 9)
 replace(co, 9, 0)

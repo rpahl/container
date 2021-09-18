@@ -8,10 +8,8 @@
 #' coercible to the respective class.
 NULL
 
-#' @rdname DictS3
-#' @details * `x` `&` `y` returns a copy of `x` keeping only the keys that
-#' are common in both (key intersection), that is, all keys in `x` that do not
-#' exist in `y` are removed.
+
+#' @rdname OpsLogic
 #' @examples
 #' d1 = dict(a = 1, b = 2)
 #' d2 = dict(a = 10, x = 4)
@@ -30,13 +28,20 @@ NULL
 }
 
 
+#' @name DictS3
 #' @rdname DictS3
-#' @details * `x` `|` `y` returns a copy of `x` extended by all elements of
-#' `y` that are stored at keys (or names) that do not exist in `x`, thereby
-#' combining the keys of both objects (set union of keys).
+#' @details * `x` `&` `y` returns a copy of `x` keeping only the keys that
+#' are common in both (key intersection), that is, all keys in `x` that do not
+#' exist in `y` are removed.
 #' @examples
-#' d1 | d2      # {a = 1, b = 2, x = 4}
+#' d1 = dict(a = 1, b = 2)
+#' d2 = dict(a = 10, x = 4)
+#' d1 & d2      # {a = 1}
 #'
+NULL
+
+
+#' @rdname OpsLogic
 #' @export
 `|.Dict` <- function(x, y)
 {
@@ -49,14 +54,18 @@ NULL
     d1
 }
 
-
-#' @rdname SetS3
-#' @details * `x` `&` `y` performs the set intersection of x and y
+#' @name DictS3
+#' @rdname DictS3
+#' @details * `x` `|` `y` returns a copy of `x` extended by all elements of
+#' `y` that are stored at keys (or names) that do not exist in `x`, thereby
+#' combining the keys of both objects (set union of keys).
 #' @examples
-#' s1 = setnew(1, b = 2)
-#' s2 = setnew(1, b = 4)
-#' s1 & s2     # {1}
+#' d1 | d2      # {a = 1, b = 2, x = 4}
 #'
+NULL
+
+
+#' @rdname OpsLogic
 #' @export
 `&.Set` <- function(x, y)
 {
@@ -65,11 +74,17 @@ NULL
     s1$intersect(s2)
 }
 
+#' @name SetS3
 #' @rdname SetS3
-#' @details * `x` `|` `y` performs the set union of x and y
+#' @details * `x` `&` `y` performs the set intersection of x and y
 #' @examples
-#' s1 | s2     # {1, b = 2, b = 4}
+#' s1 = setnew(1, b = 2)
+#' s2 = setnew(1, b = 4)
+#' s1 & s2     # {1}
 #'
+NULL
+
+#' @rdname OpsLogic
 #' @export
 `|.Set` <- function(x, y)
 {
@@ -78,3 +93,10 @@ NULL
     s1$union(s2)
 }
 
+#' @name SetS3
+#' @rdname SetS3
+#' @details * `x` `|` `y` performs the set union of x and y
+#' @examples
+#' s1 | s2     # {1, b = 2, b = 4}
+#'
+NULL

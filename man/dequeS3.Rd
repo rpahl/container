@@ -17,20 +17,12 @@ as.deque(x)
 is.deque(x)
 
 \method{rev}{Deque}(x)
-
-rotate(x, n)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Deque}.}
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.deque]{as.deque()}} and \code{\link[=is.deque]{is.deque()}}
 or of class \code{Deque} for the \code{S3} methods.}
-
-\item{.x}{\verb{object of class }Deque`}
-
-\item{default}{value to be returned if peeked value does not exist.}
-
-\item{n}{\code{integer} number of steps to rotate}
 }
 \description{
 Deques are a generalization of stacks and queues typically
@@ -112,8 +104,8 @@ d - d2
 c(d2, d) # same as d2 + d
 d2 - d
 # Math
-set.seed(123)
-d = as.deque(rnorm(3))
+d = deque(1, 2, -(3:5))
+d
 abs(d)
 cumsum(d)
 round(d)

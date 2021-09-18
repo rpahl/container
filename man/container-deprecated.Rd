@@ -2,6 +2,16 @@
 % Please edit documentation in R/container-deprecated.R
 \name{container-deprecated}
 \alias{container-deprecated}
+\alias{empty}
+\alias{empty.Container}
+\alias{size}
+\alias{size.Container}
+\alias{sortkey}
+\alias{sortkey.Dict}
+\alias{values}
+\alias{values.Container}
+\alias{values.dict.table}
+\alias{keys}
 \title{Deprecated Functions in Package container}
 \usage{
 empty(...)       ### -- use `is_empty(...)` instead
@@ -11,11 +21,51 @@ sortkey(...)     ### -- `Dict` keys are now always sorted
 remove(...)      ### -- use `delete(...)` instead
 type(...)        ### -- not of use anymore
 values(...)      ### -- use `as.list(...)` instead
+
+empty(x)
+
+\method{empty}{Container}(x)
+
+size(x)
+
+\method{size}{Container}(x)
+
+sortkey(x, decr = FALSE)
+
+\method{sortkey}{Dict}(x, decr = FALSE)
+
+values(x)
+
+\method{values}{Container}(x)
+
+\method{values}{dict.table}(x)
+
+keys(x)
 }
 \arguments{
+\item{x}{any \code{R} object.}
+
+\item{decr}{\code{logical} Should the sort be increasing or decreasing?}
+
 \item{...}{(arguments)}
+}
+\value{
+\code{TRUE} if object is empty otherwise \code{FALSE}.
+
+\code{integer} size of the \code{Container}, that is, the number of
+elements it contains.
+
+For \code{Dict} sorts the elements in place and inivisbly returns the
+\code{\link[=Dict]{Dict()}} object.
+
+a copy of all elements as a basic \code{list}.
 }
 \description{
 These functions are provided for backwards-compatibility and
 may be defunct as soon as the next release.
+
+This function is deprecated. Use \code{\link[=length]{length()}} instead.
+
+Re-order elements according to key-order. This function
+is deprecated as keys are now always sorted.
 }

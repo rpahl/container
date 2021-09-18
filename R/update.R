@@ -49,12 +49,8 @@ ref_update.Container <- function(x, other, ...)
     x$update(other)
 }
 
-#' @name DictS3methods
-#' @param other another `Dict` object
+#' @name DictS3
 #' @rdname DictS3
-#' @usage
-#' update(x, other)
-#' ref_update(x, other)
 #' @details
 #' * `update(x, other)` and `ref_update(x, other)` adds elements of `other` dict
 #' for keys not yet in `x` and replaces the values of existing keys.
@@ -97,10 +93,6 @@ ref_update.dict.table <- function(x, other, ...)
 
 #' @name dict.tabldict.table
 #' @rdname dict.table
-#' @param other another `dict.table` object
-#' @usage
-#' update(x, other)
-#' ref_update(x, other)
 #' @details
 #' * `update(x, other)` and `ref_update(x, other)` adds columns of `other` dict
 #' that are not yet in `x` and replaces the values at existing columns.

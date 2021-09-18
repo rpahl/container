@@ -9,7 +9,7 @@
 #' `peek` peek at last element of a `Deque`.
 #'
 #' `peekleft` peek at first element of a `Deque`.
-#' @param .x an `R` object of the respective class.
+#' @param x an `R` object of the respective class.
 #' @param index `character` name or `numeric` position of the sought value.
 #' @param default value to be returned if peeked value does not exist.
 #' @seealso [at2()] for strict element extraction
@@ -51,7 +51,6 @@ peek_at2.Container <- function(x, index, default = NULL)
 
 #' @name ContainerS3
 #' @rdname ContainerS3
-#' @param index `character` name or `numeric` position of the sought value.
 #' @details
 #' * `peek_at2(x, index, default)` returns the value at the given index or (if
 #' not found) the given default value.
@@ -137,7 +136,6 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 
 #' @name dict.table
 #' @rdname dict.table
-#' @param index `character` column name or `numeric` position of column
 #' @details
 #' * `peek_at2(x, index, default = NULL)` return column named `index` if it exist
 #' otherwise the given `default` value. If the default length does not match

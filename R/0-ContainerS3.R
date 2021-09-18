@@ -7,8 +7,7 @@
 #' '[deque()], [setnew()], and [dict()], respectively.
 #' @param ... (possibly named) elements to be put into or removed from the
 #' `Container`, or additional arguments passed from and to methods.
-#' @param elem some element of any type
-#' @param x,y `R` object of `ANY` type for [as.container()] and [is.container()]
+#' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.
 #' @name ContainerS3
 #' @seealso For the `Container` class documentation see [Container()]. To

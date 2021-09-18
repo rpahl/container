@@ -1,9 +1,11 @@
 #' Object labels
 #'
+#' @param x `ANY` R object
+#' @param vec.len length of vector that is still printed
+#' @param ... arguments passed to and from methods
 #' @references Credits for the code idea below belong to the authors of the
 #' very well written `sets` package.
 #' @seealso [sets::LABEL()]
-#' @noRd
 #' @export
 get_label <-
 function(x, vec.len = 4L, ...)

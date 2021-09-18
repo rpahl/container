@@ -7,9 +7,6 @@
 #' @param ... initial elements put into the `Deque`.
 #' @param x `R` object of `ANY` type for [as.deque()] and [is.deque()]
 #' or of class `Deque` for the `S3` methods.
-#' @param .x `object of class `Deque`
-#' @param default value to be returned if peeked value does not exist.
-#' @param n `integer` number of steps to rotate
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Deque()] and it's superclass [Container()].
 #' @name DequeS3

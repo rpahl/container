@@ -9,14 +9,6 @@
 \alias{$<-.Container}
 \title{Extract or Replace Parts of a Container Object}
 \usage{
-x[i]
-x[[i]]
-x[...]
-
-x[i] <- value
-x[[i]] <- value
-x$name <- value
-
 \method{[}{Container}(x, ...)
 
 \method{[[}{Container}(x, i)

@@ -5,24 +5,28 @@
 \alias{ref_rename}
 \alias{rename.Container}
 \alias{rename.dict.table}
+\alias{ref_rename.dict.table}
+\alias{rename.default}
 \title{Rename elements safely}
 \usage{
-rename(.x, old, new, ...)
+rename(.x, old, new)
 
-ref_rename(.x, old, new, ...)
+ref_rename(.x, old, new)
 
-\method{rename}{Container}(.x, old, new, ...)
+\method{rename}{Container}(.x, old, new)
 
-\method{rename}{dict.table}(.x, old, new, ...)
+\method{rename}{dict.table}(.x, old, new)
+
+\method{ref_rename}{dict.table}(.x, old, new)
+
+\method{rename}{default}(.x, old, new)
 }
 \arguments{
-\item{.x}{any \code{R} object with names.}
+\item{.x}{\code{dict.table} object}
 
-\item{old}{\code{character} vector of old names.}
+\item{old}{\code{character} old name}
 
-\item{new}{\code{character} vector of new names.}
-
-\item{...}{additional arguments to be passed to or from methods.}
+\item{new}{\code{character} new name}
 }
 \value{
 For standard \code{R} vectors renames \code{old} to \code{new} and returns the

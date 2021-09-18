@@ -6,8 +6,6 @@
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
-\alias{&.Set}
-\alias{|.Set}
 \title{Set methods}
 \usage{
 setnew(...)
@@ -15,10 +13,6 @@ setnew(...)
 as.set(x)
 
 is.set(x)
-
-\method{&}{Set}(x, y)
-
-\method{|}{Set}(x, y)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Set}.}
@@ -69,8 +63,8 @@ as.list(s)
 unpack(s)   # flatten recursively similar to unlist
 
 # Math
-set.seed(123)
-s = as.set(rnorm(3))
+s = setnew(5:3, 1, 2)
+s
 abs(s)
 cumsum(s)
 round(s)

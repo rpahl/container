@@ -8,14 +8,6 @@
 #' are `numeric` or `character` vectors or a `list` containing both.
 #' @param name `character` string (possibly backtick quoted)
 #' @param value the replacing value of `ANY` type
-#' @usage
-#' x[i]
-#' x[[i]]
-#' x[...]
-#'
-#' x[i] <- value
-#' x[[i]] <- value
-#' x$name <- value
 #' @details
 #' `[` selects multiple values. The indices can be `numeric` or
 #' `character` or both. They can be passed as a `vector` or `list` or,

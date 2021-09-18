@@ -27,12 +27,6 @@ is.dict.table(x)
 \method{rbind}{dict.table}(x, ...)
 
 \method{cbind}{dict.table}(x, ...)
-
-rename(.x, old, new, ...)
-ref_rename(.x, old, new, ...)
-
-update(x, other)
-ref_update(x, other)
 }
 \arguments{
 \item{...}{elements put into the \code{dict.table} and/or additional arguments
@@ -42,12 +36,6 @@ to be passed on.}
 
 \item{copy}{if \code{TRUE} creates a copy of the \code{data.table} object otherwise
 works on the passed object by reference.}
-
-\item{name}{\code{character} a column name}
-
-\item{index}{\code{character} column name or \code{numeric} position of column}
-
-\item{other}{another \code{dict.table} object}
 }
 \description{
 The \code{\link[=dict.table]{dict.table()}} is a mix of a \code{\link[=dict]{dict()}} and a
