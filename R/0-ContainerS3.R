@@ -5,11 +5,11 @@
 #' object. The [Container()] class serves as the base class for [Deque()],
 #' '[Set()], and [Dict()] objects, which can be created by calls to
 #' '[deque()], [setnew()], and [dict()], respectively.
-#' @param ... (possibly named) elements to be put into or removed from the `Container`.
+#' @param ... (possibly named) elements to be put into or removed from the
+#' `Container`, or additional arguments passed from and to methods.
 #' @param elem some element of any type
 #' @param x,y `R` object of `ANY` type for [as.container()] and [is.container()]
 #' or of class `Container` for the `S3` methods.
-#' @param .x `object of class `Container`
 #' @name ContainerS3
 #' @seealso For the `Container` class documentation see [Container()]. To
 #' create objects of the derived classes see [deque()], [setnew()], and
@@ -18,8 +18,6 @@
 #' providing either copy or reference semantics where the latter are visible
 #' by an underscore appended to the standard function name, for example,
 #' `[add()]` and `[add_()]`.
-#' ## Methods
-#' Description of `container` methods:
 #' @examples
 #' co = container(1, b = NA, 1:3, c = container("a", 1))
 #' is.container(co)

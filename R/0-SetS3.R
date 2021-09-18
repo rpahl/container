@@ -14,8 +14,6 @@
 #' lexicographical representation of the elements.
 #' For a description of basic methods such as adding and removing elements,
 #' see the help of [container()].
-#' ## Methods
-#' Description of `set` methods:
 #' @examples
 #' s = setnew(1, b = NA, 1:3, c = container("a", 1))
 #' is.set(s)

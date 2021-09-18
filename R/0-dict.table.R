@@ -32,9 +32,6 @@
 #' @note In contrast to [data.table()], [dict.table()] does not allow duplicated keys.
 #' @import data.table
 #' @seealso [dict()], [data.table::data.table()]
-#' @details
-#' ## Methods
-#' Description of `dict.table` methods:
 #' @examples
 #' # Some basic examples using some typical data.table and dict operations.
 #' # The constructor can take the 'key' argument known from data.table():

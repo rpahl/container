@@ -20,10 +20,8 @@ count.Container <- function(x, elem) {
 }
 
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' count(x)
 #' @details
 #' * `count(x, elem)` count how often `elem` occurs in `x`.
 #' @examples

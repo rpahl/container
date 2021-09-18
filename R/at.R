@@ -43,10 +43,8 @@ at.Container <- function(.x, ...)
 }
 
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' at(.x, ...,)
 #' @details
 #' * `at(.x, ...,)` returns the value at the given indices. Indices
 #' can be letters or numbers or both. All indices must exist.
@@ -94,10 +92,8 @@ at.dict.table <- function(.x, ...)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' at(.x, ...)
 #' @details
 #' * `at(.x, ...)` returns the columns at the given indices. Indices
 #' can be letters or numbers or both. All columns must exist.

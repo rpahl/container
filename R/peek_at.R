@@ -47,10 +47,8 @@ peek_at.Container <- function(.x, ..., .default = NULL)
 }
 
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' peek_at(x, ..., .default = NULL)
 #' @details
 #' * `peek_at(x, ..., .default = NULL)` returns the value at the given indices
 #' or (if not found) the given default value.
@@ -91,10 +89,8 @@ peek_at.dict.table <- function(.x, ..., .default = NULL)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' peek_at(.x, ..., .default = NULL)
 #' @details
 #' * `peek_at(x, ..., .default = NULL)` returns the columns at the given
 #' indices or (if not found) columns with the given default value.

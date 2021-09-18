@@ -57,11 +57,8 @@ delete_at.Container <- function(.x, ...)
     (ref_delete_at(.x$clone(deep = TRUE), ...))
 }
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' delete_at(.x, ...)
-#' ref_delete_at(.x, ...)
 #' @details
 #' * `delete_at(.x, ...)` and `ref_delete_at(.x, ...)` find and remove values at
 #' given indices. If any given index is invalid, an error is signaled.
@@ -144,11 +141,8 @@ delete_at.dict.table <- function(.x, ...)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' delete_at(.x, ...)
-#' ref_delete_at(.x, ...)
 #' @details
 #' * `delete_at(.x, ...)` and `ref_delete_at(.x, ...)` find and remove columns either by
 #' name or index (or both). If one or more columns don't exist, an error is signaled.

@@ -49,11 +49,9 @@ peek_at2.Container <- function(x, index, default = NULL)
 }
 
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
 #' @param index `character` name or `numeric` position of the sought value.
-#' @usage
-#' peek_at2(x, index, default)
 #' @details
 #' * `peek_at2(x, index, default)` returns the value at the given index or (if
 #' not found) the given default value.
@@ -85,11 +83,8 @@ peek.Deque <- function(x, default = NULL) x$peek(default)
 peekleft.Deque <- function(x, default = NULL) x$peekleft(default)
 
 
-#' @name DequeS3methods
+#' @name DequeS3
 #' @rdname DequeS3
-#' @usage
-#' peek(x, default)
-#' peekleft(x, default)
 #' @details
 #' * `peek(x, default = NULL)` peek at last element. If `x` is empty, return
 #' `default`.
@@ -140,11 +135,9 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
 #' @param index `character` column name or `numeric` position of column
-#' @usage
-#' peek_at2(x, index, default = NULL)
 #' @details
 #' * `peek_at2(x, index, default = NULL)` return column named `index` if it exist
 #' otherwise the given `default` value. If the default length does not match

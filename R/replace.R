@@ -43,7 +43,7 @@ replace.Container <- function(.x, old, new, add = FALSE, ...)
     ref_replace(.x$clone(deep = TRUE), old, new, add)
 }
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
 #' @param old old element to be found and replaced.
 #' @param new the new element replacing the old one.
@@ -51,9 +51,6 @@ replace.Container <- function(.x, old, new, add = FALSE, ...)
 #' an error is given. In contrast, if set to `TRUE` the new element is added
 #' regardless of whether it is used as a replacement for an existing or
 #' just as a new element, respectively.
-#' @usage
-#' replace(.x, old, new, add = FALSE)
-#' ref_replace(.x, old, new, add = FALSE)
 #' @details
 #' * `replace(.x, old, new, add = FALSE)` and
 #'   `ref_replace(.x, old, new, add = FALSE)` try to find element `old` and
@@ -102,13 +99,10 @@ ref_replace.Dict <- function(.x, old, new, ...)
     .x$replace(old, new)
 }
 
-#' @name DictS3methods
+#' @name DictS3
 #' @param old old element to be found and replaced.
 #' @param new the new element replacing the old one.
 #' @rdname DictS3
-#' @usage
-#' replace(.x, old, new)
-#' ref_replace(.x, old, new)
 #' @details
 #' * `replace(.x, old, new)` and `ref_replace(.x, old)` try to find element `old`
 #'  and replace it with element `new`. If `old` does not exist, an error is

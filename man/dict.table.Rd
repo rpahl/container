@@ -11,8 +11,7 @@
 \alias{as.data.table.dict.table}
 \alias{rbind.dict.table}
 \alias{cbind.dict.table}
-\alias{dict.tableMethods}
-\alias{pop.dict.table}
+\alias{dict.tabldict.table}
 \title{dict.table}
 \usage{
 dict.table(...)
@@ -29,41 +28,8 @@ is.dict.table(x)
 
 \method{cbind}{dict.table}(x, ...)
 
-add(.x, ...)
-ref_add(.x, ...)
-
-at(.x, ...)
-
-at2(x, index)
-
-clear(x)
-ref_clear(x)
-
-clone(x, ...)
-
-delete_at(.x, ...)
-ref_delete_at(.x, ...)
-
-discard_at(.x, ...)
-ref_discard_at(.x, ...)
-
-has(x, column)
-
-has_name(x, name)
-
-is_empty(x)
-
-peek_at(.x, ..., .default = NULL)
-
-peek_at2(x, index, default = NULL)
-
-ref_pop(.x, index)
-
 rename(.x, old, new, ...)
 ref_rename(.x, old, new, ...)
-
-replace_at(.x, ..., .add = FALSE)
-ref_replace_at(.x, ..., .add = FALSE)
 
 update(x, other)
 ref_update(x, other)
@@ -91,11 +57,6 @@ As a result, a dict.table object provides all \code{\link[=dict]{dict()}} and \c
 functions and operators at the same time.
 }
 \details{
-\subsection{Methods}{
-
-Description of \code{dict.table} methods:
-}
-
 \itemize{
 \item \code{dict.table(...)} initializes and returns a \code{\link[=dict]{dict()}} object.
 }

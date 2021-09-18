@@ -16,8 +16,6 @@
 #' Methods that alter `Dict` objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with
 #' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
-#' ## Methods
-#' Description of `dict` methods:
 #' @examples
 #' d = dict(a = 1, b = "one", f = mean, na = NA)
 #' print(d)

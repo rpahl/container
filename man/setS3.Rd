@@ -6,9 +6,6 @@
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
-\alias{SetS3methods}
-\alias{+.Set}
-\alias{-.Set}
 \alias{&.Set}
 \alias{|.Set}
 \title{Set methods}
@@ -18,10 +15,6 @@ setnew(...)
 as.set(x)
 
 is.set(x)
-
-\method{+}{Set}(x, y)
-
-\method{-}{Set}(x, y)
 
 \method{&}{Set}(x, y)
 
@@ -44,10 +37,6 @@ and sorted, first considering the length and, in case of a ties, a
 lexicographical representation of the elements.
 For a description of basic methods such as adding and removing elements,
 see the help of \code{\link[=container]{container()}}.
-\subsection{Methods}{
-
-Description of \code{set} methods:
-}
 
 \itemize{
 \item \code{setnew(...)} initializes and returns a \code{\link[=Set]{Set()}} object.

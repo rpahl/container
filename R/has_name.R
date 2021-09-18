@@ -25,11 +25,9 @@ has_name.Container <- function(x, name)
 }
 
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
 #' @param name `character` the name to be found.
-#' @usage
-#' has_name(x, name)
 #' @details
 #' * `has_name(x, name)` check if `name` is in `x`
 #' @examples
@@ -72,11 +70,9 @@ has_name.dict.table <- function(x, name)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
 #' @param name `character` a column name
-#' @usage
-#' has_name(x, name)
 #' @details
 #' * `has_name(x, name)` check if `x` has the given column name.
 #' @examples

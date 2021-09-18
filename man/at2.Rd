@@ -16,6 +16,8 @@ at2(x, ...)
 \item{x}{an \code{R} object of the respective class.}
 
 \item{...}{other arguments passed to or from methods.}
+
+\item{index}{\code{character} name or \code{numeric} position of the sought value.}
 }
 \value{
 For \code{Container}, returns the value at the given index.

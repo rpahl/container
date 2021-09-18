@@ -15,13 +15,10 @@ is_empty <- function(x) UseMethod("is_empty")
 is_empty.Container <- function(x) x$is_empty()
 
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' is_empty(x)
 #' @details
 #' * `is_empty(x)` `TRUE` if object is empty otherwise `FALSE`
-#' @export
 #' @examples
 #'
 #' co = container(1, 2)
@@ -40,10 +37,8 @@ NULL
 is_empty.dict.table <- function(x) ncol(x) == 0
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' is_empty(x)
 #' @details
 #' * `is_empty(x)` `TRUE` if object is empty otherwise `FALSE`
 #' @export

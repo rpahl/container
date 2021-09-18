@@ -95,7 +95,7 @@ ref_update.dict.table <- function(x, other, ...)
     x
 }
 
-#' @name dict.tableMethods
+#' @name dict.tabldict.table
 #' @rdname dict.table
 #' @param other another `dict.table` object
 #' @usage

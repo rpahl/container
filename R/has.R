@@ -19,11 +19,9 @@ has <- function(x, ...) UseMethod("has")
 #' has(co, 1:2)                 # FALSE
 has.Container <- function(x, elem, ...) x$has(elem)
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
 #' @param elem some element of any type
-#' @usage
-#' has(x, elem)
 #' @details
 #' * `has(x, elem)` `TRUE` if element is in `x` and otherwise `FALSE`.
 #' @examples
@@ -61,10 +59,8 @@ has.dict.table <- function(x, column, ...)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' has(x, column)
 #' @details
 #' * `has(x, column)` check if some `column` is in dict.table object.
 #' @examples

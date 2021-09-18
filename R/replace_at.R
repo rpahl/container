@@ -41,16 +41,13 @@ replace_at.Container <- function(.x, ..., .add = FALSE)
     (ref_replace_at(.x$clone(deep = TRUE), ..., .add = .add))
 }
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
 #' @param .add `logical` if `FALSE` (default) and index is invalid, an error is
 #' given. If set to `TRUE` the new element is added at the given index
 #' regardless whether the index existed or not. Indices can consist of numbers
 #' or names or both, except when adding values at nex indices, which is only
 #' allowed for names.
-#' @usage
-#' replace_at(.x, ..., .add = FALSE)
-#' ref_replace_at(.x, ..., .add = FALSE)
 #' @details
 #' * `replace_at(.x, .., .add = FALSE)` and `ref_replace_at(.x, ..., .add = FALSE)`
 #' replace values at given indices. If a given index is invalid, an error is
@@ -169,11 +166,8 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
     invisible(.x)
 }
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' replace_at(.x, ..., .add = FALSE)
-#' ref_replace_at(.x, ..., .add = FALSE)
 #' @details
 #' * `replace_at(.x, .., .add = FALSE)` and `ref_replace_at(.x, ..., .add = FALSE)`
 #' replace values at given indices. If a given index is invalid, an error is

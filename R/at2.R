@@ -9,6 +9,7 @@
 #' If there are two or more identical names, the value of the first match (i.e.
 #' *leftmost* element) is returned.
 #' @param x an `R` object of the respective class.
+#' @param index `character` name or `numeric` position of the sought value.
 #' @param ... other arguments passed to or from methods.
 #' @seealso [peek_at2()] for less strict extraction
 #' @export
@@ -44,10 +45,8 @@ at2.Container <- function(x, index, ...)
 }
 
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' at2(x, index)
 #' @details
 #' * `at2(x, index)` returns the value at the given index or signals an error
 #' if not found.
@@ -84,10 +83,8 @@ at2.dict.table <- function(x, index, ...)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' at2(x, index)
 #' @details
 #' * `at2(x, index)` returns the column at the given `index` or signals
 #' an error if not found.

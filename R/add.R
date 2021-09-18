@@ -1,9 +1,3 @@
-#' @name ContainerS3methods
-#' @rdname ContainerS3
-#' @usage
-#' ## More container S3 methods
-NULL
-
 #' Add elements
 #'
 #' Add elements to container-like objects.
@@ -18,12 +12,6 @@ add <- function(.x, ...) UseMethod("add")
 #' @export
 ref_add <- function(.x, ...) UseMethod("ref_add")
 
-
-#' @name DequeS3methods
-#' @rdname DequeS3
-#' @usage
-#' ## More deque S3 methods
-NULL
 
 #' @rdname add
 #' @export
@@ -53,16 +41,15 @@ add.Container <- function(.x, ...)
     (ref_add(.x$clone(deep = TRUE), ...))
 }
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' add(.x, ...)
-#' ref_add(.x, ...)
+#' @param .x `R` object of class `Container`.
 #' @details
 #' * `add(.x, ...)` and `ref_add(.x, ...)` add elements to `.x`.
 #' @examples
 #' co = container(1)
 #' add(co, 1, b = 2, c = container(1:3))
+#'
 NULL
 
 #' @rdname add
@@ -92,11 +79,8 @@ addleft.Deque <- function(.x, ...)
     (ref_addleft(.x$clone(deep = TRUE), ...))
 }
 
-#' @name DequeS3methods
+#' @name DequeS3
 #' @rdname DequeS3
-#' @usage
-#' addleft(.x, ...)
-#' ref_addleft(.x, ...)
 #' @details
 #' * `addleft(.x, ...)` adds (possibly named) elements to left side of `.x`.
 #' * `ref_addleft(.x, ...)` same as `addleft(.x, ...)` but adds by reference.
@@ -139,16 +123,9 @@ add.Dict <- function(.x, ...)
     (ref_add(.x$clone(deep = TRUE), ...))
 }
 
-#' @name DictS3methods
-#' @rdname DictS3
-#' @usage
-#' ## More dict S3 methods
-NULL
 
+#' @name DictS3
 #' @rdname DictS3
-#' @usage
-#' add(.x, ...)
-#' ref_add(.x, ...)
 #' @details
 #' * `add(.x, ...)` adds `key = value` pairs to `.x`. If one of the
 #' keys already exists, an error is given.
@@ -201,11 +178,8 @@ add.dict.table <- function(.x, ...)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' add(.x, ...)
-#' ref_add(.x, ...)
 #' @details
 #' * `add(.x, ...)` and `ref_add(.x, ...)` add columns to `.x`. If the column name
 #' already exists, an error is given.

@@ -14,11 +14,6 @@
 \alias{length.Container}
 \alias{names.Container}
 \alias{iter.Container}
-\alias{ContainerS3methods}
-\alias{+.Container}
-\alias{-.Container}
-\alias{==.Container}
-\alias{pop.Container}
 \title{Container methods}
 \usage{
 container(...)
@@ -34,66 +29,15 @@ is.container(x)
 \method{names}{Container}(x)
 
 \method{iter}{Container}(x, ...)
-
-\method{+}{Container}(x, y)
-
-\method{-}{Container}(x, y)
-
-\method{==}{Container}(x, y)
-
-## More container S3 methods
-
-add(.x, ...)
-ref_add(.x, ...)
-
-at(.x, ...,)
-
-at2(x, index)
-
-clear(x)
-ref_clear(x)
-
-clone(x)
-
-count(x)
-
-delete(.x, ...)
-ref_delete(.x, ...)
-
-delete_at(.x, ...)
-ref_delete_at(.x, ...)
-
-discard(.x, ...)
-ref_discard(.x, ...)
-
-discard_at(.x, ...)
-ref_discard_at(.x, ...)
-
-has(x, elem)
-
-has_name(x, name)
-
-is_empty(x)
-
-peek_at(x, ..., .default = NULL)
-
-peek_at2(x, index, default)
-
-ref_pop(.x, index)
-
-replace(.x, old, new, add = FALSE)
-ref_replace(.x, old, new, add = FALSE)
-
-replace_at(.x, ..., .add = FALSE)
-ref_replace_at(.x, ..., .add = FALSE)
 }
 \arguments{
-\item{...}{(possibly named) elements to be put into or removed from the \code{Container}.}
+\item{...}{(possibly named) elements to be put into or removed from the
+\code{Container}, or additional arguments passed from and to methods.}
 
 \item{x, y}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
 or of class \code{Container} for the \code{S3} methods.}
 
-\item{.x}{\verb{object of class }Container`}
+\item{.x}{\code{R} object of class \code{Container}.}
 
 \item{elem}{some element of any type}
 
@@ -128,10 +72,6 @@ Methods that alter \code{Container} objects usually come in two versions
 providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,
 \verb{[add()]} and \verb{[add_()]}.
-\subsection{Methods}{
-
-Description of \code{container} methods:
-}
 
 \itemize{
 \item \code{container(...)} initializes and returns a \code{\link[=Container]{Container()}} object.
@@ -318,6 +258,7 @@ c1 < container()    # FALSE
 
 co = container(1)
 add(co, 1, b = 2, c = container(1:3))
+
 
 co = container(a = 1, 2, b = 3, 4)
 at(co, 1:3)

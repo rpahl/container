@@ -29,11 +29,8 @@ delete.Container <- function(.x, ...)
     (ref_delete(.x$clone(deep = TRUE), ...))
 }
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' delete(.x, ...)
-#' ref_delete(.x, ...)
 #' @details
 #' * `delete(.x, ...)` and `ref_delete(.x, ...)` find and remove elements.
 #' If one or more elements don't exist, an error is signaled.

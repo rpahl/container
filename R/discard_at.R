@@ -27,11 +27,8 @@ discard_at.Container <- function(.x, ...) {
     (ref_discard_at(.x$clone(deep = TRUE), ...))
 }
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' discard_at(.x, ...)
-#' ref_discard_at(.x, ...)
 #' @details
 #' * `discard_at(.x, ...)` and `ref_discard_at(.x, ...)` find and discard values
 #' at given indices. Invalid indices are ignored.
@@ -83,11 +80,8 @@ discard_at.dict.table <- function(.x, ...)
     (ref_discard_at(clone(.x), ...))
 }
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' discard_at(.x, ...)
-#' ref_discard_at(.x, ...)
 #' @details
 #' * `discard_at(.x, ...)` and `ref_discard_at(.x, ...)` find and remove columns
 #' either by name or index (or both). Invalid column indices are ignored.

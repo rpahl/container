@@ -110,7 +110,7 @@ rename.dict.table <- function(.x, old, new, ...)
 }
 
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
 #' @usage
 #' rename(.x, old, new, ...)

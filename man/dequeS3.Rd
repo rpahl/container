@@ -8,10 +8,6 @@
 \alias{as.deque}
 \alias{is.deque}
 \alias{rev.Deque}
-\alias{DequeS3methods}
-\alias{+.Deque}
-\alias{-.Deque}
-\alias{pop.Deque}
 \title{Deque (double-ended queue)}
 \usage{
 deque(...)
@@ -21,21 +17,6 @@ as.deque(x)
 is.deque(x)
 
 \method{rev}{Deque}(x)
-
-\method{+}{Deque}(x, y)
-
-\method{-}{Deque}(x, y)
-
-## More deque S3 methods
-
-addleft(.x, ...)
-ref_addleft(.x, ...)
-
-peek(x, default)
-peekleft(x, default)
-
-ref_pop(.x)
-ref_popleft(.x)
 
 rotate(x, n)
 }
@@ -62,10 +43,6 @@ Methods that alter \code{Deque} objects usually come in two versions
 providing either copy or reference semantics where the latter are visible
 by an underscore appended to the standard function name, for example,
 \verb{[addleft()]} and \verb{[addleft_()]}.
-\subsection{Methods}{
-
-Description of \code{deque} methods:
-}
 
 \itemize{
 \item \code{deque(...)} initializes and returns an object of class \code{Deque}

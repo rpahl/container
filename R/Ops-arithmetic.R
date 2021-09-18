@@ -2,15 +2,15 @@
 #'
 #' @description Binary arithmetic operators for [Container()] objects and
 #' derived classes.
-#' @name ArithmeticContainer
+#' @name OpsArithmetic
 #' @param x,y Depending on the operator at least one must be of class
 #' [Container()] or the respective derived class and the other at least be
 #' coercible to the respective class.
 NULL
 
-#' @rdname ContainerS3
-#' @details * `x + y` combines `x` and `y` into a new container by appending `y`
-#' to `x`.
+#' @rdname OpsArithmetic
+#' @return For `Container`, `x + y` combines `x` and `y` into a new container
+#' by appending `y` to `x`.
 #' @examples
 #' c1 = container(1, 1:2)
 #' c2 = container(2, 1:2)
@@ -23,9 +23,22 @@ NULL
     c(as.container(x), as.container(y))
 }
 
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @details * `x - y` element-wise discards all items of `y` from `x`, given
-#' the element was contained in `x`. The result is always a container.
+#' @details * `x + y` combines `x` and `y` into a new container by appending `y`
+#' to `x`.
+#' @examples
+#' c1 = container(1, 1:2)
+#' c2 = container(2, 1:2)
+#' c1 + c2     # same as c(c1, c2)
+#' c2 + c1     # same as c(c2, c1)
+#'
+NULL
+
+#' @rdname OpsArithmetic
+#' @return For Container, `x - y` element-wise discards all items of `y`
+#' from `x`, given the element was contained in `x`. The result is always a
+#' container.
 #' @examples
 #' c1 - c2
 #' c2 - c1
@@ -40,10 +53,20 @@ NULL
 
 }
 
+#' @name ContainerS3
+#' @rdname ContainerS3
+#' @details * `x - y` element-wise discards all items of `y` from `x`, given
+#' the element was contained in `x`. The result is always a container.
+#' @examples
+#' c1 - c2
+#' c2 - c1
+#' c1 - c1
+#'
+NULL
 
-#' @rdname DequeS3
-#' @details * `x + y` combines `x` and `y` into a new deque by appending `y`
-#' to `x`.
+#' @rdname OpsArithmetic
+#' @return For `Deque,` `x + y` combines `x` and `y` into a new deque by
+#' appending `y` to `x`.
 #' @examples
 #' d1 = deque(1, 1:2)
 #' d2 = deque(2, 1:2)
@@ -56,10 +79,21 @@ NULL
     c(as.deque(x), as.deque(y))
 }
 
-
+#' @name DequeS3
 #' @rdname DequeS3
-#' @details * `x - y` element-wise removes all items of `y` from `x`, given
-#' the element was contained in `x`.
+#' @details * `x + y` combines `x` and `y` into a new deque by appending `y`
+#' to `x`.
+#' @examples
+#' d1 = deque(1, 1:2)
+#' d2 = deque(2, 1:2)
+#' d1 + d2     # same as c(d1, d2)
+#' d2 + d1     # same as c(d2, d1)
+#'
+NULL
+
+#' @rdname OpsArithmetic
+#' @return For Deque, `x - y` element-wise removes all items of `y` from `x`,
+#' given the element was contained in `x`.
 #' @examples
 #' d1 - d2
 #' d2 - d1
@@ -73,10 +107,20 @@ NULL
     deq
 }
 
+#' @name DequeS3
+#' @rdname DequeS3
+#' @details * `x - y` element-wise removes all items of `y` from `x`, given
+#' the element was contained in `x`.
+#' @examples
+#' d1 - d2
+#' d2 - d1
+#' d1 - d1
+#'
+NULL
 
-#' @rdname DictS3
-#' @details * `x + y` combines `x` and `y` into a new dict by updating `x`
-#' by `y` (see also `[update()]`).
+#' @rdname OpsArithmetic
+#' @return For  `Dict`, `x + y` combines `x` and `y` into a new dict by
+#' updating `x` by `y` (see also `[update()]`).
 #' @examples
 #' d1 = dict(a = 1, b = list(1, 2))
 #' d2 = dict(a = 2, b = list(1, 2))
@@ -93,9 +137,22 @@ NULL
     d1$update(d2)
 }
 
-
+#' @name DictS3
 #' @rdname DictS3
-#' @details * `x - y` removes all keys from `x` that appear in `y`.
+#' @details * `x + y` combines `x` and `y` into a new dict by updating `x`
+#' by `y` (see also `[update()]`).
+#' @examples
+#' d1 = dict(a = 1, b = list(1, 2))
+#' d2 = dict(a = 2, b = list(1, 2))
+#' d1 + d2      # same as update(d, d2)
+#' d2 + d1      # same as update(d2, d)
+#' \dontrun{
+#' c(d1, d2)    # duplicated keys are not allowed for Dict}
+#'
+NULL
+
+#' @rdname OpsArithmetic
+#' @return For `Dict`, `x - y` removes all keys from `x` that appear in `y`.
 #' @examples
 #' d - d2
 #' d2 - d
@@ -113,7 +170,19 @@ NULL
     d1
 }
 
-#' @rdname SetS3
+#' @name DictS3
+#' @rdname DictS3
+#' @details * `x - y` removes all keys from `x` that appear in `y`.
+#' @examples
+#' d - d2
+#' d2 - d
+#' d - d
+#'
+NULL
+
+
+#' @rdname OpsArithmetic
+#' @return For `Set`, `x + y` performs the set union.
 #' @examples
 #' s1 = setnew(1, 1:2)
 #' s2 = setnew(2, 1:2)
@@ -126,7 +195,19 @@ NULL
     x | y
 }
 
+#' @name SetS3
 #' @rdname SetS3
+#' @examples
+#' s1 = setnew(1, 1:2)
+#' s2 = setnew(2, 1:2)
+#' s1 + s2     # same as s1 | s2 or c(c1, s2)
+#' s2 + s1     # same
+#'
+NULL
+
+
+#' @rdname OpsArithmetic
+#' @return For `Set`, `x - y` performs the set difference.
 #' @examples
 #' s1 - s2
 #' s2 - s1
@@ -137,3 +218,10 @@ NULL
     as.set(x)$diff(as.set(y))
 }
 
+#' @name SetS3
+#' @rdname SetS3
+#' @examples
+#' s1 - s2
+#' s2 - s1
+#'
+NULL

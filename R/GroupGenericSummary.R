@@ -1,4 +1,4 @@
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
 #' @examples
 #' # Summary
@@ -14,7 +14,7 @@ Summary.Container <- function(..., na.rm = FALSE)
     get(.Generic)(unlist(lapply(..., unpack)), na.rm = na.rm)
 }
 
-#' @name DequeS3methods
+#' @name DequeS3
 #' @rdname DequeS3
 #' @examples
 #' # Summary
@@ -30,7 +30,7 @@ Summary.Deque <- function(..., na.rm = FALSE)
     get(.Generic)(unlist(lapply(..., unpack)), na.rm = na.rm)
 }
 
-#' @name DictS3methods
+#' @name DictS3
 #' @rdname DictS3
 #' @examples
 #' # Summary
@@ -46,7 +46,7 @@ Summary.Dict <- function(..., na.rm = FALSE)
     get(.Generic)(unlist(lapply(..., unpack)), na.rm = na.rm)
 }
 
-#' @name SetS3methods
+#' @name SetS3
 #' @rdname SetS3
 #' @examples
 #' # Summary

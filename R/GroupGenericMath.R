@@ -1,4 +1,4 @@
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
 #' @examples
 #'
@@ -18,7 +18,7 @@ Math.Container <- function(x, ...)
     as.container(get(.Generic)(unpack(x), ...))
 }
 
-#' @name DequeS3methods
+#' @name DequeS3
 #' @rdname DequeS3
 #' @examples
 #'
@@ -38,7 +38,7 @@ Math.Deque <- function(x, ...)
     as.deque(get(.Generic)(unpack(x), ...))
 }
 
-#' @name DictS3methods
+#' @name DictS3
 #' @rdname DictS3
 #' @examples
 #'
@@ -58,7 +58,7 @@ Math.Dict <- function(x, ...)
     as.dict(get(.Generic)(unpack(x), ...))
 }
 
-#' @name SetS3methods
+#' @name SetS3
 #' @rdname SetS3
 #' @examples
 #'

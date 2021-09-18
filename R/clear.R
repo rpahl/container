@@ -23,11 +23,8 @@ ref_clear <- function(x) UseMethod("ref_clear")
 #' co
 clear.Container <- function(x) (x$clone(deep = TRUE)$clear())
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' clear(x)
-#' ref_clear(x)
 #' @details
 #' * `clear(x)` and `ref_clear(x)` remove all elements from `x`.
 #' @examples
@@ -59,11 +56,8 @@ ref_clear.Container <- function(x)
 #' dit              # original was cleared
 clear.dict.table <- function(x) dict.table()
 
-#' @name dict.tableMethods
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' clear(x)
-#' ref_clear(x)
 #' @details
 #' * `clear(x)` and `ref_clear(x)` remove all elements from `x`.
 #' @examples

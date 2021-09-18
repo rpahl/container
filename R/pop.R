@@ -38,11 +38,8 @@ ref_pop.Deque <- function(.x, ...) .x$pop()
 #' @export
 ref_popleft.Deque <- function(.x, ...) .x$popleft()
 
-#' @name pop.Deque
+#' @name DequeS3
 #' @rdname DequeS3
-#' @usage
-#' ref_pop(.x)
-#' ref_popleft(.x)
 #' @details
 #' * `ref_pop(.x)` pop last element. If `.x` is empty, an error is given.
 #' * `ref_popleft(.x)` pop first element. If `.x` is empty, an error is given.
@@ -74,10 +71,8 @@ NULL
 #'
 ref_pop.Container <- function(.x, index, ...) .x$pop(index)
 
-#' @name pop.Container
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' ref_pop(.x, index)
 #' @details
 #' * `ref_pop(.x, index)` return element at given index and remove it
 #' from the `container` object.
@@ -115,10 +110,8 @@ ref_pop.dict.table <- function(.x, index, ...)
 }
 
 
-#' @name pop.dict.table
+#' @name dict.table
 #' @rdname dict.table
-#' @usage
-#' ref_pop(.x, index)
 #' @details
 #' * `ref_pop(.x, index)` return element at given column index and remove the
 #' column from the dict.table object.

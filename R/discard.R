@@ -27,11 +27,8 @@ discard.Container <- function(.x, ...) {
     (ref_discard(.x$clone(deep = TRUE), ...))
 }
 
-#' @name ContainerS3methods
+#' @name ContainerS3
 #' @rdname ContainerS3
-#' @usage
-#' discard(.x, ...)
-#' ref_discard(.x, ...)
 #' @details
 #' * `discard(.x, ...)` and `ref_discard(.x, ...)` find and discard elements.
 #' Elements that don't exist, are ignored.
