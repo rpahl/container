@@ -40,6 +40,7 @@ NULL
 #' @details * `x <= y` is `TRUE` if the contents of x are lexicographically
 #' *less* than or *equal* to the contents of y.
 #' @examples
+#' # Comparison
 #' c1 = container(1, 2, 3)
 #' c2 = container(1, 3, 2)
 #' c1 == c1            # TRUE

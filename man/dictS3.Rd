@@ -123,7 +123,6 @@ dict(a = 1, 2)   # all elements must be named}
 # Coercion
 as.dict(list(A = 1:3, B = "b"))
 as.dict(c(x = 1, y = "x", z = 2 + 3))
-
 # Math
 set.seed(123)
 d = dict(a = rnorm(1), b = rnorm(1))

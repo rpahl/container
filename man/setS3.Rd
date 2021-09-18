@@ -68,7 +68,6 @@ names(s)
 as.list(s)
 unpack(s)   # flatten recursively similar to unlist
 
-
 # Math
 set.seed(123)
 s = as.set(rnorm(3))

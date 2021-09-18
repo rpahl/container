@@ -28,6 +28,7 @@ NULL
 #' @details * `x + y` combines `x` and `y` into a new container by appending `y`
 #' to `x`.
 #' @examples
+#' # Arithmetic
 #' c1 = container(1, 1:2)
 #' c2 = container(2, 1:2)
 #' c1 + c2     # same as c(c1, c2)
@@ -43,7 +44,6 @@ NULL
 #' c1 - c2
 #' c2 - c1
 #' c1 - c1
-#'
 #' @export
 `-.Container` <- function(x, y)
 {
@@ -68,6 +68,7 @@ NULL
 #' @return For `Deque,` `x + y` combines `x` and `y` into a new deque by
 #' appending `y` to `x`.
 #' @examples
+#' # Arithmetic
 #' d1 = deque(1, 1:2)
 #' d2 = deque(2, 1:2)
 #' d1 + d2     # same as c(d1, d2)
@@ -122,6 +123,7 @@ NULL
 #' @return For  `Dict`, `x + y` combines `x` and `y` into a new dict by
 #' updating `x` by `y` (see also `[update()]`).
 #' @examples
+#' # Arithmetic
 #' d1 = dict(a = 1, b = list(1, 2))
 #' d2 = dict(a = 2, b = list(1, 2))
 #' d1 + d2      # same as update(d, d2)
@@ -184,6 +186,7 @@ NULL
 #' @rdname OpsArithmetic
 #' @return For `Set`, `x + y` performs the set union.
 #' @examples
+#' # Arithmetic
 #' s1 = setnew(1, 1:2)
 #' s2 = setnew(2, 1:2)
 #' s1 + s2     # same as s1 | s2 or c(c1, s2)

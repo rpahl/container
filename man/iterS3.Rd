@@ -3,6 +3,7 @@
 \name{iterS3}
 \alias{iterS3}
 \alias{iter}
+\alias{iter.Container}
 \alias{iter.default}
 \alias{is.iterator}
 \alias{begin}
@@ -17,6 +18,8 @@
 \title{Iterator}
 \usage{
 iter(x, ...)
+
+\method{iter}{Container}(x, ...)
 
 \method{iter}{default}(x, ...)
 
@@ -50,7 +53,7 @@ the \code{iterator}.}
 \item{it}{\code{Iterator} object}
 }
 \value{
-\code{length()} returns the number of elements to iterate
+\code{length} returns the number of elements that can be iterated over.
 }
 \description{
 An \code{Iterator} is an object that allows to iterate over

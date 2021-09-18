@@ -69,7 +69,7 @@ c2 + c1     # same as c(c2, c1)
 c1 - c2
 c2 - c1
 c1 - c1
-
+# Arithmetic
 d1 = deque(1, 1:2)
 d2 = deque(2, 1:2)
 d1 + d2     # same as c(d1, d2)
@@ -79,6 +79,7 @@ d1 - d2
 d2 - d1
 d1 - d1
 
+# Arithmetic
 d1 = dict(a = 1, b = list(1, 2))
 d2 = dict(a = 2, b = list(1, 2))
 d1 + d2      # same as update(d, d2)
@@ -90,6 +91,7 @@ d - d2
 d2 - d
 d - d
 
+# Arithmetic
 s1 = setnew(1, 1:2)
 s2 = setnew(2, 1:2)
 s1 + s2     # same as s1 | s2 or c(c1, s2)

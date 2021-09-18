@@ -18,7 +18,7 @@ NULL
 #' @export
 iter <- function(x, ...) UseMethod("iter")
 
-#' @rdname ContainerS3
+#' @rdname iterS3
 #' @export
 iter.Container <- function(x, ...) x$clone(deep = TRUE)$iter()
 
@@ -95,7 +95,7 @@ reset_iter <- function(it)
 }
 
 #' @rdname iterS3
-#' @return `length()` returns the number of elements to iterate
+#' @return `length` returns the number of elements that can be iterated over.
 #' @export
 length.Iterator <- function(x) x$length()
 

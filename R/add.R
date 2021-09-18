@@ -47,6 +47,7 @@ add.Container <- function(.x, ...)
 #' @details
 #' * `add(.x, ...)` and `ref_add(.x, ...)` add elements to `.x`.
 #' @examples
+#'
 #' co = container(1)
 #' add(co, 1, b = 2, c = container(1:3))
 #'

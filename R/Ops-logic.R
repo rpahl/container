@@ -2,7 +2,7 @@
 #'
 #' @description Binary logic operators for [Container()] objects and
 #' derived classes.
-#' @name LogicContainer
+#' @name OpsLogic
 #' @param x,y Depending on the operator at least one must be of class
 #' [Container()] or the respective derived class and the other at least be
 #' coercible to the respective class.

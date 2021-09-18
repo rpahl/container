@@ -111,7 +111,6 @@ d2 + d
 d - d2
 c(d2, d) # same as d2 + d
 d2 - d
-
 # Math
 set.seed(123)
 d = as.deque(rnorm(3))

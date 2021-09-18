@@ -2,7 +2,7 @@
 #'
 #' @description Extract or replace parts of a `Container` object similar
 #' to R's base extract and replace operators on lists.
-#' @name ExtractContainer
+#' @name OpsExtract
 #' @param x `Container` object for which to extract or replace elements.
 #' @param i,...  indices specifying elements to extract or replace. Indices
 #' are `numeric` or `character` vectors or a `list` containing both.
@@ -30,14 +30,14 @@
 #' indices.
 #'
 #' `[[<-` replaces a single value at a given `numeric` or `character` index.
-#' Instead of an index, it is also possible to pass an element as a `list`. In
-#' this case, the object is searched for the element and then the element is
-#' replaced by the value (see Examples).
+#' Instead of an index, it is also possible to replace certain elements by
+#' passing the element in curly braces (see Examples), that is, the object is
+#' searched for the element and then the element is replaced by the value.
 #'
 #' `$<-` replaces a single element at a given name.
 NULL
 
-#' @name ExtractContainer
+#' @rdname OpsExtract
 #' @examples
 #' co = container(a = 1, b = 2, c = 3, d = 4)
 #' co[1:2]
@@ -45,8 +45,6 @@ NULL
 #' co["d", 2]
 #' co[list("d", 2)]
 #' co[0:10]
-NULL
-
 #' @export
 "[.Container" <- function(x, ...)
 {
@@ -58,8 +56,34 @@ NULL
     peek_at(x, ...)
 }
 
+#' @name ContainerS3
+#' @rdname ContainerS3
+#' @examples
+#' # Extract or replace
+#' co = container(a = 1, b = 2, c = 3, d = 4)
+#' co[1:2]
+#' co[1, 4]
+#' co["d", 2]
+#' co[list("d", 2)]
+#' co[0:10]
+NULL
 
-#' @name ExtractContainer
+
+#' @rdname OpsExtract
+#' @examples
+#'
+#' co = container(a = 1, b = 2)
+#' co[[1]]
+#' co[["a"]]
+#' co[["x"]]
+#' @export
+"[[.Container" <- function(x, i)
+{
+    x$peek_at2(i)
+}
+
+#' @name ContainerS3
+#' @rdname ContainerS3
 #' @examples
 #'
 #' co = container(a = 1, b = 2)
@@ -68,22 +92,40 @@ NULL
 #' co[["x"]]
 NULL
 
-#' @export
-"[[.Container" <- function(x, i)
-{
-    x$peek_at2(i)
-}
 
-
+#' @rdname OpsExtract
+#' @examples
+#' co = container(a = 1, b = "bar")
+#' (co[1:2] <- 1:2)
+#'
+#' \dontrun{
+#' co[3] <- 3 # index out of range}
+#'
+#' (co[list(1, "b")] <- 3:4)   # mixed numeric/character index
+#'
 #' @export
 "[<-.Container" = function(x, i, value)
 {
     ref_replace_at(x, i, value, .add = TRUE)
 }
 
-#' @name ExtractContainer
+#' @name ContainerS3
+#' @rdname ContainerS3
 #' @examples
+#' co = container(a = 1, b = "bar")
+#' (co[1:2] <- 1:2)
 #'
+#' \dontrun{
+#' co[3] <- 3 # index out of range}
+#'
+#' (co[list(1, "b")] <- 3:4)   # mixed numeric/character index
+#'
+NULL
+
+
+
+#' @rdname OpsExtract
+#' @examples
 #' co = container(a = 1, b = 2)
 #' co[[1]] <- 9
 #' co[["b"]] <- 8
@@ -94,8 +136,6 @@ NULL
 #' # Replace 8 by 0
 #' co[[{8}]] <- 0
 #' print(co)
-NULL
-
 #' @export
 "[[<-.Container" = function(x, i, value)
 {
@@ -111,11 +151,43 @@ NULL
         ref_replace_at(x, i, value, .add = TRUE)
 }
 
+#' @name ContainerS3
+#' @rdname ContainerS3
+#' @examples
+#' co = container(a = 1, b = 2)
+#' co[[1]] <- 9
+#' co[["b"]] <- 8
+#' co[["x"]] <- 7
+#' co$z <- 99
+#' print(co)
+#'
+#' # Replace 8 by 0
+#' co[[{8}]] <- 0
+#' print(co)
+#'
+NULL
 
+
+#' @rdname OpsExtract
+#' @examples
+#' co = container(a = 1, b = "bar")
+#' co$f <- 3
+#' co$b <- 2
+#' co
+#'
 #' @export
 "$<-.Container" = function(x, name, value)
 {
     ref_replace_at(x, name, value, .add = TRUE)
 }
 
+#' @name ContainerS3
+#' @rdname ContainerS3
+#' @examples
+#' co = container(a = 1, b = "bar")
+#' co$f <- 3
+#' co$b <- 2
+#' co
+#'
+NULL
 

@@ -1,10 +1,9 @@
 #' @name ContainerS3
 #' @rdname ContainerS3
 #' @examples
-#'
 #' # Math
-#' set.seed(123)
-#' co = as.container(rnorm(3))
+#' co = container(1, 2, -(3:5))
+#' co
 #' abs(co)
 #' cumsum(co)
 #' round(co)
@@ -21,10 +20,9 @@ Math.Container <- function(x, ...)
 #' @name DequeS3
 #' @rdname DequeS3
 #' @examples
-#'
 #' # Math
-#' set.seed(123)
-#' d = as.deque(rnorm(3))
+#' d = deque(1, 2, -(3:5))
+#' d
 #' abs(d)
 #' cumsum(d)
 #' round(d)
@@ -41,9 +39,7 @@ Math.Deque <- function(x, ...)
 #' @name DictS3
 #' @rdname DictS3
 #' @examples
-#'
 #' # Math
-#' set.seed(123)
 #' d = dict(a = rnorm(1), b = rnorm(1))
 #' abs(d)
 #' cumsum(d)
@@ -61,10 +57,9 @@ Math.Dict <- function(x, ...)
 #' @name SetS3
 #' @rdname SetS3
 #' @examples
-#'
 #' # Math
-#' set.seed(123)
-#' s = as.set(rnorm(3))
+#' s = setnew(5:3, 1, 2)
+#' s
 #' abs(s)
 #' cumsum(s)
 #' round(s)
