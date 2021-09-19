@@ -14,14 +14,6 @@
 \alias{keys}
 \title{Deprecated Functions in Package container}
 \usage{
-empty(...)       ### -- use `is_empty(...)` instead
-set(...)         ### -- use `setnew(...)` instead to create `Set`s
-size(...)        ### -- use `length(...)` instead
-sortkey(...)     ### -- `Dict` keys are now always sorted
-remove(...)      ### -- use `delete(...)` instead
-type(...)        ### -- not of use anymore
-values(...)      ### -- use `as.list(...)` instead
-
 empty(x)
 
 \method{empty}{Container}(x)
@@ -45,27 +37,20 @@ keys(x)
 \arguments{
 \item{x}{any \code{R} object.}
 
-\item{decr}{\code{logical} Should the sort be increasing or decreasing?}
+\item{decr}{\code{logical} sort decreasingly?}
 
 \item{...}{(arguments)}
-}
-\value{
-\code{TRUE} if object is empty otherwise \code{FALSE}.
-
-\code{integer} size of the \code{Container}, that is, the number of
-elements it contains.
-
-For \code{Dict} sorts the elements in place and inivisbly returns the
-\code{\link[=Dict]{Dict()}} object.
-
-a copy of all elements as a basic \code{list}.
 }
 \description{
 These functions are provided for backwards-compatibility and
 may be defunct as soon as the next release.
-
-This function is deprecated. Use \code{\link[=length]{length()}} instead.
-
-Re-order elements according to key-order. This function
-is deprecated as keys are now always sorted.
+}
+\details{
+empty(...)       ### -- use \code{is_empty(...)} instead
+set(...)         ### -- use \code{setnew(...)} instead to create \code{Set}s
+size(...)        ### -- use \code{length(...)} instead
+sortkey(...)     ### -- \code{Dict} keys are now always sorted
+remove(...)      ### -- use \code{delete(...)} instead
+type(...)        ### -- not of use anymore
+values(...)      ### -- use \code{as.list(...)} instead
 }

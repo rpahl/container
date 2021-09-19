@@ -2,8 +2,8 @@
 #'
 #' @description These functions are provided for backwards-compatibility and
 #' may be defunct as soon as the next release.
-#' @param ... (arguments)
-#' @usage
+#' @param x any `R` object.
+#' @details
 #' empty(...)       ### -- use `is_empty(...)` instead
 #' set(...)         ### -- use `setnew(...)` instead to create `Set`s
 #' size(...)        ### -- use `length(...)` instead
@@ -11,13 +11,6 @@
 #' remove(...)      ### -- use `delete(...)` instead
 #' type(...)        ### -- not of use anymore
 #' values(...)      ### -- use `as.list(...)` instead
-#' @name container-deprecated
-NULL
-
-#' Check if object is empty
-#'
-#' @param x any `R` object.
-#' @return `TRUE` if object is empty otherwise `FALSE`.
 #' @name container-deprecated
 NULL
 
@@ -34,13 +27,6 @@ empty.Container <- function(x)
 }
 
 
-#' @title Container size (deprecated)
-#' @description This function is deprecated. Use [length()] instead.
-#' @return `integer` size of the `Container`, that is, the number of
-#' elements it contains.
-#' @name container-deprecated
-NULL
-
 #' @rdname container-deprecated
 #' @export
 size <- function(x) UseMethod("size")
@@ -53,36 +39,18 @@ size.Container <- function(x)
     length(x)
 }
 
-
-#' Sort Dict keys (deprecated)
-#'
-#' @description Re-order elements according to key-order. This function
-#' is deprecated as keys are now always sorted.
-#' @param x any `R` object.
-#' @param decr `logical` Should the sort be increasing or decreasing?
-#' @name container-deprecated
-NULL
-
 #' @rdname container-deprecated
+#' @param decr `logical` sort decreasingly?
 #' @export
 sortkey <- function(x, decr = FALSE) UseMethod("sortkey")
 
 #' @rdname container-deprecated
-#' @return For `Dict` sorts the elements in place and inivisbly returns the
-#' [Dict()] object.
 #' @export
 sortkey.Dict <- function(x, decr = FALSE) {
     .Deprecated(msg = "'sort' is deprecated - keys are now always sorted")
     invisible(x)
 }
 
-
-#' Get raw values of an object (deprecated)
-#'
-#' @param x any `R` object.
-#' @return a copy of all elements as a basic `list`.
-#' @name container-deprecated
-NULL
 
 #' @rdname container-deprecated
 #' @export
