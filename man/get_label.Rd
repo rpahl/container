@@ -21,5 +21,5 @@ Credits for the code idea below belong to the authors of the
 very well written \code{sets} package.
 }
 \seealso{
-\code{\link[sets:labels]{sets::LABEL()}}
+\code{LABEL} function of the \code{sets} package.
 }

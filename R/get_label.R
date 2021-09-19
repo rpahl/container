@@ -5,7 +5,7 @@
 #' @param ... arguments passed to and from methods
 #' @references Credits for the code idea below belong to the authors of the
 #' very well written `sets` package.
-#' @seealso [sets::LABEL()]
+#' @seealso `LABEL` function of the `sets` package.
 #' @export
 get_label <-
 function(x, vec.len = 4L, ...)
