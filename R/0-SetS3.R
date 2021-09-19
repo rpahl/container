@@ -10,8 +10,8 @@
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Set()] and it's superclass [Container()].
 #' @details Under the hood, elements of a set object are stored in a hash-table
-#' and sorted, first considering the length and, in case of a ties, a
-#' lexicographical representation of the elements.
+#' and sorted by their length and, in case of ties, by their lexicographical
+#' representation.
 #' For a description of basic methods such as adding and removing elements,
 #' see the help of [container()].
 #' Methods that alter `Set` objects usually come in two versions

@@ -69,9 +69,8 @@ combining the keys of both objects (set union of keys).
 }
 
 \itemize{
-\item \code{add(.x, ...)} adds \code{key = value} pairs to \code{.x}. If one of the
-keys already exists, an error is given.
-\item \code{ref_add(.x, ...)} same as \code{add(.x, ...)} but adds by reference.
+\item \code{add(.x, ...)} and \code{ref_add(.x, ...)} adds \code{key = value} pairs to \code{.x}.
+If any of the keys already exists, an error is given.
 }
 
 \itemize{

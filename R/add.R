@@ -127,9 +127,8 @@ add.Dict <- function(.x, ...)
 #' @name DictS3
 #' @rdname DictS3
 #' @details
-#' * `add(.x, ...)` adds `key = value` pairs to `.x`. If one of the
-#' keys already exists, an error is given.
-#' * `ref_add(.x, ...)` same as `add(.x, ...)` but adds by reference.
+#' * `add(.x, ...)` and `ref_add(.x, ...)` adds `key = value` pairs to `.x`.
+#' If any of the keys already exists, an error is given.
 #' @examples
 #'
 #' d = dict(a = 1)

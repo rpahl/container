@@ -27,8 +27,8 @@ typical set operations such as \code{union} and \code{intersect}.
 }
 \details{
 Under the hood, elements of a set object are stored in a hash-table
-and sorted, first considering the length and, in case of a ties, a
-lexicographical representation of the elements.
+and sorted by their length and, in case of ties, by their lexicographical
+representation.
 For a description of basic methods such as adding and removing elements,
 see the help of \code{\link[=container]{container()}}.
 Methods that alter \code{Set} objects usually come in two versions
