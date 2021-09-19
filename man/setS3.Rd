@@ -31,6 +31,9 @@ and sorted, first considering the length and, in case of a ties, a
 lexicographical representation of the elements.
 For a description of basic methods such as adding and removing elements,
 see the help of \code{\link[=container]{container()}}.
+Methods that alter \code{Set} objects usually come in two versions
+providing either copy or reference semantics where the latter start with
+\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
 
 \itemize{
 \item \code{setnew(...)} initializes and returns a \code{\link[=Set]{Set()}} object.

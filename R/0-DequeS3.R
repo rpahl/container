@@ -10,10 +10,10 @@
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Deque()] and it's superclass [Container()].
 #' @name DequeS3
-#' @details Methods that alter `Deque` objects usually come in two versions
-#' providing either copy or reference semantics where the latter are visible
-#' by an underscore appended to the standard function name, for example,
-#' `[addleft()]` and `[addleft_()]`.
+#' @details
+#' Methods that alter `Deque` objects usually come in two versions
+#' providing either copy or reference semantics where the latter start with
+#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
 #' @examples
 #' d = deque(1, 2, s = "a", v = 1:3)
 #' is.deque(d)

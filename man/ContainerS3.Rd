@@ -43,9 +43,8 @@ object. The \code{\link[=Container]{Container()}} class serves as the base class
 }
 \details{
 Methods that alter \code{Container} objects usually come in two versions
-providing either copy or reference semantics where the latter are visible
-by an underscore appended to the standard function name, for example,
-\verb{[add()]} and \verb{[add_()]}.
+providing either copy or reference semantics where the latter start with
+\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
 
 \itemize{
 \item \code{container(...)} initializes and returns a \code{\link[=Container]{Container()}} object.

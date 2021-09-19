@@ -14,6 +14,9 @@
 #' lexicographical representation of the elements.
 #' For a description of basic methods such as adding and removing elements,
 #' see the help of [container()].
+#' Methods that alter `Set` objects usually come in two versions
+#' providing either copy or reference semantics where the latter start with
+#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
 #' @examples
 #' s = setnew(1, b = NA, 1:3, c = container("a", 1))
 #' is.set(s)

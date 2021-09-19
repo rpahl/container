@@ -13,10 +13,10 @@
 #' @seealso For the `Container` class documentation see [Container()]. To
 #' create objects of the derived classes see [deque()], [setnew()], and
 #' [dict()].
-#' @details Methods that alter `Container` objects usually come in two versions
-#' providing either copy or reference semantics where the latter are visible
-#' by an underscore appended to the standard function name, for example,
-#' `[add()]` and `[add_()]`.
+#' @details
+#' Methods that alter `Container` objects usually come in two versions
+#' providing either copy or reference semantics where the latter start with
+#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
 #' @examples
 #' co = container(1, b = NA, 1:3, c = container("a", 1))
 #' is.container(co)

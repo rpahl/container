@@ -42,6 +42,10 @@ As a result, a dict.table object provides all \code{\link[=dict]{dict()}} and \c
 functions and operators at the same time.
 }
 \details{
+Methods that alter \code{dict.table} objects usually come in two versions
+providing either copy or reference semantics where the latter start with
+\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
+
 \itemize{
 \item \code{dict.table(...)} initializes and returns a \code{\link[=dict]{dict()}} object.
 }
@@ -151,10 +155,10 @@ dit[y > 5]
 
 \dontrun{
 at(dit, "x")                                 # index 'x' not found
-replace_at(dit, "x" = 0)                     # cannot be replaced, if it does not exist
+replace_at(dit, x = 0)                       # cannot be replaced, if it does not exist
 }
 
-dit = replace_at(dit, "x" = 0, .add = TRUE)  # ok - re-adds column 'x' with all 0s
+dit = replace_at(dit, x = 0, .add = TRUE)    # ok - re-adds column 'x' with all 0s
 peek_at(dit, "x")                            # glance at column 'x'
 has_name(dit, "x")                           # TRUE
 ref_pop(dit, "x")                            # get column and remove it

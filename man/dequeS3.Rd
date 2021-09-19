@@ -32,9 +32,8 @@ both stacks and queues.
 }
 \details{
 Methods that alter \code{Deque} objects usually come in two versions
-providing either copy or reference semantics where the latter are visible
-by an underscore appended to the standard function name, for example,
-\verb{[addleft()]} and \verb{[addleft_()]}.
+providing either copy or reference semantics where the latter start with
+\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
 
 \itemize{
 \item \code{deque(...)} initializes and returns an object of class \code{Deque}
