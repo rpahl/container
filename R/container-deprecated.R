@@ -83,3 +83,9 @@ keys <- function(x)
 }
 
 
+set <- function(...) {
+    .Deprecated("setnew")
+    setnew(...)
+}
+
+

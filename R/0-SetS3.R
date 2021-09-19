@@ -33,12 +33,6 @@ NULL
 #' @export
 setnew <- function(...) Set$new(...)$clone(deep = TRUE)
 
-set <- function(...) {
-    .Deprecated("setnew")
-    setnew(...)
-}
-
-
 #' @rdname SetS3
 #' @details * `as.set(x)` coerces `x` to a set.
 #' @export
