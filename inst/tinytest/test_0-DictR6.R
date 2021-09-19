@@ -309,7 +309,7 @@ expect_true(d$has_name("a"))
 expect_false(d$has_name("A"))
 
 # Verify that values did not change
-values_did_not_change = all.equal(vals, as.numeric(d$values()))
+values_did_not_change = all(vals %in% as.numeric(d$values()))
 expect_true(values_did_not_change)
 
 # Several keys at once

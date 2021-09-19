@@ -29,12 +29,12 @@ ee(s$length(), 1)
 ee(as.list(s$values()), list(NULL))
 
 s$add(list())
-ee(as.list(s$values()), list(list(), NULL))
+expect_true(setequal(as.list(s$values()), list(list(), NULL)))
 s$add(list())
-ee(as.list(s$values()), list(list(), NULL))
+expect_true(setequal(as.list(s$values()), list(list(), NULL)))
 
 s$add(numeric(0))
-ee(as.list(s$values()), list(list(), NULL, numeric()))
+expect_true(setequal(as.list(s$values()), list(list(), NULL, numeric())))
 
 # --
 # at
@@ -141,9 +141,12 @@ expect_true(s$has(1L))
 
 # Use identical as the comparison function to achieve different result:
 container_options(compare = identical)
-s.ident = Set$new(s$values(), .cmp = identical)
-expect_false(s.ident$has(numeric()))
-expect_false(s.ident$has(1L))
+si = Set$new(s$values(), .cmp = identical)
+expect_false(si$has(numeric()))
+expect_false(si$has(1L))
+
+si = Set$new(1, 1L)
+expect_true(setequal(as.list(si), list(1.0, 1L)))
 container_options(.reset = TRUE)
 
 # Membership of container objects depends on comparison function. By default
@@ -151,22 +154,23 @@ container_options(.reset = TRUE)
 # 'identical' will check for the exact reference.
 s  = Set$new()
 container_options(compare = identical)
-s.ident  = Set$new()
+si  = Set$new()
 container_options(.reset = TRUE)
 
 co = Container$new(1, 2)
 s$add(co)
-s.ident$add(co)
+si$add(co)
 expect_true(s$has(co))
-expect_true(s.ident$has(co))
+expect_true(si$has(co))
 
 co2 = Container$new(1, 2)
 expect_true(s$has(co2))         # TRUE, because co2 has same elements as co
-expect_false(s.ident$has(co2))  # FALSE, as the reference is checked
+expect_false(si$has(co2))       # FALSE, as the reference is checked
 
 co$add("a")
 expect_true(s$has(co))
-expect_true(s.ident$has(co))
+expect_true(si$has(co))
+
 
 # -------
 # peek_at
@@ -257,32 +261,9 @@ expect_error(s$pop(), "pop at empty Set")
 out = capture.output(print(Set$new()))
 ee(out, "{}")
 
-s = Set$new(1, 1L, NULL, integer())
+s = Set$new(1, 2, 3)
 out = capture.output(print(s))
-ee(out, "{integer(), NULL, 1}")
-s = Set$new(1L, 1, NULL, integer())
-out = capture.output(print(s))
-ee(out, "{integer(), NULL, 1L}")
-
-# Using identical lets will keep both numeric and integer
-container_options(compare = identical)
-s = Set$new(1, 1L, NULL, integer())
-out = capture.output(print(s))
-ee(out, "{integer(), NULL, 1, 1L}")
-container_options(.reset = TRUE)
-
-s2 = Set$new(list(), 3:5, s)
-out = capture.output(print(s2))
-ee(out, "{list(), (3L 4L 5L), {integer(), NULL, 1, 1L}}")
-
-# Increasing the size of the first Set alters the output
-s$add(1)$add(2)$add(3)
-out = capture.output(print(s2))
-ee(out, "{list(), (3L 4L 5L), <<Set(6)>>}")
-
-s2$add(data.frame(A = 1:3, B = 3:1))
-out = capture.output(print(s2))
-ee(out, "{list(), <<data.frame(3x2)>>, (3L 4L 5L), <<Set(6)>>}")
+ee(out, "{1, 2, 3}")
 
 
 # -------
@@ -373,9 +354,9 @@ ee(s$replace_at("a", 5), Set$new(2, 3, a = 5))
 
 # Replace works on special elements of basic type
 s = Set$new(list(), NULL, numeric(0))
-ee(s$replace_at(1, 0), Set$new(NULL, numeric(), 0))
-ee(s$replace_at(1, 0), Set$new(numeric(), 0))
-ee(s$replace_at(1, 0), Set$new(0))
+ee(Set$new(list())$replace_at(1, 0), Set$new(0))
+ee(Set$new(numeric())$replace_at(1, 0), Set$new(0))
+ee(Set$new(NULL)$replace_at(1, 0), Set$new(0))
 
 # Replace works on non-basic objects
 S1 = Set$new(1, "1")
@@ -453,8 +434,8 @@ sss = Set$new(42, ss)
 ss.deep = sss$clone(deep = TRUE)
 s1$add(4)
 
-ee(unpack(sss), c(a = 1, 2:4, 42))
-ee(unpack(ss.deep), c(a = 1, 2:3, 42))
+expect_true(setequal(as.list(unpack(sss)), list(a = 1, 2, 3, 4, 42)))
+expect_true(setequal(as.list(unpack(ss.deep)), list(a = 1, 2, 3, 42)))
 
 # --------------
 # Set operations

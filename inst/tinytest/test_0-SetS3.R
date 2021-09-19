@@ -86,8 +86,8 @@ ee(as.list(c(setnew(1), setnew(2))),
 ee(as.list(c(setnew(1), setnew(2, list(a = 3)))),
            c(list(1), list(2, list(a = 3))))
 
-ee(as.list(c(setnew(1), setnew(2, setnew(a = 3)))),
-           c(list(setnew(a = 3)), list(1), list(2)))
+expect_true(setequal(as.list(c(setnew(1), setnew(2, setnew(a = 3)))),
+                     c(list(setnew(a = 3)), list(1), list(2))))
 
 ee(names(c(setnew(1), dict(a = 2, b = setnew(a = 3)), use.names = FALSE)), NULL)
 
@@ -111,8 +111,8 @@ ee(cr(setnew(1), setnew(2, 3)),
    cr(list(1),     list(2, 3)))
 ee(cr(setnew(1), setnew(2, list(a = 3))),
    cr(  list(1),   list(2, list(a = 3))))
-ee(cr(setnew(1), setnew(2, setnew(a = 3))),
-   cr(list(1),     list(list(a = 3), 2)))
+expect_true(setequal(cr(setnew(1), setnew(2, setnew(a = 3))),
+                     cr(list(1),     list(list(a = 3), 2))))
 ee(cr(setnew(1), list(2, setnew(a = 3))),
    cr(list(1),   list(2, list(a = 3))))
 ee(cr(setnew(1), list(2, dict(a = 3))),
@@ -130,8 +130,8 @@ c2 = setnew(2)
 c1c1 = setnew(c1 = c1)
 
 cc = c(c1, c1c1, c2)
-ee(unpack(cc), c(c1 = 1, 1, 2))
+expect_true(setequal(unpack(cc), c(c1 = 1, 1, 2)))
 c1$add(2)
-ee(unpack(cc), c(c1 = 1, 1, 2)) # still the same
+expect_true(setequal(unpack(cc), c(c1 = 1, 1, 2))) # still the same
 
 
