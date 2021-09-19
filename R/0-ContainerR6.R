@@ -446,7 +446,12 @@ Container <- R6::R6Class("Container",
         },
 
         compare_predicate = function(x) {
-            function(y) isTRUE(private$compare_fun(x, y))
+            function(y) {
+                if (is.function(x) || is.function(y))
+                    identical(x, y)
+                else
+                    all(sapply(private$compare_fun(x, y), isTRUE))
+            }
         },
 
         deep_clone = function(name, value) {
