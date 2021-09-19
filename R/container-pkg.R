@@ -2,15 +2,19 @@
 #' with iterators and reference semantics.
 #'
 #' @description
-#' Implements a general Container class with typical member functions to insert,
-#' delete and access objects from the container. The Container class serves as
-#' the base class for the Deque, Set and Dict classes (resembling 'Python's
-#' dict type). Supports iterators and, being R6 classes, reference semantics.
-#' The focus of implementation was not on speed but to define consistent class
-#' interfaces based on a meaningful class hierarchy.
+#' Common container data structures deque, set, dict (resembling
+#' Python's dict type) and dict.table (combining dict and data.table) with
+#' typical member functions to insert, delete and access container elements.
+#' Furthermore, iterators are provided and for any created object both
+#' reference and copy semantics are supported simultaneously.
 #'
 #' @author Roman Pahl, \email{roman.pahl@gmail.com}
 #' @docType package
-#' @name container.pkg
+#' @name container-pkg
 NULL
+
+.onLoad <- function(libname, pkgname)
+{
+    invisible()
+}
 

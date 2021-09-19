@@ -1,5 +1,7 @@
-^\.travis\.yml$
 .git
+.gitignore
 TODO
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$
+tags

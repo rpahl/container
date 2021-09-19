@@ -1,13 +1,13 @@
 ---
-title: "Overview and examples"
+title: "Overview"
 author: "Roman Pahl"
 date: "`r Sys.Date()`"
-output: 
+output:
   rmarkdown::html_vignette:
     toc: yes
     toc_depth: 4
 vignette: >
-  %\VignetteIndexEntry{Overview and examples}
+  %\VignetteIndexEntry{Overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,342 +19,90 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Overview
-The `Container` class serves as the base class for `Deque`, `Set` and `Dict`, which inherit all methods from `Container`, except those that are overwritten (see below). In addition, the `Container` and all its subclasses are iterable, that is, they provide a method returning an `Iterator` to iterate through the elements of the container object.
-```{r out.width = '40%', echo = FALSE, fig.cap="Class diagram with basic class hierarchy."}
-knitr::include_graphics("class-diagram-bare.png")
+## Introduction
+
+This package aims at providing common container data structures with typical member functions to insert, delete and access container elements. Specifically, it comes with the types [deque](https://en.wikipedia.org/wiki/Double-ended_queue), [set](https://en.wikipedia.org/wiki/Set_(abstract_data_type)), and `dict`, an [associative container](https://en.wikipedia.org/wiki/Associative_containers) resembling Python's [dict](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) type. In addition, a specialized data structure called `dict.frame` is provided, which is a `dict` containing elements with identical length. The `dict.frame` can be considered a generalized and more powerful version of the base `data.frame`.
+
+The backbone of this package are classes implemented using the [R6](https://CRAN.R-project.org/package=R6) framework. The focus for developing this package was to provide a concise data structure and specifically making use of inheritance and the reference semantics provided by the [R6](https://CRAN.R-project.org/package=R6) package. The basic class hierarchy is outlined in the class diagram below.
+
+</br>
+```{r out.width = '80%', echo = FALSE, fig.cap="Basic class hierarchy of the container package."}
+knitr::include_graphics("class-diagram.png")
 ```
 
+</br>
 
-The following table shows member methods divided by class. The top half contains all `Container` methods, each derived by the subclasses to the right unless there is a new entry in a sub-class column, meaning the method is overwritten by the subclass. The bottom half contains methods unique to each subclass.
+## R6 classes and member methods
 
-|Iterable | Container                | Deque           | Set              | Dict                         |
-|---------|--------------------------|-----------------|------------------|------------------------------|
-|         | `Container$new()`        | `Deque$new()`   | `s <- Set$new()` | `Dict$new()`                 |
-|         |                          |                 |                  |                              |
-|`iter()` |                          |                 |                  |                              |
-|         | `add(elem)`              |                 | `add(elem)`      | `add(key, value)`            |
-|         | `apply(f)`               |                 |                  |                              |
-|         | `clear()`                |                 |                  |                              |
-|         | `discard(elem, right=F)` |                 |                  | `discard(key)`               |
-|         | `empty()`                |                 |                  |                              |
-|         | `has(elem)`              |                 |                  | `has(key)`                   |
-|         | `print(list.len=10)`     |                 |                  |                              |
-|         | `remove(elem, right=F)`  |                 |                  | `remove(key)`                |
-|         | `size()`                 |                 |                  |                              |
-|         | `type()`                 |                 |                  |                              |
-|         | `values()`               |                 |                  |                              |
-|         |                          |                 |                  |                              |
-|         |                          | `addleft(elem)` | `union(s)`       | `get(key)`                   |
-|         |                          | `count(elem)`   | `intersect(s)`   | `keys()`                     |
-|         |                          | `peek()`        | `diff(s)`        | `peek(key, default=NULL)`    |
-|         |                          | `peekleft()`    | `is.equal(s)`    | `pop(key)`                   |
-|         |                          | `pop()`         | `is.subset(s)`   | `popitem()`                  |
-|         |                          | `popleft()`     | `is.superset(s)` | `set(key, value, add=FALSE)` |
-|         |                          | `reverse()`     |                  | `sort(decr=FALSE)`           |
-|         |                          | `rotate(n=1L)`  |                  | `update(other)`              |
+The [Container](Container.html) class as the central element serves as the base class for [Deque](Deque.html), [Set](Set.html), and [Dict](Dict.html), which inherit all methods from [Container](Container.html), with some of them being overwritten (see below). In addition, the [Container](Container.html) class inherits from the abstract *Iterable* class and therefore provides a method to create an [Iterator](Iterator.html), which can be used to iterate through the elements of any container object.
 
+The following table shows member methods divided by class. The top half contains all [Container](Container.html) methods, each derived by a subclass to the right unless there is a new entry in a subclass column, meaning that the method is redefined in the subclass. The bottom half contains methods unique to each subclass. Note that `Dict.frame` (right-most column) inherits all methods from both [Container](Container.html) and [Dict](Dict.html).
 
-More details about the methods are found in the respective online helps (see `?Container`, `?Deque`, `?Set`, and `?Dict`).
-
-## Container
-The base `Container` is ready to be used by itself. Examples of `Deque`, `Set`, and `Dict`, follow below.
-```{r lib-setup}
-library(container)
-```
-
-```{r}
-collection <- Container$new()
-collection$empty()
-```
-
-#### add
-By default, elements internally are stored in a basic `list` and therefore can be of any type.
-```{r}
-collection$add(1)
-collection$add("A")
-collection$add(data.frame(B=1, C=2))
-collection$type()
-```
-
-The internal representation can always be retrieved directly using the `values` function.
-```{r}
-collection$values()
-```
-
-The container's print method presents the content more compact similar to `utils::str`
-```{r}
-collection$print()
-```
-
-If initialized with an R object, the type of the object is adopted to allow for efficient internal representations, if required.
-```{r}
-ints <- Container$new(integer())
-ints$type()
-```
-
-The `add` method supports chaining.
-```{r}
-ints$add(1)$add(2)$add(3.7)$print()
-```
-
-Initialization also works with vectors.
-```{r}
-ints <- Container$new(1:10)$print()
-
-ints$values()
-
-ints$size()
-```
-
-#### discard, remove
-```{r}
-ints$has(11)
-
-ints$has(7)
-
-ints$discard(7)$has(7)
-
-ints$remove(8)$values()
-```
-
-Using `remove` on non-existent elements throws an error,
-```{r, error=TRUE}
-ints$remove(8)
-```
-
-but discard does not.
-```{r}
-ints$discard(8) # ok
-```
-
-
-Discard and remove work also from the right.
-```{r}
-ints$add(1:3)$values()
-
-ints$discard(1)$values()
-
-ints$discard(2, right=TRUE)$values()
-```
-
-There is also an apply method, which applies a function to all elements and returns a copy of the result.
-```{r}
-unlist(ints$apply(f = function(x) x^2))
-
-ints$clear()$empty()
-```
-More details and examples are found in the online help (see `?Container`).
-
-
-### Reference semantics and iterator
-Being based on R6 classes, any `Container` object provides reference semantics.
-```{r}
-members <- Container$new(c("Lisa", "Bob", "Joe"))$print()
-
-remove_Joe <- function(cont) cont$discard("Joe")
-remove_Joe(members)
-members
-```
-
-```{r}
-it <- members$iter()
-print(it)
-
-while(it$has_next()) {
-    print(it$get_next())
-    print(it)
+```{=html}
+<style type="text/css">
+  table{
+  font-size: 9pt;
+  font-family: Courier New;
+  font-style:monospace
 }
+</style>
 ```
+| Container                  | Deque         | Set                  | Dict                         |
+| :--------------------------| :-------------| :--------------------| :----------------------------|
+| Container\$new()           | Deque\$new()  | s <- Set\$new()      | Dict\$new()                  |
+|                            |               |                      |                              |
+| add(elem)                  |               |                      | add(key, value)              |
+| clear()                    |               |                      |                              |
+| count(elem)                |               |                      |                              |
+| delete(elem)               |               |                      | delete(key)                  |
+| discard(elem)              |               |                      | discard(key)                 |
+| has(elem)                  |               |                      | has(key)                     |
+| is_empty()                 |               |                      |                              |
+| replace(old, new, add = F) |               |                      | replace(key, value, add = F) |
+| values()                   |               |                      |                              |
+|                            |               |                      |                              |
+|                            | addleft(elem) | diff(s)              | get(key)                     |
+|                            | peek()        | intersect(s)         | peek(key, default = NULL)    |
+|                            | peekleft()    | is_equal(s)          | pop(key)                     |
+|                            | pop()         | is_subset(s)         | rename(old, new)             |
+|                            | popleft()     | is_proper_subset(s)  | update(other)                |
+|                            | rev()         | union(s)             |                              |
+|                            | rotate(n)     |                      |                              |
 
-Once iterated to the last element, trying to iterate further leads to an error.
-```{r, error=TRUE}
-it$get_next()
-```
+
+Table: Overview of classes and member methods
+
+</br>
+
+For more details visit the respective online helps (see `?Container`, `?Deque`, `?Set`, `?Dict`. Usage examples are found in the corresponding [Container](Container.html), [Deque](Deque.html), [Set](Set.html), and [Dict](Dict.html) vignettes.
 
 
-## Deque
-```{r}
-d <- Deque$new(0L)
-d$type()
-d
-```
+## S3 classes and methods
 
+On top of the above classes and methods, a complete [S3](http://adv-r.had.co.nz/S3.html) interface is available, which might be more familiar to most typical R users. More importantly, it allows to provide operators, for example, to access elements in the dict.frame via `[[`. In the table below, standard `set` operators are already listed for the `set` class.
 
-#### addleft, count
-```{r}
-d$add(1)$add(2)$addleft(1)$addleft(2)$values()
+| container                    | deque               | set              | dict                           |
+| :----------------------------| :-------------------| :----------------| :------------------------------|
+|  co = container()            |  d = deque()        |  s = setnew()    |  d = dict()                    |
+|                              |                     |                  |                                |
+|  add(co, elem)               |                     |                  |  add(d, key, val)              |
+|  clear(co)                   |                     |                  |                                |
+|  delete(co, elem, right=F)   |                     |                  |  delete(d, key)                |
+|  discard(co, elem, right=F)  |                     |                  |  discard(d, key)               |
+|  has(co, elem)               |                     |                  |  has(d, key)                   |
+|  is_empty(co)                |                     |                  |                                |
+|  values(co)                  |                     |                  |                                |
+|                              |                     |                  |                                |
+|                              |  addleft(d, elem)   |  s1 - s2         |  getval(d, key)                |
+|                              |  count(d, elem)     |  s1 / s2         |  keys(d)                       |
+|                              |  peek(d)            |  s1 == s2        |  peek(d, key, default=NULL)    |
+|                              |  peekleft(d)        |  s1 < s2         |  pop(d, key)                   |
+|                              |  pop(d)             |  s1 > s2         |                                |
+|                              |  popleft(d)         |  s1 + s2         |  rename(d, old, new)           |
+|                              |  reverse(d)         |                  |  setval(d, key, val, add=FALSE)|
+|                              |  rotate(d, n=1L)    |                  |  sortkey(decr=FALSE)           |
 
-d$count(0)  # count number of 0s
+Table: Overview of S3 classes and methods
 
-d$count(1)  # count number of 1s
-```
-
-#### peek, pop
-A `peek` shows the last value, while `pop` shows and removes it afterwards. 
-```{r}
-d$peek()
-
-d$pop()
-
-d$pop()
-
-d$values()
-```
-
-Being a double-ended queue, both methods are also defined for the left side.
-```{r}
-d$peekleft()
-
-d$popleft()
-
-d$values()
-
-d$count(2)
-```
-
-Invoking `peek` on an empty `Deque` gives `NULL` while `pop` stops with an error.
-```{r, error=TRUE}
-Deque$new()$peek()
-
-Deque$new()$pop()
-```
-
-#### rotate, reverse
-```{r}
-d$add(rep(0, 3))$values()
-
-d$rotate()$values()    # rotate 1 to the right
-
-d$rotate(2)$values()   # rotate 2 to the right
-
-d$rotate(-3)$values()  # rotate 3 to the left
-
-d$addleft(4:2)$values()
-
-d$reverse()$values()
-```
-
-#### Deque iterator
-As a silly example, define a reverse perfect shuffler.
-```{r}
-reverse_ps <- function(x)
-{
-    it <- Iterator$new(seq_along(x))
-    d <- Deque$new(integer())
-    
-    while(it$has_next()) {
-        it$.next()
-        d$add(it$get())
-        if (it$has_next()) d$addleft(it$get_next())
-    }
-    x[d$values()]
-}
-
-(zz <- rep(c(0, 1), 10))
-
-reverse_ps(zz)
-```
-
-## Set
-```{r}
-s1 <- Set$new(1:3)$print()
-
-s1$add(1)  # does not change the set 
-s1
-```
-
-#### set operators
-```{r}
-s1 <- Set$new(c(1, 2,    4, 5))
-s2 <- Set$new(c(   2, 3,    5, 6))
-
-s1$union(s2)$print()
-
-s1$intersect(s2)$print()
-
-s1$diff(s2)$print()
-
-s1$is.subset(s2)
-s1$is.subset(s1$union(s2))
-s1$intersect(s2)$is.subset(s1)
-
-s1$is.equal(s2)
-s1$is.equal(s1)
-
-s1$is.superset(s2)
-s1$union(s2)$is.superset(s2)
-```
-
-## Dict
-```{r}
-ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))$print()
-
-ages$keys()
-
-ages$peek("Lisa")
-
-ages$peek("Anna")
-```
-
-#### add, discard, remove
-Due to the key-value semantic, several `Container ` methods are modified/extended to take the key argument.
-```{r, error=TRUE}
-ages$add("Albert", 139)$values()
-
-ages$add("Bob", 40)
-
-ages$has("Peter")
-
-ages$discard("Albert")$values()
-
-# Trying to discard a non-existing key has no effect
-ages$discard("Albert")$values()
-
-# Trying to remove a non-existing key throws an error
-ages$remove("Albert")
-```
-
-#### add vs set
-Trying to `set` a value at a non-existing key throws an error unless the `set` method is explicitly told to add it to the `Dict`.
-```{r, error=TRUE}
-ages$set("Anna", 23)
-
-ages$set("Anna", 23, add=TRUE)  # alternatively ages$add("Anna", 23)
-ages
-```
-
-This allows fine control over the insert-behaviour of the `Dict`. If already existing, the value is overwritten.
-```{r}
-ages$set("Lisa", 11)$values()
-```
-
-#### peek, pop, and popitem
-A similar control is provided via the different methods to retrieve elements.
-```{r, error=TRUE}
-ages$pop("Lisa")
-
-ages$values()
-
-ages$pop("Lisa")
-
-ages$get("Lisa")
-
-ages$peek("Lisa")
-```
-
-The `Dict` can also be used as a sampler (without replacement).
-```{r}
-set.seed(123)
-while(!ages$empty()) print(ages$popitem())
-```
-
-#### update
-```{r}
-shoplist <- Dict$new(list(eggs=10, potatoes=10, bananas=5, apples=4))
-
-shoplist2 <- Dict$new(list(eggs=6, broccoli=4))
-
-shoplist$update(shoplist2)$values()
-```
-
+</br>
+For more details and to see the provided operators for each class again refer to the corresponding [Container](Container.html), [Deque](Deque.html), [Set](Set.html), [Dict](Dict.html), and [Dict.frame](Dict.frame) vignettes.
