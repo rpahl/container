@@ -92,7 +92,8 @@ names(d)
 as.list(d)
 
 \dontrun{
-dict(a = 1, 2)   # all elements must be named}
+dict(a = 1, 2)   # all elements must be named
+}
 
 # Coercion
 as.dict(list(A = 1:3, B = "b"))
@@ -114,11 +115,11 @@ d2 = dict(a = 2, b = list(1, 2))
 d1 + d2      # same as update(d, d2)
 d2 + d1      # same as update(d2, d)
 \dontrun{
-c(d1, d2)    # duplicated keys are not allowed for Dict}
-
-d - d2
-d2 - d
-d - d
+c(d1, d2)    # duplicated keys are not allowed for Dict
+}
+d1 - d2
+d2 - d1
+d1 - d1
 
 d1 = dict(a = 1, b = 2)
 d2 = dict(a = 10, x = 4)
@@ -131,16 +132,16 @@ d = dict(a = 1)
 add(d, b = 2, co = container(1:3))
 
 \dontrun{
-add(d, a = 7:9)  # key 'a' already in Dict}
-
+add(d, a = 7:9)  # key 'a' already in Dict
+}
 
 d = dict(a = 1, b = "z")
 replace(d, 1, 1:5)
 replace(d, "z", "a")
 
 \dontrun{
-replace(d, "a", 2)              # old element ("a") is not in Dict}
-
+replace(d, "a", 2)              # old element ("a") is not in Dict
+}
 
 d1 = dict(a = 1, b = 2)
 d2 = dict(       b = 0, c = 3)

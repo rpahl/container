@@ -25,9 +25,9 @@ Check if object is empty
 
 co = container(1, 2)
 is_empty(co)
-is_empty(co$clear())
+is_empty(clear(co))
 
 d = dict.table(a = 1:4, b = 4:1)
 is_empty(d)
-is_empty(d$clear())
+is_empty(clear(d))
 }

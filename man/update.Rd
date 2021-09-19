@@ -64,5 +64,6 @@ l1 = list(1, b = 2)
 l2 = list(   b = 0, c = 3)
 update(l1, l2)
 \dontrun{
-update(l2, l1)  # all elements of 'other' must be named}
+update(l2, l1)  # all elements of 'other' must be named
+}
 }

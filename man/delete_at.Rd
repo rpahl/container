@@ -45,12 +45,14 @@ delete_at(co, 1:2)               # [3]
 delete_at(co, "a", 3)            # [b = 2]
 \dontrun{
 delete_at(co, 4)                 # index out of range
-delete_at(co, "x")               # names(s) not found: 'x'}
+delete_at(co, "x")               # names(s) not found: 'x'
+}
 
 dit = as.dict.table(head(sleep))
 dit
 delete_at(dit, "ID")
 delete_at(dit, "ID", 1)
 \dontrun{
-delete_at(dit, "foo")   # Column 'foo' not in dict.table}
+delete_at(dit, "foo")   # Column 'foo' not in dict.table
+}
 }

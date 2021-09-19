@@ -54,7 +54,8 @@ co = container("x", 9)
 replace(co, 9, 0)
 replace(co, "x", 0)
 \dontrun{
-replace(co, "z", 0)              # old element ("z") is not in Container}
+replace(co, "z", 0)              # old element ("z") is not in Container
+}
 replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 
 
@@ -63,6 +64,6 @@ replace(d, 1, 1:5)
 replace(d, "z", "a")
 
 \dontrun{
-replace(d, "a", 2)              # old element ("a") is not in Dict}
-
+replace(d, "a", 2)              # old element ("a") is not in Dict
+}
 }

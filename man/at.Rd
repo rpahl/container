@@ -37,15 +37,16 @@ at(co, 1:3)
 at(co, "a", "b", 2)
 \dontrun{
 at(co, "x")     # index 'x' not found
-at(co, 1:10)    # index 5 exceeds length of Container}
-
+at(co, 1:10)    # index 5 exceeds length of Container
+}
 # Dict
 d = dict(a = 1, b = 3)
 at(d, 1:2)
 at(d, "a", 2)
 \dontrun{
 at(d, "x")     # index 'x' not found
-at(d, 1:3)     # index 5 exceeds length of Dict}
+at(d, 1:3)     # index 5 exceeds length of Dict
+}
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)
@@ -54,7 +55,8 @@ at(dit, 2)
 at(dit, "a", 2)
 \dontrun{
 at(dit, "x")     # index 'x' not found
-at(dit, 1:3)     # index 3 exceeds length of dict.table}
+at(dit, 1:3)     # index 3 exceeds length of dict.table
+}
 }
 \seealso{
 \code{\link[=peek_at]{peek_at()}} for less strict extraction

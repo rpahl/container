@@ -11,7 +11,7 @@ is_empty <- function(x) UseMethod("is_empty")
 #'
 #' co = container(1, 2)
 #' is_empty(co)
-#' is_empty(co$clear())
+#' is_empty(clear(co))
 is_empty.Container <- function(x) x$is_empty()
 
 
@@ -23,7 +23,7 @@ is_empty.Container <- function(x) x$is_empty()
 #'
 #' co = container(1, 2)
 #' is_empty(co)
-#' is_empty(co$clear())
+#' is_empty(clear(co))
 NULL
 
 
@@ -33,7 +33,7 @@ NULL
 #'
 #' d = dict.table(a = 1:4, b = 4:1)
 #' is_empty(d)
-#' is_empty(d$clear())
+#' is_empty(clear(d))
 is_empty.dict.table <- function(x) ncol(x) == 0
 
 
@@ -46,5 +46,5 @@ is_empty.dict.table <- function(x) ncol(x) == 0
 #'
 #' d = dict.table(a = 1:4, b = 4:1)
 #' is_empty(d)
-#' is_empty(d$clear())
+#' is_empty(clear(d))
 NULL

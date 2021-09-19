@@ -143,7 +143,8 @@ ref_popleft(d)
 print(d)
 
 \dontrun{
-ref_pop(deque())  # pop at empty Deque}
+ref_pop(deque())  # pop at empty Deque
+}
 
 d = deque(1, 2, 3, 4)
 rotate(d)

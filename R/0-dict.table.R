@@ -35,6 +35,7 @@
 #' @examples
 #' # Some basic examples using some typical data.table and dict operations.
 #' # The constructor can take the 'key' argument known from data.table():
+#' require(data.table)
 #' dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
 #' print(dit)
 #' setkey(dit, "x")                             # sort by 'x'
@@ -45,7 +46,8 @@
 #'
 #' \dontrun{
 #' at(dit, "x")                                 # index 'x' not found
-#' replace_at(dit, "x" = 0)                     # cannot be replaced, if it does not exist}
+#' replace_at(dit, "x" = 0)                     # cannot be replaced, if it does not exist
+#' }
 #'
 #' dit = replace_at(dit, "x" = 0, .add = TRUE)  # ok - re-adds column 'x' with all 0s
 #' peek_at(dit, "x")                            # glance at column 'x'
@@ -92,12 +94,11 @@ as.dict.table <- function(x, ...)
 #' dit = as.dict.table(dat)
 #' is.dict.table(dit)                           # TRUE
 #' is.dict.table(dat)                           # FALSE
-#' setval(dit, "a", 9)
+#' ref_replace_at(dit, "a", 9)
 #' dit[["a"]]                                   # 9
 #' dat[["a"]]                                   # 1
 #' dit.dat = as.dict.table(dat, copy = FALSE)   # init by reference
-#' setval(dit.dat, "a", 9)
-#' dit.dat[["a"]]                               # 9
+#' ref_replace_at(dit.dat, "a", 9)
 #' dat[["a"]]                                   # 9
 #' is.dict.table(dit.dat)                       # TRUE
 #' is.dict.table(dat)                           # TRUE now as well!

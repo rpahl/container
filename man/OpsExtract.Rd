@@ -69,8 +69,8 @@ co = container(a = 1, b = "bar")
 (co[1:2] <- 1:2)
 
 \dontrun{
-co[3] <- 3 # index out of range}
-
+co[3] <- 3 # index out of range
+}
 (co[list(1, "b")] <- 3:4)   # mixed numeric/character index
 
 co = container(a = 1, b = 2)

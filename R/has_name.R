@@ -77,8 +77,6 @@ has_name.dict.table <- function(x, name)
 #'
 #' dit = dict.table(a = 1, b = 2)
 #' has_name(dit, "a")    # TRUE
-#' has_name(dit, 1)      # TRUE
 #' has_name(dit, "x")    # FALSE
-#' has_name(dit, 3)      # FALSE
 NULL
 

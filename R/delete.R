@@ -22,7 +22,8 @@ ref_delete <- function(.x, ...) UseMethod("ref_delete")
 #' delete(s, 1:3, "a")
 #' delete(s, iris)
 #' \dontrun{
-#' delete(s, "b")  # "b" is not in Set}
+#' delete(s, "b")  # "b" is not in Set
+#' }
 #' @export
 delete.Container <- function(.x, ...)
 {
@@ -41,7 +42,8 @@ delete.Container <- function(.x, ...)
 #' delete(co, 1:3, "a")
 #' delete(co, iris)
 #' \dontrun{
-#' delete(co, "b")   # "b" is not in Container}
+#' delete(co, "b")   # "b" is not in Container
+#' }
 NULL
 
 #' @rdname delete

@@ -85,11 +85,11 @@ d2 = dict(a = 2, b = list(1, 2))
 d1 + d2      # same as update(d, d2)
 d2 + d1      # same as update(d2, d)
 \dontrun{
-c(d1, d2)    # duplicated keys are not allowed for Dict}
-
-d - d2
-d2 - d
-d - d
+c(d1, d2)    # duplicated keys are not allowed for Dict
+}
+d1 - d2
+d2 - d1
+d1 - d1
 
 # Arithmetic
 s1 = setnew(1, 1:2)

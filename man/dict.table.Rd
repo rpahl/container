@@ -143,6 +143,7 @@ In contrast to \code{\link[=data.table]{data.table()}}, \code{\link[=dict.table]
 \examples{
 # Some basic examples using some typical data.table and dict operations.
 # The constructor can take the 'key' argument known from data.table():
+require(data.table)
 dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
 print(dit)
 setkey(dit, "x")                             # sort by 'x'
@@ -153,7 +154,8 @@ dit[y > 5]
 
 \dontrun{
 at(dit, "x")                                 # index 'x' not found
-replace_at(dit, "x" = 0)                     # cannot be replaced, if it does not exist}
+replace_at(dit, "x" = 0)                     # cannot be replaced, if it does not exist
+}
 
 dit = replace_at(dit, "x" = 0, .add = TRUE)  # ok - re-adds column 'x' with all 0s
 peek_at(dit, "x")                            # glance at column 'x'
@@ -167,12 +169,11 @@ dat = data.table(a = 1, b = 2)
 dit = as.dict.table(dat)
 is.dict.table(dit)                           # TRUE
 is.dict.table(dat)                           # FALSE
-setval(dit, "a", 9)
+ref_replace_at(dit, "a", 9)
 dit[["a"]]                                   # 9
 dat[["a"]]                                   # 1
 dit.dat = as.dict.table(dat, copy = FALSE)   # init by reference
-setval(dit.dat, "a", 9)
-dit.dat[["a"]]                               # 9
+ref_replace_at(dit.dat, "a", 9)
 dat[["a"]]                                   # 9
 is.dict.table(dit.dat)                       # TRUE
 is.dict.table(dat)                           # TRUE now as well!
@@ -221,7 +222,8 @@ dit = dict.table(a = 1:3)
 add(dit, b = 3:1, d = 4:6)
 
 \dontrun{
-add(dit, a = 7:9)  # column 'a' already exists}
+add(dit, a = 7:9)  # column 'a' already exists
+}
 
 dit = dict.table(a = 1:3, b = 4:6)
 at(dit, "a")
@@ -229,7 +231,8 @@ at(dit, 2)
 at(dit, "a", 2)
 \dontrun{
 at(dit, "x")     # index 'x' not found
-at(dit, 1:3)     # index 3 exceeds length of dict.table}
+at(dit, 1:3)     # index 3 exceeds length of dict.table
+}
 
 dit = dict.table(a = 1:3, b = 4:6)
 at2(dit, 1)
@@ -237,7 +240,8 @@ at2(dit, "a")
 at2(dit, 2)
 \dontrun{
 at2(dit, "x")     # index 'x' not found
-at2(dit, 5)       # index 5 exceeds length of dict.table}
+at2(dit, 5)       # index 5 exceeds length of dict.table
+}
 
 dit = dict.table(a = 1, b = 2)
 clear(dit)
@@ -246,7 +250,7 @@ ref_clear(dit)
 dit
 
 d = dict.table(a = 1:2, b = 3:4)
-clone(d)
+d2 = clone(d)
 ref_clear(d)
 print(d2)
 
@@ -255,8 +259,8 @@ delete_at(dit, "ID")
 delete_at(dit, "ID", 1)
 
 \dontrun{
-delete_at(dit, "foo")   # Column 'foo' not in dict.table}
-
+delete_at(dit, "foo")   # Column 'foo' not in dict.table
+}
 
 dit = as.dict.table(head(sleep))
 discard_at(dit, "ID")
@@ -270,13 +274,11 @@ has(dit, as.list(4:6))   # TRUE
 
 dit = dict.table(a = 1, b = 2)
 has_name(dit, "a")    # TRUE
-has_name(dit, 1)      # TRUE
 has_name(dit, "x")    # FALSE
-has_name(dit, 3)      # FALSE
 
 d = dict.table(a = 1:4, b = 4:1)
 is_empty(d)
-is_empty(d$clear())
+is_empty(clear(d))
 
 dit = dict.table(a = 1:3, b = 4:6)
 peek_at(dit, "a")
@@ -299,8 +301,8 @@ ref_pop(dit, "a")
 ref_pop(dit, 1)
 
 \dontrun{
-ref_pop(dit, "x")  # index 'x' not found}
-
+ref_pop(dit, "x")  # index 'x' not found
+}
 
 dit = dict.table(a = 1, b = 2, c = 3)
 rename(dit, c("a", "b"), c("a1", "y"))
@@ -312,8 +314,8 @@ dit = dict.table(a = 1:3)
 replace_at(dit, "a", 3:1)
 
 \dontrun{
-replace_at(dit, "b", 4:6)               # column 'b' not in dict.table}
-
+replace_at(dit, "b", 4:6)               # column 'b' not in dict.table
+}
 replace_at(dit, "b", 4:6, .add = TRUE)  # ok, adds column
 
 # Update parts of tables (second overwrites columns of the first)

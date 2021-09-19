@@ -129,8 +129,8 @@ NULL
 #' d1 + d2      # same as update(d, d2)
 #' d2 + d1      # same as update(d2, d)
 #' \dontrun{
-#' c(d1, d2)    # duplicated keys are not allowed for Dict}
-#'
+#' c(d1, d2)    # duplicated keys are not allowed for Dict
+#' }
 #' @export
 `+.Dict` <- function(x, y)
 {
@@ -149,16 +149,16 @@ NULL
 #' d1 + d2      # same as update(d, d2)
 #' d2 + d1      # same as update(d2, d)
 #' \dontrun{
-#' c(d1, d2)    # duplicated keys are not allowed for Dict}
-#'
+#' c(d1, d2)    # duplicated keys are not allowed for Dict
+#' }
 NULL
 
 #' @rdname OpsArithmetic
 #' @return For `Dict`, `x - y` removes all keys from `x` that appear in `y`.
 #' @examples
-#' d - d2
-#' d2 - d
-#' d - d
+#' d1 - d2
+#' d2 - d1
+#' d1 - d1
 #'
 #' @export
 `-.Dict` <- function(x, y)
@@ -176,9 +176,9 @@ NULL
 #' @rdname DictS3
 #' @details * `x - y` removes all keys from `x` that appear in `y`.
 #' @examples
-#' d - d2
-#' d2 - d
-#' d - d
+#' d1 - d2
+#' d2 - d1
+#' d1 - d1
 #'
 NULL
 

@@ -31,7 +31,8 @@ ref_popleft <- function(.x, ...) UseMethod("ref_popleft")
 #' ref_popleft(d)
 #'
 #' \dontrun{
-#' ref_pop(deque())  # pop at empty Deque}
+#' ref_pop(deque())  # pop at empty Deque
+#' }
 ref_pop.Deque <- function(.x, ...) .x$pop()
 
 #' @rdname pop
@@ -51,7 +52,8 @@ ref_popleft.Deque <- function(.x, ...) .x$popleft()
 #' print(d)
 #'
 #' \dontrun{
-#' ref_pop(deque())  # pop at empty Deque}
+#' ref_pop(deque())  # pop at empty Deque
+#' }
 NULL
 
 
@@ -67,8 +69,8 @@ NULL
 #' ref_pop(co, 1)
 #'
 #' \dontrun{
-#' ref_pop(co, "x")  # index 'x' not found}
-#'
+#' ref_pop(co, "x")  # index 'x' not found
+#' }
 ref_pop.Container <- function(.x, index, ...) .x$pop(index)
 
 #' @name ContainerS3
@@ -83,8 +85,8 @@ ref_pop.Container <- function(.x, index, ...) .x$pop(index)
 #' ref_pop(co, 1)
 #'
 #' \dontrun{
-#' ref_pop(co, "x")  # index 'x' not found}
-#'
+#' ref_pop(co, "x")  # index 'x' not found
+#' }
 NULL
 
 
@@ -100,8 +102,8 @@ NULL
 #' ref_pop(dit, 1)
 #'
 #' \dontrun{
-#' ref_pop(dit, "x")  # index 'x' not found}
-#'
+#' ref_pop(dit, "x")  # index 'x' not found
+#' }
 ref_pop.dict.table <- function(.x, index, ...)
 {
     elem <- at2(.x, index)
@@ -122,6 +124,6 @@ ref_pop.dict.table <- function(.x, index, ...)
 #' ref_pop(dit, 1)
 #'
 #' \dontrun{
-#' ref_pop(dit, "x")  # index 'x' not found}
-#'
+#' ref_pop(dit, "x")  # index 'x' not found
+#' }
 NULL

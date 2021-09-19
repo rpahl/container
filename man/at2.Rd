@@ -44,8 +44,8 @@ at2(co, "a")
 at2(co, 2)
 \dontrun{
 at2(co, "x")     # index 'x' not found
-at2(co, 5)       # index 5 exceeds length of Container}
-
+at2(co, 5)       # index 5 exceeds length of Container
+}
 # Dict
 d = dict(a = 1, b = 3)
 at2(d, 1)
@@ -53,7 +53,8 @@ at2(d, "a")
 at2(d, 2)
 \dontrun{
 at2(d, "x")     # index 'x' not found
-at2(d, 5)       # index 5 exceeds length of Dict}
+at2(d, 5)       # index 5 exceeds length of Dict
+}
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)
@@ -62,7 +63,8 @@ at2(dit, "a")
 at2(dit, 2)
 \dontrun{
 at2(dit, "x")     # index 'x' not found
-at2(dit, 5)       # index 5 exceeds length of dict.table}
+at2(dit, 5)       # index 5 exceeds length of dict.table
+}
 }
 \seealso{
 \code{\link[=peek_at2]{peek_at2()}} for less strict extraction
