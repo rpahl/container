@@ -8,7 +8,6 @@
 \alias{as.dict.table}
 \alias{as.dict.table.data.table}
 \alias{is.dict.table}
-\alias{as.data.table.dict.table}
 \alias{rbind.dict.table}
 \alias{cbind.dict.table}
 \alias{dict.tabldict.table}
@@ -21,8 +20,6 @@ as.dict.table(x, ...)
 \method{as.dict.table}{data.table}(x, copy = TRUE, ...)
 
 is.dict.table(x)
-
-\method{as.data.table}{dict.table}(x, copy = TRUE, ...)
 
 \method{rbind}{dict.table}(x, ...)
 
@@ -182,21 +179,6 @@ is.dict.table(dat)                           # TRUE now as well!
 d = dict(a = 1, b = 1:3)
 as.dict.table(d)
 
-
-# Copy and reference semantics when coercing *to* a data.table
-dit = dict.table(a = 1, b = 2)
-dat = as.data.table(dit)
-is.data.table(dat)                           # TRUE
-data.table::set(dat, j = "a", value = 9)
-dat[["a"]]                                   # 9
-dit[["a"]]                                   # 1
-dat.dit = as.data.table(dit, copy = FALSE)   # init by reference
-is.data.table(dat.dit)                       # TRUE
-is.dict.table(dit)                           # FALSE - not a dict.table anymore ...
-is.data.table(dit)                           # TRUE  - ... but a data.table
-data.table::set(dat.dit, j = "a", value = 9)
-dat.dit[["a"]]                               # 9
-dit[["a"]]                                   # 9 - also changed
 dit = dict.table(a = 1:2, b = 1:2)
 rbind(dit, dit)
 

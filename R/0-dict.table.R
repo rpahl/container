@@ -86,7 +86,6 @@ as.dict.table <- function(x, ...)
 #' @rdname dict.table
 #' @param copy if `TRUE` creates a copy of the `data.table` object otherwise
 #' works on the passed object by reference.
-#' @export
 #' @examples
 #'
 #' # Copy and reference semantics when coercing *from* a data.table
@@ -107,6 +106,7 @@ as.dict.table <- function(x, ...)
 #' d = dict(a = 1, b = 1:3)
 #' as.dict.table(d)
 #'
+#' @export
 as.dict.table.data.table <- function(x, copy = TRUE, ...)
 {
     if (copy)
@@ -127,32 +127,6 @@ as.dict.table.default <- function(x, ...)
 #' @export
 is.dict.table <- function(x) inherits(x, "dict.table")
 
-#' @rdname dict.table
-#' @export
-#' @examples
-#'
-#' # Copy and reference semantics when coercing *to* a data.table
-#' dit = dict.table(a = 1, b = 2)
-#' dat = as.data.table(dit)
-#' is.data.table(dat)                           # TRUE
-#' data.table::set(dat, j = "a", value = 9)
-#' dat[["a"]]                                   # 9
-#' dit[["a"]]                                   # 1
-#' dat.dit = as.data.table(dit, copy = FALSE)   # init by reference
-#' is.data.table(dat.dit)                       # TRUE
-#' is.dict.table(dit)                           # FALSE - not a dict.table anymore ...
-#' is.data.table(dit)                           # TRUE  - ... but a data.table
-#' data.table::set(dat.dit, j = "a", value = 9)
-#' dat.dit[["a"]]                               # 9
-#' dit[["a"]]                                   # 9 - also changed
-`as.data.table.dict.table` <- function(x, copy = TRUE, ...)
-{
-    if (copy) {
-        data.table::as.data.table(as.list(x), ...)
-    } else {
-        .remove_class(x, class = "dict.table")
-    }
-}
 
 
 #' @export
@@ -168,7 +142,6 @@ print.dict.table <- function(x, ...)
 
 
 #' @rdname dict.table
-#' @export
 #' @examples
 #' dit = dict.table(a = 1:2, b = 1:2)
 #' rbind(dit, dit)
@@ -181,6 +154,7 @@ print.dict.table <- function(x, ...)
 #' dat = data.table(a = 3:4, b = 3:4)
 #' rbind(dit, dat)  # yields a dict.table
 #' rbind(dat, dit)  # yields a data.table
+#' @export
 rbind.dict.table <- function(x, ...)
 {
     dots <- list(...)
@@ -190,7 +164,6 @@ rbind.dict.table <- function(x, ...)
 
 
 #' @rdname dict.table
-#' @export
 #' @examples
 #'
 #' # cbind ...
@@ -201,6 +174,7 @@ rbind.dict.table <- function(x, ...)
 #' # ... can be mixed with data.tables
 #' dat = data.table(x = 3:4, y = 3:4)
 #' cbind(dit, dat)
+#' @export
 cbind.dict.table <- function(x, ...)
 {
     dots <- list(...)
@@ -215,6 +189,4 @@ cbind.dict.table <- function(x, ...)
 
     .set_class(res)
 }
-
-# TODO: implement c.dict.table()
 
