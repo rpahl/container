@@ -1,7 +1,9 @@
+exit_file(msg = "internal helper functions")
+
 # -------------
-# .assert_index
+# .assert_index_and_arg
 # -------------
-f = assert_index
+f = .assert_index_and_arg
 co = container(1, 2, 3)
 
 expect_error(f(co, 4), "index 4 exceeds length of Container, which is 3")
@@ -19,10 +21,10 @@ expect_true(f(list(a = 1), "a"))
 expect_true(f(list(a = 1), "a"))
 
 
-# ----------
-# .has_index
-# ----------
-f = has_index
+# ---------------------
+# .assert_and_has_index
+# ---------------------
+f = .assert_and_has_index
 co = container(a = 1, 2)
 
 expect_false(f(co, 0))

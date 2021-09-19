@@ -80,7 +80,7 @@ Container <- R6::R6Class("Container",
             if (missing(index))
                 stop("'index' is missing", call. = FALSE)
 
-            lapply(index, assert_index, x = self)
+            lapply(index, .assert_index_and_arg, x = self)
 
             l = lapply(index, function(x) private$.subset(self, x))
             if (!length(l))
@@ -104,7 +104,7 @@ Container <- R6::R6Class("Container",
             if (missing(index))
                 stop("'index' is missing", call. = FALSE)
 
-            assert_index(self, index)
+            .assert_index_and_arg(self, index)
             private$.subset2(self, index)
         },
 
@@ -142,7 +142,7 @@ Container <- R6::R6Class("Container",
         #' @param index `character` or `numeric` index
         #' @return the `Container` object
         delete_at = function(index) {
-            assert_index(self, index)
+            .assert_index_and_arg(self, index)
 
             self$discard_at(index)
         },
@@ -167,7 +167,7 @@ Container <- R6::R6Class("Container",
 
             pos = private$.get_index_position(index)
 
-            if (has_index(self, pos))
+            if (.assert_and_has_index(self, pos))
                 private$elems <- .subset(private$elems, -pos)
 
             self
@@ -362,7 +362,7 @@ Container <- R6::R6Class("Container",
         #' @return the `Container` object
         replace_at = function(index, value, add = FALSE) {
 
-            hasIndex = has_index(self, index)
+            hasIndex = .assert_and_has_index(self, index)
             if (!hasIndex && add) {
                 name = NULL
                 if (is.character(index) && !is.na(index) && nzchar(index))
@@ -372,7 +372,7 @@ Container <- R6::R6Class("Container",
             }
 
             if (!hasIndex)
-                assert_index(self, index)
+                .assert_index_and_arg(self, index)
 
             pos = private$.get_index_position(index)
             name = names(self)[[pos]]

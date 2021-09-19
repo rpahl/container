@@ -1,3 +1,5 @@
+exit_file(msg = "internal helper functions")
+
 # ---------
 # is_string
 # ---------

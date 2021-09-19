@@ -57,7 +57,7 @@ Dict <- R6::R6Class("Dict",
 
             pos = private$.get_index_position(index)
 
-            if (has_index(self, pos))
+            if (.assert_and_has_index(self, pos))
                 base::remove(list = self$keys()[pos], envir = private$elems)
 
             self

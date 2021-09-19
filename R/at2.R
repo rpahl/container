@@ -81,7 +81,7 @@ NULL
 #' }
 at2.dict.table <- function(x, index, ...)
 {
-    assert_index(x, index)
+    .assert_index_and_arg(x, index)
     .subset2(x, index)
 }
 

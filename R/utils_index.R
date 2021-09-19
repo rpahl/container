@@ -40,7 +40,7 @@ setMethod(".assert_index",
           signature("ANY", "numeric"), .assert_index.numeric)
 
 
-assert_index = function(x, index)
+.assert_index_and_arg = function(x, index)
 {
     .assert_index_arg(index)
     .assert_index(x, index)
@@ -79,7 +79,7 @@ setMethod(".has_index",
 setMethod(".has_index",
           signature("ANY", "integer"), .has_index.integer)
 
-has_index = function(x, index)
+.assert_and_has_index = function(x, index)
 {
     .assert_index_arg(index)
     .has_index(x, index)
