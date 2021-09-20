@@ -7,3 +7,4 @@ TODO
 tags
 ^pkgdown$
 ^_pkgdown\.yml$
+^docs$
