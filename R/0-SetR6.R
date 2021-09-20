@@ -41,7 +41,7 @@ Set <- R6::R6Class("Set",
 
             hash_value = private$.get_hash_value(value)
             private$elems[[hash_value]] = elem
-            private$.resort_by_hash()
+            private$.reorder_values()
 
             self
         },
@@ -140,9 +140,12 @@ Set <- R6::R6Class("Set",
             }
             lapply(value, clone_deep_if_container)
         },
+
         .get_hash_value = function(x) {
-            lab = get_label(x)
-            paste(length(x), lab, serialize(x, NULL), collapse = "")
+            tmp = tempfile()
+            on.exit(file.remove(tmp))
+            saveRDS(x, tmp)
+            tools::md5sum(tmp)
         },
 
         .rename = function(old, new) {
@@ -156,8 +159,10 @@ Set <- R6::R6Class("Set",
             self
         },
 
-        .resort_by_hash = function() {
-            new_order = order(lengths(self$values()), names(private$elems))
+        .reorder_values = function() {
+            new_order = order(lengths(self$values()),
+                              sapply(self$values(), get_label),
+                              names(private$elems))
             private$elems = private$elems[new_order]
         }
     ),
