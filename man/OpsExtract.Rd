@@ -83,6 +83,8 @@ print(co)
 # Replace 8 by 0
 co[[{8}]] <- 0
 print(co)
+
+
 co = container(a = 1, b = "bar")
 co$f <- 3
 co$b <- 2

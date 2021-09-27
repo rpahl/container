@@ -36,6 +36,8 @@ co$clear()
 ee(length(co), 0)
 ee(length(co2), 2)
 
+ee(container(1, 2), cont(1, 2))
+
 # a data.frame can be converted to a container
 daf = data.frame(A = 1:2, B = 3:4)
 ee(as.list(as.container(daf)), as.list(daf))

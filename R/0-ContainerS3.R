@@ -38,6 +38,16 @@ container <- function(...)
 }
 
 #' @rdname ContainerS3
+#' @details
+#' * `cont(...)` a short cut for [container()].
+#' @export
+cont <- function(...)
+{
+    container(...)
+}
+
+
+#' @rdname ContainerS3
 #' @details * `as.container(x)` coerces `x` to a `container`
 #' @export
 as.container <- function(x)

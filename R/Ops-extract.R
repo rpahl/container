@@ -128,6 +128,7 @@ NULL
 #' # Replace 8 by 0
 #' co[[{8}]] <- 0
 #' print(co)
+#'
 #' @export
 "[[<-.Container" = function(x, i, value)
 {
@@ -162,6 +163,7 @@ NULL
 
 #' @rdname OpsExtract
 #' @examples
+#'
 #' co = container(a = 1, b = "bar")
 #' co$f <- 3
 #' co$b <- 2
@@ -176,6 +178,7 @@ NULL
 #' @name ContainerS3
 #' @rdname ContainerS3
 #' @examples
+#'
 #' co = container(a = 1, b = "bar")
 #' co$f <- 3
 #' co$b <- 2

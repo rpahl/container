@@ -8,6 +8,7 @@
 \name{ContainerS3}
 \alias{ContainerS3}
 \alias{container}
+\alias{cont}
 \alias{as.container}
 \alias{is.container}
 \alias{as.list.Container}
@@ -16,6 +17,8 @@
 \title{Container methods}
 \usage{
 container(...)
+
+cont(...)
 
 as.container(x)
 
@@ -48,6 +51,10 @@ providing either copy or reference semantics where the latter start with
 
 \itemize{
 \item \code{container(...)} initializes and returns a \code{\link[=Container]{Container()}} object.
+}
+
+\itemize{
+\item \code{cont(...)} a short cut for \code{\link[=container]{container()}}.
 }
 
 \itemize{
@@ -265,6 +272,7 @@ print(co)
 # Replace 8 by 0
 co[[{8}]] <- 0
 print(co)
+
 
 co = container(a = 1, b = "bar")
 co$f <- 3
