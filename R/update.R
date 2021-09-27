@@ -3,26 +3,20 @@
 #' @description Takes an object and updates it with values from another object
 #' by replacing the values at existing names and adding values at new names of
 #' the other object. A common use case is to update parameter lists.
-#' @param x any `R` object
-#' @param other any object of the same type as `x`
+#' @param object any `R` object
+#' @param other any object of the same type as `object`
 #' @param ... additional arguments to be passed to or from methods.
+#' @name update
 #' @details `update` uses copy semantics while `ref_update` works by reference,
 #' that is, updates in place.
-#' @export
-update <- function(x, other, ...)
-{
-    if (!inherits(other, data.class(x))) {
-        stop("'other' must be a ", data.class(x))
-    }
-    UseMethod("update")
-}
+NULL
 
 #' @rdname update
 #' @export
-ref_update <- function(x, other, ...)
+ref_update <- function(object, other, ...)
 {
-    if (!inherits(other, data.class(x))) {
-        stop("'other' must be a ", data.class(x))
+    if (!inherits(other, data.class(object))) {
+        stop("'other' must be a ", data.class(object))
     }
     UseMethod("ref_update")
 }
@@ -37,23 +31,26 @@ ref_update <- function(x, other, ...)
 #' update(d1, d2)  # {a = 1, b = 0, c = 3}
 #' update(d2, d1)  # {a = 1, b = 2, c = 3}
 #' @export
-update.Container <- function(x, other, ...)
+update.Container <- function(object, other, ...)
 {
-    ref_update.Container(x$clone(deep = TRUE), other$clone(deep = TRUE))
+    if (!inherits(other, data.class(object))) {
+        stop("'other' must be a ", data.class(object))
+    }
+    ref_update.Container(object$clone(deep = TRUE), other$clone(deep = TRUE))
 }
 
 #' @rdname update
 #' @export
-ref_update.Container <- function(x, other, ...)
+ref_update.Container <- function(object, other, ...)
 {
-    x$update(other)
+    object$update(other)
 }
 
 #' @name DictS3
 #' @rdname DictS3
 #' @details
-#' * `update(x, other)` and `ref_update(x, other)` adds elements of `other` dict
-#' for keys not yet in `x` and replaces the values of existing keys.
+#' * `update(object, other)` and `ref_update(object, other)` adds elements of `other` dict
+#' for keys not yet in `object` and replaces the values of existing keys.
 #' @examples
 #'
 #' d1 = dict(a = 1, b = 2)
@@ -72,30 +69,33 @@ NULL
 #' update(d1, d2)
 #' update(d2, d1)
 #' @export
-update.dict.table <- function(x, other, ...)
+update.dict.table <- function(object, other, ...)
 {
-    (ref_update.dict.table(copy(x), copy(other)))
+    if (!inherits(other, data.class(object))) {
+        stop("'other' must be a ", data.class(object))
+    }
+    (ref_update.dict.table(copy(object), copy(other)))
 }
 
 
 #' @rdname update
 #' @export
-ref_update.dict.table <- function(x, other, ...)
+ref_update.dict.table <- function(object, other, ...)
 {
-    if (!inherits(other, data.class(x)))
-        stop("arg must be a ", data.class(x))
+    if (!inherits(other, data.class(object)))
+        stop("arg must be a ", data.class(object))
 
     for (key in colnames(other))
-        ref_replace_at(x, key, other[[key]], .add = TRUE)
+        ref_replace_at(object, key, other[[key]], .add = TRUE)
 
-    x
+    object
 }
 
 #' @name dict.tabldict.table
 #' @rdname dict.table
 #' @details
-#' * `update(x, other)` and `ref_update(x, other)` adds columns of `other` dict
-#' that are not yet in `x` and replaces the values at existing columns.
+#' * `update(object, other)` and `ref_update(object, other)` adds columns of `other` dict
+#' that are not yet in `object` and replaces the values at existing columns.
 #' @examples
 #'
 #' # Update parts of tables (second overwrites columns of the first)
@@ -117,12 +117,12 @@ NULL
 #' update(l2, l1)  # all elements of 'other' must be named
 #' }
 #' @export
-update.list <- function(x, other, ...)
+update.list <- function(object, other, ...)
 {
     if (!all(nzchar(names(other)))) {
         stop("all elements of 'other' must be named")
     }
-    x[names(other)] <- other
-    x
+    object[names(other)] <- other
+    object
 }
 

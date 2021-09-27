@@ -39,9 +39,6 @@ devtools::install_github("rpahl/container")
 library(container)
 #> 
 #> Attaching package: 'container'
-#> The following object is masked from 'package:stats':
-#> 
-#>     update
 #> The following object is masked from 'package:base':
 #> 
 #>     replace

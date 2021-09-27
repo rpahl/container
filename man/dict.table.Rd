@@ -134,8 +134,8 @@ signaled unless \code{.add} was set to \code{TRUE}.
 }
 
 \itemize{
-\item \code{update(x, other)} and \code{ref_update(x, other)} adds columns of \code{other} dict
-that are not yet in \code{x} and replaces the values at existing columns.
+\item \code{update(object, other)} and \code{ref_update(object, other)} adds columns of \code{other} dict
+that are not yet in \code{object} and replaces the values at existing columns.
 }
 }
 \note{

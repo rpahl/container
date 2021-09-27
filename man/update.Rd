@@ -10,24 +10,22 @@
 \alias{update.list}
 \title{Update elements}
 \usage{
-update(x, other, ...)
+ref_update(object, other, ...)
 
-ref_update(x, other, ...)
+\method{update}{Container}(object, other, ...)
 
-\method{update}{Container}(x, other, ...)
+\method{ref_update}{Container}(object, other, ...)
 
-\method{ref_update}{Container}(x, other, ...)
+\method{update}{dict.table}(object, other, ...)
 
-\method{update}{dict.table}(x, other, ...)
+\method{ref_update}{dict.table}(object, other, ...)
 
-\method{ref_update}{dict.table}(x, other, ...)
-
-\method{update}{list}(x, other, ...)
+\method{update}{list}(object, other, ...)
 }
 \arguments{
-\item{x}{any \code{R} object}
+\item{object}{any \code{R} object}
 
-\item{other}{any object of the same type as \code{x}}
+\item{other}{any object of the same type as \code{object}}
 
 \item{...}{additional arguments to be passed to or from methods.}
 }
