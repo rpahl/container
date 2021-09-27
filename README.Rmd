@@ -23,30 +23,47 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 <!-- badges: end -->
 
-# container <img src="images/logo.png" align="right" width="210" height="133"/>
+# container <img src="images/logo.png" align="right" width="163" height="104"/>
 
-The goal of container is to ...
+container provides common container data structures deque, set, dict (resembling
+Python's dict type) and dict.table (combining dict and data.table) with
+typical member functions to insert, delete and access container elements.
+Furthermore, provides iterators and supports both reference and copy semantics.
 
 ## Installation
 
 You can install the released version of container from [CRAN](https://CRAN.R-project.org) with:
 
 ```{r, eval = FALSE}
+# Install release version from CRAN
 install.packages("container")
-```
 
-And the development version from [GitHub](https://github.com/) with:
-
-```{r, eval = FALSE}
-# install.packages("devtools")
+# Install development version from GitHub
 devtools::install_github("rpahl/container")
 ```
 
-## Example
 
-This is a basic example which shows you how to solve a common problem:
+## Example
 
 ```{r example}
 library(container)
-## basic example code
+
+co = container(1, b = NA, 1:3, c = container("a", 1))
+co
+```
+
+```{r}
+length(co)
+```
+
+```{r}
+names(co)
+```
+
+```{r}
+as.list(co)
+```
+
+```{r}
+unpack(co)
 ```
