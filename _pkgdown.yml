@@ -1,0 +1,11 @@
+url: https://github.com/rpahl/container
+
+
+template:
+  params:
+    bootswatch: cerulean
+
+authors:
+  Roman Pahl:
+    href: https://rpahl.github.io/about.html
+
