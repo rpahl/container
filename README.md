@@ -12,7 +12,7 @@ Status](https://travis-ci.org/rpahl/container.png?branch=master)](https://travis
 status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 <!-- badges: end -->
 
-# container <img src="images/README-container-logo.png" align="right" width="210" height="133"/>
+# container <img src="images/logo.png" align="right" width="210" height="133"/>
 
 The goal of container is to …
 
