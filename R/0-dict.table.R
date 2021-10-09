@@ -20,7 +20,7 @@
 #' @title dict.table
 #'
 #' @description The [dict.table()] is a mix of a [dict()] and a
-#' `data.table`, that is, it can be considered as a data.table with extended
+#' [data.table()], that is, it can be considered as a data.table with extended
 #' functionality to manage its data columns.
 #' As a result, a dict.table object provides all [dict()] and [data.table()]
 #' functions and operators at the same time.

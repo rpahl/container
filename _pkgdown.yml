@@ -9,3 +9,80 @@ authors:
   Roman Pahl:
     href: https://rpahl.github.io/about.html
 
+
+reference:
+  - title: "Container"
+    desc: "A container can be considered a basic R list with extended functionality."
+    contents:
+    - container
+    - clone
+    - container_options
+    - unpack
+  - subtitle: "add"
+    contents:
+    - add
+    - starts_with("at")
+  - subtitle: "extract or replace"
+    contents:
+    - starts_with("peek")
+    - starts_with("replace")
+    - contains("pop")
+    - "[.Container"
+  - subtitle: "inspect"
+    contents:
+    - count
+    - has
+    - has_name
+    - is_empty
+  - subtitle: "remove"
+    contents:
+    - clear
+    - starts_with("delete")
+    - starts_with("discard")
+  - subtitle: "update"
+    contents:
+    - rename
+    - update
+
+  - title: "Deque"
+    desc: >
+        Derives all Container methods.
+        Can also be used to mimic stacks or simple queues.
+    contents:
+    - deque
+    - addleft
+    - rotate
+
+  - title: "Set"
+    desc: "Derives all Container methods. Set elements are always unique."
+    contents:
+    - setnew
+
+
+  - title: "Dict"
+    desc: >
+        Derives all Container methods.
+        The dict resembles Python's dict type but here is more flexible by
+        providing both associative key-value pair as well as positional array
+        semantics.
+    contents:
+    - dict
+
+
+  - title: "dict.table"
+    desc: >
+        The dict.table is a mix of a dict and a data.table and hence derives
+        all methods from both.
+    contents:
+    - starts_with("dict.table")
+
+  - title: "Iterators"
+    desc: "Iterate over sequences."
+    contents:
+    - iter
+
+  - title: "Operators"
+    contents:
+    - "+.Container"
+    - "<.Container"
+    - "&.Dict"

@@ -48,11 +48,10 @@
 
 <meta property="og:title" content="dict.table — dict.table" />
 <meta property="og:description" content="The dict.table() is a mix of a dict() and a
-data.table, that is, it can be considered as a data.table with extended
+data.table(), that is, it can be considered as a data.table with extended
 functionality to manage its data columns.
 As a result, a dict.table object provides all dict() and data.table()
 functions and operators at the same time." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -141,10 +140,10 @@ functions and operators at the same time." />
     </div>
 
     <div class="ref-description">
-    <p>The <code>dict.table()</code> is a mix of a <code><a href='DictS3.html'>dict()</a></code> and a
-<code>data.table</code>, that is, it can be considered as a data.table with extended
+    <p>The <code>dict.table()</code> is a mix of a <code>dict()</code> and a
+<code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table()</a></code>, that is, it can be considered as a data.table with extended
 functionality to manage its data columns.
-As a result, a dict.table object provides all <code><a href='DictS3.html'>dict()</a></code> and <code>data.table()</code>
+As a result, a dict.table object provides all <code>dict()</code> and <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table()</a></code>
 functions and operators at the same time.</p>
     </div>
 
@@ -158,7 +157,7 @@ functions and operators at the same time.</p>
 <span class='fu'>is.dict.table</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for dict.table</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbind</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for dict.table</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -188,7 +187,7 @@ works on the passed object by reference.</p></td>
 providing either copy or reference semantics where the latter start with
 <code>'ref_'</code> to note the reference semantic, for example, <code><a href='add.html'>add()</a></code> and <code><a href='add.html'>ref_add()</a></code>.</p>
 <ul>
-<li><p><code>dict.table(...)</code> initializes and returns a <code><a href='DictS3.html'>dict()</a></code> object.</p></li>
+<li><p><code>dict.table(...)</code> initializes and returns a <code>dict()</code> object.</p></li>
 </ul>
 
 <ul>
@@ -275,8 +274,8 @@ signaled unless <code>.add</code> was set to <code>TRUE</code>.</p></li>
 </ul>
 
 <ul>
-<li><p><code><a href='update.html'>update(x, other)</a></code> and <code><a href='update.html'>ref_update(x, other)</a></code> adds columns of <code>other</code> dict
-that are not yet in <code>x</code> and replaces the values at existing columns.</p></li>
+<li><p><code><a href='update.html'>update(object, other)</a></code> and <code><a href='update.html'>ref_update(object, other)</a></code> adds columns of <code>other</code> dict
+that are not yet in <code>object</code> and replaces the values at existing columns.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -284,13 +283,13 @@ that are not yet in <code>x</code> and replaces the values at existing columns.<
     <p>In contrast to <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table()</a></code>, <code>dict.table()</code> does not allow duplicated keys.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='DictS3.html'>dict()</a></code>, <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code></p></div>
+    <div class='dont-index'><p><code>dict()</code>, <code><a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table::data.table()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Some basic examples using some typical data.table and dict operations.</span>
 <span class='co'># The constructor can take the 'key' argument known from data.table():</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: data.table</span></div><div class='input'><span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"c"</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>6</span><span class='op'>)</span>, key <span class='op'>=</span> <span class='st'>"y"</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"c"</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>6</span><span class='op'>)</span>, key <span class='op'>=</span> <span class='st'>"y"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 9 rows and 2 columns
 #&gt;    x y
@@ -379,7 +378,7 @@ that are not yet in <code>x</code> and replaces the values at existing columns.<
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>is.dict.table</span><span class='op'>(</span><span class='va'>dat</span><span class='op'>)</span>                           <span class='co'># TRUE now as well!</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># Coerce from dict</span>
-<span class='va'>d</span> <span class='op'>=</span> <span class='fu'><a href='DictS3.html'>dict</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>d</span> <span class='op'>=</span> <span class='fu'>dict</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='fu'>as.dict.table</span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 2 columns
 #&gt;    a b

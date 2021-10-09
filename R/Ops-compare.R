@@ -1,4 +1,4 @@
-#' Comparison Operators for Containers
+#' Comparison Operators
 #'
 #' @description Binary comparison operators for [Container()] objects and
 #' derived classes.

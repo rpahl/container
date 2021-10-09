@@ -47,7 +47,6 @@
 
 
 <meta property="og:title" content="Function reference" />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -144,11 +143,48 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-container" class="hasAnchor"><a href="#section-container" class="anchor"></a>Container</h2>
+          <p class="section-desc"><p>A container can be considered a basic R list with extended functionality.</p></p>
         </th>
       </tr>
       
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="ContainerS3.html">container()</a></code> <code><a href="ContainerS3.html">cont()</a></code> <code><a href="ContainerS3.html">as.container()</a></code> <code><a href="ContainerS3.html">is.container()</a></code> <code><a href="ContainerS3.html">as.list(<i>&lt;Container&gt;</i>)</a></code> <code><a href="ContainerS3.html">length(<i>&lt;Container&gt;</i>)</a></code> <code><a href="ContainerS3.html">names(<i>&lt;Container&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Container methods</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="clone.html">clone()</a></code> </p>
+        </td>
+        <td><p>Clone an object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="container_options.html">container_options()</a></code> <code><a href="container_options.html">getContainerOption()</a></code> </p>
+        </td>
+        <td><p>Set container package options</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="unpack.html">unpack()</a></code> </p>
+        </td>
+        <td><p>Unpack nested objects</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-add" class="hasAnchor"><a href="#section-add" class="anchor"></a>add</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
       
     </tbody><tbody>
       
@@ -171,182 +207,20 @@
           <p><code><a href="at2.html">at2()</a></code> </p>
         </td>
         <td><p>Strict element extraction</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="clear.html">clear()</a></code> <code><a href="clear.html">ref_clear()</a></code> </p>
-        </td>
-        <td><p>Clear a container</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="clone.html">clone()</a></code> </p>
-        </td>
-        <td><p>Clone an object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="container-deprecated.html">empty()</a></code> <code><a href="container-deprecated.html">size()</a></code> <code><a href="container-deprecated.html">sortkey()</a></code> <code><a href="container-deprecated.html">values()</a></code> <code><a href="container-deprecated.html">keys()</a></code> </p>
-        </td>
-        <td><p>Deprecated Functions in Package container</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="container-pkg.html">container-pkg</a></code> </p>
-        </td>
-        <td><p>Container, Deque, Set, and Dict (aka Map) - R6 based container classes
-with iterators and reference semantics.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Container.html">Container</a></code> </p>
-        </td>
-        <td><p>A sequence Container</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ContainerS3.html">container()</a></code> <code><a href="ContainerS3.html">cont()</a></code> <code><a href="ContainerS3.html">as.container()</a></code> <code><a href="ContainerS3.html">is.container()</a></code> <code><a href="ContainerS3.html">as.list(<i>&lt;Container&gt;</i>)</a></code> <code><a href="ContainerS3.html">length(<i>&lt;Container&gt;</i>)</a></code> <code><a href="ContainerS3.html">names(<i>&lt;Container&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Container methods</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="container_options.html">container_options()</a></code> <code><a href="container_options.html">getContainerOption()</a></code> </p>
-        </td>
-        <td><p>Set container package options</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="count.html">count()</a></code> </p>
-        </td>
-        <td><p>Count elements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delete.html">delete()</a></code> <code><a href="delete.html">ref_delete()</a></code> </p>
-        </td>
-        <td><p>Delete elements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delete_at.html">delete_at()</a></code> <code><a href="delete_at.html">ref_delete_at()</a></code> </p>
-        </td>
-        <td><p>Delete elements at index</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Deque.html">Deque</a></code> </p>
-        </td>
-        <td><p>Deque (double-ended queue)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="DequeS3.html">deque()</a></code> <code><a href="DequeS3.html">as.deque()</a></code> <code><a href="DequeS3.html">is.deque()</a></code> <code><a href="DequeS3.html">rev(<i>&lt;Deque&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Deque (double-ended queue)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Dict.html">Dict</a></code> </p>
-        </td>
-        <td><p>Dict</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dict.table.html">dict.table()</a></code> <code><a href="dict.table.html">as.dict.table()</a></code> <code><a href="dict.table.html">is.dict.table()</a></code> <code><a href="dict.table.html">rbind(<i>&lt;dict.table&gt;</i>)</a></code> <code><a href="dict.table.html">cbind(<i>&lt;dict.table&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>dict.table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="DictS3.html">dict()</a></code> <code><a href="DictS3.html">as.dict()</a></code> <code><a href="DictS3.html">is.dict()</a></code> </p>
-        </td>
-        <td><p>Dict methods</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="discard.html">discard()</a></code> <code><a href="discard.html">ref_discard()</a></code> </p>
-        </td>
-        <td><p>Discard elements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="discard_at.html">discard_at()</a></code> <code><a href="discard_at.html">ref_discard_at()</a></code> </p>
-        </td>
-        <td><p>Discard elements at index</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_label.html">get_label()</a></code> </p>
-        </td>
-        <td><p>Object labels</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="has.html">has()</a></code> </p>
-        </td>
-        <td><p>Check if object has some element</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="has_name.html">has_name()</a></code> </p>
-        </td>
-        <td><p>Check if object has some name</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is.subsettable.html">is.subsettable()</a></code> </p>
-        </td>
-        <td><p>Check if object is subsettable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is_empty.html">is_empty()</a></code> </p>
-        </td>
-        <td><p>Check if object is empty</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Iterable.html">Iterable</a></code> </p>
-        </td>
-        <td><p>Iterable abstract class interface</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Iterator.html">Iterator</a></code> </p>
-        </td>
-        <td><p>Iterator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="iterS3.html">iter()</a></code> <code><a href="iterS3.html">is.iterator()</a></code> <code><a href="iterS3.html">is.iterable()</a></code> <code><a href="iterS3.html">begin()</a></code> <code><a href="iterS3.html">get_value()</a></code> <code><a href="iterS3.html">get_next()</a></code> <code><a href="iterS3.html">has_next()</a></code> <code><a href="iterS3.html">has_value()</a></code> <code><a href="iterS3.html">pos()</a></code> <code><a href="iterS3.html">next_iter()</a></code> <code><a href="iterS3.html">reset_iter()</a></code> <code><a href="iterS3.html">length(<i>&lt;Iterator&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Iterator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="OpsArithmetic.html">`+`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`+`(<i>&lt;Deque&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Deque&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`+`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`+`(<i>&lt;Set&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Set&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Arithmetic Operators for Containers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="OpsCompare.html">`==`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`!=`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&lt;`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&gt;`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&lt;=`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&gt;=`(<i>&lt;Container&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Comparison Operators for Containers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="OpsExtract.html">`[`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`[[`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`[&lt;-`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`[[&lt;-`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`$&lt;-`(<i>&lt;Container&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Extract or Replace Parts of a Container Object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="OpsLogic.html">`&amp;`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsLogic.html">`|`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsLogic.html">`&amp;`(<i>&lt;Set&gt;</i>)</a></code> <code><a href="OpsLogic.html">`|`(<i>&lt;Set&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Logic Operators for Containers</p></td>
-      </tr><tr>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-extract-or-replace" class="hasAnchor"><a href="#section-extract-or-replace" class="anchor"></a>extract or replace</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="peek_at.html">peek_at()</a></code> </p>
@@ -358,18 +232,6 @@ with iterators and reference semantics.</p></td>
           <p><code><a href="peek_at2.html">peek_at2()</a></code> <code><a href="peek_at2.html">peekleft()</a></code> <code><a href="peek_at2.html">peek()</a></code> </p>
         </td>
         <td><p>Peek at one element</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pop.html">ref_pop()</a></code> <code><a href="pop.html">ref_popleft()</a></code> </p>
-        </td>
-        <td><p>Pop element</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rename.html">rename()</a></code> <code><a href="rename.html">ref_rename()</a></code> </p>
-        </td>
-        <td><p>Rename elements safely</p></td>
       </tr><tr>
         
         <td>
@@ -385,33 +247,258 @@ with iterators and reference semantics.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rotate.html">rotate()</a></code> <code><a href="rotate.html">ref_rotate()</a></code> </p>
+          <p><code><a href="pop.html">ref_pop()</a></code> <code><a href="pop.html">ref_popleft()</a></code> </p>
         </td>
-        <td><p>Rotate elements</p></td>
+        <td><p>Pop element</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="Set.html">Set</a></code> </p>
+          <p><code><a href="OpsExtract.html">`[`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`[[`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`[&lt;-`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`[[&lt;-`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsExtract.html">`$&lt;-`(<i>&lt;Container&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Set</p></td>
+        <td><p>Extract or Replace Parts of a Container Object</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-inspect" class="hasAnchor"><a href="#section-inspect" class="anchor"></a>inspect</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="count.html">count()</a></code> </p>
+        </td>
+        <td><p>Count elements</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="has.html">has()</a></code> </p>
+        </td>
+        <td><p>Check if object has some element</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="has_name.html">has_name()</a></code> </p>
+        </td>
+        <td><p>Check if object has some name</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is_empty.html">is_empty()</a></code> </p>
+        </td>
+        <td><p>Check if object is empty</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-remove" class="hasAnchor"><a href="#section-remove" class="anchor"></a>remove</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="clear.html">clear()</a></code> <code><a href="clear.html">ref_clear()</a></code> </p>
+        </td>
+        <td><p>Clear a container</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="delete.html">delete()</a></code> <code><a href="delete.html">ref_delete()</a></code> </p>
+        </td>
+        <td><p>Delete elements</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="delete_at.html">delete_at()</a></code> <code><a href="delete_at.html">ref_delete_at()</a></code> </p>
+        </td>
+        <td><p>Delete elements at index</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="discard.html">discard()</a></code> <code><a href="discard.html">ref_discard()</a></code> </p>
+        </td>
+        <td><p>Discard elements</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="discard_at.html">discard_at()</a></code> <code><a href="discard_at.html">ref_discard_at()</a></code> </p>
+        </td>
+        <td><p>Discard elements at index</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section-update" class="hasAnchor"><a href="#section-update" class="anchor"></a>update</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="rename.html">rename()</a></code> <code><a href="rename.html">ref_rename()</a></code> </p>
+        </td>
+        <td><p>Rename elements safely</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="update.html">ref_update()</a></code> <code><a href="update.html">update(<i>&lt;Container&gt;</i>)</a></code> <code><a href="update.html">update(<i>&lt;dict.table&gt;</i>)</a></code> <code><a href="update.html">update(<i>&lt;list&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Update elements</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-deque" class="hasAnchor"><a href="#section-deque" class="anchor"></a>Deque</h2>
+          <p class="section-desc"><p>Derives all Container methods. Can also be used to mimic stacks or simple queues.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="DequeS3.html">deque()</a></code> <code><a href="DequeS3.html">as.deque()</a></code> <code><a href="DequeS3.html">is.deque()</a></code> <code><a href="DequeS3.html">rev(<i>&lt;Deque&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Deque (double-ended queue)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="add.html">add()</a></code> <code><a href="add.html">ref_add()</a></code> <code><a href="add.html">addleft()</a></code> <code><a href="add.html">ref_addleft()</a></code> </p>
+        </td>
+        <td><p>Add elements</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rotate.html">rotate()</a></code> <code><a href="rotate.html">ref_rotate()</a></code> </p>
+        </td>
+        <td><p>Rotate elements</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-set" class="hasAnchor"><a href="#section-set" class="anchor"></a>Set</h2>
+          <p class="section-desc"><p>Derives all Container methods. Set elements are always unique.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="SetS3.html">setnew()</a></code> <code><a href="SetS3.html">as.set()</a></code> <code><a href="SetS3.html">is.set()</a></code> </p>
         </td>
         <td><p>Set methods</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-dict" class="hasAnchor"><a href="#section-dict" class="anchor"></a>Dict</h2>
+          <p class="section-desc"><p>Derives all Container methods. The dict resembles Python’s dict type but here is more flexible by providing both associative key-value pair as well as positional array semantics.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="DictS3.html">dict()</a></code> <code><a href="DictS3.html">as.dict()</a></code> <code><a href="DictS3.html">is.dict()</a></code> </p>
+        </td>
+        <td><p>Dict methods</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-dict-table" class="hasAnchor"><a href="#section-dict-table" class="anchor"></a>dict.table</h2>
+          <p class="section-desc"><p>The dict.table is a mix of a dict and a data.table and hence derives all methods from both.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="dict.table.html">dict.table()</a></code> <code><a href="dict.table.html">as.dict.table()</a></code> <code><a href="dict.table.html">is.dict.table()</a></code> <code><a href="dict.table.html">rbind(<i>&lt;dict.table&gt;</i>)</a></code> <code><a href="dict.table.html">cbind(<i>&lt;dict.table&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>dict.table</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-iterators" class="hasAnchor"><a href="#section-iterators" class="anchor"></a>Iterators</h2>
+          <p class="section-desc"><p>Iterate over sequences.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="iterS3.html">iter()</a></code> <code><a href="iterS3.html">is.iterator()</a></code> <code><a href="iterS3.html">is.iterable()</a></code> <code><a href="iterS3.html">begin()</a></code> <code><a href="iterS3.html">get_value()</a></code> <code><a href="iterS3.html">get_next()</a></code> <code><a href="iterS3.html">has_next()</a></code> <code><a href="iterS3.html">has_value()</a></code> <code><a href="iterS3.html">pos()</a></code> <code><a href="iterS3.html">next_iter()</a></code> <code><a href="iterS3.html">reset_iter()</a></code> <code><a href="iterS3.html">length(<i>&lt;Iterator&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Iterator</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-operators" class="hasAnchor"><a href="#section-operators" class="anchor"></a>Operators</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="OpsArithmetic.html">`+`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`+`(<i>&lt;Deque&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Deque&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`+`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`+`(<i>&lt;Set&gt;</i>)</a></code> <code><a href="OpsArithmetic.html">`-`(<i>&lt;Set&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Arithmetic Operators</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="unpack.html">unpack()</a></code> </p>
+          <p><code><a href="OpsCompare.html">`==`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`!=`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&lt;`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&gt;`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&lt;=`(<i>&lt;Container&gt;</i>)</a></code> <code><a href="OpsCompare.html">`&gt;=`(<i>&lt;Container&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Unpack nested objects</p></td>
+        <td><p>Comparison Operators</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="update.html">update()</a></code> <code><a href="update.html">ref_update()</a></code> </p>
+          <p><code><a href="OpsLogic.html">`&amp;`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsLogic.html">`|`(<i>&lt;Dict&gt;</i>)</a></code> <code><a href="OpsLogic.html">`&amp;`(<i>&lt;Set&gt;</i>)</a></code> <code><a href="OpsLogic.html">`|`(<i>&lt;Set&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Update elements</p></td>
+        <td><p>Logic Operators</p></td>
       </tr>
     </tbody>
     </table>

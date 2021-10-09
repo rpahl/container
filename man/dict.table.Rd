@@ -36,7 +36,7 @@ works on the passed object by reference.}
 }
 \description{
 The \code{\link[=dict.table]{dict.table()}} is a mix of a \code{\link[=dict]{dict()}} and a
-\code{data.table}, that is, it can be considered as a data.table with extended
+\code{\link[=data.table]{data.table()}}, that is, it can be considered as a data.table with extended
 functionality to manage its data columns.
 As a result, a dict.table object provides all \code{\link[=dict]{dict()}} and \code{\link[=data.table]{data.table()}}
 functions and operators at the same time.

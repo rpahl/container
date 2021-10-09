@@ -50,7 +50,6 @@
 <meta property="og:description" content="Takes an object and updates it with values from another object
 by replacing the values at existing names and adding values at new names of
 the other object. A common use case is to update parameter lists." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -144,35 +143,33 @@ by replacing the values at existing names and adding values at new names of
 the other object. A common use case is to update parameter lists.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>update</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='fu'>ref_update</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>ref_update</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Container</span>
-<span class='fu'>update</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>update</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Container</span>
-<span class='fu'>ref_update</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>ref_update</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for dict.table</span>
-<span class='fu'>update</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>update</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for dict.table</span>
-<span class='fu'>ref_update</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>ref_update</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for list</span>
-<span class='fu'>update</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'>update</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>other</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
+      <th>object</th>
       <td><p>any <code>R</code> object</p></td>
     </tr>
     <tr>
       <th>other</th>
-      <td><p>any object of the same type as <code>x</code></p></td>
+      <td><p>any object of the same type as <code>object</code></p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Arithmetic Operators for Containers — OpsArithmetic • container</title>
+<title>Arithmetic Operators — OpsArithmetic • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Arithmetic Operators for Containers — OpsArithmetic" />
+<meta property="og:title" content="Arithmetic Operators — OpsArithmetic" />
 <meta property="og:description" content="Binary arithmetic operators for Container() objects and
 derived classes." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -132,7 +131,7 @@ derived classes." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Arithmetic Operators for Containers</h1>
+    <h1>Arithmetic Operators</h1>
     <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/Ops-arithmetic.R'><code>R/Ops-arithmetic.R</code></a></small>
     <div class="hidden name"><code>OpsArithmetic.Rd</code></div>
     </div>
@@ -214,8 +213,8 @@ updating <code>x</code> by <code>y</code> (see also <code>[update()]</code>).</p
 </div><div class='output co'>#&gt; |2|</div><div class='input'><span class='va'>d1</span> <span class='op'>-</span> <span class='va'>d1</span>
 </div><div class='output co'>#&gt; ||</div><div class='input'>
 <span class='co'># Arithmetic</span>
-<span class='va'>d1</span> <span class='op'>=</span> <span class='fu'><a href='DictS3.html'>dict</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>d2</span> <span class='op'>=</span> <span class='fu'><a href='DictS3.html'>dict</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>d1</span> <span class='op'>=</span> <span class='fu'>dict</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>d2</span> <span class='op'>=</span> <span class='fu'>dict</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>2</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>d1</span> <span class='op'>+</span> <span class='va'>d2</span>      <span class='co'># same as update(d, d2)</span>
 </div><div class='output co'>#&gt; {a = 2, b = list(1, 2)}</div><div class='input'><span class='va'>d2</span> <span class='op'>+</span> <span class='va'>d1</span>      <span class='co'># same as update(d2, d)</span>
 </div><div class='output co'>#&gt; {a = 1, b = list(1, 2)}</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
