@@ -6,7 +6,7 @@
 \alias{setnew}
 \alias{as.set}
 \alias{is.set}
-\title{Set methods}
+\title{Set}
 \usage{
 setnew(...)
 

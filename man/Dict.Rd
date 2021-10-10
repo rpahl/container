@@ -2,7 +2,7 @@
 % Please edit documentation in R/0-DictR6.R
 \name{Dict}
 \alias{Dict}
-\title{Dict}
+\title{A Dictionary}
 \description{
 The \code{\link[=Dict]{Dict()}} resembles Python's dict type, and is implemented
 as a specialized associative \code{\link[=Container]{Container()}} thus sharing all \code{\link[=Container]{Container()}}

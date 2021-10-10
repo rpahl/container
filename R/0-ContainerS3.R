@@ -1,4 +1,4 @@
-#' @title Container methods
+#' @title A sequence Container
 #'
 #' @description A [Container()] is a data structure with typical member
 #' functions to insert, delete and access elements from the container

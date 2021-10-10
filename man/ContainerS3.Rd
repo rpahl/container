@@ -14,7 +14,7 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
-\title{Container methods}
+\title{A sequence Container}
 \usage{
 container(...)
 

@@ -7,7 +7,7 @@
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
-\title{Dict methods}
+\title{A Dictionary}
 \usage{
 dict(...)
 
