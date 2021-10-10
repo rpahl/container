@@ -6,3 +6,5 @@ container.Rproj
 vignettes
 tags
 
+/doc/
+/Meta/

@@ -9,3 +9,5 @@ tags
 ^_pkgdown\.yml$
 ^docs$
 ^README\.Rmd$
+^doc$
+^Meta$

@@ -14,11 +14,15 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 
 # container <img src="images/logo.png" align="right" width="163" height="104"/>
 
-container provides common container data structures deque, set, dict
-(resembling Python’s dict type) and dict.table (combining dict and
-data.table) with typical member functions to insert, delete and access
-container elements. Furthermore, provides iterators and supports both
-reference and copy semantics.
+\[container\] extends the functionality of base R \[list\] and the
+\[data.table\] package and with \[deque\], \[set\], and \[dict\]
+provides common data structures not provided by base R, (resembling
+Python’s dict type). In addition, it provides \[iterators\] and supports
+both reference and copy semantics.
+
+## Why `container`?
+
+## Features
 
 ## Installation
 
@@ -33,40 +37,28 @@ install.packages("container")
 devtools::install_github("rpahl/container")
 ```
 
-## container vs list
+### container vs list
 
-The `container` can be seen as a basic R `list` with extended
-functionality. There is basically nothing that you can do with a `list`
-that can’t can be done with the `container`, but the `container` is
-capable of much more. Below you find some (of many) extra things the
-`container` is capable of.
+The \[container\] can be seen as a base R \[list\] with extended
+functionality. There is basically nothing that you can do with a
+\[list\] that can’t can also be done with the \[container\], but the
+\[container\] is capable of much more. Below you find some (of many)
+extra things the \[container\] is capable of.
 
 ``` r
 library(container)
-#> 
-#> Attaching package: 'container'
-#> The following object is masked from 'package:base':
-#> 
-#>     replace
-co <- container(1:10, b = NA, l = list("a", 1))
+
+co <- container(1:10, l = list("a", 1))
 li <- as.list(co)
 ```
 
-Since they are similar, you can always transform back-and-forth between
-both types using respectively `as.list` or `as.container`.
-
-The `container` object by default prints more compact than the `list`.
+While the \[list\] output can be very long and hard to read
 
 ``` r
-co
-#> [(1L 2L 3L 4L ...), b = NA, l = list("a", 1)]
 li
 #> [[1]]
 #>  [1]  1  2  3  4  5  6  7  8  9 10
 #> 
-#> $b
-#> [1] NA
-#> 
 #> $l
 #> $l[[1]]
 #> [1] "a"
@@ -75,69 +67,28 @@ li
 #> [1] 1
 ```
 
+the elements of a \[container\] object are printed in a very compact and
+readable way.
+
 ``` r
-str(co) # TODO
-#> Classes 'Container', 'Iterable', 'R6' <Container>
-#>   Inherits from: <Iterable>
-#>   Public:
-#>     add: function (value, name = NULL) 
-#>     at: function (index) 
-#>     at2: function (index) 
-#>     clear: function () 
-#>     clone: function (deep = FALSE) 
-#>     count: function (elem) 
-#>     delete: function (elem) 
-#>     delete_at: function (index) 
-#>     discard: function (elem) 
-#>     discard_at: function (index) 
-#>     empty: function () 
-#>     get_compare_fun: function () 
-#>     has: function (elem) 
-#>     has_name: function (name) 
-#>     initialize: function (...) 
-#>     is_empty: function () 
-#>     iter: function () 
-#>     length: function () 
-#>     peek_at: function (index, default = NULL) 
-#>     peek_at2: function (index, default = NULL) 
-#>     pop: function (index) 
-#>     print: function (...) 
-#>     remove: function (elem) 
-#>     rename: function (old, new) 
-#>     replace: function (old, new, add = FALSE) 
-#>     replace_at: function (index, value, add = FALSE) 
-#>     size: function () 
-#>     type: function () 
-#>     update: function (other) 
-#>     values: function () 
-#>   Private:
-#>     .get_element_position: function (x, ...) 
-#>     .get_index_position: function (index) 
-#>     .rename: function (old, new) 
-#>     .replace_value_at: function (pos, value, name) 
-#>     .set_compare_fun: function (x) 
-#>     .subset: function (x, ...) 
-#>     .subset2: function (x, ...) 
-#>     .verify_same_class: function (x) 
-#>     compare_fun: function (target, current, ...) 
-#>     compare_predicate: function (x) 
-#>     create_iter: function () 
-#>     deep_clone: function (name, value) 
-#>     elems: list
+co
+#> [(1L 2L 3L 4L ...), l = list("a", 1)]
 ```
 
-The `container` allows to find and replace elements directly without the
-need to determine their index first, by passing them in curly brackets.
+``` r
+#str(co) # TODO
+```
+
+The \[container\] allows to find and replace elements directly without
+the need to determine their index first, by passing them in curly
+brackets. First, let’s see how to do it with the list.
 
 ``` r
 index = which(sapply(li, identical, 1:10))
-li[[index]] <- 1:5
+li[[index]] <- 1:3
 li
 #> [[1]]
-#> [1] 1 2 3 4 5
-#> 
-#> $b
-#> [1] NA
+#> [1] 1 2 3
 #> 
 #> $l
 #> $l[[1]]
@@ -145,29 +96,33 @@ li
 #> 
 #> $l[[2]]
 #> [1] 1
-#co[[{1:10}]] <- 1:5 # TODO
-#co[[{list("a", 1)}]] <- 1:5 # TODO
-#co[c(T, F, T)] # TODO
+```
+
+``` r
+co[[{1:10}]] <- 1:3
 co
-#> [(1L 2L 3L 4L ...), b = NA, l = list("a", 1)]
+#> [(1L 2L 3L), l = list("a", 1)]
 ```
 
 ``` r
 unpack(co)
-#>                                                      b   l1   l2 
-#>  "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9" "10"   NA  "a"  "1"
+#>              l1  l2 
+#> "1" "2" "3" "a" "1"
 ```
 
-## dict.table vs data.frame
+### dict.table vs data.frame
 
-The `dict.table` can be seen as a basic R `data.frame` with extended
+The \[dict.table\] can be seen as a base R \[data.frame\] with extended
 functionality. There is basically nothing that you can do with a
-`data.frame` that can’t can be done with the `dict.table`, but the
-`dict.table` is capable of much more. Here are some examples for why you
-might want to prefer the `dict.table`.
+\[data.frame\] that can’t can also be done with the \[dict.table\], but
+the \[dict.table\] is capable of much more. Below you find some (of
+many) extra things the \[dict.table\] is capable of.
 
 ``` r
-co = container(1, b = NA, 1:3, c = container("a", 1))
-co
-#> [1, b = NA, (1L 2L 3L), c = ["a", 1]]
+dit = dict.table(a = 1:2, b = 3:4)
+dit
+#> <dict.table> with 2 rows and 2 columns
+#>    a b
+#> 1: 1 3
+#> 2: 2 4
 ```

@@ -1,18 +1,18 @@
-#' @title A sequence Container
+#' @title Container - extending base R lists
 #'
-#' @description A [Container()] is a data structure with typical member
+#' @description A container is a data structure with typical member
 #' functions to insert, delete and access elements from the container
-#' object. The [Container()] class serves as the base class for [Deque()],
-#' '[Set()], and [Dict()] objects, which can be created by calls to
-#' '[deque()], [setnew()], and [dict()], respectively.
+#' object. The [container] can be seen as a base R [list] with
+#' extended functionality. The [Container] class also serves as the base
+#' class for [Deque], [Set], and [Dict] objects.
 #' @param ... (possibly named) elements to be put into or removed from the
 #' `Container`, or additional arguments passed from and to methods.
-#' @param x `R` object of `ANY` type for [as.container()] and [is.container()]
+#' @param x `R` object of `ANY` type for [as.container] and [is.container]
 #' or of class `Container` for the `S3` methods.
 #' @name ContainerS3
-#' @seealso For the `Container` class documentation see [Container()]. To
-#' create objects of the derived classes see [deque()], [setnew()], and
-#' [dict()].
+#' @seealso For the `Container` class documentation see [Container]. To
+#' create objects of the derived classes see [deque], [setnew], and
+#' [dict].
 #' @details
 #' Methods that alter `Container` objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with

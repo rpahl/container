@@ -25,14 +25,22 @@ knitr::opts_chunk$set(
 
 # container <img src="images/logo.png" align="right" width="163" height="104"/>
 
-container provides common container data structures deque, set, dict (resembling
-Python's dict type) and dict.table (combining dict and data.table) with
-typical member functions to insert, delete and access container elements.
-Furthermore, provides iterators and supports both reference and copy semantics.
+[container] extends the functionality of base R [list] and the [data.table]
+package and with [deque], [set], and [dict] provides common data structures
+not provided by base R, (resembling Python's dict type).
+In addition, it provides [iterators] and supports both reference and copy
+semantics.
+
+## Why `container`?
+
+
+## Features
+
 
 ## Installation
 
-You can install the released version of container from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of container from
+[CRAN](https://CRAN.R-project.org) with:
 
 ```{r, eval = FALSE}
 # Install release version from CRAN
@@ -42,43 +50,50 @@ install.packages("container")
 devtools::install_github("rpahl/container")
 ```
 
+```{r load-container, include = FALSE}
+library(container)
+```
 
-## container vs list
-The `container` can be seen as a basic R `list` with extended functionality.
-There is basically nothing that you can do with a `list` that can't can be
-done with the `container`, but the `container` is capable of much more.
-Below you find some (of many) extra things the `container` is capable of.
+### container vs list
+The [container] can be seen as a base R [list] with extended functionality.
+There is basically nothing that you can do with a [list] that
+can't can also be done with the [container], but the [container] is
+capable of much more. Below you find some (of many) extra things the
+[container] is capable of.
 
 ```{r container-vs-list}
 library(container)
 
-co <- container(1:10, b = NA, l = list("a", 1))
+co <- container(1:10, l = list("a", 1))
 li <- as.list(co)
 ```
-Since they are similar, you can always transform back-and-forth between both
-types using respectively `as.list` or `as.container`.
 
-The `container` object by default prints more compact than the `list`.
+While the [list] output can be very long and hard to read
+```{r}
+li
+```
+
+the elements of a [container] object are printed in a very compact and
+readable way.
 ```{r}
 co
-
-li
 ```
 
 ```{r}
-str(co) # TODO
+#str(co) # TODO
 ```
 
-The `container` allows to find and replace elements directly without the need
-to determine their index first, by passing them in curly brackets.
+The [container] allows to find and replace elements directly without the need
+to determine their index first, by passing them in curly brackets. First, let's
+see how to do it with the list.
 ```{r}
 index = which(sapply(li, identical, 1:10))
-li[[index]] <- 1:5
+li[[index]] <- 1:3
 li
+```
 
-#co[[{1:10}]] <- 1:5 # TODO
-#co[[{list("a", 1)}]] <- 1:5 # TODO
-#co[c(T, F, T)] # TODO
+```{r}
+co[[{1:10}]] <- 1:3
 co
 ```
 
@@ -86,16 +101,17 @@ co
 unpack(co)
 ```
 
-## dict.table vs data.frame
-The `dict.table` can be seen as a basic R `data.frame` with extended functionality.
-There is basically nothing that you can do with a `data.frame` that can't can be
-done with the `dict.table`, but the `dict.table` is capable of much more.
-Here are some examples for why you might want to prefer the `dict.table`.
-
+### dict.table vs data.frame
+The [dict.table] can be seen as a base R [data.frame] with
+extended functionality.
+There is basically nothing that you can do with a [data.frame] that
+can't can also be done with the [dict.table], but the [dict.table] is
+capable of much more. Below you find some (of many) extra things the
+[dict.table] is capable of.
 
 ```{r dict.table-vs-data.frame}
-co = container(1, b = NA, 1:3, c = container("a", 1))
-co
+dit = dict.table(a = 1:2, b = 3:4)
+dit
 ```
 
 

@@ -41,11 +41,11 @@ is.container(x)
 or of class \code{Container} for the \code{S3} methods.}
 }
 \description{
-A \code{\link[=Container]{Container()}} is a data structure with typical member
+A container is a data structure with typical member
 functions to insert, delete and access elements from the container
-object. The \code{\link[=Container]{Container()}} class serves as the base class for \code{\link[=Deque]{Deque()}},
-'\code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}} objects, which can be created by calls to
-'\link[=Deque]{deque()}, \code{\link[=setnew]{setnew()}}, and \link[=Dict]{dict()}, respectively.
+object. The \link{Container} class serves as the base class for \link{Deque},
+\link{Set}, and \link{Dict} objects, which can be created by calls to
+\link[=Deque]{deque}, \link{setnew}, and \link[=Dict]{dict}, respectively.
 }
 \details{
 Methods that alter \code{Container} objects usually come in two versions

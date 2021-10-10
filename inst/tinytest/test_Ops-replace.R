@@ -34,8 +34,11 @@ ee(co, container(a = NA, b = 0, x = 0))
 co[[{NA}]] <- NULL
 ee(co, container(a = NULL, b = 0, x = 0))
 
-co[[{NULL}]] <- 0
-ee(co, container(a = 0, b = 0, x = 0))
+co[[{0}]] <- list(1, "a")
+ee(co, container(a = NULL, b = list(1, "a"), x = 0))
+
+co[[{list(1, "a")}]] <- 9
+ee(co, container(a = NULL, b = 9, x = 0))
 
 expect_error(co[[{1}]] <- 9, "old element \\(1\\) is not in Container")
 expect_error(co[[1, 2]] <- 3:4)
