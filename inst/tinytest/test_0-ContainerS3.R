@@ -31,6 +31,7 @@ ee(as.container(container(1)), container(1))
 # container is created as copy from another container
 co = container(1, 2)
 co2 = as.container(co)
+ee(as.container(co), as.cont(co))
 ee(co, co2)
 co$clear()
 ee(length(co), 0)

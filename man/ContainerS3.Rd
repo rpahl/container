@@ -10,6 +10,7 @@
 \alias{container}
 \alias{cont}
 \alias{as.container}
+\alias{as.cont}
 \alias{is.container}
 \alias{as.list.Container}
 \alias{length.Container}
@@ -21,6 +22,8 @@ container(...)
 cont(...)
 
 as.container(x)
+
+as.cont(x)
 
 is.container(x)
 
@@ -54,11 +57,11 @@ providing either copy or reference semantics where the latter start with
 }
 
 \itemize{
-\item \code{cont(...)} a short cut for \code{\link[=container]{container()}}.
+\item \code{cont(...)} is a short cut for \code{container(...)}.
 }
 
 \itemize{
-\item \code{as.container(x)} coerces \code{x} to a \code{container}
+\item \code{as.container(x)} or \code{as.cont(x)} coerces \code{x} to a \code{container}
 }
 
 \itemize{

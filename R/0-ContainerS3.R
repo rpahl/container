@@ -39,21 +39,23 @@ container <- function(...)
 
 #' @rdname ContainerS3
 #' @details
-#' * `cont(...)` a short cut for [container()].
+#' * `cont(...)` is a short cut for `container(...)`.
 #' @export
-cont <- function(...)
-{
-    container(...)
-}
+cont <- function(...) container(...)
 
 
 #' @rdname ContainerS3
-#' @details * `as.container(x)` coerces `x` to a `container`
+#' @details * `as.container(x)` or `as.cont(x)` coerces `x` to a `container`
 #' @export
 as.container <- function(x)
 {
     do.call(container, args = as.list(x))
 }
+
+#' @rdname ContainerS3
+#' @export
+as.cont <- function(x) as.container(x)
+
 
 #' @import methods
 methods::setOldClass("Container")
