@@ -75,10 +75,6 @@ co
 #> [(1L 2L 3L 4L ...), l = list("a", 1)]
 ```
 
-``` r
-#str(co) # TODO
-```
-
 The \[container\] allows to find and replace elements directly without
 the need to determine their index first, by passing them in curly
 brackets. First, let’s see how to do it with the list.

@@ -1,4 +1,4 @@
-#' @title Container - extending base R lists
+#' @title Container - an enhanced base R list
 #'
 #' @description A container is a data structure with typical member
 #' functions to insert, delete and access elements from the container
@@ -6,12 +6,12 @@
 #' extended functionality. The [Container] class also serves as the base
 #' class for [Deque], [Set], and [Dict] objects.
 #' @param ... (possibly named) elements to be put into or removed from the
-#' `Container`, or additional arguments passed from and to methods.
+#' [Container], or additional arguments passed from and to methods.
 #' @param x `R` object of `ANY` type for [as.container] and [is.container]
 #' or of class `Container` for the `S3` methods.
 #' @name ContainerS3
-#' @seealso For the `Container` class documentation see [Container]. To
-#' create objects of the derived classes see [deque], [setnew], and
+#' @seealso For the class documentation see [Container].
+#' Objects of the derived classes can be created by [deque], [setnew], and
 #' [dict].
 #' @details
 #' Methods that alter `Container` objects usually come in two versions
@@ -103,6 +103,17 @@ length.Container <- function(x) x$length()
 #' @details * `names(x)` returns the names of the elements contained in `x`.
 #' @export
 names.Container <- function(x) names(x$values())
+
+
+#' @rdname ContainerS3
+#' @details * `str(x)` display the internal *str*ucture of the container's
+#' elements in more detail than the standard print method.
+#' @export
+str.Container <- function(object, ...)
+{
+    cat(data.class(object), "of", length(object), "\n")
+    utils::str(as.list(object), no.list = TRUE, ...)
+}
 
 
 # TODO: implement generic %in%

@@ -15,7 +15,8 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
-\title{A sequence Container}
+\alias{str.Container}
+\title{Container - an enhanced base R list}
 \usage{
 container(...)
 
@@ -32,20 +33,22 @@ is.container(x)
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
+
+\method{str}{Container}(object, ...)
 }
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the
-\code{Container}, or additional arguments passed from and to methods.}
+\link{Container}, or additional arguments passed from and to methods.}
 
-\item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.container]{as.container()}} and \code{\link[=is.container]{is.container()}}
+\item{x}{\code{R} object of \code{ANY} type for \link{as.container} and \link{is.container}
 or of class \code{Container} for the \code{S3} methods.}
 }
 \description{
 A container is a data structure with typical member
 functions to insert, delete and access elements from the container
-object. The \link{Container} class serves as the base class for \link{Deque},
-\link{Set}, and \link{Dict} objects, which can be created by calls to
-\link[=Deque]{deque}, \link{setnew}, and \link[=Dict]{dict}, respectively.
+object. The \link{container} can be seen as a base R \link{list} with
+extended functionality. The \link[=container]{Container} class also serves as the base
+class for \link{Deque}, \link{Set}, and \link{Dict} objects.
 }
 \details{
 Methods that alter \code{Container} objects usually come in two versions
@@ -79,6 +82,11 @@ the container's elements will copied (deeply) during the conversion.
 
 \itemize{
 \item \code{names(x)} returns the names of the elements contained in \code{x}.
+}
+
+\itemize{
+\item \code{str(x)} display the internal \emph{str}ucture of the container's
+elements in more detail than the standard print method.
 }
 
 \itemize{
@@ -407,7 +415,7 @@ replace_at(co, x = 1)                # names(s) not found: 'x'
 replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
 }
 \seealso{
-For the \code{Container} class documentation see \code{\link[=Container]{Container()}}. To
-create objects of the derived classes see \code{\link[=deque]{deque()}}, \code{\link[=setnew]{setnew()}}, and
-\code{\link[=dict]{dict()}}.
+For the class documentation see \link{Container}.
+Objects of the derived classes can be created by \link{deque}, \link{setnew}, and
+\link{dict}.
 }

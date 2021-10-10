@@ -79,9 +79,6 @@ readable way.
 co
 ```
 
-```{r}
-#str(co) # TODO
-```
 
 The [container] allows to find and replace elements directly without the need
 to determine their index first, by passing them in curly brackets. First, let's
