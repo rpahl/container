@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Peek at one element — peek_at2 • container</title>
+<title>Peek at deque — peekleft • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Peek at one element — peek_at2" />
-<meta property="og:description" content="Try to access element and return some default value if not found.
+<meta property="og:title" content="Peek at deque — peekleft" />
+<meta property="og:description" content="Try to access first or last element and return some default value if not found.
 In contrast to [at2()], this function provides a less stricter element
 access, that is, it remains valid even if peeked elements don't exist." />
 
@@ -132,35 +132,25 @@ access, that is, it remains valid even if peeked elements don't exist." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Peek at one element</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/peek_at2.R'><code>R/peek_at2.R</code></a></small>
-    <div class="hidden name"><code>peek_at2.Rd</code></div>
+    <h1>Peek at deque</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/peek.R'><code>R/peek.R</code></a></small>
+    <div class="hidden name"><code>peekleft.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Try to access element and return some default value if not found.
+    <p>Try to access first or last element and return some default value if not found.
 In contrast to <code>[at2()]</code>, this function provides a less stricter element
 access, that is, it remains valid even if peeked elements don't exist.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>index</span>, default <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-
-<span class='co'># S3 method for Container</span>
-<span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>index</span>, default <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-
-<span class='co'># S3 method for dict.table</span>
-<span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>index</span>, default <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>peekleft</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an <code>R</code> object of the respective class.</p></td>
-    </tr>
-    <tr>
-      <th>index</th>
-      <td><p><code>character</code> name or <code>numeric</code> position of the sought value.</p></td>
+      <td><p>a <code>Deque</code> object.</p></td>
     </tr>
     <tr>
       <th>default</th>
@@ -168,43 +158,14 @@ access, that is, it remains valid even if peeked elements don't exist.</p>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For <code>Container</code>, returns the value at the given index or (if not
-found) the given default value.</p>
-<p>For <code>dict.table</code>, returns the column named <code>index</code> if it exist
-otherwise the given <code>default</code> value. If the default length does not match
-the number of rows, it is recycled accordingly and a warning is given,
-unless the default value has a length of 1, in which case recycling is
-done silently.</p>
+    <p><code>peek</code> peek at last element of a <code>Deque</code>.</p>
+<p><code>peekleft</code> peek at first element of a <code>Deque</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='at2.html'>at2()</a></code> for strict element extraction</p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'># Container</span>
-<span class='va'>co</span> <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, <span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
-<span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>co</span>, <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"a"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"x"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"x"</span>, default <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
-<span class='co'># Dict</span>
-<span class='va'>d</span> <span class='op'>=</span> <span class='fu'><a href='DictS3.html'>dict</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-<span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>d</span>, <span class='st'>"b"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>d</span>, <span class='st'>"x"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>d</span>, <span class='st'>"x"</span>, default <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 4 5 6 7</div><div class='input'>
-<span class='co'># dict.table</span>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
-<span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>3</span>, default <span class='op'>=</span> <span class='fl'>9</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 9 9 9</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'>peek_at2</span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span>, default <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0 0 0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

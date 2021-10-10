@@ -64,10 +64,3 @@ c.Deque <- function(..., recursive = FALSE, use.names = TRUE)
         as.deque(concat)
 }
 
-
-#' @rdname DequeS3
-#' @details * `rev(x)` reverses all elements of the deque in place and invisibly
-#' returns the [Deque()] object.
-#' @export
-rev.Deque <- function(x) x$rev()
-

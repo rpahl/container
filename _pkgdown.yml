@@ -15,18 +15,18 @@ reference:
     desc: "A container can be considered a basic R list with extended functionality."
     contents:
     - container
+    - clear
     - clone
     - container_options
     - unpack
-  - subtitle: "add"
+  - subtitle: "add or replace"
     contents:
     - add
-    - starts_with("at")
-  - subtitle: "extract or replace"
-    contents:
-    - starts_with("peek")
     - starts_with("replace")
-    - contains("pop")
+  - subtitle: "extract"
+    contents:
+    - starts_with("at")
+    - starts_with("peek_at")
     - "[.Container"
   - subtitle: "inspect"
     contents:
@@ -36,9 +36,9 @@ reference:
     - is_empty
   - subtitle: "remove"
     contents:
-    - clear
     - starts_with("delete")
     - starts_with("discard")
+    - contains("pop")
   - subtitle: "update"
     contents:
     - rename
@@ -51,6 +51,8 @@ reference:
     contents:
     - deque
     - addleft
+    - peekleft
+    - rev
     - rotate
 
   - title: "Set"
@@ -71,8 +73,8 @@ reference:
 
   - title: "dict.table"
     desc: >
-        The dict.table is a mix of a dict and a data.table and hence derives
-        all methods from both.
+        The dict.table is a mix of a dict and a data.table and derives
+        all data.table and most of the dict/container methods.
     contents:
     - starts_with("dict.table")
 

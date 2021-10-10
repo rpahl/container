@@ -1,4 +1,4 @@
-#' Peek at elements
+#' Peek at multiple elements
 #'
 #' Try to access elements and return default values if not found.
 #' In contrast to `[at()]`, this function provides a less stricter element

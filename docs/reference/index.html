@@ -161,6 +161,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="clear.html">clear()</a></code> <code><a href="clear.html">ref_clear()</a></code> </p>
+        </td>
+        <td><p>Clear a container</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="clone.html">clone()</a></code> </p>
         </td>
         <td><p>Clone an object</p></td>
@@ -181,7 +187,7 @@
       
       <tr>
         <th colspan="2">
-          <h3 id="section-add" class="hasAnchor"><a href="#section-add" class="anchor"></a>add</h3>
+          <h3 id="section-add-or-replace" class="hasAnchor"><a href="#section-add-or-replace" class="anchor"></a>add or replace</h3>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -198,21 +204,21 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="at.html">at()</a></code> </p>
+          <p><code><a href="replace.html">replace()</a></code> <code><a href="replace.html">ref_replace()</a></code> </p>
         </td>
-        <td><p>Strict element extraction</p></td>
+        <td><p>Strict element replacement</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="at2.html">at2()</a></code> </p>
+          <p><code><a href="replace_at.html">replace_at()</a></code> <code><a href="replace_at.html">ref_replace_at()</a></code> </p>
         </td>
-        <td><p>Strict element extraction</p></td>
+        <td><p>Strict element replacement at index</p></td>
       </tr>
     </tbody><tbody>
       
       <tr>
         <th colspan="2">
-          <h3 id="section-extract-or-replace" class="hasAnchor"><a href="#section-extract-or-replace" class="anchor"></a>extract or replace</h3>
+          <h3 id="section-extract" class="hasAnchor"><a href="#section-extract" class="anchor"></a>extract</h3>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -223,33 +229,27 @@
       <tr>
         
         <td>
+          <p><code><a href="at.html">at()</a></code> </p>
+        </td>
+        <td><p>Strict multiple elements extraction</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="at2.html">at2()</a></code> </p>
+        </td>
+        <td><p>Strict element extraction</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="peek_at.html">peek_at()</a></code> </p>
         </td>
-        <td><p>Peek at elements</p></td>
+        <td><p>Peek at multiple elements</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="peek_at2.html">peek_at2()</a></code> <code><a href="peek_at2.html">peekleft()</a></code> <code><a href="peek_at2.html">peek()</a></code> </p>
+          <p><code><a href="peek_at2.html">peek_at2()</a></code> </p>
         </td>
         <td><p>Peek at one element</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="replace.html">replace()</a></code> <code><a href="replace.html">ref_replace()</a></code> </p>
-        </td>
-        <td><p>Strict element replacement</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="replace_at.html">replace_at()</a></code> <code><a href="replace_at.html">ref_replace_at()</a></code> </p>
-        </td>
-        <td><p>Strict element replacement at index</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pop.html">ref_pop()</a></code> <code><a href="pop.html">ref_popleft()</a></code> </p>
-        </td>
-        <td><p>Pop element</p></td>
       </tr><tr>
         
         <td>
@@ -309,12 +309,6 @@
       <tr>
         
         <td>
-          <p><code><a href="clear.html">clear()</a></code> <code><a href="clear.html">ref_clear()</a></code> </p>
-        </td>
-        <td><p>Clear a container</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="delete.html">delete()</a></code> <code><a href="delete.html">ref_delete()</a></code> </p>
         </td>
         <td><p>Delete elements</p></td>
@@ -336,6 +330,12 @@
           <p><code><a href="discard_at.html">discard_at()</a></code> <code><a href="discard_at.html">ref_discard_at()</a></code> </p>
         </td>
         <td><p>Discard elements at index</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="pop.html">ref_pop()</a></code> <code><a href="pop.html">ref_popleft()</a></code> </p>
+        </td>
+        <td><p>Pop element</p></td>
       </tr>
     </tbody><tbody>
       
@@ -377,7 +377,7 @@
       <tr>
         
         <td>
-          <p><code><a href="DequeS3.html">deque()</a></code> <code><a href="DequeS3.html">as.deque()</a></code> <code><a href="DequeS3.html">is.deque()</a></code> <code><a href="DequeS3.html">rev(<i>&lt;Deque&gt;</i>)</a></code> </p>
+          <p><code><a href="DequeS3.html">deque()</a></code> <code><a href="DequeS3.html">as.deque()</a></code> <code><a href="DequeS3.html">is.deque()</a></code> </p>
         </td>
         <td><p>Deque (double-ended queue)</p></td>
       </tr><tr>
@@ -386,6 +386,18 @@
           <p><code><a href="add.html">add()</a></code> <code><a href="add.html">ref_add()</a></code> <code><a href="add.html">addleft()</a></code> <code><a href="add.html">ref_addleft()</a></code> </p>
         </td>
         <td><p>Add elements</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="peek.html">peekleft()</a></code> <code><a href="peek.html">peek()</a></code> </p>
+        </td>
+        <td><p>Peek at deque</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rev.html">ref_rev()</a></code> <code><a href="rev.html">rev(<i>&lt;Deque&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Reverse Elements</p></td>
       </tr><tr>
         
         <td>
@@ -435,7 +447,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-dict-table" class="hasAnchor"><a href="#section-dict-table" class="anchor"></a>dict.table</h2>
-          <p class="section-desc"><p>The dict.table is a mix of a dict and a data.table and hence derives all methods from both.</p></p>
+          <p class="section-desc"><p>The dict.table is a mix of a dict and a data.table and derives all data.table and most of the dict/container methods.</p></p>
         </th>
       </tr>
       
