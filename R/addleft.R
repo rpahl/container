@@ -1,9 +1,9 @@
 #' Add elements to the left
 #'
-#' Add elements to left side of `[Deque()]` objects.
-#' @param .x a `[Deque()]` object
+#' Add elements to left side of [Deque] objects.
+#' @param .x a `[Deque]` object
 #' @param ... elements to be added.
-#' @details While `addleft` uses copy semantics `ref_addleft` work by reference.
+#' @note While [addleft] uses copy semantics [ref_addleft] work by reference.
 #' @export
 addleft <- function(.x, ...) UseMethod("addleft")
 
@@ -13,7 +13,7 @@ ref_addleft <- function(.x, ...) UseMethod("ref_addleft")
 
 
 #' @rdname addleft
-#' @return For `Deque`, an object of class `Deque` with the elements being
+#' @return For [Deque], an object of class [Deque] with the elements being
 #' added to the left of `.x`.
 #' @export
 #' @examples

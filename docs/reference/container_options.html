@@ -48,7 +48,6 @@
 
 <meta property="og:title" content="Set container package options — container_options" />
 <meta property="og:description" content="Set container package options" />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -153,7 +152,7 @@
     </tr>
     <tr>
       <th>.reset</th>
-      <td><p><code>logical</code> if TRUE, the options are reset to their default and
+      <td><p><code>logical</code> if <code>TRUE</code>, the options are reset to their default and
 returned.</p></td>
     </tr>
     <tr>
@@ -171,70 +170,58 @@ value is returned.</p></td>
 
     
 <ul>
-<li><p>container_options() returns a list of all set options sorted by name.</p></li>
-<li><p>container_options(name), a list of length one containing the set value,
-or NULL if it is unset. Can also be multiple names (see examples).</p></li>
-<li><p>container_options(key = value) sets the option with name <code>key</code> to <code>value</code>
+<li><p><code>container_options()</code> returns a list of all set options sorted by name.</p></li>
+<li><p><code>container_options(name)</code>, a list of length one containing the set value,
+or <code>NULL</code> if it is unset. Can also be multiple names (see Examples).</p></li>
+<li><p><code>container_options(key = value)</code> sets the option with name <code>key</code> to <code>value</code>
 and returns the previous options invisibly.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="container-options"><a class="anchor" href="#container-options"></a>Container Options</h2>
+
+    
+
+<ul>
+<li><p><code>compare</code> (default = <code>all.equal</code>)</p></li>
+<li><p><code>useDots</code> (default = <code>TRUE</code>) whether to abbreviate long container
+elements with <code>...</code> when exceeding <code>vec.len</code> (see below). If <code>FALSE</code>, they
+are abbreviated as <code>&lt;&lt;type(length)&gt;&gt;</code>.</p></li>
+<li><p><code>vec.len</code> (default = 4) the length limit at which container vectors are
+abbreviated.</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>container_options</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $.copy
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $compare
-#&gt; [1] "all.equal"
-#&gt; 
-#&gt; $useDots
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $vec.len
-#&gt; [1] 4
-#&gt; </div><div class='input'><span class='va'>old</span> <span class='op'>&lt;-</span> <span class='fu'>container_options</span><span class='op'>(</span>useDots <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>old</span>
-</div><div class='output co'>#&gt; $.copy
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $compare
-#&gt; [1] "all.equal"
-#&gt; 
-#&gt; $useDots
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $vec.len
-#&gt; [1] 4
-#&gt; </div><div class='input'><span class='fu'>container_options</span><span class='op'>(</span><span class='st'>"useDots"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $useDots
-#&gt; [1] FALSE
-#&gt; </div><div class='input'><span class='fu'>container_options</span><span class='op'>(</span><span class='st'>"useDots"</span>, <span class='st'>"vec.len"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $useDots
-#&gt; [1] FALSE
-#&gt; 
-#&gt; $vec.len
-#&gt; [1] 4
-#&gt; </div><div class='input'><span class='fu'>container_options</span><span class='op'>(</span>compare <span class='op'>=</span> <span class='st'>"identical"</span>, foo <span class='op'>=</span> <span class='st'>"bar"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>co</span> <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span><span class='fl'>1L</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>co</span>
+</div><div class='output co'>#&gt; [1L, (1L 2L 3L 4L ...), &lt;&lt;list(5)&gt;&gt;]</div><div class='input'>
+<span class='fu'>container_options</span><span class='op'>(</span>useDots <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='va'>co</span>
+</div><div class='output co'>#&gt; [1L, &lt;&lt;integer(10)&gt;&gt;, &lt;&lt;list(5)&gt;&gt;]</div><div class='input'>
+<span class='fu'>container_options</span><span class='op'>(</span>useDots <span class='op'>=</span> <span class='cn'>TRUE</span>, vec.len <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+<span class='va'>co</span>
+</div><div class='output co'>#&gt; [1L, (1L 2L 3L 4L 5L 6L ...), list(1L, 2L, 3L, 4L, 5L)]</div><div class='input'>
+<span class='fu'><a href='has.html'>has</a></span><span class='op'>(</span><span class='va'>co</span>, <span class='fl'>1.0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>container_options</span><span class='op'>(</span>compare <span class='op'>=</span> <span class='st'>"identical"</span><span class='op'>)</span>
+
+<span class='fu'><a href='has.html'>has</a></span><span class='op'>(</span><span class='va'>co</span>, <span class='fl'>1.0</span><span class='op'>)</span> <span class='co'># still uses 'all.equal'</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='va'>co2</span> <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span><span class='fl'>1L</span><span class='op'>)</span>
+<span class='fu'><a href='has.html'>has</a></span><span class='op'>(</span><span class='va'>co2</span>, <span class='fl'>1.0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'><a href='has.html'>has</a></span><span class='op'>(</span><span class='va'>co2</span>, <span class='fl'>1L</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='fu'>container_options</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $.copy
-#&gt; [1] TRUE
-#&gt; 
-#&gt; $compare
+</div><div class='output co'>#&gt; $compare
 #&gt; [1] "identical"
 #&gt; 
-#&gt; $foo
-#&gt; [1] "bar"
-#&gt; 
 #&gt; $useDots
-#&gt; [1] FALSE
-#&gt; 
-#&gt; $vec.len
-#&gt; [1] 4
-#&gt; </div><div class='input'><span class='op'>(</span><span class='fu'>container_options</span><span class='op'>(</span>.reset <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $.copy
 #&gt; [1] TRUE
 #&gt; 
-#&gt; $compare
+#&gt; $vec.len
+#&gt; [1] 6
+#&gt; </div><div class='input'><span class='fu'>container_options</span><span class='op'>(</span>.reset <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $compare
 #&gt; [1] "all.equal"
 #&gt; 
 #&gt; $useDots

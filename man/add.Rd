@@ -33,24 +33,24 @@ ref_add(.x, ...)
 \item{...}{elements to be added.}
 }
 \value{
-For \code{Container}, an object of class \code{Container} (or one of the
+For \link{Container}, an object of class \link{Container} (or one of the
 respective derived classes).
 
-For \code{Dict}, an object of class \code{Dict}.
-
-For \code{dict.table}, an object of class \code{dict.table}.
+For \href{dicttable}{dict.table} an object of class
+\href{dicttable}{dict.table}.
 }
 \description{
 Add elements to container-like objects.
 }
-\details{
-While \code{add} uses copy semantics \code{ref_add} works by reference.
+\note{
+While \link{add} uses copy semantics \link{ref_add} works by reference.
 
-If \code{.x} is a \code{Container}, \code{Set} or \code{Deque} object, the elements being added
+If \code{.x} is a \link{Container}, \link{Set} or \link{Deque} object, the elements being added
 can (but must not) be named.
 
-If \code{.x} is a \code{Dict} or \code{dict.table} object, all elements \emph{must} be of the
-form \code{key = value}. If one of the keys already exists, an error is given.
+If \code{.x} is a \link{Dict} or \href{dicttable}{dict.table} object,
+all elements \emph{must} be of the form \code{key = value}.
+If one of the keys already exists, an error is given.
 }
 \examples{
 

@@ -3,7 +3,7 @@
 #' Add elements to container-like objects.
 #' @param .x an `R` object of the respective class.
 #' @param ... elements to be added.
-#' @details While `add` uses copy semantics `ref_add` works by reference.
+#' @note While [add] uses copy semantics [ref_add] works by reference.
 #' @export
 add <- function(.x, ...) UseMethod("add")
 
@@ -13,10 +13,10 @@ ref_add <- function(.x, ...) UseMethod("ref_add")
 
 
 #' @rdname add
-#' @return For `Container`, an object of class `Container` (or one of the
+#' @return For [Container], an object of class [Container] (or one of the
 #' respective derived classes).
-#' @details
-#' If `.x` is a `Container`, `Set` or `Deque` object, the elements being added
+#' @note
+#' If `.x` is a [Container], [Set] or [Deque] object, the elements being added
 #' can (but must not) be named.
 #' @examples
 #'
@@ -57,10 +57,10 @@ ref_add.Container <- function(.x, ...)
 
 
 #' @rdname add
-#' @return For `Dict`, an object of class `Dict`.
-#' @details
-#' If `.x` is a `Dict` or `dict.table` object, all elements *must* be of the
-#' form `key = value`. If one of the keys already exists, an error is given.
+#' @note
+#' If `.x` is a [Dict] or [dict.table](dicttable) object,
+#' all elements *must* be of the form `key = value`.
+#' If one of the keys already exists, an error is given.
 #' @export
 #' @examples
 #'
@@ -114,7 +114,8 @@ ref_add.Dict <- function(.x, ...)
 
 
 #' @rdname add
-#' @return For `dict.table`, an object of class `dict.table`.
+#' @return For [dict.table](dicttable) an object of class
+#' [dict.table](dicttable).
 #' @export
 #' @examples
 #'
@@ -130,8 +131,8 @@ add.dict.table <- function(.x, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `add(.x, ...)` and `ref_add(.x, ...)` add columns to `.x`. If the column name
 #' already exists, an error is given.

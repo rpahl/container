@@ -16,19 +16,19 @@ ref_addleft(.x, ...)
 \method{ref_addleft}{Deque}(.x, ...)
 }
 \arguments{
-\item{.x}{a \verb{[Deque()]} object}
+\item{.x}{a \verb{[Deque]} object}
 
 \item{...}{elements to be added.}
 }
 \value{
-For \code{Deque}, an object of class \code{Deque} with the elements being
+For \link{Deque}, an object of class \link{Deque} with the elements being
 added to the left of \code{.x}.
 }
 \description{
-Add elements to left side of \verb{[Deque()]} objects.
+Add elements to left side of \link{Deque} objects.
 }
-\details{
-While \code{addleft} uses copy semantics \code{ref_addleft} work by reference.
+\note{
+While \link{addleft} uses copy semantics \link{ref_addleft} work by reference.
 }
 \examples{
 d = deque(0)

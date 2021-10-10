@@ -137,7 +137,7 @@ functions and operators at the same time." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Combining dict and data.table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/0-dict.table.R'><code>R/0-dict.table.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/0-dict.table.R'><code>R/0-dict.table.R</code></a>, <a href='https://github.com/rpahl/container/blob/master/R/add.R'><code>R/add.R</code></a>, <a href='https://github.com/rpahl/container/blob/master/R/clear.R'><code>R/clear.R</code></a></small>
     <div class="hidden name"><code>dicttable.Rd</code></div>
     </div>
 
@@ -194,6 +194,15 @@ providing either copy or reference semantics where the latter start with
 
 <ul>
 <li><p><code>as.dict.table(x, ...)</code> coerce <code>x</code> to a dict.table</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='add.html'>add(.x, ...)</a></code> and <code><a href='add.html'>ref_add(.x, ...)</a></code> add columns to <code>.x</code>. If the column name
+already exists, an error is given.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='clear.html'>clear(x)</a></code> and <code><a href='clear.html'>ref_clear(x)</a></code> remove all elements from <code>x</code>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -345,7 +354,28 @@ providing either copy or reference semantics where the latter start with
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 2 rows and 4 columns
 #&gt;    a b x y
 #&gt; 1: 1 1 3 3
-#&gt; 2: 2 2 4 4</div></pre>
+#&gt; 2: 2 2 4 4</div><div class='input'>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'><a href='add.html'>add</a></span><span class='op'>(</span><span class='va'>dit</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span>, d <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 3 columns
+#&gt;    a b d
+#&gt; 1: 1 3 4
+#&gt; 2: 2 2 5
+#&gt; 3: 3 1 6</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='add.html'>add</a></span><span class='op'>(</span><span class='va'>dit</span>, a <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span>  <span class='co'># column 'a' already exists</span>
+<span class='op'>}</span>
+
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='clear.html'>clear</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 0 rows and 0 columns
+#&gt; Null data.table (0 rows and 0 cols)</div><div class='input'><span class='va'>dit</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 1 row and 2 columns
+#&gt;    a b
+#&gt; 1: 1 2</div><div class='input'><span class='fu'><a href='clear.html'>ref_clear</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
+<span class='va'>dit</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 0 rows and 0 columns
+#&gt; Null data.table (0 rows and 0 cols)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

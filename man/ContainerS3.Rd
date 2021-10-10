@@ -41,7 +41,7 @@ is.container(x)
 \link{Container}, or additional arguments passed from and to methods.}
 
 \item{x}{\code{R} object of \code{ANY} type for \link{as.container} and \link{is.container}
-or of class \code{Container} for the \code{S3} methods.}
+or of class \link{Container} for the \code{S3} methods.}
 }
 \description{
 A container is a data structure with typical member
@@ -51,12 +51,12 @@ extended functionality. The \link[=container]{Container} class also serves as th
 class for \link{Deque}, \link{Set}, and \link{Dict} objects.
 }
 \details{
-Methods that alter \code{Container} objects usually come in two versions
+Methods that alter \link{Container} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
+\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and \code{\link[=ref_add]{ref_add()}}.
 
 \itemize{
-\item \code{container(...)} initializes and returns a \code{\link[=Container]{Container()}} object.
+\item \code{container(...)} initializes and returns a \link{Container} object.
 }
 
 \itemize{
@@ -64,24 +64,24 @@ providing either copy or reference semantics where the latter start with
 }
 
 \itemize{
-\item \code{as.container(x)} or \code{as.cont(x)} coerces \code{x} to a \code{container}
+\item \code{as.container(x)} or \code{as.cont(x)} coerce \code{x} to a \link{Container}
 }
 
 \itemize{
-\item \code{is.container(x)} check if \code{x} is \code{container}
+\item \code{is.container(x)} check if \code{x} is a \link{Container}
 }
 
 \itemize{
-\item \code{as.list(x)} converts container \code{x} to a base \code{R} list. All of
-the container's elements will copied (deeply) during the conversion.
+\item \code{as.list(x)} converts container \code{x} to a base R \link{list}. All of
+the container's elements are copied (deeply) during the conversion.
 }
 
 \itemize{
-\item \code{length(x)} returns the number of elements contained in \code{x}.
+\item \code{length(x)} return the number of elements contained in \code{x}.
 }
 
 \itemize{
-\item \code{names(x)} returns the names of the elements contained in \code{x}.
+\item \code{names(x)} return the names of the elements contained in \code{x}.
 }
 
 \itemize{

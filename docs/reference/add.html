@@ -176,17 +176,18 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For <code>Container</code>, an object of class <code>Container</code> (or one of the
+    <p>For <a href='Container.html'>Container</a>, an object of class <a href='Container.html'>Container</a> (or one of the
 respective derived classes).</p>
-<p>For <code>Dict</code>, an object of class <code>Dict</code>.</p>
-<p>For <code>dict.table</code>, an object of class <code>dict.table</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+<p>For <a href='dicttable'>dict.table</a> an object of class
+<a href='dicttable'>dict.table</a>.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>While <code>add</code> uses copy semantics <code>ref_add</code> works by reference.</p>
-<p>If <code>.x</code> is a <code>Container</code>, <code>Set</code> or <code>Deque</code> object, the elements being added
+    <p>While add uses copy semantics ref_add works by reference.</p>
+<p>If <code>.x</code> is a <a href='Container.html'>Container</a>, <a href='Set.html'>Set</a> or <a href='Deque.html'>Deque</a> object, the elements being added
 can (but must not) be named.</p>
-<p>If <code>.x</code> is a <code>Dict</code> or <code>dict.table</code> object, all elements <em>must</em> be of the
-form <code>key = value</code>. If one of the keys already exists, an error is given.</p>
+<p>If <code>.x</code> is a <a href='Dict.html'>Dict</a> or <a href='dicttable'>dict.table</a> object,
+all elements <em>must</em> be of the form <code>key = value</code>.
+If one of the keys already exists, an error is given.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -203,7 +204,7 @@ form <code>key = value</code>. If one of the keys already exists, an error is gi
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>d</span>, a <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span>  <span class='co'># key 'a' already in Dict</span>
 <span class='op'>}</span>
 
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>dit</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span>, d <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 3 columns
 #&gt;    a b d
@@ -214,7 +215,7 @@ form <code>key = value</code>. If one of the keys already exists, an error is gi
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>dit</span>, a <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span>  <span class='co'># column 'a' already exists</span>
 <span class='op'>}</span>
 
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>dit</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span>, d <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 3 columns
 #&gt;    a b d
