@@ -4,34 +4,25 @@
 \alias{OpsExtract}
 \alias{[.Container}
 \alias{[[.Container}
-\alias{[<-.Container}
-\alias{[[<-.Container}
-\alias{$<-.Container}
-\title{Extract or Replace Parts of a Container Object}
+\title{Extract Parts of a Container Object}
 \usage{
 \method{[}{Container}(x, ...)
 
 \method{[[}{Container}(x, i)
-
-\method{[}{Container}(x, i) <- value
-
-\method{[[}{Container}(x, i) <- value
-
-\method{$}{Container}(x, name) <- value
 }
 \arguments{
-\item{x}{\code{Container} object for which to extract or replace elements.}
+\item{x}{\code{Container} object from which to extract elements.}
 
-\item{i, ...}{indices specifying elements to extract or replace. Indices
+\item{i, ...}{indices specifying elements to extract. Indices
 are \code{numeric} or \code{character} vectors or a \code{list} containing both.}
 
-\item{value}{the replacing value of \code{ANY} type}
-
 \item{name}{\code{character} string (possibly backtick quoted)}
+
+\item{value}{the replacing value of \code{ANY} type}
 }
 \description{
-Extract or replace parts of a \code{Container} object similar
-to R's base extract and replace operators on lists.
+Extract parts of a \code{Container} object similar
+to R's base extract operators on lists.
 }
 \details{
 \code{[} selects multiple values. The indices can be \code{numeric} or
@@ -40,18 +31,6 @@ for convenience, just as a comma-separated sequence (see Examples).
 Non-existing indices are ignored.
 
 \code{[[} selects a single value using a \code{numeric} or \code{character} index.
-
-\verb{[<-} replaces multiple values. The indices can be \code{numeric} or
-\code{character} or both. They can be passed as a \code{vector} or \code{list}. Values can
-be added by 'replacing' at new indices, which only works for \code{character}
-indices.
-
-\verb{[[<-} replaces a single value at a given \code{numeric} or \code{character} index.
-Instead of an index, it is also possible to replace certain elements by
-passing the element in curly braces (see Examples), that is, the object is
-searched for the element and then the element is replaced by the value.
-
-\verb{$<-} replaces a single element at a given name.
 }
 \examples{
 co = container(a = 1, b = 2, c = 3, d = 4)
@@ -65,29 +44,4 @@ co = container(a = 1, b = 2)
 co[[1]]
 co[["a"]]
 co[["x"]]
-co = container(a = 1, b = "bar")
-(co[1:2] <- 1:2)
-
-\dontrun{
-co[3] <- 3 # index out of range
-}
-(co[list(1, "b")] <- 3:4)   # mixed numeric/character index
-
-co = container(a = 1, b = 2)
-co[[1]] <- 9
-co[["b"]] <- 8
-co[["x"]] <- 7
-co$z <- 99
-print(co)
-
-# Replace 8 by 0
-co[[{8}]] <- 0
-print(co)
-
-
-co = container(a = 1, b = "bar")
-co$f <- 3
-co$b <- 2
-co
-
 }

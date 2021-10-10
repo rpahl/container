@@ -23,6 +23,7 @@ reference:
     contents:
     - add
     - starts_with("replace")
+    - "[<-.Container"
   - subtitle: "extract"
     contents:
     - starts_with("at")
