@@ -70,16 +70,19 @@ NULL
 #' @export
 "[[<-.Container" = function(x, i, value)
 {
-    if (length(i) != 1)
-        stop("index must be of length 1", call. = FALSE)
-
     isub = substitute(i)
     char1 = as.character(isub)[1]
 
-    if (grepl(char1, pattern = "{", fixed = TRUE))
-        ref_replace(x, old = i, new = value)
-    else
-        ref_replace_at(x, i, value, .add = TRUE)
+    i_is_value = startsWith(trimws(char1), prefix = "{")
+
+    if (i_is_value)
+        return(ref_replace(x, old = i, new = value))
+
+
+    if (length(i) != 1)
+        stop("index must be of length 1", call. = FALSE)
+
+    ref_replace_at(x, i, value, .add = TRUE)
 }
 
 #' @name ContainerS3

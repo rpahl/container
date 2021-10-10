@@ -25,13 +25,19 @@ co[["x"]] <- 0
 ee(co, container(a = 2, b = 0, x = 0))
 expect_error(co[[4]] <- 1, "index out of range")
 
-co[[{2}]] <- 9
-ee(co, container(a = 9, b = 0, x = 0))
+co[[{2}]] <- 1:4
+ee(co, container(a = 1:4, b = 0, x = 0))
 
-co[[{0}]] <- 9
-ee(co, container(a = 9, b = 9, x = 0))
+co[[{1:4}]] <- NA
+ee(co, container(a = NA, b = 0, x = 0))
 
-expect_error(co[[{ 1 }]] <- 9, "old element \\(1\\) is not in Container")
+co[[{NA}]] <- NULL
+ee(co, container(a = NULL, b = 0, x = 0))
+
+co[[{NULL}]] <- 0
+ee(co, container(a = 0, b = 0, x = 0))
+
+expect_error(co[[{1}]] <- 9, "old element \\(1\\) is not in Container")
 expect_error(co[[1, 2]] <- 3:4)
 expect_error(co[[1:2]] <- 3:4, "index must be of length 1")
 
