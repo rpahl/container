@@ -1,4 +1,4 @@
-#' Peek at deque
+#' Peek at left or right of a deque
 #'
 #' Try to access first or last element and return some default value if not found.
 #' In contrast to `[at2()]`, this function provides a less stricter element

@@ -1,4 +1,4 @@
-#' Reverse Elements
+#' Reverse elements
 #'
 #' @description `rev` provides a reversed version of its argument.
 #' @param x `Deque` object

@@ -48,7 +48,6 @@
 
 <meta property="og:title" content="Add elements — add" />
 <meta property="og:description" content="Add elements to container-like objects." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -144,21 +143,11 @@
 
 <span class='fu'>ref_add</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>addleft</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='fu'>ref_addleft</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
-
 <span class='co'># S3 method for Container</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Container</span>
 <span class='fu'>ref_add</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for Deque</span>
-<span class='fu'>addleft</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for Deque</span>
-<span class='fu'>ref_addleft</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for Dict</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>...</span><span class='op'>)</span>
@@ -189,14 +178,11 @@
 
     <p>For <code>Container</code>, an object of class <code>Container</code> (or one of the
 respective derived classes).</p>
-<p>For <code>Deque</code>, an object of class <code>Deque</code> with the elements being
-added to the right or left (<code>addleft</code>) of <code>.x</code>.</p>
 <p>For <code>Dict</code>, an object of class <code>Dict</code>.</p>
 <p>For <code>dict.table</code>, an object of class <code>dict.table</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Both <code>add</code> and <code>addleft</code> use copy semantics while <code>ref_add</code> and
-<code>ref_addleft</code> work by reference.</p>
+    <p>While <code>add</code> uses copy semantics <code>ref_add</code> works by reference.</p>
 <p>If <code>.x</code> is a <code>Container</code>, <code>Set</code> or <code>Deque</code> object, the elements being added
 can (but must not) be named.</p>
 <p>If <code>.x</code> is a <code>Dict</code> or <code>dict.table</code> object, all elements <em>must</em> be of the
@@ -209,10 +195,7 @@ form <code>key = value</code>. If one of the keys already exists, an error is gi
 </div><div class='output co'>#&gt; [1, 1, b = 2, c = [(1L 2L 3L)]]</div><div class='input'>
 <span class='va'>s</span> <span class='op'>=</span> <span class='fu'><a href='SetS3.html'>setnew</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>s</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span>, <span class='st'>"1"</span>, co <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; {"1", 1, b = 2, co = [1, 1]}</div><div class='input'><span class='va'>d</span> <span class='op'>=</span> <span class='fu'><a href='DequeS3.html'>deque</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>
-<span class='fu'>add</span><span class='op'>(</span><span class='va'>d</span>, a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>         <span class='co'># |0, a = 1, b = 2|</span>
-</div><div class='output co'>#&gt; |0, a = 1, b = 2|</div><div class='input'><span class='fu'>addleft</span><span class='op'>(</span><span class='va'>d</span>, a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>     <span class='co'># |b = 2, a = 1, 0|</span>
-</div><div class='output co'>#&gt; |b = 2, a = 1, 0|</div><div class='input'>
+</div><div class='output co'>#&gt; {"1", 1, b = 2, co = [1, 1]}</div><div class='input'>
 <span class='va'>d</span> <span class='op'>=</span> <span class='fu'><a href='DictS3.html'>dict</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>d</span>, b <span class='op'>=</span> <span class='fl'>2</span>, co <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; {a = 1, b = 2, co = [(1L 2L 3L)]}</div><div class='input'>

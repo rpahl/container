@@ -4,7 +4,7 @@
 \alias{peek_at}
 \alias{peek_at.Container}
 \alias{peek_at.dict.table}
-\title{Peek at multiple elements}
+\title{Peek at element(s)}
 \usage{
 peek_at(.x, ...)
 

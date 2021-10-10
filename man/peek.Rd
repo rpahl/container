@@ -5,7 +5,7 @@
 \alias{peekleft}
 \alias{peek.Deque}
 \alias{peekleft.Deque}
-\title{Peek at deque}
+\title{Peek at left or right of a deque}
 \usage{
 peekleft(x, default = NULL)
 

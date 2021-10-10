@@ -4,7 +4,7 @@
 \alias{at}
 \alias{at.Container}
 \alias{at.dict.table}
-\title{Strict multiple elements extraction}
+\title{Strict element(s) extraction}
 \usage{
 at(.x, ...)
 

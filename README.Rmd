@@ -43,27 +43,59 @@ devtools::install_github("rpahl/container")
 ```
 
 
-## Example
+## container vs list
+The `container` can be seen as a basic R `list` with extended functionality.
+There is basically nothing that you can do with a `list` that can't can be
+done with the `container`, but the `container` is capable of much more.
+Below you find some (of many) extra things the `container` is capable of.
 
-```{r example}
+```{r container-vs-list}
 library(container)
 
-co = container(1, b = NA, 1:3, c = container("a", 1))
+co <- container(1:10, b = NA, l = list("a", 1))
+li <- as.list(co)
+```
+Since they are similar, you can always transform back-and-forth between both
+types using respectively `as.list` or `as.container`.
+
+The `container` object by default prints more compact than the `list`.
+```{r}
 co
+
+li
 ```
 
 ```{r}
-length(co)
+str(co) # TODO
 ```
 
+The `container` allows to find and replace elements directly without the need
+to determine their index first, by passing them in curly brackets.
 ```{r}
-names(co)
-```
+index = which(sapply(li, identical, 1:10))
+li[[index]] <- 1:5
+li
 
-```{r}
-as.list(co)
+#co[[{1:10}]] <- 1:5 # TODO
+#co[[{list("a", 1)}]] <- 1:5 # TODO
+#co[c(T, F, T)] # TODO
+co
 ```
 
 ```{r}
 unpack(co)
 ```
+
+## dict.table vs data.frame
+The `dict.table` can be seen as a basic R `data.frame` with extended functionality.
+There is basically nothing that you can do with a `data.frame` that can't can be
+done with the `dict.table`, but the `dict.table` is capable of much more.
+Here are some examples for why you might want to prefer the `dict.table`.
+
+
+```{r dict.table-vs-data.frame}
+co = container(1, b = NA, 1:3, c = container("a", 1))
+co
+```
+
+

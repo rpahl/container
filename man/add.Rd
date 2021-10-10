@@ -3,12 +3,8 @@
 \name{add}
 \alias{add}
 \alias{ref_add}
-\alias{addleft}
-\alias{ref_addleft}
 \alias{add.Container}
 \alias{ref_add.Container}
-\alias{addleft.Deque}
-\alias{ref_addleft.Deque}
 \alias{add.Dict}
 \alias{ref_add.Dict}
 \alias{add.dict.table}
@@ -19,17 +15,9 @@ add(.x, ...)
 
 ref_add(.x, ...)
 
-addleft(.x, ...)
-
-ref_addleft(.x, ...)
-
 \method{add}{Container}(.x, ...)
 
 \method{ref_add}{Container}(.x, ...)
-
-\method{addleft}{Deque}(.x, ...)
-
-\method{ref_addleft}{Deque}(.x, ...)
 
 \method{add}{Dict}(.x, ...)
 
@@ -48,9 +36,6 @@ ref_addleft(.x, ...)
 For \code{Container}, an object of class \code{Container} (or one of the
 respective derived classes).
 
-For \code{Deque}, an object of class \code{Deque} with the elements being
-added to the right or left (\code{addleft}) of \code{.x}.
-
 For \code{Dict}, an object of class \code{Dict}.
 
 For \code{dict.table}, an object of class \code{dict.table}.
@@ -59,8 +44,7 @@ For \code{dict.table}, an object of class \code{dict.table}.
 Add elements to container-like objects.
 }
 \details{
-Both \code{add} and \code{addleft} use copy semantics while \code{ref_add} and
-\code{ref_addleft} work by reference.
+While \code{add} uses copy semantics \code{ref_add} works by reference.
 
 If \code{.x} is a \code{Container}, \code{Set} or \code{Deque} object, the elements being added
 can (but must not) be named.
@@ -75,9 +59,6 @@ add(co, 1, b = 2, c = container(1:3))
 
 s = setnew(1)
 add(s, 1, 1, b = 2, "1", co = container(1, 1))
-d = deque(0)
-add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
-addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 
 d = dict(a = 1)
 add(d, b = 2, co = container(1:3))
