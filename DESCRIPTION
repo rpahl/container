@@ -9,6 +9,8 @@ Authors@R:
 Description: container extends the functionality of base R list and the
     data.table package and with deque, set, and dict provides common data
     structures not provided by base R, (resembling Python's dict type).
+    In addition, it provides iterators and supports both reference and copy
+    semantics.
 Depends: R (>= 3.0)
 License: GPL-3
 LazyData: TRUE

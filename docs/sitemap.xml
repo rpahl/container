@@ -7,6 +7,9 @@
     <loc>https://github.com/rpahl/container/reference/add.html</loc>
   </url>
   <url>
+    <loc>https://github.com/rpahl/container/reference/addleft.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/rpahl/container/reference/at.html</loc>
   </url>
   <url>
@@ -17,12 +20,6 @@
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/clone.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/container-deprecated.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/container-pkg.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/Container.html</loc>
@@ -43,6 +40,9 @@
     <loc>https://github.com/rpahl/container/reference/delete_at.html</loc>
   </url>
   <url>
+    <loc>https://github.com/rpahl/container/reference/deprecated.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/rpahl/container/reference/Deque.html</loc>
   </url>
   <url>
@@ -52,10 +52,10 @@
     <loc>https://github.com/rpahl/container/reference/Dict.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/dict.table.html</loc>
+    <loc>https://github.com/rpahl/container/reference/DictS3.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/DictS3.html</loc>
+    <loc>https://github.com/rpahl/container/reference/dicttable.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/discard.html</loc>
@@ -64,16 +64,10 @@
     <loc>https://github.com/rpahl/container/reference/discard_at.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/get_label.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/rpahl/container/reference/has.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/has_name.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/is.subsettable.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/is_empty.html</loc>
@@ -100,6 +94,12 @@
     <loc>https://github.com/rpahl/container/reference/OpsLogic.html</loc>
   </url>
   <url>
+    <loc>https://github.com/rpahl/container/reference/OpsReplace.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/reference/peek.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/rpahl/container/reference/peek_at.html</loc>
   </url>
   <url>
@@ -116,6 +116,9 @@
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/replace_at.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/reference/rev.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/rotate.html</loc>

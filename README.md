@@ -3,8 +3,6 @@
 <!-- badges: start -->
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
-[![Build
-Status](https://travis-ci.org/rpahl/container.png?branch=master)](https://travis-ci.org/rpahl/container)
 [![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
 [![status](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
 [![Downloads](http://cranlogs.r-pkg.org/badges/container)](http://www.r-pkg.org/pkg/container)
@@ -14,11 +12,10 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 
 # container <img src="images/logo.png" align="right" width="163" height="104"/>
 
-\[container\] extends the functionality of base R \[list\] and the
+This package extends the functionality of base R \[list\] and the
 \[data.table\] package and with \[deque\], \[set\], and \[dict\]
-provides common data structures not provided by base R, (resembling
-Python’s dict type). In addition, it provides \[iterators\] and supports
-both reference and copy semantics.
+provides additional common data structures. It furthermore implements
+\[iterators\] and supports both reference and copy semantics.
 
 ## Why `container`?
 
