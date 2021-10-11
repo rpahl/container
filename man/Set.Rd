@@ -14,6 +14,23 @@ Under the hood, elements of a set object are stored in a hash-table
 and always sorted by their length and, in case of ties, by their lexicographical
 representation.
 }
+\examples{
+s1 = Set$new(1, 2)
+s1
+s1$add(1)
+s1$add(3)
+s2 = Set$new(3, 4, 5)
+s1$union(s2)
+s1
+
+s1 = Set$new(1, 2, 3)
+s1$intersect(s2)
+s1
+
+s1$diff(s2)
+s1$diff(s1)
+s1
+}
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=set]{set()}}
 }

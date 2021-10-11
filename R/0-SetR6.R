@@ -9,6 +9,22 @@
 #' representation.
 #' @seealso [Container()], [set()]
 #' @export
+#' @examples
+#' s1 = Set$new(1, 2)
+#' s1
+#' s1$add(1)
+#' s1$add(3)
+#' s2 = Set$new(3, 4, 5)
+#' s1$union(s2)
+#' s1
+#'
+#' s1 = Set$new(1, 2, 3)
+#' s1$intersect(s2)
+#' s1
+#'
+#' s1$diff(s2)
+#' s1$diff(s1)
+#' s1
 Set <- R6::R6Class("Set",
     inherit = Container,
     public = list(
