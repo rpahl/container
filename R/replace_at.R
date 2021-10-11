@@ -76,7 +76,7 @@ NULL
             values = list(values)
         }
     } else {
-        verify_names(names(values))
+        .verify_names(names(values))
     }
 
     if (length(indices) > 1 && length(indices) != length(values))

@@ -102,8 +102,8 @@ ref_add.Dict <- function(.x, ...)
 
     elem_names = names(elems)
 
-    verify_names(elem_names)
-    check_name_collision(names(.x), elem_names)
+    .verify_names(elem_names)
+    .check_name_collision(names(.x), elem_names)
 
     for (i in seq_along(elems))
         .x$add(elem_names[[i]], elems[[i]])
@@ -165,8 +165,8 @@ ref_add.dict.table <- function(.x, ...)
 
     elem_names = names(elems)
 
-    verify_names(elem_names)
-    check_name_collision(colnames(.x), elem_names)
+    .verify_names(elem_names)
+    .check_name_collision(colnames(.x), elem_names)
 
     for (i in seq_along(elems))
         ref_replace_at.dict.table(.x, elem_names[[i]], elems[[i]], .add = TRUE)

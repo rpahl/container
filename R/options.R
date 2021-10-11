@@ -88,7 +88,7 @@ function(..., .reset = FALSE)
 #' @export
 getContainerOption = function(x, default = NULL)
 {
-    if (!is_string(x))
+    if (!.is_string(x))
         stop("'x' must be a character string")
 
 

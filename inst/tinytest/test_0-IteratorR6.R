@@ -106,15 +106,14 @@ s$discard(1)
 expect_equal(it$get_value(), list(2))
 
 
-exit_file(msg = "internal helper function")
-
 # .is.subsettable
-f = as.factor(1:3)
-expect_false(is.vector(f))
-expect_true(.is.subsettable(f))
-f = formula(y ~ x + 1)
-expect_false(is.vector(f))
-expect_true(.is.subsettable(f))
+.is.subsettable = container:::.is.subsettable
+fac = as.factor(1:3)
+expect_false(is.vector(fac))
+expect_true(.is.subsettable(fac))
+form = formula(y ~ x + 1)
+expect_false(is.vector(form))
+expect_true(.is.subsettable(form))
 expect_true(.is.subsettable(1))
 expect_true(.is.subsettable(data.frame(a = 1)))
 expect_true(.is.subsettable(expression(x + 1)))
