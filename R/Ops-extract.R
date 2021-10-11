@@ -6,8 +6,6 @@
 #' @param x `Container` object from which to extract elements.
 #' @param i,...  indices specifying elements to extract. Indices
 #' are `numeric` or `character` vectors or a `list` containing both.
-#' @param name `character` string (possibly backtick quoted)
-#' @param value the replacing value of `ANY` type
 #' @details
 #' `[` selects multiple values. The indices can be `numeric` or
 #' `character` or both. They can be passed as a `vector` or `list` or,

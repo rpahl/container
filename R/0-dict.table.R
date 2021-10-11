@@ -127,7 +127,7 @@ as.dict.table.default <- function(x, ...)
     do.call(dict.table, args = as.list(x))
 }
 
-#' @rdname dict.table
+#' @rdname dicttable
 #' @details * `is.dict.table(x)` check if `x` is a `dict.table`
 #' @export
 is.dict.table <- function(x) inherits(x, "dict.table")

@@ -15,10 +15,6 @@
 
 \item{i, ...}{indices specifying elements to extract. Indices
 are \code{numeric} or \code{character} vectors or a \code{list} containing both.}
-
-\item{name}{\code{character} string (possibly backtick quoted)}
-
-\item{value}{the replacing value of \code{ANY} type}
 }
 \description{
 Extract parts of a \code{Container} object similar

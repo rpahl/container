@@ -16,7 +16,7 @@
 \arguments{
 \item{x}{\code{Container} object in which to replace elements.}
 
-\item{i, ...}{indices specifying elements to replace. Indices
+\item{i}{indices specifying elements to replace. Indices
 are \code{numeric} or \code{character} vectors or a \code{list} containing both.}
 
 \item{value}{the replacing value of \code{ANY} type}

@@ -105,9 +105,6 @@ length.Container <- function(x) x$length()
 names.Container <- function(x) names(x$values())
 
 
-#' @rdname ContainerS3
-#' @details * `str(x)` display the internal *str*ucture of the container's
-#' elements in more detail than the standard print method.
 #' @export
 str.Container <- function(object, ...)
 {

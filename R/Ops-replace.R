@@ -4,7 +4,7 @@
 #' to R's base replace operators on lists.
 #' @name OpsReplace
 #' @param x `Container` object in which to replace elements.
-#' @param i,...  indices specifying elements to replace. Indices
+#' @param i  indices specifying elements to replace. Indices
 #' are `numeric` or `character` vectors or a `list` containing both.
 #' @param name `character` string (possibly backtick quoted)
 #' @param value the replacing value of `ANY` type

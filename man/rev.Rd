@@ -7,7 +7,7 @@
 \alias{rev.Deque}
 \title{Reverse elements}
 \usage{
-ref_rev(.x, ...)
+ref_rev(x)
 
 \method{ref_rev}{Deque}(x)
 

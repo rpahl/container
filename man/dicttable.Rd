@@ -5,6 +5,7 @@
 \alias{dict.table}
 \alias{as.dict.table}
 \alias{as.dict.table.data.table}
+\alias{is.dict.table}
 \alias{rbind.dict.table}
 \alias{cbind.dict.table}
 \title{Combining dict and data.table}
@@ -14,6 +15,8 @@ dict.table(...)
 as.dict.table(x, ...)
 
 \method{as.dict.table}{data.table}(x, copy = TRUE, ...)
+
+is.dict.table(x)
 
 \method{rbind}{dict.table}(x, ...)
 
@@ -48,6 +51,10 @@ providing either copy or reference semantics where the latter start with
 
 \itemize{
 \item \code{as.dict.table(x, ...)} coerce \code{x} to a \link{dict.table}
+}
+
+\itemize{
+\item \code{is.dict.table(x)} check if \code{x} is a \code{dict.table}
 }
 
 \itemize{

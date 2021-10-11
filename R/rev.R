@@ -10,7 +10,7 @@ NULL
 
 #' @rdname rev
 #' @export
-ref_rev <- function(.x) UseMethod("ref_rev")
+ref_rev <- function(x) UseMethod("ref_rev")
 
 #' @rdname rev
 #' @export
