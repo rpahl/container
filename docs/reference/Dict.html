@@ -48,9 +48,8 @@
 
 <meta property="og:title" content="Dict Class — Dict" />
 <meta property="og:description" content="The Dict() resembles Python's dict type, and is implemented
-as a specialized associative Container() thus sharing all Container()
-methods with some of them being overriden to account for the associative
-key-value pair semantic." />
+as a specialized associative Container().
+For the standard S3 interface, see dict()." />
 
 
 
@@ -140,17 +139,18 @@ key-value pair semantic." />
 
     <div class="ref-description">
     <p>The <code>Dict()</code> resembles Python's dict type, and is implemented
-as a specialized associative <code><a href='Container.html'>Container()</a></code> thus sharing all <code><a href='Container.html'>Container()</a></code>
-methods with some of them being overriden to account for the associative
-key-value pair semantic.</p>
+as a specialized associative <code><a href='Container.html'>Container()</a></code>.
+For the standard S3 interface, see dict().</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Internally, all key-value pairs are stored in a hash-table and the
-elements are sorted lexicographically by their keys.</p>
+    <p>This class inherits from class <code><a href='Container.html'>Container()</a></code> and overwrides some
+methods to account for the associative key-value pair semantic.
+Internally, all key-value pairs are stored in a hash-table and the
+elements are always sorted lexicographically by their keys.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='Container.html'>Container()</a></code>, <code><a href='DictS3.html'>dict()</a></code></p></div>
@@ -291,7 +291,7 @@ If <code>old</code> does not exist, an error is signaled.</p><h4 class='hasAncho
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
 <p>the <code>Dict</code> object</p>
 <p><hr>
-<a id="method-set"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>set()</code></h3>
+<a id="method-set"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>set()</a></code></h3>
 <p>This function is deprecated. Use <code><a href='replace.html'>replace()</a></code> instead.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Dict</span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span><span class='va'>key</span>, <span class='va'>value</span>, add <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 

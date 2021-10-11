@@ -8,6 +8,7 @@
 An \code{Iterator} is an object that allows to iterate over
 sequences. It implements \code{next_iter} and \code{get_value} to iterate and retrieve the
 value of the sequence it is associated with.
+For the standard S3 interface, see \code{\link[=iter]{iter()}}.
 }
 \author{
 Roman Pahl

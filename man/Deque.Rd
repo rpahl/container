@@ -6,12 +6,12 @@
 \description{
 Deques are a generalization of stacks and queues typically
 with methods to add, delete and access elements at both sides of the
-underlying data sequence. As such, the \code{\link[=Deque]{Deque()}} can also be used to mimic
-both stacks and queues.
+underlying data sequence. As such, the \link{Deque} can also be used to mimic
+both stacks and queues. For the standard S3 interface, see \code{\link[=deque]{deque()}}.
 }
 \details{
 This class inherits from class \code{\link[=Container]{Container()}} and extends it by
-\code{pop} and \code{peek} methods, and reverse and rotate functionality.
+\code{popleft} and \code{peek} methods, and reverse and rotate functionality.
 }
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=deque]{deque()}}

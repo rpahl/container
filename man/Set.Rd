@@ -7,10 +7,11 @@
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 \code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and
 it provides typical set operations such as \code{union} and \code{intersect}.
+For the standard S3 interface, see \code{\link[=setnew]{setnew()}}.
 }
 \details{
 Under the hood, elements of a set object are stored in a hash-table
-and sorted by their length and, in case of ties, by their lexicographical
+and always sorted by their length and, in case of ties, by their lexicographical
 representation.
 }
 \seealso{

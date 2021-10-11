@@ -5,13 +5,14 @@
 \title{Dict Class}
 \description{
 The \code{\link[=Dict]{Dict()}} resembles Python's dict type, and is implemented
-as a specialized associative \code{\link[=Container]{Container()}} thus sharing all \code{\link[=Container]{Container()}}
-methods with some of them being overriden to account for the associative
-key-value pair semantic.
+as a specialized associative \code{\link[=Container]{Container()}}.
+For the standard S3 interface, see \link[=Dict]{dict()}.
 }
 \details{
+This class inherits from class \code{\link[=Container]{Container()}} and overwrides some
+methods to account for the associative key-value pair semantic.
 Internally, all key-value pairs are stored in a hash-table and the
-elements are sorted lexicographically by their keys.
+elements are always sorted lexicographically by their keys.
 }
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=dict]{dict()}}

@@ -7,8 +7,11 @@
 \description{
 This class implements a container data structure with typical
 member functions to insert, delete and access elements from the container.
-It derives from \link{Iterable} and serves as the base class for \link{Deque}, \link{Set},
-and \link{Dict}. For the standard S3 interface, see \code{\link[=container]{container()}}.
+For the standard S3 interface, see \code{\link[=container]{container()}}.
+}
+\details{
+This class inherits from class \link{Iterable} and serves as the base
+class for \link{Deque}, \link{Set}, and \link{Dict}.
 }
 \examples{
 co <- Container$new(1, b = NA, 1:3, c = container("a", 1))

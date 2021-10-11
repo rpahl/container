@@ -48,8 +48,9 @@
 
 <meta property="og:title" content="Iterate over Sequences — iterS3" />
 <meta property="og:description" content="An Iterator is an object that allows to iterate over
-sequences. It implements next_iter and get_value to iterate and retrieve the
-value of the sequence it is associated with." />
+sequences. It implements next_iter() and get_value() to iterate and retrieve the
+value of the sequence it is associated with.
+For documentation of the methods see Iterator." />
 
 
 
@@ -139,8 +140,9 @@ value of the sequence it is associated with." />
 
     <div class="ref-description">
     <p>An <code>Iterator</code> is an object that allows to iterate over
-sequences. It implements <code>next_iter</code> and <code>get_value</code> to iterate and retrieve the
-value of the sequence it is associated with.</p>
+sequences. It implements <code>next_iter()</code> and <code>get_value()</code> to iterate and retrieve the
+value of the sequence it is associated with.
+For documentation of the methods see <a href='Iterator.html'>Iterator</a>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>iter</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
@@ -179,9 +181,9 @@ value of the sequence it is associated with.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>an object of class <code><a href='Iterable.html'>Iterable()</a></code> or any other <code>R</code> object. In the
-latter case, <code>x</code> will always be coerced to a base <code>R</code> list prior to creating
-the <code>iterator</code>.</p></td>
+      <td><p>an object of class <a href='Iterable.html'>Iterable</a> or any other <code>R</code> object. In the
+latter case, <code>x</code> will always be coerced to a base <code>R</code> <a href='https://rdrr.io/r/base/list.html'>list</a> prior to creating
+the <a href='Iterator.html'>Iterator</a>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -196,12 +198,9 @@ the <code>iterator</code>.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code>length</code> returns the number of elements that can be iterated over.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>For more details on the methods see <code><a href='Iterator.html'>Iterator()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='Iterator.html'>Iterator()</a></code></p></div>
+    <div class='dont-index'><p>For the class documentation see <a href='Iterator.html'>Iterator</a>.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

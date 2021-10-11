@@ -3,8 +3,9 @@
 #' @description The [Set()] is considered and implemented as a specialized
 #' [Container()], that is, elements are always unique in the [Container()] and
 #' it provides typical set operations such as `union` and `intersect`.
+#' For the standard S3 interface, see [setnew()].
 #' @details Under the hood, elements of a set object are stored in a hash-table
-#' and sorted by their length and, in case of ties, by their lexicographical
+#' and always sorted by their length and, in case of ties, by their lexicographical
 #' representation.
 #' @seealso [Container()], [set()]
 #' @export

@@ -1,11 +1,12 @@
 #' @title Dict Class
 #'
 #' @description The [Dict()] resembles Python's dict type, and is implemented
-#' as a specialized associative [Container()] thus sharing all [Container()]
-#' methods with some of them being overriden to account for the associative
-#' key-value pair semantic.
-#' @details Internally, all key-value pairs are stored in a hash-table and the
-#' elements are sorted lexicographically by their keys.
+#' as a specialized associative [Container()].
+#' For the standard S3 interface, see [dict()].
+#' @details This class inherits from class [Container()] and overwrides some
+#' methods to account for the associative key-value pair semantic.
+#' Internally, all key-value pairs are stored in a hash-table and the
+#' elements are always sorted lexicographically by their keys.
 #' @importFrom R6 R6Class
 #' @seealso [Container()], [dict()]
 #' @export

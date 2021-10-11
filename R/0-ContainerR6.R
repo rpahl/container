@@ -38,8 +38,9 @@ Iterable <- R6::R6Class("Iterable",
 #'
 #' @description This class implements a container data structure with typical
 #' member functions to insert, delete and access elements from the container.
-#' It derives from [Iterable] and serves as the base class for [Deque], [Set],
-#' and [Dict]. For the standard S3 interface, see [container()].
+#' For the standard S3 interface, see [container()].
+#' @details This class inherits from class [Iterable] and serves as the base
+#' class for [Deque], [Set], and [Dict].
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class

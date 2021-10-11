@@ -47,9 +47,9 @@ reset_iter(it)
 \method{length}{Iterator}(x)
 }
 \arguments{
-\item{x}{an object of class \code{\link[=Iterable]{Iterable()}} or any other \code{R} object. In the
-latter case, \code{x} will always be coerced to a base \code{R} list prior to creating
-the \code{iterator}.}
+\item{x}{an object of class \link{Iterable} or any other \code{R} object. In the
+latter case, \code{x} will always be coerced to a base \code{R} \link{list} prior to creating
+the \link{Iterator}.}
 
 \item{...}{other parameters passed to or from methods}
 
@@ -60,12 +60,10 @@ the \code{iterator}.}
 }
 \description{
 An \code{Iterator} is an object that allows to iterate over
-sequences. It implements \code{next_iter} and \code{get_value} to iterate and retrieve the
+sequences. It implements \code{\link[=next_iter]{next_iter()}} and \code{\link[=get_value]{get_value()}} to iterate and retrieve the
 value of the sequence it is associated with.
-}
-\details{
-For more details on the methods see \code{\link[=Iterator]{Iterator()}}.
+For documentation of the methods see \link{Iterator}.
 }
 \seealso{
-\code{\link[=Iterator]{Iterator()}}
+For the class documentation see \link{Iterator}.
 }

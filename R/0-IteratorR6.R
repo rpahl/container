@@ -13,6 +13,7 @@
 #' @description An `Iterator` is an object that allows to iterate over
 #'  sequences. It implements `next_iter` and `get_value` to iterate and retrieve the
 #'  value of the sequence it is associated with.
+#' For the standard S3 interface, see [iter()].
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class

@@ -2,10 +2,10 @@
 #'
 #' @description Deques are a generalization of stacks and queues typically
 #' with methods to add, delete and access elements at both sides of the
-#' underlying data sequence. As such, the [Deque()] can also be used to mimic
-#' both stacks and queues.
+#' underlying data sequence. As such, the [Deque] can also be used to mimic
+#' both stacks and queues. For the standard S3 interface, see [deque()].
 #' @details This class inherits from class [Container()] and extends it by
-#' `pop` and `peek` methods, and reverse and rotate functionality.
+#' `popleft` and `peek` methods, and reverse and rotate functionality.
 #' @importFrom R6 R6Class
 #' @seealso [Container()], [deque()]
 #' @export

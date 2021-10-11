@@ -1,17 +1,17 @@
 #' Iterate over Sequences
 #'
 #' @description An `Iterator` is an object that allows to iterate over
-#'  sequences. It implements `next_iter` and `get_value` to iterate and retrieve the
+#'  sequences. It implements [next_iter()] and [get_value()] to iterate and retrieve the
 #'  value of the sequence it is associated with.
-#' @details For more details on the methods see [Iterator()].
+#' For documentation of the methods see [Iterator].
 #'
-#' @param x an object of class [Iterable()] or any other `R` object. In the
-#' latter case, `x` will always be coerced to a base `R` list prior to creating
-#' the `iterator`.
+#' @param x an object of class [Iterable] or any other `R` object. In the
+#' latter case, `x` will always be coerced to a base `R` [list] prior to creating
+#' the [Iterator].
 #' @param ... other parameters passed to or from methods
 #' @param it `Iterator` object
 #' @name iterS3
-#' @seealso [Iterator()]
+#' @seealso For the class documentation see [Iterator].
 NULL
 
 #' @rdname iterS3
