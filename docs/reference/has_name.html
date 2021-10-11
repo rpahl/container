@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if object has some name — has_name • container</title>
+<title>Check for Name — has_name • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Check if object has some name — has_name" />
-<meta property="og:description" content="Check if object has some name" />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
+<meta property="og:title" content="Check for Name — has_name" />
+<meta property="og:description" content="Check for Name" />
 
 
 
@@ -131,13 +130,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if object has some name</h1>
+    <h1>Check for Name</h1>
     <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/has_name.R'><code>R/has_name.R</code></a></small>
     <div class="hidden name"><code>has_name.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check if object has some name</p>
+    <p>Check for Name</p>
     </div>
 
     <pre class="usage"><span class='fu'>has_name</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>name</span><span class='op'>)</span>
@@ -177,7 +176,7 @@ column name, otherwise <code>FALSE</code>.</p>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_name</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"f"</span><span class='op'>)</span>    <span class='co'># TRUE</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_name</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"2"</span><span class='op'>)</span>    <span class='co'># FALSE</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
 <span class='fu'>has_name</span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>   <span class='co'># TRUE</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has_name</span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>   <span class='co'># FALSE</span>
 </div><div class='output co'>#&gt; [1] FALSE</div></pre>

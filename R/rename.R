@@ -19,7 +19,7 @@
     invisible()
 }
 
-#' Rename elements safely
+#' Rename Elements Safely
 #'
 #' @description Search for old name and replace it by new name. If either the
 #' old name does not exist or the name would result in a name-clash with an

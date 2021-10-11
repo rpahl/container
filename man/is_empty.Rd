@@ -4,7 +4,7 @@
 \alias{is_empty}
 \alias{is_empty.Container}
 \alias{is_empty.dict.table}
-\title{Check if object is empty}
+\title{Check if Object is Empty}
 \usage{
 is_empty(x)
 
@@ -19,7 +19,7 @@ is_empty(x)
 \code{TRUE} if object is empty otherwise \code{FALSE}.
 }
 \description{
-Check if object is empty
+Check if Object is Empty
 }
 \examples{
 

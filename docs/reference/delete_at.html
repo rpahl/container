@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delete elements at index — delete_at • container</title>
+<title>Delete Elements at Indices Safely — delete_at • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,10 @@
 
 
 
-<meta property="og:title" content="Delete elements at index — delete_at" />
+<meta property="og:title" content="Delete Elements at Indices Safely — delete_at" />
 <meta property="og:description" content="Search and remove values at given indices, which can be numeric or character
 or both. If any given index is invalid, an error is signaled. Indices can be
 numbers or names or both." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -133,7 +132,7 @@ numbers or names or both." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Delete elements at index</h1>
+    <h1>Delete Elements at Indices Safely</h1>
     <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/delete_at.R'><code>R/delete_at.R</code></a></small>
     <div class="hidden name"><code>delete_at.Rd</code></div>
     </div>
@@ -190,7 +189,7 @@ respective derived classes).</p>
 <span class='fu'>delete_at</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"x"</span><span class='op'>)</span>               <span class='co'># names(s) not found: 'x'</span>
 <span class='op'>}</span>
 
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>as.dict.table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sleep</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>as.dict.table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sleep</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>dit</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 3 columns
 #&gt;    extra group ID

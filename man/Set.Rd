@@ -2,7 +2,7 @@
 % Please edit documentation in R/0-SetR6.R
 \name{Set}
 \alias{Set}
-\title{Set class}
+\title{Set Class}
 \description{
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 \code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and

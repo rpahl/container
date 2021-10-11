@@ -1,4 +1,4 @@
-#' Strict element replacement
+#' Replace Values in Containers Safely
 #'
 #' @description Try to find and replace elements and signal an error if not
 #' found, unless it is stated to explicitly add the element (see option `add`).

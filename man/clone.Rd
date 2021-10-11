@@ -4,7 +4,7 @@
 \alias{clone}
 \alias{clone.Container}
 \alias{clone.dict.table}
-\title{Clone an object}
+\title{Clone an Object}
 \usage{
 clone(x)
 

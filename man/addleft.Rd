@@ -5,7 +5,7 @@
 \alias{ref_addleft}
 \alias{addleft.Deque}
 \alias{ref_addleft.Deque}
-\title{Add elements to the left}
+\title{Add Elements to the Left of Deques}
 \usage{
 addleft(.x, ...)
 

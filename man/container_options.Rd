@@ -3,7 +3,7 @@
 \name{container_options}
 \alias{container_options}
 \alias{getContainerOption}
-\title{Set container package options}
+\title{Set Container Package Options}
 \usage{
 container_options(..., .reset = FALSE)
 
@@ -30,7 +30,7 @@ and returns the previous options invisibly.
 }
 }
 \description{
-Set container package options
+Set Container Package Options
 }
 \section{Container Options}{
 

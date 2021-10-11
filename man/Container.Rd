@@ -3,7 +3,7 @@
 \docType{class}
 \name{Container}
 \alias{Container}
-\title{Container class}
+\title{Container Class}
 \description{
 This class implements a container data structure with typical
 member functions to insert, delete and access elements from the container.

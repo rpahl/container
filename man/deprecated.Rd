@@ -12,7 +12,7 @@
 \alias{values.Container}
 \alias{values.dict.table}
 \alias{keys}
-\title{Deprecated Functions in Package container}
+\title{Deprecated Functions}
 \usage{
 empty(x)
 

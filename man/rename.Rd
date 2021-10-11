@@ -7,7 +7,7 @@
 \alias{rename.dict.table}
 \alias{ref_rename.dict.table}
 \alias{rename.default}
-\title{Rename elements safely}
+\title{Rename Elements Safely}
 \usage{
 rename(.x, old, new)
 

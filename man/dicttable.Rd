@@ -11,7 +11,7 @@
 \alias{is.dict.table}
 \alias{rbind.dict.table}
 \alias{cbind.dict.table}
-\title{Combining dict and data.table}
+\title{Combining Dict and data.table}
 \usage{
 dict.table(...)
 

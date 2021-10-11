@@ -4,7 +4,7 @@
 \alias{peek_at2}
 \alias{peek_at2.Container}
 \alias{peek_at2.dict.table}
-\title{Peek at one element}
+\title{Peek at Single Index}
 \usage{
 peek_at2(x, index, default = NULL)
 

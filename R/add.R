@@ -1,4 +1,4 @@
-#' Add elements
+#' Add Elements to Containers
 #'
 #' Add elements to container-like objects.
 #' @param .x an `R` object of the respective class.

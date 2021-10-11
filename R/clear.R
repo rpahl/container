@@ -1,4 +1,4 @@
-#' Clear a container
+#' Clear a Container
 #'
 #' Removes all elements from the container object.
 #' @param x any `R` object.

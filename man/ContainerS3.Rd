@@ -15,7 +15,7 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
-\title{Container - an enhanced base R list}
+\title{Container - Enhancing R's list}
 \usage{
 container(...)
 

@@ -5,7 +5,7 @@
 \alias{ref_rev}
 \alias{ref_rev.Deque}
 \alias{rev.Deque}
-\title{Reverse elements}
+\title{Reverse Elements}
 \usage{
 ref_rev(x)
 

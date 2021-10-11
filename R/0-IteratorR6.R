@@ -8,7 +8,7 @@
 }
 
 
-#' @title Iterator class
+#' @title Iterator Class
 #'
 #' @description An `Iterator` is an object that allows to iterate over
 #'  sequences. It implements `next_iter` and `get_value` to iterate and retrieve the

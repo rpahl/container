@@ -2,7 +2,7 @@
 % Please edit documentation in R/0-DequeR6.R
 \name{Deque}
 \alias{Deque}
-\title{Deque class}
+\title{Deque Class}
 \description{
 Deques are a generalization of stacks and queues typically
 with methods to add, delete and access elements at both sides of the

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Strict element replacement at index — replace_at • container</title>
+<title>Replace Values at Indices Safely — replace_at • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,10 @@
 
 
 
-<meta property="og:title" content="Strict element replacement at index — replace_at" />
+<meta property="og:title" content="Replace Values at Indices Safely — replace_at" />
 <meta property="og:description" content="Try to find and replace elements at given indices and signal an
 error if not found, unless it is stated to explicitly add the element (see
 option add)." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -133,7 +132,7 @@ option add)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Strict element replacement at index</h1>
+    <h1>Replace Values at Indices Safely</h1>
     <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/replace_at.R'><code>R/replace_at.R</code></a></small>
     <div class="hidden name"><code>replace_at.Rd</code></div>
     </div>
@@ -204,7 +203,7 @@ reference.</p>
 <span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, x <span class='op'>=</span> <span class='fl'>1</span>, .add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>   <span class='co'># ok (adds x = 1)</span>
 </div><div class='output co'>#&gt; [a = 0, b = "z", x = 1]</div><div class='input'>
 
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
 <span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>dit</span>, a <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 2 columns
 #&gt;    a b

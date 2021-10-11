@@ -4,7 +4,7 @@
 \alias{has}
 \alias{has.Container}
 \alias{has.dict.table}
-\title{Check if object has some element}
+\title{Check for Element}
 \usage{
 has(x, ...)
 
@@ -28,7 +28,7 @@ of the \code{dict.table}.}
 For \code{dict.table}, \code{TRUE} if column exists in \code{x} otherwise \code{FALSE}.
 }
 \description{
-Check if object has some element
+Check for Element
 }
 \examples{
 

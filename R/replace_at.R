@@ -1,4 +1,4 @@
-#' Strict element replacement at index
+#' Replace Values at Indices Safely
 #'
 #' @description Try to find and replace elements at given indices and signal an
 #' error if not found, unless it is stated to explicitly add the element (see

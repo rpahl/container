@@ -1,4 +1,4 @@
-#' Check if object has some element
+#' Check for Element
 #'
 #' @param x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.

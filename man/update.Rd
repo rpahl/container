@@ -8,7 +8,7 @@
 \alias{update.dict.table}
 \alias{ref_update.dict.table}
 \alias{update.list}
-\title{Update elements}
+\title{Update Object with Elements from Another Object}
 \usage{
 ref_update(object, other, ...)
 

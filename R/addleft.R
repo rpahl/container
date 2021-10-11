@@ -1,4 +1,4 @@
-#' Add elements to the left
+#' Add Elements to the Left of Deques
 #'
 #' Add elements to left side of [Deque] objects.
 #' @param .x a `[Deque]` object

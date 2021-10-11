@@ -5,7 +5,7 @@
 \alias{[<-.Container}
 \alias{[[<-.Container}
 \alias{$<-.Container}
-\title{Replace Parts of a Container Object}
+\title{Replace Parts of a Container}
 \usage{
 \method{[}{Container}(x, i) <- value
 

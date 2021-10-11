@@ -4,7 +4,7 @@
 \alias{at2}
 \alias{at2.Container}
 \alias{at2.dict.table}
-\title{Strict single element extraction}
+\title{Extract Single Elements Safely}
 \usage{
 at2(x, ...)
 

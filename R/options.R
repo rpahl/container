@@ -10,7 +10,7 @@
 .env[["options"]] = .default_options()
 
 
-#' Set container package options
+#' Set Container Package Options
 #'
 #' @param ... any options can be defined, using name = value.
 #' @param x a character string holding an option name.

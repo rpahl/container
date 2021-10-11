@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if object has some element — has • container</title>
+<title>Check for Element — has • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Check if object has some element — has" />
-<meta property="og:description" content="Check if object has some element" />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
+<meta property="og:title" content="Check for Element — has" />
+<meta property="og:description" content="Check for Element" />
 
 
 
@@ -131,13 +130,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if object has some element</h1>
+    <h1>Check for Element</h1>
     <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/has.R'><code>R/has.R</code></a></small>
     <div class="hidden name"><code>has.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Check if object has some element</p>
+    <p>Check for Element</p>
     </div>
 
     <pre class="usage"><span class='fu'>has</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
@@ -185,7 +184,7 @@ of the <code>dict.table</code>.</p></td>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>co</span>, <span class='va'>mean</span><span class='op'>)</span>                <span class='co'># TRUE</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>co</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>                 <span class='co'># FALSE</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>has</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>            <span class='co'># TRUE</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>            <span class='co'># FALSE</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>   <span class='co'># TRUE</span>

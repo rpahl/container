@@ -1,4 +1,4 @@
-#' Check if object has some name
+#' Check for Name
 #'
 #' @param x any `R` object.
 #' @param name `character` the name to be found.

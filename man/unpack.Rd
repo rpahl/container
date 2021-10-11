@@ -2,7 +2,7 @@
 % Please edit documentation in R/unpack.R
 \name{unpack}
 \alias{unpack}
-\title{Unpack nested objects}
+\title{Unpack Nested Objects}
 \usage{
 unpack(x, recursive = TRUE, use.names = TRUE)
 }

@@ -16,7 +16,7 @@
 \alias{next_iter}
 \alias{reset_iter}
 \alias{length.Iterator}
-\title{Iterator}
+\title{Iterate over Sequences}
 \usage{
 iter(x, ...)
 

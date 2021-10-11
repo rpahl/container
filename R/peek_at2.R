@@ -1,4 +1,4 @@
-#' Peek at one element
+#' Peek at Single Index
 #'
 #' Try to access element and return some default value if not found.
 #' In contrast to `[at2()]`, this function provides a less stricter element

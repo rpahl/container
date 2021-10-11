@@ -1,4 +1,4 @@
-#' Delete elements at index
+#' Delete Elements at Indices Safely
 #'
 #' Search and remove values at given indices, which can be numeric or character
 #' or both. If any given index is invalid, an error is signaled. Indices can be

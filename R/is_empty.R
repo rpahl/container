@@ -1,4 +1,4 @@
-#' Check if object is empty
+#' Check if Object is Empty
 #'
 #' @param x any `R` object.
 #' @return `TRUE` if object is empty otherwise `FALSE`.

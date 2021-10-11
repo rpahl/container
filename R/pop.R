@@ -1,4 +1,4 @@
-#' Pop element
+#' Get and Remove Element
 #'
 #' Search and return an element and remove it afterwards from the object.
 #' If the element is not found, signal an error.

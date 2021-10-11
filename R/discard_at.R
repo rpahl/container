@@ -1,4 +1,4 @@
-#' Discard elements at index
+#' Discard Elements at Indices
 #'
 #' Search and remove values at given indices, which can be numeric or character
 #' or both. Invalid indices are ignored.

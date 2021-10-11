@@ -1,4 +1,4 @@
-#' Strict single element extraction
+#' Extract Single Elements Safely
 #'
 #' Extracts the value of a Container at the given index. If the index is
 #' invalid, an error is signaled. If given as a string, the element matching the

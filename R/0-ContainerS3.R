@@ -1,4 +1,4 @@
-#' @title Container - an enhanced base R list
+#' @title Container - Enhancing R's list
 #'
 #' @description A container is a data structure with typical member
 #' functions to insert, delete and access elements from the container

@@ -1,4 +1,4 @@
-#' Strict element(s) extraction
+#' Extract Elements Safely
 #'
 #' Extract parts of a Container at given indices. If an index is invalid, an
 #' error is signaled. If given as a string, the element matching the

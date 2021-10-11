@@ -17,7 +17,7 @@
 }
 
 
-#' @title Combining dict and data.table
+#' @title Combining Dict and data.table
 #'
 #' @description The [dict.table](dicttable) is a combination of [dict] and
 #' [data.table] and basically can be considered a [data.table] with extended

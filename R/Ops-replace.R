@@ -1,4 +1,4 @@
-#' Replace Parts of a Container Object
+#' Replace Parts of a Container
 #'
 #' @description Replace parts of a `Container` object similar
 #' to R's base replace operators on lists.

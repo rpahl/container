@@ -1,4 +1,4 @@
-#' Peek at element(s)
+#' Peek at Indices
 #'
 #' Try to access elements and return default values if not found.
 #' In contrast to `[at()]`, this function provides a less stricter element

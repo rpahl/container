@@ -1,4 +1,4 @@
-#' Update elements
+#' Update Object with Elements from Another Object
 #'
 #' @description Takes an object and updates it with values from another object
 #' by replacing the values at existing names and adding values at new names of

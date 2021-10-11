@@ -5,7 +5,7 @@
 \alias{ref_rotate}
 \alias{rotate.Deque}
 \alias{ref_rotate.Deque}
-\title{Rotate elements}
+\title{Rotate Elements}
 \usage{
 rotate(x, n = 1L)
 

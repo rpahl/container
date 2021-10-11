@@ -7,7 +7,7 @@
 \alias{ref_clear.Container}
 \alias{clear.dict.table}
 \alias{ref_clear.dict.table}
-\title{Clear a container}
+\title{Clear a Container}
 \usage{
 clear(x)
 

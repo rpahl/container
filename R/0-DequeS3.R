@@ -1,4 +1,4 @@
-#' Deque (double-ended queue)
+#' Deque - Double-Ended Queue
 #'
 #' @description Deques are a generalization of stacks and queues typically
 #' with methods to add, remove and access elements at both sides of the

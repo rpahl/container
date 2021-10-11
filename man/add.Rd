@@ -9,7 +9,7 @@
 \alias{ref_add.Dict}
 \alias{add.dict.table}
 \alias{ref_add.dict.table}
-\title{Add elements}
+\title{Add Elements to Containers}
 \usage{
 add(.x, ...)
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rename elements safely — rename • container</title>
+<title>Rename Elements Safely — rename • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,10 @@
 
 
 
-<meta property="og:title" content="Rename elements safely — rename" />
+<meta property="og:title" content="Rename Elements Safely — rename" />
 <meta property="og:description" content="Search for old name and replace it by new name. If either the
 old name does not exist or the name would result in a name-clash with an
 already existing name, an error is signaled." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -133,7 +132,7 @@ already existing name, an error is signaled." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Rename elements safely</h1>
+    <h1>Rename Elements Safely</h1>
     <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/rename.R'><code>R/rename.R</code></a></small>
     <div class="hidden name"><code>rename.Rd</code></div>
     </div>
@@ -184,7 +183,7 @@ renamed vector.</p>
 <p>For <code>Container</code>, an object of class <code>Container</code> (or one of the
 respective derived classes).</p>
 <p>For <code>dict.table</code> renames key <code>old</code> to <code>new</code> in place (i.e. by
-reference) and invisibly returns the <code><a href='dict.table.html'>dict.table()</a></code> object.</p>
+reference) and invisibly returns the <code><a href='dicttable.html'>dict.table()</a></code> object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The passed old and new names can be vectors but always must have
@@ -202,7 +201,7 @@ that is, it renames elements in place.</p>
 </div><div class='output co'>#&gt; [a1 = 1, y = 2, 3]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>co</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [a1 = 1, y = 2, 3]</div><div class='input'>
 <span class='co'># dict.table</span>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span>, c <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span>, c <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 <span class='fu'>rename</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a1"</span>, <span class='st'>"y"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 1 row and 3 columns
 #&gt;    a1 y c

@@ -7,7 +7,7 @@
 \alias{ref_replace_at.Container}
 \alias{replace_at.dict.table}
 \alias{ref_replace_at.dict.table}
-\title{Strict element replacement at index}
+\title{Replace Values at Indices Safely}
 \usage{
 replace_at(.x, ...)
 

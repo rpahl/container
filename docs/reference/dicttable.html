@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Combining dict and data.table — dicttable • container</title>
+<title>Combining Dict and data.table — dicttable • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Combining dict and data.table — dicttable" />
+<meta property="og:title" content="Combining Dict and data.table — dicttable" />
 <meta property="og:description" content="The dict.table is a combination of dict and
 data.table and basically can be considered a data.table with extended
 functionality to manage its data columns in a stricter way. For example,
@@ -136,18 +136,18 @@ functions and operators at the same time." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Combining dict and data.table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/0-dict.table.R'><code>R/0-dict.table.R</code></a>, <a href='https://github.com/rpahl/container/blob/master/R/add.R'><code>R/add.R</code></a>, <a href='https://github.com/rpahl/container/blob/master/R/clear.R'><code>R/clear.R</code></a></small>
+    <h1>Combining Dict and data.table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/0-dict.table.R'><code>R/0-dict.table.R</code></a>, <a href='https://github.com/rpahl/container/blob/master/R/add.R'><code>R/add.R</code></a>, <a href='https://github.com/rpahl/container/blob/master/R/at.R'><code>R/at.R</code></a>, and 14 more</small>
     <div class="hidden name"><code>dicttable.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>The <a href='dicttable'>dict.table</a> is a combination of <a href='DictS3.html'>dict</a> and
-<a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a> and basically can be considered a <a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a> with extended
+data.table and basically can be considered a data.table with extended
 functionality to manage its data columns in a stricter way. For example,
-in contrast to <a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a>, <a href='dicttable'>dict.table</a> does not allow
+in contrast to data.table, <a href='dicttable'>dict.table</a> does not allow
 duplicated column names.
-A <a href='dicttable'>dict.table</a> object provides all <a href='DictS3.html'>dict</a> and <a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a>
+A <a href='dicttable'>dict.table</a> object provides all <a href='DictS3.html'>dict</a> and data.table
 functions and operators at the same time.</p>
     </div>
 
@@ -161,7 +161,7 @@ functions and operators at the same time.</p>
 <span class='fu'>is.dict.table</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
 <span class='co'># S3 method for dict.table</span>
-<span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbind</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for dict.table</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
@@ -180,7 +180,7 @@ arguments to be passed on.</p></td>
     </tr>
     <tr>
       <th>copy</th>
-      <td><p>if <code>TRUE</code> creates a copy of the <a href='https://Rdatatable.gitlab.io/data.table/reference/data.table.html'>data.table</a> object otherwise
+      <td><p>if <code>TRUE</code> creates a copy of the data.table object otherwise
 works on the passed object by reference.</p></td>
     </tr>
     </table>
@@ -208,7 +208,78 @@ already exists, an error is given.</p></li>
 </ul>
 
 <ul>
+<li><p><code><a href='at.html'>at(.x, ...)</a></code> returns the columns at the given indices. Indices
+can be letters or numbers or both. All columns must exist.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='at2.html'>at2(x, index)</a></code> returns the column at the given <code>index</code> or signals
+an error if not found.</p></li>
+</ul>
+
+<ul>
 <li><p><code><a href='clear.html'>clear(x)</a></code> and <code><a href='clear.html'>ref_clear(x)</a></code> remove all elements from <code>x</code>.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='clone.html'>clone(x)</a></code> create a copy of <code>x</code>.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='delete_at.html'>delete_at(.x, ...)</a></code> and <code><a href='delete_at.html'>ref_delete_at(.x, ...)</a></code> find and remove columns either by
+name or index (or both). If one or more columns don't exist, an error is signaled.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='discard_at.html'>discard_at(.x, ...)</a></code> and <code><a href='discard_at.html'>ref_discard_at(.x, ...)</a></code> find and remove columns
+either by name or index (or both). Invalid column indices are ignored.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='has.html'>has(x, column)</a></code> check if some <code>column</code> is in dict.table object.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='has_name.html'>has_name(x, name)</a></code> check if <code>x</code> has the given column name.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='is_empty.html'>is_empty(x)</a></code> <code>TRUE</code> if object is empty otherwise <code>FALSE</code></p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='peek_at.html'>peek_at(x, ..., .default = NULL)</a></code> returns the columns at the given
+indices or (if not found) columns with the given default value.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='peek_at2.html'>peek_at2(x, index, default = NULL)</a></code> return column named <code>index</code> if it exist
+otherwise the given <code>default</code> value. If the default length does not match
+the number of rows, it is recycled accordingly and a warning is given,
+unless the default value has a length of 1, in which case recycling is
+done silently.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='pop.html'>ref_pop(.x, index)</a></code> return element at given column index and remove the
+column from the dict.table object.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='rename.html'>rename(.x, old, new)</a></code> and <code><a href='rename.html'>ref_rename(.x, old, new)</a></code> rename one or more
+columns from <code>old</code> to <code>new</code>, respectively, by copy and in place (i.e. by
+reference).</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='replace_at.html'>replace_at(.x, .., .add = FALSE)</a></code> and <code><a href='replace_at.html'>ref_replace_at(.x, ..., .add = FALSE)</a></code>
+replace values at given indices. If a given index is invalid, an error is
+signaled unless <code>.add</code> was set to <code>TRUE</code>.</p></li>
+</ul>
+
+<ul>
+<li><p><code><a href='update.html'>update(object, other)</a></code> and <code><a href='update.html'>ref_update(object, other)</a></code> adds columns of <code>other</code> dict
+that are not yet in <code>object</code> and replaces the values at existing columns.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -219,7 +290,7 @@ already exists, an error is given.</p></li>
     <pre class="examples"><div class='input'><span class='co'># Some basic examples using some typical data.table and dict operations.</span>
 <span class='co'># The constructor can take the 'key' argument known from data.table():</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"c"</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>6</span><span class='op'>)</span>, key <span class='op'>=</span> <span class='st'>"y"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: data.table</span></div><div class='output co'>#&gt; <span class='message'>data.table 1.14.0 using 6 threads (see ?getDTthreads).  Latest news: r-datatable.com</span></div><div class='input'><span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"c"</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>6</span><span class='op'>)</span>, key <span class='op'>=</span> <span class='st'>"y"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 9 rows and 2 columns
 #&gt;    x y
@@ -372,6 +443,36 @@ already exists, an error is given.</p></li>
 <span class='fu'><a href='add.html'>add</a></span><span class='op'>(</span><span class='va'>dit</span>, a <span class='op'>=</span> <span class='fl'>7</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span>  <span class='co'># column 'a' already exists</span>
 <span class='op'>}</span>
 
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+<span class='fu'><a href='at.html'>at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 1 column
+#&gt;    a
+#&gt; 1: 1
+#&gt; 2: 2
+#&gt; 3: 3</div><div class='input'><span class='fu'><a href='at.html'>at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 1 column
+#&gt;    b
+#&gt; 1: 4
+#&gt; 2: 5
+#&gt; 3: 6</div><div class='input'><span class='fu'><a href='at.html'>at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 2 columns
+#&gt;    a b
+#&gt; 1: 1 4
+#&gt; 2: 2 5
+#&gt; 3: 3 6</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='at.html'>at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>     <span class='co'># index 'x' not found</span>
+<span class='fu'><a href='at.html'>at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>     <span class='co'># index 3 exceeds length of dict.table</span>
+<span class='op'>}</span>
+
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+<span class='fu'><a href='at2.html'>at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='at2.html'>at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='at2.html'>at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='at2.html'>at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>     <span class='co'># index 'x' not found</span>
+<span class='fu'><a href='at2.html'>at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>5</span><span class='op'>)</span>       <span class='co'># index 5 exceeds length of dict.table</span>
+<span class='op'>}</span>
+
 <span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 <span class='fu'><a href='clear.html'>clear</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 0 rows and 0 columns
@@ -381,7 +482,165 @@ already exists, an error is given.</p></li>
 #&gt; 1: 1 2</div><div class='input'><span class='fu'><a href='clear.html'>ref_clear</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
 <span class='va'>dit</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 0 rows and 0 columns
-#&gt; Null data.table (0 rows and 0 cols)</div></pre>
+#&gt; Null data.table (0 rows and 0 cols)</div><div class='input'>
+<span class='va'>d</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='va'>d2</span> <span class='op'>=</span> <span class='fu'><a href='clone.html'>clone</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+<span class='fu'><a href='clear.html'>ref_clear</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>d2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 2 rows and 2 columns
+#&gt;    a b
+#&gt; 1: 1 3
+#&gt; 2: 2 4</div><div class='input'>
+<span class='op'>(</span><span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>as.dict.table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sleep</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 3 columns
+#&gt;    extra group ID
+#&gt; 1:   0.7     1  1
+#&gt; 2:  -1.6     1  2
+#&gt; 3:  -0.2     1  3
+#&gt; 4:  -1.2     1  4
+#&gt; 5:  -0.1     1  5
+#&gt; 6:   3.4     1  6</div><div class='input'><span class='fu'><a href='delete_at.html'>delete_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"ID"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 2 columns
+#&gt;    extra group
+#&gt; 1:   0.7     1
+#&gt; 2:  -1.6     1
+#&gt; 3:  -0.2     1
+#&gt; 4:  -1.2     1
+#&gt; 5:  -0.1     1
+#&gt; 6:   3.4     1</div><div class='input'><span class='fu'><a href='delete_at.html'>delete_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"ID"</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 1 column
+#&gt;    group
+#&gt; 1:     1
+#&gt; 2:     1
+#&gt; 3:     1
+#&gt; 4:     1
+#&gt; 5:     1
+#&gt; 6:     1</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='delete_at.html'>delete_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"foo"</span><span class='op'>)</span>   <span class='co'># Column 'foo' not in dict.table</span>
+<span class='op'>}</span>
+
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>as.dict.table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sleep</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='discard_at.html'>discard_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"ID"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 2 columns
+#&gt;    extra group
+#&gt; 1:   0.7     1
+#&gt; 2:  -1.6     1
+#&gt; 3:  -0.2     1
+#&gt; 4:  -1.2     1
+#&gt; 5:  -0.1     1
+#&gt; 6:   3.4     1</div><div class='input'><span class='fu'><a href='discard_at.html'>discard_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"ID"</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 1 column
+#&gt;    group
+#&gt; 1:     1
+#&gt; 2:     1
+#&gt; 3:     1
+#&gt; 4:     1
+#&gt; 5:     1
+#&gt; 6:     1</div><div class='input'><span class='fu'><a href='discard_at.html'>discard_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"foo"</span><span class='op'>)</span>  <span class='co'># ignored</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 3 columns
+#&gt;    extra group ID
+#&gt; 1:   0.7     1  1
+#&gt; 2:  -1.6     1  2
+#&gt; 3:  -0.2     1  3
+#&gt; 4:  -1.2     1  4
+#&gt; 5:  -0.1     1  5
+#&gt; 6:   3.4     1  6</div><div class='input'>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='has.html'>has</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>            <span class='co'># TRUE</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='has.html'>has</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>            <span class='co'># FALSE</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'><a href='has.html'>has</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>   <span class='co'># TRUE</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='has_name.html'>has_name</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>    <span class='co'># TRUE</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'><a href='has_name.html'>has_name</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>    <span class='co'># FALSE</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='va'>d</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='fu'><a href='is_empty.html'>is_empty</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'><a href='is_empty.html'>is_empty</a></span><span class='op'>(</span><span class='fu'><a href='clear.html'>clear</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+<span class='fu'><a href='peek_at.html'>peek_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 1 column
+#&gt;    a
+#&gt; 1: 1
+#&gt; 2: 2
+#&gt; 3: 3</div><div class='input'><span class='fu'><a href='peek_at.html'>peek_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 1 column
+#&gt;    a
+#&gt; 1: 1
+#&gt; 2: 2
+#&gt; 3: 3</div><div class='input'><span class='fu'><a href='peek_at.html'>peek_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 0 rows and 0 columns
+#&gt; Null data.table (0 rows and 0 cols)</div><div class='input'><span class='fu'><a href='peek_at.html'>peek_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 0 rows and 0 columns
+#&gt; Null data.table (0 rows and 0 cols)</div><div class='input'><span class='fu'><a href='peek_at.html'>peek_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span>, .default <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 1 column
+#&gt;    x
+#&gt; 1: 0
+#&gt; 2: 0
+#&gt; 3: 0</div><div class='input'><span class='fu'><a href='peek_at.html'>peek_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span>, <span class='st'>"x"</span>, .default <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 2 columns
+#&gt;    a x
+#&gt; 1: 1 0
+#&gt; 2: 2 0
+#&gt; 3: 3 0</div><div class='input'>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+<span class='fu'><a href='peek_at2.html'>peek_at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='peek_at2.html'>peek_at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='peek_at2.html'>peek_at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'><a href='peek_at2.html'>peek_at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>3</span>, default <span class='op'>=</span> <span class='fl'>9</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 9 9 9</div><div class='input'><span class='fu'><a href='peek_at2.html'>peek_at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; NULL</div><div class='input'><span class='fu'><a href='peek_at2.html'>peek_at2</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span>, default <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 0 0 0</div><div class='input'>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+<span class='fu'><a href='pop.html'>ref_pop</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'><span class='fu'><a href='pop.html'>ref_pop</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 4 5 6</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='pop.html'>ref_pop</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"x"</span><span class='op'>)</span>  <span class='co'># index 'x' not found</span>
+<span class='op'>}</span>
+
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span>, c <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'><a href='rename.html'>rename</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a1"</span>, <span class='st'>"y"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 1 row and 3 columns
+#&gt;    a1 y c
+#&gt; 1:  1 2 3</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 1 row and 3 columns
+#&gt;    a b c
+#&gt; 1: 1 2 3</div><div class='input'><span class='fu'><a href='rename.html'>ref_rename</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a1"</span>, <span class='st'>"y"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 1 row and 3 columns
+#&gt;    a1 y c
+#&gt; 1:  1 2 3</div><div class='input'>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'><a href='replace_at.html'>replace_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"a"</span>, <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 1 column
+#&gt;    a
+#&gt; 1: 3
+#&gt; 2: 2
+#&gt; 3: 1</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='replace_at.html'>replace_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"b"</span>, <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>               <span class='co'># column 'b' not in dict.table</span>
+<span class='op'>}</span>
+<span class='fu'><a href='replace_at.html'>replace_at</a></span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"b"</span>, <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span>, .add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>  <span class='co'># ok, adds column</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 2 columns
+#&gt;    a b
+#&gt; 1: 1 4
+#&gt; 2: 2 5
+#&gt; 3: 3 6</div><div class='input'>
+<span class='co'># Update parts of tables (second overwrites columns of the first)</span>
+<span class='va'>dit1</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='va'>dit2</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>         b <span class='op'>=</span> <span class='fl'>5</span><span class='op'>:</span><span class='fl'>6</span>, c <span class='op'>=</span> <span class='fl'>8</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span>
+<span class='fu'><a href='update.html'>update</a></span><span class='op'>(</span><span class='va'>dit1</span>, <span class='va'>dit2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 2 rows and 3 columns
+#&gt;    a b c
+#&gt; 1: 1 5 8
+#&gt; 2: 2 6 9</div><div class='input'><span class='fu'><a href='update.html'>update</a></span><span class='op'>(</span><span class='va'>dit2</span>, <span class='va'>dit1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; &lt;dict.table&gt; with 2 rows and 3 columns
+#&gt;    b c a
+#&gt; 1: 3 8 1
+#&gt; 2: 4 9 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

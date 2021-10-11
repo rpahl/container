@@ -1,4 +1,4 @@
-#' Clone an object
+#' Clone an Object
 #'
 #' Creates a copy of the object.
 #' @param x any `R` object.

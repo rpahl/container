@@ -1,4 +1,4 @@
-#' Deprecated Functions in Package container
+#' Deprecated Functions
 #'
 #' @description These functions are provided for backwards-compatibility and
 #' may be defunct as soon as the next release.

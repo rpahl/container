@@ -7,7 +7,7 @@
 \alias{deque}
 \alias{as.deque}
 \alias{is.deque}
-\title{Deque (double-ended queue)}
+\title{Deque - Double-Ended Queue}
 \usage{
 deque(...)
 

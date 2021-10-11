@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Discard elements at index — discard_at • container</title>
+<title>Discard Elements at Indices — discard_at • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,9 @@
 
 
 
-<meta property="og:title" content="Discard elements at index — discard_at" />
+<meta property="og:title" content="Discard Elements at Indices — discard_at" />
 <meta property="og:description" content="Search and remove values at given indices, which can be numeric or character
 or both. Invalid indices are ignored." />
-<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -132,7 +131,7 @@ or both. Invalid indices are ignored." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Discard elements at index</h1>
+    <h1>Discard Elements at Indices</h1>
     <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/discard_at.R'><code>R/discard_at.R</code></a></small>
     <div class="hidden name"><code>discard_at.Rd</code></div>
     </div>
@@ -185,7 +184,7 @@ respective derived classes).</p>
 </div><div class='output co'>#&gt; [3]</div><div class='input'><span class='fu'>discard_at</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"a"</span>, <span class='fl'>3</span><span class='op'>)</span>           <span class='co'># [b = 2]</span>
 </div><div class='output co'>#&gt; [b = 2]</div><div class='input'><span class='fu'>discard_at</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"x"</span><span class='op'>)</span>              <span class='co'># ignored</span>
 </div><div class='output co'>#&gt; [a = 1, b = 2, 3]</div><div class='input'>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>as.dict.table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sleep</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>as.dict.table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sleep</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>discard_at</span><span class='op'>(</span><span class='va'>dit</span>, <span class='st'>"ID"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 6 rows and 2 columns
 #&gt;    extra group
