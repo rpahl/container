@@ -89,6 +89,8 @@ Iterable <- R6::R6Class("Iterable",
 #' co2 = Container$new(b = 0)
 #' co2$add(0, name = "a")
 #' co$update(co2)
+#' co$pop(1)
+#' co
 Container <- R6::R6Class("Container",
     inherit = Iterable,
     public = list(

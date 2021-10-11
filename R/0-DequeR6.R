@@ -9,6 +9,16 @@
 #' @importFrom R6 R6Class
 #' @seealso [Container()], [deque()]
 #' @export
+#' @examples
+#' d = Deque$new(1, 2, s = "a", v = 1:3)
+#' d$addleft(0)
+#' d$peekleft()
+#' d$peek()
+#' d$popleft()
+#' d$rev()
+#' d$rotate()
+#' d$rotate(2)
+#' d$rotate(-3)
 Deque <- R6::R6Class("Deque",
     inherit = Container,
     public = list(

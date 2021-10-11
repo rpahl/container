@@ -13,6 +13,17 @@ both stacks and queues. For the standard S3 interface, see \code{\link[=deque]{d
 This class inherits from class \code{\link[=Container]{Container()}} and extends it by
 \code{popleft} and \code{peek} methods, and reverse and rotate functionality.
 }
+\examples{
+d = Deque$new(1, 2, s = "a", v = 1:3)
+d$addleft(0)
+d$peekleft()
+d$peek()
+d$popleft()
+d$rev()
+d$rotate()
+d$rotate(2)
+d$rotate(-3)
+}
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=deque]{deque()}}
 }

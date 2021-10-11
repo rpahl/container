@@ -56,6 +56,7 @@ co$discard(3)
 co2 = Container$new(b = 0)
 co2$add(0, name = "a")
 co$update(co2)
+co$pop(1)
 }
 \seealso{
 \code{\link[=container]{container()}}, \link{Iterable}, \link{Deque}, \link{Set}, and \link{Dict}
