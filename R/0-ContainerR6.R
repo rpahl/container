@@ -47,11 +47,11 @@ Iterable <- R6::R6Class("Iterable",
 #' @seealso [container()], [Iterable], [Deque], [Set], and [Dict]
 #' @export
 #' @examples
-#' co <- Container$new(1, b = NA, 1:3, c = container("a", 1))
+#' co <- Container$new(1:5, c = Container$new("a", 1), l = list(1:3))
 #' co$print()
 #' co$length()
+#'
 #' co$add(3)
-#' co$at(1:2)
 Container <- R6::R6Class("Container",
     inherit = Iterable,
     public = list(
@@ -230,6 +230,10 @@ Container <- R6::R6Class("Container",
         #' @return `integer` length of the `Container`, that is, the number of
         #' elements it contains.
         length = function() length(private$elems),
+
+        #' @description Names of the elements.
+        #' @return `character` the names of the elements contained in `x`
+        names = function() names(private$elems),
 
         #' @description Same as `peek_at2` (see below) but accepts a vector of
         #' indices and always returns a `Container` object.
