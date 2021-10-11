@@ -98,7 +98,7 @@ Dict <- R6::R6Class("Dict",
 
             hasElem = !is.na(pos)
             if (!hasElem)
-                stop("old element (", get_label(old),
+                stop("old element (", .get_label(old),
                      ") is not in ", data.class(self), call. = FALSE)
 
             name = names(self)[[pos]]

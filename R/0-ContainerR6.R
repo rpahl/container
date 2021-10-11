@@ -137,7 +137,7 @@ Container <- R6::R6Class("Container",
         #' @return the `Container` object
         delete = function(elem) {
             if (!self$has(elem))
-                stop(get_label(elem), " is not in ", data.class(self),
+                stop(.get_label(elem), " is not in ", data.class(self),
                      call. = FALSE)
 
             self$discard(elem)
@@ -349,7 +349,7 @@ Container <- R6::R6Class("Container",
                 return(self$add(new))
 
             if (!hasElem)
-                stop("old element (", get_label(old),
+                stop("old element (", .get_label(old),
                      ") is not in ", data.class(self), call. = FALSE)
 
             name = names(self)[[pos]]

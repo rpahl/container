@@ -17,7 +17,7 @@ get_label(x, vec.len = 4L, ...)
 Object labels
 }
 \references{
-Credits for the code idea below belong to the authors of the
+Credits for the code idea belong to the authors of the
 very well written \code{sets} package.
 }
 \seealso{

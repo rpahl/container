@@ -7,7 +7,7 @@ function(x, left = "(", right = ")", ...)
     if (!is.null(x.names))
         name_seps[x.names != ""] <- " = "
 
-    labels = sapply(x, get_label, ...)
+    labels = sapply(x, .get_label, ...)
 
     obj_str = paste(x.names, name_seps, labels, sep = "", collapse = ", ")
     paste0(left, obj_str, right)

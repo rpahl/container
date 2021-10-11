@@ -161,7 +161,7 @@ Set <- R6::R6Class("Set",
 
         .reorder_values = function() {
             new_order = order(lengths(self$values()),
-                              sapply(self$values(), get_label),
+                              sapply(self$values(), .get_label),
                               names(private$elems))
             private$elems = private$elems[new_order]
         }
