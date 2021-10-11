@@ -95,3 +95,9 @@ reference:
     - "+.Container"
     - "<.Container"
     - "&.Dict"
+
+  - title: "Depecated"
+    desc: "Deprecated functions."
+    contents:
+    - "deprecated"
+

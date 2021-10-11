@@ -158,6 +158,8 @@ functions and operators at the same time.</p>
 <span class='co'># S3 method for data.table</span>
 <span class='fu'>as.dict.table</span><span class='op'>(</span><span class='va'>x</span>, copy <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
+<span class='fu'>is.dict.table</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+
 <span class='co'># S3 method for dict.table</span>
 <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbind</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
@@ -194,6 +196,10 @@ providing either copy or reference semantics where the latter start with
 
 <ul>
 <li><p><code>as.dict.table(x, ...)</code> coerce <code>x</code> to a dict.table</p></li>
+</ul>
+
+<ul>
+<li><p><code>is.dict.table(x)</code> check if <code>x</code> is a <code>dict.table</code></p></li>
 </ul>
 
 <ul>
