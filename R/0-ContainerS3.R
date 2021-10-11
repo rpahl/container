@@ -18,12 +18,12 @@
 #' providing either copy or reference semantics where the latter start with
 #' `'ref_'` to note the reference semantic, for example, [add()] and [ref_add()].
 #' @examples
-#' co = container(1, b = NA, 1:3, c = container("a", 1))
+#' co = container(1:5, c = container("a", 1), l = list())
 #' is.container(co)
 #' print(co)
 #' length(co)
 #' names(co)
-#' as.list(co)
+#'
 #' unpack(co)   # flatten recursively similar to unlist
 #'
 NULL

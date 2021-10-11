@@ -14,11 +14,48 @@ This class inherits from class \link{Iterable} and serves as the base
 class for \link{Deque}, \link{Set}, and \link{Dict}.
 }
 \examples{
-co <- Container$new(1, b = NA, 1:3, c = container("a", 1))
+co = Container$new(1:5, c = Container$new("a", 1), l = list())
 co$print()
 co$length()
-co$add(3)
+co$names()
+co$clear()
+
+# Extract
+co = Container$new(a = 1, b = 2, c = 3, d = 4)
 co$at(1:2)
+co$at(c(1, 4))
+co$at(list("d", 2))
+co$at2(1)
+
+\dontrun{
+co$at(0:2)  # index must be > 0
+}
+
+co$peek_at(0:2)
+co$peek_at(0:2, default = 1)
+
+# Replace
+co$replace(4, 9)
+co$replace(9, 11)
+co$replace_at(1, -1)
+
+\dontrun{
+co$replace_at(11, 1) # index 11 exceeds length of Container
+}
+
+# Delete
+co$delete(-1)
+co$delete_at(3)
+
+\dontrun{
+co$delete_at(3)     # index 3 exceeds length of Container
+}
+
+co$discard(3)
+
+co2 = Container$new(b = 0)
+co2$add(0, name = "a")
+co$update(co2)
 }
 \seealso{
 \code{\link[=container]{container()}}, \link{Iterable}, \link{Deque}, \link{Set}, and \link{Dict}
@@ -48,6 +85,7 @@ Roman Pahl
 \item \href{#method-has_name}{\code{Container$has_name()}}
 \item \href{#method-is_empty}{\code{Container$is_empty()}}
 \item \href{#method-length}{\code{Container$length()}}
+\item \href{#method-names}{\code{Container$names()}}
 \item \href{#method-peek_at}{\code{Container$peek_at()}}
 \item \href{#method-peek_at2}{\code{Container$peek_at2()}}
 \item \href{#method-pop}{\code{Container$pop()}}
@@ -366,6 +404,19 @@ Number of elements of the \code{Container}.
 \subsection{Returns}{
 \code{integer} length of the \code{Container}, that is, the number of
 elements it contains.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-names"></a>}}
+\if{latex}{\out{\hypertarget{method-names}{}}}
+\subsection{Method \code{names()}}{
+Names of the elements.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Container$names()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{character} the names of the elements contained in \code{x}
 }
 }
 \if{html}{\out{<hr>}}

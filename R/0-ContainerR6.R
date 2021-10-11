@@ -47,11 +47,48 @@ Iterable <- R6::R6Class("Iterable",
 #' @seealso [container()], [Iterable], [Deque], [Set], and [Dict]
 #' @export
 #' @examples
-#' co <- Container$new(1:5, c = Container$new("a", 1), l = list(1:3))
+#' co = Container$new(1:5, c = Container$new("a", 1), l = list())
 #' co$print()
 #' co$length()
+#' co$names()
+#' co$clear()
 #'
-#' co$add(3)
+#' # Extract
+#' co = Container$new(a = 1, b = 2, c = 3, d = 4)
+#' co$at(1:2)
+#' co$at(c(1, 4))
+#' co$at(list("d", 2))
+#' co$at2(1)
+#'
+#' \dontrun{
+#' co$at(0:2)  # index must be > 0
+#' }
+#'
+#' co$peek_at(0:2)
+#' co$peek_at(0:2, default = 1)
+#'
+#' # Replace
+#' co$replace(4, 9)
+#' co$replace(9, 11)
+#' co$replace_at(1, -1)
+#'
+#' \dontrun{
+#' co$replace_at(11, 1) # index 11 exceeds length of Container
+#' }
+#'
+#' # Delete
+#' co$delete(-1)
+#' co$delete_at(3)
+#'
+#' \dontrun{
+#' co$delete_at(3)     # index 3 exceeds length of Container
+#' }
+#'
+#' co$discard(3)
+#'
+#' co2 = Container$new(b = 0)
+#' co2$add(0, name = "a")
+#' co$update(co2)
 Container <- R6::R6Class("Container",
     inherit = Iterable,
     public = list(

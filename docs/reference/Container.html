@@ -180,6 +180,7 @@ class for <a href='Deque.html'>Deque</a>, <a href='Set.html'>Set</a>, and <a hre
 <li><p><a href='#method-has_name'><code>Container$has_name()</code></a></p></li>
 <li><p><a href='#method-is_empty'><code>Container$is_empty()</code></a></p></li>
 <li><p><a href='#method-length'><code>Container$length()</code></a></p></li>
+<li><p><a href='#method-names'><code>Container$names()</code></a></p></li>
 <li><p><a href='#method-peek_at'><code>Container$peek_at()</code></a></p></li>
 <li><p><a href='#method-peek_at2'><code>Container$peek_at2()</code></a></p></li>
 <li><p><a href='#method-pop'><code>Container$pop()</code></a></p></li>
@@ -383,6 +384,13 @@ determines whether <em>any</em> element is named.</p><h4 class='hasAnchor' id='a
 <p><code>integer</code> length of the <code>Container</code>, that is, the number of
 elements it contains.</p>
 <p><hr>
+<a id="method-names"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/names.html'>names()</a></code></h3>
+<p>Names of the elements.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>Container</span><span class='op'>$</span><span class='fu'>names</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
+<p><code>character</code> the names of the elements contained in <code>x</code></p>
+<p><hr>
 <a id="method-peek_at"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='peek_at.html'>peek_at()</a></code></h3>
 <p>Same as <code>peek_at2</code> (see below) but accepts a vector of
 indices and always returns a <code>Container</code> object.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
@@ -559,12 +567,49 @@ not in the <code>Container</code> and update elements with existing names.</p><h
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>co</span> <span class='op'>&lt;-</span> <span class='va'>Container</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='fl'>1</span>, b <span class='op'>=</span> <span class='cn'>NA</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, c <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>co</span> <span class='op'>=</span> <span class='va'>Container</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, c <span class='op'>=</span> <span class='va'>Container</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='st'>"a"</span>, <span class='fl'>1</span><span class='op'>)</span>, l <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>co</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1, b = NA, (1L 2L 3L), c = ["a", 1]]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>length</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 4</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>add</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1, b = NA, (1L 2L 3L), c = ["a", 1], 3]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>at</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1, b = NA]</div></pre>
+</div><div class='output co'>#&gt; [(1L 2L 3L 4L ...), c = ["a", 1], l = list()]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>length</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 3</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>names</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] ""  "c" "l"</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>clear</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; []</div><div class='input'>
+<span class='co'># Extract</span>
+<span class='va'>co</span> <span class='op'>=</span> <span class='va'>Container</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span>, c <span class='op'>=</span> <span class='fl'>3</span>, d <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>at</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [a = 1, b = 2]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>at</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [a = 1, d = 4]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>at</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='st'>"d"</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [d = 4, b = 2]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>at2</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>at</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>  <span class='co'># index must be &gt; 0</span>
+<span class='op'>}</span>
+
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>peek_at</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [a = 1, b = 2]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>peek_at</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>2</span>, default <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1, a = 1, b = 2]</div><div class='input'>
+<span class='co'># Replace</span>
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>replace</span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>9</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [a = 1, b = 2, c = 3, d = 9]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>replace</span><span class='op'>(</span><span class='fl'>9</span>, <span class='fl'>11</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [a = 1, b = 2, c = 3, d = 11]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>replace_at</span><span class='op'>(</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [a = -1, b = 2, c = 3, d = 11]</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>replace_at</span><span class='op'>(</span><span class='fl'>11</span>, <span class='fl'>1</span><span class='op'>)</span> <span class='co'># index 11 exceeds length of Container</span>
+<span class='op'>}</span>
+
+<span class='co'># Delete</span>
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>delete</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [b = 2, c = 3, d = 11]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>delete_at</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [b = 2, c = 3]</div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>delete_at</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>     <span class='co'># index 3 exceeds length of Container</span>
+<span class='op'>}</span>
+
+<span class='va'>co</span><span class='op'>$</span><span class='fu'>discard</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [b = 2]</div><div class='input'>
+<span class='va'>co2</span> <span class='op'>=</span> <span class='va'>Container</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>b <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span>
+<span class='va'>co2</span><span class='op'>$</span><span class='fu'>add</span><span class='op'>(</span><span class='fl'>0</span>, name <span class='op'>=</span> <span class='st'>"a"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [b = 0, a = 0]</div><div class='input'><span class='va'>co</span><span class='op'>$</span><span class='fu'>update</span><span class='op'>(</span><span class='va'>co2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [b = 0, a = 0]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
