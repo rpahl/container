@@ -18,9 +18,11 @@ elements are always sorted lexicographically by their keys.
 d = Dict$new(o = "one", na = NA, a = 1)
 d
 d$keys()
+
 d$add("li", list(1, 2))
 d$discard_at("na")
 d$replace(1, 9)
+
 d2 = Dict$new(a = 0, b = 1)
 d$update(d2)
 }

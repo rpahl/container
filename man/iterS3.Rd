@@ -64,6 +64,42 @@ sequences. It implements \code{\link[=next_iter]{next_iter()}} and \code{\link[=
 value of the sequence it is associated with.
 For documentation of the methods see \link{Iterator}.
 }
+\examples{
+# Numeric Vector
+v = 1:3
+it = iter(v)
+it
+
+\dontrun{
+it$get_value()  # iterator does not point at a value
+}
+
+has_value(it)
+has_next(it)
+next_iter(it)
+get_value(it)
+get_next(it)
+get_next(it)
+it
+has_next(it)
+begin(it)
+get_value(it)
+reset_iter(it)
+
+# Works on copy of Container
+co = container(1, 2, 3)
+it = iter(co)
+get_next(it)
+ref_discard(co, 2)
+co
+it
+get_next(it)
+ref_clear(co)
+co
+it
+get_next(it)
+begin(it)
+}
 \seealso{
 For the class documentation see \link{Iterator}.
 }

@@ -18,6 +18,40 @@
 #' @docType class
 #' @importFrom R6 R6Class
 #' @export
+#' @examples
+#'
+#' # Numeric Vector
+#' v = 1:3
+#' it = Iterator$new(v)
+#' it
+#'
+#' \dontrun{
+#' it$get_value()  # iterator does not point at a value
+#' }
+#'
+#' it$has_value()
+#' it$has_next()
+#' it$next_iter()
+#' it$get_value()
+#' it$get_next()
+#' it$get_next()
+#' it
+#' it$has_next()
+#' it$begin()
+#' it$get_value()
+#' it$reset_iter()
+#'
+#' # Works by reference for Container
+#' co = Container$new(1, 2, 3)
+#' it = co$iter()
+#' it$get_next()
+#' co$discard(2)
+#' it
+#' it$get_value()
+#' co$discard(1)
+#' it
+#' it$get_value()
+#' it$begin()
 Iterator <- R6::R6Class("Iterator",
     public = list(
 
@@ -31,7 +65,7 @@ Iterator <- R6::R6Class("Iterator",
 
             private$object <- x
             private$.subset <- .subset
-            invisible(self)
+            self
         },
 
         #' @description set iterator to the first element of the underlying
@@ -40,7 +74,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @return invisibly returns the `Iterator` object
         begin = function() {
             private$i <- min(1L, self$length())
-            invisible(self)
+            self
         },
 
         #' @description get value where the iterator points to
@@ -91,7 +125,7 @@ Iterator <- R6::R6Class("Iterator",
             } else {
                 stop("Iterator has no more elements.")
             }
-            invisible(self)
+            self
         },
 
         #' @description print method
@@ -104,7 +138,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @return invisibly returns the `Iterator` object
         reset_iter = function() {
             private$i <- 0L
-            invisible(self)
+            self
         }
     ),
     private = list(object = list(),

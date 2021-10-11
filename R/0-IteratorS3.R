@@ -12,8 +12,41 @@
 #' @param it `Iterator` object
 #' @name iterS3
 #' @seealso For the class documentation see [Iterator].
-NULL
-
+#' @examples
+#' # Numeric Vector
+#' v = 1:3
+#' it = iter(v)
+#' it
+#'
+#' \dontrun{
+#' it$get_value()  # iterator does not point at a value
+#' }
+#'
+#' has_value(it)
+#' has_next(it)
+#' next_iter(it)
+#' get_value(it)
+#' get_next(it)
+#' get_next(it)
+#' it
+#' has_next(it)
+#' begin(it)
+#' get_value(it)
+#' reset_iter(it)
+#'
+#' # Works on copy of Container
+#' co = container(1, 2, 3)
+#' it = iter(co)
+#' get_next(it)
+#' ref_discard(co, 2)
+#' co
+#' it
+#' get_next(it)
+#' ref_clear(co)
+#' co
+#' it
+#' get_next(it)
+#' begin(it)
 #' @rdname iterS3
 #' @export
 iter <- function(x, ...) UseMethod("iter")
