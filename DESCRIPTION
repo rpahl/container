@@ -1,7 +1,7 @@
 Package: container
 Type: Package
 Title: Extending base R list and data.table
-Version: 0.4.0
+Version: 1.0.0
 Date: 2020-11-07
 Authors@R:
     person("Roman", "Pahl",
