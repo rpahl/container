@@ -14,8 +14,10 @@
 #' d$addleft(0)
 #' d$peekleft()
 #' d$peek()
+#'
 #' d$popleft()
 #' d$rev()
+#'
 #' d$rotate()
 #' d$rotate(2)
 #' d$rotate(-3)
