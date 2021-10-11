@@ -12,15 +12,16 @@
 #' @export
 replace <- function(.x, ...) UseMethod("replace")
 
-#' @rdname replace
-#' @export
-ref_replace <- function(.x, ...) UseMethod("ref_replace")
-
 #' @export
 replace.default <- function(.x, ...)
 {
     base::replace(.x, ...)
 }
+
+
+#' @rdname replace
+#' @export
+ref_replace <- function(.x, ...) UseMethod("ref_replace")
 
 
 #' @rdname replace
