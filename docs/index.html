@@ -120,7 +120,11 @@
 <p>The <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span> can be seen as a base R <span class="math display"><em>l</em><em>i</em><em>s</em><em>t</em></span> with extended functionality. There is basically nothing that you can do with a <span class="math display"><em>l</em><em>i</em><em>s</em><em>t</em></span> that can’t can also be done with the <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span>, but the <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span> is capable of much more. Below you find some (of many) extra things the <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span> is capable of.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rpahl/container">container</a></span><span class="op">)</span>
-
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'container'</span>
+<span class="co">#&gt; The following object is masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     replace</span>
 <span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="va">li</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span></code></pre></div>
 <p>While the <span class="math display"><em>l</em><em>i</em><em>s</em><em>t</em></span> output can be very long and hard to read</p>
@@ -139,10 +143,8 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span>
 <span class="co">#&gt; [(1L 2L 3L 4L ...), l = list("a", 1)]</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#str(co) # TODO</span></code></pre></div>
 <p>The <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span> allows to find and replace elements directly without the need to determine their index first, by passing them in curly brackets. First, let’s see how to do it with the list.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">index</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">li</span>, <span class="va">identical</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="va">li</span><span class="op">[[</span><span class="va">index</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>
 <span class="va">li</span>
@@ -155,11 +157,11 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $l[[2]]</span>
 <span class="co">#&gt; [1] 1</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>
 <span class="va">co</span>
 <span class="co">#&gt; [(1L 2L 3L), l = list("a", 1)]</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/unpack.html">unpack</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
 <span class="co">#&gt;              l1  l2 </span>
 <span class="co">#&gt; "1" "2" "3" "a" "1"</span></code></pre></div>
@@ -168,7 +170,7 @@
 <h3 class="hasAnchor">
 <a href="#dicttable-vs-dataframe" class="anchor"></a>dict.table vs data.frame</h3>
 <p>The <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span> can be seen as a base R <span class="math display"><em>d</em><em>a</em><em>t</em><em>a</em>.<em>f</em><em>r</em><em>a</em><em>m</em><em>e</em></span> with extended functionality. There is basically nothing that you can do with a <span class="math display"><em>d</em><em>a</em><em>t</em><em>a</em>.<em>f</em><em>r</em><em>a</em><em>m</em><em>e</em></span> that can’t can also be done with the <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span>, but the <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span> is capable of much more. Below you find some (of many) extra things the <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span> is capable of.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dit</span> <span class="op">=</span> <span class="fu"><a href="reference/dicttable.html">dict.table</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
 <span class="va">dit</span>
 <span class="co">#&gt; &lt;dict.table&gt; with 2 rows and 2 columns</span>

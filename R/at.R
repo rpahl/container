@@ -95,8 +95,8 @@ at.dict.table <- function(.x, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `at(.x, ...)` returns the columns at the given indices. Indices
 #' can be letters or numbers or both. All columns must exist.

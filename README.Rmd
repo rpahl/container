@@ -51,7 +51,7 @@ devtools::install_github("rpahl/container")
 ```
 
 ```{r load-container, include = FALSE}
-library(container)
+#library(container)
 ```
 
 ### container vs list

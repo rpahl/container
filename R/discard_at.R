@@ -79,8 +79,8 @@ discard_at.dict.table <- function(.x, ...)
     (ref_discard_at(clone(.x), ...))
 }
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `discard_at(.x, ...)` and `ref_discard_at(.x, ...)` find and remove columns
 #' either by name or index (or both). Invalid column indices are ignored.

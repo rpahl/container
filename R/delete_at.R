@@ -144,8 +144,8 @@ delete_at.dict.table <- function(.x, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `delete_at(.x, ...)` and `ref_delete_at(.x, ...)` find and remove columns either by
 #' name or index (or both). If one or more columns don't exist, an error is signaled.

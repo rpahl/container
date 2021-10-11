@@ -47,7 +47,11 @@ extra things the \[container\] is capable of.
 
 ``` r
 library(container)
-
+#> 
+#> Attaching package: 'container'
+#> The following object is masked from 'package:base':
+#> 
+#>     replace
 co <- container(1:10, l = list("a", 1))
 li <- as.list(co)
 ```

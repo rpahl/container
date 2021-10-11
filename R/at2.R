@@ -86,8 +86,8 @@ at2.dict.table <- function(x, index, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `at2(x, index)` returns the column at the given `index` or signals
 #' an error if not found.

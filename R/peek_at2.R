@@ -84,8 +84,8 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `peek_at2(x, index, default = NULL)` return column named `index` if it exist
 #' otherwise the given `default` value. If the default length does not match

@@ -91,8 +91,8 @@ ref_update.dict.table <- function(object, other, ...)
     object
 }
 
-#' @name dict.tabldict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `update(object, other)` and `ref_update(object, other)` adds columns of `other` dict
 #' that are not yet in `object` and replaces the values at existing columns.
