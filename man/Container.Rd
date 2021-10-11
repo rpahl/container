@@ -3,14 +3,22 @@
 \docType{class}
 \name{Container}
 \alias{Container}
-\title{A sequence Container}
+\title{Container class}
 \description{
 This class implements a container data structure with typical
 member functions to insert, delete and access elements from the container.
-It also serves as the base class for \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}.
+It derives from \link{Iterable} and serves as the base class for \link{Deque}, \link{Set},
+and \link{Dict}. For the standard S3 interface, see \code{\link[=container]{container()}}.
+}
+\examples{
+co <- Container$new(1, b = NA, 1:3, c = container("a", 1))
+co$print()
+co$length()
+co$add(3)
+co$at(1:2)
 }
 \seealso{
-\code{\link[=Iterable]{Iterable()}}, \code{\link[=Deque]{Deque()}}, \code{\link[=Set]{Set()}}, and \code{\link[=Dict]{Dict()}}
+\code{\link[=container]{container()}}, \link{Iterable}, \link{Deque}, \link{Set}, and \link{Dict}
 }
 \author{
 Roman Pahl

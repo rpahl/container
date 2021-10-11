@@ -2,21 +2,6 @@
 expect_true(is.iterable(Container$new()))
 expect_false(is.iterable(1))
 
-# is.subsettable
-f = as.factor(1:3)
-expect_false(is.vector(f))
-expect_true(is.subsettable(f))
-f = formula(y ~ x + 1)
-expect_false(is.vector(f))
-expect_true(is.subsettable(f))
-expect_true(is.subsettable(1))
-expect_true(is.subsettable(data.frame(a = 1)))
-expect_true(is.subsettable(expression(x + 1)))
-
-expect_false(is.subsettable(list()))
-expect_true(is.subsettable(list(), .subset = .subset))
-
-
 # Iterator constructor works as expected
 expect_error(Iterator$new(), 'argument "x" is missing')
 expect_error(Iterator$new(list()), "x must be iterable or subsettable")
@@ -119,4 +104,22 @@ it$next_iter()
 expect_equal(it$get_value(), list(a = 1))
 s$discard(1)
 expect_equal(it$get_value(), list(2))
+
+
+exit_file(msg = "internal helper function")
+
+# .is.subsettable
+f = as.factor(1:3)
+expect_false(is.vector(f))
+expect_true(.is.subsettable(f))
+f = formula(y ~ x + 1)
+expect_false(is.vector(f))
+expect_true(.is.subsettable(f))
+expect_true(.is.subsettable(1))
+expect_true(.is.subsettable(data.frame(a = 1)))
+expect_true(.is.subsettable(expression(x + 1)))
+
+expect_false(.is.subsettable(list()))
+expect_true(.is.subsettable(list(), .subset = .subset))
+
 

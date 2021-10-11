@@ -1,10 +1,4 @@
-#' Check if object is subsettable
-#'
-#' @param x any `R` object
-#' @param .subset subset function to be used on `x`
-#' @return returns `TRUE` if object is subsettable otherwise `FALSE`
-#' @export
-is.subsettable <- function(x, .subset = .subset2)
+.is.subsettable <- function(x, .subset = .subset2)
 {
     if (!is.function(.subset))
         stop("'.subset' argument must be a function", call. = FALSE)
@@ -14,7 +8,7 @@ is.subsettable <- function(x, .subset = .subset2)
 }
 
 
-#' @title Iterator
+#' @title Iterator class
 #'
 #' @description An `Iterator` is an object that allows to iterate over
 #'  sequences. It implements `next_iter` and `get_value` to iterate and retrieve the
@@ -31,7 +25,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @param .subset accessor function
         #' @return invisibly returns the `Iterator` object
         initialize = function(x, .subset = .subset2) {
-            if (!(is.iterable(x) || is.subsettable(x, .subset)))
+            if (!(is.iterable(x) || .is.subsettable(x, .subset)))
                 stop("x must be iterable or subsettable", call. = FALSE)
 
             private$object <- x

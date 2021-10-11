@@ -14,6 +14,7 @@ reference:
   - title: "Container"
     desc: "A container can be considered a basic R list with extended functionality."
     contents:
+    - Container
     - container
     - clear
     - clone
@@ -50,6 +51,7 @@ reference:
         Derives all Container methods.
         Can also be used to mimic stacks or simple queues.
     contents:
+    - Deque
     - deque
     - addleft
     - peekleft
@@ -59,6 +61,7 @@ reference:
   - title: "Set"
     desc: "Derives all Container methods. Set elements are always unique."
     contents:
+    - Set
     - setnew
 
 
@@ -69,6 +72,7 @@ reference:
         providing both associative key-value pair as well as positional array
         semantics.
     contents:
+    - Dict
     - dict
 
 
@@ -79,9 +83,11 @@ reference:
     contents:
     - starts_with("dict.table")
 
-  - title: "Iterators"
+  - title: "Iterator"
     desc: "Iterate over sequences."
     contents:
+    - Iterable
+    - Iterator
     - iter
 
   - title: "Operators"

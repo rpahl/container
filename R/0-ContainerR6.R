@@ -1,14 +1,14 @@
 #' Iterable abstract class interface
 #'
-#' @description An `Iterable` is an object that provides an `iter` method,
-#' which is expected to return an `Iterator` object. This class defines the
+#' @description An [Iterable] is an object that provides an [iter()] method,
+#' which is expected to return an [Iterator] object. This class defines the
 #' abstract class interface such that each class inheriting this class provides
-#' an [iter()] method and must implement a private method `create_iter`,
-#' which must return an `Iterator` object.
+#' an [iter()] method and must implement a private method `create_iter()`,
+#' which must return an [Iterator] object.
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
-#' @seealso `Iterator` and `Container`
+#' @seealso [Iterator] and [Container]
 Iterable <- R6::R6Class("Iterable",
     public = list(
 
@@ -34,16 +34,23 @@ Iterable <- R6::R6Class("Iterable",
 
 
 
-#' @title A sequence Container
+#' @title Container class
 #'
 #' @description This class implements a container data structure with typical
 #' member functions to insert, delete and access elements from the container.
-#' It also serves as the base class for [Deque()], [Set()], and [Dict()].
+#' It derives from [Iterable] and serves as the base class for [Deque], [Set],
+#' and [Dict]. For the standard S3 interface, see [container()].
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
-#' @seealso [Iterable()], [Deque()], [Set()], and [Dict()]
+#' @seealso [container()], [Iterable], [Deque], [Set], and [Dict]
 #' @export
+#' @examples
+#' co <- Container$new(1, b = NA, 1:3, c = container("a", 1))
+#' co$print()
+#' co$length()
+#' co$add(3)
+#' co$at(1:2)
 Container <- R6::R6Class("Container",
     inherit = Iterable,
     public = list(
