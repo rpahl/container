@@ -1,4 +1,4 @@
-#' @title Set methods
+#' @title Set
 #'
 #' @description The [Set()] is considered and implemented as a specialized
 #' [Container()], that is, `Set` elements are always unique. It provides

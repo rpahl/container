@@ -1,4 +1,4 @@
-#' Strict element replacement at index
+#' Replace Values at Indices Safely
 #'
 #' @description Try to find and replace elements at given indices and signal an
 #' error if not found, unless it is stated to explicitly add the element (see
@@ -76,7 +76,7 @@ NULL
             values = list(values)
         }
     } else {
-        verify_names(names(values))
+        .verify_names(names(values))
     }
 
     if (length(indices) > 1 && length(indices) != length(values))
@@ -164,8 +164,8 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
     invisible(.x)
 }
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `replace_at(.x, .., .add = FALSE)` and `ref_replace_at(.x, ..., .add = FALSE)`
 #' replace values at given indices. If a given index is invalid, an error is

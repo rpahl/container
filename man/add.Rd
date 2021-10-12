@@ -3,33 +3,21 @@
 \name{add}
 \alias{add}
 \alias{ref_add}
-\alias{addleft}
-\alias{ref_addleft}
 \alias{add.Container}
 \alias{ref_add.Container}
-\alias{addleft.Deque}
-\alias{ref_addleft.Deque}
 \alias{add.Dict}
 \alias{ref_add.Dict}
 \alias{add.dict.table}
 \alias{ref_add.dict.table}
-\title{Add elements}
+\title{Add Elements to Containers}
 \usage{
 add(.x, ...)
 
 ref_add(.x, ...)
 
-addleft(.x, ...)
-
-ref_addleft(.x, ...)
-
 \method{add}{Container}(.x, ...)
 
 \method{ref_add}{Container}(.x, ...)
-
-\method{addleft}{Deque}(.x, ...)
-
-\method{ref_addleft}{Deque}(.x, ...)
 
 \method{add}{Dict}(.x, ...)
 
@@ -45,28 +33,24 @@ ref_addleft(.x, ...)
 \item{...}{elements to be added.}
 }
 \value{
-For \code{Container}, an object of class \code{Container} (or one of the
+For \link{Container}, an object of class \link{Container} (or one of the
 respective derived classes).
 
-For \code{Deque}, an object of class \code{Deque} with the elements being
-added to the right or left (\code{addleft}) of \code{.x}.
-
-For \code{Dict}, an object of class \code{Dict}.
-
-For \code{dict.table}, an object of class \code{dict.table}.
+For \href{dicttable}{dict.table} an object of class
+\href{dicttable}{dict.table}.
 }
 \description{
 Add elements to container-like objects.
 }
-\details{
-Both \code{add} and \code{addleft} use copy semantics while \code{ref_add} and
-\code{ref_addleft} work by reference.
+\note{
+While \link{add} uses copy semantics \link{ref_add} works by reference.
 
-If \code{.x} is a \code{Container}, \code{Set} or \code{Deque} object, the elements being added
+If \code{.x} is a \link{Container}, \link{Set} or \link{Deque} object, the elements being added
 can (but must not) be named.
 
-If \code{.x} is a \code{Dict} or \code{dict.table} object, all elements \emph{must} be of the
-form \code{key = value}. If one of the keys already exists, an error is given.
+If \code{.x} is a \link{Dict} or \href{dicttable}{dict.table} object,
+all elements \emph{must} be of the form \code{key = value}.
+If one of the keys already exists, an error is given.
 }
 \examples{
 
@@ -75,9 +59,6 @@ add(co, 1, b = 2, c = container(1:3))
 
 s = setnew(1)
 add(s, 1, 1, b = 2, "1", co = container(1, 1))
-d = deque(0)
-add(d, a = 1, b = 2)         # |0, a = 1, b = 2|
-addleft(d, a = 1, b = 2)     # |b = 2, a = 1, 0|
 
 d = dict(a = 1)
 add(d, b = 2, co = container(1:3))

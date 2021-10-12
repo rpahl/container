@@ -1,14 +1,14 @@
 #' Iterable abstract class interface
 #'
-#' @description An `Iterable` is an object that provides an `iter` method,
-#' which is expected to return an `Iterator` object. This class defines the
+#' @description An [Iterable] is an object that provides an [iter()] method,
+#' which is expected to return an [Iterator] object. This class defines the
 #' abstract class interface such that each class inheriting this class provides
-#' an [iter()] method and must implement a private method `create_iter`,
-#' which must return an `Iterator` object.
+#' an [iter()] method and must implement a private method `create_iter()`,
+#' which must return an [Iterator] object.
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
-#' @seealso `Iterator` and `Container`
+#' @seealso [Iterator] and [Container]
 Iterable <- R6::R6Class("Iterable",
     public = list(
 
@@ -34,17 +34,63 @@ Iterable <- R6::R6Class("Iterable",
 
 
 
-#' @title A sequence Container
+#' @title Container Class
 #'
 #' @description This class implements a container data structure with typical
 #' member functions to insert, delete and access elements from the container.
-#' While it can be used to create [Container()] objects, it also serves as the
-#' base class for [Deque()], [Set()], and [Dict()].
+#' For the standard S3 interface, see [container()].
+#' @details This class inherits from class [Iterable] and serves as the base
+#' class for [Deque], [Set], and [Dict].
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
-#' @seealso [Iterable()], [Deque()], [Set()], and [Dict()]
+#' @seealso [container()], [Iterable], [Deque], [Set], and [Dict]
 #' @export
+#' @examples
+#' co = Container$new(1:5, c = Container$new("a", 1), l = list())
+#' co$print()
+#' co$length()
+#' co$names()
+#' co$clear()
+#'
+#' # Extract
+#' co = Container$new(a = 1, b = 2, c = 3, d = 4)
+#' co$at(1:2)
+#' co$at(c(1, 4))
+#' co$at(list("d", 2))
+#' co$at2(1)
+#'
+#' \dontrun{
+#' co$at(0:2)  # index must be > 0
+#' }
+#'
+#' co$peek_at(0:2)
+#' co$peek_at(0:2, default = 1)
+#'
+#' # Replace
+#' co$replace(4, 9)
+#' co$replace(9, 11)
+#' co$replace_at(1, -1)
+#'
+#' \dontrun{
+#' co$replace_at(11, 1) # index 11 exceeds length of Container
+#' }
+#'
+#' # Delete
+#' co$delete(-1)
+#' co$delete_at(3)
+#'
+#' \dontrun{
+#' co$delete_at(3)     # index 3 exceeds length of Container
+#' }
+#'
+#' co$discard(3)
+#'
+#' co2 = Container$new(b = 0)
+#' co2$add(0, name = "a")
+#' co$update(co2)
+#' co$pop(1)
+#' co
 Container <- R6::R6Class("Container",
     inherit = Iterable,
     public = list(
@@ -131,7 +177,7 @@ Container <- R6::R6Class("Container",
         #' @return the `Container` object
         delete = function(elem) {
             if (!self$has(elem))
-                stop(get_label(elem), " is not in ", data.class(self),
+                stop(.get_label(elem), " is not in ", data.class(self),
                      call. = FALSE)
 
             self$discard(elem)
@@ -223,6 +269,10 @@ Container <- R6::R6Class("Container",
         #' @return `integer` length of the `Container`, that is, the number of
         #' elements it contains.
         length = function() length(private$elems),
+
+        #' @description Names of the elements.
+        #' @return `character` the names of the elements contained in `x`
+        names = function() names(private$elems),
 
         #' @description Same as `peek_at2` (see below) but accepts a vector of
         #' indices and always returns a `Container` object.
@@ -343,7 +393,7 @@ Container <- R6::R6Class("Container",
                 return(self$add(new))
 
             if (!hasElem)
-                stop("old element (", get_label(old),
+                stop("old element (", .get_label(old),
                      ") is not in ", data.class(self), call. = FALSE)
 
             name = names(self)[[pos]]

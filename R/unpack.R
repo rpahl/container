@@ -1,4 +1,4 @@
-#' Unpack nested objects
+#' Unpack Nested Objects
 #'
 #' Similary to [unlist()] recursively unpacks any (possibly nested) structure
 #' into a flat list. In contrast to [unlist()], [unpack()] also works with

@@ -1,5 +1,5 @@
-f... = get_label
-f = function(...) get_label(..., useDots = FALSE)
+f... = container:::.get_label
+f = function(...) container:::.get_label(..., useDots = FALSE)
 ee = expect_equal
 
 # -------------

@@ -1,4 +1,4 @@
-#' Discard elements
+#' Discard Container Elements
 #'
 #' Search and remove an element from an object. If the element is not found,
 #' ignore the attempt.

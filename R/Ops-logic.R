@@ -1,4 +1,4 @@
-#' Logic Operators for Containers
+#' Logic Operators
 #'
 #' @description Binary logic operators for [Container()] objects and
 #' derived classes.

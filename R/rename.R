@@ -19,7 +19,7 @@
     invisible()
 }
 
-#' Rename elements safely
+#' Rename Elements Safely
 #'
 #' @description Search for old name and replace it by new name. If either the
 #' old name does not exist or the name would result in a name-clash with an
@@ -117,8 +117,8 @@ ref_rename.dict.table <- function(.x, old, new)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `rename(.x, old, new)` and `ref_rename(.x, old, new)` rename one or more
 #' columns from `old` to `new`, respectively, by copy and in place (i.e. by

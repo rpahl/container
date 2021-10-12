@@ -1,4 +1,4 @@
-#' Delete elements
+#' Delete Container Elements Safely
 #'
 #' Search and remove elements from an object. If the element is not found,
 #' an error is signaled.

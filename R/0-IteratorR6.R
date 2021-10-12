@@ -1,10 +1,4 @@
-#' Check if object is subsettable
-#'
-#' @param x any `R` object
-#' @param .subset subset function to be used on `x`
-#' @return returns `TRUE` if object is subsettable otherwise `FALSE`
-#' @export
-is.subsettable <- function(x, .subset = .subset2)
+.is.subsettable <- function(x, .subset = .subset2)
 {
     if (!is.function(.subset))
         stop("'.subset' argument must be a function", call. = FALSE)
@@ -14,15 +8,50 @@ is.subsettable <- function(x, .subset = .subset2)
 }
 
 
-#' @title Iterator
+#' @title Iterator Class
 #'
 #' @description An `Iterator` is an object that allows to iterate over
 #'  sequences. It implements `next_iter` and `get_value` to iterate and retrieve the
 #'  value of the sequence it is associated with.
+#' For the standard S3 interface, see [iter()].
 #' @author Roman Pahl
 #' @docType class
 #' @importFrom R6 R6Class
 #' @export
+#' @examples
+#'
+#' # Numeric Vector
+#' v = 1:3
+#' it = Iterator$new(v)
+#' it
+#'
+#' \dontrun{
+#' it$get_value()  # iterator does not point at a value
+#' }
+#'
+#' it$has_value()
+#' it$has_next()
+#' it$next_iter()
+#' it$get_value()
+#' it$get_next()
+#' it$get_next()
+#' it
+#' it$has_next()
+#' it$begin()
+#' it$get_value()
+#' it$reset_iter()
+#'
+#' # Works by reference for Container
+#' co = Container$new(1, 2, 3)
+#' it = co$iter()
+#' it$get_next()
+#' co$discard(2)
+#' it
+#' it$get_value()
+#' co$discard(1)
+#' it
+#' it$get_value()
+#' it$begin()
 Iterator <- R6::R6Class("Iterator",
     public = list(
 
@@ -31,12 +60,12 @@ Iterator <- R6::R6Class("Iterator",
         #' @param .subset accessor function
         #' @return invisibly returns the `Iterator` object
         initialize = function(x, .subset = .subset2) {
-            if (!(is.iterable(x) || is.subsettable(x, .subset)))
+            if (!(is.iterable(x) || .is.subsettable(x, .subset)))
                 stop("x must be iterable or subsettable", call. = FALSE)
 
             private$object <- x
             private$.subset <- .subset
-            invisible(self)
+            self
         },
 
         #' @description set iterator to the first element of the underlying
@@ -45,7 +74,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @return invisibly returns the `Iterator` object
         begin = function() {
             private$i <- min(1L, self$length())
-            invisible(self)
+            self
         },
 
         #' @description get value where the iterator points to
@@ -96,7 +125,7 @@ Iterator <- R6::R6Class("Iterator",
             } else {
                 stop("Iterator has no more elements.")
             }
-            invisible(self)
+            self
         },
 
         #' @description print method
@@ -109,7 +138,7 @@ Iterator <- R6::R6Class("Iterator",
         #' @return invisibly returns the `Iterator` object
         reset_iter = function() {
             private$i <- 0L
-            invisible(self)
+            self
         }
     ),
     private = list(object = list(),

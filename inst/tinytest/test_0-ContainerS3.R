@@ -31,10 +31,13 @@ ee(as.container(container(1)), container(1))
 # container is created as copy from another container
 co = container(1, 2)
 co2 = as.container(co)
+ee(as.container(co), as.cont(co))
 ee(co, co2)
 co$clear()
 ee(length(co), 0)
 ee(length(co2), 2)
+
+ee(container(1, 2), cont(1, 2))
 
 # a data.frame can be converted to a container
 daf = data.frame(A = 1:2, B = 3:4)
@@ -172,4 +175,18 @@ ee(names(container(numeric())), NULL)
 ee(names(container(list())), NULL)
 ee(names(container(1, 2, 3)), NULL)
 ee(names(container(a = 1, 2, x = 5)), c("a", "", "x"))
+
+# ---------------
+# str.Container
+# ---------------
+co = container(1:3, container("a", 1))
+out = utils::capture.output(str(co))
+
+expected_out = c("Container of 2 ",
+                 " $ : int [1:3] 1 2 3",
+                 " $ :Container of 2 ",
+                 "  ..$ : chr \"a\"",
+                 "  ..$ : num 1")
+
+expect_equal(out, expected_out)
 

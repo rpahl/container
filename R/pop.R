@@ -1,4 +1,4 @@
-#' Pop element
+#' Get and Remove Element
 #'
 #' Search and return an element and remove it afterwards from the object.
 #' If the element is not found, signal an error.
@@ -112,8 +112,8 @@ ref_pop.dict.table <- function(.x, index, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `ref_pop(.x, index)` return element at given column index and remove the
 #' column from the dict.table object.

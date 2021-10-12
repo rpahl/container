@@ -8,7 +8,7 @@
 \alias{ref_popleft.Deque}
 \alias{ref_pop.Container}
 \alias{ref_pop.dict.table}
-\title{Pop element}
+\title{Get and Remove Element}
 \usage{
 ref_pop(.x, ...)
 

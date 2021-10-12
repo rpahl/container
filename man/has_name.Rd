@@ -4,7 +4,7 @@
 \alias{has_name}
 \alias{has_name.Container}
 \alias{has_name.dict.table}
-\title{Check if object has some name}
+\title{Check for Name}
 \usage{
 has_name(x, name)
 
@@ -24,7 +24,7 @@ For \code{dict.table} \code{TRUE} if the dict.table objects has the given
 column name, otherwise \code{FALSE}.
 }
 \description{
-Check if object has some name
+Check for Name
 }
 \examples{
 

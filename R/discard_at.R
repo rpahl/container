@@ -1,4 +1,4 @@
-#' Discard elements at index
+#' Discard Elements at Indices
 #'
 #' Search and remove values at given indices, which can be numeric or character
 #' or both. Invalid indices are ignored.
@@ -79,8 +79,8 @@ discard_at.dict.table <- function(.x, ...)
     (ref_discard_at(clone(.x), ...))
 }
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `discard_at(.x, ...)` and `ref_discard_at(.x, ...)` find and remove columns
 #' either by name or index (or both). Invalid column indices are ignored.

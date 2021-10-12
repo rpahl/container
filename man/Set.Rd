@@ -2,16 +2,34 @@
 % Please edit documentation in R/0-SetR6.R
 \name{Set}
 \alias{Set}
-\title{Set}
+\title{Set Class}
 \description{
 The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
 \code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and
 it provides typical set operations such as \code{union} and \code{intersect}.
+For the standard S3 interface, see \code{\link[=setnew]{setnew()}}.
 }
 \details{
 Under the hood, elements of a set object are stored in a hash-table
-and sorted by their length and, in case of ties, by their lexicographical
+and always sorted by their length and, in case of ties, by their lexicographical
 representation.
+}
+\examples{
+s1 = Set$new(1, 2)
+s1
+s1$add(1)
+s1$add(3)
+s2 = Set$new(3, 4, 5)
+s1$union(s2)
+s1
+
+s1 = Set$new(1, 2, 3)
+s1$intersect(s2)
+s1
+
+s1$diff(s2)
+s1$diff(s1)
+s1
 }
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=set]{set()}}
@@ -52,6 +70,7 @@ representation.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name">}\href{../../container/html/Container.html#method-has_name}{\code{container::Container$has_name()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names">}\href{../../container/html/Container.html#method-names}{\code{container::Container$names()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}

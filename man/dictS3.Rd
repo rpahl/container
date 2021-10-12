@@ -7,7 +7,7 @@
 \alias{dict}
 \alias{as.dict}
 \alias{is.dict}
-\title{Dict methods}
+\title{A Dictionary}
 \usage{
 dict(...)
 
@@ -80,8 +80,8 @@ raised.
 }
 
 \itemize{
-\item \code{update(x, other)} and \code{ref_update(x, other)} adds elements of \code{other} dict
-for keys not yet in \code{x} and replaces the values of existing keys.
+\item \code{update(object, other)} and \code{ref_update(object, other)} adds elements of \code{other} dict
+for keys not yet in \code{object} and replaces the values of existing keys.
 }
 }
 \examples{

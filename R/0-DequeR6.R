@@ -1,14 +1,26 @@
-#' Deque (double-ended queue)
+#' Deque Class
 #'
 #' @description Deques are a generalization of stacks and queues typically
 #' with methods to add, delete and access elements at both sides of the
-#' underlying data sequence. As such, the [Deque()] can also be used to mimic
-#' both stacks and queues.
+#' underlying data sequence. As such, the [Deque] can also be used to mimic
+#' both stacks and queues. For the standard S3 interface, see [deque()].
 #' @details This class inherits from class [Container()] and extends it by
-#' `pop` and `peek` methods, and reverse and rotate functionality.
+#' `popleft` and `peek` methods, and reverse and rotate functionality.
 #' @importFrom R6 R6Class
 #' @seealso [Container()], [deque()]
 #' @export
+#' @examples
+#' d = Deque$new(1, 2, s = "a", v = 1:3)
+#' d$addleft(0)
+#' d$peekleft()
+#' d$peek()
+#'
+#' d$popleft()
+#' d$rev()
+#'
+#' d$rotate()
+#' d$rotate(2)
+#' d$rotate(-3)
 Deque <- R6::R6Class("Deque",
     inherit = Container,
     public = list(

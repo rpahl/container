@@ -1,4 +1,4 @@
-#' Clone an object
+#' Clone an Object
 #'
 #' Creates a copy of the object.
 #' @param x any `R` object.
@@ -38,8 +38,8 @@ NULL
 #' print(d2)
 clone.dict.table <- function(x) (copy(x))
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `clone(x)` create a copy of `x`.
 #' @examples

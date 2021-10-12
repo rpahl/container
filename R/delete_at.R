@@ -1,4 +1,4 @@
-#' Delete elements at index
+#' Delete Elements at Indices Safely
 #'
 #' Search and remove values at given indices, which can be numeric or character
 #' or both. If any given index is invalid, an error is signaled. Indices can be
@@ -144,8 +144,8 @@ delete_at.dict.table <- function(.x, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `delete_at(.x, ...)` and `ref_delete_at(.x, ...)` find and remove columns either by
 #' name or index (or both). If one or more columns don't exist, an error is signaled.

@@ -7,7 +7,7 @@
 \alias{ref_clear.Container}
 \alias{clear.dict.table}
 \alias{ref_clear.dict.table}
-\title{Clear a container}
+\title{Clear a Container}
 \usage{
 clear(x)
 
@@ -25,10 +25,11 @@ ref_clear(x)
 \item{x}{any \code{R} object.}
 }
 \value{
-For \code{Container}, an object of class \code{Container} (or one of the
+For \link{Container}, an object of class \link{Container} (or one of the
 respective derived classes).
 
-For \code{dict.table} an object of class \code{dict.table}.
+For \href{dicttable}{dict.table} an object of class
+\href{dicttable}{dict.table}.
 }
 \description{
 Removes all elements from the container object.

@@ -3,7 +3,7 @@
 \name{container_options}
 \alias{container_options}
 \alias{getContainerOption}
-\title{Set container package options}
+\title{Set Container Package Options}
 \usage{
 container_options(..., .reset = FALSE)
 
@@ -12,7 +12,7 @@ getContainerOption(x, default = NULL)
 \arguments{
 \item{...}{any options can be defined, using name = value.}
 
-\item{.reset}{\code{logical} if TRUE, the options are reset to their default and
+\item{.reset}{\code{logical} if \code{TRUE}, the options are reset to their default and
 returned.}
 
 \item{x}{a character string holding an option name.}
@@ -22,23 +22,48 @@ value is returned.}
 }
 \value{
 \itemize{
-\item container_options() returns a list of all set options sorted by name.
-\item container_options(name), a list of length one containing the set value,
-or NULL if it is unset. Can also be multiple names (see examples).
-\item container_options(key = value) sets the option with name \code{key} to \code{value}
+\item \code{container_options()} returns a list of all set options sorted by name.
+\item \code{container_options(name)}, a list of length one containing the set value,
+or \code{NULL} if it is unset. Can also be multiple names (see Examples).
+\item \code{container_options(key = value)} sets the option with name \code{key} to \code{value}
 and returns the previous options invisibly.
 }
 }
 \description{
-Set container package options
+Set Container Package Options
 }
+\section{Container Options}{
+
+\itemize{
+\item \code{compare} (default = \code{all.equal})
+\item \code{useDots} (default = \code{TRUE}) whether to abbreviate long container
+elements with \code{...} when exceeding \code{vec.len} (see below). If \code{FALSE}, they
+are abbreviated as \verb{<<type(length)>>}.
+\item \code{vec.len} (default = 4) the length limit at which container vectors are
+abbreviated.
+}
+}
+
 \examples{
+co = container(1L, 1:10, as.list(1:5))
+co
+
+container_options(useDots = FALSE)
+co
+
+container_options(useDots = TRUE, vec.len = 6)
+co
+
+has(co, 1.0)
+
+container_options(compare = "identical")
+
+has(co, 1.0) # still uses 'all.equal'
+
+co2 = container(1L)
+has(co2, 1.0)
+has(co2, 1L)
+
 container_options()
-old <- container_options(useDots = FALSE)
-old
-container_options("useDots")
-container_options("useDots", "vec.len")
-container_options(compare = "identical", foo = "bar")
-container_options()
-(container_options(.reset = TRUE))
+container_options(.reset = TRUE)
 }

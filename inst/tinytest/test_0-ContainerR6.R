@@ -284,6 +284,7 @@ ee(co$length(), length(co$values()))
 # -----
 # all names can be listed
 co <- Container$new(a = 1, 2, y = 3)
+ee(co$names(), c("a", "", "y"))
 
 # -------
 # peek_at

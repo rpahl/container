@@ -1,4 +1,4 @@
-#' Check if object has some element
+#' Check for Element
 #'
 #' @param x any `R` object.
 #' @param ... additional arguments to be passed to or from methods.
@@ -58,8 +58,8 @@ has.dict.table <- function(x, column, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `has(x, column)` check if some `column` is in dict.table object.
 #' @examples

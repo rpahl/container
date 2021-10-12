@@ -7,7 +7,7 @@
 \alias{ref_replace.Container}
 \alias{replace.Dict}
 \alias{ref_replace.Dict}
-\title{Strict element replacement}
+\title{Replace Values in Containers Safely}
 \usage{
 replace(.x, ...)
 

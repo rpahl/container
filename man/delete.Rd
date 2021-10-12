@@ -5,7 +5,7 @@
 \alias{ref_delete}
 \alias{delete.Container}
 \alias{ref_delete.Container}
-\title{Delete elements}
+\title{Delete Container Elements Safely}
 \usage{
 delete(.x, ...)
 

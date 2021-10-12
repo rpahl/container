@@ -1,28 +1,14 @@
-#' Peek at one element
+#' Peek at Single Index
 #'
 #' Try to access element and return some default value if not found.
 #' In contrast to `[at2()]`, this function provides a less stricter element
 #' access, that is, it remains valid even if peeked elements don't exist.
-#' @details
-#' `peek_at2` tries to access specific values.
-#'
-#' `peek` peek at last element of a `Deque`.
-#'
-#' `peekleft` peek at first element of a `Deque`.
 #' @param x an `R` object of the respective class.
 #' @param index `character` name or `numeric` position of the sought value.
 #' @param default value to be returned if peeked value does not exist.
 #' @seealso [at2()] for strict element extraction
 #' @export
 peek_at2 <- function(x, index, default = NULL) UseMethod("peek_at2")
-
-#' @rdname peek_at2
-#' @export
-peekleft <- function(x, default = NULL) UseMethod("peekleft")
-
-#' @rdname peek_at2
-#' @export
-peek <- function(x, default = NULL) UseMethod("peek")
 
 
 #' @rdname peek_at2
@@ -65,42 +51,6 @@ NULL
 
 
 #' @rdname peek_at2
-#' @return For `Deque` the first (`peekleft`) or last (`peek`) element.
-#' @export
-#' @examples
-#' # Deque
-#' d = deque(1, 2, 3)
-#' peek(d)
-#' peekleft(d)
-#' peek(deque())
-#' peek(deque(), default = 0)
-#' peekleft(deque(), default = 0)
-peek.Deque <- function(x, default = NULL) x$peek(default)
-
-#' @rdname peek_at2
-#' @export
-peekleft.Deque <- function(x, default = NULL) x$peekleft(default)
-
-
-#' @name DequeS3
-#' @rdname DequeS3
-#' @details
-#' * `peek(x, default = NULL)` peek at last element. If `x` is empty, return
-#' `default`.
-#' * `peekleft(x, default = NULL)` peek at first element. If `x` is empty,
-#' return `default`.
-#' @examples
-#'
-#' d = deque(1, 2, 3)
-#' peek(d)
-#' peekleft(d)
-#' peek(deque())
-#' peek(deque(), default = 0)
-#' peekleft(deque(), default = 0)
-NULL
-
-
-#' @rdname peek_at2
 #' @return For `dict.table`, returns the column named `index` if it exist
 #' otherwise the given `default` value. If the default length does not match
 #' the number of rows, it is recycled accordingly and a warning is given,
@@ -134,8 +84,8 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `peek_at2(x, index, default = NULL)` return column named `index` if it exist
 #' otherwise the given `default` value. If the default length does not match

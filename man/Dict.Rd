@@ -2,16 +2,29 @@
 % Please edit documentation in R/0-DictR6.R
 \name{Dict}
 \alias{Dict}
-\title{Dict}
+\title{Dict Class}
 \description{
 The \code{\link[=Dict]{Dict()}} resembles Python's dict type, and is implemented
-as a specialized associative \code{\link[=Container]{Container()}} thus sharing all \code{\link[=Container]{Container()}}
-methods with some of them being overriden to account for the associative
-key-value pair semantic.
+as a specialized associative \code{\link[=Container]{Container()}}.
+For the standard S3 interface, see \link[=Dict]{dict()}.
 }
 \details{
+This class inherits from class \code{\link[=Container]{Container()}} and overwrides some
+methods to account for the associative key-value pair semantic.
 Internally, all key-value pairs are stored in a hash-table and the
-elements are sorted lexicographically by their keys.
+elements are always sorted lexicographically by their keys.
+}
+\examples{
+d = Dict$new(o = "one", na = NA, a = 1)
+d
+d$keys()
+
+d$add("li", list(1, 2))
+d$discard_at("na")
+d$replace(1, 9)
+
+d2 = Dict$new(a = 0, b = 1)
+d$update(d2)
 }
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=dict]{dict()}}
@@ -53,6 +66,7 @@ elements are sorted lexicographically by their keys.
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name">}\href{../../container/html/Container.html#method-has_name}{\code{container::Container$has_name()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names">}\href{../../container/html/Container.html#method-names}{\code{container::Container$names()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}

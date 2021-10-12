@@ -1,4 +1,4 @@
-#' Count elements
+#' Count Elements
 #'
 #' @description Count the number of occurences of some element.
 #' @param x any `R` object.

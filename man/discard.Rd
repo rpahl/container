@@ -5,7 +5,7 @@
 \alias{ref_discard}
 \alias{discard.Container}
 \alias{ref_discard.Container}
-\title{Discard elements}
+\title{Discard Container Elements}
 \usage{
 discard(.x, ...)
 

@@ -1,4 +1,4 @@
-is_string = function(x)
+.is_string = function(x)
 {
     if (is.null(x))
         return(FALSE)
@@ -9,22 +9,22 @@ is_string = function(x)
     isTRUE(is.character(x) && !is.na(x))
 }
 
-is_nonempty_string = function(x)
+.is_nonempty_string = function(x)
 {
-    isTRUE(is_string(x) && nchar(x) > 0)
+    isTRUE(.is_string(x) && nchar(x) > 0)
 }
 
 
-verify_names = function(x)
+.verify_names = function(x)
 {
-    if (!length(x) || !all(sapply(x, is_nonempty_string)))
+    if (!length(x) || !all(sapply(x, .is_nonempty_string)))
         stop("all elements must be named", call. = FALSE)
 
     invisible(TRUE)
 }
 
 
-check_name_collision = function(x, y)
+.check_name_collision = function(x, y)
 {
     common = intersect(x, y)
 

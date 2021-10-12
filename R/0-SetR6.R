@@ -1,13 +1,30 @@
-#' Set
+#' Set Class
 #'
 #' @description The [Set()] is considered and implemented as a specialized
 #' [Container()], that is, elements are always unique in the [Container()] and
 #' it provides typical set operations such as `union` and `intersect`.
+#' For the standard S3 interface, see [setnew()].
 #' @details Under the hood, elements of a set object are stored in a hash-table
-#' and sorted by their length and, in case of ties, by their lexicographical
+#' and always sorted by their length and, in case of ties, by their lexicographical
 #' representation.
 #' @seealso [Container()], [set()]
 #' @export
+#' @examples
+#' s1 = Set$new(1, 2)
+#' s1
+#' s1$add(1)
+#' s1$add(3)
+#' s2 = Set$new(3, 4, 5)
+#' s1$union(s2)
+#' s1
+#'
+#' s1 = Set$new(1, 2, 3)
+#' s1$intersect(s2)
+#' s1
+#'
+#' s1$diff(s2)
+#' s1$diff(s1)
+#' s1
 Set <- R6::R6Class("Set",
     inherit = Container,
     public = list(
@@ -41,7 +58,7 @@ Set <- R6::R6Class("Set",
 
             hash_value = private$.get_hash_value(value)
             private$elems[[hash_value]] = elem
-            private$.resort_by_hash()
+            private$.reorder_values()
 
             self
         },
@@ -140,9 +157,12 @@ Set <- R6::R6Class("Set",
             }
             lapply(value, clone_deep_if_container)
         },
+
         .get_hash_value = function(x) {
-            lab = get_label(x)
-            paste(length(x), lab, serialize(x, NULL), collapse = "")
+            tmp = tempfile()
+            on.exit(file.remove(tmp))
+            saveRDS(x, tmp)
+            tools::md5sum(tmp)
         },
 
         .rename = function(old, new) {
@@ -156,8 +176,10 @@ Set <- R6::R6Class("Set",
             self
         },
 
-        .resort_by_hash = function() {
-            new_order = order(lengths(self$values()), names(private$elems))
+        .reorder_values = function() {
+            new_order = order(lengths(self$values()),
+                              sapply(self$values(), .get_label),
+                              names(private$elems))
             private$elems = private$elems[new_order]
         }
     ),

@@ -1,0 +1,103 @@
+url: https://github.com/rpahl/container
+
+
+template:
+  params:
+    bootswatch: cerulean
+
+authors:
+  Roman Pahl:
+    href: https://rpahl.github.io/about.html
+
+
+reference:
+  - title: "Container"
+    desc: "A container can be considered a basic R list with extended functionality."
+    contents:
+    - Container
+    - container
+    - clear
+    - clone
+    - container_options
+    - unpack
+  - subtitle: "add or replace"
+    contents:
+    - add
+    - starts_with("replace")
+    - "[<-.Container"
+  - subtitle: "extract"
+    contents:
+    - starts_with("at")
+    - starts_with("peek_at")
+    - "[.Container"
+  - subtitle: "inspect"
+    contents:
+    - count
+    - has
+    - has_name
+    - is_empty
+  - subtitle: "remove"
+    contents:
+    - starts_with("delete")
+    - starts_with("discard")
+    - contains("pop")
+  - subtitle: "update"
+    contents:
+    - rename
+    - update
+
+  - title: "Deque"
+    desc: >
+        Derives all Container methods.
+        Can also be used to mimic stacks or simple queues.
+    contents:
+    - Deque
+    - deque
+    - addleft
+    - peekleft
+    - rev
+    - rotate
+
+  - title: "Set"
+    desc: "Derives all Container methods. Set elements are always unique."
+    contents:
+    - Set
+    - setnew
+
+
+  - title: "Dict"
+    desc: >
+        Derives all Container methods.
+        The dict resembles Python's dict type but here is more flexible by
+        providing both associative key-value pair as well as positional array
+        semantics.
+    contents:
+    - Dict
+    - dict
+
+
+  - title: "dict.table"
+    desc: >
+        The dict.table is a mix of a dict and a data.table and derives
+        all data.table and most of the dict/container methods.
+    contents:
+    - starts_with("dict.table")
+
+  - title: "Iterator"
+    desc: "Iterate over sequences."
+    contents:
+    - Iterable
+    - Iterator
+    - iter
+
+  - title: "Operators"
+    contents:
+    - "+.Container"
+    - "<.Container"
+    - "&.Dict"
+
+  - title: "Depecated"
+    desc: "Deprecated functions."
+    contents:
+    - "deprecated"
+

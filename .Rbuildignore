@@ -5,3 +5,9 @@ TODO
 ^\.Rproj\.user$
 ^\.github$
 tags
+^pkgdown$
+^_pkgdown\.yml$
+^docs$
+^README\.Rmd$
+^doc$
+^Meta$

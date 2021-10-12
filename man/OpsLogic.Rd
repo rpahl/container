@@ -6,7 +6,7 @@
 \alias{|.Dict}
 \alias{&.Set}
 \alias{|.Set}
-\title{Logic Operators for Containers}
+\title{Logic Operators}
 \usage{
 \method{&}{Dict}(x, y)
 

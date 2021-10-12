@@ -1,24 +1,24 @@
-#' Deprecated Functions in Package container
+#' Deprecated Functions
 #'
 #' @description These functions are provided for backwards-compatibility and
 #' may be defunct as soon as the next release.
 #' @param x any `R` object.
 #' @details
-#' empty(...)       ### -- use `is_empty(...)` instead
-#' set(...)         ### -- use `setnew(...)` instead to create `Set`s
-#' size(...)        ### -- use `length(...)` instead
-#' sortkey(...)     ### -- `Dict` keys are now always sorted
-#' remove(...)      ### -- use `delete(...)` instead
-#' type(...)        ### -- not of use anymore
-#' values(...)      ### -- use `as.list(...)` instead
-#' @name container-deprecated
+#' * [empty()]      [is_empty()] instead
+#' * [set()]        [setnew()] instead
+#' * [size()]       use [length()] instead
+#' * [sortkey()]    keys of [Dict] objects are now always sorted
+#' * [remove()]     use [delete()] instead
+#' * [type()]       not of use anymore
+#' * [values()]     use [as.list()] instead
+#' @name deprecated
 NULL
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 empty <- function(x) UseMethod("empty")
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 empty.Container <- function(x)
 {
@@ -27,11 +27,11 @@ empty.Container <- function(x)
 }
 
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 size <- function(x) UseMethod("size")
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 size.Container <- function(x)
 {
@@ -39,12 +39,12 @@ size.Container <- function(x)
     length(x)
 }
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @param decr `logical` sort decreasingly?
 #' @export
 sortkey <- function(x, decr = FALSE) UseMethod("sortkey")
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 sortkey.Dict <- function(x, decr = FALSE) {
     .Deprecated(msg = "'sort' is deprecated - keys are now always sorted")
@@ -52,12 +52,12 @@ sortkey.Dict <- function(x, decr = FALSE) {
 }
 
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 values <- function(x)
     UseMethod("values")
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 values.Container <- function(x)
 {
@@ -65,7 +65,7 @@ values.Container <- function(x)
     as.list(x)
 }
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 values.dict.table <- function(x)
 {
@@ -74,7 +74,7 @@ values.dict.table <- function(x)
 }
 
 
-#' @rdname container-deprecated
+#' @rdname deprecated
 #' @export
 keys <- function(x)
 {

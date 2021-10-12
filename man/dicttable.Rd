@@ -3,15 +3,15 @@
 %   R/at2.R, R/clear.R, R/clone.R, R/delete_at.R, R/discard_at.R, R/has.R,
 %   R/has_name.R, R/is_empty.R, R/peek_at.R, R/peek_at2.R, R/pop.R, R/rename.R,
 %   R/replace_at.R, R/update.R
-\name{dict.table}
+\name{dicttable}
+\alias{dicttable}
 \alias{dict.table}
 \alias{as.dict.table}
 \alias{as.dict.table.data.table}
 \alias{is.dict.table}
 \alias{rbind.dict.table}
 \alias{cbind.dict.table}
-\alias{dict.tabldict.table}
-\title{dict.table}
+\title{Combining Dict and data.table}
 \usage{
 dict.table(...)
 
@@ -26,32 +26,34 @@ is.dict.table(x)
 \method{cbind}{dict.table}(x, ...)
 }
 \arguments{
-\item{...}{elements put into the \code{dict.table} and/or additional arguments
-to be passed on.}
+\item{...}{elements put into the \href{dicttable}{dict.table} and/or additional
+arguments to be passed on.}
 
-\item{x}{any \code{R} object or a \code{dict.table} object.}
+\item{x}{any \code{R} object or a \href{dicttable}{dict.table} object.}
 
-\item{copy}{if \code{TRUE} creates a copy of the \code{data.table} object otherwise
+\item{copy}{if \code{TRUE} creates a copy of the \link{data.table} object otherwise
 works on the passed object by reference.}
 }
 \description{
-The \code{\link[=dict.table]{dict.table()}} is a mix of a \code{\link[=dict]{dict()}} and a
-\code{data.table}, that is, it can be considered as a data.table with extended
-functionality to manage its data columns.
-As a result, a dict.table object provides all \code{\link[=dict]{dict()}} and \code{\link[=data.table]{data.table()}}
+The \href{dicttable}{dict.table} is a combination of \link{dict} and
+\link{data.table} and basically can be considered a \link{data.table} with extended
+functionality to manage its data columns in a stricter way. For example,
+in contrast to \link{data.table}, \href{dicttable}{dict.table} does not allow
+duplicated column names.
+A \href{dicttable}{dict.table} object provides all \link{dict} and \link{data.table}
 functions and operators at the same time.
 }
 \details{
-Methods that alter \code{dict.table} objects usually come in two versions
+Methods that alter \href{dicttable}{dict.table} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
+\code{'ref_'} to note the reference semantic, for example, \link{add} and \link{ref_add}.
 
 \itemize{
-\item \code{dict.table(...)} initializes and returns a \code{\link[=dict]{dict()}} object.
+\item \code{dict.table(...)} initializes and returns a \link{dict} object.
 }
 
 \itemize{
-\item \code{as.dict.table(x, ...)} coerces \code{x} to a \code{dict.table}
+\item \code{as.dict.table(x, ...)} coerce \code{x} to a \link{dict.table}
 }
 
 \itemize{
@@ -134,12 +136,9 @@ signaled unless \code{.add} was set to \code{TRUE}.
 }
 
 \itemize{
-\item \code{update(x, other)} and \code{ref_update(x, other)} adds columns of \code{other} dict
-that are not yet in \code{x} and replaces the values at existing columns.
+\item \code{update(object, other)} and \code{ref_update(object, other)} adds columns of \code{other} dict
+that are not yet in \code{object} and replaces the values at existing columns.
 }
-}
-\note{
-In contrast to \code{\link[=data.table]{data.table()}}, \code{\link[=dict.table]{dict.table()}} does not allow duplicated keys.
 }
 \examples{
 # Some basic examples using some typical data.table and dict operations.
@@ -311,5 +310,5 @@ update(dit1, dit2)
 update(dit2, dit1)
 }
 \seealso{
-\code{\link[=dict]{dict()}}, \code{\link[data.table:data.table]{data.table::data.table()}}
+\link{dict}, \link{data.table}
 }

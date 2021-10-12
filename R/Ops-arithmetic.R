@@ -1,4 +1,4 @@
-#' Arithmetic Operators for Containers
+#' Arithmetic Operators
 #'
 #' @description Binary arithmetic operators for [Container()] objects and
 #' derived classes.

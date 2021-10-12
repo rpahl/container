@@ -1,4 +1,4 @@
-#' Check if object has some name
+#' Check for Name
 #'
 #' @param x any `R` object.
 #' @param name `character` the name to be found.
@@ -69,8 +69,8 @@ has_name.dict.table <- function(x, name)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `has_name(x, name)` check if `x` has the given column name.
 #' @examples

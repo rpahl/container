@@ -7,7 +7,7 @@
 \alias{ref_delete_at.Container}
 \alias{delete_at.dict.table}
 \alias{ref_delete_at.dict.table}
-\title{Delete elements at index}
+\title{Delete Elements at Indices Safely}
 \usage{
 delete_at(.x, ...)
 

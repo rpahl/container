@@ -1,4 +1,4 @@
-#' Dict methods
+#' @title A Dictionary
 #'
 #' @description The [dict()] resembles Python's dict type, and is implemented
 #' as a specialized associative [Container()] thus sharing all [container()]

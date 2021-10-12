@@ -4,7 +4,7 @@
 \alias{peek_at}
 \alias{peek_at.Container}
 \alias{peek_at.dict.table}
-\title{Peek at elements}
+\title{Peek at Indices}
 \usage{
 peek_at(.x, ...)
 

@@ -1,4 +1,4 @@
-#' Peek at elements
+#' Peek at Indices
 #'
 #' Try to access elements and return default values if not found.
 #' In contrast to `[at()]`, this function provides a less stricter element
@@ -89,8 +89,8 @@ peek_at.dict.table <- function(.x, ..., .default = NULL)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `peek_at(x, ..., .default = NULL)` returns the columns at the given
 #' indices or (if not found) columns with the given default value.

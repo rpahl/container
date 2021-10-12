@@ -3,11 +3,47 @@
 \docType{class}
 \name{Iterator}
 \alias{Iterator}
-\title{Iterator}
+\title{Iterator Class}
 \description{
 An \code{Iterator} is an object that allows to iterate over
 sequences. It implements \code{next_iter} and \code{get_value} to iterate and retrieve the
 value of the sequence it is associated with.
+For the standard S3 interface, see \code{\link[=iter]{iter()}}.
+}
+\examples{
+
+# Numeric Vector
+v = 1:3
+it = Iterator$new(v)
+it
+
+\dontrun{
+it$get_value()  # iterator does not point at a value
+}
+
+it$has_value()
+it$has_next()
+it$next_iter()
+it$get_value()
+it$get_next()
+it$get_next()
+it
+it$has_next()
+it$begin()
+it$get_value()
+it$reset_iter()
+
+# Works by reference for Container
+co = Container$new(1, 2, 3)
+it = co$iter()
+it$get_next()
+co$discard(2)
+it
+it$get_value()
+co$discard(1)
+it
+it$get_value()
+it$begin()
 }
 \author{
 Roman Pahl

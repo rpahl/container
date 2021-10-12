@@ -2,25 +2,13 @@
 % Please edit documentation in R/peek_at2.R
 \name{peek_at2}
 \alias{peek_at2}
-\alias{peekleft}
-\alias{peek}
 \alias{peek_at2.Container}
-\alias{peek.Deque}
-\alias{peekleft.Deque}
 \alias{peek_at2.dict.table}
-\title{Peek at one element}
+\title{Peek at Single Index}
 \usage{
 peek_at2(x, index, default = NULL)
 
-peekleft(x, default = NULL)
-
-peek(x, default = NULL)
-
 \method{peek_at2}{Container}(x, index, default = NULL)
-
-\method{peek}{Deque}(x, default = NULL)
-
-\method{peekleft}{Deque}(x, default = NULL)
 
 \method{peek_at2}{dict.table}(x, index, default = NULL)
 }
@@ -35,8 +23,6 @@ peek(x, default = NULL)
 For \code{Container}, returns the value at the given index or (if not
 found) the given default value.
 
-For \code{Deque} the first (\code{peekleft}) or last (\code{peek}) element.
-
 For \code{dict.table}, returns the column named \code{index} if it exist
 otherwise the given \code{default} value. If the default length does not match
 the number of rows, it is recycled accordingly and a warning is given,
@@ -47,13 +33,6 @@ done silently.
 Try to access element and return some default value if not found.
 In contrast to \verb{[at2()]}, this function provides a less stricter element
 access, that is, it remains valid even if peeked elements don't exist.
-}
-\details{
-\code{peek_at2} tries to access specific values.
-
-\code{peek} peek at last element of a \code{Deque}.
-
-\code{peekleft} peek at first element of a \code{Deque}.
 }
 \examples{
 
@@ -69,13 +48,6 @@ d = dict(a = 1, b = 1:3)
 peek_at2(d, "b")
 peek_at2(d, "x")
 peek_at2(d, "x", default = 4:7)
-# Deque
-d = deque(1, 2, 3)
-peek(d)
-peekleft(d)
-peek(deque())
-peek(deque(), default = 0)
-peekleft(deque(), default = 0)
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)

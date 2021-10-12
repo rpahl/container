@@ -1,4 +1,4 @@
-#' Strict element extraction
+#' Extract Single Elements Safely
 #'
 #' Extracts the value of a Container at the given index. If the index is
 #' invalid, an error is signaled. If given as a string, the element matching the
@@ -86,8 +86,8 @@ at2.dict.table <- function(x, index, ...)
 }
 
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `at2(x, index)` returns the column at the given `index` or signals
 #' an error if not found.

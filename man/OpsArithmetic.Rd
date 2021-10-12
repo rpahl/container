@@ -10,7 +10,7 @@
 \alias{-.Dict}
 \alias{+.Set}
 \alias{-.Set}
-\title{Arithmetic Operators for Containers}
+\title{Arithmetic Operators}
 \usage{
 \method{+}{Container}(x, y)
 

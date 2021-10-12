@@ -16,7 +16,7 @@
 \alias{next_iter}
 \alias{reset_iter}
 \alias{length.Iterator}
-\title{Iterator}
+\title{Iterate over Sequences}
 \usage{
 iter(x, ...)
 
@@ -47,9 +47,9 @@ reset_iter(it)
 \method{length}{Iterator}(x)
 }
 \arguments{
-\item{x}{an object of class \code{\link[=Iterable]{Iterable()}} or any other \code{R} object. In the
-latter case, \code{x} will always be coerced to a base \code{R} list prior to creating
-the \code{iterator}.}
+\item{x}{an object of class \link{Iterable} or any other \code{R} object. In the
+latter case, \code{x} will always be coerced to a base \code{R} \link{list} prior to creating
+the \link{Iterator}.}
 
 \item{...}{other parameters passed to or from methods}
 
@@ -60,12 +60,46 @@ the \code{iterator}.}
 }
 \description{
 An \code{Iterator} is an object that allows to iterate over
-sequences. It implements \code{next_iter} and \code{get_value} to iterate and retrieve the
+sequences. It implements \code{\link[=next_iter]{next_iter()}} and \code{\link[=get_value]{get_value()}} to iterate and retrieve the
 value of the sequence it is associated with.
+For documentation of the methods see \link{Iterator}.
 }
-\details{
-For more details on the methods see \code{\link[=Iterator]{Iterator()}}.
+\examples{
+# Numeric Vector
+v = 1:3
+it = iter(v)
+it
+
+\dontrun{
+it$get_value()  # iterator does not point at a value
+}
+
+has_value(it)
+has_next(it)
+next_iter(it)
+get_value(it)
+get_next(it)
+get_next(it)
+it
+has_next(it)
+begin(it)
+get_value(it)
+reset_iter(it)
+
+# Works on copy of Container
+co = container(1, 2, 3)
+it = iter(co)
+get_next(it)
+ref_discard(co, 2)
+co
+it
+get_next(it)
+ref_clear(co)
+co
+it
+get_next(it)
+begin(it)
 }
 \seealso{
-\code{\link[=Iterator]{Iterator()}}
+For the class documentation see \link{Iterator}.
 }

@@ -2,16 +2,29 @@
 % Please edit documentation in R/0-DequeR6.R
 \name{Deque}
 \alias{Deque}
-\title{Deque (double-ended queue)}
+\title{Deque Class}
 \description{
 Deques are a generalization of stacks and queues typically
 with methods to add, delete and access elements at both sides of the
-underlying data sequence. As such, the \code{\link[=Deque]{Deque()}} can also be used to mimic
-both stacks and queues.
+underlying data sequence. As such, the \link{Deque} can also be used to mimic
+both stacks and queues. For the standard S3 interface, see \code{\link[=deque]{deque()}}.
 }
 \details{
 This class inherits from class \code{\link[=Container]{Container()}} and extends it by
-\code{pop} and \code{peek} methods, and reverse and rotate functionality.
+\code{popleft} and \code{peek} methods, and reverse and rotate functionality.
+}
+\examples{
+d = Deque$new(1, 2, s = "a", v = 1:3)
+d$addleft(0)
+d$peekleft()
+d$peek()
+
+d$popleft()
+d$rev()
+
+d$rotate()
+d$rotate(2)
+d$rotate(-3)
 }
 \seealso{
 \code{\link[=Container]{Container()}}, \code{\link[=deque]{deque()}}
@@ -51,6 +64,7 @@ This class inherits from class \code{\link[=Container]{Container()}} and extends
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="initialize">}\href{../../container/html/Container.html#method-initialize}{\code{container::Container$initialize()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names">}\href{../../container/html/Container.html#method-names}{\code{container::Container$names()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}

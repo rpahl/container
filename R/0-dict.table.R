@@ -17,25 +17,26 @@
 }
 
 
-#' @title dict.table
+#' @title Combining Dict and data.table
 #'
-#' @description The [dict.table()] is a mix of a [dict()] and a
-#' `data.table`, that is, it can be considered as a data.table with extended
-#' functionality to manage its data columns.
-#' As a result, a dict.table object provides all [dict()] and [data.table()]
+#' @description The [dict.table](dicttable) is a combination of [dict] and
+#' [data.table] and basically can be considered a [data.table] with extended
+#' functionality to manage its data columns in a stricter way. For example,
+#' in contrast to [data.table], [dict.table](dicttable) does not allow
+#' duplicated column names.
+#' A [dict.table](dicttable) object provides all [dict] and [data.table]
 #' functions and operators at the same time.
 #'
-#' @param ... elements put into the `dict.table` and/or additional arguments
-#' to be passed on.
-#' @param x any `R` object or a `dict.table` object.
-#' @name dict.table
+#' @param ... elements put into the [dict.table](dicttable) and/or additional
+#' arguments to be passed on.
+#' @param x any `R` object or a [dict.table](dicttable) object.
+#' @name dicttable
 #' @details
-#' Methods that alter `dict.table` objects usually come in two versions
+#' Methods that alter [dict.table](dicttable) objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with
-#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
-#' @note In contrast to [data.table()], [dict.table()] does not allow duplicated keys.
+#' `'ref_'` to note the reference semantic, for example, [add] and [ref_add].
 #' @import data.table
-#' @seealso [dict()], [data.table::data.table()]
+#' @seealso [dict], [data.table]
 #' @examples
 #' # Some basic examples using some typical data.table and dict operations.
 #' # The constructor can take the 'key' argument known from data.table():
@@ -62,9 +63,9 @@
 NULL
 
 
-#' @rdname dict.table
+#' @rdname dicttable
 #' @details
-#' * `dict.table(...)` initializes and returns a [dict()] object.
+#' * `dict.table(...)` initializes and returns a [dict] object.
 #' @export
 dict.table <- function(...)
 {
@@ -77,9 +78,9 @@ dict.table <- function(...)
     dat
 }
 
-#' @rdname dict.table
+#' @rdname dicttable
 #' @details
-#' * `as.dict.table(x, ...)` coerces `x` to a `dict.table`
+#' * `as.dict.table(x, ...)` coerce `x` to a [dict.table]
 #' @export
 as.dict.table <- function(x, ...)
 {
@@ -87,8 +88,8 @@ as.dict.table <- function(x, ...)
     UseMethod("as.dict.table")
 }
 
-#' @rdname dict.table
-#' @param copy if `TRUE` creates a copy of the `data.table` object otherwise
+#' @rdname dicttable
+#' @param copy if `TRUE` creates a copy of the [data.table] object otherwise
 #' works on the passed object by reference.
 #' @examples
 #'
@@ -126,7 +127,7 @@ as.dict.table.default <- function(x, ...)
     do.call(dict.table, args = as.list(x))
 }
 
-#' @rdname dict.table
+#' @rdname dicttable
 #' @details * `is.dict.table(x)` check if `x` is a `dict.table`
 #' @export
 is.dict.table <- function(x) inherits(x, "dict.table")
@@ -145,7 +146,7 @@ print.dict.table <- function(x, ...)
 }
 
 
-#' @rdname dict.table
+#' @rdname dicttable
 #' @examples
 #' dit = dict.table(a = 1:2, b = 1:2)
 #' rbind(dit, dit)
@@ -167,7 +168,7 @@ rbind.dict.table <- function(x, ...)
 }
 
 
-#' @rdname dict.table
+#' @rdname dicttable
 #' @examples
 #'
 #' # cbind ...

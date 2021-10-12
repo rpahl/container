@@ -4,7 +4,7 @@
 \alias{count}
 \alias{count.Container}
 \alias{count.Set}
-\title{Count elements}
+\title{Count Elements}
 \usage{
 count(x, elem)
 

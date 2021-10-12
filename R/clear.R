@@ -1,4 +1,4 @@
-#' Clear a container
+#' Clear a Container
 #'
 #' Removes all elements from the container object.
 #' @param x any `R` object.
@@ -11,7 +11,7 @@ ref_clear <- function(x) UseMethod("ref_clear")
 
 
 #' @rdname clear
-#' @return For `Container`, an object of class `Container` (or one of the
+#' @return For [Container], an object of class [Container] (or one of the
 #' respective derived classes).
 #' @export
 #' @examples
@@ -45,7 +45,8 @@ ref_clear.Container <- function(x)
 
 
 #' @rdname clear
-#' @return For `dict.table` an object of class `dict.table`.
+#' @return For [dict.table](dicttable) an object of class
+#' [dict.table](dicttable).
 #' @export
 #' @examples
 #'
@@ -56,8 +57,8 @@ ref_clear.Container <- function(x)
 #' dit              # original was cleared
 clear.dict.table <- function(x) dict.table()
 
-#' @name dict.table
-#' @rdname dict.table
+#' @name dicttable
+#' @rdname dicttable
 #' @details
 #' * `clear(x)` and `ref_clear(x)` remove all elements from `x`.
 #' @examples

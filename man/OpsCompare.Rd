@@ -8,7 +8,7 @@
 \alias{>.Container}
 \alias{<=.Container}
 \alias{>=.Container}
-\title{Comparison Operators for Containers}
+\title{Comparison Operators}
 \usage{
 \method{==}{Container}(x, y)
 

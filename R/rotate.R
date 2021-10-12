@@ -1,4 +1,4 @@
-#' Rotate elements
+#' Rotate Elements
 #'
 #' @description Rotate all elements `n` steps to the right. If n is
 #' negative, rotate to the left.

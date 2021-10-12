@@ -7,7 +7,7 @@
 \alias{ref_discard_at.Container}
 \alias{discard_at.dict.table}
 \alias{ref_discard_at.dict.table}
-\title{Discard elements at index}
+\title{Discard Elements at Indices}
 \usage{
 discard_at(.x, ...)
 

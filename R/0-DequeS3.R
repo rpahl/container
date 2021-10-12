@@ -1,4 +1,4 @@
-#' Deque (double-ended queue)
+#' Deque - Double-Ended Queue
 #'
 #' @description Deques are a generalization of stacks and queues typically
 #' with methods to add, remove and access elements at both sides of the
@@ -63,11 +63,4 @@ c.Deque <- function(..., recursive = FALSE, use.names = TRUE)
     else
         as.deque(concat)
 }
-
-
-#' @rdname DequeS3
-#' @details * `rev(x)` reverses all elements of the deque in place and invisibly
-#' returns the [Deque()] object.
-#' @export
-rev.Deque <- function(x) x$rev()
 

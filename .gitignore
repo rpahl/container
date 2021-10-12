@@ -1,5 +1,3 @@
-inst/doc
-*.html
 .Rproj.user
 .Rhistory
 
@@ -8,3 +6,5 @@ container.Rproj
 vignettes
 tags
 
+/doc/
+/Meta/
