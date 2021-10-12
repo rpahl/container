@@ -24,6 +24,11 @@ knitr::opts_chunk$set(
 
 # container <img src="images/logo.png" align="right" width="163" height="104"/>
 
+## Update
+Update to version 1.0.0 is coming soon to [CRAN](https://cran.r-project.org/).
+
+## Intro
+
 This package extends the functionality of base R [list] and the [data.table]
 package and with [deque], [set], and [dict] provides additional common data
 structures. It furthermore implements [iterators] and supports both reference
@@ -49,15 +54,12 @@ devtools::install_github("rpahl/container")
 ```
 
 ```{r load-container, include = FALSE}
-#library(container)
+library(container)
 ```
 
 ### container vs list
-The [container] can be seen as a base R [list] with extended functionality.
-There is basically nothing that you can do with a [list] that
-can't can also be done with the [container], but the [container] is
-capable of much more. Below you find some (of many) extra things the
-[container] is capable of.
+Basically all you can do with a [list] can also be done with a [container],
+but the [container] is capable of much more.
 
 ```{r container-vs-list}
 library(container)
@@ -71,38 +73,41 @@ While the [list] output can be very long and hard to read
 li
 ```
 
-the elements of a [container] object are printed in a very compact and
-readable way.
+the elements of a [container] object are printed very compact.
 ```{r}
 co
 ```
 
 
-The [container] allows to find and replace elements directly without the need
-to determine their index first, by passing them in curly brackets. First, let's
-see how to do it with the list.
+Find and replace of [list] elements requires to determine the index first.
 ```{r}
-index = which(sapply(li, identical, 1:10))
+element = list("a", 1)
+index = which(sapply(li, identical, list("a", 1)))
 li[[index]] <- 1:3
 li
 ```
 
+With [container] just pass the element directly in `{}`
 ```{r}
-co[[{1:10}]] <- 1:3
+co[[{element}]] <- 1:3
 co
 ```
 
+Update parameter lists with ease.
 ```{r}
-unpack(co)
+param = cont(x = 1, foo = "bar") # cont is a shortcut for container
+param
 ```
 
+```{r}
+new_param = cont(z = 2, foo = "my foo")
+update(param, new_param)
+```
+
+
 ### dict.table vs data.frame
-The [dict.table] can be seen as a base R [data.frame] with
-extended functionality.
-There is basically nothing that you can do with a [data.frame] that
-can't can also be done with the [dict.table], but the [dict.table] is
-capable of much more. Below you find some (of many) extra things the
-[dict.table] is capable of.
+Basically all you can do with a [data.table] can also be done with a
+[dict.table], but the [dict.table] also provides [dict] functionality.
 
 ```{r dict.table-vs-data.frame}
 dit = dict.table(a = 1:2, b = 3:4)

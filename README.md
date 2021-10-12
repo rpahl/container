@@ -12,6 +12,13 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 
 # container <img src="images/logo.png" align="right" width="163" height="104"/>
 
+## Update
+
+Update to version 1.0.0 is coming soon to
+[CRAN](https://cran.r-project.org/).
+
+## Intro
+
 This package extends the functionality of base R \[list\] and the
 \[data.table\] package and with \[deque\], \[set\], and \[dict\]
 provides additional common data structures. It furthermore implements
@@ -36,19 +43,12 @@ devtools::install_github("rpahl/container")
 
 ### container vs list
 
-The \[container\] can be seen as a base R \[list\] with extended
-functionality. There is basically nothing that you can do with a
-\[list\] that can’t can also be done with the \[container\], but the
-\[container\] is capable of much more. Below you find some (of many)
-extra things the \[container\] is capable of.
+Basically all you can do with a \[list\] can also be done with a
+\[container\], but the \[container\] is capable of much more.
 
 ``` r
 library(container)
-#> 
-#> Attaching package: 'container'
-#> The following object is masked from 'package:base':
-#> 
-#>     replace
+
 co <- container(1:10, l = list("a", 1))
 li <- as.list(co)
 ```
@@ -68,52 +68,55 @@ li
 #> [1] 1
 ```
 
-the elements of a \[container\] object are printed in a very compact and
-readable way.
+the elements of a \[container\] object are printed very compact.
 
 ``` r
 co
 #> [(1L 2L 3L 4L ...), l = list("a", 1)]
 ```
 
-The \[container\] allows to find and replace elements directly without
-the need to determine their index first, by passing them in curly
-brackets. First, let’s see how to do it with the list.
+Find and replace of \[list\] elements requires to determine the index
+first.
 
 ``` r
-index = which(sapply(li, identical, 1:10))
+element = list("a", 1)
+index = which(sapply(li, identical, list("a", 1)))
 li[[index]] <- 1:3
 li
 #> [[1]]
-#> [1] 1 2 3
+#>  [1]  1  2  3  4  5  6  7  8  9 10
 #> 
 #> $l
-#> $l[[1]]
-#> [1] "a"
-#> 
-#> $l[[2]]
-#> [1] 1
+#> [1] 1 2 3
 ```
 
+With \[container\] just pass the element directly in `{}`
+
 ``` r
-co[[{1:10}]] <- 1:3
+co[[{element}]] <- 1:3
 co
-#> [(1L 2L 3L), l = list("a", 1)]
+#> [(1L 2L 3L 4L ...), l = (1L 2L 3L)]
+```
+
+Update parameter lists with ease.
+
+``` r
+param = cont(x = 1, foo = "bar") # cont is a shortcut for container
+param
+#> [x = 1, foo = "bar"]
 ```
 
 ``` r
-unpack(co)
-#>              l1  l2 
-#> "1" "2" "3" "a" "1"
+new_param = cont(z = 2, foo = "my foo")
+update(param, new_param)
+#> [x = 1, foo = "my foo", z = 2]
 ```
 
 ### dict.table vs data.frame
 
-The \[dict.table\] can be seen as a base R \[data.frame\] with extended
-functionality. There is basically nothing that you can do with a
-\[data.frame\] that can’t can also be done with the \[dict.table\], but
-the \[dict.table\] is capable of much more. Below you find some (of
-many) extra things the \[dict.table\] is capable of.
+Basically all you can do with a \[data.table\] can also be done with a
+\[dict.table\], but the \[dict.table\] also provides \[dict\]
+functionality.
 
 ``` r
 dit = dict.table(a = 1:2, b = 3:4)
