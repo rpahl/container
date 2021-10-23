@@ -194,7 +194,7 @@ Set <- R6::R6Class("Set",
 #' s1 = OrderedSet$new(2, 1)
 #' s1
 OrderedSet <- R6::R6Class("OrderedSet",
-    inherit = Container,
+    inherit = Set,
     public = list(
         #' @description `OrderedSet` constructor
         #' @param ... initial elements put into the `OrderedSet`
@@ -218,8 +218,12 @@ OrderedSet <- R6::R6Class("OrderedSet",
         #' @return the `OrderedSet` object.
         add = function(value, name = NULL) {
 
+            len = self$length()
             super$add(value, name)
-            private$.reorder_values()
+
+            hasAdded = len < self$length()
+            if (hasAdded)
+                private$.reorder_values()
 
             self
         }

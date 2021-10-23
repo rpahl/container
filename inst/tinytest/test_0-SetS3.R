@@ -135,3 +135,13 @@ c1$add(2)
 expect_true(setequal(unpack(cc), c(c1 = 1, 1, 2))) # still the same
 
 
+# ----------
+# OrderedSet
+# ----------
+s = setnew(2, 1, .ordered = TRUE)
+expect_true(is.orderedset(s))
+
+ee(as.list(s), list(1, 2))
+ee(as.list(as.orderedset(list(2, 1))), list(1, 2))
+
+ee(c(s, s), s)

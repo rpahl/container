@@ -47,8 +47,8 @@
 
 
 <meta property="og:title" content="Set Class — Set" />
-<meta property="og:description" content="The Set() is considered and implemented as a specialized
-Container(), that is, elements are always unique in the Container() and
+<meta property="og:description" content="The Set is considered and implemented as a specialized
+Container, that is, elements are always unique in the Container and
 it provides typical set operations such as union and intersect.
 For the standard S3 interface, see setnew()." />
 
@@ -108,13 +108,13 @@ For the standard S3 interface, see setnew()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/code-development.html">Use container for code development</a>
+      <a href="../articles/code-development.html">Why container for code development</a>
     </li>
     <li>
       <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
     </li>
     <li>
-      <a href="../articles/parameter-list.html">Manage parameter lists with *dict*</a>
+      <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
       <a href="../articles/reference-semantics.html">Reference semantics</a>
@@ -148,22 +148,17 @@ For the standard S3 interface, see setnew()." />
     </div>
 
     <div class="ref-description">
-    <p>The <code>Set()</code> is considered and implemented as a specialized
-<code><a href='Container.html'>Container()</a></code>, that is, elements are always unique in the <code><a href='Container.html'>Container()</a></code> and
+    <p>The Set is considered and implemented as a specialized
+<a href='Container.html'>Container</a>, that is, elements are always unique in the <a href='Container.html'>Container</a> and
 it provides typical set operations such as <code>union</code> and <code>intersect</code>.
 For the standard S3 interface, see <code><a href='SetS3.html'>setnew()</a></code>.</p>
     </div>
 
 
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Under the hood, elements of a set object are stored in a hash-table
-and always sorted by their length and, in case of ties, by their lexicographical
-representation.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='Container.html'>Container()</a></code>, <code><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>set()</a></code></p></div>
+    <div class='dont-index'><p><a href='Container.html'>Container</a>, <code><a href='https://Rdatatable.gitlab.io/data.table/reference/assign.html'>set()</a></code></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
     <p><code><a href='Iterable.html'>container::Iterable</a></code> -&gt; <code><a href='Container.html'>container::Container</a></code> -&gt; <code>Set</code></p>

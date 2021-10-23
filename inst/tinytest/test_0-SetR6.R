@@ -513,3 +513,26 @@ expect_true(s1$is_proper_subset(s12))
 expect_false(s0$is_proper_subset(s0))
 expect_false(s1$is_proper_subset(s1))
 
+
+# ----------
+# OrderedSet
+# ----------
+os = OrderedSet$new
+s = os(2, 1)
+ee(s$values(), list(1, 2))
+
+ee(s$add(1)$values(), list(1, 2))
+ee(s$add(0)$values(), list(0, 1, 2))
+
+# Verify sorting
+ee(as.list(os(1:2, 1)), list(1, 1:2))
+ee(as.list(os(2:1, 3)), list(3, 2:1))
+ee(as.list(os(list(4), 1:2)), list(list(4), 1:2))
+
+ee(as.list(os(list(), container())), list(container(), list()))
+ee(as.list(os("b", "a")), list("a", "b"))
+
+l1 = as.list(1:6)
+l2 = as.list(c(1:5, 7))
+ee(as.list(os(b = l1, a = l2)), list(a = l2, b = l1))
+

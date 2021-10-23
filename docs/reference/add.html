@@ -105,13 +105,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/code-development.html">Use container for code development</a>
+      <a href="../articles/code-development.html">Why container for code development</a>
     </li>
     <li>
       <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
     </li>
     <li>
-      <a href="../articles/parameter-list.html">Manage parameter lists with *dict*</a>
+      <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
       <a href="../articles/reference-semantics.html">Reference semantics</a>
@@ -205,7 +205,7 @@ If one of the keys already exists, an error is given.</p>
 </div><div class='output co'>#&gt; [1, 1, b = 2, c = [(1L 2L 3L)]]</div><div class='input'>
 <span class='va'>s</span> <span class='op'>=</span> <span class='fu'><a href='SetS3.html'>setnew</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>s</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span>, <span class='st'>"1"</span>, co <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; {"1", 1, b = 2, co = [1, 1]}</div><div class='input'>
+</div><div class='output co'>#&gt; {1, b = 2, "1", co = [1, 1]}</div><div class='input'>
 <span class='va'>d</span> <span class='op'>=</span> <span class='fu'><a href='DictS3.html'>dict</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
 <span class='fu'>add</span><span class='op'>(</span><span class='va'>d</span>, b <span class='op'>=</span> <span class='fl'>2</span>, co <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; {a = 1, b = 2, co = [(1L 2L 3L)]}</div><div class='input'>

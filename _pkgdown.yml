@@ -63,6 +63,7 @@ reference:
         Derives all Container methods. Set elements are always unique.
     contents:
     - Set
+    - OrderedSet
     - setnew
 
 

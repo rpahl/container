@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deque Class — Deque • container</title>
+<title>Ordered Set Class — OrderedSet • container</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +46,9 @@
 
 
 
-<meta property="og:title" content="Deque Class — Deque" />
-<meta property="og:description" content="Deques are a generalization of stacks and queues typically
-with methods to add, delete and access elements at both sides of the
-underlying data sequence. As such, the Deque can also be used to mimic
-both stacks and queues. For the standard S3 interface, see deque()." />
+<meta property="og:title" content="Ordered Set Class — OrderedSet" />
+<meta property="og:description" content="The OrderedSet is as Set where all elements are always
+ordered." />
 
 
 
@@ -142,48 +140,48 @@ both stacks and queues. For the standard S3 interface, see deque()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deque Class</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/0-DequeR6.R'><code>R/0-DequeR6.R</code></a></small>
-    <div class="hidden name"><code>Deque.Rd</code></div>
+    <h1>Ordered Set Class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rpahl/container/blob/master/R/0-SetR6.R'><code>R/0-SetR6.R</code></a></small>
+    <div class="hidden name"><code>OrderedSet.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Deques are a generalization of stacks and queues typically
-with methods to add, delete and access elements at both sides of the
-underlying data sequence. As such, the Deque can also be used to mimic
-both stacks and queues. For the standard S3 interface, see <code><a href='DequeS3.html'>deque()</a></code>.</p>
+    <p>The OrderedSet is as <a href='Set.html'>Set</a> where all elements are always
+ordered.</p>
     </div>
 
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This class inherits from class <code><a href='Container.html'>Container()</a></code> and extends it by
-<code>popleft</code> and <code>peek</code> methods, and reverse and rotate functionality.</p>
+    <p>The order of elements is determined sequentially as follows:</p><ul>
+<li><p>element's length</p></li>
+<li><p>whether it is an <a href='is.atomic'>atomic</a> element</p></li>
+<li><p>the element's class(es)</p></li>
+<li><p>by numeric value (if applicable)</p></li>
+<li><p>it's representation when printed</p></li>
+<li><p>the name of the element in the <a href='Set.html'>Set</a></p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='Container.html'>Container()</a></code>, <code><a href='DequeS3.html'>deque()</a></code></p></div>
+    <div class='dont-index'><p><a href='Container.html'>Container</a>, <a href='Set.html'>Set</a></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
-    <p><code><a href='Iterable.html'>container::Iterable</a></code> -&gt; <code><a href='Container.html'>container::Container</a></code> -&gt; <code>Deque</code></p>
+    <p><code><a href='Iterable.html'>container::Iterable</a></code> -&gt; <code><a href='Container.html'>container::Container</a></code> -&gt; <code><a href='Set.html'>container::Set</a></code> -&gt; <code>OrderedSet</code></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
 <h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Public methods</h3>
 
 <ul>
-<li><p><a href='#method-addleft'><code>Deque$addleft()</code></a></p></li>
-<li><p><a href='#method-peek'><code>Deque$peek()</code></a></p></li>
-<li><p><a href='#method-peekleft'><code>Deque$peekleft()</code></a></p></li>
-<li><p><a href='#method-popleft'><code>Deque$popleft()</code></a></p></li>
-<li><p><a href='#method-rev'><code>Deque$rev()</code></a></p></li>
-<li><p><a href='#method-rotate'><code>Deque$rotate()</code></a></p></li>
-<li><p><a href='#method-clone'><code>Deque$clone()</code></a></p></li>
+<li><p><a href='#method-new'><code>OrderedSet$new()</code></a></p></li>
+<li><p><a href='#method-add'><code>OrderedSet$add()</code></a></p></li>
+<li><p><a href='#method-clone'><code>OrderedSet$clone()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter"><a href='../../container/html/Iterable.html#method-iter'><code>container::Iterable$iter()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="add"><a href='../../container/html/Container.html#method-add'><code>container::Container$add()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at"><a href='../../container/html/Container.html#method-at'><code>container::Container$at()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2"><a href='../../container/html/Container.html#method-at2'><code>container::Container$at2()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear"><a href='../../container/html/Container.html#method-clear'><code>container::Container$clear()</code></a></span></p></li>
@@ -196,7 +194,6 @@ both stacks and queues. For the standard S3 interface, see <code><a href='DequeS
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun"><a href='../../container/html/Container.html#method-get_compare_fun'><code>container::Container$get_compare_fun()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has"><a href='../../container/html/Container.html#method-has'><code>container::Container$has()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name"><a href='../../container/html/Container.html#method-has_name'><code>container::Container$has_name()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="initialize"><a href='../../container/html/Container.html#method-initialize'><code>container::Container$initialize()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty"><a href='../../container/html/Container.html#method-is_empty'><code>container::Container$is_empty()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length"><a href='../../container/html/Container.html#method-length'><code>container::Container$length()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names"><a href='../../container/html/Container.html#method-names'><code>container::Container$names()</code></a></span></p></li>
@@ -211,79 +208,46 @@ both stacks and queues. For the standard S3 interface, see <code><a href='DequeS
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size"><a href='../../container/html/Container.html#method-size'><code>container::Container$size()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type"><a href='../../container/html/Container.html#method-type'><code>container::Container$type()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="update"><a href='../../container/html/Container.html#method-update'><code>container::Container$update()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="values"><a href='../../container/html/Container.html#method-values'><code>container::Container$values()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="container" data-topic="Set" data-id="diff"><a href='../../container/html/Set.html#method-diff'><code>container::Set$diff()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="container" data-topic="Set" data-id="intersect"><a href='../../container/html/Set.html#method-intersect'><code>container::Set$intersect()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="container" data-topic="Set" data-id="is_equal"><a href='../../container/html/Set.html#method-is_equal'><code>container::Set$is_equal()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="container" data-topic="Set" data-id="is_proper_subset"><a href='../../container/html/Set.html#method-is_proper_subset'><code>container::Set$is_proper_subset()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="container" data-topic="Set" data-id="is_subset"><a href='../../container/html/Set.html#method-is_subset'><code>container::Set$is_subset()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="container" data-topic="Set" data-id="union"><a href='../../container/html/Set.html#method-union'><code>container::Set$union()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="container" data-topic="Set" data-id="values"><a href='../../container/html/Set.html#method-values'><code>container::Set$values()</code></a></span></p></li>
 </ul>
 </details>
 
 <hr>
-<a id="method-addleft"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='addleft.html'>addleft()</a></code></h3>
-<p>Add element to left side of the <code>Deque</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Deque</span><span class='op'>$</span><span class='fu'>addleft</span><span class='op'>(</span><span class='va'>value</span>, name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+<a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+<p><code>OrderedSet</code> constructor</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>OrderedSet</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>value</code></dt><dd><p>value of <code>ANY</code> type to be added to the <code>Deque</code>.</p></dd>
+<dt><code>...</code></dt><dd><p>initial elements put into the <code>OrderedSet</code></p></dd>
+
+</dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
+<p>returns the <code>OrderedSet</code> object</p>
+<p><hr>
+<a id="method-add"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='add.html'>add()</a></code></h3>
+<p>Add element</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>OrderedSet</span><span class='op'>$</span><span class='fu'>add</span><span class='op'>(</span><span class='va'>value</span>, name <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>value</code></dt><dd><p>value of <code>ANY</code> type to be added to the <code>OrderedSet</code>.</p></dd>
 
 <dt><code>name</code></dt><dd><p><code>character</code> optional name attribute of the value.</p></dd>
 
 </dl><p></div></p>
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p>the <code>Deque</code> object.</p>
-<p><hr>
-<a id="method-peek"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='peek.html'>peek()</a></code></h3>
-<p>Peek at last element of the <code>Deque</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Deque</span><span class='op'>$</span><span class='fu'>peek</span><span class='op'>(</span>default <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>default</code></dt><dd><p>returned default value if <code>Deque</code> is empty.</p></dd>
-
-</dl><p></div></p>
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p>element 'peeked' on the right</p>
-<p><hr>
-<a id="method-peekleft"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='peek.html'>peekleft()</a></code></h3>
-<p>Peek at first element of the <code>Deque</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Deque</span><span class='op'>$</span><span class='fu'>peekleft</span><span class='op'>(</span>default <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>default</code></dt><dd><p>returned default value if <code>Deque</code> is empty.</p></dd>
-
-</dl><p></div></p>
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p>element 'peeked' on the left</p>
-<p><hr>
-<a id="method-popleft"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>popleft()</code></h3>
-<p>Delete and return element from the left side of the <code>Deque()</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Deque</span><span class='op'>$</span><span class='fu'>popleft</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p>element 'popped' from the left side of the <code>Deque()</code></p>
-<p><hr>
-<a id="method-rev"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='rev.html'>rev()</a></code></h3>
-<p>Reverse all elements of the <code>Deque()</code> in-place.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Deque</span><span class='op'>$</span><span class='fu'>rev</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p>the <code>Deque()</code> object.</p>
-<p><hr>
-<a id="method-rotate"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='rotate.html'>rotate()</a></code></h3>
-<p>Rotate all elements <code>n</code> steps to the right. If n is
-negative, rotate to the left.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Deque</span><span class='op'>$</span><span class='fu'>rotate</span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span></pre><p></div></p>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
-<p><div class="arguments"></p><dl>
-<dt><code>n</code></dt><dd><p><code>integer</code> number of steps to rotate</p></dd>
-
-</dl><p></div></p>
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
-<p>returns the <code>Deque()</code> object.</p>
+<p>the <code>OrderedSet</code> object.</p>
 <p><hr>
 <a id="method-clone"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='clone.html'>clone()</a></code></h3>
 <p>The objects of this class are cloneable with this method.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Deque</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
+<p><div class="r"></p><pre><span class='va'>OrderedSet</span><span class='op'>$</span><span class='fu'>clone</span><span class='op'>(</span>deep <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
@@ -294,18 +258,9 @@ negative, rotate to the left.</p><h4 class='hasAnchor' id='arguments'><a class='
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>d</span> <span class='op'>=</span> <span class='va'>Deque</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, s <span class='op'>=</span> <span class='st'>"a"</span>, v <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>d</span><span class='op'>$</span><span class='fu'>addleft</span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; |0, 1, 2, s = "a", v = (1L 2L 3L)|</div><div class='input'><span class='va'>d</span><span class='op'>$</span><span class='fu'>peekleft</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='va'>d</span><span class='op'>$</span><span class='fu'>peek</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 3</div><div class='input'>
-<span class='va'>d</span><span class='op'>$</span><span class='fu'>popleft</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='va'>d</span><span class='op'>$</span><span class='fu'>rev</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; |v = (1L 2L 3L), s = "a", 2, 1|</div><div class='input'>
-<span class='va'>d</span><span class='op'>$</span><span class='fu'>rotate</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; |1, v = (1L 2L 3L), s = "a", 2|</div><div class='input'><span class='va'>d</span><span class='op'>$</span><span class='fu'>rotate</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; |"a", 2, 1, v = (1L 2L 3L)|</div><div class='input'><span class='va'>d</span><span class='op'>$</span><span class='fu'>rotate</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; |v = (1L 2L 3L), "a", 2, 1|</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>s1</span> <span class='op'>=</span> <span class='va'>OrderedSet</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>s1</span>
+</div><div class='output co'>#&gt; {1, 2}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
