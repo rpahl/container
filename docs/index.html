@@ -67,7 +67,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/code-development.html">Why container for code development</a>
+      <a href="articles/code-development.html">Why and how container for code development</a>
     </li>
     <li>
       <a href="articles/dict.table.html">Enhancing data.table with dict.table</a>
@@ -134,9 +134,49 @@
 <span class="co"># Install development version from GitHub</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rpahl/container"</span><span class="op">)</span></code></pre></div>
 </div>
+<div id="usage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h3>
+<p>Use <code>container</code> the same way you would use a base R <code>list</code>, but enjoy additional functionalities.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">container</span><span class="op">)</span>
+<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">2.0</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span>
+<span class="va">co</span>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
+<p>Some standard operations …</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L)]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"n"</span><span class="op">]</span><span class="op">]</span>
+<span class="co">#&gt; NULL</span></code></pre></div>
+<p>Some new operations …</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"data"</span>, <span class="st">"n"</span><span class="op">]</span>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">cars</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">iris</span>
+<span class="va">co</span>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L), data = &lt;&lt;data.frame(150x5)&gt;&gt;]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co2</span> <span class="op">=</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, data <span class="op">=</span> <span class="cn">NULL</span>, <span class="op">-</span><span class="fl">111</span><span class="op">)</span>
+<span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="reference/update.html">update</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">co2</span><span class="op">)</span>
+<span class="va">co</span>
+<span class="co">#&gt; [x = (1L 2L 3L 4L ...), y = (1L 2L), data = NULL, -111]</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/rename.html">rename</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"x"</span>, <span class="st">"X"</span><span class="op">)</span>
+<span class="co">#&gt; [X = (1L 2L 3L 4L ...), y = (1L 2L), data = NULL, -111]</span></code></pre></div>
+</div>
 <div id="getting-started" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h3>
+<p>There is much more to explore. To get started, see</p>
+<ul>
+<li>Get started vignette</li>
+<li>Manage parameter lists with dict</li>
+<li>Why and how container for code development</li>
+<li>Enhancing data.table with dict.table</li>
+</ul>
 </div>
 </div>
 

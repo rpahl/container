@@ -54,8 +54,53 @@ install.packages("container")
 devtools::install_github("rpahl/container")
 ```
 
+```{r pre-load, include = FALSE}
+library(container, warn.conflicts = FALSE)
+```
+
+### Usage
+
+Use `container` the same way you would use a base R `list`, but enjoy
+additional functionalities.
+
+```{r}
+library(container)
+co <- container(x = c(1.0, 2.0), y = 1:2, data = cars)
+co
+```
+
+Some standard operations ...
+```{r}
+co[1:2]
+```
+```{r}
+co[["n"]]
+```
+
+Some new operations ...
+```{r}
+co[1:2, "data", "n"]
+```
+```{r}
+co[[{cars}]] <- iris
+co
+```
+```{r}
+co2 = container(x = 1:10, data = NULL, -111)
+co = update(co, co2)
+co
+```
+```{r}
+rename(co, "x", "X")
+```
 
 ### Getting Started
+There is much more to explore. To get started, see
+
+* Get started vignette
+* Manage parameter lists with dict
+* Why and how container for code development
+* Enhancing data.table with dict.table
 
 
 
