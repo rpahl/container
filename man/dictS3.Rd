@@ -22,10 +22,14 @@ is.dict(x)
 or of class \code{Dict} for the \code{S3} methods.}
 }
 \description{
-The \code{\link[=dict]{dict()}} resembles Python's dict type, and is implemented
-as a specialized associative \code{\link[=Container]{Container()}} thus sharing all \link[=Container]{container()}
-methods with some of them being overridden to account for the associative
-key-value pair semantic.
+The \link{Dict} initially was developed to resemble Python's
+dict type, but by now offers both more features and flexibility, for
+example, by providing both associative key-value pair as well as
+positional array semantics.
+It is implemented as a specialized associative \link{Container} thus sharing
+all \link{Container} methods with some of them being adapted to account for
+the key-value pair semantic.
+All Dict elements must be named and are always sorted by their name.
 }
 \details{
 Internally, all key-value pairs are stored in a hash-table and the
@@ -149,5 +153,5 @@ update(d2, d1)  # {a = 1, b = 2, c = 3}
 }
 \seealso{
 See \code{\link[=container]{container()}} for all inherited methods. For the full class
-documentation see \code{\link[=Dict]{Dict()}} and it's superclass \link[=container]{Container()}.
+documentation see \link{Dict} and it's superclass \link{Container}.
 }

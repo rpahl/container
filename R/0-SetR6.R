@@ -1,13 +1,10 @@
 #' Set Class
 #'
-#' @description The [Set()] is considered and implemented as a specialized
-#' [Container()], that is, elements are always unique in the [Container()] and
+#' @description The [Set] is considered and implemented as a specialized
+#' [Container], that is, elements are always unique in the [Container] and
 #' it provides typical set operations such as `union` and `intersect`.
 #' For the standard S3 interface, see [setnew()].
-#' @details Under the hood, elements of a set object are stored in a hash-table
-#' and always sorted by their length and, in case of ties, by their lexicographical
-#' representation.
-#' @seealso [Container()], [set()]
+#' @seealso [Container], [set()]
 #' @export
 #' @examples
 #' s1 = Set$new(1, 2)
@@ -58,7 +55,6 @@ Set <- R6::R6Class("Set",
 
             hash_value = private$.get_hash_value(value)
             private$elems[[hash_value]] = elem
-            private$.reorder_values()
 
             self
         },
@@ -174,15 +170,91 @@ Set <- R6::R6Class("Set",
             self$discard_at(pos)
             self$add(value, name)
             self
+        }
+    ),
+    lock_class = TRUE
+)
+
+
+#' Ordered Set Class
+#'
+#' @description The [OrderedSet] is as [Set] where all elements are always
+#' ordered.
+#' @details The order of elements is determined sequentially as follows:
+#' * element's length
+#' * whether it is an [atomic](is.atomic) element
+#' * the element's class(es)
+#' * by numeric value (if applicable)
+#' * it's representation when printed
+#' * the name of the element in the [Set]
+#'
+#' @seealso [Container], [Set]
+#' @export
+#' @examples
+#' s1 = OrderedSet$new(2, 1)
+#' s1
+OrderedSet <- R6::R6Class("OrderedSet",
+    inherit = Set,
+    public = list(
+        #' @description `OrderedSet` constructor
+        #' @param ... initial elements put into the `OrderedSet`
+        #' @return returns the `OrderedSet` object
+        initialize = function(...) {
+
+            super$initialize()
+
+            it = iter(list(...), .subset = .subset)
+            while (has_next(it)) {
+                value = get_next(it)
+                self$add(value[[1]], name = names(value))
+            }
+
+            self
         },
 
+        #' @description Add element
+        #' @param value value of `ANY` type to be added to the `OrderedSet`.
+        #' @param name `character` optional name attribute of the value.
+        #' @return the `OrderedSet` object.
+        add = function(value, name = NULL) {
+
+            len = self$length()
+            super$add(value, name)
+
+            hasAdded = len < self$length()
+            if (hasAdded)
+                private$.reorder_values()
+
+            self
+        }
+    ),
+    private = list(
         .reorder_values = function() {
-            new_order = order(lengths(self$values()),
-                              sapply(self$values(), .get_label),
-                              names(private$elems))
+            v = self$values()
+            lens = lengths(v)
+            classes = paste(lapply(v, class))
+            labs = sapply(v, .get_label)
+            labnames = names(labs)
+
+            atom = sapply(v, is.atomic)
+
+            inum = which(sapply(v, is.numeric) & lens == 1)
+            numbers = numeric(self$length())
+            numbers[inum] = as.numeric(v[inum])
+
+            orderCriteria = list(lens,
+                                 !atom,
+                                 classes,
+                                 numbers,
+                                 labs,
+                                 names(labs))
+            orderCriteria = Filter(function(x) length(x) > 0, orderCriteria)
+
+            new_order = do.call(order, args = orderCriteria)
             private$elems = private$elems[new_order]
         }
     ),
     lock_class = TRUE
 )
+
 

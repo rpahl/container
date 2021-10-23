@@ -28,8 +28,8 @@ ref_clear(x)
 For \link{Container}, an object of class \link{Container} (or one of the
 respective derived classes).
 
-For \href{dicttable}{dict.table} an object of class
-\href{dicttable}{dict.table}.
+For \link{dict.table} an object of class
+\link{dict.table}.
 }
 \description{
 Removes all elements from the container object.

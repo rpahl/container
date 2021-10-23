@@ -4,15 +4,10 @@
 \alias{Set}
 \title{Set Class}
 \description{
-The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
-\code{\link[=Container]{Container()}}, that is, elements are always unique in the \code{\link[=Container]{Container()}} and
+The \link{Set} is considered and implemented as a specialized
+\link{Container}, that is, elements are always unique in the \link{Container} and
 it provides typical set operations such as \code{union} and \code{intersect}.
 For the standard S3 interface, see \code{\link[=setnew]{setnew()}}.
-}
-\details{
-Under the hood, elements of a set object are stored in a hash-table
-and always sorted by their length and, in case of ties, by their lexicographical
-representation.
 }
 \examples{
 s1 = Set$new(1, 2)
@@ -32,7 +27,7 @@ s1$diff(s1)
 s1
 }
 \seealso{
-\code{\link[=Container]{Container()}}, \code{\link[=set]{set()}}
+\link{Container}, \code{\link[=set]{set()}}
 }
 \section{Super classes}{
 \code{\link[container:Iterable]{container::Iterable}} -> \code{\link[container:Container]{container::Container}} -> \code{Set}

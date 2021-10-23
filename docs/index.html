@@ -54,6 +54,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/container.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -64,10 +67,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/Container.html">Container introduction</a>
+      <a href="articles/code-development.html">Why and how container for code development</a>
     </li>
     <li>
-      <a href="articles/overview.html">Overview</a>
+      <a href="articles/dict.table.html">Enhancing data.table with dict.table</a>
+    </li>
+    <li>
+      <a href="articles/parameter-list.html">Manage parameter lists with dict</a>
+    </li>
+    <li>
+      <a href="articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -97,97 +106,77 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#container-" class="anchor"></a>container <img src="images/logo.png" align="right" width="163" height="104">
 </h1></div>
-<div id="update" class="section level2">
-<h2 class="hasAnchor">
-<a href="#update" class="anchor"></a>Update</h2>
-<p>Update to version 1.0.0 is coming soon to <a href="https://cran.r-project.org/">CRAN</a>.</p>
+<div id="update-to-new-version-100-soon-on-cran" class="section level3">
+<h3 class="hasAnchor">
+<a href="#update-to-new-version-100-soon-on-cran" class="anchor"></a>Update to NEW version 1.0.0 soon on <a href="https://cran.r-project.org/">CRAN</a>.</h3>
+<p><em>container</em> extends base R <em>list</em> functionality with the goal to serve as an <em>easy and safe</em> to use <em>list</em> alternative, applicable not only for interactive R sessions but specifically to make life easier in <em>serious code</em> development.</p>
+<p>In addition, this package provides specialized data structures <em>deque</em>, <em>set</em>, <em>dict</em>, and <em>dict.table</em>, the latter to extend the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> package.</p>
 </div>
-<div id="intro" class="section level2">
-<h2 class="hasAnchor">
-<a href="#intro" class="anchor"></a>Intro</h2>
-<p>This package extends the functionality of base R <span class="math display"><em>l</em><em>i</em><em>s</em><em>t</em></span> and the <span class="math display"><em>d</em><em>a</em><em>t</em><em>a</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span> package and with <span class="math display"><em>d</em><em>e</em><em>q</em><em>u</em><em>e</em></span>, <span class="math display"><em>s</em><em>e</em><em>t</em></span>, and <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em></span> provides additional common data structures. It furthermore implements <span class="math display"><em>i</em><em>t</em><em>e</em><em>r</em><em>a</em><em>t</em><em>o</em><em>r</em><em>s</em></span> and supports both reference and copy semantics.</p>
+<div id="why-container-over-list" class="section level3">
+<h3 class="hasAnchor">
+<a href="#why-container-over-list" class="anchor"></a>Why <code>container</code> over list?</h3>
+<p>A <code>container</code> is based on <code>list</code> but with</p>
+<ul>
+<li>compact printing</li>
+<li>feature rich add, extract, replace, or removal operations</li>
+<li>safer data operations (no more unintended <code>NULL</code> or <code>NA</code>)</li>
+<li>optional reference semantics</li>
+<li>some more …</li>
+</ul>
 </div>
-<div id="why-container" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-container" class="anchor"></a>Why <code>container</code>?</h2>
-</div>
-<div id="features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
-</div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of container from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Install release version from CRAN</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"container"</span><span class="op">)</span>
 
 <span class="co"># Install development version from GitHub</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rpahl/container"</span><span class="op">)</span></code></pre></div>
-<div id="container-vs-list" class="section level3">
+</div>
+<div id="usage" class="section level3">
 <h3 class="hasAnchor">
-<a href="#container-vs-list" class="anchor"></a>container vs list</h3>
-<p>Basically all you can do with a <span class="math display"><em>l</em><em>i</em><em>s</em><em>t</em></span> can also be done with a <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span>, but the <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span> is capable of much more.</p>
+<a href="#usage" class="anchor"></a>Usage</h3>
+<p>Use <code>container</code> the same way you would use a base R <code>list</code>, but enjoy additional functionalities.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">container</span><span class="op">)</span>
-
-<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="va">li</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span></code></pre></div>
-<p>While the <span class="math display"><em>l</em><em>i</em><em>s</em><em>t</em></span> output can be very long and hard to read</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">li</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $l</span>
-<span class="co">#&gt; $l[[1]]</span>
-<span class="co">#&gt; [1] "a"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $l[[2]]</span>
-<span class="co">#&gt; [1] 1</span></code></pre></div>
-<p>the elements of a <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span> object are printed very compact.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span>
-<span class="co">#&gt; [(1L 2L 3L 4L ...), l = list("a", 1)]</span></code></pre></div>
-<p>Find and replace of <span class="math display"><em>l</em><em>i</em><em>s</em><em>t</em></span> elements requires to determine the index first.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">element</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="va">index</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">li</span>, <span class="va">identical</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">li</span><span class="op">[[</span><span class="va">index</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>
-<span class="va">li</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $l</span>
-<span class="co">#&gt; [1] 1 2 3</span></code></pre></div>
-<p>With <span class="math display"><em>c</em><em>o</em><em>n</em><em>t</em><em>a</em><em>i</em><em>n</em><em>e</em><em>r</em></span> just pass the element directly in <code>{}</code></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">element</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>
+<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fl">2.0</span><span class="op">)</span>, y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span>
 <span class="va">co</span>
-<span class="co">#&gt; [(1L 2L 3L 4L ...), l = (1L 2L 3L)]</span></code></pre></div>
-<p>Update parameter lists with ease.</p>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
+<p>Some standard operations …</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L)]</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"n"</span><span class="op">]</span><span class="op">]</span>
+<span class="co">#&gt; NULL</span></code></pre></div>
+<p>Some new operations …</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"data"</span>, <span class="st">"n"</span><span class="op">]</span>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">cars</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">iris</span>
+<span class="va">co</span>
+<span class="co">#&gt; [x = (1 2), y = (1L 2L), data = &lt;&lt;data.frame(150x5)&gt;&gt;]</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">param</span> <span class="op">=</span> <span class="fu"><a href="reference/ContainerS3.html">cont</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, foo <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span> <span class="co"># cont is a shortcut for container</span>
-<span class="va">param</span>
-<span class="co">#&gt; [x = 1, foo = "bar"]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">co2</span> <span class="op">=</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, data <span class="op">=</span> <span class="cn">NULL</span>, <span class="op">-</span><span class="fl">111</span><span class="op">)</span>
+<span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="reference/update.html">update</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">co2</span><span class="op">)</span>
+<span class="va">co</span>
+<span class="co">#&gt; [x = (1L 2L 3L 4L ...), y = (1L 2L), data = NULL, -111]</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">new_param</span> <span class="op">=</span> <span class="fu"><a href="reference/ContainerS3.html">cont</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fl">2</span>, foo <span class="op">=</span> <span class="st">"my foo"</span><span class="op">)</span>
-<span class="fu"><a href="reference/update.html">update</a></span><span class="op">(</span><span class="va">param</span>, <span class="va">new_param</span><span class="op">)</span>
-<span class="co">#&gt; [x = 1, foo = "my foo", z = 2]</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/rename.html">rename</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"x"</span>, <span class="st">"X"</span><span class="op">)</span>
+<span class="co">#&gt; [X = (1L 2L 3L 4L ...), y = (1L 2L), data = NULL, -111]</span></code></pre></div>
 </div>
-<div id="dicttable-vs-dataframe" class="section level3">
+<div id="getting-started" class="section level3">
 <h3 class="hasAnchor">
-<a href="#dicttable-vs-dataframe" class="anchor"></a>dict.table vs data.frame</h3>
-<p>Basically all you can do with a <span class="math display"><em>d</em><em>a</em><em>t</em><em>a</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span> can also be done with a <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span>, but the <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em>.<em>t</em><em>a</em><em>b</em><em>l</em><em>e</em></span> also provides <span class="math display"><em>d</em><em>i</em><em>c</em><em>t</em></span> functionality.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dit</span> <span class="op">=</span> <span class="fu"><a href="reference/dicttable.html">dict.table</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
-<span class="va">dit</span>
-<span class="co">#&gt; &lt;dict.table&gt; with 2 rows and 2 columns</span>
-<span class="co">#&gt;    a b</span>
-<span class="co">#&gt; 1: 1 3</span>
-<span class="co">#&gt; 2: 2 4</span></code></pre></div>
-</div>
+<a href="#getting-started" class="anchor"></a>Getting Started</h3>
+<p>There is much more to explore. To get started, see</p>
+<ul>
+<li>Get started vignette</li>
+<li>Manage parameter lists with dict</li>
+<li>Why and how container for code development</li>
+<li>Enhancing data.table with dict.table</li>
+</ul>
 </div>
 </div>
 

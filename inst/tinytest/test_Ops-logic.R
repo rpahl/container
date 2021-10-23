@@ -191,9 +191,9 @@ ee(s1 | s1, s1)
 ee(s1 | s12, s12)
 ee(s12 | s1, s12)
 ee(s12 | s23, s123)
-ee(s23 | s12, s123)
-ee(s2 | s1_3, s123)
-ee(s1_3 | s123, s123)
+ee(s23 | s12, setnew(2, 3, 1))
+ee(s2 | s1_3, setnew(2, 1, 3))
+ee(s1_3 | s123, setnew(1, 3, 2))
 ee(s12 | s123, s123)
 
 original_sets_were_not_altered =
@@ -212,16 +212,16 @@ s1  = setnew(1)
 ss1 = setnew(1, s1)
 ss2 = setnew(2, s1)
 res = ss1 | ss2
-ee(res, setnew(setnew(1), 1, 2))
+ee(res, setnew(1, setnew(1), 2))
 s1$add(5)
-has_used_copy_semantics <- res == setnew(setnew(1), 1, 2)
+has_used_copy_semantics <- res == setnew(1, setnew(1), 2)
 expect_true(has_used_copy_semantics)
 
 # Named elements
 s1 = setnew(a = 1, b = 2)
 s2 = setnew(a = 2, c = 3)
 ee(s1 | s2, setnew(a = 1, b = 2, c = 3))
-ee(s2 | s1, setnew(a = 1, a = 2, c = 3))
+ee(s2 | s1, setnew(a = 2, c = 3, a = 1))
 
 # sets combined with other objects
 ee(setnew(1) | list(1, 2), setnew(1, 2))

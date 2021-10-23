@@ -52,5 +52,5 @@ ee(f(deque(2, 3, 1)), "|2, 3, 1|")
 # format.Set
 # ----------
 f = container:::format.Set
-ee(f(setnew(2, 3, 1)), "{1, 2, 3}")
+ee(f(setnew(2, 3, 1)), "{2, 3, 1}")
 

@@ -38,8 +38,8 @@ NULL
 #' print(d2)
 clone.dict.table <- function(x) (copy(x))
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `clone(x)` create a copy of `x`.
 #' @examples

@@ -55,12 +55,7 @@ ee = expect_equal
 ee(abs(setnew(-1, 1)), setnew(1, 1))
 ee(exp(log(setnew(1, 2))), setnew(1, 2))
 ee(cumsum(setnew(1, 2, 3)), setnew(1, 3, 6))
-ee(cumsum(setnew(3, 2, 1)),
-          setnew(1, 3, 6)) # first sorted then calculated
 
 ee(cumsum(setnew(two = 2, one = 1, s = setnew(one = 1, two = 2))),
-          setnew(one = 1, two = 3, s.one = 4,        s.two = 6))
-
-ee(cumsum(setnew(two = 2, one = 1, s = setnew(1, one = 1, two = 2))),
-          setnew(one = 1, two = 3, s1 = 4,              s.two = 6))
+          setnew(two = 2, one = 3, s.one = 4, s.two = 6))
 

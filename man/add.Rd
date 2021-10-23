@@ -36,8 +36,8 @@ ref_add(.x, ...)
 For \link{Container}, an object of class \link{Container} (or one of the
 respective derived classes).
 
-For \href{dicttable}{dict.table} an object of class
-\href{dicttable}{dict.table}.
+For \link{dict.table} an object of class
+\link{dict.table}.
 }
 \description{
 Add elements to container-like objects.
@@ -48,7 +48,7 @@ While \link{add} uses copy semantics \link{ref_add} works by reference.
 If \code{.x} is a \link{Container}, \link{Set} or \link{Deque} object, the elements being added
 can (but must not) be named.
 
-If \code{.x} is a \link{Dict} or \href{dicttable}{dict.table} object,
+If \code{.x} is a \link{Dict} or \link{dict.table} object,
 all elements \emph{must} be of the form \code{key = value}.
 If one of the keys already exists, an error is given.
 }

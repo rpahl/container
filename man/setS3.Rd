@@ -5,35 +5,39 @@
 \alias{SetS3}
 \alias{setnew}
 \alias{as.set}
+\alias{as.orderedset}
 \alias{is.set}
-\title{Set}
+\alias{is.orderedset}
+\title{Set and ordered Set}
 \usage{
-setnew(...)
+setnew(..., .ordered = FALSE)
 
 as.set(x)
 
+as.orderedset(x)
+
 is.set(x)
+
+is.orderedset(x)
 }
 \arguments{
 \item{...}{initial elements put into the \code{Set}.}
+
+\item{.ordered}{\code{logical} if \code{TRUE} all elements in the \link{Set} will be
+ordered.}
 
 \item{x}{\code{R} object of \code{ANY} type for \code{\link[=as.set]{as.set()}} and \code{\link[=is.set]{is.set()}}
 or of class \code{Set} for the \code{S3} methods.}
 }
 \description{
-The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
-\code{\link[=Container]{Container()}}, that is, \code{Set} elements are always unique. It provides
+The \link{Set} is considered and implemented as a specialized
+\link{Container}, that is, \code{Set} elements are always unique. It provides
 typical set operations such as \code{union} and \code{intersect}.
 }
 \details{
-Under the hood, elements of a set object are stored in a hash-table
-and sorted by their length and, in case of ties, by their lexicographical
-representation.
-For a description of basic methods such as adding and removing elements,
-see the help of \code{\link[=container]{container()}}.
-Methods that alter \code{Set} objects usually come in two versions
+Methods that alter \link{Set} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
+\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and \code{\link[=ref_add]{ref_add()}}.
 
 \itemize{
 \item \code{setnew(...)} initializes and returns a \code{\link[=Set]{Set()}} object.
@@ -44,8 +48,17 @@ providing either copy or reference semantics where the latter start with
 }
 
 \itemize{
+\item \code{as.orderedset(x)} coerces \code{x} to an ordered set.
+}
+
+\itemize{
 \item \code{is.set(x)} returns \code{TRUE} if \code{x} is of class \code{Set} and \code{FALSE}
 otherwise.
+}
+
+\itemize{
+\item \code{is.orderedset(x)} returns \code{TRUE} if \code{x} is of class \code{OrderedSet}
+and \code{FALSE} otherwise.
 }
 
 \itemize{
@@ -65,6 +78,9 @@ names(s)
 as.list(s)
 unpack(s)   # flatten recursively similar to unlist
 
+so = setnew(2, 1, .ordered = TRUE)
+print(so)
+add(so, 0)
 # Math
 s = setnew(5:3, 1, 2)
 s
@@ -95,5 +111,5 @@ s1 | s2     # {1, b = 2, b = 4}
 }
 \seealso{
 See \code{\link[=container]{container()}} for all inherited methods. For the full class
-documentation see \code{\link[=Set]{Set()}} and it's superclass \link[=container]{Container()}.
+documentation see \link{Set} and it's superclass \link{Container}.
 }

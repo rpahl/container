@@ -164,8 +164,8 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
     invisible(.x)
 }
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `replace_at(.x, .., .add = FALSE)` and `ref_replace_at(.x, ..., .add = FALSE)`
 #' replace values at given indices. If a given index is invalid, an error is

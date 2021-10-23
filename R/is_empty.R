@@ -37,8 +37,8 @@ NULL
 is_empty.dict.table <- function(x) ncol(x) == 0
 
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `is_empty(x)` `TRUE` if object is empty otherwise `FALSE`
 #' @examples

@@ -94,6 +94,9 @@ option add)." />
   </a>
 </li>
 <li>
+  <a href="../articles/container.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -104,10 +107,16 @@ option add)." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Container.html">Container introduction</a>
+      <a href="../articles/code-development.html">Why and how container for code development</a>
     </li>
     <li>
-      <a href="../articles/overview.html">Overview</a>
+      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -203,7 +212,7 @@ reference.</p>
 <span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, x <span class='op'>=</span> <span class='fl'>1</span>, .add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>   <span class='co'># ok (adds x = 1)</span>
 </div><div class='output co'>#&gt; [a = 0, b = "z", x = 1]</div><div class='input'>
 
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
 <span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>dit</span>, a <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 3 rows and 2 columns
 #&gt;    a b

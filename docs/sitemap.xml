@@ -52,10 +52,10 @@
     <loc>https://github.com/rpahl/container/reference/Dict.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/DictS3.html</loc>
+    <loc>https://github.com/rpahl/container/reference/dict.table.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/dicttable.html</loc>
+    <loc>https://github.com/rpahl/container/reference/DictS3.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/discard.html</loc>
@@ -97,6 +97,9 @@
     <loc>https://github.com/rpahl/container/reference/OpsReplace.html</loc>
   </url>
   <url>
+    <loc>https://github.com/rpahl/container/reference/OrderedSet.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/rpahl/container/reference/peek.html</loc>
   </url>
   <url>
@@ -136,9 +139,18 @@
     <loc>https://github.com/rpahl/container/reference/update.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/articles/Container.html</loc>
+    <loc>https://github.com/rpahl/container/articles/code-development.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/articles/overview.html</loc>
+    <loc>https://github.com/rpahl/container/articles/container.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/articles/dict.table.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/articles/parameter-list.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/articles/reference-semantics.html</loc>
   </url>
 </urlset>

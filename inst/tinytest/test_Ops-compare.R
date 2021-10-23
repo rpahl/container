@@ -78,7 +78,7 @@ expect_true(y >= y)
 s = setnew(2, 3)
 x = setnew(1, setnew(2, 3))
 y = setnew(1, setnew(3, 2))
-expect_true(x == y)
+expect_false(x == y)
 x = setnew(1, s)
 y = setnew(1, s)
 expect_true(x == y)
@@ -92,8 +92,6 @@ expect_true(x >= y)
 expect_false(x < y)
 expect_false(x > y)
 
-y = setnew(container(2, deque(3)), 4, 1)
-expect_true(x == y)
 y = setnew(1, container(deque(3), 2), 4)
 expect_false(x == y) # order in container plays a role
 
@@ -103,7 +101,7 @@ expect_true(x < y)
 
 y = setnew(1, container(2, deque(3)))
 expect_false(x == y)
-expect_error(expect_true(x > y))
+expect_true(x > y)
 
 
 

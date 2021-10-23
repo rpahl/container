@@ -92,6 +92,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/container.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -102,10 +105,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Container.html">Container introduction</a>
+      <a href="../articles/code-development.html">Why and how container for code development</a>
     </li>
     <li>
-      <a href="../articles/overview.html">Overview</a>
+      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -184,7 +193,7 @@ of the <code>dict.table</code>.</p></td>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>co</span>, <span class='va'>mean</span><span class='op'>)</span>                <span class='co'># TRUE</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>co</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>                 <span class='co'># FALSE</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'>has</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>)</span>            <span class='co'># TRUE</span>
 </div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>            <span class='co'># FALSE</span>
 </div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>has</span><span class='op'>(</span><span class='va'>dit</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>   <span class='co'># TRUE</span>

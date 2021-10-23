@@ -11,7 +11,7 @@ ee(attr(s, "class"), c("Set", "Container", "Iterable", "R6"))
 
 # set elements can be named
 s <- setnew(a = 2, b = 1, 9)
-ee(names(s), c("b", "a", ""))
+ee(names(s), c("a", "b", ""))
 
 # Set of set is also a copy throughout
 s1 = setnew(1)
@@ -135,3 +135,13 @@ c1$add(2)
 expect_true(setequal(unpack(cc), c(c1 = 1, 1, 2))) # still the same
 
 
+# ----------
+# OrderedSet
+# ----------
+s = setnew(2, 1, .ordered = TRUE)
+expect_true(is.orderedset(s))
+
+ee(as.list(s), list(1, 2))
+ee(as.list(as.orderedset(list(2, 1))), list(1, 2))
+
+ee(c(s, s), s)

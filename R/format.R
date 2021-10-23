@@ -34,6 +34,12 @@ function(x, ...) {
     .format_values(x$values(), left = "{", right = "}", ...)
 }
 
+format.OrderedSet <-
+function(x, ...) {
+    .format_values(x$values(), left = "{", right = "}", ...)
+}
+
+
 format.list <-
 function(x, ...) {
     .format_values(x, left = "list(", right = ")", ...)
