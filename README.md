@@ -46,7 +46,7 @@ devtools::install_github("rpahl/container")
 ### Usage
 
 Use `container` the same way you would use a base R `list`, but enjoy
-additional functionalities.
+additional features.
 
 ``` r
 library(container)
