@@ -60,7 +60,7 @@ expect_equal(x + setnew(), x)
 expect_equal(setnew() + x, x)
 expect_equal(x + list(), x)
 expect_equal(list() + x, x)
-expect_true((x + y) == (y + x))
+expect_false((x + y) == (y + x))
 
 # x - y
 x <- setnew(1, 2,    "1", "2")

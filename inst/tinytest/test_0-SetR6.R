@@ -55,7 +55,8 @@ expect_error(s$at("c"), "index 'c' not found")
 expect_error(s$at(as.numeric(NA)), "index must not be 'NA'")
 
 s = Set$new(a = 10, b = 1)
-ee(s$at(1), Set$new(b = 1))
+ee(s$at(1), Set$new(a = 10))
+
 
 # ---
 # at2
@@ -283,19 +284,19 @@ ee(s$replace(1, NULL), Set$new(NULL))
 
 # Replacing a named element preserves the name
 s = Set$new(a = 1, b = 2)
-ee(s$replace(1, 0), Set$new(a = 0, b = 2))
+ee(s$replace(1, 0), Set$new(b = 2, a = 0))
 
 # Replacing by new element works as expected
 s = Set$new(a = 1, 2, 3)
 ee(s$replace(1, 4), Set$new(2, 3, a = 4))
 
 s = Set$new(1, "1")
-ee(s$replace(1, 0), Set$new(0, "1"))
+ee(s$replace(1, 0), Set$new("1", 0))
 
 # Replace works on special elements of basic type
 s = Set$new(NULL, numeric(0), list())
-ee(s$replace(NULL, 0), Set$new(0, numeric(), list()))
-ee(s$replace(numeric(0), 0), Set$new(0, list()))
+ee(s$replace(NULL, 0), Set$new(numeric(), list(), 0))
+ee(s$replace(numeric(0), 0), Set$new(list(), 0))
 ee(s$replace(list(), 0), Set$new(0))
 
 # Replace works on non-basic objects
@@ -303,9 +304,9 @@ S1 = Set$new(1, "1")
 S2 = Set$new(2, "2")
 Co = Container$new(NULL)
 s = Set$new(S1, S2, Co)
-ee(s$replace(S1, 1), Set$new(1, S2, Co))
-ee(s$replace(S2, 2), Set$new(1, 2, Co))
-ee(s$replace(Co, 0), Set$new(0, 1, 2))
+ee(s$replace(S1, 1), Set$new(S2, Co, 1))
+ee(s$replace(S2, 2), Set$new(Co, 1, 2))
+ee(s$replace(Co, 0), Set$new(1, 2, 0))
 
 # ------
 # rename
@@ -345,7 +346,7 @@ ee(s$replace_at(1, NULL), Set$new(NULL))
 
 # Replacing a named element preserves the name
 s = Set$new(a = 1, b = 2)
-ee(s$replace_at(1, 0), Set$new(a = 0, b = 2))
+ee(s$replace_at(1, 0), Set$new(b = 2, a = 0))
 
 # Replacing by new element works as expected
 s = Set$new(a = 1, 2, 3)
@@ -363,7 +364,7 @@ S1 = Set$new(1, "1")
 S2 = Set$new(2, "2")
 Co = Container$new(NULL)
 s = Set$new(co = Co, s1 = S1, s2 = S2)
-ee(s$replace_at(1, 1), Set$new(co = 1, s1 = S1, s2 = S2))
+ee(s$replace_at(1, 1), Set$new(s1 = S1, s2 = S2, co = 1))
 
 
 # ------
@@ -383,11 +384,10 @@ ee(s1$update(s2)$values(), list(A = 1, B = 2, C = 3, D = 4))
 ee(Set$new()$update(s2), s2)
 
 # a Set can be updated by another Container object with partially unnamed elements
-ee(Set$new(a = 0)$update(Container$new(2, a = 1, 1)),
-   Set$new(a = 1, 2))
+ee(Set$new(a = 0)$update(Container$new(2, a = 1, 1)), Set$new(2, a = 1))
 
 ee(Set$new(a = 0)$update(Container$new(2, a = 1, 1, b = 2, x = 5, a = 3)),
-   Set$new(a = 3, 2, x = 5))
+   Set$new(2, x = 5, a = 3))
 
 
 # ------
@@ -487,7 +487,7 @@ ee(Set$new()$union(s123), s123)
 ee(Set$new(1, 2, 3)$union(s0), s123)
 
 ee(Set$new(1, 2)$union(s23), s123)
-ee(Set$new(2, 3)$union(s12), s123)
+ee(Set$new(2, 3)$union(s12), Set$new(2, 3, 1))
 ee(Set$new(1, 2)$union(s1_3), s123)
 
 

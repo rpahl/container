@@ -11,7 +11,7 @@ ee(attr(s, "class"), c("Set", "Container", "Iterable", "R6"))
 
 # set elements can be named
 s <- setnew(a = 2, b = 1, 9)
-ee(names(s), c("b", "a", ""))
+ee(names(s), c("a", "b", ""))
 
 # Set of set is also a copy throughout
 s1 = setnew(1)

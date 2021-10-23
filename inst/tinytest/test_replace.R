@@ -31,16 +31,16 @@ expect_true(was_changed_by_referene)
 # replace.Set, ref_replace.Set
 # ----------------------------
 x = setnew(1, "z")
-ee(replace(x, 1, 0), setnew(0, "z"))
-ee(replace(x, "z", 0), setnew(0, 1))
+ee(replace(x, 1, 0), setnew("z", 0))
+ee(replace(x, "z", 0), setnew(1, 0))
 
 expect_error(replace(x, old = 99, 0), "old element \\(99\\) is not in Set")
 
 x_was_not_touched = all.equal(x, setnew(1, "z"))
 expect_true(x_was_not_touched)
 
-ee(ref_replace(x, 1, 0), setnew(0, "z"))
-was_changed_by_referene = ee(x,  setnew(0, "z"))
+ee(ref_replace(x, 1, 0), setnew("z", 0))
+was_changed_by_referene = ee(x,  setnew("z", 0))
 expect_true(was_changed_by_referene)
 
 

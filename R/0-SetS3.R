@@ -8,15 +8,11 @@
 #' or of class `Set` for the `S3` methods.
 #' @name SetS3
 #' @seealso See [container()] for all inherited methods. For the full class
-#' documentation see [Set()] and it's superclass [Container()].
-#' @details Under the hood, elements of a set object are stored in a hash-table
-#' and sorted by their length and, in case of ties, by their lexicographical
-#' representation.
-#' For a description of basic methods such as adding and removing elements,
-#' see [container].
+#' documentation see [Set] and it's superclass [Container].
+#' @details
 #' Methods that alter [Set] objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with
-#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
+#' `'ref_'` to note the reference semantic, for example, [add()] and [ref_add()].
 #' @examples
 #' s = setnew(1, b = NA, 1:3, c = container("a", 1))
 #' is.set(s)
