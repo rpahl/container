@@ -113,10 +113,11 @@ str.Container <- function(object, ...)
 }
 
 
-#' @rdname ContainerS3
-#' @details * `names(x) <- value` set names of the elements contained in `x`.
 #' @export
-"names<-.Container" <- function(x, value) names(x$values()) <- value
+"names<-.Container" <- function(x, value)
+{
+    x$rename(names(x), value)
+}
 
 # TODO: implement generic %in%
 

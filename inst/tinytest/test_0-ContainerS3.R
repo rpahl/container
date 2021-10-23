@@ -176,6 +176,17 @@ ee(names(container(list())), NULL)
 ee(names(container(1, 2, 3)), NULL)
 ee(names(container(a = 1, 2, x = 5)), c("a", "", "x"))
 
+# -----------------
+# names<-.Container
+# -----------------
+co = container(1, b = 2, c = 3)
+names(co) = letters[1:3]
+ee(names(co), letters[1:3])
+names(co)[3] = "z"
+ee(names(co), c("a", "b", "z"))
+names(co)[1:2] = c("x", "y")
+ee(names(co), c("x", "y", "z"))
+
 # ---------------
 # str.Container
 # ---------------

@@ -15,7 +15,6 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
-\alias{names<-.Container}
 \title{Container - Enhancing R's list}
 \usage{
 container(...)
@@ -33,8 +32,6 @@ is.container(x)
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
-
-\method{names}{Container}(x) <- value
 }
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the
@@ -82,10 +79,6 @@ the container's elements are copied (deeply) during the conversion.
 
 \itemize{
 \item \code{names(x)} return the names of the elements contained in \code{x}.
-}
-
-\itemize{
-\item \code{names(x) <- value} set names of the elements contained in \code{x}.
 }
 
 \itemize{
