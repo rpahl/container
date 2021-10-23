@@ -1,0 +1,66 @@
+---
+title: "Get started"
+author: "Roman Pahl"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+vignette: >
+  %\VignetteIndexEntry{Get started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+### Introduction
+
+Some examples on how to use a container interactively.
+
+```{r load-package}
+library(container, warn.conflicts = FALSE)
+co <- container(data = iris, f = Sepal.Length ~ Sepal.Width, n = 1:10)
+```
+
+**Print** nice and compact.
+```{r}
+co
+```
+
+**Access** elements by position or name or *both*
+```{r}
+co[1:2]
+co[1, 3]
+```
+```{r}
+co[["n"]]
+```
+```{r}
+co[2, 3, "data"]
+```
+
+**Replace** elements by position or name or *value*
+```{r}
+co[[3]] <- 1:3
+```
+```{r}
+co[["f"]] <- speed ~ dist
+```
+```{r}
+co[[{iris}]] <- cars
+co
+```
+
+**Update** names and elements with ease
+```{r}
+c1 = container(a = 1, b = 2)
+c2 = container(a = 3, b = 4)
+ref_rename(c1, "a", "A")
+update(c1, c2)
+```
