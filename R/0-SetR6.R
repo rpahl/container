@@ -177,9 +177,27 @@ Set <- R6::R6Class("Set",
         },
 
         .reorder_values = function() {
-            new_order = order(lengths(self$values()),
-                              sapply(self$values(), .get_label),
-                              names(private$elems))
+            v = self$values()
+            lens = lengths(v)
+            classes = paste(lapply(v, class))
+            labs = sapply(v, .get_label)
+            labnames = names(labs)
+
+            atom = sapply(v, is.atomic)
+
+            inum = which(sapply(v, is.numeric) & lens == 1)
+            numbers = numeric(self$length())
+            numbers[inum] = as.numeric(v[inum])
+
+            orderCriteria = list(lens,
+                                 !atom,
+                                 classes,
+                                 numbers,
+                                 labs,
+                                 names(labs))
+            orderCriteria = Filter(function(x) length(x) > 0, orderCriteria)
+
+            new_order = do.call(order, args = orderCriteria)
             private$elems = private$elems[new_order]
         }
     ),
