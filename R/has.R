@@ -58,8 +58,8 @@ has.dict.table <- function(x, column, ...)
 }
 
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `has(x, column)` check if some `column` is in dict.table object.
 #' @examples

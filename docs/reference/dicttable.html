@@ -48,10 +48,9 @@
 
 <meta property="og:title" content="Combining Dict and data.table — dicttable" />
 <meta property="og:description" content="The dict.table is a combination of dict and
-data.table and basically can be considered a data.table with extended
-functionality to manage its data columns in a stricter way. For example,
-in contrast to data.table, dict.table does not allow
-duplicated column names.
+data.table and basically can be considered a data.table with no
+duplicated column names plus an extended set of functions to add, insert and
+remove its data columns.
 A dict.table object provides all dict and data.table
 functions and operators at the same time." />
 
@@ -98,6 +97,9 @@ functions and operators at the same time." />
   </a>
 </li>
 <li>
+  <a href="../articles/container.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -108,10 +110,16 @@ functions and operators at the same time." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Container.html">Container introduction</a>
+      <a href="../articles/code-development.html">Use container for code development</a>
     </li>
     <li>
-      <a href="../articles/overview.html">Overview</a>
+      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/parameter-list.html">Manage parameter lists with *dict*</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -142,12 +150,11 @@ functions and operators at the same time." />
     </div>
 
     <div class="ref-description">
-    <p>The <a href='dicttable'>dict.table</a> is a combination of <a href='DictS3.html'>dict</a> and
-data.table and basically can be considered a data.table with extended
-functionality to manage its data columns in a stricter way. For example,
-in contrast to data.table, <a href='dicttable'>dict.table</a> does not allow
-duplicated column names.
-A <a href='dicttable'>dict.table</a> object provides all <a href='DictS3.html'>dict</a> and data.table
+    <p>The dict.table is a combination of <a href='DictS3.html'>dict</a> and
+data.table and basically can be considered a data.table with no
+duplicated column names plus an extended set of functions to add, insert and
+remove its data columns.
+A dict.table object provides all <a href='DictS3.html'>dict</a> and data.table
 functions and operators at the same time.</p>
     </div>
 
@@ -187,9 +194,9 @@ works on the passed object by reference.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Methods that alter <a href='dicttable'>dict.table</a> objects usually come in two versions
+    <p>Methods that alter dict.table objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-<code>'ref_'</code> to note the reference semantic, for example, <a href='add.html'>add</a> and <a href='add.html'>ref_add</a>.</p>
+<code>'ref_'</code> to note the reference semantic, for example, <code><a href='add.html'>add()</a></code> and <code><a href='add.html'>ref_add()</a></code>.</p>
 <ul>
 <li><p><code>dict.table(...)</code> initializes and returns a <a href='DictS3.html'>dict</a> object.</p></li>
 </ul>
@@ -290,7 +297,7 @@ that are not yet in <code>object</code> and replaces the values at existing colu
     <pre class="examples"><div class='input'><span class='co'># Some basic examples using some typical data.table and dict operations.</span>
 <span class='co'># The constructor can take the 'key' argument known from data.table():</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: data.table</span></div><div class='input'><span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"c"</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>6</span><span class='op'>)</span>, key <span class='op'>=</span> <span class='st'>"y"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: data.table</span></div><div class='output co'>#&gt; <span class='message'>data.table 1.14.0 using 6 threads (see ?getDTthreads).  Latest news: r-datatable.com</span></div><div class='input'><span class='va'>dit</span> <span class='op'>=</span> <span class='fu'>dict.table</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"c"</span><span class='op'>)</span>, each <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span>,<span class='fl'>6</span><span class='op'>)</span>, key <span class='op'>=</span> <span class='st'>"y"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 9 rows and 2 columns
 #&gt;    x y

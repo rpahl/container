@@ -2,7 +2,7 @@
 #'
 #' @description A container is a data structure with typical member
 #' functions to insert, delete and access elements from the container
-#' object. The [container] can be seen as a base R [list] with
+#' object. It can be considered as a base R [list] with
 #' extended functionality. The [Container] class also serves as the base
 #' class for [Deque], [Set], and [Dict] objects.
 #' @param ... (possibly named) elements to be put into or removed from the
@@ -112,6 +112,11 @@ str.Container <- function(object, ...)
     utils::str(as.list(object), no.list = TRUE, ...)
 }
 
+
+#' @rdname ContainerS3
+#' @details * `names(x) <- value` set names of the elements contained in `x`.
+#' @export
+"names<-.Container" <- function(x, value) names(x$values()) <- value
 
 # TODO: implement generic %in%
 

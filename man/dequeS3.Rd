@@ -24,11 +24,11 @@ or of class \code{Deque} for the \code{S3} methods.}
 \description{
 Deques are a generalization of stacks and queues typically
 with methods to add, remove and access elements at both sides of the
-underlying data sequence. As such, the \code{\link[=deque]{deque()}} can also be used to mimic
+underlying data sequence. As such, the \link{deque} can also be used to mimic
 both stacks and queues.
 }
 \details{
-Methods that alter \code{Deque} objects usually come in two versions
+Methods that alter \link{Deque} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
 \code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
 

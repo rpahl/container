@@ -112,8 +112,8 @@ ref_pop.dict.table <- function(.x, index, ...)
 }
 
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `ref_pop(.x, index)` return element at given column index and remove the
 #' column from the dict.table object.

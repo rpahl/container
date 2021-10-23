@@ -1,14 +1,18 @@
 #' @title A Dictionary
 #'
-#' @description The [dict()] resembles Python's dict type, and is implemented
-#' as a specialized associative [Container()] thus sharing all [container()]
-#' methods with some of them being overridden to account for the associative
-#' key-value pair semantic.
+#' @description The [Dict] initially was developed to resemble Python's
+#' dict type, but by now offers both more features and flexibility, for
+#' example, by providing both associative key-value pair as well as
+#' positional array semantics.
+#' It is implemented as a specialized associative [Container] thus sharing
+#' all [Container] methods with some of them being adapted to account for
+#' the key-value pair semantic.
+#' All Dict elements must be named and are always sorted by their name.
 #' @param ... elements put into the `Dict`.
 #' @param x `R` object of `ANY` type for [as.dict()] and [is.dict()]
 #' or of class `Dict` for the `S3` methods.
 #' @seealso See [container()] for all inherited methods. For the full class
-#' documentation see [Dict()] and it's superclass [Container()].
+#' documentation see [Dict] and it's superclass [Container].
 #' @name DictS3
 #' @details Internally, all key-value pairs are stored in a hash-table and the
 #' elements are sorted lexicographically by their keys.

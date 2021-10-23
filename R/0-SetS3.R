@@ -1,7 +1,7 @@
 #' @title Set
 #'
-#' @description The [Set()] is considered and implemented as a specialized
-#' [Container()], that is, `Set` elements are always unique. It provides
+#' @description The [Set] is considered and implemented as a specialized
+#' [Container], that is, `Set` elements are always unique. It provides
 #' typical set operations such as `union` and `intersect`.
 #' @param ... initial elements put into the `Set`.
 #' @param x `R` object of `ANY` type for [as.set()] and [is.set()]
@@ -13,8 +13,8 @@
 #' and sorted by their length and, in case of ties, by their lexicographical
 #' representation.
 #' For a description of basic methods such as adding and removing elements,
-#' see the help of [container()].
-#' Methods that alter `Set` objects usually come in two versions
+#' see [container].
+#' Methods that alter [Set] objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with
 #' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
 #' @examples

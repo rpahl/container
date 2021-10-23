@@ -94,6 +94,9 @@ the other object. A common use case is to update parameter lists." />
   </a>
 </li>
 <li>
+  <a href="../articles/container.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -104,10 +107,16 @@ the other object. A common use case is to update parameter lists." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Container.html">Container introduction</a>
+      <a href="../articles/code-development.html">Use container for code development</a>
     </li>
     <li>
-      <a href="../articles/overview.html">Overview</a>
+      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/parameter-list.html">Manage parameter lists with *dict*</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -195,8 +204,8 @@ that is, updates in place.</p>
 <span class='fu'>update</span><span class='op'>(</span><span class='va'>d1</span>, <span class='va'>d2</span><span class='op'>)</span>  <span class='co'># {a = 1, b = 0, c = 3}</span>
 </div><div class='output co'>#&gt; {a = 1, b = 0, c = 3}</div><div class='input'><span class='fu'>update</span><span class='op'>(</span><span class='va'>d2</span>, <span class='va'>d1</span><span class='op'>)</span>  <span class='co'># {a = 1, b = 2, c = 3}</span>
 </div><div class='output co'>#&gt; {a = 1, b = 2, c = 3}</div><div class='input'>
-<span class='va'>dit1</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
-<span class='va'>dit2</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>         b <span class='op'>=</span> <span class='fl'>5</span><span class='op'>:</span><span class='fl'>6</span>, c <span class='op'>=</span> <span class='fl'>8</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span>
+<span class='va'>dit1</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>3</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>
+<span class='va'>dit2</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>         b <span class='op'>=</span> <span class='fl'>5</span><span class='op'>:</span><span class='fl'>6</span>, c <span class='op'>=</span> <span class='fl'>8</span><span class='op'>:</span><span class='fl'>9</span><span class='op'>)</span>
 <span class='fu'>update</span><span class='op'>(</span><span class='va'>d1</span>, <span class='va'>d2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; {a = 1, b = 0, c = 3}</div><div class='input'><span class='fu'>update</span><span class='op'>(</span><span class='va'>d2</span>, <span class='va'>d1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; {a = 1, b = 2, c = 3}</div><div class='input'>

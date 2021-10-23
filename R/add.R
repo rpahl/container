@@ -58,7 +58,7 @@ ref_add.Container <- function(.x, ...)
 
 #' @rdname add
 #' @note
-#' If `.x` is a [Dict] or [dict.table](dicttable) object,
+#' If `.x` is a [Dict] or [dict.table] object,
 #' all elements *must* be of the form `key = value`.
 #' If one of the keys already exists, an error is given.
 #' @export
@@ -114,8 +114,8 @@ ref_add.Dict <- function(.x, ...)
 
 
 #' @rdname add
-#' @return For [dict.table](dicttable) an object of class
-#' [dict.table](dicttable).
+#' @return For [dict.table] an object of class
+#' [dict.table].
 #' @export
 #' @examples
 #'
@@ -131,8 +131,8 @@ add.dict.table <- function(.x, ...)
 }
 
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `add(.x, ...)` and `ref_add(.x, ...)` add columns to `.x`. If the column name
 #' already exists, an error is given.

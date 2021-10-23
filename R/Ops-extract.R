@@ -26,10 +26,15 @@ NULL
 #' @export
 "[.Container" <- function(x, ...)
 {
-    dots = tryCatch(as.list(...), error = identity)
+    dots = tryCatch(list(...), error = identity)
 
     if (inherits(dots, "error"))
         return(x)
+
+    if (all(sapply(dots, is.logical))) {
+        v = rep(unlist(dots), length.out = length(x))
+        return(peek_at(x, which(v)))
+    }
 
     peek_at(x, ...)
 }

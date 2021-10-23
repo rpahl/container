@@ -69,8 +69,8 @@ has_name.dict.table <- function(x, name)
 }
 
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `has_name(x, name)` check if `x` has the given column name.
 #' @examples

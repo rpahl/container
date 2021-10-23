@@ -12,7 +12,7 @@ authors:
 
 reference:
   - title: "Container"
-    desc: "A container can be considered a basic R list with extended functionality."
+    desc: "A container can be considered a base R list with extended functionality."
     contents:
     - Container
     - container
@@ -59,7 +59,8 @@ reference:
     - rotate
 
   - title: "Set"
-    desc: "Derives all Container methods. Set elements are always unique."
+    desc: >
+        Derives all Container methods. Set elements are always unique.
     contents:
     - Set
     - setnew
@@ -67,10 +68,8 @@ reference:
 
   - title: "Dict"
     desc: >
-        Derives all Container methods.
-        The dict resembles Python's dict type but here is more flexible by
-        providing both associative key-value pair as well as positional array
-        semantics.
+        Derives all Container methods. All Dict elements must be named and are
+        always sorted by their name.
     contents:
     - Dict
     - dict

@@ -117,8 +117,8 @@ ref_rename.dict.table <- function(.x, old, new)
 }
 
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `rename(.x, old, new)` and `ref_rename(.x, old, new)` rename one or more
 #' columns from `old` to `new`, respectively, by copy and in place (i.e. by

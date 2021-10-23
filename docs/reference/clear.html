@@ -92,6 +92,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/container.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -102,10 +105,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Container.html">Container introduction</a>
+      <a href="../articles/code-development.html">Use container for code development</a>
     </li>
     <li>
-      <a href="../articles/overview.html">Overview</a>
+      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/parameter-list.html">Manage parameter lists with *dict*</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -168,8 +177,8 @@
 
     <p>For <a href='Container.html'>Container</a>, an object of class <a href='Container.html'>Container</a> (or one of the
 respective derived classes).</p>
-<p>For <a href='dicttable'>dict.table</a> an object of class
-<a href='dicttable'>dict.table</a>.</p>
+<p>For <a href='dict.table.html'>dict.table</a> an object of class
+<a href='dict.table.html'>dict.table</a>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -179,7 +188,7 @@ respective derived classes).</p>
 </div><div class='output co'>#&gt; [1, 2, &lt;&lt;function&gt;&gt;]</div><div class='input'><span class='fu'>ref_clear</span><span class='op'>(</span><span class='va'>co</span><span class='op'>)</span>
 <span class='va'>co</span>
 </div><div class='output co'>#&gt; []</div><div class='input'>
-<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dicttable.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 <span class='fu'>clear</span><span class='op'>(</span><span class='va'>dit</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;dict.table&gt; with 0 rows and 0 columns
 #&gt; Null data.table (0 rows and 0 cols)</div><div class='input'><span class='va'>dit</span>              <span class='co'># original was not touched</span>

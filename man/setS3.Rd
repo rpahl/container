@@ -21,8 +21,8 @@ is.set(x)
 or of class \code{Set} for the \code{S3} methods.}
 }
 \description{
-The \code{\link[=Set]{Set()}} is considered and implemented as a specialized
-\code{\link[=Container]{Container()}}, that is, \code{Set} elements are always unique. It provides
+The \link{Set} is considered and implemented as a specialized
+\link{Container}, that is, \code{Set} elements are always unique. It provides
 typical set operations such as \code{union} and \code{intersect}.
 }
 \details{
@@ -30,8 +30,8 @@ Under the hood, elements of a set object are stored in a hash-table
 and sorted by their length and, in case of ties, by their lexicographical
 representation.
 For a description of basic methods such as adding and removing elements,
-see the help of \code{\link[=container]{container()}}.
-Methods that alter \code{Set} objects usually come in two versions
+see \link{container}.
+Methods that alter \link{Set} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
 \code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
 

@@ -15,6 +15,7 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
+\alias{names<-.Container}
 \title{Container - Enhancing R's list}
 \usage{
 container(...)
@@ -32,6 +33,8 @@ is.container(x)
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
+
+\method{names}{Container}(x) <- value
 }
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the
@@ -43,8 +46,8 @@ or of class \link{Container} for the \code{S3} methods.}
 \description{
 A container is a data structure with typical member
 functions to insert, delete and access elements from the container
-object. The \link{container} can be seen as a base R \link{list} with
-extended functionality. The \link[=container]{Container} class also serves as the base
+object. It can be considered as a base R \link{list} with
+extended functionality. The \link{Container} class also serves as the base
 class for \link{Deque}, \link{Set}, and \link{Dict} objects.
 }
 \details{
@@ -79,6 +82,10 @@ the container's elements are copied (deeply) during the conversion.
 
 \itemize{
 \item \code{names(x)} return the names of the elements contained in \code{x}.
+}
+
+\itemize{
+\item \code{names(x) <- value} set names of the elements contained in \code{x}.
 }
 
 \itemize{

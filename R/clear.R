@@ -45,8 +45,8 @@ ref_clear.Container <- function(x)
 
 
 #' @rdname clear
-#' @return For [dict.table](dicttable) an object of class
-#' [dict.table](dicttable).
+#' @return For [dict.table] an object of class
+#' [dict.table].
 #' @export
 #' @examples
 #'
@@ -57,8 +57,8 @@ ref_clear.Container <- function(x)
 #' dit              # original was cleared
 clear.dict.table <- function(x) dict.table()
 
-#' @name dicttable
-#' @rdname dicttable
+#' @name dict.table
+#' @rdname dict.table
 #' @details
 #' * `clear(x)` and `ref_clear(x)` remove all elements from `x`.
 #' @examples

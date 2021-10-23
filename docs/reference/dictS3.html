@@ -47,10 +47,14 @@
 
 
 <meta property="og:title" content="A Dictionary — DictS3" />
-<meta property="og:description" content="The dict() resembles Python's dict type, and is implemented
-as a specialized associative Container() thus sharing all container()
-methods with some of them being overridden to account for the associative
-key-value pair semantic." />
+<meta property="og:description" content="The Dict initially was developed to resemble Python's
+dict type, but by now offers both more features and flexibility, for
+example, by providing both associative key-value pair as well as
+positional array semantics.
+It is implemented as a specialized associative Container thus sharing
+all Container methods with some of them being adapted to account for
+the key-value pair semantic.
+All Dict elements must be named and are always sorted by their name." />
 
 
 
@@ -95,6 +99,9 @@ key-value pair semantic." />
   </a>
 </li>
 <li>
+  <a href="../articles/container.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -105,10 +112,16 @@ key-value pair semantic." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Container.html">Container introduction</a>
+      <a href="../articles/code-development.html">Use container for code development</a>
     </li>
     <li>
-      <a href="../articles/overview.html">Overview</a>
+      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/parameter-list.html">Manage parameter lists with *dict*</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -139,10 +152,14 @@ key-value pair semantic." />
     </div>
 
     <div class="ref-description">
-    <p>The <code>dict()</code> resembles Python's dict type, and is implemented
-as a specialized associative <code><a href='Container.html'>Container()</a></code> thus sharing all <a href='Container.html'>container()</a>
-methods with some of them being overridden to account for the associative
-key-value pair semantic.</p>
+    <p>The <a href='Dict.html'>Dict</a> initially was developed to resemble Python's
+dict type, but by now offers both more features and flexibility, for
+example, by providing both associative key-value pair as well as
+positional array semantics.
+It is implemented as a specialized associative <a href='Container.html'>Container</a> thus sharing
+all <a href='Container.html'>Container</a> methods with some of them being adapted to account for
+the key-value pair semantic.
+All Dict elements must be named and are always sorted by their name.</p>
     </div>
 
     <pre class="usage"><span class='fu'>dict</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
@@ -225,7 +242,7 @@ for keys not yet in <code>object</code> and replaces the values of existing keys
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See <code><a href='ContainerS3.html'>container()</a></code> for all inherited methods. For the full class
-documentation see <code><a href='Dict.html'>Dict()</a></code> and it's superclass <a href='ContainerS3.html'>Container()</a>.</p></div>
+documentation see <a href='Dict.html'>Dict</a> and it's superclass <a href='Container.html'>Container</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>d</span> <span class='op'>=</span> <span class='fu'>dict</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='st'>"one"</span>, f <span class='op'>=</span> <span class='va'>mean</span>, na <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
@@ -241,7 +258,7 @@ documentation see <code><a href='Dict.html'>Dict()</a></code> and it's superclas
 #&gt; $f
 #&gt; function (x, ...) 
 #&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x0000000015e8b250&gt;
+#&gt; &lt;bytecode: 0x0000000016787dc8&gt;
 #&gt; &lt;environment: namespace:base&gt;
 #&gt; 
 #&gt; $na
