@@ -21,7 +21,17 @@ knitr::opts_chunk$set(
 
 ### Introduction
 
-Some examples on how to use a container interactively.
+The *container* package is designed to serve three main goals:
+
+1. enhance base R *list* for interactive sessions
+2. enhance base R *list* for code development
+3. provide specialized data structures that are not available with base R
+
+This vignette will cover the first point. For the second point see
+vignette [Why and how container for code development](code-development.html).
+Examples for specialized data structures are found in
+[Manage parameter lists with dict](parameter-list.html)
+and [Enhancing data.table with dict.table](dict.table.html).
 
 ```{r load-package}
 library(container, warn.conflicts = FALSE)
