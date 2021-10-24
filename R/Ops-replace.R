@@ -36,6 +36,13 @@ NULL
 #' @export
 "[<-.Container" = function(x, i, value)
 {
+    lenv = length(value)
+    leni = length(i)
+    if (leni < lenv || leni %% lenv != 0)
+        warning("number of items to replace (", leni,
+                ") is not a multiple of replacement length (", lenv,")")
+
+    value = rep(value, length.out = length(i))
     ref_replace_at(x, i, value, .add = TRUE)
 }
 
