@@ -66,13 +66,13 @@
       <a href="../articles/code-development.html">Why and how container for code development</a>
     </li>
     <li>
-      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
-    </li>
-    <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
       <a href="../articles/reference-semantics.html">Reference semantics</a>
+    </li>
+    <li>
+      <a href="../articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
     </li>
   </ul>
 </li>
@@ -98,9 +98,8 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Manage parameter lists with dict</h1>
-                        <h4 class="author">Roman Pahl</h4>
             
-            <h4 class="date">2021-10-23</h4>
+            <h4 class="date">2021-10-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/parameter-list.Rmd"><code>vignettes/parameter-list.Rmd</code></a></small>
       <div class="hidden name"><code>parameter-list.Rmd</code></div>
@@ -126,23 +125,23 @@
 <p>With a <em>dict</em> the problem of accidentally overriding an existing parameter value is solved out of the box using the <code>add</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">params</span> <span class="op">=</span> <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co">#&gt; Error: name 'a' exists already</span>
+<span class="co"># Error: name 'a' exists already</span>
 <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="co"># ok</span>
-<span class="co">#&gt; {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
+<span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
 <p>Of course, it’s also possible to indeed override a parameter.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co">#&gt; {a = 0, b = "foo"}</span></code></pre></div>
+<span class="co"># {a = 0, b = "foo"}</span></code></pre></div>
 <p>What if you intend to replace something, but there is nothing to replace?</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co">#&gt; Error: names(s) not found: 'x'</span></code></pre></div>
+<span class="co"># Error: names(s) not found: 'x'</span></code></pre></div>
 <p>Now you might wonder, what if <em>‘I don’t care if it is replaced or added’</em>. That’s easy.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; {a = 0, b = "foo"}</span>
+<span class="co"># {a = 0, b = "foo"}</span>
 <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
+<span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
 <p>That is, using <code>.add = TRUE</code> basically means, <em>‘replace it, or, if it is not there, just add it’</em></p>
 <p>Maybe you agree that even these simple use-cases already require some effort when using base R lists.</p>
 </div>
@@ -152,36 +151,36 @@
 <p>When extracting a parameter, you might want to be sure it exists and signal an error otherwise.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; Error: index 'x' not found</span>
+<span class="co"># Error: index 'x' not found</span>
 <span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>
-<span class="co">#&gt; {a = (1L 2L 3L 4L ...), b = "foo"}</span></code></pre></div>
+<span class="co"># {a = (1L 2L 3L 4L ...), b = "foo"}</span></code></pre></div>
 <p>To extract a single raw element, use <code>at2</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
+<span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
 <p>Alternatively, you could use the standard access operators, which behave like base R list and therefore return an empty <em>dict</em> (or <code>NULL</code>) if the index is not found.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">params</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span>
-<span class="co">#&gt; {}</span>
+<span class="co"># {}</span>
 <span class="va">params</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; NULL</span>
+<span class="co"># NULL</span>
 <span class="va">params</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; {a = (1L 2L 3L 4L ...)}</span>
+<span class="co"># {a = (1L 2L 3L 4L ...)}</span>
 <span class="va">params</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
+<span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
 <div id="default-values" class="section level3">
 <h3 class="hasAnchor">
 <a href="#default-values" class="anchor"></a>Default values</h3>
 <p>A nice property of the <em>dict</em> is that it provides an easy and flexible way to manage default values.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; {}</span>
+<span class="co"># {}</span>
 <span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span>, .default <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; {x = (3L 2L 1L)}</span></code></pre></div>
+<span class="co"># {x = (3L 2L 1L)}</span></code></pre></div>
 <p>That is, if you <em>peek</em> at a non-existing parameter, by default an empty <em>dict</em> is returned, but with the option to explicitly set the default. This also works for multiple peeks.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, .default <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; {a = (1L 2L 3L 4L ...), x = (3L 2L 1L), y = (3L 2L 1L)}</span></code></pre></div>
+<span class="co"># {a = (1L 2L 3L 4L ...), x = (3L 2L 1L), y = (3L 2L 1L)}</span></code></pre></div>
 </div>
 </div>
 <div id="remove" class="section level2">
@@ -190,19 +189,19 @@
 <p>Similar to the above examples, the user can control how removal of existing/non-existing parameters is handled. If you expect a parameter and want to be signaled if it was not there, use <code>delete</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; Error: names(s) not found: 'x'</span>
+<span class="co"># Error: names(s) not found: 'x'</span>
 <span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span><span class="op">)</span> <span class="co"># ok</span>
-<span class="co">#&gt; {b = "foo"}</span></code></pre></div>
+<span class="co"># {b = "foo"}</span></code></pre></div>
 <p>Otherwise to loosely delete a parameter, regardless of whether it exists or not, use <code>discard</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co">#&gt; {b = "foo"}</span></code></pre></div>
+<span class="co"># {b = "foo"}</span></code></pre></div>
 <p>It’s important to note, that the “base R list way” to delete elements does not work, because it just inserts a <code>NULL</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">params</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 
 <span class="va">params</span>
-<span class="co">#&gt; {a = NULL, b = "foo"}</span></code></pre></div>
+<span class="co"># {a = NULL, b = "foo"}</span></code></pre></div>
 </div>
 <div id="merge" class="section level2">
 <h2 class="hasAnchor">
@@ -213,21 +212,21 @@
 <span class="va">par2</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>b <span class="op">=</span> <span class="st">"bar"</span>, x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">par1</span>, <span class="va">par2</span><span class="op">)</span>
-<span class="co">#&gt; {a = 1, b = "bar", x = 2, y = 3}</span></code></pre></div>
+<span class="co"># {a = 1, b = "bar", x = 2, y = 3}</span></code></pre></div>
 <p>As can be seen, existing parameters are updated and new parameters added. Using <code>as.dict</code> you can also do this with ordinary lists.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">par1</span>, <span class="fu"><a href="../reference/DictS3.html">as.dict</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>b <span class="op">=</span> <span class="st">"my b"</span>, x <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; {a = 1, b = "my b", x = 100}</span></code></pre></div>
+<span class="co"># {a = 1, b = "my b", x = 100}</span></code></pre></div>
 <p>That’s it. I hope, it will free you some time and safe some bugs next time you need to manage parameter lists.</p>
 <p>As a very last note, keep in mind that since container version 1.0.0, <em>dict</em> elements are always sorted by their name, while you are still able to access elements by position (based on the sorted values).</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">2</span>, a <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="va">d</span>
-<span class="co">#&gt; {a = 3, x = 1, z = 2}</span>
+<span class="co"># {a = 3, x = 1, z = 2}</span>
 <span class="va">d</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [1] 3</span>
+<span class="co"># [1] 3</span>
 <span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co">#&gt; {x = 1, z = 2}</span></code></pre></div>
+<span class="co"># {x = 1, z = 2}</span></code></pre></div>
 </div>
   </div>
 

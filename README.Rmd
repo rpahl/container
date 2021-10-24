@@ -5,12 +5,17 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+require(container)
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
+  comment = "#",
   fig.path = "images/README-",
+  tidy = FALSE,
+  cache = FALSE,
   out.width = "100%"
 )
+
+options(width = 100L)
 ```
 
 
@@ -26,23 +31,25 @@ knitr::opts_chunk$set(
 
 ### Update to NEW version 1.0.0 soon on [CRAN](https://cran.r-project.org/).
 
-*container* extends base R *list* functionality with the goal to
-serve as an *easy and safe* to use *list* alternative,
-applicable not only for interactive R sessions but specifically to make
-life easier in *serious code* development.
+`container` extends base R `list` functionality with the goal to
+serve as an **easy** and **safe** to use `list` alternative in **interactive**
+and **serious** R code.
+
+### Why `container` over `list`?
+A `container` is based on `list` but provides
+
+* compact printing
+* feature rich add and extract operations (no unintended `NULL` or `NA`)
+* safe replace and removal operations (no unintended override or delete)
+* optional reference semantics
+* and some more ...
+
+which makes life specifically easier in **code development** and when dealing
+with **large lists**.
 
 In addition, this package provides specialized data structures *deque*,
 *set*, *dict*, and *dict.table*, the latter to extend the
 [data.table](https://CRAN.R-project.org/package=data.table) package.
-
-### Why `container` over list?
-A `container` is based on `list` but with
-
-* compact printing
-* feature rich add, extract, replace, or removal operations
-* safer data operations (no more unintended `NULL` or `NA`)
-* optional reference semantics
-* some more ...
 
 ### Installation
 
@@ -54,18 +61,15 @@ install.packages("container")
 devtools::install_github("rpahl/container")
 ```
 
-```{r pre-load, include = FALSE}
-library(container, warn.conflicts = FALSE)
-```
 
 ### Usage
 
-Use `container` the same way you would use a base R `list`, but enjoy
-additional features.
+In an interactive R session you most likely use a `container` the same way
+you would use a base R `list`, plus some new operations.
 
 ```{r}
 library(container)
-co <- container(x = c(1.0, 2.0), y = 1:2, data = cars)
+co <- container(x = cars[, 1], y = cars[, 2], data = cars)
 co
 ```
 
@@ -74,33 +78,40 @@ Some standard operations ...
 co[1:2]
 ```
 ```{r}
-co[["n"]]
+co[["x"]][1:10]
 ```
 
 Some new operations ...
 ```{r}
-co[1:2, "data", "n"]
+# Use any number of (mixed) indices
+co[1:2, "data"]
 ```
 ```{r}
+# Replace element by value
 co[[{cars}]] <- iris
 co
 ```
 ```{r}
-co2 = container(x = 1:10, data = NULL, -111)
+co2 = container(x = 111, data = NULL, -111)
+co2
+```
+```{r}
+# Merge-update with other containers
 co = update(co, co2)
 co
 ```
 ```{r}
-rename(co, "x", "X")
+# Easier rename
+rename(co, "x", "A")
 ```
 
 ### Getting Started
 There is much more to explore. To get started, see
 
-* Get started vignette
-* Manage parameter lists with dict
-* Why and how container for code development
-* Enhancing data.table with dict.table
+* the [Get started](articles/container.html) vignette
+* [Manage parameter lists with dict](articles/parameter-list.html)
+* [Smartly select and mutate data columns with
+  dict.table](articles/smart-select-and-mutate.html)
 
 
 

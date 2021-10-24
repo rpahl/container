@@ -1,6 +1,5 @@
 ---
 title: "Manage parameter lists with dict"
-author: "Roman Pahl"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
@@ -13,11 +12,18 @@ vignette: >
 ---
 
 ```{r knitr-setup, include = FALSE}
+require(container)
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  comment = "#",
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
 )
+
+options(width = 100L)
 ```
+
 
 ## Motivation
 
