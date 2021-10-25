@@ -7,7 +7,7 @@ Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
 Description: container extends the functionality of base R list and
-    provides specialized data structures *deque*,
+    provides specialized data structures deque,
     set, dict, and dict.table, the latter to extend the data.table
     package.
 Depends: R (>= 3.0)
