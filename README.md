@@ -10,7 +10,7 @@
 status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 <!-- badges: end -->
 
-# container <img src="images/logo.png" align="right" width="163" height="104"/>
+# container <img src="man/figures/logo.png" align="right" width="163" height="104"/>
 
 ### Update to NEW version 1.0.0 soon on [CRAN](https://cran.r-project.org/).
 
