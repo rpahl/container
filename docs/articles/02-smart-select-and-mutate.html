@@ -63,16 +63,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/code-development.html">Why and how container for code development</a>
+      <a href="../articles/01-parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
-      <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
+      <a href="../articles/02-smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
     </li>
     <li>
-      <a href="../articles/reference-semantics.html">Reference semantics</a>
+      <a href="../articles/03-code-development.html">Why and how container for code development</a>
     </li>
     <li>
-      <a href="../articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
+      <a href="../articles/04-reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
 </li>
@@ -94,15 +94,15 @@
 
       
 
-      </header><script src="smart-select-and-mutate_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="02-smart-select-and-mutate_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Smartly select and mutate data columns with dict.table</h1>
             
-            <h4 class="date">2021-10-24</h4>
+            <h4 class="date">2021-10-25</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/smart-select-and-mutate.Rmd"><code>vignettes/smart-select-and-mutate.Rmd</code></a></small>
-      <div class="hidden name"><code>smart-select-and-mutate.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/02-smart-select-and-mutate.Rmd"><code>vignettes/02-smart-select-and-mutate.Rmd</code></a></small>
+      <div class="hidden name"><code>02-smart-select-and-mutate.Rmd</code></div>
 
     </div>
 
@@ -298,7 +298,7 @@
         <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">speed</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="smart-select-and-mutate_files/figure-html/benchmark1-1.png" width="672"></p>
+<p><img src="02-smart-select-and-mutate_files/figure-html/benchmark1-1.png" width="672"></p>
 <p>Apparently, <code>dict.table</code> and <code>data.table</code> performed nearly the same with some distance to <code>dplyr</code> (about 10x). Let’s examine each operation in more detail.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">=</span> <span class="va">cars</span>
@@ -320,7 +320,7 @@
     <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">tbl</span>, <span class="op">-</span><span class="va">speed</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="smart-select-and-mutate_files/figure-html/benchmark2-1.png" width="672"></p>
+<p><img src="02-smart-select-and-mutate_files/figure-html/benchmark2-1.png" width="672"></p>
 <p>Apparently, the mutate and select operations are the slowest in comparison, which for the most part should be a result of the functions providing non-standard evaluation (NSE) and other ways of input. It’s not surprising that such flexibility comes at a cost.</p>
 <p>Since the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> expressions also involve NSE terms and some overhead, in this benchmark the <code>dict.table</code> performs even best. Having said that, of course, the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> code can be further improved by avoiding the overhead and instead use reference semantics via <code>data.table</code>s built-in <code>set</code> function.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -354,7 +354,7 @@
 <span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="smart-select-and-mutate_files/figure-html/benchmark3-1.png" width="672"></p>
+<p><img src="02-smart-select-and-mutate_files/figure-html/benchmark3-1.png" width="672"></p>
 <p>This puts things back into perspective. As you see we also provided a a reference semantic version of <code>dict.table</code>, which results in a slight speed improvement over the standard version. Overall, <code>data.table</code> remains the way to go when speed is important.</p>
 </div>
 <div id="summary" class="section level2">

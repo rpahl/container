@@ -110,6 +110,6 @@ rename(co, "x", "A")
 There is much more to explore. To get started, see
 
 -   the [Get started](articles/container.html) vignette
--   [Manage parameter lists with dict](articles/parameter-list.html)
+-   [Manage parameter lists with dict](articles/01-parameter-list.html)
 -   [Smartly select and mutate data columns with
-    dict.table](articles/smart-select-and-mutate.html)
+    dict.table](articles/02-smart-select-and-mutate.html)

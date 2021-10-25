@@ -15,8 +15,8 @@ vignette: >
 require(container)
 
 knitr::opts_chunk$set(
-  comment = "",
-  prompt = TRUE,
+  comment = "#",
+  prompt = F,
   tidy = FALSE,
   cache = FALSE,
   collapse = T
@@ -36,10 +36,10 @@ The *container* package is designed to serve three main goals:
 This vignette will cover the first point and present the basic container 
 operations.
 For the second point see
-vignette [Why and how container for code development](code-development.html).
+vignette [Why and how container for code development](03-code-development.html).
 Examples for specialized data structures are found in the vignettes
-[Manage parameter lists with dict](parameter-list.html)
-and [Smartly select and mutate data columns with dict.table](smart-select-and-mutate.html).
+[Manage parameter lists with dict](01-parameter-list.html)
+and [Smartly select and mutate data columns with dict.table](02-smart-select-and-mutate.html).
 
 ```{r load-package}
 library(container)
