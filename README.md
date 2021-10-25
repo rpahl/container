@@ -10,28 +10,32 @@
 status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 <!-- badges: end -->
 
-# container <img src="images/logo.png" align="right" width="163" height="104"/>
+# container <img src="man/figures/logo.png" align="right" width="163" height="104"/>
 
 ### Update to NEW version 1.0.0 soon on [CRAN](https://cran.r-project.org/).
 
-*container* extends base R *list* functionality with the goal to serve
-as an *easy and safe* to use *list* alternative, applicable not only for
-interactive R sessions but specifically to make life easier in *serious
-code* development.
+`container` extends base R `list` functionality with the goal to serve
+as an **easy** and **safe** to use `list` alternative in **interactive**
+and **serious** R code.
+
+### Why `container` over `list`?
+
+A `container` is based on `list` but provides
+
+-   compact printing
+-   feature rich add and extract operations (no unintended `NULL` or
+    `NA`)
+-   safe replace and removal operations (no unintended override or
+    delete)
+-   optional reference semantics
+-   and some more …
+
+which makes life specifically easier in **code development** and when
+dealing with **large lists**.
 
 In addition, this package provides specialized data structures *deque*,
 *set*, *dict*, and *dict.table*, the latter to extend the
 [data.table](https://CRAN.R-project.org/package=data.table) package.
-
-### Why `container` over list?
-
-A `container` is based on `list` but with
-
--   compact printing
--   feature rich add, extract, replace, or removal operations
--   safer data operations (no more unintended `NULL` or `NA`)
--   optional reference semantics
--   some more …
 
 ### Installation
 
@@ -45,58 +49,67 @@ devtools::install_github("rpahl/container")
 
 ### Usage
 
-Use `container` the same way you would use a base R `list`, but enjoy
-additional functionalities.
+In an interactive R session you most likely use a `container` the same
+way you would use a base R `list`, plus some new operations.
 
 ``` r
 library(container)
-co <- container(x = c(1.0, 2.0), y = 1:2, data = cars)
+co <- container(x = cars[, 1], y = cars[, 2], data = cars)
 co
-#> [x = (1 2), y = (1L 2L), data = <<data.frame(50x2)>>]
+# [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = <<data.frame(50x2)>>]
 ```
 
 Some standard operations …
 
 ``` r
 co[1:2]
-#> [x = (1 2), y = (1L 2L)]
+# [x = (4 4 7 7 ...), y = (2 10 4 22 ...)]
 ```
 
 ``` r
-co[["n"]]
-#> NULL
+co[["x"]][1:10]
+#  [1]  4  4  7  7  8  9 10 10 10 11
 ```
 
 Some new operations …
 
 ``` r
-co[1:2, "data", "n"]
-#> [x = (1 2), y = (1L 2L), data = <<data.frame(50x2)>>]
+# Use any number of (mixed) indices
+co[1:2, "data"]
+# [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = <<data.frame(50x2)>>]
 ```
 
 ``` r
+# Replace element by value
 co[[{cars}]] <- iris
 co
-#> [x = (1 2), y = (1L 2L), data = <<data.frame(150x5)>>]
+# [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = <<data.frame(150x5)>>]
 ```
 
 ``` r
-co2 = container(x = 1:10, data = NULL, -111)
+co2 = container(x = 111, data = NULL, -111)
+co2
+# [x = 111, data = NULL, -111]
+```
+
+``` r
+# Merge-update with other containers
 co = update(co, co2)
 co
-#> [x = (1L 2L 3L 4L ...), y = (1L 2L), data = NULL, -111]
+# [x = 111, y = (2 10 4 22 ...), data = NULL, -111]
 ```
 
 ``` r
-rename(co, "x", "X")
-#> [X = (1L 2L 3L 4L ...), y = (1L 2L), data = NULL, -111]
+# Easier rename
+rename(co, "x", "A")
+# [A = 111, y = (2 10 4 22 ...), data = NULL, -111]
 ```
 
 ### Getting Started
 
 There is much more to explore. To get started, see
 
--   Get started vignette
--   Manage parameter lists with dict
--   Why and how container for code development
--   Enhancing data.table with dict.table
+-   the [Get started](articles/container.html) vignette
+-   [Manage parameter lists with dict](articles/parameter-list.html)
+-   [Smartly select and mutate data columns with
+    dict.table](articles/smart-select-and-mutate.html)

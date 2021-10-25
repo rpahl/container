@@ -52,6 +52,7 @@ functions to insert, delete and access elements from the container
 object. It can be considered as a base R list with
 extended functionality. The Container class also serves as the base
 class for Deque, Set, and Dict objects." />
+<meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
 
@@ -112,13 +113,13 @@ class for Deque, Set, and Dict objects." />
       <a href="../articles/code-development.html">Why and how container for code development</a>
     </li>
     <li>
-      <a href="../articles/dict.table.html">Enhancing data.table with dict.table</a>
-    </li>
-    <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
       <a href="../articles/reference-semantics.html">Reference semantics</a>
+    </li>
+    <li>
+      <a href="../articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
     </li>
   </ul>
 </li>
@@ -191,6 +192,10 @@ class for <a href='Deque.html'>Deque</a>, <a href='Set.html'>Set</a>, and <a hre
       <td><p><code>R</code> object of <code>ANY</code> type for as.container and is.container
 or of class <a href='Container.html'>Container</a> for the <code>S3</code> methods.</p></td>
     </tr>
+    <tr>
+      <th>value</th>
+      <td><p><code>character</code> vector of names.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -228,7 +233,7 @@ the container's elements are copied (deeply) during the conversion.</p></li>
 </ul>
 
 <ul>
-<li><p><code>names(x) &lt;- value</code> set names of the elements contained in <code>x</code>.</p></li>
+<li><p><code>names(x) &lt;- value</code> sets the names of <code>x</code>.</p></li>
 </ul>
 
 <ul>

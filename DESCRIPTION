@@ -6,18 +6,17 @@ Date: 2020-11-07
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
-Description: container extends the functionality of base R list and the
-    data.table package and with deque, set, and dict provides common data
-    structures not provided by base R, (resembling Python's dict type).
-    In addition, it provides iterators and supports both reference and copy
-    semantics.
+Description: container extends the functionality of base R list and
+    provides specialized data structures deque,
+    set, dict, and dict.table, the latter to extend the data.table
+    package.
 Depends: R (>= 3.0)
 License: GPL-3
 LazyData: TRUE
 Encoding: UTF-8
 Imports: data.table, methods, R6
 VignetteBuilder: knitr
-Suggests: knitr, tinytest, rmarkdown
+Suggests: knitr, tinytest, rmarkdown, microbenchmark, ggplot2, dplyr, tibble
 URL: https://github.com/rpahl/container
 BugReports: https://github.com/rpahl/container/issues
 NeedsCompilation: no

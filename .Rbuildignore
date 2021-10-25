@@ -11,3 +11,5 @@ tags
 ^README\.Rmd$
 ^doc$
 ^Meta$
+
+^images$
