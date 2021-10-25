@@ -2,12 +2,12 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  01-parameter-list: 01-parameter-list.html
-  02-smart-select-and-mutate: 02-smart-select-and-mutate.html
-  03-code-development: 03-code-development.html
-  04-reference-semantics: 04-reference-semantics.html
+  code-development: code-development.html
   container: container.html
-last_built: 2021-10-25T20:45Z
+  parameter-list: parameter-list.html
+  reference-semantics: reference-semantics.html
+  smart-select-and-mutate: smart-select-and-mutate.html
+last_built: 2021-10-25T21:14Z
 urls:
   reference: https://github.com/rpahl/container/reference
   article: https://github.com/rpahl/container/articles

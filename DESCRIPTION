@@ -16,7 +16,7 @@ LazyData: TRUE
 Encoding: UTF-8
 Imports: data.table, methods, R6
 VignetteBuilder: knitr
-Suggests: knitr, tinytest, rmarkdown, microbenchmark, ggplot2, dplyr
+Suggests: knitr, tinytest, rmarkdown, microbenchmark, ggplot2, dplyr, tibble
 URL: https://github.com/rpahl/container
 BugReports: https://github.com/rpahl/container/issues
 NeedsCompilation: no

@@ -145,7 +145,3 @@ ee(as.list(s), list(1, 2))
 ee(as.list(as.orderedset(list(2, 1))), list(1, 2))
 
 ee(c(s, s), s)
-<<<<<<< HEAD
-=======
-
->>>>>>> docs
