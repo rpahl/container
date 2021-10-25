@@ -11,6 +11,15 @@ expect_error(co[3] <- 3, "index out of range")
 co[list(1, "b")] <- 3:4
 ee(co, container(a = 3, b = 4))
 
+co[1:2] <- 0
+ee(co, container(a = 0, b = 0))
+
+co <- container(1, 2, 3)
+expect_warning(co[1:3] <- 1:2, "number of items to replace")
+ee(co, container(1, 2, 1))
+expect_warning(co[1] <- 5:6, "number of items to replace")
+ee(co, container(5, 2, 1))
+
 # -----------------------
 # Container [[<- operator
 # -----------------------

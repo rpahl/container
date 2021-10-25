@@ -1,0 +1,197 @@
+---
+title: "Get started"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+vignette: >
+  %\VignetteIndexEntry{Get started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+require(container)
+
+knitr::opts_chunk$set(
+  comment = "#",
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
+)
+
+options(width = 100L)
+```
+
+## Introduction
+
+The *container* package is designed to serve three main goals:
+
+1. enhance base R *list* for interactive sessions
+2. enhance base R *list* for code development
+3. provide specialized data structures that are not available with base R
+
+This vignette will cover the first point and present the basic container 
+operations.
+For the second point see
+vignette [Why and how container for code development](03-code-development.html).
+Examples for specialized data structures are found in the vignettes
+[Manage parameter lists with dict](01-parameter-list.html)
+and [Smartly select and mutate data columns with dict.table](02-smart-select-and-mutate.html).
+
+```{r load-package}
+library(container)
+```
+
+
+### Basic methods
+
+For easier typing it's recommended to use the shorter `cont` when creating
+`container` objects in interactive sessions.
+```{r}
+co <- cont(n = 5, data = cars[1:5, ], form = speed ~ dist)
+```
+
+The container print method is designed to be very compact.
+```{r}
+print(co)
+```
+
+For more verbose output, either convert to a base `list` ...
+```{r}
+as.list(co)
+```
+
+or use `str`.
+```{r}
+str(co)
+```
+
+Both `length` and `names` work as usual.
+```{r}
+length(co)
+
+names(co)
+
+names(co)[1] <- "a"
+co
+```
+
+There is also an alternative way for renaming.
+```{r}
+co = rename(co, old = c("a", "form"), new = c("N", "ff"))
+co
+```
+A container can also be constructed from a list.
+```{r}
+l = list(x = 1:2, y = (1:2)^2)
+co2 = as.container(l)
+co2
+```
+
+### Add elements
+
+Elements can be added by concatenation
+```{r}
+c(co, co2)
+```
+or name.
+```{r}
+co[["co2"]] <- co2
+co
+```
+As you see containers can be nested. To flatten everything into a list, use `unpack`.
+```{r}
+str(unpack(co))
+```
+
+To avoid unintended results, in contrast to base R `list`s, elements cannot 
+be added at new integer positions.
+```{r, error = TRUE}
+l = list(a = 1, b = 2, c = 3)
+l[[4]] <- 4 # works
+l
+
+ct = cont(a = 1, b = 2, c = 3)
+ct[[4]] <- 4 # fails
+```
+
+
+### Replace values
+
+Single or multiple value replacement works as usual.
+```{r}
+ct[[3]] <- 0
+ct[1:2] <- 0
+ct
+```
+
+In contrast to base `list`s, containers can take a mix of numeric and character
+indices.
+```{r}
+ct[list("a", 3, "z")] <- 1
+ct
+```
+
+Another option for container object is to replace *by value*. For example, to 
+replace the 0 by 100, can be achieved as follows.
+```{r}
+ct[[{0}]] <- 100
+ct
+```
+
+This works for any data type.
+```{r}
+co
+co[[{cars[1:5,]}]] <- cars
+co[[{co2}]] <- unpack(co2)
+co
+```
+
+
+### Extract
+The standard operators to access elements also should be familiar to R users.
+^[Note that the `$` operator does not work.]
+```{r}
+ct[[1]]
+ct[1:3]
+```
+
+As another option, you can pass any number of indices, possibly mixed as numeric
+and character.
+```{r}
+ct[1, 3, "z"]
+
+ct[2:1, "a"]
+```
+
+### Inspect
+Count the number of elements.
+```{r}
+count(ct, 0)
+count(ct, 1)
+```
+
+Check if container has an element
+```{r}
+has(co, cars)
+has(ct, cars)
+
+```
+
+or name.
+```{r}
+has_name(co, "a")
+has_name(ct, "a")
+```
+ 
+
+Use the apply family.
+```{r}
+sapply(co, is.numeric)
+
+sapply(ct, function(x) x + 1)
+```
+

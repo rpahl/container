@@ -15,6 +15,7 @@
 \alias{as.list.Container}
 \alias{length.Container}
 \alias{names.Container}
+\alias{names<-.Container}
 \title{Container - Enhancing R's list}
 \usage{
 container(...)
@@ -32,6 +33,8 @@ is.container(x)
 \method{length}{Container}(x)
 
 \method{names}{Container}(x)
+
+\method{names}{Container}(x) <- value
 }
 \arguments{
 \item{...}{(possibly named) elements to be put into or removed from the
@@ -39,6 +42,8 @@ is.container(x)
 
 \item{x}{\code{R} object of \code{ANY} type for \link{as.container} and \link{is.container}
 or of class \link{Container} for the \code{S3} methods.}
+
+\item{value}{\code{character} vector of names.}
 }
 \description{
 A container is a data structure with typical member
@@ -79,6 +84,10 @@ the container's elements are copied (deeply) during the conversion.
 
 \itemize{
 \item \code{names(x)} return the names of the elements contained in \code{x}.
+}
+
+\itemize{
+\item \code{names(x) <- value} sets the names of \code{x}.
 }
 
 \itemize{

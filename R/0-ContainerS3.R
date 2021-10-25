@@ -113,6 +113,9 @@ str.Container <- function(object, ...)
 }
 
 
+#' @rdname ContainerS3
+#' @param value `character` vector of names.
+#' @details * `names(x) <- value` sets the names of `x`.
 #' @export
 "names<-.Container" <- function(x, value)
 {

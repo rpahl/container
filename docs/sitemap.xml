@@ -46,7 +46,7 @@
     <loc>https://github.com/rpahl/container/reference/Deque.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/DequeS3.html</loc>
+    <loc>https://github.com/rpahl/container/reference/dequeS3.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/Dict.html</loc>
@@ -55,7 +55,7 @@
     <loc>https://github.com/rpahl/container/reference/dict.table.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/DictS3.html</loc>
+    <loc>https://github.com/rpahl/container/reference/dictS3.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/discard.html</loc>
@@ -130,7 +130,7 @@
     <loc>https://github.com/rpahl/container/reference/Set.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/reference/SetS3.html</loc>
+    <loc>https://github.com/rpahl/container/reference/setS3.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/reference/unpack.html</loc>
@@ -139,18 +139,18 @@
     <loc>https://github.com/rpahl/container/reference/update.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/container/articles/code-development.html</loc>
+    <loc>https://github.com/rpahl/container/articles/01-parameter-list.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/articles/02-smart-select-and-mutate.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/articles/03-code-development.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/container/articles/04-reference-semantics.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/articles/container.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/dict.table.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/parameter-list.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/reference-semantics.html</loc>
   </url>
 </urlset>
