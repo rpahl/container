@@ -6,8 +6,7 @@
 #' positional array semantics.
 #' It is implemented as a specialized associative [Container] thus sharing
 #' all [Container] methods with some of them being adapted to account for
-#' the key-value pair semantic.
-#' All Dict elements must be named and are always sorted by their name.
+#' the key-value pair semantic. All elements must be named.
 #' @param ... elements put into the `Dict`.
 #' @param x `R` object of `ANY` type for [as.dict()] and [is.dict()]
 #' or of class `Dict` for the `S3` methods.
@@ -20,10 +19,9 @@
 #' providing either copy or reference semantics where the latter start with
 #' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
 #' @examples
-#' d = dict(a = 1, b = "one", f = mean, na = NA)
+#' d = dict(b = "one", a = 1, f = mean, na = NA)
 #' print(d)
 #' names(d)
-#' as.list(d)
 #'
 #' \dontrun{
 #' dict(a = 1, 2)   # all elements must be named
