@@ -67,16 +67,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/code-development.html">Why and how container for code development</a>
+      <a href="articles/code-development.html">When and how to use container for code development</a>
+    </li>
+    <li>
+      <a href="articles/manage-data-columns.html">Manage data columns with dict.table</a>
     </li>
     <li>
       <a href="articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
       <a href="articles/reference-semantics.html">Reference semantics</a>
-    </li>
-    <li>
-      <a href="articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
     </li>
   </ul>
 </li>
@@ -109,12 +109,11 @@
 <div id="update-to-new-version-100-soon-on-cran" class="section level3">
 <h3 class="hasAnchor">
 <a href="#update-to-new-version-100-soon-on-cran" class="anchor"></a>Update to NEW version 1.0.0 soon on <a href="https://cran.r-project.org/">CRAN</a>.</h3>
-<p><code>container</code> extends base R <code>list</code> functionality with the goal to serve as an <strong>easy</strong> and <strong>safe</strong> to use <code>list</code> alternative in <strong>interactive</strong> and <strong>serious</strong> R code.</p>
 </div>
-<div id="why-container-over-list" class="section level3">
+<div id="why-container" class="section level3">
 <h3 class="hasAnchor">
-<a href="#why-container-over-list" class="anchor"></a>Why <code>container</code> over <code>list</code>?</h3>
-<p>A <code>container</code> is based on <code>list</code> but provides</p>
+<a href="#why-container" class="anchor"></a>Why <code>container</code>?</h3>
+<p><code>container</code> extends base R <code>list</code> functionality with the goal to serve as an <strong>easy</strong> and <strong>safe</strong> to use <code>list</code> alternative. It is based on <code>list</code> but provides</p>
 <ul>
 <li>compact printing</li>
 <li>feature rich add and extract operations (no unintended <code>NULL</code> or <code>NA</code>)</li>
@@ -122,8 +121,8 @@
 <li>optional reference semantics</li>
 <li>and some more …</li>
 </ul>
-<p>which makes life specifically easier in <strong>code development</strong> and when dealing with <strong>large lists</strong>.</p>
-<p>In addition, this package provides specialized data structures <em>deque</em>, <em>set</em>, <em>dict</em>, and <em>dict.table</em>, the latter to extend the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> package.</p>
+<p>to make life easier when writing <strong>critical</strong> R code and managing <strong>large</strong> lists.</p>
+<p>Based on the <em>Container</em> class, this package also comes with specialized data structures <em>Deque</em>, <em>Set</em> and <em>Dict</em> and a <em>special</em> class <code>dict.table</code>, which is designed to extend <a href="https://CRAN.R-project.org/package=data.table">data.table</a> by a rich set of functions to manage data columns.</p>
 </div>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
@@ -138,20 +137,20 @@
 <div id="usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h3>
-<p>In an interactive R session you most likely use a <code>container</code> the same way you would use a base R <code>list</code>, plus some new operations.</p>
+<p>The <code>container</code> package was originally created to enhance code development but since version 1.0.0 also gained some functionality that can be useful in an interactive R session, where you most likely use a <code>container</code> the same way you would use a base R <code>list</code>, plus some new operations. For example,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rpahl/container">container</a></span><span class="op">)</span>
 <span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">cars</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span>
 <span class="va">co</span>
 <span class="co"># [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
-<p>Some standard operations …</p>
+<p>some standard operations …</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
 <span class="co"># [x = (4 4 7 7 ...), y = (2 10 4 22 ...)]</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>
 <span class="co">#  [1]  4  4  7  7  8  9 10 10 10 11</span></code></pre></div>
-<p>Some new operations …</p>
+<p>some new operations …</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Use any number of (mixed) indices</span>
 <span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"data"</span><span class="op">]</span>
@@ -182,7 +181,7 @@
 <ul>
 <li>the <a href="articles/container.html">Get started</a> vignette</li>
 <li><a href="articles/parameter-list.html">Manage parameter lists with dict</a></li>
-<li><a href="articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a></li>
+<li><a href="articles/manage-data-columns.html">Manage data columns with dict.table</a></li>
 </ul>
 </div>
 </div>

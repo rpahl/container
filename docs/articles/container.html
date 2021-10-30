@@ -64,16 +64,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/code-development.html">Why and how container for code development</a>
+      <a href="../articles/code-development.html">When and how to use container for code development</a>
+    </li>
+    <li>
+      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
     </li>
     <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
       <a href="../articles/reference-semantics.html">Reference semantics</a>
-    </li>
-    <li>
-      <a href="../articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
     </li>
   </ul>
 </li>
@@ -100,7 +100,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started</h1>
             
-            <h4 class="date">2021-10-25</h4>
+            <h4 class="date">2021-10-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/container.Rmd"><code>vignettes/container.Rmd</code></a></small>
       <div class="hidden name"><code>container.Rmd</code></div>
@@ -114,11 +114,11 @@
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>The <em>container</em> package is designed to serve three main goals:</p>
 <ol style="list-style-type: decimal">
+<li>enhance base R <em>list</em> for code development (see <a href="code-development.html">When and how to use container for code development</a>)</li>
+<li>provide specialized data structures beyond <em>list</em> (see <a href="parameter-list.html">Manage parameter lists with dict</a> and <a href="manage-data-columns.html">Manage data columns with dict.table</a>)</li>
 <li>enhance base R <em>list</em> for interactive sessions</li>
-<li>enhance base R <em>list</em> for code development</li>
-<li>provide specialized data structures that are not available with base R</li>
 </ol>
-<p>This vignette will cover the first point and present the basic container operations. For the second point see vignette <a href="code-development.html">Why and how container for code development</a>. Examples for specialized data structures are found in the vignettes <a href="parameter-list.html">Manage parameter lists with dict</a> and <a href="smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>.</p>
+<p>This vignette covers the third topic and presents container operations that are best suited for interactive R sessions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rpahl/container">container</a></span><span class="op">)</span></code></pre></div>
 <div id="basic-methods" class="section level3">

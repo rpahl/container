@@ -1,12 +1,12 @@
 ---
-title: "Why and how container for code development"
+title: "When and how to use container for code development"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
 vignette: >
-  %\VignetteIndexEntry{Why and how container for code development}
+  %\VignetteIndexEntry{When and how to use container for code development}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,3 +23,5 @@ knitr::opts_chunk$set(
 options(width = 100L)
 ```
 
+
+## When to use

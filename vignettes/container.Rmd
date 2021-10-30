@@ -33,17 +33,15 @@ options(width = 100L)
 
 The *container* package is designed to serve three main goals:
 
-1. enhance base R *list* for interactive sessions
-2. enhance base R *list* for code development
-3. provide specialized data structures that are not available with base R
+1. enhance base R *list* for code development (see
+   [When and how to use container for code development](code-development.html))
+2. provide specialized data structures beyond *list* (see
+   [Manage parameter lists with dict](parameter-list.html) and
+   [Manage data columns with dict.table](manage-data-columns.html))
+3. enhance base R *list* for interactive sessions
 
-This vignette will cover the first point and present the basic container 
-operations.
-For the second point see
-vignette [Why and how container for code development](code-development.html).
-Examples for specialized data structures are found in the vignettes
-[Manage parameter lists with dict](parameter-list.html)
-and [Smartly select and mutate data columns with dict.table](smart-select-and-mutate.html).
+This vignette covers the third topic and presents container operations
+that are best suited for interactive R sessions.
 
 ```{r load-package}
 library(container)
@@ -111,7 +109,7 @@ As you see containers can be nested. To flatten everything into a list, use `unp
 str(unpack(co))
 ```
 
-To avoid unintended results, in contrast to base R `list`s, elements cannot 
+To avoid unintended results, in contrast to base R `list`s, elements cannot
 be added at new integer positions.
 ```{r, error = TRUE}
 l = list(a = 1, b = 2, c = 3)
@@ -139,7 +137,7 @@ ct[list("a", 3, "z")] <- 1
 ct
 ```
 
-Another option for container object is to replace *by value*. For example, to 
+Another option for container object is to replace *by value*. For example, to
 replace the 0 by 100, can be achieved as follows.
 ```{r}
 ct[[{0}]] <- 100
@@ -189,7 +187,7 @@ or name.
 has_name(co, "a")
 has_name(ct, "a")
 ```
- 
+
 
 Use the apply family.
 ```{r}

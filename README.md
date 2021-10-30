@@ -14,13 +14,11 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 
 ### Update to NEW version 1.0.0 soon on [CRAN](https://cran.r-project.org/).
 
+### Why `container`?
+
 `container` extends base R `list` functionality with the goal to serve
-as an **easy** and **safe** to use `list` alternative in **interactive**
-and **serious** R code.
-
-### Why `container` over `list`?
-
-A `container` is based on `list` but provides
+as an **easy** and **safe** to use `list` alternative. It is based on
+`list` but provides
 
 -   compact printing
 -   feature rich add and extract operations (no unintended `NULL` or
@@ -30,12 +28,14 @@ A `container` is based on `list` but provides
 -   optional reference semantics
 -   and some more …
 
-which makes life specifically easier in **code development** and when
-dealing with **large lists**.
+to make life easier when writing **critical** R code and managing
+**large** lists.
 
-In addition, this package provides specialized data structures *deque*,
-*set*, *dict*, and *dict.table*, the latter to extend the
-[data.table](https://CRAN.R-project.org/package=data.table) package.
+Based on the *Container* class, this package also comes with specialized
+data structures *Deque*, *Set* and *Dict* and a *special* class
+`dict.table`, which is designed to extend
+[data.table](https://CRAN.R-project.org/package=data.table) by a rich
+set of functions to manage data columns.
 
 ### Installation
 
@@ -49,8 +49,11 @@ devtools::install_github("rpahl/container")
 
 ### Usage
 
-In an interactive R session you most likely use a `container` the same
-way you would use a base R `list`, plus some new operations.
+The `container` package was originally created to enhance code
+development but since version 1.0.0 also gained some functionality that
+can be useful in an interactive R session, where you most likely use a
+`container` the same way you would use a base R `list`, plus some new
+operations. For example,
 
 ``` r
 library(container)
@@ -59,7 +62,7 @@ co
 # [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = <<data.frame(50x2)>>]
 ```
 
-Some standard operations …
+some standard operations …
 
 ``` r
 co[1:2]
@@ -71,7 +74,7 @@ co[["x"]][1:10]
 #  [1]  4  4  7  7  8  9 10 10 10 11
 ```
 
-Some new operations …
+some new operations …
 
 ``` r
 # Use any number of (mixed) indices
@@ -111,5 +114,5 @@ There is much more to explore. To get started, see
 
 -   the [Get started](articles/container.html) vignette
 -   [Manage parameter lists with dict](articles/parameter-list.html)
--   [Smartly select and mutate data columns with
-    dict.table](articles/smart-select-and-mutate.html)
+-   [Manage data columns with
+    dict.table](articles/manage-data-columns.html)

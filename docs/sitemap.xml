@@ -145,12 +145,12 @@
     <loc>https://github.com/rpahl/container/articles/container.html</loc>
   </url>
   <url>
+    <loc>https://github.com/rpahl/container/articles/manage-data-columns.html</loc>
+  </url>
+  <url>
     <loc>https://github.com/rpahl/container/articles/parameter-list.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/container/articles/reference-semantics.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/smart-select-and-mutate.html</loc>
   </url>
 </urlset>
