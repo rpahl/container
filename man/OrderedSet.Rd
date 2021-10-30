@@ -2,9 +2,9 @@
 % Please edit documentation in R/0-SetR6.R
 \name{OrderedSet}
 \alias{OrderedSet}
-\title{Ordered Set Class}
+\title{OrderedSet Class}
 \description{
-The \link{OrderedSet} is as \link{Set} where all elements are always
+The \link{OrderedSet} is a \link{Set} where all elements are always
 ordered.
 }
 \details{

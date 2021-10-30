@@ -109,9 +109,52 @@
 
     
     
-<div id="when-to-use" class="section level2">
+<div id="when-not-to-use-container" class="section level2">
 <h2 class="hasAnchor">
-<a href="#when-to-use" class="anchor"></a>When to use</h2>
+<a href="#when-not-to-use-container" class="anchor"></a>When <em>not</em> to use container</h2>
+<p>Don’t bother using the <code>container</code> framework if …</p>
+<ul>
+<li>
+<em>computation speed</em> is of high importance.</li>
+</ul>
+<p>The <code>container</code> package is written in pure R and was never designed or optimized for speed. So if computation speed is critical for your application, you rather should fall back to base R <em>list</em> or use packages that were optimized for performance, such as the <a href="https://CRAN.R-project.org/package=collections">collections</a> package.</p>
+<ul>
+<li>your application is <em>small</em> or <em>simple</em>.</li>
+</ul>
+<p>If the complexity of your application is low, it is probably not worth adding the <code>container</code> dependency and, again, you are probably fine with just using base R lists or vectors.</p>
+</div>
+<div id="when-to-use-container" class="section level2">
+<h2 class="hasAnchor">
+<a href="#when-to-use-container" class="anchor"></a>When to use container</h2>
+<p>Consider using the <code>container</code> framework if …</p>
+<ul>
+<li>code <em>robustness</em> and <em>readability</em> is of high importance</li>
+<li>you need to manage <em>long</em> lists with various add, access, replace and removal operations.</li>
+<li>you want to use <em>specialized</em> data structures (deque, set, dict) that still provide a <em>rich set of functions</em> to add, access, replace and remove elements.</li>
+<li>you demand <a href="reference-semantics.html">reference semantics</a>.</li>
+</ul>
+</div>
+<div id="how-to-use-container" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-use-container" class="anchor"></a>How to use container</h2>
+<p>In the following sections we are going to touch each of the above points briefly with some examples.</p>
+<div id="code-robustness-and-readability" class="section level3">
+<h3 class="hasAnchor">
+<a href="#code-robustness-and-readability" class="anchor"></a>Code <em>robustness</em> and <em>readability</em>
+</h3>
+</div>
+<div id="managing-long-lists" class="section level3">
+<h3 class="hasAnchor">
+<a href="#managing-long-lists" class="anchor"></a>Managing <em>long</em> lists</h3>
+</div>
+<div id="specialized-data-structures" class="section level3">
+<h3 class="hasAnchor">
+<a href="#specialized-data-structures" class="anchor"></a>Specialized data structures</h3>
+</div>
+<div id="reference-semantics" class="section level3">
+<h3 class="hasAnchor">
+<a href="#reference-semantics" class="anchor"></a>Reference semantics</h3>
+</div>
 </div>
   </div>
 

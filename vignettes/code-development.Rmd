@@ -23,5 +23,55 @@ knitr::opts_chunk$set(
 options(width = 100L)
 ```
 
+## When *not* to use container
 
-## When to use
+Don't bother using the `container` framework if ...
+
+* *computation speed* is of high importance.
+
+The `container` package is written in pure R and was never designed or
+optimized for speed. So if computation speed is critical for your application,
+you rather should fall back to base R *list* or use packages that were 
+optimized for performance,
+such as the [collections](https://CRAN.R-project.org/package=collections)
+package.
+
+* your application is *small* or *simple*.
+
+If the complexity of your application is low, it is probably not
+worth adding the `container` dependency and, again, you are probably fine with
+just using base R lists or vectors.
+
+
+## When to use container
+Consider using the `container` framework if ...
+
+* code *robustness* and *readability* is of high importance
+* you need to manage *long* lists with various add, access,
+replace and removal operations.
+* you want to use *specialized* data structures (deque, set, dict) that 
+still provide a *rich set of functions* to add, access, replace and remove
+elements.
+* you demand [reference semantics](reference-semantics.html).
+
+## How to use container
+
+In the following sections we are going to touch each of the above points briefly
+with some examples.
+
+### Code *robustness* and *readability*
+
+
+### Managing *long* lists
+
+### Specialized data structures
+
+### Reference semantics
+
+
+
+
+
+
+
+
