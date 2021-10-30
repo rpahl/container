@@ -16,9 +16,9 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 
 ### Why `container`?
 
-`container` extends base R `list` functionality with the goal to serve
-as an **easy** and **safe** to use `list` alternative. It is based on
-`list` but provides
+`container` extends base R `list` functionality with the goal to make
+life easier when writing **critical** R code and managing **long**
+lists. It is based on R’s `list` but provides
 
 -   compact printing
 -   feature rich add and extract operations (no unintended `NULL` or
@@ -28,14 +28,12 @@ as an **easy** and **safe** to use `list` alternative. It is based on
 -   optional reference semantics
 -   and some more …
 
-to make life easier when writing **critical** R code and managing
-**long** lists.
-
-Based on the *Container* class, this package also comes with specialized
-data structures *Deque*, *Set* and *Dict* and a *special* class
-`dict.table`, which is designed to extend
+In addition, this package comes with specialized data structures
+*Deque*, *Set* and *Dict* and a *special* class `dict.table`, which is
+designed to extend
 [data.table](https://CRAN.R-project.org/package=data.table) by a rich
-set of functions to manage data columns.
+set of functions to manage data columns (for more details see [Manage
+data columns with dict.table](articles/manage-data-columns.html)).
 
 ### Installation
 
