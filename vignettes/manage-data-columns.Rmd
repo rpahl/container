@@ -47,12 +47,15 @@ package in parts was developed to close this gap. With version 1.0.0,
 it provides `dict.table`, which can be considered a
 [data.table](https://CRAN.R-project.org/package=data.table) with
 an extended set of functions to add, extract, remove and replace data
-columns with minimal required additional checking resulting in very lean code.
+columns with minimal required additional checking, hopefully resulting in
+lean and robust code.
 
 This vignette compares basic `dplyr` and `dict.table` data column operations
 and at the end shows that both frameworks can be easily combined.
 
-To keep matters simple, we use a tiny data table.
+## Column operations
+
+To keep matters simple, we use a tiny data set.
 ```{r}
 library(container)
 library(dplyr)
@@ -61,7 +64,7 @@ data <- dict.table(x = c(0.2, 0.5), y = letters[1:2])
 data
 ```
 
-## Column operations
+
 ### Add
 Let's add columns using `mutate`.
 ```{r}
@@ -189,7 +192,7 @@ head(cars)
 ```
 
 For the benchmark, we add, replace and finally delete a column.
-```{r benchmark1, warning = FALSE, message = FALSE, cache=FALSE}
+```{r benchmark1, warning = FALSE, message = FALSE, cache=TRUE}
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
     dict.table =
@@ -216,7 +219,7 @@ autoplot(bm) + theme_bw()
 While `dict.table` and `data.table` performed nearly the same there is
 some distance to `dplyr` (about 10x). Let's examine each operation in more detail.
 
-```{r benchmark2, warning = FALSE, message = FALSE, cache=FALSE}
+```{r benchmark2, warning = FALSE, message = FALSE, cache=TRUE}
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
@@ -241,8 +244,7 @@ autoplot(bm) + theme_bw()
 Apparently, the mutate and select operations are the slowest in comparison,
 which for the most part should be a result of these functions providing
 non-standard evaluation (NSE) and generally a wide range of ways to specify the
-desired operation.
-It's not surprising that such flexibility comes at a cost.
+desired operation. Unsurprisingly such flexibility comes at a cost.
 
 Since the
 [data.table](https://CRAN.R-project.org/package=data.table) expressions also
@@ -252,7 +254,7 @@ Having said that, of course, the [data.table](https://CRAN.R-project.org/package
 code can be further improved by avoiding the overhead and instead use reference semantics
 via the `data.table` built-in `set` function.
 
-```{r benchmark3, warning = FALSE, message = FALSE, cache=FALSE}
+```{r benchmark3, warning = FALSE, message = FALSE, cache=TRUE}
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
@@ -288,9 +290,7 @@ autoplot(bm) + theme_bw()
 This puts things back into perspective. We also provided a `dict.table`
 version using reference semantic, which is also `built-in` and results in a
 slight speed improvement over the standard version. As a result, `data.table`
-remains the way to go when speed is key, but note that again there is no
-checking of missing or existing data columns, as implicitly provided by the
-`dict.table` operations.
+remains the way to go when speed is key.
 
 ## Combine dplyr and dict.table
 Since a `dict.table` is fully compatible with `dplyr` and `data.table`,
@@ -307,10 +307,10 @@ res = data %>%
 
 ## Summary
 In critical code, it is usually of high priority to avoid unintended data
-column operations. For this usually additional code is required to check
+column operations. For this, usually additional code is required to check
 for the existence or absence of columns.
 The `dict.table` framework provides a set of column operations with built-in
-checking, thereby yielding safer and less redundant code and
-ultimately freeing the developer from writing these annoying checks over and
+checking, thereby yielding safer and leaner code out of the box and
+ultimately freeing the developer from writing some annoying checks over and
 over again.
 

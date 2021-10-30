@@ -113,9 +113,13 @@
 <h2 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h2>
 <p>The <a href="https://CRAN.R-project.org/package=dplyr">dplyr</a> functions <code>select</code> and <code>mutate</code> are widely used to manage data <code>data.frame</code> (or <code>tibble</code>) columns. They cover a wide range of use cases and are applied in quick data exploration as well as in data analysis pipelines. On the other hand, when implementing critical code or building R packages, developers may revert to base R to minimize errors and code dependencies. At least, both <code>mutate</code> and <code>select</code> may require additional checking, for example, to catch column name clashes.</p>
-<p>The <a href="https://cran.r-project.org/web/packages/container/index.html">container</a> package in parts was developed to close this gap. With version 1.0.0, it provides <code>dict.table</code>, which can be considered a <a href="https://CRAN.R-project.org/package=data.table">data.table</a> with an extended set of functions to add, extract, remove and replace data columns with minimal required additional checking resulting in very lean code.</p>
+<p>The <a href="https://cran.r-project.org/web/packages/container/index.html">container</a> package in parts was developed to close this gap. With version 1.0.0, it provides <code>dict.table</code>, which can be considered a <a href="https://CRAN.R-project.org/package=data.table">data.table</a> with an extended set of functions to add, extract, remove and replace data columns with minimal required additional checking, hopefully resulting in lean and robust code.</p>
 <p>This vignette compares basic <code>dplyr</code> and <code>dict.table</code> data column operations and at the end shows that both frameworks can be easily combined.</p>
-<p>To keep matters simple, we use a tiny data table.</p>
+</div>
+<div id="column-operations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#column-operations" class="anchor"></a>Column operations</h2>
+<p>To keep matters simple, we use a tiny data set.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rpahl/container">container</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
@@ -126,10 +130,6 @@
 <span class="co">#      x y</span>
 <span class="co"># 1: 0.2 a</span>
 <span class="co"># 2: 0.5 b</span></code></pre></div>
-</div>
-<div id="column-operations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#column-operations" class="anchor"></a>Column operations</h2>
 <div id="add" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add" class="anchor"></a>Add</h3>
@@ -326,7 +326,7 @@
 <span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="manage-data-columns_files/figure-html/benchmark2-1.png" width="672"></p>
-<p>Apparently, the mutate and select operations are the slowest in comparison, which for the most part should be a result of these functions providing non-standard evaluation (NSE) and generally a wide range of ways to specify the desired operation. It’s not surprising that such flexibility comes at a cost.</p>
+<p>Apparently, the mutate and select operations are the slowest in comparison, which for the most part should be a result of these functions providing non-standard evaluation (NSE) and generally a wide range of ways to specify the desired operation. Unsurprisingly such flexibility comes at a cost.</p>
 <p>Since the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> expressions also involve NSE terms and some overhead, in this benchmark the <code>dict.table</code> performs even best. Having said that, of course, the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> code can be further improved by avoiding the overhead and instead use reference semantics via the <code>data.table</code> built-in <code>set</code> function.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">=</span> <span class="va">cars</span>
@@ -359,7 +359,7 @@
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="manage-data-columns_files/figure-html/benchmark3-1.png" width="672"></p>
-<p>This puts things back into perspective. We also provided a <code>dict.table</code> version using reference semantic, which is also <code>built-in</code> and results in a slight speed improvement over the standard version. As a result, <code>data.table</code> remains the way to go when speed is key, but note that again there is no checking of missing or existing data columns, as implicitly provided by the <code>dict.table</code> operations.</p>
+<p>This puts things back into perspective. We also provided a <code>dict.table</code> version using reference semantic, which is also <code>built-in</code> and results in a slight speed improvement over the standard version. As a result, <code>data.table</code> remains the way to go when speed is key.</p>
 </div>
 <div id="combine-dplyr-and-dict-table" class="section level2">
 <h2 class="hasAnchor">
@@ -375,7 +375,7 @@
 <div id="summary" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summary" class="anchor"></a>Summary</h2>
-<p>In critical code, it is usually of high priority to avoid unintended data column operations. For this usually additional code is required to check for the existence or absence of columns. The <code>dict.table</code> framework provides a set of column operations with built-in checking, thereby yielding safer and less redundant code and ultimately freeing the developer from writing these annoying checks over and over again.</p>
+<p>In critical code, it is usually of high priority to avoid unintended data column operations. For this, usually additional code is required to check for the existence or absence of columns. The <code>dict.table</code> framework provides a set of column operations with built-in checking, thereby yielding safer and leaner code out of the box and ultimately freeing the developer from writing some annoying checks over and over again.</p>
 </div>
   </div>
 
