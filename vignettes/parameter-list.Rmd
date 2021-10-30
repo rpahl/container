@@ -29,7 +29,7 @@ options(width = 100L)
 
 The original motivation for the development of this package actually was that
 the author found himself writing countless checks and helper code over and over
-again when managing parameter lists in larger applications.
+again when managing parameter lists.
 It became apparent that something similar to python's
 dictionary would make life easier and so the idea of the container
 package was born.

@@ -29,7 +29,7 @@ as an **easy** and **safe** to use `list` alternative. It is based on
 -   and some more …
 
 to make life easier when writing **critical** R code and managing
-**large** lists.
+**long** lists.
 
 Based on the *Container* class, this package also comes with specialized
 data structures *Deque*, *Set* and *Dict* and a *special* class
