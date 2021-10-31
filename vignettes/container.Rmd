@@ -41,7 +41,8 @@ The *container* package is designed to serve three main goals:
 3. enhance base R *list* for interactive sessions
 
 This vignette covers the third topic and presents container operations
-that are best suited for interactive R sessions.
+that are best suited for interactive R sessions. To see the first two points,
+please follow the respective links.
 
 ```{r load-package}
 library(container)
