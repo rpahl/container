@@ -35,8 +35,8 @@ options(width = 100L)
 
 
 ### Why `container`?
-`container` is being developed with the goal to make life easier when working 
-with R lists, specifically in critical R code. 
+`container` is being developed with the goal to make life easier when working
+with R lists, specifically in critical R code.
 It extends base R *list* functionality by
 
 * compact printing

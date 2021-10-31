@@ -1,12 +1,13 @@
 ---
-title: "Get started"
-date: "`r Sys.Date()`"
+title: "Introduction"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
+description: >
+  Start here if this is your first time using container.
 vignette: >
-  %\VignetteIndexEntry{Get started}
+  %\VignetteIndexEntry{Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -41,8 +42,10 @@ The *container* package is designed to serve three main goals:
 3. enhance base R *list* for interactive sessions
 
 This vignette covers the third topic and presents container operations
-that are best suited for interactive R sessions. To see the first two points,
-please follow the respective links.
+that are best suited for interactive R sessions. To see how to use the
+container package for code development, follow the link in 1. and the
+respective links in 2. for concrete use cases of derived data structures.
+
 
 ```{r load-package}
 library(container)
