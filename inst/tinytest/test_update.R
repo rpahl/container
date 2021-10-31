@@ -69,7 +69,7 @@ expect_error(update(dit1, dit3), "Supplied 3 items to be assigned to 2 items")
 l1 = list(1, b = 2)
 l2 = list(   b = 0, c = 3)
 ee(update(l1, l2), list(1, b = 0, c = 3))
-expect_error(update(l2, l1), "all elements of 'other' must be named")
+ee(update(l2, l1), list(b = 2, c = 3, 1))
 
 ee(update(l1, list()), l1)
 ee(update(l2, list()), l2)

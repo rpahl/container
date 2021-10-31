@@ -113,16 +113,14 @@ NULL
 #' l1 = list(1, b = 2)
 #' l2 = list(   b = 0, c = 3)
 #' update(l1, l2)
-#' \dontrun{
-#' update(l2, l1)  # all elements of 'other' must be named
-#' }
+#' update(l2, l1)
 #' @export
 update.list <- function(object, other, ...)
 {
-    if (!all(nzchar(names(other)))) {
-        stop("all elements of 'other' must be named")
+    if (!inherits(other, data.class(object))) {
+        stop("'other' must be a ", data.class(object))
     }
-    object[names(other)] <- other
-    object
+
+    as.list(as.container(object)$update(as.container(other)))
 }
 
