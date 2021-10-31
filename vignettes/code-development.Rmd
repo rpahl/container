@@ -64,8 +64,8 @@ please follow the respective links.
 Since R has always been used as an interactive tool, base R list operations
 are generous with respect to errors, which can lead to undetected errors.
 In contrast, the container package provides additional functions for all basic 
-operations that allow for fine control and avoid many pitfalls that can happen
-with lists.
+operations that allow for fine control, avoid many pitfalls that can happen
+with lists, and will usually result in more robust code.
 
 ### Add elements
 New elements can be added "as usual" by concatenation or name.
