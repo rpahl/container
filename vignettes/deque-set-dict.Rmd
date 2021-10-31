@@ -1,12 +1,12 @@
 ---
-title: "Reference semantics"
+title: "Deque, Set, and Dict"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
 vignette: >
-  %\VignetteIndexEntry{Reference semantics}
+  %\VignetteIndexEntry{Deque, Set, and Dict}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
