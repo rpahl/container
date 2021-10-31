@@ -16,13 +16,12 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 
 ### Why `container`?
 
-`container` extends base R `list` functionality with the goal to make
-life easier when writing **critical** R code and managing **long**
-lists. It is based on R’s `list` but provides
+`container` is being developed with the goal to make life easier when
+working with R lists, specifically in critical R code. It extends base R
+*list* functionality by
 
 -   compact printing
--   feature rich add and extract operations (no unintended `NULL` or
-    `NA`)
+-   feature rich add and extract operations (no unintended `NULL`)
 -   safe replace and removal operations (no unintended override or
     delete)
 -   optional reference semantics

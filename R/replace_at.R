@@ -4,7 +4,8 @@
 #' error if not found, unless it is stated to explicitly add the element (see
 #' option `add`).
 #' @param .x any `R` object.
-#' @param ... indices at which values are to be replaced.
+#' @param ... either name = value pairs or two vectors/lists with names/values
+#' to be replaced.
 #' @param .add `logical` if `FALSE` (default) and index is invalid, an error is
 #' given. If set to `TRUE` the new element is added at the given index
 #' regardless whether the index existed or not. Indices can consist of numbers
@@ -26,14 +27,14 @@ ref_replace_at <- function(.x, ...) UseMethod("ref_replace_at")
 #' @examples
 #'
 #' co = container(a = 0, b = "z")
-#' replace_at(co, a = 1)
-#' replace_at(co, 1, 1)                 # same
-#' replace_at(co, "a", 1)               # same
+#' replace_at(co, a = 1, b = 2)
+#' replace_at(co, 1:2, 1:2)                 # same
+#' replace_at(co, c("a", "b"), list(1, 2))  # same
 #'
 #' \dontrun{
-#' replace_at(co, x = 1)                # names(s) not found: 'x'
+#' replace_at(co, x = 1)                    # names(s) not found: 'x'
 #' }
-#' replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
+#' replace_at(co, x = 1, .add = TRUE)       # ok (adds x = 1)
 #'
 #' @export
 replace_at.Container <- function(.x, ..., .add = FALSE)
@@ -51,14 +52,14 @@ replace_at.Container <- function(.x, ..., .add = FALSE)
 #' @examples
 #'
 #' co = container(a = 0, b = "z")
-#' replace_at(co, a = 1)
-#' replace_at(co, 1, 1)                 # same
-#' replace_at(co, "a", 1)               # same
+#' replace_at(co, a = 1, b = 2)
+#' replace_at(co, 1:2, 1:2)                 # same
+#' replace_at(co, c("a", "b"), list(1, 2))  # same
 #'
 #' \dontrun{
-#' replace_at(co, x = 1)                # names(s) not found: 'x'
+#' replace_at(co, x = 1)                    # names(s) not found: 'x'
 #' }
-#' replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
+#' replace_at(co, x = 1, .add = TRUE)       # ok (adds x = 1)
 NULL
 
 

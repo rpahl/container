@@ -34,7 +34,7 @@ options(width = 100L)
 The *container* package is designed to serve three main goals:
 
 1. enhance base R *list* for code development (see
-   [When and how to use container for code development](code-development.html))
+   [When and how to use container](code-development.html))
 2. provide specialized data structures beyond *list* (see
    [Manage parameter lists with dict](parameter-list.html) and
    [Manage data columns with dict.table](manage-data-columns.html))

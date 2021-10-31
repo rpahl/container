@@ -1,12 +1,12 @@
 ---
-title: "When and how to use container for code development"
+title: "When and how to use container"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
 vignette: >
-  %\VignetteIndexEntry{When and how to use container for code development}
+  %\VignetteIndexEntry{When and how to use container}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,7 +27,7 @@ options(width = 100L)
 
 Don't bother using the `container` framework if ...
 
-* *computation speed* is of high importance.
+* *speed* is of high importance.
 
 The `container` package is written in pure R and was never designed or
 optimized for speed. So if computation speed is critical for your application,
@@ -36,7 +36,7 @@ optimized for performance,
 such as the [collections](https://CRAN.R-project.org/package=collections)
 package.
 
-* your application is *small* or *simple*.
+* your application is *simple*.
 
 If the complexity of your application is low, it is probably not
 worth adding the `container` dependency and, again, you are probably fine with
@@ -44,25 +44,98 @@ just using base R lists or vectors.
 
 
 ## When to use container
-Consider using the `container` framework if ...
+Consider using the `container` framework over base `list` if you are looking 
+for ...
 
-* code *robustness* and *readability* is of high importance
-* you need to manage *long* lists with various add, access,
-replace and removal operations.
-* you want to use *specialized* data structures (deque, set, dict) that 
-still provide a *rich set of functions* to add, access, replace and remove
-elements.
-* you demand [reference semantics](reference-semantics.html).
+* lean but **safe** list operations in **critical** code, specifically to avoid
+  * name clashes
+  * producing unintended NULLs
+  * accessing undefined list values
+* **specialized** data structures (deque, set, dict) that still
+provide a **rich set** of list operations.
+* lists with [reference semantics](reference-semantics.html).
 
 ## How to use container
 
 In the following sections we are going to touch each of the above points briefly
 with some examples.
 
-### Code *robustness* and *readability*
+### Safe list operations
+Since R has always been used as an interactive tool, base R list operations
+are generous with respect to errors. This can result in unintended values.
+
+In contrast, the container package provides additional functions for all basic 
+operations that allow for fine control and avoid many pitfalls that can happen
+with lists.
+
+#### Add elements
+New elements can be added "as usually" by concatenation or name.
+```{r}
+co <- container()
+co[["x"]] <- 1
+co <- c(co, 2)
+co
+```
+
+In addition, the container package provides the add function, which 
+allows to add new elements by name even if that name already exists.
+```{r}
+add(co, x = 3)  # same as c(co, container(x = 3))
+```
+
+#### Replace elements
+Basic replacement is done by name or position.
+```{r}
+co[["x"]] <- 0
+co[[2]] <- 0
+co
+```
+
+When adding elements at positions exceeding the list's length, the list is
+extended and padded with NULLs if needed. In contrast, the container will not
+allow any index out of range.
 
 
-### Managing *long* lists
+```{r, error = TRUE}
+co[[3]] <- 3
+```
+
+
+
+
+
+
+
+```{r, eval = FALSE}
+co <- replace_at(co, "x" = 0) # or replace_at(co, "x", 0)
+co
+```
+
+
+
+```{r, eval = FALSE}
+co = replace_at(co, "x" = 9, "y" = 10) # or replace_at(co, c("x", "y"), 9:10)
+co
+```
+
+
+```{r, eval = FALSE}
+co = replace_at(co, "z" = 11)
+```
+
+```{r, eval = FALSE}
+co = replace_at(co, "z" = 11, .add = TRUE)
+```
+
+
+
+
+
+```{r, eval = FALSE}
+co = container(x = 1, y = 2, z = 3)
+add(co, 5, 5)
+```
+
 
 ### Specialized data structures
 
