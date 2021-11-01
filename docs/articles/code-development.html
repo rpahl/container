@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>When and how to use container • container</title>
+<title>Container operations for robust code • container</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,8 +17,9 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="When and how to use container">
-<meta property="og:description" content="container">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Container operations for robust code">
+<meta property="og:description" content="Use this vignette if you want to see how container operations can be used to make it safer and easier to work with list-like data structures. It describes the different methods to add, extract, replace, and remove elements and their nuances.
+">
 <meta property="og:image" content="https://github.com/rpahl/container/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -64,21 +65,24 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/code-development.html">When and how to use container</a>
-    </li>
-    <li>
-      <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
-    </li>
-    <li>
-      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
+      <a href="../articles/code-development.html">Container operations for robust code</a>
     </li>
     <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
+      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
+    </li>
+    <li>
       <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -101,9 +105,9 @@
       </header><script src="code-development_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>When and how to use container</h1>
+      <h1 data-toc-skip>Container operations for robust code</h1>
             
-            <h4 class="date">2021-10-31</h4>
+            <h4 class="date">2021-11-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/code-development.Rmd"><code>vignettes/code-development.Rmd</code></a></small>
       <div class="hidden name"><code>code-development.Rmd</code></div>
@@ -112,42 +116,10 @@
 
     
     
-<div id="when-not-to-use-container" class="section level2">
-<h2 class="hasAnchor">
-<a href="#when-not-to-use-container" class="anchor"></a>When <em>not</em> to use container</h2>
-<p>Don’t bother using the <code>container</code> framework if …</p>
-<ul>
-<li>
-<em>speed</em> is of high importance.</li>
-</ul>
-<p>The <code>container</code> package is written in pure R and was never designed or optimized for speed. So if computation speed is critical for your application, you rather should fall back to base R <em>list</em> or use packages that were optimized for performance, such as the <a href="https://CRAN.R-project.org/package=collections">collections</a> package.</p>
-<ul>
-<li>your application is <em>simple</em>.</li>
-</ul>
-<p>If the complexity of your application is low, it is probably not worth adding the <code>container</code> dependency and, again, you are probably fine with just using base R lists or vectors.</p>
-</div>
-<div id="when-to-use-container" class="section level2">
-<h2 class="hasAnchor">
-<a href="#when-to-use-container" class="anchor"></a>When to use container</h2>
-<p>Consider using the <code>container</code> framework over base <code>list</code> if you are looking for …</p>
-<ul>
-<li>lean but <strong>safe</strong> list operations in <strong>critical</strong> code, specifically to
-<ul>
-<li>recognize name clashes</li>
-<li>prevent unintended NULLs</li>
-<li>avoid access of undefined values</li>
-</ul>
-</li>
-<li>
-<strong>specialized</strong> data structures (<a href="deque-set-dict.html">Deque, Set, and Dict</a>) with list properties.</li>
-<li>lists with <a href="reference-semantics.html">reference semantics</a>.</li>
-</ul>
-<p>The following sections cover the first of the above points going through all relevant access, replace and removal operations and showing the advantages of using the container package. For the other points, please follow the respective links.</p>
-</div>
 <div id="container-operations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#container-operations" class="anchor"></a>Container operations</h2>
-<p>Since R has always been used as an interactive tool, base R list operations are generous with respect to errors, which can lead to undetected errors. In contrast, the container package provides additional functions for all basic operations that allow for fine control, avoid many pitfalls that can happen with lists, and will usually result in more robust code.</p>
+<p>Since R has always been used as an interactive tool, base R list operations are generous with respect to errors, which can lead to undetected bugs when developing code. In contrast, the container package provides additional functions for all basic operations that allow for fine control to avoid many pitfalls that can happen with lists and will usually result in more robust code.</p>
 <div id="add-elements" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-elements" class="anchor"></a>Add elements</h3>
@@ -186,9 +158,9 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, x <span class="op">=</span> <span class="fl">10</span>, y <span class="op">=</span> <span class="fl">13</span><span class="op">)</span>            <span class="co"># name = value pairs</span>
 <span class="co"># [x = 10, 12, x = 3, y = 13]</span>
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>,  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># names followed by values </span>
+<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>,  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># names followed by values</span>
 <span class="co"># [x = 10, 12, x = 3, y = 13]</span>
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>,      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># positions followed by values </span>
+<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>,      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># positions followed by values</span>
 <span class="co"># [x = 10, 12, x = 3, y = 13]</span>
 <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"y"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># mixed names/positions followed by values</span>
 <span class="co"># [x = 10, 12, x = 3, y = 13]</span></code></pre></div>

@@ -1,12 +1,17 @@
 ---
-title: "When and how to use container"
+title: "Container operations for robust code"
 date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
+description: >
+    Use this vignette if you want to see how container operations can be used
+    to make it safer and easier to work with list-like data structures.
+    It describes the different methods to add, extract, replace, and remove
+    elements and their nuances.
 vignette: >
-  %\VignetteIndexEntry{When and how to use container}
+  %\VignetteIndexEntry{Container operations for robust code}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,49 +28,13 @@ knitr::opts_chunk$set(
 options(width = 100L)
 ```
 
-## When *not* to use container
-
-Don't bother using the `container` framework if ...
-
-* *speed* is of high importance.
-
-The `container` package is written in pure R and was never designed or
-optimized for speed. So if computation speed is critical for your application,
-you rather should fall back to base R *list* or use packages that were 
-optimized for performance,
-such as the [collections](https://CRAN.R-project.org/package=collections)
-package.
-
-* your application is *simple*.
-
-If the complexity of your application is low, it is probably not
-worth adding the `container` dependency and, again, you are probably fine with
-just using base R lists or vectors.
-
-
-## When to use container
-Consider using the `container` framework over base `list` if you are looking 
-for ...
-
-* lean but **safe** list operations in **critical** code, specifically to
-  * recognize name clashes
-  * prevent unintended NULLs
-  * avoid access of undefined values
-* **specialized** data structures ([Deque, Set, and Dict](deque-set-dict.html))
-  with list properties.
-* lists with [reference semantics](reference-semantics.html).
-
-The following sections cover the first of the above points going through
-all relevant access, replace and removal operations and showing the 
-advantages of using the container package. For the other points,
-please follow the respective links.
-
 ## Container operations
 Since R has always been used as an interactive tool, base R list operations
-are generous with respect to errors, which can lead to undetected errors.
-In contrast, the container package provides additional functions for all basic 
-operations that allow for fine control, avoid many pitfalls that can happen
-with lists, and will usually result in more robust code.
+are generous with respect to errors, which can lead to undetected bugs when
+developing code.
+In contrast, the container package provides additional functions for all basic
+operations that allow for fine control to avoid many pitfalls that can happen
+with lists and will usually result in more robust code.
 
 ### Add elements
 New elements can be added "as usual" by concatenation or name.
@@ -75,7 +44,7 @@ co[["x"]] <- 1
 co <- c(co, 2)
 co
 ```
-In addition, the container package provides *add*, which 
+In addition, the container package provides *add*, which
 allows to add new elements by name even if that name exists already.
 ```{r}
 co = add(co, x = 3)  # same as c(co, container(x = 3))
@@ -103,12 +72,12 @@ co
 
 If you want to make sure that something is replaced, *container* provides the
 function *replace_at*, which will only replace elements if at names or
-positions that exist. The following statements are all equal and show the 
+positions that exist. The following statements are all equal and show the
 different possibilities on how to use *replace_at*.
 ```{r}
 replace_at(co, x = 10, y = 13)            # name = value pairs
-replace_at(co, c("x", "y"),  c(10, 13))   # names followed by values 
-replace_at(co, c(1, 4),      c(10, 13))   # positions followed by values 
+replace_at(co, c("x", "y"),  c(10, 13))   # names followed by values
+replace_at(co, c(1, 4),      c(10, 13))   # positions followed by values
 replace_at(co, list(1, "y"), c(10, 13))   # mixed names/positions followed by values
 ```
 
@@ -127,7 +96,7 @@ co = replace_at(co, 7, 10, .add = TRUE)
 co
 ```
 
-It is also possible to *replace* elements by value, that is, you specify the 
+It is also possible to *replace* elements by value, that is, you specify the
 value (not the index) that should be replaced. Let's replace the 12 by "foo" and
 then 4 by `1:4`.
 ```{r}

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction • container</title>
+<title>Introduction to container • container</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,8 +17,8 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction">
-<meta property="og:description" content="Start here if this is your first time using container.
+<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to container">
+<meta property="og:description" content="Start here if this is your first time using container. This vignette describes when and when not to use container, and gives a brief introduction on basic container operations.
 ">
 <meta property="og:image" content="https://github.com/rpahl/container/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -65,7 +65,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/code-development.html">When and how to use container</a>
+      <a href="../articles/code-development.html">Container operations for robust code</a>
     </li>
     <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
@@ -105,7 +105,7 @@
       </header><script src="container_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Introduction</h1>
+      <h1 data-toc-skip>Introduction to container</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/container.Rmd"><code>vignettes/container.Rmd</code></a></small>
@@ -115,202 +115,153 @@
 
     
     
-<div id="introduction" class="section level2">
+<div id="when-not-to-use-container" class="section level2">
 <h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
-<p>The <em>container</em> package is designed to serve three main goals:</p>
-<ol style="list-style-type: decimal">
-<li>enhance base R <em>list</em> for code development (see <a href="code-development.html">When and how to use container</a>)</li>
-<li>provide specialized data structures beyond <em>list</em> (see <a href="parameter-list.html">Manage parameter lists with dict</a> and <a href="manage-data-columns.html">Manage data columns with dict.table</a>)</li>
-<li>enhance base R <em>list</em> for interactive sessions</li>
-</ol>
-<p>This vignette covers the third topic and presents container operations that are best suited for interactive R sessions. To see how to use the container package for code development, follow the link in 1. and the respective links in 2. for concrete use cases of derived data structures.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container">container</a></span><span class="op">)</span></code></pre></div>
-<div id="basic-methods" class="section level3">
-<h3 class="hasAnchor">
-<a href="#basic-methods" class="anchor"></a>Basic methods</h3>
-<p>For easier typing it’s recommended to use the shorter <code>cont</code> when creating <code>container</code> objects in interactive sessions.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">cont</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, form <span class="op">=</span> <span class="va">speed</span> <span class="op">~</span> <span class="va">dist</span><span class="op">)</span></code></pre></div>
-<p>The container print method is designed to be very compact.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
-<span class="co"># [n = 5, data = &lt;&lt;data.frame(5x2)&gt;&gt;, form = &lt;&lt;formula&gt;&gt;]</span></code></pre></div>
-<p>For more verbose output, either convert to a base <code>list</code> …</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
-<span class="co"># $n</span>
-<span class="co"># [1] 5</span>
-<span class="co"># </span>
-<span class="co"># $data</span>
-<span class="co">#   speed dist</span>
-<span class="co"># 1     4    2</span>
-<span class="co"># 2     4   10</span>
-<span class="co"># 3     7    4</span>
-<span class="co"># 4     7   22</span>
-<span class="co"># 5     8   16</span>
-<span class="co"># </span>
-<span class="co"># $form</span>
-<span class="co"># speed ~ dist</span></code></pre></div>
-<p>or use <code>str</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
-<span class="co"># Container of 3 </span>
-<span class="co">#  $ n   : num 5</span>
-<span class="co">#  $ data:'data.frame': 5 obs. of  2 variables:</span>
-<span class="co">#   ..$ speed: num [1:5] 4 4 7 7 8</span>
-<span class="co">#   ..$ dist : num [1:5] 2 10 4 22 16</span>
-<span class="co">#  $ form:Class 'formula'  language speed ~ dist</span>
-<span class="co">#   .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt;</span></code></pre></div>
-<p>Both <code>length</code> and <code>names</code> work as usual.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
-<span class="co"># [1] 3</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
-<span class="co"># [1] "n"    "data" "form"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"a"</span>
-<span class="va">co</span>
-<span class="co"># [a = 5, data = &lt;&lt;data.frame(5x2)&gt;&gt;, form = &lt;&lt;formula&gt;&gt;]</span></code></pre></div>
-<p>There is also an alternative way for renaming.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/rename.html">rename</a></span><span class="op">(</span><span class="va">co</span>, old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"form"</span><span class="op">)</span>, new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"ff"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">co</span>
-<span class="co"># [N = 5, data = &lt;&lt;data.frame(5x2)&gt;&gt;, ff = &lt;&lt;formula&gt;&gt;]</span></code></pre></div>
-<p>A container can also be constructed from a list.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, y <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
-<span class="va">co2</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">as.container</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>
-<span class="va">co2</span>
-<span class="co"># [x = (1L 2L), y = (1 4)]</span></code></pre></div>
+<a href="#when-not-to-use-container" class="anchor"></a>When <em>not</em> to use container</h2>
+<p>Don’t bother using the <code>container</code> framework if <em>speed</em> is of high importance. An exception is the <code>dict.table</code> class, which is very fast as it is based on <a href="https://CRAN.R-project.org/package=data.table">data.table</a>. Other than that, if computation speed is critical for your application, we refer you to using base R <em>list</em> or packages that were optimized for performance, such as the <a href="https://CRAN.R-project.org/package=collections">collections</a> package.</p>
 </div>
-<div id="add-elements" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-elements" class="anchor"></a>Add elements</h3>
-<p>Elements can be added by concatenation</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">co2</span><span class="op">)</span>
-<span class="co"># [N = 5, data = &lt;&lt;data.frame(5x2)&gt;&gt;, ff = &lt;&lt;formula&gt;&gt;, x = (1L 2L), y = (1 4)]</span></code></pre></div>
-<p>or name.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"co2"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">co2</span>
-<span class="va">co</span>
-<span class="co"># [N = 5, data = &lt;&lt;data.frame(5x2)&gt;&gt;, ff = &lt;&lt;formula&gt;&gt;, co2 = [x = (1L 2L), y = (1 4)]]</span></code></pre></div>
-<p>As you see containers can be nested. To flatten everything into a list, use <code>unpack</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/unpack.html">unpack</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># List of 16</span>
-<span class="co">#  $ N          : num 5</span>
-<span class="co">#  $ data.speed1: num 4</span>
-<span class="co">#  $ data.speed2: num 4</span>
-<span class="co">#  $ data.speed3: num 7</span>
-<span class="co">#  $ data.speed4: num 7</span>
-<span class="co">#  $ data.speed5: num 8</span>
-<span class="co">#  $ data.dist1 : num 2</span>
-<span class="co">#  $ data.dist2 : num 10</span>
-<span class="co">#  $ data.dist3 : num 4</span>
-<span class="co">#  $ data.dist4 : num 22</span>
-<span class="co">#  $ data.dist5 : num 16</span>
-<span class="co">#  $ ff         :Class 'formula'  language speed ~ dist</span>
-<span class="co">#   .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; </span>
-<span class="co">#  $ co2.x1     : num 1</span>
-<span class="co">#  $ co2.x2     : num 2</span>
-<span class="co">#  $ co2.y1     : num 1</span>
-<span class="co">#  $ co2.y2     : num 4</span></code></pre></div>
-<p>To avoid unintended results, in contrast to base R <code>list</code>s, elements cannot be added at new integer positions.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span>, c <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="va">l</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span> <span class="co"># works</span>
-<span class="va">l</span>
+<div id="when-to-use-container" class="section level2">
+<h2 class="hasAnchor">
+<a href="#when-to-use-container" class="anchor"></a>When to use container</h2>
+<p>Consider using the <code>container</code> framework over base <code>list</code> if you are looking for …</p>
+<ul>
+<li>feature-rich and safe access, replace, and remove <a href="code-development">operations for robust code</a>
+</li>
+<li>feature rich <a href="deque-set-dict.html">specialized data structures</a> beyond lists</li>
+<li>lists with <a href="reference-semantics.html">reference semantics</a>.</li>
+</ul>
+<p>Furthermore consider using <code>dict.table</code> for a flexible and robust way to <a href="manage-data-columns.html">manage data columns</a> of <code>data.table</code>s.</p>
+</div>
+<div id="container-in-interactive-r-session" class="section level2">
+<h2 class="hasAnchor">
+<a href="#container-in-interactive-r-session" class="anchor"></a>container in interactive R session</h2>
+<p>In an interactive R session a <code>container</code> can be used similar to a base R <code>list</code>, but also provides some extra features. For easier typing it’s recommended to use the shorter <code>cont</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container">container</a></span><span class="op">)</span>
+<span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">cont</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>  <span class="co"># same as co = container(a = 1, b = 1:10)</span></code></pre></div>
+<p>The container print method is designed to be very compact.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
+<span class="co"># [a = 1, b = (1L 2L 3L 4L ...)]</span></code></pre></div>
+<p>For more verbose output, either convert to a base <code>list</code> …</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
 <span class="co"># $a</span>
 <span class="co"># [1] 1</span>
 <span class="co"># </span>
 <span class="co"># $b</span>
+<span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
+<p>or use <code>str</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
+<span class="co"># Container of 2 </span>
+<span class="co">#  $ a: num 1</span>
+<span class="co">#  $ b: int [1:10] 1 2 3 4 5 6 7 8 9 10</span></code></pre></div>
+<p>Both <code>length</code> and <code>names</code> work as usual.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
 <span class="co"># [1] 2</span>
-<span class="co"># </span>
-<span class="co"># $c</span>
-<span class="co"># [1] 3</span>
-<span class="co"># </span>
-<span class="co"># [[4]]</span>
-<span class="co"># [1] 4</span>
-<span class="va">ct</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">cont</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span>, c <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="va">ct</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span> <span class="co"># fails</span>
-<span class="co"># Error: index out of range (length = 3): 4</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
+<span class="co"># [1] "a" "b"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"A"</span>
+<span class="va">co</span>
+<span class="co"># [A = 1, b = (1L 2L 3L 4L ...)]</span></code></pre></div>
+<p>A container can also be constructed from a list.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">1</span>, y <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="va">co2</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">as.container</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>
+<span class="va">co2</span>
+<span class="co"># [x = (1 2), y = (1 4)]</span></code></pre></div>
+<div id="add-elements" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-elements" class="anchor"></a>Add elements</h3>
+<p>Elements can be added by concatenation,</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">co2</span><span class="op">)</span>
+<span class="co"># [A = 1, b = (1L 2L 3L 4L ...), x = (1 2), y = (1 4)]</span></code></pre></div>
+<p>or name,</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"c"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span>
+<span class="va">co</span>
+<span class="co"># [A = 1, b = (1L 2L 3L 4L ...), c = 3]</span></code></pre></div>
+<p>and containers can be nested.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"co2"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">co2</span>
+<span class="va">co</span>
+<span class="co"># [A = 1, b = (1L 2L 3L 4L ...), c = 3, co2 = [x = (1 2), y = (1 4)]]</span></code></pre></div>
+<p>In contrast to base R <code>list</code>, elements cannot be added via positional index if it exceeds the container’s length.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span>
+<span class="co"># Error: index out of range (length = 4): 5</span></code></pre></div>
 </div>
 <div id="replace-values" class="section level3">
 <h3 class="hasAnchor">
 <a href="#replace-values" class="anchor"></a>Replace values</h3>
 <p>Single or multiple value replacement works as usual.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ct</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">ct</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">ct</span>
-<span class="co"># [a = 0, b = 0, c = 0]</span></code></pre></div>
-<p>In contrast to base <code>list</code>s, containers can take a mix of numeric and character indices.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ct</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="fl">3</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="va">ct</span>
-<span class="co"># [a = 1, b = 0, c = 1, z = 1]</span></code></pre></div>
-<p>Another option for container object is to replace <em>by value</em>. For example, to replace the 0 by 100, can be achieved as follows.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ct</span><span class="op">[[</span><span class="op">{</span><span class="fl">0</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">100</span>
-<span class="va">ct</span>
-<span class="co"># [a = 1, b = 100, c = 1, z = 1]</span></code></pre></div>
-<p>This works for any data type.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span>
-<span class="co"># [N = 5, data = &lt;&lt;data.frame(5x2)&gt;&gt;, ff = &lt;&lt;formula&gt;&gt;, co2 = [x = (1L 2L), y = (1 4)]]</span>
-<span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">cars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">cars</span>
-<span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">co2</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/unpack.html">unpack</a></span><span class="op">(</span><span class="va">co2</span><span class="op">)</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
+<span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
 <span class="va">co</span>
-<span class="co"># [N = 5, data = &lt;&lt;data.frame(50x2)&gt;&gt;, ff = &lt;&lt;formula&gt;&gt;, co2 = (1 2 1 4)]</span></code></pre></div>
+<span class="co"># [A = 0, b = 0, c = 0, co2 = [x = (1 2), y = (1 4)]]</span></code></pre></div>
+<p>In contrast to base <code>list</code>, containers can take a mix of numeric and character indices.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="fl">2</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="st">"three"</span><span class="op">)</span>
+<span class="va">co</span>
+<span class="co"># [A = 1, b = 2, c = "three", co2 = [x = (1 2), y = (1 4)]]</span></code></pre></div>
+<p>Another option for container object is to replace <em>by value</em>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="st">"three"</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span>
+<span class="va">co</span>
+<span class="co"># [A = 1, b = 2, c = 3, co2 = [x = (1 2), y = (1 4)]]</span></code></pre></div>
+<p>This works for any data type.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">co2</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span>
+<span class="va">co</span>
+<span class="co"># [A = 1, b = 2, c = 3, co2 = 3]</span></code></pre></div>
 </div>
 <div id="extract" class="section level3">
 <h3 class="hasAnchor">
 <a href="#extract" class="anchor"></a>Extract</h3>
 <p>The standard operators to access elements also should be familiar to R users. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ct</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co"># [1] 1</span>
-<span class="va">ct</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co"># [a = 1, b = 100, c = 1]</span></code></pre></div>
+<span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
+<span class="co"># [A = 1, b = 2, c = 3]</span></code></pre></div>
 <p>As another option, you can pass any number of indices, possibly mixed as numeric and character.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ct</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="st">"z"</span><span class="op">]</span>
-<span class="co"># [a = 1, c = 1, z = 1]</span>
-<span class="va">ct</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">1</span>, <span class="st">"a"</span><span class="op">]</span>
-<span class="co"># [b = 100, a = 1, a = 1]</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="st">"b"</span><span class="op">]</span>
+<span class="co"># [A = 1, c = 3, b = 2]</span>
+<span class="va">co</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">1</span>, <span class="st">"A"</span><span class="op">]</span>
+<span class="co"># [b = 2, A = 1, A = 1]</span></code></pre></div>
+<p>Invalid indices don’t produce <code>NULL</code>s but are just ignored.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>
+<span class="co"># [A = 1, b = 2, c = 3, co2 = 3]</span></code></pre></div>
 </div>
 <div id="inspect" class="section level3">
 <h3 class="hasAnchor">
 <a href="#inspect" class="anchor"></a>Inspect</h3>
 <p>Count the number of elements.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">ct</span>, <span class="fl">0</span><span class="op">)</span>
-<span class="co"># [1] 0</span>
-<span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">ct</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co"># [1] 3</span></code></pre></div>
-<p>Check if container has an element</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/has.html">has</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">cars</span><span class="op">)</span>
-<span class="co"># [1] TRUE</span>
-<span class="fu"><a href="../reference/has.html">has</a></span><span class="op">(</span><span class="va">ct</span>, <span class="va">cars</span><span class="op">)</span>
-<span class="co"># [1] FALSE</span></code></pre></div>
-<p>or name.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/has_name.html">has_name</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co"># [1] FALSE</span>
-<span class="fu"><a href="../reference/has_name.html">has_name</a></span><span class="op">(</span><span class="va">ct</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co"># [1] TRUE</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="co"># [1] 1</span>
+<span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">3</span><span class="op">)</span>
+<span class="co"># [1] 2</span></code></pre></div>
 <p>Use the apply family.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">is.numeric</span><span class="op">)</span>
-<span class="co">#     N  data    ff   co2 </span>
-<span class="co">#  TRUE FALSE FALSE  TRUE</span>
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">ct</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#   a   b   c   z </span>
-<span class="co">#   2 101   2   2</span></code></pre></div>
+<span class="co">#    A    b    c  co2 </span>
+<span class="co"># TRUE TRUE TRUE TRUE</span>
+<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">co</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
+<span class="co">#   A   b   c co2 </span>
+<span class="co">#   2   3   4   4</span></code></pre></div>
 </div>
+</div>
+<div id="container-in-code-development" class="section level2">
+<h2 class="hasAnchor">
+<a href="#container-in-code-development" class="anchor"></a>container in code development</h2>
+<p>Next, see vignette <a href="code-development">Container operations for robust code</a>.</p>
 </div>
 <div class="footnotes">
 <hr>

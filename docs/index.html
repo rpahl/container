@@ -67,7 +67,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/code-development.html">When and how to use container</a>
+      <a href="articles/code-development.html">Container operations for robust code</a>
     </li>
     <li>
       <a href="articles/parameter-list.html">Manage parameter lists with dict</a>
@@ -115,19 +115,23 @@
 <div id="update-to-new-version-100-soon-on-cran" class="section level3">
 <h3 class="hasAnchor">
 <a href="#update-to-new-version-100-soon-on-cran" class="anchor"></a>Update to NEW version 1.0.0 soon on <a href="https://cran.r-project.org/">CRAN</a>.</h3>
+<p><code>container</code> provides an enhanced version of base R’s <code>list</code> with a carefully designed set of extract, replace, and remove operations that make it easier and safer to work with list-like data structures.</p>
 </div>
 <div id="why-container" class="section level3">
 <h3 class="hasAnchor">
 <a href="#why-container" class="anchor"></a>Why <code>container</code>?</h3>
-<p><code>container</code> is being developed with the goal to make life easier when working with R lists, specifically in critical R code. It extends base R <em>list</em> functionality by</p>
 <ul>
-<li>compact printing</li>
-<li>feature rich add and extract operations (no unintended <code>NULL</code>)</li>
-<li>safe replace and removal operations (no unintended override or delete)</li>
-<li>optional reference semantics</li>
-<li>and some more …</li>
+<li>safe and flexible operations to
+<ul>
+<li>extract (built-in default values, no unintended <code>NULL</code>)</li>
+<li>add and replace (mixed indices, no unintended overrides)</li>
+<li>remove (loose or strict deletion, remove by index or value)</li>
 </ul>
-<p>In addition, this package comes with specialized data structures <em>Deque</em>, <em>Set</em> and <em>Dict</em> and a <em>special</em> class <code>dict.table</code>, which is designed to extend <a href="https://CRAN.R-project.org/package=data.table">data.table</a> by a rich set of functions to manage data columns (for more details see <a href="articles/manage-data-columns.html">Manage data columns with dict.table</a>).</p>
+</li>
+<li>compact printing</li>
+<li>optional reference semantics</li>
+</ul>
+<p>In addition, this package provides specialized data structures <em>Deque</em>, <em>Set</em> and <em>Dict</em> and a <em>special</em> class <code>dict.table</code>, designed to extend <a href="https://CRAN.R-project.org/package=data.table">data.table</a> by container operations to safely <a href="articles/manage-data-columns.html">Manage data columns with dict.table</a>.</p>
 </div>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
@@ -142,49 +146,46 @@
 <div id="usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h3>
-<p>The <code>container</code> package was originally created to enhance code development but since version 1.0.0 also gained some functionality that can be useful in an interactive R session, where you most likely use a <code>container</code> the same way you would use a base R <code>list</code>, plus some new operations. For example,</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container">container</a></span><span class="op">)</span>
-<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cars</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">cars</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span>
+<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Red"</span>, <span class="st">"Green"</span><span class="op">)</span>, numbers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span>
 <span class="va">co</span>
-<span class="co"># [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
-<p>some standard operations …</p>
+<span class="co"># [colors = ("Red" "Green"), numbers = (1 2 3), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
+<p>Extract</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
-<span class="co"># [x = (4 4 7 7 ...), y = (2 10 4 22 ...)]</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colours"</span><span class="op">)</span>   <span class="co"># oops</span>
+<span class="co"># Error: index 'colours' not found</span>
+<span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
+<span class="co"># [colors = ("Red" "Green")]</span></code></pre></div>
+<p>Remove</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span>
-<span class="co">#  [1]  4  4  7  7  8  9 10 10 10 11</span></code></pre></div>
-<p>some new operations …</p>
+<code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colours"</span><span class="op">)</span>   <span class="co"># oops</span>
+<span class="co"># Error: names(s) not found: 'colours'</span>
+<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
+<span class="va">co</span>
+<span class="co"># [numbers = (1 2 3), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
+<p>Peek</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Use any number of (mixed) indices</span>
-<span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"data"</span><span class="op">]</span>
-<span class="co"># [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>   <span class="co"># oops</span>
+<span class="co"># Error: index 'colors' not found</span>
+<span class="fu"><a href="reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
+<span class="co"># []</span>
+<span class="fu"><a href="reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span>, .default <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># [colors = ("black" "white")]</span></code></pre></div>
+<p>Replace</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Replace element by value</span>
-<span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">cars</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">iris</span>
+<code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, num <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>   <span class="co"># oops</span>
+<span class="co"># Error: names(s) not found: 'num'</span>
+<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, numbers <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="va">co</span>
-<span class="co"># [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = &lt;&lt;data.frame(150x5)&gt;&gt;]</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co2</span> <span class="op">=</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">111</span>, data <span class="op">=</span> <span class="cn">NULL</span>, <span class="op">-</span><span class="fl">111</span><span class="op">)</span>
-<span class="va">co2</span>
-<span class="co"># [x = 111, data = NULL, -111]</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Merge-update with other containers</span>
-<span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="reference/update.html">update</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">co2</span><span class="op">)</span>
-<span class="va">co</span>
-<span class="co"># [x = 111, y = (2 10 4 22 ...), data = NULL, -111]</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Easier rename</span>
-<span class="fu"><a href="reference/rename.html">rename</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"x"</span>, <span class="st">"A"</span><span class="op">)</span>
-<span class="co"># [A = 111, y = (2 10 4 22 ...), data = NULL, -111]</span></code></pre></div>
+<span class="co"># [numbers = (1L 2L 3L 4L ...), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
 </div>
 <div id="getting-started" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h3>
-<p>There is much more to explore. To get started, see</p>
 <ul>
-<li>the <a href="articles/container.html">Get started</a> vignette</li>
+<li><a href="articles/container.html">Introduction to container</a></li>
+<li><a href="code-development">Container operations for robust code</a></li>
 <li><a href="articles/parameter-list.html">Manage parameter lists with dict</a></li>
 <li><a href="articles/manage-data-columns.html">Manage data columns with dict.table</a></li>
 </ul>

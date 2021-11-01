@@ -64,18 +64,24 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/code-development.html">When and how to use container</a>
-    </li>
-    <li>
-      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
+      <a href="../articles/code-development.html">Container operations for robust code</a>
     </li>
     <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
+      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
+    </li>
+    <li>
+      <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
+    </li>
+    <li>
       <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -100,7 +106,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Manage parameter lists with dict</h1>
             
-            <h4 class="date">2021-10-31</h4>
+            <h4 class="date">2021-11-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/parameter-list.Rmd"><code>vignettes/parameter-list.Rmd</code></a></small>
       <div class="hidden name"><code>parameter-list.Rmd</code></div>
@@ -115,7 +121,7 @@
 <p>The original motivation for the development of this package actually was that the author found himself writing countless checks and helper code over and over again when managing parameter lists. It became apparent that something similar to python’s dictionary would make life easier and so the idea of the container package was born.</p>
 <p>The package has undergone some changes since it’s initial version, but the <em>dict</em> as a use-case for parameter lists remains very valid. So without further ado, let’s see how this works out in practice.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rpahl/container">container</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container">container</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># Define some parameters</span>
 <span class="va">params</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="st">"foo"</span><span class="op">)</span></code></pre></div>

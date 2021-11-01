@@ -14,25 +14,24 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 
 ### Update to NEW version 1.0.0 soon on [CRAN](https://cran.r-project.org/).
 
+`container` provides an enhanced version of base R’s `list` with a
+carefully designed set of extract, replace, and remove operations that
+make it easier and safer to work with list-like data structures.
+
 ### Why `container`?
 
-`container` is being developed with the goal to make life easier when
-working with R lists, specifically in critical R code. It extends base R
-*list* functionality by
-
+-   safe and flexible operations to
+    -   extract (built-in default values, no unintended `NULL`)
+    -   add and replace (mixed indices, no unintended overrides)
+    -   remove (loose or strict deletion, remove by index or value)
 -   compact printing
--   feature rich add and extract operations (no unintended `NULL`)
--   safe replace and removal operations (no unintended override or
-    delete)
 -   optional reference semantics
--   and some more …
 
-In addition, this package comes with specialized data structures
-*Deque*, *Set* and *Dict* and a *special* class `dict.table`, which is
-designed to extend
-[data.table](https://CRAN.R-project.org/package=data.table) by a rich
-set of functions to manage data columns (for more details see [Manage
-data columns with dict.table](articles/manage-data-columns.html)).
+In addition, this package provides specialized data structures *Deque*,
+*Set* and *Dict* and a *special* class `dict.table`, designed to extend
+[data.table](https://CRAN.R-project.org/package=data.table) by container
+operations to safely [Manage data columns with
+dict.table](articles/manage-data-columns.html).
 
 ### Installation
 
@@ -46,70 +45,57 @@ devtools::install_github("rpahl/container")
 
 ### Usage
 
-The `container` package was originally created to enhance code
-development but since version 1.0.0 also gained some functionality that
-can be useful in an interactive R session, where you most likely use a
-`container` the same way you would use a base R `list`, plus some new
-operations. For example,
-
 ``` r
 library(container)
-co <- container(x = cars[, 1], y = cars[, 2], data = cars)
+co <- container(colors = c("Red", "Green"), numbers = c(1, 2, 3), data = cars)
 co
-# [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = <<data.frame(50x2)>>]
+# [colors = ("Red" "Green"), numbers = (1 2 3), data = <<data.frame(50x2)>>]
 ```
 
-some standard operations …
+Extract
 
 ``` r
-co[1:2]
-# [x = (4 4 7 7 ...), y = (2 10 4 22 ...)]
+at(co, "colours")   # oops
+# Error: index 'colours' not found
+at(co, "colors")
+# [colors = ("Red" "Green")]
 ```
 
-``` r
-co[["x"]][1:10]
-#  [1]  4  4  7  7  8  9 10 10 10 11
-```
-
-some new operations …
+Remove
 
 ``` r
-# Use any number of (mixed) indices
-co[1:2, "data"]
-# [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = <<data.frame(50x2)>>]
-```
-
-``` r
-# Replace element by value
-co[[{cars}]] <- iris
+co <- delete_at(co, "colours")   # oops
+# Error: names(s) not found: 'colours'
+co <- delete_at(co, "colors")
 co
-# [x = (4 4 7 7 ...), y = (2 10 4 22 ...), data = <<data.frame(150x5)>>]
+# [numbers = (1 2 3), data = <<data.frame(50x2)>>]
 ```
 
-``` r
-co2 = container(x = 111, data = NULL, -111)
-co2
-# [x = 111, data = NULL, -111]
-```
+Peek
 
 ``` r
-# Merge-update with other containers
-co = update(co, co2)
+at(co, "colors")   # oops
+# Error: index 'colors' not found
+peek_at(co, "colors")
+# []
+peek_at(co, "colors", .default = c("black", "white"))
+# [colors = ("black" "white")]
+```
+
+Replace
+
+``` r
+co <- replace_at(co, num = 1:10)   # oops
+# Error: names(s) not found: 'num'
+co <- replace_at(co, numbers = 1:10)
 co
-# [x = 111, y = (2 10 4 22 ...), data = NULL, -111]
-```
-
-``` r
-# Easier rename
-rename(co, "x", "A")
-# [A = 111, y = (2 10 4 22 ...), data = NULL, -111]
+# [numbers = (1L 2L 3L 4L ...), data = <<data.frame(50x2)>>]
 ```
 
 ### Getting Started
 
-There is much more to explore. To get started, see
-
--   the [Get started](articles/container.html) vignette
+-   [Introduction to container](articles/container.html)
+-   [Container operations for robust code](code-development)
 -   [Manage parameter lists with dict](articles/parameter-list.html)
 -   [Manage data columns with
     dict.table](articles/manage-data-columns.html)
