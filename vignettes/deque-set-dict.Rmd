@@ -1,6 +1,5 @@
 ---
 title: "Deque, Set, and Dict"
-date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true

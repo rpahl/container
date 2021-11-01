@@ -1,6 +1,5 @@
 ---
 title: "Manage data columns with dict.table"
-date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
