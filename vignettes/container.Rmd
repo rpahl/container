@@ -49,7 +49,7 @@ Consider using the `container` framework over base `list` if you are looking
 for ...
 
 * feature-rich and safe access, replace, and remove
-  [operations for robust code](code-development)
+  [operations for robust code](code-development.html)
 * feature rich [specialized data structures](deque-set-dict.html) beyond lists
 * lists with [reference semantics](reference-semantics.html).
 
@@ -194,4 +194,4 @@ sapply(co, function(x) x + 1)
 
 ## container in code development
 
-Next, see vignette [Container operations for robust code](code-development).
+Next, see vignette [Container operations for robust code](code-development.html).
