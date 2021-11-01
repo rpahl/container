@@ -107,7 +107,7 @@ co
 ### Getting Started
 
 * [Introduction to container](articles/container.html)
-* [Container operations for robust code](code-development.html)
+* [Container operations for robust code](articles/code-development.html)
 * [Manage parameter lists with dict](articles/parameter-list.html)
 * [Manage data columns with dict.table](articles/manage-data-columns.html)
 
