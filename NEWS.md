@@ -15,8 +15,8 @@ integer indices similar to base R list, which should users enable to use any of
 them right from the start without having to read through the manual.
 
 A new class `dict.table` is provided, a mixture of 
-[data.table](https://CRAN.R-project.org/package=data.table) and the `Dict` class
-that extends `data.table` by `Dict` operations to enhance data column management.
+[data.table](https://CRAN.R-project.org/package=data.table) and `Dict`, which
+extends `data.table` by `Dict` operations to enhance data column management.
 
 List of changes
 
