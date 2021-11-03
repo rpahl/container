@@ -1,18 +1,17 @@
 Package: container
 Type: Package
-Title: Extending base R list and data.table
+Title: Extending Base R List
 Version: 1.0.0
-Date: 2020-11-07
+Date: 2021-11-03
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
-Description: container extends the functionality of base R list and
+Description: Extends the functionality of base R list and
     provides specialized data structures deque,
     set, dict, and dict.table, the latter to extend the data.table
     package.
-Depends: R (>= 3.0)
+Depends: R (>= 3.5.0)
 License: GPL-3
-LazyData: TRUE
 Encoding: UTF-8
 Imports: data.table, methods, R6
 VignetteBuilder: knitr

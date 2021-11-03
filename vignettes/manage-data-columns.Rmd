@@ -46,7 +46,7 @@ developers may revert to base R to minimize errors and code dependencies. At
 least, both `mutate` and `select` may require additional checking, for example,
 to catch column name clashes.
 
-The [container](https://cran.r-project.org/web/packages/container/index.html)
+The [container](https://CRAN.R-project.org/package=container)
 package in parts was developed to close this gap. With version 1.0.0,
 it provides `dict.table`, which can be considered a
 [data.table](https://CRAN.R-project.org/package=data.table) with
