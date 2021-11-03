@@ -28,8 +28,7 @@ example, by providing both associative key-value pair as well as
 positional array semantics.
 It is implemented as a specialized associative \link{Container} thus sharing
 all \link{Container} methods with some of them being adapted to account for
-the key-value pair semantic.
-All Dict elements must be named and are always sorted by their name.
+the key-value pair semantic. All elements must be named.
 }
 \details{
 Internally, all key-value pairs are stored in a hash-table and the
@@ -89,10 +88,9 @@ for keys not yet in \code{object} and replaces the values of existing keys.
 }
 }
 \examples{
-d = dict(a = 1, b = "one", f = mean, na = NA)
+d = dict(b = "one", a = 1, f = mean, na = NA)
 print(d)
 names(d)
-as.list(d)
 
 \dontrun{
 dict(a = 1, 2)   # all elements must be named

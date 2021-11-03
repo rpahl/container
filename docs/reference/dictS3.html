@@ -53,8 +53,7 @@ example, by providing both associative key-value pair as well as
 positional array semantics.
 It is implemented as a specialized associative Container thus sharing
 all Container methods with some of them being adapted to account for
-the key-value pair semantic.
-All Dict elements must be named and are always sorted by their name." />
+the key-value pair semantic. All elements must be named." />
 <meta property="og:image" content="https://github.com/rpahl/container/logo.png" />
 
 
@@ -113,18 +112,24 @@ All Dict elements must be named and are always sorted by their name." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/code-development.html">Why and how container for code development</a>
+      <a href="../articles/code-development.html">Container operations for robust code</a>
     </li>
     <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
-      <a href="../articles/reference-semantics.html">Reference semantics</a>
+      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
     </li>
     <li>
-      <a href="../articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
+      <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -159,8 +164,7 @@ example, by providing both associative key-value pair as well as
 positional array semantics.
 It is implemented as a specialized associative <a href='Container.html'>Container</a> thus sharing
 all <a href='Container.html'>Container</a> methods with some of them being adapted to account for
-the key-value pair semantic.
-All Dict elements must be named and are always sorted by their name.</p>
+the key-value pair semantic. All elements must be named.</p>
     </div>
 
     <pre class="usage"><span class='fu'>dict</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
@@ -246,25 +250,10 @@ for keys not yet in <code>object</code> and replaces the values of existing keys
 documentation see <a href='Dict.html'>Dict</a> and it's superclass <a href='Container.html'>Container</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>d</span> <span class='op'>=</span> <span class='fu'>dict</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='st'>"one"</span>, f <span class='op'>=</span> <span class='va'>mean</span>, na <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>d</span> <span class='op'>=</span> <span class='fu'>dict</span><span class='op'>(</span>b <span class='op'>=</span> <span class='st'>"one"</span>, a <span class='op'>=</span> <span class='fl'>1</span>, f <span class='op'>=</span> <span class='va'>mean</span>, na <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; {a = 1, b = "one", f = &lt;&lt;function&gt;&gt;, na = NA}</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "a"  "b"  "f"  "na"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='va'>d</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $a
-#&gt; [1] 1
-#&gt; 
-#&gt; $b
-#&gt; [1] "one"
-#&gt; 
-#&gt; $f
-#&gt; function (x, ...) 
-#&gt; UseMethod("mean")
-#&gt; &lt;bytecode: 0x00000000168070f8&gt;
-#&gt; &lt;environment: namespace:base&gt;
-#&gt; 
-#&gt; $na
-#&gt; [1] NA
-#&gt; </div><div class='input'>
+</div><div class='output co'>#&gt; [1] "a"  "b"  "f"  "na"</div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='fu'>dict</span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>   <span class='co'># all elements must be named</span>
 <span class='op'>}</span>

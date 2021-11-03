@@ -32,25 +32,26 @@ options(width = 100L)
 
 ### Update to NEW version 1.0.0 soon on [CRAN](https://cran.r-project.org/).
 
-`container` extends base R `list` functionality with the goal to
-serve as an **easy** and **safe** to use `list` alternative in **interactive**
-and **serious** R code.
 
-### Why `container` over `list`?
-A `container` is based on `list` but provides
+`container` provides an enhanced version of base R's `list` with a
+carefully designed set of extract, replace, and remove operations that make
+it easier and safer to work with list-like data structures.
 
+### Why `container`?
+
+* safe and flexible operations to
+  * extract (built-in default values, no unintended `NULL`)
+  * add and replace (mixed indices, no unintended overrides)
+  * remove (loose or strict deletion, remove by index or value)
 * compact printing
-* feature rich add and extract operations (no unintended `NULL` or `NA`)
-* safe replace and removal operations (no unintended override or delete)
 * optional reference semantics
-* and some more ...
 
-which makes life specifically easier in **code development** and when dealing
-with **large lists**.
+In addition, this package provides specialized data structures *Deque*,
+*Set* and *Dict* and a *special* class `dict.table`, designed to extend
+[data.table](https://CRAN.R-project.org/package=data.table) by
+container operations to safely
+[Manage data columns with dict.table](articles/manage-data-columns.html).
 
-In addition, this package provides specialized data structures *deque*,
-*set*, *dict*, and *dict.table*, the latter to extend the
-[data.table](https://CRAN.R-project.org/package=data.table) package.
 
 ### Installation
 
@@ -65,54 +66,50 @@ devtools::install_github("rpahl/container")
 
 ### Usage
 
-In an interactive R session you most likely use a `container` the same way
-you would use a base R `list`, plus some new operations.
-
 ```{r}
 library(container)
-co <- container(x = cars[, 1], y = cars[, 2], data = cars)
+co <- container(colors = c("Red", "Green"), numbers = c(1, 2, 3), data = cars)
 co
 ```
 
-Some standard operations ...
-```{r}
-co[1:2]
-```
-```{r}
-co[["x"]][1:10]
+Extract
+```{r, error = TRUE}
+at(co, "colours")   # oops
+
+at(co, "colors")
 ```
 
-Some new operations ...
-```{r}
-# Use any number of (mixed) indices
-co[1:2, "data"]
-```
-```{r}
-# Replace element by value
-co[[{cars}]] <- iris
+Remove
+```{r, error = TRUE}
+co <- delete_at(co, "colours")   # oops
+
+co <- delete_at(co, "colors")
 co
 ```
-```{r}
-co2 = container(x = 111, data = NULL, -111)
-co2
+
+Peek
+```{r, error = TRUE}
+at(co, "colors")   # oops
+
+peek_at(co, "colors")
+
+peek_at(co, "colors", .default = c("black", "white"))
 ```
-```{r}
-# Merge-update with other containers
-co = update(co, co2)
+
+Replace
+```{r, error = TRUE}
+co <- replace_at(co, num = 1:10)   # oops
+
+co <- replace_at(co, numbers = 1:10)
 co
-```
-```{r}
-# Easier rename
-rename(co, "x", "A")
 ```
 
 ### Getting Started
-There is much more to explore. To get started, see
 
-* the [Get started](articles/container.html) vignette
+* [Introduction to container](articles/container.html)
+* [Container operations for robust code](articles/code-development.html)
 * [Manage parameter lists with dict](articles/parameter-list.html)
-* [Smartly select and mutate data columns with
-  dict.table](articles/smart-select-and-mutate.html)
+* [Manage data columns with dict.table](articles/manage-data-columns.html)
 
 
 

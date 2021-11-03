@@ -176,9 +176,9 @@ Set <- R6::R6Class("Set",
 )
 
 
-#' Ordered Set Class
+#' OrderedSet Class
 #'
-#' @description The [OrderedSet] is as [Set] where all elements are always
+#' @description The [OrderedSet] is a [Set] where all elements are always
 #' ordered.
 #' @details The order of elements is determined sequentially as follows:
 #' * element's length

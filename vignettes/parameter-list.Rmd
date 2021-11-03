@@ -1,0 +1,189 @@
+---
+title: "Manage parameter lists with dict"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+description: >
+    The original motivation for the development of this package was 
+    that the author found himself writing countless checks and helper code over
+    and over again when managing parameter lists. This vignette describes how
+    to use the dictionary to manage parameter lists safely and with ease.
+vignette: >
+  %\VignetteIndexEntry{Manage parameter lists with dict}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+require(container)
+knitr::opts_chunk$set(
+  comment = "#",
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
+)
+
+options(width = 100L)
+```
+
+
+## Motivation
+
+The original motivation for the development of this package actually was that
+the author found himself writing countless checks and helper code over and over
+again when managing parameter lists.
+It became apparent that something similar to python's
+dictionary would make life easier and so the idea of the container
+package was born.
+
+The package has undergone some changes since it's initial version,
+but the *dict* as a use-case for parameter lists remains very valid.
+So without further ado, let's see how this works out in practice.
+
+```{r}
+library(container, warn.conflicts = FALSE)
+
+# Define some parameters
+params = dict(a = 1:10, b = "foo")
+```
+
+
+## Add or Replace
+With a *dict* the problem of accidentally overriding an existing
+parameter value is solved out of the box using the `add` function.
+
+```{r, error = TRUE}
+params = add(params, a = 0)
+
+add(params, x = 0) # ok
+```
+
+Of course, it's also possible to indeed override a parameter.
+```{r}
+replace_at(params, a = 0)
+```
+
+What if you intend to replace something, but there is nothing to replace?
+```{r, error = TRUE}
+replace_at(params, x = 0)
+```
+
+Now you might wonder, what if *'I don't care if it is replaced or added'*.
+That's easy.
+```{r, error = TRUE}
+replace_at(params, a = 0, .add=TRUE)
+
+replace_at(params, x = 0, .add=TRUE)
+```
+
+That is, using `.add = TRUE` basically means, *'replace it, or, if it is not
+there, just add it'*
+
+Maybe you agree that even these simple use-cases already require some effort
+when using base R lists.
+
+## Extract
+When extracting a parameter, you might want to be sure it exists and signal an
+error otherwise.
+```{r, error = TRUE}
+at(params, "x")
+
+at(params, "a", "b")
+```
+
+To extract a single raw element, use `at2`
+```{r}
+at2(params, "a")
+```
+
+
+Alternatively, you could use the standard access operators, which behave
+like base R list and therefore return an empty *dict* (or `NULL`) if the
+index is not found.
+```{r}
+params["x"]
+
+params[["x"]]
+
+params["a"]
+
+params[["a"]]
+```
+
+### Default values
+A nice property of the *dict* is that it provides an easy and flexible way to
+manage default values.
+```{r}
+peek_at(params, "x")
+
+peek_at(params, "x", .default = 3:1)
+```
+
+That is, if you *peek* at a non-existing parameter, by default an empty *dict*
+is returned, but with the option to explicitly set the default. This also works
+for multiple peeks.
+```{r}
+peek_at(params, "a", "x", "y", .default = 3:1)
+```
+
+## Remove
+Similar to the above examples, the user can control how removal of
+existing/non-existing parameters is handled. If you expect a parameter and
+want to be signaled if it was not there, use `delete`.
+```{r, error = TRUE}
+delete_at(params, "x")
+
+delete_at(params, "a") # ok
+```
+
+Otherwise to loosely delete a parameter, regardless of whether it
+exists or not, use `discard`.
+```{r}
+discard_at(params, "a", "x")
+```
+
+It's important to note, that the "base R list way" to delete elements does not
+work, because it just inserts a `NULL`.
+```{r}
+params[["a"]] <- NULL
+
+params
+```
+
+
+## Merge
+Last but not least, *dict* allows to easily merge and/or update parameter lists.
+```{r}
+par1 = dict(a = 1, b = "foo")
+par2 = dict(b = "bar", x = 2, y = 3)
+
+update(par1, par2)
+```
+
+As can be seen, existing parameters are updated and new parameters added.
+Using `as.dict` you can also do this with ordinary lists.
+```{r}
+update(par1, as.dict(list(b = "my b", x = 100)))
+```
+
+That's it. I hope, it will free you some time and safe some bugs next time you
+need to manage parameter lists.
+
+As a very last note, keep in mind that since container version 1.0.0, *dict*
+elements are always sorted by their name, while you are still able to
+access elements by position (based on the sorted values).
+```{r}
+d = dict(x = 1, z = 2, a = 3)
+d
+
+d[[1]]
+
+d[2:3]
+```
+
+
+
+
+

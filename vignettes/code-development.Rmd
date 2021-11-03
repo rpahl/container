@@ -1,0 +1,244 @@
+---
+title: "Container operations for robust code"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+description: >
+    Use this vignette if you want to see how container operations can be used
+    to make it safer and easier to work with list-like data structures.
+    It describes the different methods to add, extract, replace, and remove
+    elements and their nuances.
+vignette: >
+  %\VignetteIndexEntry{Container operations for robust code}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+require(container)
+knitr::opts_chunk$set(
+  comment = "#",
+    error = FALSE,
+     tidy = FALSE,
+    cache = FALSE,
+ collapse = TRUE
+)
+options(width = 100L)
+```
+
+## Container operations
+Since R has always been used as an interactive tool, base R list operations
+are generous with respect to errors, which can lead to undetected bugs when
+developing code.
+In contrast, the container package provides additional functions for all basic
+operations that allow for fine control to avoid many pitfalls that can happen
+with lists and will usually result in more robust code.
+
+### Add elements
+New elements can be added "as usual" by concatenation or name.
+```{r}
+co <- container()
+co[["x"]] <- 1
+co <- c(co, 2)
+co
+```
+In addition, the container package provides *add*, which
+allows to add new elements by name even if that name exists already.
+```{r}
+co = add(co, x = 3)  # same as c(co, container(x = 3))
+co
+```
+
+### Replace elements
+Basic replacement again can be done "as usual" by name or position.
+```{r}
+co[["x"]] <- 0
+co[[2]] <- 12
+co
+```
+In contrast to base *lists*, the container will not allow to add elements at
+positions longer than the length of the object.
+```{r, error = TRUE}
+co[[4]] <- 4
+```
+
+If the name does not exist, the element is appended as known from base lists.
+```{r}
+co[["y"]] <- 4
+co
+```
+
+If you want to make sure that something is replaced, *container* provides the
+function *replace_at*, which will only replace elements if at names or
+positions that exist. The following statements are all equal and show the
+different possibilities on how to use *replace_at*.
+```{r}
+replace_at(co, x = 10, y = 13)            # name = value pairs
+replace_at(co, c("x", "y"),  c(10, 13))   # names followed by values
+replace_at(co, c(1, 4),      c(10, 13))   # positions followed by values
+replace_at(co, list(1, "y"), c(10, 13))   # mixed names/positions followed by values
+```
+
+Now see how invalid indices are signaled.
+```{r, error = TRUE}
+replace_at(co, z = 10)
+replace_at(co, "z", 10)
+replace_at(co, 5, 10)
+```
+
+If you instead want elements at new names to be added, set `.add = TRUE`.
+Invalid positional indices are still signaled.
+```{r, error = TRUE}
+co = replace_at(co, z = 10, .add = TRUE)
+co = replace_at(co, 7, 10, .add = TRUE)
+co
+```
+
+It is also possible to *replace* elements by value, that is, you specify the
+value (not the index) that should be replaced. Let's replace the 12 by "foo" and
+then 4 by `1:4`.
+```{r}
+co = replace(co, 12, "foo")
+co
+co = replace(co, 4, 1:4)
+co
+```
+
+In an interactive R session you may want to apply the notation using curly
+braces.
+```{r}
+co[[{1:4}]] <- 1:2
+co
+```
+
+### Extract elements
+First of all, standard extract operators apply as expected.
+```{r}
+co[[1]]
+co[["x"]]
+co[3:5]
+co[c("x", "y", "z")]
+```
+
+Programmatically, the corresponding functions to select one or multiple
+elements are named *at2* and *at*.
+```{r}
+at2(co, 1)
+at2(co, "x")
+at(co, 3:5)
+at(co, c("x", "y", "z"))
+```
+
+As before you can specify mixed indices via lists.
+```{r}
+indices = list("x", 4, "z")
+at(co, indices)
+```
+
+Again, accessing non-existent names or positions is signaled with an error.
+```{r, error = TRUE}
+at2(co, 10)
+at2(co, "a")
+at(co, 3:6)
+at(co, c("x", "a"))
+```
+
+With base R lists non-existent indices usually yield `NULL`.
+```{r}
+l = list()
+l[["a"]]
+l[2:3]
+```
+
+If needed, the (less strict) *list* access can be mimicked with *peek_at* and
+*peek_at2*.
+```{r}
+peek_at2(co, "a")
+peek_at(co, 10, 11)
+peek_at(co, 5:10)
+```
+
+As you see, one important difference is multiple access via *peek_at* will not
+insert `NULL` values by default.
+However, both functions in fact allow to specify the default value that is
+returned if the index does not exist.
+```{r}
+peek_at2(co, "a", default = -1)
+
+peek_at(co, "z", "a", .default = -1)
+peek_at(co, 4:8, .default = NA)
+```
+
+
+### Remove elements
+To remove elements in lists, they have to be replaced by `NULL`.
+```{r}
+l = list(a = 1)
+l
+l[["a"]] <- NULL
+l
+```
+
+With the container package this is done differently, as replacing by `NULL`
+will not delete the element but literally replace it by `NULL`.
+```{r}
+co[["x"]] <- NULL
+co
+```
+
+Instead, elements can be deleted by index (*delete_at*) or value (*delete*)
+as follows.
+```{r}
+delete_at(co, 1, "y", "z")
+delete(co, NULL, 1:2, 10)   # same but remove by value
+```
+
+As before, invalid indices or missing values are signaled.
+```{r, error = TRUE}
+delete_at(co, "a")
+delete_at(co, 10)
+
+delete(co, 1:3)
+```
+
+
+If you need a less strict delete operation, use the *discard* functions, which
+delete all valid indices/values and ignore the rest.
+```{r}
+discard_at(co, 1, "a")
+discard_at(co, 1:100)
+
+discard(co, NULL, 1:2, 1:3, 1:4)
+```
+
+
+### Combine containers
+The *update* function is used to combine/merge two containers.
+```{r}
+c1 = container(1, b = 2)
+c2 = container(   b = 0, c = 3)
+
+update(c1, c2)
+update(c2, c1)
+```
+
+With the container package this function is also provided for base R lists.
+```{r}
+l1 = list(1, b = 2)
+l2 = list(   b = 0, c = 3)
+
+update(l1, l2)
+update(l2, l1)
+```
+
+
+
+
+
+
+
+
+
+
+

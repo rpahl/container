@@ -406,14 +406,14 @@ replace(co, "z", 0)              # old element ("z") is not in Container
 replace(co, "z", 0, add = TRUE)  # ok, adds the element
 
 co = container(a = 0, b = "z")
-replace_at(co, a = 1)
-replace_at(co, 1, 1)                 # same
-replace_at(co, "a", 1)               # same
+replace_at(co, a = 1, b = 2)
+replace_at(co, 1:2, 1:2)                 # same
+replace_at(co, c("a", "b"), list(1, 2))  # same
 
 \dontrun{
-replace_at(co, x = 1)                # names(s) not found: 'x'
+replace_at(co, x = 1)                    # names(s) not found: 'x'
 }
-replace_at(co, x = 1, .add = TRUE)   # ok (adds x = 1)
+replace_at(co, x = 1, .add = TRUE)       # ok (adds x = 1)
 }
 \seealso{
 For the class documentation see \link{Container}.

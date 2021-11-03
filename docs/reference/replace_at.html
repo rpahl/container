@@ -108,18 +108,24 @@ option add)." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/code-development.html">Why and how container for code development</a>
+      <a href="../articles/code-development.html">Container operations for robust code</a>
     </li>
     <li>
       <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
     </li>
     <li>
-      <a href="../articles/reference-semantics.html">Reference semantics</a>
+      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
     </li>
     <li>
-      <a href="../articles/smart-select-and-mutate.html">Smartly select and mutate data columns with dict.table</a>
+      <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
+    </li>
+    <li>
+      <a href="../articles/reference-semantics.html">Reference semantics</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -178,7 +184,8 @@ option <code>add</code>).</p>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>indices at which values are to be replaced.</p></td>
+      <td><p>either name = value pairs or two vectors/lists with names/values
+to be replaced.</p></td>
     </tr>
     <tr>
       <th>.add</th>
@@ -203,14 +210,14 @@ reference.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='va'>co</span> <span class='op'>=</span> <span class='fu'><a href='ContainerS3.html'>container</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>0</span>, b <span class='op'>=</span> <span class='st'>"z"</span><span class='op'>)</span>
-<span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [a = 1, b = "z"]</div><div class='input'><span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>                 <span class='co'># same</span>
-</div><div class='output co'>#&gt; [a = 1, b = "z"]</div><div class='input'><span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, <span class='st'>"a"</span>, <span class='fl'>1</span><span class='op'>)</span>               <span class='co'># same</span>
-</div><div class='output co'>#&gt; [a = 1, b = "z"]</div><div class='input'>
+<span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, a <span class='op'>=</span> <span class='fl'>1</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [a = 1, b = 2]</div><div class='input'><span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>                 <span class='co'># same</span>
+</div><div class='output co'>#&gt; [a = 1L, b = 2L]</div><div class='input'><span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>  <span class='co'># same</span>
+</div><div class='output co'>#&gt; [a = 1, b = 2]</div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>                <span class='co'># names(s) not found: 'x'</span>
+<span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>                    <span class='co'># names(s) not found: 'x'</span>
 <span class='op'>}</span>
-<span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, x <span class='op'>=</span> <span class='fl'>1</span>, .add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>   <span class='co'># ok (adds x = 1)</span>
+<span class='fu'>replace_at</span><span class='op'>(</span><span class='va'>co</span>, x <span class='op'>=</span> <span class='fl'>1</span>, .add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>       <span class='co'># ok (adds x = 1)</span>
 </div><div class='output co'>#&gt; [a = 0, b = "z", x = 1]</div><div class='input'>
 
 <span class='va'>dit</span> <span class='op'>=</span> <span class='fu'><a href='dict.table.html'>dict.table</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, b <span class='op'>=</span> <span class='fl'>4</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>)</span>
