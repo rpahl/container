@@ -53,9 +53,11 @@ List of changes
 * `at()` and `at2()` for safe element extraction
 * `peek_at()` and `peek_at2()` for loose element peeking with default values
 * `ref_pop()` get and remove element at given index
+* `rename()` elements in place
 * comparison operators that compare containers *lexicographically*
 * arithmetic operators
-* `rename()` elements in place
+* group generic functions for Math and Summary
+
 
 ## Deprecated Functions
 
