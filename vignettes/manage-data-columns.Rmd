@@ -4,6 +4,11 @@ output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
+description: >
+    The dict.table as a mix of data.table and Dict extends the data.table by
+    functions to enhance data column management. This vignette compares basic
+    dplyr and dict.table data column operations and shows how both frameworks 
+    can be easily combined.
 vignette: >
   %\VignetteIndexEntry{Manage data columns with dict.table}
   %\VignetteEngine{knitr::rmarkdown}

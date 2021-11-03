@@ -4,6 +4,11 @@ output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
+description: >
+    The original motivation for the development of this package was 
+    that the author found himself writing countless checks and helper code over
+    and over again when managing parameter lists. This vignette describes how
+    to use the dictionary to manage parameter lists safely and with ease.
 vignette: >
   %\VignetteIndexEntry{Manage parameter lists with dict}
   %\VignetteEngine{knitr::rmarkdown}
