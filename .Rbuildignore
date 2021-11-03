@@ -8,6 +8,7 @@ tags
 ^pkgdown$
 ^_pkgdown\.yml$
 ^docs$
+^doc$
 ^README\.Rmd$
 ^doc$
 ^Meta$
