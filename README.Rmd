@@ -50,7 +50,7 @@ In addition, this package provides specialized data structures *Deque*,
 *Set* and *Dict* and a *special* class `dict.table`, designed to extend
 [data.table](https://CRAN.R-project.org/package=data.table) by
 container operations to safely
-[Manage data columns with dict.table](articles/manage-data-columns.html).
+[Manage data columns with dict.table](https://rpahl.github.io/container/articles/manage-data-columns.html).
 
 
 ### Installation
@@ -72,14 +72,14 @@ co <- container(colors = c("Red", "Green"), numbers = c(1, 2, 3), data = cars)
 co
 ```
 
-Extract
+Safe extract
 ```{r, error = TRUE}
 at(co, "colours")   # oops
 
 at(co, "colors")
 ```
 
-Remove
+Safe remove
 ```{r, error = TRUE}
 co <- delete_at(co, "colours")   # oops
 
@@ -87,7 +87,7 @@ co <- delete_at(co, "colors")
 co
 ```
 
-Peek
+Flexible peek
 ```{r, error = TRUE}
 at(co, "colors")   # oops
 
@@ -96,7 +96,7 @@ peek_at(co, "colors")
 peek_at(co, "colors", .default = c("black", "white"))
 ```
 
-Replace
+Safe replace
 ```{r, error = TRUE}
 co <- replace_at(co, num = 1:10)   # oops
 
@@ -106,10 +106,10 @@ co
 
 ### Getting Started
 
-* [Introduction to container](articles/container.html)
-* [Container operations for robust code](articles/code-development.html)
-* [Manage parameter lists with dict](articles/parameter-list.html)
-* [Manage data columns with dict.table](articles/manage-data-columns.html)
+* [Introduction to container](https://rpahl.github.io/container/articles/container.html)
+* [Container operations for robust code](https://rpahl.github.io/container/articles/code-development.html)
+* [Manage parameter lists with dict](https://rpahl.github.io/container/articles/parameter-list.html)
+* [Manage data columns with dict.table](https://rpahl.github.io/container/articles/manage-data-columns.html)
 
 
 

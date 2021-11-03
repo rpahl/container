@@ -131,7 +131,7 @@
 <li>compact printing</li>
 <li>optional reference semantics</li>
 </ul>
-<p>In addition, this package provides specialized data structures <em>Deque</em>, <em>Set</em> and <em>Dict</em> and a <em>special</em> class <code>dict.table</code>, designed to extend <a href="https://CRAN.R-project.org/package=data.table">data.table</a> by container operations to safely <a href="articles/manage-data-columns.html">Manage data columns with dict.table</a>.</p>
+<p>In addition, this package provides specialized data structures <em>Deque</em>, <em>Set</em> and <em>Dict</em> and a <em>special</em> class <code>dict.table</code>, designed to extend <a href="https://CRAN.R-project.org/package=data.table">data.table</a> by container operations to safely <a href="https://rpahl.github.io/container/articles/manage-data-columns.html">Manage data columns with dict.table</a>.</p>
 </div>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
@@ -151,20 +151,20 @@
 <span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Red"</span>, <span class="st">"Green"</span><span class="op">)</span>, numbers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span>
 <span class="va">co</span>
 <span class="co"># [colors = ("Red" "Green"), numbers = (1 2 3), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
-<p>Extract</p>
+<p>Safe extract</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colours"</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: index 'colours' not found</span>
 <span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
 <span class="co"># [colors = ("Red" "Green")]</span></code></pre></div>
-<p>Remove</p>
+<p>Safe remove</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colours"</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: names(s) not found: 'colours'</span>
 <span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
 <span class="va">co</span>
 <span class="co"># [numbers = (1 2 3), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
-<p>Peek</p>
+<p>Flexible peek</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: index 'colors' not found</span>
@@ -172,7 +172,7 @@
 <span class="co"># []</span>
 <span class="fu"><a href="reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span>, .default <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># [colors = ("black" "white")]</span></code></pre></div>
-<p>Replace</p>
+<p>Safe replace</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, num <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: names(s) not found: 'num'</span>
@@ -184,10 +184,10 @@
 <h3 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h3>
 <ul>
-<li><a href="articles/container.html">Introduction to container</a></li>
-<li><a href="articles/code-development.html">Container operations for robust code</a></li>
-<li><a href="articles/parameter-list.html">Manage parameter lists with dict</a></li>
-<li><a href="articles/manage-data-columns.html">Manage data columns with dict.table</a></li>
+<li><a href="https://rpahl.github.io/container/articles/container.html">Introduction to container</a></li>
+<li><a href="https://rpahl.github.io/container/articles/code-development.html">Container operations for robust code</a></li>
+<li><a href="https://rpahl.github.io/container/articles/parameter-list.html">Manage parameter lists with dict</a></li>
+<li><a href="https://rpahl.github.io/container/articles/manage-data-columns.html">Manage data columns with dict.table</a></li>
 </ul>
 </div>
 </div>
