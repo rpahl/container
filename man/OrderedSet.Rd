@@ -11,7 +11,7 @@ ordered.
 The order of elements is determined sequentially as follows:
 \itemize{
 \item element's length
-\item whether it is an \href{is.atomic}{atomic} element
+\item whether it is an atomic element
 \item the element's class(es)
 \item by numeric value (if applicable)
 \item it's representation when printed

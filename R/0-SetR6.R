@@ -182,7 +182,7 @@ Set <- R6::R6Class("Set",
 #' ordered.
 #' @details The order of elements is determined sequentially as follows:
 #' * element's length
-#' * whether it is an [atomic](is.atomic) element
+#' * whether it is an atomic element
 #' * the element's class(es)
 #' * by numeric value (if applicable)
 #' * it's representation when printed
