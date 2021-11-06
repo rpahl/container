@@ -2,12 +2,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
+[![R-CMD-check](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 [![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
-[![status](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
-[![Downloads](http://cranlogs.r-pkg.org/badges/container)](http://www.r-pkg.org/pkg/container)
-[![R build
-status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
+[![dependencies](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
+[![downloads](https://cranlogs.r-pkg.org/badges/container)](https://www.r-pkg.org:443/pkg/container)
+
 <!-- badges: end -->
 
 # container <img src="man/figures/logo.png" align="right" width="163" height="104"/>
