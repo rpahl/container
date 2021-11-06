@@ -158,7 +158,7 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <p>This update brings some big changes and breaks some of the earlier functions. However, with version 1.0.0, from now on, the API will remain stable.</p>
 <p>All classes <code>Container</code>, <code>Deque</code>, <code>Set</code> and <code>Dict</code> now have been modified to be more similar in the way elements can be added, extracted, replaced or removed and therefore share most of their operations. The motivation behind this was to provide specialized data structures that enhance base R list but at the same time still ‘feel’ familiar to R users. As a result, all classes (including <code>Set</code> and <code>Dict</code>) now provide named elements and access via name or integer indices similar to base R list, which should users enable to use any of them right from the start without having to read through the manual.</p>
-<p>A new class <code>dict.table</code> is provided, a mixture of <a href="https://CRAN.R-project.org/package=data.table">data.table</a> and the <code>Dict</code> class that extends <code>data.table</code> by <code>Dict</code> operations to enhance data column management.</p>
+<p>A new class <code>dict.table</code> is provided, a mixture of <a href="https://CRAN.R-project.org/package=data.table">data.table</a> and <code>Dict</code>, which extends <code>data.table</code> by <code>Dict</code> operations to enhance data column management.</p>
 <p>List of changes</p>
 <ul>
 <li>
