@@ -12,7 +12,7 @@
 
 # container <img src="man/figures/logo.png" align="right" width="163" height="104"/>
 
-### Update to NEW version 1.0.0 soon on [CRAN](https://cran.r-project.org/).
+### Update to version 1.0.0 *NOW* on [CRAN](https://cran.r-project.org/).
 
 `container` provides an enhanced version of base R’s `list` with a
 carefully designed set of extract, replace, and remove operations that
