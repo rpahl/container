@@ -145,7 +145,11 @@ navbar:
           href: https://CRAN.R-project.org/package=GroupSeq 
   right:
     - icon: fab fa-github
+<<<<<<< HEAD
       href: https://github.com/rpahl/container/
+=======
+      href: https://github.com/rpahl/r-some-blog
+>>>>>>> Update navbar
     - icon: fab fa-stack-overflow
       href: https://stackoverflow.com/users/8120617/rpahl
     - icon: fab fa-twitter
