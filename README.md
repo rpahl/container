@@ -2,10 +2,11 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
 [![R-CMD-check](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 [![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
 [![dependencies](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
+[![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=container)
 [![downloads](https://cranlogs.r-pkg.org/badges/container)](https://www.r-pkg.org:443/pkg/container)
 
 <!-- badges: end -->

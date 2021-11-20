@@ -25,6 +25,7 @@ options(width = 100L)
 [![R-CMD-check](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 [![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
 [![dependencies](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
+[![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=container)
 [![downloads](https://cranlogs.r-pkg.org/badges/container)](https://www.r-pkg.org:443/pkg/container)
 
 
