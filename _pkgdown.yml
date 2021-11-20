@@ -7,8 +7,7 @@ template:
 
 authors:
   Roman Pahl:
-    href: https://rpahl.github.io/about.html
-
+    href: https://rpahl.github.io/r-some-blog/about.html
 
 reference:
   - title: "Container"
@@ -111,4 +110,45 @@ articles:
     - manage-data-columns
     - deque-set-dict
     - reference-semantics
+    
+    
+home:
+  links:
+  - text: Visit my R blog
+    href: https://rpahl.github.io/r-some-blog/
 
+
+navbar:
+  title: "container"
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "Get started"
+      href: articles/container.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Changelog"
+      href: news/index.html
+    - text: "Vignettes"
+      menu:
+        - text: "Container operations for robust code"
+          href: articles/code-development.html
+        - text: "Manage parameter lists with dict"
+          href: articles/parameter-list.html
+        - text: "Manage data columns with dict.table"
+          href: articles/manage-data-columns.html
+    - text: "All Packages"
+      menu:
+        - text: "container"
+          href: https://rpahl.github.io/container/
+        - text: "GroupSeq"
+          href: https://CRAN.R-project.org/package=GroupSeq 
+  right:
+    - icon: fab fa-github
+      href: https://github.com/rpahl/r-some-blog
+    - icon: fab fa-stack-overflow
+      href: https://stackoverflow.com/users/8120617/rpahl
+    - icon: fab fa-twitter
+      href: https://twitter.com/romanpahl
+    - icon: fas fa-blog
+      href: https://rpahl.github.io/r-some-blog/
