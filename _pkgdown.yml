@@ -146,10 +146,14 @@ navbar:
   right:
     - icon: fab fa-github
 <<<<<<< HEAD
+<<<<<<< HEAD
       href: https://github.com/rpahl/container/
 =======
       href: https://github.com/rpahl/r-some-blog
 >>>>>>> Update navbar
+=======
+      href: https://github.com/rpahl/container/
+>>>>>>> Fix link to github repo
     - icon: fab fa-stack-overflow
       href: https://stackoverflow.com/users/8120617/rpahl
     - icon: fab fa-twitter
