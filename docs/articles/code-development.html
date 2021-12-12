@@ -89,7 +89,7 @@
       <a href="https://rpahl.github.io/container/">container</a>
     </li>
     <li>
-      <a href="https://CRAN.R-project.org/package=GroupSeq">GroupSeq</a>
+      <a href="https://rpahl.github.io/GroupSeq/">GroupSeq</a>
     </li>
   </ul>
 </li>
@@ -288,6 +288,7 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/peek_at2.html">peek_at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span>, default <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 <span class="co"># [1] -1</span>
+
 <span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"z"</span>, <span class="st">"a"</span>, .default <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
 <span class="co"># [z = 10, a = -1]</span>
 <span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">8</span>, .default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
@@ -322,6 +323,7 @@
 <span class="co"># Error: names(s) not found: 'a'</span>
 <span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="co"># Error: index out of range (length = 5): 10</span>
+
 <span class="fu"><a href="../reference/delete.html">delete</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
 <span class="co"># Error: (1L 2L 3L) is not in Container</span></code></pre></div>
 <p>If you need a less strict delete operation, use the <em>discard</em> functions, which delete all valid indices/values and ignore the rest.</p>
@@ -330,6 +332,7 @@
 <span class="co"># ["foo", x = 3, y = (1L 2L), z = 10]</span>
 <span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span>
 <span class="co"># []</span>
+
 <span class="fu"><a href="../reference/discard.html">discard</a></span><span class="op">(</span><span class="va">co</span>, <span class="cn">NULL</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
 <span class="co"># ["foo", x = 3, z = 10]</span></code></pre></div>
 </div>

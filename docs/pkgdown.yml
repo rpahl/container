@@ -10,6 +10,7 @@ articles:
   reference-semantics: reference-semantics.html
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 last_built: 2021-11-20T18:07Z
 =======
 last_built: 2021-11-20T13:58Z
@@ -17,6 +18,9 @@ last_built: 2021-11-20T13:58Z
 =======
 last_built: 2021-11-20T18:07Z
 >>>>>>> Fix link to github repo
+=======
+last_built: 2021-12-12T18:13Z
+>>>>>>> Update GroupSeq package link
 urls:
   reference: https://github.com/rpahl/container/reference
   article: https://github.com/rpahl/container/articles

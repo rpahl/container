@@ -89,7 +89,7 @@
       <a href="https://rpahl.github.io/container/">container</a>
     </li>
     <li>
-      <a href="https://CRAN.R-project.org/package=GroupSeq">GroupSeq</a>
+      <a href="https://rpahl.github.io/GroupSeq/">GroupSeq</a>
     </li>
   </ul>
 </li>
@@ -168,6 +168,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">params</span> <span class="op">=</span> <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="co"># Error: name 'a' exists already</span>
+
 <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="co"># ok</span>
 <span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
 <p>Of course, it’s also possible to indeed override a parameter.</p>
@@ -182,6 +183,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># {a = 0, b = "foo"}</span>
+
 <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
 <p>That is, using <code>.add = TRUE</code> basically means, <em>‘replace it, or, if it is not there, just add it’</em></p>
@@ -194,6 +196,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
 <span class="co"># Error: index 'x' not found</span>
+
 <span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>
 <span class="co"># {a = (1L 2L 3L 4L ...), b = "foo"}</span></code></pre></div>
 <p>To extract a single raw element, use <code>at2</code></p>
@@ -204,10 +207,13 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">params</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span>
 <span class="co"># {}</span>
+
 <span class="va">params</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span>
 <span class="co"># NULL</span>
+
 <span class="va">params</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span>
 <span class="co"># {a = (1L 2L 3L 4L ...)}</span>
+
 <span class="va">params</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
 <div id="default-values" class="section level3">
@@ -217,6 +223,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
 <span class="co"># {}</span>
+
 <span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span>, .default <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
 <span class="co"># {x = (3L 2L 1L)}</span></code></pre></div>
 <p>That is, if you <em>peek</em> at a non-existing parameter, by default an empty <em>dict</em> is returned, but with the option to explicitly set the default. This also works for multiple peeks.</p>
@@ -232,6 +239,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
 <span class="co"># Error: names(s) not found: 'x'</span>
+
 <span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span><span class="op">)</span> <span class="co"># ok</span>
 <span class="co"># {b = "foo"}</span></code></pre></div>
 <p>Otherwise to loosely delete a parameter, regardless of whether it exists or not, use <code>discard</code>.</p>
@@ -265,8 +273,10 @@
 <code class="sourceCode R"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">2</span>, a <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="va">d</span>
 <span class="co"># {a = 3, x = 1, z = 2}</span>
+
 <span class="va">d</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co"># [1] 3</span>
+
 <span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
 <span class="co"># {x = 1, z = 2}</span></code></pre></div>
 </div>

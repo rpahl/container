@@ -89,7 +89,7 @@
       <a href="https://rpahl.github.io/container/">container</a>
     </li>
     <li>
-      <a href="https://CRAN.R-project.org/package=GroupSeq">GroupSeq</a>
+      <a href="https://rpahl.github.io/GroupSeq/">GroupSeq</a>
     </li>
   </ul>
 </li>
@@ -196,8 +196,10 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
 <span class="co"># [1] 2</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span>
 <span class="co"># [1] "a" "b"</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"A"</span>
 <span class="va">co</span>
 <span class="co"># [A = 1, b = (1L 2L 3L 4L ...)]</span></code></pre></div>
@@ -267,6 +269,7 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="st">"b"</span><span class="op">]</span>
 <span class="co"># [A = 1, c = 3, b = 2]</span>
+
 <span class="va">co</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">1</span>, <span class="st">"A"</span><span class="op">]</span>
 <span class="co"># [b = 2, A = 1, A = 1]</span></code></pre></div>
 <p>Invalid indices don’t produce <code>NULL</code>s but are just ignored.</p>
@@ -288,6 +291,7 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">is.numeric</span><span class="op">)</span>
 <span class="co">#    A    b    c  co2 </span>
 <span class="co"># TRUE TRUE TRUE TRUE</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">co</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#   A   b   c co2 </span>
 <span class="co">#   2   3   4   4</span></code></pre></div>
