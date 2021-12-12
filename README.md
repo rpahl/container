@@ -3,17 +3,17 @@
 <!-- badges: start -->
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
-[![R-CMD-check](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
-[![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
 [![dependencies](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
+[![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
+[![R-CMD-check](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
+[![downloads](https://cranlogs.r-pkg.org/badges/container?color=3aa9e8)](https://www.r-pkg.org:443/pkg/container)
+[![total-downloads](http://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
+[![last-commit](https://img.shields.io/github/last-commit/rpahl/container)](https://cran.r-project.org/package=container)
 [![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=container)
-[![downloads](https://cranlogs.r-pkg.org/badges/container)](https://www.r-pkg.org:443/pkg/container)
 
 <!-- badges: end -->
 
 # container <img src="man/figures/logo.png" align="right" width="163" height="104"/>
-
-### Update to version 1.0.0 *NOW* on [CRAN](https://cran.r-project.org/).
 
 `container` provides an enhanced version of base R’s `list` with a
 carefully designed set of extract, replace, and remove operations that
@@ -58,6 +58,7 @@ Safe extract
 ``` r
 at(co, "colours")   # oops
 # Error: index 'colours' not found
+
 at(co, "colors")
 # [colors = ("Red" "Green")]
 ```
@@ -67,6 +68,7 @@ Safe remove
 ``` r
 co <- delete_at(co, "colours")   # oops
 # Error: names(s) not found: 'colours'
+
 co <- delete_at(co, "colors")
 co
 # [numbers = (1 2 3), data = <<data.frame(50x2)>>]
@@ -77,8 +79,10 @@ Flexible peek
 ``` r
 at(co, "colors")   # oops
 # Error: index 'colors' not found
+
 peek_at(co, "colors")
 # []
+
 peek_at(co, "colors", .default = c("black", "white"))
 # [colors = ("black" "white")]
 ```
@@ -88,6 +92,7 @@ Safe replace
 ``` r
 co <- replace_at(co, num = 1:10)   # oops
 # Error: names(s) not found: 'num'
+
 co <- replace_at(co, numbers = 1:10)
 co
 # [numbers = (1L 2L 3L 4L ...), data = <<data.frame(50x2)>>]
