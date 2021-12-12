@@ -110,8 +110,8 @@ articles:
     - manage-data-columns
     - deque-set-dict
     - reference-semantics
-    
-    
+
+
 home:
   links:
   - text: Visit my R blog
@@ -142,7 +142,7 @@ navbar:
         - text: "container"
           href: https://rpahl.github.io/container/
         - text: "GroupSeq"
-          href: https://CRAN.R-project.org/package=GroupSeq 
+          href: https://rpahl.github.io/GroupSeq/
   right:
     - icon: fab fa-github
       href: https://github.com/rpahl/container/
