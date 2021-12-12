@@ -140,11 +140,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#container-" class="anchor"></a>container <img src="reference/figures/logo.png" align="right" width="163" height="104">
 </h1></div>
-<div id="update-to-version-100-now-on-cran" class="section level3">
-<h3 class="hasAnchor">
-<a href="#update-to-version-100-now-on-cran" class="anchor"></a>Update to version 1.0.0 <em>NOW</em> on <a href="https://cran.r-project.org/">CRAN</a>.</h3>
 <p><code>container</code> provides an enhanced version of base R’s <code>list</code> with a carefully designed set of extract, replace, and remove operations that make it easier and safer to work with list-like data structures.</p>
-</div>
 <div id="why-container" class="section level3">
 <h3 class="hasAnchor">
 <a href="#why-container" class="anchor"></a>Why <code>container</code>?</h3>
@@ -169,13 +165,13 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"container"</span><span class="op">)</span>
 
 <span class="co"># Install development version from GitHub</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rpahl/container"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rpahl/container"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container/">container</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container">container</a></span><span class="op">)</span>
 <span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/ContainerS3.html">container</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Red"</span>, <span class="st">"Green"</span><span class="op">)</span>, numbers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">cars</span><span class="op">)</span>
 <span class="va">co</span>
 <span class="co"># [colors = ("Red" "Green"), numbers = (1 2 3), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
@@ -183,12 +179,14 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colours"</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: index 'colours' not found</span>
+
 <span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
 <span class="co"># [colors = ("Red" "Green")]</span></code></pre></div>
 <p>Safe remove</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colours"</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: names(s) not found: 'colours'</span>
+
 <span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
 <span class="va">co</span>
 <span class="co"># [numbers = (1 2 3), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
@@ -196,14 +194,17 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: index 'colors' not found</span>
+
 <span class="fu"><a href="reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span><span class="op">)</span>
 <span class="co"># []</span>
+
 <span class="fu"><a href="reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"colors"</span>, .default <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"white"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># [colors = ("black" "white")]</span></code></pre></div>
 <p>Safe replace</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, num <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>   <span class="co"># oops</span>
 <span class="co"># Error: names(s) not found: 'num'</span>
+
 <span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, numbers <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
 <span class="va">co</span>
 <span class="co"># [numbers = (1L 2L 3L 4L ...), data = &lt;&lt;data.frame(50x2)&gt;&gt;]</span></code></pre></div>
@@ -254,11 +255,13 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=container"><img src="https://www.r-pkg.org/badges/version/container" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://github.com/rpahl/container/actions"><img src="https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/github/rpahl/container?branch=master"><img src="https://codecov.io/github/rpahl/container/coverage.svg?branch=master" alt="codecov.io"></a></li>
 <li><a href="https://CRAN.R-project.org/package=container"><img src="https://tinyverse.netlify.com/badge/container" alt="dependencies"></a></li>
+<li><a href="https://codecov.io/github/rpahl/container?branch=master"><img src="https://codecov.io/github/rpahl/container/coverage.svg?branch=master" alt="codecov.io"></a></li>
+<li><a href="https://github.com/rpahl/container/actions"><img src="https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://www.r-pkg.org:443/pkg/container"><img src="https://cranlogs.r-pkg.org/badges/container?color=3aa9e8" alt="downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=container"><img src="http://cranlogs.r-pkg.org/badges/grand-total/container" alt="total-downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=container"><img src="https://img.shields.io/github/last-commit/rpahl/container" alt="last-commit"></a></li>
 <li><a href="https://cran.r-project.org/package=container"><img src="https://img.shields.io/badge/lifecycle-stable-green.svg" alt="Lifecycle_Badge"></a></li>
-<li><a href="https://www.r-pkg.org:443/pkg/container"><img src="https://cranlogs.r-pkg.org/badges/container" alt="downloads"></a></li>
 </ul>
 </div>
 </div>
