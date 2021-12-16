@@ -143,7 +143,6 @@ data %>%
     replace_at(ID = 1:2, .add = TRUE)
 ```
 
-### Extract
 
 ### Remove
 A common [tidyverse](https://www.tidyverse.org/) approach to remove a column is based on
