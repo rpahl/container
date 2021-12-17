@@ -44,12 +44,10 @@ co
 
 Although these days this usually can be achieved equally easy using pipes.
 
-```{r}
+```{r, eval = FALSE}
 co = container() |>
     add(a = 1)   |>
     add(b = 2)
-
-co
 ```
 
 Still there might be use cases, where it makes your life a bit easier.
@@ -69,7 +67,7 @@ evens
 
 Using reference semantics for it's side effects (as in the above example)
 should be really done with care though and in most cases is probably best 
-avoided as you introduce coupling into your code, and risk some nasty bugs.
+avoided as you risk introducing unnecessary coupling into your code.
 
 Last but not least, reference semantics can make sense when you are dealing with
 very large objects to avoid copying. Although, these days R often is smart 
@@ -77,4 +75,4 @@ enough to only copy those parts of an objects, for which a copy is really
 needed (copy-on-modify).
 
 To summarize, the `container` package does provide reference semantics, but it
-should be used sparsely and with care.
+should be used with care.

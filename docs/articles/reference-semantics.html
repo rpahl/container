@@ -175,10 +175,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="op">)</span> |&gt;
     <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>   |&gt;
-    <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span>b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-
-<span class="va">co</span>
-<span class="co"># [a = 1, b = 2]</span></code></pre></div>
+    <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span>b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p>Still there might be use cases, where it makes your life a bit easier. Consider the following silly example.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">odds</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="op">)</span>
@@ -193,9 +190,9 @@
 <span class="co"># [1L, 3L, 5L, 7L, 9L]</span>
 <span class="va">evens</span>
 <span class="co"># [2L, 4L, 6L, 8L, 10L]</span></code></pre></div>
-<p>Using reference semantics for it’s side effects (as in the above example) should be really done with care though and in most cases is probably best avoided as you introduce coupling into your code, and risk some nasty bugs.</p>
+<p>Using reference semantics for it’s side effects (as in the above example) should be really done with care though and in most cases is probably best avoided as you risk introducing unnecessary coupling into your code.</p>
 <p>Last but not least, reference semantics can make sense when you are dealing with very large objects to avoid copying. Although, these days R often is smart enough to only copy those parts of an objects, for which a copy is really needed (copy-on-modify).</p>
-<p>To summarize, the <code>container</code> package does provide reference semantics, but it should be used sparsely and with care.</p>
+<p>To summarize, the <code>container</code> package does provide reference semantics, but it should be used with care.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
