@@ -1,10 +1,12 @@
 ---
 title: "Reference semantics"
-date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
+description: >
+    Gives a brief overview about the reference semantic functionality provided
+    by the container package.
 vignette: >
   %\VignetteIndexEntry{Reference semantics}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,11 +17,64 @@ vignette: >
 require(container)
 knitr::opts_chunk$set(
   comment = "#",
-    error = FALSE,
-     tidy = FALSE,
-    cache = FALSE,
- collapse = TRUE
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
 )
+
+options(width = 100L)
 ```
 
-This vignette is updated in the coming days.
+Methods that alter Container objects usually come in two versions providing 
+either copy or reference semantics where the latter start with 'ref_' to note 
+the reference semantic, for example, `add()` and `ref_add()`.
+
+Since reference semantics changes the original object, it can be used to
+save some typing.
+
+```{r}
+co = container()
+
+ref_add(co, a = 1)
+ref_add(co, b = 2)
+
+co
+```
+
+Although these days this usually can be achieved equally easy using pipes.
+
+```{r}
+co = container() |>
+    add(a = 1)   |>
+    add(b = 2)
+
+co
+```
+
+Still there might be use cases, where it makes your life a bit easier.
+Consider the following silly example.
+```{r}
+odds = container()
+evens = container()
+isOdd = function(x) {x %% 2 == 1}
+
+res = sapply(1:10, function(i) 
+    if(isOdd(i)) ref_add(odds, i) else ref_add(evens, i)
+)
+
+odds
+evens
+```
+
+Using reference semantics for it's side effects (as in the above example)
+should be really done with care though and in most cases is probably best 
+avoided as you introduce coupling into your code, and risk some nasty bugs.
+
+Last but not least, reference semantics can make sense when you are dealing with
+very large objects to avoid copying. Although, these days R often is smart 
+enough to only copy those parts of an objects, for which a copy is really
+needed (copy-on-modify).
+
+To summarize, the `container` package does provide reference semantics, but it
+should be used sparsely and with care.
