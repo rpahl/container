@@ -113,6 +113,16 @@ rename.dict.table <- function(.x, old, new)
 #' @export
 ref_rename.dict.table <- function(.x, old, new)
 {
+    before = colnames(.x)
+    names(before) = before
+    after = base::replace(before, old, new)
+
+    if (any(duplicated(after))) {
+        stop("renaming not possible due to duplicated column names: ",
+             toString(after[duplicated(after)])
+        )
+    }
+
     data.table::setnames(.x, old, new)
 }
 
