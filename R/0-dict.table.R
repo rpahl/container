@@ -73,7 +73,7 @@ NULL
 #' @export
 dict.table <- function(...)
 {
-    dat <- data.table::data.table(..., check.names = TRUE)
+    dat <- data.table::data.table(...)
     .set_class(dat)
     if (any(duplicated(names(dat)))) {
         dups <- names(dat)[duplicated(names(dat))]
