@@ -49,6 +49,25 @@ expect_error(rename(dit, "A", "b"))
 expect_error(rename(dit, c("y", "y2"), c("y2", "y3")),
              "Items of 'old' not found in names: y2")
 
+# Duplicated column names are signaled
+dit = dict.table(a = 1:2, b = 2:1)
+expect_error(rename(dit, "a", "b"),
+             "renaming not possible due to duplicated column names: b")
+
+hasSameColumnNames = isTRUE(all.equal(colnames(dit), c("a", "b")))
+expect_true(hasSameColumnNames)
+
+expect_error(ref_rename(dit, "a", "b"),
+             "renaming not possible due to duplicated column names: b")
+hasSameColumnNames = isTRUE(all.equal(colnames(dit), c("a", "b")))
+expect_true(hasSameColumnNames)
+
+dit = dict.table(a = 1, b = 2, c = 3, d = 4)
+expect_error(ref_rename(dit, c("a", "b"), c("c", "d")),
+             "renaming not possible due to duplicated column names: c, d")
+hasSameColumnNames = isTRUE(all.equal(colnames(dit), c("a", "b", "c", "d")))
+expect_true(hasSameColumnNames)
+
 # --------------
 # rename.default
 # --------------

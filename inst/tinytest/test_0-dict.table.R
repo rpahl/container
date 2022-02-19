@@ -9,6 +9,16 @@ dat = data.table(A = 1, B = 2)
 dit = dict.table(A = 1, B = 2)
 expect_equivalent(dit, dat)
 
+# dict.table can be initialized with or without checking of column names
+dit = dict.table("x 1" = 1)
+expect_equal(colnames(dit), "x 1")
+
+dit = dict.table("x 1" = 1, check.names = TRUE)
+expect_equal(colnames(dit), "x.1")
+
+# dict.table cannot be initialized with duplicated names
+expect_error(dict.table(a = 1, b = 2, a = 3),
+             "duplicated keys after init: a")
 
 # access of dict.table properities work as expected
 dat = data.table(A = 1, B = 2)

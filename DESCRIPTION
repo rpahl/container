@@ -1,7 +1,7 @@
 Package: container
 Type: Package
 Title: Extending Base R List
-Version: 1.0.0
+Version: 1.0.1
 Date: 2021-11-03
 Authors@R:
     person("Roman", "Pahl",
