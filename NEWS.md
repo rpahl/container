@@ -1,3 +1,8 @@
+# container 1.0.1
+
+* prevent duplicated column names when renaming dict.tables
+* don't check names in dict.table constructor - allow optional checking
+
 # container 1.0.0
 
 ## Breaking changes
@@ -5,16 +10,16 @@
 This update brings some big changes and breaks some of the earlier functions.
 However, with version 1.0.0, from now on, the API will remain stable.
 
-All classes `Container`, `Deque`, `Set` and `Dict` now have been modified to 
-be more similar in the way elements can be added, extracted, replaced or 
+All classes `Container`, `Deque`, `Set` and `Dict` now have been modified to
+be more similar in the way elements can be added, extracted, replaced or
 removed and therefore share most of their operations. The motivation behind this
 was to provide specialized data structures that enhance base R list but at
 the same time still 'feel' familiar to R users. As a result, all classes
 (including `Set` and `Dict`) now provide named elements and access via name or
-integer indices similar to base R list, which should users enable to use any of 
+integer indices similar to base R list, which should users enable to use any of
 them right from the start without having to read through the manual.
 
-A new class `dict.table` is provided, a mixture of 
+A new class `dict.table` is provided, a mixture of
 [data.table](https://CRAN.R-project.org/package=data.table) and `Dict`, which
 extends `data.table` by `Dict` operations to enhance data column management.
 
@@ -32,7 +37,7 @@ List of changes
   removing elements by index, now `delete_at()` and `discard_at()` are used.
 * `has()` now always works *by value*. For checking elements by name, now
   `has_name()` is used.
-* the `print()` method has been fully revised and now (inspired by the 
+* the `print()` method has been fully revised and now (inspired by the
   [sets](https://CRAN.R-project.org/package=sets) package) prints very compact.
 * `size()` is now determined by `length()`
 * `count()`, `pop`, and `update` are now available for all classes
@@ -43,7 +48,7 @@ List of changes
 ## New features
 
 * new classes `OrderedSet` and `dict.table`
-* all classes support named elements 
+* all classes support named elements
 * `names()` is used to get and set the names as in base R list.
 * extract or replace parts of an object via standard `[`, `[[`, and `$`
   operators using character or numeric indices or *both* at the same time.
