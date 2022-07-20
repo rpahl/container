@@ -1,8 +1,8 @@
 Package: container
 Type: Package
 Title: Extending Base R List
-Version: 1.0.2
-Date: 2022-02-19
+Version: 1.0.3
+Date: 2022-07-20
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
@@ -13,7 +13,7 @@ Description: Extends the functionality of base R list and
 Depends: R (>= 3.5.0)
 License: GPL-3
 Encoding: UTF-8
-Imports: data.table, methods, R6
+Imports: 'data.table', methods, R6
 VignetteBuilder: knitr
 Suggests: knitr, tinytest, rmarkdown, microbenchmark, ggplot2, dplyr, tibble
 URL: https://rpahl.github.io/container/
