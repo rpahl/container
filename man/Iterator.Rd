@@ -51,23 +51,23 @@ Roman Pahl
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{Iterator$new()}}
-\item \href{#method-begin}{\code{Iterator$begin()}}
-\item \href{#method-get_value}{\code{Iterator$get_value()}}
-\item \href{#method-get_next}{\code{Iterator$get_next()}}
-\item \href{#method-has_next}{\code{Iterator$has_next()}}
-\item \href{#method-has_value}{\code{Iterator$has_value()}}
-\item \href{#method-length}{\code{Iterator$length()}}
-\item \href{#method-pos}{\code{Iterator$pos()}}
-\item \href{#method-next_iter}{\code{Iterator$next_iter()}}
-\item \href{#method-print}{\code{Iterator$print()}}
-\item \href{#method-reset_iter}{\code{Iterator$reset_iter()}}
-\item \href{#method-clone}{\code{Iterator$clone()}}
+\item \href{#method-Iterator-new}{\code{Iterator$new()}}
+\item \href{#method-Iterator-begin}{\code{Iterator$begin()}}
+\item \href{#method-Iterator-get_value}{\code{Iterator$get_value()}}
+\item \href{#method-Iterator-get_next}{\code{Iterator$get_next()}}
+\item \href{#method-Iterator-has_next}{\code{Iterator$has_next()}}
+\item \href{#method-Iterator-has_value}{\code{Iterator$has_value()}}
+\item \href{#method-Iterator-length}{\code{Iterator$length()}}
+\item \href{#method-Iterator-pos}{\code{Iterator$pos()}}
+\item \href{#method-Iterator-next_iter}{\code{Iterator$next_iter()}}
+\item \href{#method-Iterator-print}{\code{Iterator$print()}}
+\item \href{#method-Iterator-reset_iter}{\code{Iterator$reset_iter()}}
+\item \href{#method-Iterator-clone}{\code{Iterator$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Iterator-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-new}{}}}
 \subsection{Method \code{new()}}{
 \code{Iterator} constructor
 \subsection{Usage}{
@@ -88,8 +88,8 @@ invisibly returns the \code{Iterator} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-begin"></a>}}
-\if{latex}{\out{\hypertarget{method-begin}{}}}
+\if{html}{\out{<a id="method-Iterator-begin"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-begin}{}}}
 \subsection{Method \code{begin()}}{
 set iterator to the first element of the underlying
 sequence unless length of sequence is zero, in which case it will
@@ -103,8 +103,8 @@ invisibly returns the \code{Iterator} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_value"></a>}}
-\if{latex}{\out{\hypertarget{method-get_value}{}}}
+\if{html}{\out{<a id="method-Iterator-get_value"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-get_value}{}}}
 \subsection{Method \code{get_value()}}{
 get value where the iterator points to
 \subsection{Usage}{
@@ -116,8 +116,8 @@ returns the value the \code{Iterator} is pointing at.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_next"></a>}}
-\if{latex}{\out{\hypertarget{method-get_next}{}}}
+\if{html}{\out{<a id="method-Iterator-get_next"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-get_next}{}}}
 \subsection{Method \code{get_next()}}{
 get next value
 \subsection{Usage}{
@@ -130,8 +130,8 @@ is pointing to.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-has_next"></a>}}
-\if{latex}{\out{\hypertarget{method-has_next}{}}}
+\if{html}{\out{<a id="method-Iterator-has_next"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-has_next}{}}}
 \subsection{Method \code{has_next()}}{
 check if \code{iterator} has more elements
 \subsection{Usage}{
@@ -143,8 +143,8 @@ check if \code{iterator} has more elements
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-has_value"></a>}}
-\if{latex}{\out{\hypertarget{method-has_value}{}}}
+\if{html}{\out{<a id="method-Iterator-has_value"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-has_value}{}}}
 \subsection{Method \code{has_value()}}{
 check if \code{iterator} points at value
 \subsection{Usage}{
@@ -156,8 +156,8 @@ check if \code{iterator} points at value
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-length"></a>}}
-\if{latex}{\out{\hypertarget{method-length}{}}}
+\if{html}{\out{<a id="method-Iterator-length"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-length}{}}}
 \subsection{Method \code{length()}}{
 iterator length
 \subsection{Usage}{
@@ -169,8 +169,8 @@ number of elements to iterate
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pos"></a>}}
-\if{latex}{\out{\hypertarget{method-pos}{}}}
+\if{html}{\out{<a id="method-Iterator-pos"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-pos}{}}}
 \subsection{Method \code{pos()}}{
 get iterator position
 \subsection{Usage}{
@@ -182,8 +182,8 @@ get iterator position
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-next_iter"></a>}}
-\if{latex}{\out{\hypertarget{method-next_iter}{}}}
+\if{html}{\out{<a id="method-Iterator-next_iter"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-next_iter}{}}}
 \subsection{Method \code{next_iter()}}{
 increment \code{iterator}
 \subsection{Usage}{
@@ -195,8 +195,8 @@ invisibly returns the \code{Iterator} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-Iterator-print"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-print}{}}}
 \subsection{Method \code{print()}}{
 print method
 \subsection{Usage}{
@@ -205,8 +205,8 @@ print method
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-reset_iter"></a>}}
-\if{latex}{\out{\hypertarget{method-reset_iter}{}}}
+\if{html}{\out{<a id="method-Iterator-reset_iter"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-reset_iter}{}}}
 \subsection{Method \code{reset_iter()}}{
 reset iterator to '0'
 \subsection{Usage}{
@@ -218,8 +218,8 @@ invisibly returns the \code{Iterator} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Iterator-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterator-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

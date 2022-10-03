@@ -1,7 +1,7 @@
 Package: container
 Type: Package
 Title: Extending Base R List
-Version: 1.0.2
+Version: 1.0.3
 Date: 2022-07-20
 Authors@R:
     person("Roman", "Pahl",
@@ -22,5 +22,5 @@ NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)

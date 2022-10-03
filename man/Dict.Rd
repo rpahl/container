@@ -35,52 +35,52 @@ d$update(d2)
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{Dict$new()}}
-\item \href{#method-add}{\code{Dict$add()}}
-\item \href{#method-discard_at}{\code{Dict$discard_at()}}
-\item \href{#method-get}{\code{Dict$get()}}
-\item \href{#method-keys}{\code{Dict$keys()}}
-\item \href{#method-remove}{\code{Dict$remove()}}
-\item \href{#method-replace}{\code{Dict$replace()}}
-\item \href{#method-set}{\code{Dict$set()}}
-\item \href{#method-sort}{\code{Dict$sort()}}
-\item \href{#method-update}{\code{Dict$update()}}
-\item \href{#method-values}{\code{Dict$values()}}
-\item \href{#method-clone}{\code{Dict$clone()}}
+\item \href{#method-Dict-new}{\code{Dict$new()}}
+\item \href{#method-Dict-add}{\code{Dict$add()}}
+\item \href{#method-Dict-discard_at}{\code{Dict$discard_at()}}
+\item \href{#method-Dict-get}{\code{Dict$get()}}
+\item \href{#method-Dict-keys}{\code{Dict$keys()}}
+\item \href{#method-Dict-remove}{\code{Dict$remove()}}
+\item \href{#method-Dict-replace}{\code{Dict$replace()}}
+\item \href{#method-Dict-set}{\code{Dict$set()}}
+\item \href{#method-Dict-sort}{\code{Dict$sort()}}
+\item \href{#method-Dict-update}{\code{Dict$update()}}
+\item \href{#method-Dict-values}{\code{Dict$values()}}
+\item \href{#method-Dict-clone}{\code{Dict$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at">}\href{../../container/html/Container.html#method-at}{\code{container::Container$at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2">}\href{../../container/html/Container.html#method-at2}{\code{container::Container$at2()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at">}\href{../../container/html/Container.html#method-delete_at}{\code{container::Container$delete_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name">}\href{../../container/html/Container.html#method-has_name}{\code{container::Container$has_name()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names">}\href{../../container/html/Container.html#method-names}{\code{container::Container$names()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="rename">}\href{../../container/html/Container.html#method-rename}{\code{container::Container$rename()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at">}\href{../../container/html/Container.html#method-replace_at}{\code{container::Container$replace_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter"><a href='../../container/html/Iterable.html#method-Iterable-iter'><code>container::Iterable$iter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at"><a href='../../container/html/Container.html#method-Container-at'><code>container::Container$at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2"><a href='../../container/html/Container.html#method-Container-at2'><code>container::Container$at2()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear"><a href='../../container/html/Container.html#method-Container-clear'><code>container::Container$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count"><a href='../../container/html/Container.html#method-Container-count'><code>container::Container$count()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete"><a href='../../container/html/Container.html#method-Container-delete'><code>container::Container$delete()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at"><a href='../../container/html/Container.html#method-Container-delete_at'><code>container::Container$delete_at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard"><a href='../../container/html/Container.html#method-Container-discard'><code>container::Container$discard()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty"><a href='../../container/html/Container.html#method-Container-empty'><code>container::Container$empty()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun"><a href='../../container/html/Container.html#method-Container-get_compare_fun'><code>container::Container$get_compare_fun()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has"><a href='../../container/html/Container.html#method-Container-has'><code>container::Container$has()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name"><a href='../../container/html/Container.html#method-Container-has_name'><code>container::Container$has_name()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty"><a href='../../container/html/Container.html#method-Container-is_empty'><code>container::Container$is_empty()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length"><a href='../../container/html/Container.html#method-Container-length'><code>container::Container$length()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names"><a href='../../container/html/Container.html#method-Container-names'><code>container::Container$names()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at"><a href='../../container/html/Container.html#method-Container-peek_at'><code>container::Container$peek_at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2"><a href='../../container/html/Container.html#method-Container-peek_at2'><code>container::Container$peek_at2()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop"><a href='../../container/html/Container.html#method-Container-pop'><code>container::Container$pop()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print"><a href='../../container/html/Container.html#method-Container-print'><code>container::Container$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="rename"><a href='../../container/html/Container.html#method-Container-rename'><code>container::Container$rename()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at"><a href='../../container/html/Container.html#method-Container-replace_at'><code>container::Container$replace_at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size"><a href='../../container/html/Container.html#method-Container-size'><code>container::Container$size()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type"><a href='../../container/html/Container.html#method-Container-type'><code>container::Container$type()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Dict-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-new}{}}}
 \subsection{Method \code{new()}}{
 \code{Dict} constructor
 \subsection{Usage}{
@@ -99,8 +99,8 @@ returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add"></a>}}
-\if{latex}{\out{\hypertarget{method-add}{}}}
+\if{html}{\out{<a id="method-Dict-add"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-add}{}}}
 \subsection{Method \code{add()}}{
 If \code{name} not yet in \code{Dict}, insert \code{value} at \code{name},
 otherwise signal an error.
@@ -122,8 +122,8 @@ the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-discard_at"></a>}}
-\if{latex}{\out{\hypertarget{method-discard_at}{}}}
+\if{html}{\out{<a id="method-Dict-discard_at"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-discard_at}{}}}
 \subsection{Method \code{discard_at()}}{
 Discard value at given index. If index is not found,
 the operation is ignored.
@@ -143,8 +143,8 @@ the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get"></a>}}
-\if{latex}{\out{\hypertarget{method-get}{}}}
+\if{html}{\out{<a id="method-Dict-get"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-get}{}}}
 \subsection{Method \code{get()}}{
 This function is deprecated. Use \code{\link[=at2]{at2()}} instead.
 \subsection{Usage}{
@@ -163,8 +163,8 @@ If \code{key} in \code{Dict}, return value at \code{key}, else throw error.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-keys"></a>}}
-\if{latex}{\out{\hypertarget{method-keys}{}}}
+\if{html}{\out{<a id="method-Dict-keys"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-keys}{}}}
 \subsection{Method \code{keys()}}{
 Get all keys.
 \subsection{Usage}{
@@ -176,8 +176,8 @@ Get all keys.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-remove"></a>}}
-\if{latex}{\out{\hypertarget{method-remove}{}}}
+\if{html}{\out{<a id="method-Dict-remove"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-remove}{}}}
 \subsection{Method \code{remove()}}{
 This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 \subsection{Usage}{
@@ -196,8 +196,8 @@ If \code{key} in \code{Dict}, remove it, otherwise raise an error.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-replace"></a>}}
-\if{latex}{\out{\hypertarget{method-replace}{}}}
+\if{html}{\out{<a id="method-Dict-replace"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-replace}{}}}
 \subsection{Method \code{replace()}}{
 Replace one element by another element.
 Search for occurence of \code{old} and, if found, replace it by \code{new}.
@@ -220,8 +220,8 @@ the \code{Dict} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set"></a>}}
-\if{latex}{\out{\hypertarget{method-set}{}}}
+\if{html}{\out{<a id="method-Dict-set"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-set}{}}}
 \subsection{Method \code{set()}}{
 This function is deprecated. Use \code{\link[=replace]{replace()}} instead.
 \subsection{Usage}{
@@ -245,8 +245,8 @@ returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-sort"></a>}}
-\if{latex}{\out{\hypertarget{method-sort}{}}}
+\if{html}{\out{<a id="method-Dict-sort"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-sort}{}}}
 \subsection{Method \code{sort()}}{
 Sort elements according to their keys. This function
 is deprecated as keys are now always sorted.
@@ -266,8 +266,8 @@ returns the \code{Dict}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-update"></a>}}
-\if{latex}{\out{\hypertarget{method-update}{}}}
+\if{html}{\out{<a id="method-Dict-update"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-update}{}}}
 \subsection{Method \code{update()}}{
 Add elements of \code{other} to this if the name is
 not in the \code{Dict} and update elements with existing names.
@@ -287,8 +287,8 @@ returns the updated \code{Dict} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-values"></a>}}
-\if{latex}{\out{\hypertarget{method-values}{}}}
+\if{html}{\out{<a id="method-Dict-values"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-values}{}}}
 \subsection{Method \code{values()}}{
 Get \code{Container} values
 \subsection{Usage}{
@@ -300,8 +300,8 @@ a copy of all elements in a list
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Dict-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Dict-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

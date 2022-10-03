@@ -20,14 +20,14 @@ Roman Pahl
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{Iterable$new()}}
-\item \href{#method-iter}{\code{Iterable$iter()}}
-\item \href{#method-clone}{\code{Iterable$clone()}}
+\item \href{#method-Iterable-new}{\code{Iterable$new()}}
+\item \href{#method-Iterable-iter}{\code{Iterable$iter()}}
+\item \href{#method-Iterable-clone}{\code{Iterable$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Iterable-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterable-new}{}}}
 \subsection{Method \code{new()}}{
 \code{Iterable} is an abstract class and thus cannot be instantiated.
 \subsection{Usage}{
@@ -36,8 +36,8 @@ Roman Pahl
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-iter"></a>}}
-\if{latex}{\out{\hypertarget{method-iter}{}}}
+\if{html}{\out{<a id="method-Iterable-iter"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterable-iter}{}}}
 \subsection{Method \code{iter()}}{
 Create iterator
 \subsection{Usage}{
@@ -49,8 +49,8 @@ returns the \code{Iterator} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Iterable-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Iterable-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

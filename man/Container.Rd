@@ -71,48 +71,48 @@ Roman Pahl
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{Container$new()}}
-\item \href{#method-add}{\code{Container$add()}}
-\item \href{#method-at}{\code{Container$at()}}
-\item \href{#method-at2}{\code{Container$at2()}}
-\item \href{#method-clear}{\code{Container$clear()}}
-\item \href{#method-count}{\code{Container$count()}}
-\item \href{#method-delete}{\code{Container$delete()}}
-\item \href{#method-delete_at}{\code{Container$delete_at()}}
-\item \href{#method-discard}{\code{Container$discard()}}
-\item \href{#method-discard_at}{\code{Container$discard_at()}}
-\item \href{#method-empty}{\code{Container$empty()}}
-\item \href{#method-get_compare_fun}{\code{Container$get_compare_fun()}}
-\item \href{#method-has}{\code{Container$has()}}
-\item \href{#method-has_name}{\code{Container$has_name()}}
-\item \href{#method-is_empty}{\code{Container$is_empty()}}
-\item \href{#method-length}{\code{Container$length()}}
-\item \href{#method-names}{\code{Container$names()}}
-\item \href{#method-peek_at}{\code{Container$peek_at()}}
-\item \href{#method-peek_at2}{\code{Container$peek_at2()}}
-\item \href{#method-pop}{\code{Container$pop()}}
-\item \href{#method-print}{\code{Container$print()}}
-\item \href{#method-rename}{\code{Container$rename()}}
-\item \href{#method-replace}{\code{Container$replace()}}
-\item \href{#method-replace_at}{\code{Container$replace_at()}}
-\item \href{#method-remove}{\code{Container$remove()}}
-\item \href{#method-size}{\code{Container$size()}}
-\item \href{#method-type}{\code{Container$type()}}
-\item \href{#method-update}{\code{Container$update()}}
-\item \href{#method-values}{\code{Container$values()}}
-\item \href{#method-clone}{\code{Container$clone()}}
+\item \href{#method-Container-new}{\code{Container$new()}}
+\item \href{#method-Container-add}{\code{Container$add()}}
+\item \href{#method-Container-at}{\code{Container$at()}}
+\item \href{#method-Container-at2}{\code{Container$at2()}}
+\item \href{#method-Container-clear}{\code{Container$clear()}}
+\item \href{#method-Container-count}{\code{Container$count()}}
+\item \href{#method-Container-delete}{\code{Container$delete()}}
+\item \href{#method-Container-delete_at}{\code{Container$delete_at()}}
+\item \href{#method-Container-discard}{\code{Container$discard()}}
+\item \href{#method-Container-discard_at}{\code{Container$discard_at()}}
+\item \href{#method-Container-empty}{\code{Container$empty()}}
+\item \href{#method-Container-get_compare_fun}{\code{Container$get_compare_fun()}}
+\item \href{#method-Container-has}{\code{Container$has()}}
+\item \href{#method-Container-has_name}{\code{Container$has_name()}}
+\item \href{#method-Container-is_empty}{\code{Container$is_empty()}}
+\item \href{#method-Container-length}{\code{Container$length()}}
+\item \href{#method-Container-names}{\code{Container$names()}}
+\item \href{#method-Container-peek_at}{\code{Container$peek_at()}}
+\item \href{#method-Container-peek_at2}{\code{Container$peek_at2()}}
+\item \href{#method-Container-pop}{\code{Container$pop()}}
+\item \href{#method-Container-print}{\code{Container$print()}}
+\item \href{#method-Container-rename}{\code{Container$rename()}}
+\item \href{#method-Container-replace}{\code{Container$replace()}}
+\item \href{#method-Container-replace_at}{\code{Container$replace_at()}}
+\item \href{#method-Container-remove}{\code{Container$remove()}}
+\item \href{#method-Container-size}{\code{Container$size()}}
+\item \href{#method-Container-type}{\code{Container$type()}}
+\item \href{#method-Container-update}{\code{Container$update()}}
+\item \href{#method-Container-values}{\code{Container$values()}}
+\item \href{#method-Container-clone}{\code{Container$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter"><a href='../../container/html/Iterable.html#method-Iterable-iter'><code>container::Iterable$iter()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Container-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-new}{}}}
 \subsection{Method \code{new()}}{
 constructor
 \subsection{Usage}{
@@ -131,8 +131,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add"></a>}}
-\if{latex}{\out{\hypertarget{method-add}{}}}
+\if{html}{\out{<a id="method-Container-add"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-add}{}}}
 \subsection{Method \code{add()}}{
 add element
 \subsection{Usage}{
@@ -153,8 +153,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-at"></a>}}
-\if{latex}{\out{\hypertarget{method-at}{}}}
+\if{html}{\out{<a id="method-Container-at"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-at}{}}}
 \subsection{Method \code{at()}}{
 Same as \code{at2} (see below) but accepts a vector of
 indices and always returns a \code{Container} object.
@@ -174,8 +174,8 @@ indices and always returns a \code{Container} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-at2"></a>}}
-\if{latex}{\out{\hypertarget{method-at2}{}}}
+\if{html}{\out{<a id="method-Container-at2"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-at2}{}}}
 \subsection{Method \code{at2()}}{
 Extract value at index. If index is invalid or not
 found, an error is signaled. If given as a string, the element
@@ -200,8 +200,8 @@ corresponding name matching the given string is returned.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clear"></a>}}
-\if{latex}{\out{\hypertarget{method-clear}{}}}
+\if{html}{\out{<a id="method-Container-clear"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-clear}{}}}
 \subsection{Method \code{clear()}}{
 delete all elements from the \code{Container}
 \subsection{Usage}{
@@ -213,8 +213,8 @@ the cleared \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-count"></a>}}
-\if{latex}{\out{\hypertarget{method-count}{}}}
+\if{html}{\out{<a id="method-Container-count"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-count}{}}}
 \subsection{Method \code{count()}}{
 Count number of element occurences.
 \subsection{Usage}{
@@ -233,8 +233,8 @@ Count number of element occurences.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-delete"></a>}}
-\if{latex}{\out{\hypertarget{method-delete}{}}}
+\if{html}{\out{<a id="method-Container-delete"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-delete}{}}}
 \subsection{Method \code{delete()}}{
 Search for occurence(s) of \code{elem} in \code{Container} and
 remove first one that is found. If \code{elem} does not exist, an error
@@ -255,8 +255,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-delete_at"></a>}}
-\if{latex}{\out{\hypertarget{method-delete_at}{}}}
+\if{html}{\out{<a id="method-Container-delete_at"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-delete_at}{}}}
 \subsection{Method \code{delete_at()}}{
 Delete value at given index. If index is not found, an
 error is signaled.
@@ -276,8 +276,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-discard"></a>}}
-\if{latex}{\out{\hypertarget{method-discard}{}}}
+\if{html}{\out{<a id="method-Container-discard"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-discard}{}}}
 \subsection{Method \code{discard()}}{
 Search for occurence(s) of \code{elem} in \code{Container} and
 remove first one that is found.
@@ -298,8 +298,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-discard_at"></a>}}
-\if{latex}{\out{\hypertarget{method-discard_at}{}}}
+\if{html}{\out{<a id="method-Container-discard_at"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-discard_at}{}}}
 \subsection{Method \code{discard_at()}}{
 Discard value at given index. If index is not found,
 the operation is ignored.
@@ -319,8 +319,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-empty"></a>}}
-\if{latex}{\out{\hypertarget{method-empty}{}}}
+\if{html}{\out{<a id="method-Container-empty"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-empty}{}}}
 \subsection{Method \code{empty()}}{
 This function is deprecated. Use \code{\link[=is_empty]{is_empty()}} instead.
 \subsection{Usage}{
@@ -329,8 +329,8 @@ This function is deprecated. Use \code{\link[=is_empty]{is_empty()}} instead.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_compare_fun"></a>}}
-\if{latex}{\out{\hypertarget{method-get_compare_fun}{}}}
+\if{html}{\out{<a id="method-Container-get_compare_fun"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-get_compare_fun}{}}}
 \subsection{Method \code{get_compare_fun()}}{
 Get comparison function used internally by the
 \code{Container} object to compare elements.
@@ -340,8 +340,8 @@ Get comparison function used internally by the
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-has"></a>}}
-\if{latex}{\out{\hypertarget{method-has}{}}}
+\if{html}{\out{<a id="method-Container-has"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-has}{}}}
 \subsection{Method \code{has()}}{
 Determine if \code{Container} has some element.
 \subsection{Usage}{
@@ -360,8 +360,8 @@ Determine if \code{Container} has some element.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-has_name"></a>}}
-\if{latex}{\out{\hypertarget{method-has_name}{}}}
+\if{html}{\out{<a id="method-Container-has_name"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-has_name}{}}}
 \subsection{Method \code{has_name()}}{
 Determine if \code{Container} object contains an element
 with the given name. If called with no argument, the function
@@ -382,8 +382,8 @@ determines whether \emph{any} element is named.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-is_empty"></a>}}
-\if{latex}{\out{\hypertarget{method-is_empty}{}}}
+\if{html}{\out{<a id="method-Container-is_empty"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-is_empty}{}}}
 \subsection{Method \code{is_empty()}}{
 Check if \code{Container} is empty
 \subsection{Usage}{
@@ -395,8 +395,8 @@ Check if \code{Container} is empty
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-length"></a>}}
-\if{latex}{\out{\hypertarget{method-length}{}}}
+\if{html}{\out{<a id="method-Container-length"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-length}{}}}
 \subsection{Method \code{length()}}{
 Number of elements of the \code{Container}.
 \subsection{Usage}{
@@ -409,8 +409,8 @@ elements it contains.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-names"></a>}}
-\if{latex}{\out{\hypertarget{method-names}{}}}
+\if{html}{\out{<a id="method-Container-names"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-names}{}}}
 \subsection{Method \code{names()}}{
 Names of the elements.
 \subsection{Usage}{
@@ -422,8 +422,8 @@ Names of the elements.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-peek_at"></a>}}
-\if{latex}{\out{\hypertarget{method-peek_at}{}}}
+\if{html}{\out{<a id="method-Container-peek_at"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-peek_at}{}}}
 \subsection{Method \code{peek_at()}}{
 Same as \code{peek_at2} (see below) but accepts a vector of
 indices and always returns a \code{Container} object.
@@ -446,8 +446,8 @@ indices and always returns a \code{Container} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-peek_at2"></a>}}
-\if{latex}{\out{\hypertarget{method-peek_at2}{}}}
+\if{html}{\out{<a id="method-Container-peek_at2"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-peek_at2}{}}}
 \subsection{Method \code{peek_at2()}}{
 Peek at index and extract value. If index is invalid,
 missing, or not not found, return \code{default} value.
@@ -471,8 +471,8 @@ default value.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-pop"></a>}}
-\if{latex}{\out{\hypertarget{method-pop}{}}}
+\if{html}{\out{<a id="method-Container-pop"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-pop}{}}}
 \subsection{Method \code{pop()}}{
 Get value at index and remove it from \code{Container}.
 If \code{index} is not found, raise an error.
@@ -494,8 +494,8 @@ corresponding name matching the given string is returned.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-Container-print"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-print}{}}}
 \subsection{Method \code{print()}}{
 Print object representation
 \subsection{Usage}{
@@ -514,8 +514,8 @@ invisibly returns the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-rename"></a>}}
-\if{latex}{\out{\hypertarget{method-rename}{}}}
+\if{html}{\out{<a id="method-Container-rename"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-rename}{}}}
 \subsection{Method \code{rename()}}{
 Rename a \code{key} in the \code{Container}. An error is signaled,
 if either the \code{old} key is not in the \code{Container} or the \code{new} key results
@@ -538,8 +538,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-replace"></a>}}
-\if{latex}{\out{\hypertarget{method-replace}{}}}
+\if{html}{\out{<a id="method-Container-replace"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-replace}{}}}
 \subsection{Method \code{replace()}}{
 Replace one element by another element.
 Search for occurence of \code{old} and, if found, replace it by \code{new}.
@@ -566,8 +566,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-replace_at"></a>}}
-\if{latex}{\out{\hypertarget{method-replace_at}{}}}
+\if{html}{\out{<a id="method-Container-replace_at"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-replace_at}{}}}
 \subsection{Method \code{replace_at()}}{
 Replace value at given index.
 Replace value at index by given value. If index is not found, an
@@ -594,8 +594,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-remove"></a>}}
-\if{latex}{\out{\hypertarget{method-remove}{}}}
+\if{html}{\out{<a id="method-Container-remove"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-remove}{}}}
 \subsection{Method \code{remove()}}{
 This function is deprecated. Use \code{\link[=delete]{delete()}} instead.
 \subsection{Usage}{
@@ -615,8 +615,8 @@ the \code{Container} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-size"></a>}}
-\if{latex}{\out{\hypertarget{method-size}{}}}
+\if{html}{\out{<a id="method-Container-size"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-size}{}}}
 \subsection{Method \code{size()}}{
 This function is deprecated. Use \code{\link[=length]{length()}} instead.
 \subsection{Usage}{
@@ -628,8 +628,8 @@ the \code{Container} length
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-type"></a>}}
-\if{latex}{\out{\hypertarget{method-type}{}}}
+\if{html}{\out{<a id="method-Container-type"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-type}{}}}
 \subsection{Method \code{type()}}{
 This function is deprecated and of no real use anymore.
 \subsection{Usage}{
@@ -641,8 +641,8 @@ type (or mode) of internal vector containing the elements
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-update"></a>}}
-\if{latex}{\out{\hypertarget{method-update}{}}}
+\if{html}{\out{<a id="method-Container-update"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-update}{}}}
 \subsection{Method \code{update()}}{
 Add elements of \code{other} to this if the name is
 not in the \code{Container} and update elements with existing names.
@@ -662,8 +662,8 @@ returns the \code{Container}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-values"></a>}}
-\if{latex}{\out{\hypertarget{method-values}{}}}
+\if{html}{\out{<a id="method-Container-values"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-values}{}}}
 \subsection{Method \code{values()}}{
 Get \code{Container} values
 \subsection{Usage}{
@@ -675,8 +675,8 @@ elements of the container as a base list
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Container-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Container-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

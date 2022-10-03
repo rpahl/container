@@ -35,54 +35,54 @@ s1
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{Set$new()}}
-\item \href{#method-add}{\code{Set$add()}}
-\item \href{#method-diff}{\code{Set$diff()}}
-\item \href{#method-intersect}{\code{Set$intersect()}}
-\item \href{#method-union}{\code{Set$union()}}
-\item \href{#method-is_equal}{\code{Set$is_equal()}}
-\item \href{#method-is_subset}{\code{Set$is_subset()}}
-\item \href{#method-is_proper_subset}{\code{Set$is_proper_subset()}}
-\item \href{#method-values}{\code{Set$values()}}
-\item \href{#method-clone}{\code{Set$clone()}}
+\item \href{#method-Set-new}{\code{Set$new()}}
+\item \href{#method-Set-add}{\code{Set$add()}}
+\item \href{#method-Set-diff}{\code{Set$diff()}}
+\item \href{#method-Set-intersect}{\code{Set$intersect()}}
+\item \href{#method-Set-union}{\code{Set$union()}}
+\item \href{#method-Set-is_equal}{\code{Set$is_equal()}}
+\item \href{#method-Set-is_subset}{\code{Set$is_subset()}}
+\item \href{#method-Set-is_proper_subset}{\code{Set$is_proper_subset()}}
+\item \href{#method-Set-values}{\code{Set$values()}}
+\item \href{#method-Set-clone}{\code{Set$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter">}\href{../../container/html/Iterable.html#method-iter}{\code{container::Iterable$iter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at">}\href{../../container/html/Container.html#method-at}{\code{container::Container$at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2">}\href{../../container/html/Container.html#method-at2}{\code{container::Container$at2()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear">}\href{../../container/html/Container.html#method-clear}{\code{container::Container$clear()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count">}\href{../../container/html/Container.html#method-count}{\code{container::Container$count()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete">}\href{../../container/html/Container.html#method-delete}{\code{container::Container$delete()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at">}\href{../../container/html/Container.html#method-delete_at}{\code{container::Container$delete_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard">}\href{../../container/html/Container.html#method-discard}{\code{container::Container$discard()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard_at">}\href{../../container/html/Container.html#method-discard_at}{\code{container::Container$discard_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty">}\href{../../container/html/Container.html#method-empty}{\code{container::Container$empty()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun">}\href{../../container/html/Container.html#method-get_compare_fun}{\code{container::Container$get_compare_fun()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has">}\href{../../container/html/Container.html#method-has}{\code{container::Container$has()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name">}\href{../../container/html/Container.html#method-has_name}{\code{container::Container$has_name()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty">}\href{../../container/html/Container.html#method-is_empty}{\code{container::Container$is_empty()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length">}\href{../../container/html/Container.html#method-length}{\code{container::Container$length()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names">}\href{../../container/html/Container.html#method-names}{\code{container::Container$names()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at">}\href{../../container/html/Container.html#method-peek_at}{\code{container::Container$peek_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2">}\href{../../container/html/Container.html#method-peek_at2}{\code{container::Container$peek_at2()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop">}\href{../../container/html/Container.html#method-pop}{\code{container::Container$pop()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print">}\href{../../container/html/Container.html#method-print}{\code{container::Container$print()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove">}\href{../../container/html/Container.html#method-remove}{\code{container::Container$remove()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="rename">}\href{../../container/html/Container.html#method-rename}{\code{container::Container$rename()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace">}\href{../../container/html/Container.html#method-replace}{\code{container::Container$replace()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at">}\href{../../container/html/Container.html#method-replace_at}{\code{container::Container$replace_at()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size">}\href{../../container/html/Container.html#method-size}{\code{container::Container$size()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type">}\href{../../container/html/Container.html#method-type}{\code{container::Container$type()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="container" data-topic="Container" data-id="update">}\href{../../container/html/Container.html#method-update}{\code{container::Container$update()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="container" data-topic="Iterable" data-id="iter"><a href='../../container/html/Iterable.html#method-Iterable-iter'><code>container::Iterable$iter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at"><a href='../../container/html/Container.html#method-Container-at'><code>container::Container$at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="at2"><a href='../../container/html/Container.html#method-Container-at2'><code>container::Container$at2()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="clear"><a href='../../container/html/Container.html#method-Container-clear'><code>container::Container$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="count"><a href='../../container/html/Container.html#method-Container-count'><code>container::Container$count()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete"><a href='../../container/html/Container.html#method-Container-delete'><code>container::Container$delete()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="delete_at"><a href='../../container/html/Container.html#method-Container-delete_at'><code>container::Container$delete_at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard"><a href='../../container/html/Container.html#method-Container-discard'><code>container::Container$discard()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="discard_at"><a href='../../container/html/Container.html#method-Container-discard_at'><code>container::Container$discard_at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="empty"><a href='../../container/html/Container.html#method-Container-empty'><code>container::Container$empty()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="get_compare_fun"><a href='../../container/html/Container.html#method-Container-get_compare_fun'><code>container::Container$get_compare_fun()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has"><a href='../../container/html/Container.html#method-Container-has'><code>container::Container$has()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="has_name"><a href='../../container/html/Container.html#method-Container-has_name'><code>container::Container$has_name()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="is_empty"><a href='../../container/html/Container.html#method-Container-is_empty'><code>container::Container$is_empty()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="length"><a href='../../container/html/Container.html#method-Container-length'><code>container::Container$length()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="names"><a href='../../container/html/Container.html#method-Container-names'><code>container::Container$names()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at"><a href='../../container/html/Container.html#method-Container-peek_at'><code>container::Container$peek_at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="peek_at2"><a href='../../container/html/Container.html#method-Container-peek_at2'><code>container::Container$peek_at2()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="pop"><a href='../../container/html/Container.html#method-Container-pop'><code>container::Container$pop()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="print"><a href='../../container/html/Container.html#method-Container-print'><code>container::Container$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="remove"><a href='../../container/html/Container.html#method-Container-remove'><code>container::Container$remove()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="rename"><a href='../../container/html/Container.html#method-Container-rename'><code>container::Container$rename()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace"><a href='../../container/html/Container.html#method-Container-replace'><code>container::Container$replace()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="replace_at"><a href='../../container/html/Container.html#method-Container-replace_at'><code>container::Container$replace_at()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="size"><a href='../../container/html/Container.html#method-Container-size'><code>container::Container$size()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="type"><a href='../../container/html/Container.html#method-Container-type'><code>container::Container$type()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="container" data-topic="Container" data-id="update"><a href='../../container/html/Container.html#method-Container-update'><code>container::Container$update()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-Set-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-new}{}}}
 \subsection{Method \code{new()}}{
 \code{Set} constructor
 \subsection{Usage}{
@@ -101,8 +101,8 @@ returns the \code{Set} object
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-add"></a>}}
-\if{latex}{\out{\hypertarget{method-add}{}}}
+\if{html}{\out{<a id="method-Set-add"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-add}{}}}
 \subsection{Method \code{add()}}{
 Add element
 \subsection{Usage}{
@@ -123,8 +123,8 @@ the \code{Set} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-diff"></a>}}
-\if{latex}{\out{\hypertarget{method-diff}{}}}
+\if{html}{\out{<a id="method-Set-diff"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-diff}{}}}
 \subsection{Method \code{diff()}}{
 \code{Set} difference
 \subsection{Usage}{
@@ -144,8 +144,8 @@ between this and s.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-intersect"></a>}}
-\if{latex}{\out{\hypertarget{method-intersect}{}}}
+\if{html}{\out{<a id="method-Set-intersect"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-intersect}{}}}
 \subsection{Method \code{intersect()}}{
 \code{Set} intersection
 \subsection{Usage}{
@@ -164,8 +164,8 @@ the \code{Set} object as a result of the intersection of this and s.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-union"></a>}}
-\if{latex}{\out{\hypertarget{method-union}{}}}
+\if{html}{\out{<a id="method-Set-union"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-union}{}}}
 \subsection{Method \code{union()}}{
 \code{Set} union
 \subsection{Usage}{
@@ -184,8 +184,8 @@ the \code{Set} object as a result of the union of this and s.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-is_equal"></a>}}
-\if{latex}{\out{\hypertarget{method-is_equal}{}}}
+\if{html}{\out{<a id="method-Set-is_equal"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-is_equal}{}}}
 \subsection{Method \code{is_equal()}}{
 \code{Set} equality
 \subsection{Usage}{
@@ -204,8 +204,8 @@ the \code{Set} object as a result of the union of this and s.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-is_subset"></a>}}
-\if{latex}{\out{\hypertarget{method-is_subset}{}}}
+\if{html}{\out{<a id="method-Set-is_subset"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-is_subset}{}}}
 \subsection{Method \code{is_subset()}}{
 \code{Set} proper subset
 \subsection{Usage}{
@@ -224,8 +224,8 @@ the \code{Set} object as a result of the union of this and s.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-is_proper_subset"></a>}}
-\if{latex}{\out{\hypertarget{method-is_proper_subset}{}}}
+\if{html}{\out{<a id="method-Set-is_proper_subset"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-is_proper_subset}{}}}
 \subsection{Method \code{is_proper_subset()}}{
 \code{Set} subset
 \subsection{Usage}{
@@ -244,8 +244,8 @@ the \code{Set} object as a result of the union of this and s.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-values"></a>}}
-\if{latex}{\out{\hypertarget{method-values}{}}}
+\if{html}{\out{<a id="method-Set-values"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-values}{}}}
 \subsection{Method \code{values()}}{
 Get \code{Set} values
 \subsection{Usage}{
@@ -257,8 +257,8 @@ elements of the set as a base list
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Set-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Set-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
