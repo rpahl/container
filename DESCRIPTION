@@ -1,14 +1,14 @@
 Package: container
 Type: Package
-Title: Extending Base R List
+Title: Extending Base 'R' Lists
 Version: 1.0.3
 Date: 2022-10-03
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
-Description: Extends the functionality of base R list and
-    provides specialized data structures deque,
-    set, dict, and 'dict.table', the latter to extend the 'data.table'
+Description: Extends the functionality of base 'R' lists and
+    provides specialized data structures 'deque',
+    'set', 'dict', and 'dict.table', the latter to extend the 'data.table'
     package.
 Depends: R (>= 3.5.0)
 License: GPL-3
