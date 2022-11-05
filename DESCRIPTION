@@ -2,7 +2,7 @@ Package: container
 Type: Package
 Title: Extending Base 'R' Lists
 Version: 1.0.3
-Date: 2022-10-03
+Date: 2022-11-05
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
@@ -15,7 +15,15 @@ License: GPL-3
 Encoding: UTF-8
 Imports: data.table, methods, R6
 VignetteBuilder: knitr
-Suggests: knitr, tinytest, rmarkdown, microbenchmark, ggplot2, dplyr, tibble
+Suggests:
+    knitr,
+    tinytest,
+    rmarkdown,
+    microbenchmark,
+    ggplot2,
+    dplyr,
+    tibble,
+    testthat (>= 3.0.0)
 URL: https://rpahl.github.io/container/
 BugReports: https://github.com/rpahl/container/issues
 NeedsCompilation: no
@@ -24,3 +32,4 @@ Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
