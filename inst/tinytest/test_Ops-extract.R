@@ -1,10 +1,10 @@
 exit_file(msg = "skip for now as some test fails at CRAN")
-ee = expect_equal
+ee <- expect_equal
 
 # --------------------
 # Container [ operator
 # --------------------
-co = container(a = 1, 2, b = 3, 4)
+co <- container(a = 1, 2, b = 3, 4)
 ee(co[1], container(a = 1))
 ee(co[2], container(2))
 ee(co["a"], container(a = 1))
@@ -34,7 +34,7 @@ ee(co[list("b", 1, 4)], co["b", 1, 4])
 # --------------------
 # Container [[ operator
 # --------------------
-co = container(a = 1, 2, b = 3, 4, b = "bar")
+co <- container(a = 1, 2, b = 3, 4, b = "bar")
 
 ee(co[[1]], 1)
 ee(co[[2]], 2)
@@ -48,12 +48,10 @@ ee(co[[NULL]], NULL)
 ee(co[[integer(0)]], NULL)
 
 # list inconsistency
-l = list(a = 1, 2, e = 3)
-#l[[0]] # gives error
+l <- list(a = 1, 2, e = 3)
 ee(l[[]], 2)
 ee(l[[""]], NULL)
 
 expect_error(co[[1:2]], "index must be of length 1")
 expect_error(co[[c("a", "b")]], "index must be of length 1")
 expect_error(co[[NA]], "index must not be 'NA'")
-
