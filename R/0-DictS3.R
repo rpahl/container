@@ -23,9 +23,7 @@
 #' print(d)
 #' names(d)
 #'
-#' \dontrun{
-#' dict(a = 1, 2)   # all elements must be named
-#' }
+#' try(dict(a = 1, 2))   # all elements must be named
 NULL
 
 #' @rdname DictS3

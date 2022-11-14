@@ -53,10 +53,8 @@
 #' dit[y > 5]
 #' (ref_discard_at(dit, "x"))                   # discard column 'x'
 #'
-#' \dontrun{
-#' at(dit, "x")                                 # index 'x' not found
-#' replace_at(dit, x = 0)                       # cannot be replaced, if it does not exist
-#' }
+#' try(at(dit, "x"))                            # index 'x' not found
+#' try(replace_at(dit, x = 0))                  # cannot be replaced, if it does not exist
 #'
 #' dit = replace_at(dit, x = 0, .add = TRUE)    # ok - re-adds column 'x' with all 0s
 #' peek_at(dit, "x")                            # glance at column 'x'

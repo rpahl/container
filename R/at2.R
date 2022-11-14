@@ -26,19 +26,16 @@ at2 <- function(x, ...) UseMethod("at2")
 #' at2(co, 1)
 #' at2(co, "a")
 #' at2(co, 2)
-#' \dontrun{
-#' at2(co, "x")     # index 'x' not found
-#' at2(co, 5)       # index 5 exceeds length of Container
-#' }
+#' try(at2(co, "x"))     # index 'x' not found
+#' try(at2(co, 5))       # index 5 exceeds length of Container
+#'
 #' # Dict
 #' d = dict(a = 1, b = 3)
 #' at2(d, 1)
 #' at2(d, "a")
 #' at2(d, 2)
-#' \dontrun{
-#' at2(d, "x")     # index 'x' not found
-#' at2(d, 5)       # index 5 exceeds length of Dict
-#' }
+#' try(at2(d, "x"))     # index 'x' not found
+#' try(at2(d, 5))       # index 5 exceeds length of Dict
 #' @export
 at2.Container <- function(x, index, ...)
 {
@@ -57,10 +54,8 @@ at2.Container <- function(x, index, ...)
 #' at2(co, 1)
 #' at2(co, "a")
 #' at2(co, 2)
-#' \dontrun{
-#' at2(co, "x")     # index 'x' not found
-#' at2(co, 5)       # index 5 exceeds length of Container
-#' }
+#' try(at2(co, "x"))     # index 'x' not found
+#' try(at2(co, 5))       # index 5 exceeds length of Container
 NULL
 
 
@@ -75,10 +70,8 @@ NULL
 #' at2(dit, 1)
 #' at2(dit, "a")
 #' at2(dit, 2)
-#' \dontrun{
-#' at2(dit, "x")     # index 'x' not found
-#' at2(dit, 5)       # index 5 exceeds length of dict.table
-#' }
+#' try(at2(dit, "x"))     # index 'x' not found
+#' try(at2(dit, 5))       # index 5 exceeds length of dict.table
 at2.dict.table <- function(x, index, ...)
 {
     .assert_index_and_arg(x, index)
@@ -97,10 +90,8 @@ at2.dict.table <- function(x, index, ...)
 #' at2(dit, 1)
 #' at2(dit, "a")
 #' at2(dit, 2)
-#' \dontrun{
-#' at2(dit, "x")     # index 'x' not found
-#' at2(dit, 5)       # index 5 exceeds length of dict.table
-#' }
+#' try(at2(dit, "x"))     # index 'x' not found
+#' try(at2(dit, 5))       # index 5 exceeds length of dict.table
 NULL
 
 

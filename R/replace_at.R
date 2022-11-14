@@ -31,9 +31,9 @@ ref_replace_at <- function(.x, ...) UseMethod("ref_replace_at")
 #' replace_at(co, 1:2, 1:2)                 # same
 #' replace_at(co, c("a", "b"), list(1, 2))  # same
 #'
-#' \dontrun{
+#' try({
 #' replace_at(co, x = 1)                    # names(s) not found: 'x'
-#' }
+#' })
 #' replace_at(co, x = 1, .add = TRUE)       # ok (adds x = 1)
 #'
 #' @export
@@ -56,9 +56,9 @@ replace_at.Container <- function(.x, ..., .add = FALSE)
 #' replace_at(co, 1:2, 1:2)                 # same
 #' replace_at(co, c("a", "b"), list(1, 2))  # same
 #'
-#' \dontrun{
+#' try({
 #' replace_at(co, x = 1)                    # names(s) not found: 'x'
-#' }
+#' })
 #' replace_at(co, x = 1, .add = TRUE)       # ok (adds x = 1)
 NULL
 
@@ -128,9 +128,9 @@ ref_replace_at.Container <- function(.x, ..., .add = FALSE)
 #' replace_at(dit, a = 3:1, b = 6:4)
 #' replace_at(dit, 1:2, list(3:1, 6:4))     # same
 #'
-#' \dontrun{
+#' try({
 #' replace_at(dit, x = 1)                   # column(s) not found: 'x'
-#' }
+#' })
 #' replace_at(dit, x = 1, .add = TRUE)      # ok (adds column)
 replace_at.dict.table <- function(.x, ..., .add = FALSE)
 {
@@ -176,9 +176,9 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
 #' dit = dict.table(a = 1:3)
 #' replace_at(dit, "a", 3:1)
 #'
-#' \dontrun{
+#' try({
 #' replace_at(dit, "b", 4:6)               # column 'b' not in dict.table
-#' }
+#' })
 #' replace_at(dit, "b", 4:6, .add = TRUE)  # ok, adds column
 NULL
 
