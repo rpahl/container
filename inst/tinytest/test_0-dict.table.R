@@ -127,6 +127,7 @@ expect_true(identical(dit, dit.copy)) # dit.copy has not changed
 
 # dict.table can be printed
 dit = dict.table(A = 1:2, B = 2:1)
+options(datatable.print.class=FALSE)
 out <- capture.output(print(dit))
 out.expected <- c("<dict.table> with 2 rows and 2 columns",
                   "   A B",
