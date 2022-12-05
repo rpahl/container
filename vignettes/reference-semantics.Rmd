@@ -23,11 +23,11 @@ knitr::opts_chunk$set(
   collapse = T
 )
 
-options(width = 100L)
+old <- options(width = 100L)
 ```
 
-Methods that alter Container objects usually come in two versions providing 
-either copy or reference semantics where the latter start with 'ref_' to note 
+Methods that alter Container objects usually come in two versions providing
+either copy or reference semantics where the latter start with 'ref_' to note
 the reference semantic, for example, `add()` and `ref_add()`.
 
 Since reference semantics changes the original object, it can be used to
@@ -57,7 +57,7 @@ odds = container()
 evens = container()
 isOdd = function(x) {x %% 2 == 1}
 
-res = sapply(1:10, function(i) 
+res = sapply(1:10, function(i)
     if(isOdd(i)) ref_add(odds, i) else ref_add(evens, i)
 )
 
@@ -66,13 +66,17 @@ evens
 ```
 
 Using reference semantics for it's side effects (as in the above example)
-should be really done with care though and in most cases is probably best 
+should be really done with care though and in most cases is probably best
 avoided as you risk introducing unnecessary coupling into your code.
 
 Last but not least, reference semantics can make sense when you are dealing with
-very large objects to avoid copying. Although, these days R often is smart 
+very large objects to avoid copying. Although, these days R often is smart
 enough to only copy those parts of an objects, for which a copy is really
 needed (copy-on-modify).
 
 To summarize, the `container` package does provide reference semantics, but it
 should be used with care.
+
+```{r, include = FALSE}
+options(old)
+```

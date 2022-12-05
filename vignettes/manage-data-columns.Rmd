@@ -7,7 +7,7 @@ output:
 description: >
     The dict.table as a mix of data.table and Dict extends the data.table by
     functions to enhance data column management. This vignette compares basic
-    dplyr and dict.table data column operations and shows how both frameworks 
+    dplyr and dict.table data column operations and shows how both frameworks
     can be easily combined.
 vignette: >
   %\VignetteIndexEntry{Manage data columns with dict.table}
@@ -33,7 +33,7 @@ knitr::opts_chunk$set(
   fig.width = 7
 )
 
-options(width = 100L)
+old <- options(width = 100L)
 ```
 
 ## Motivation
@@ -317,3 +317,7 @@ checking, thereby yielding safer and leaner code out of the box and
 ultimately freeing the developer from writing some annoying checks over and
 over again.
 
+
+```{r, include = FALSE}
+options(old)
+```

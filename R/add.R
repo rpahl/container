@@ -67,9 +67,7 @@ ref_add.Container <- function(.x, ...)
 #' d = dict(a = 1)
 #' add(d, b = 2, co = container(1:3))
 #'
-#' \dontrun{
-#' add(d, a = 7:9)  # key 'a' already in Dict
-#' }
+#' try(add(d, a = 7:9))  # key 'a' already in Dict
 add.Dict <- function(.x, ...)
 {
     (ref_add(.x$clone(deep = TRUE), ...))
@@ -86,9 +84,7 @@ add.Dict <- function(.x, ...)
 #' d = dict(a = 1)
 #' add(d, b = 2, co = container(1:3))
 #'
-#' \dontrun{
-#' add(d, a = 7:9)  # key 'a' already in Dict
-#' }
+#' try(add(d, a = 7:9))  # key 'a' already in Dict
 NULL
 
 
@@ -122,9 +118,7 @@ ref_add.Dict <- function(.x, ...)
 #' dit = dict.table(a = 1:3)
 #' add(dit, b = 3:1, d = 4:6)
 #'
-#' \dontrun{
-#' add(dit, a = 7:9)  # column 'a' already exists
-#' }
+#' try(add(dit, a = 7:9))  # column 'a' already exists
 add.dict.table <- function(.x, ...)
 {
     (ref_add.dict.table(copy(.x), ...))
@@ -141,9 +135,7 @@ add.dict.table <- function(.x, ...)
 #' dit = dict.table(a = 1:3)
 #' add(dit, b = 3:1, d = 4:6)
 #'
-#' \dontrun{
-#' add(dit, a = 7:9)  # column 'a' already exists
-#' }
+#' try(add(dit, a = 7:9))  # column 'a' already exists
 NULL
 
 
@@ -154,9 +146,7 @@ NULL
 #' dit = dict.table(a = 1:3)
 #' add(dit, b = 3:1, d = 4:6)
 #'
-#' \dontrun{
-#' add(dit, a = 7:9)  # column 'a' already exists
-#' }
+#' try(add(dit, a = 7:9))  # column 'a' already exists
 ref_add.dict.table <- function(.x, ...)
 {
     elems = list(...)

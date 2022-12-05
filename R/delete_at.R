@@ -48,10 +48,10 @@ ref_delete_at <- function(.x, ...) UseMethod("ref_delete_at")
 #' delete_at(co, "a", "b")          # [3]
 #' delete_at(co, 1:2)               # [3]
 #' delete_at(co, "a", 3)            # [b = 2]
-#' \dontrun{
+#' try({
 #' delete_at(co, 4)                 # index out of range
 #' delete_at(co, "x")               # names(s) not found: 'x'
-#' }
+#' })
 #' @export
 delete_at.Container <- function(.x, ...)
 {
@@ -69,10 +69,10 @@ delete_at.Container <- function(.x, ...)
 #' delete_at(co, "a", "b")          # [3]
 #' delete_at(co, 1:2)               # [3]
 #' delete_at(co, "a", 3)            # [b = 2]
-#' \dontrun{
-#' delete_at(co, 4)                 # index out of range
-#' delete_at(co, "x")               # names(s) not found: 'x'
-#' }
+#' try({
+#'  delete_at(co, 4)                 # index out of range
+#'  delete_at(co, "x")               # names(s) not found: 'x'
+#' })
 NULL
 
 #' @rdname delete_at
@@ -134,9 +134,9 @@ ref_delete_at.Container <- function(.x, ...)
 #' dit
 #' delete_at(dit, "ID")
 #' delete_at(dit, "ID", 1)
-#' \dontrun{
-#' delete_at(dit, "foo")   # Column 'foo' not in dict.table
-#' }
+#' try({
+#'  delete_at(dit, "foo")   # Column 'foo' not in dict.table
+#' })
 #' @export
 delete_at.dict.table <- function(.x, ...)
 {
@@ -155,9 +155,9 @@ delete_at.dict.table <- function(.x, ...)
 #' delete_at(dit, "ID")
 #' delete_at(dit, "ID", 1)
 #'
-#' \dontrun{
+#' try({
 #' delete_at(dit, "foo")   # Column 'foo' not in dict.table
-#' }
+#' })
 NULL
 
 

@@ -25,9 +25,7 @@
 #' it = Iterator$new(v)
 #' it
 #'
-#' \dontrun{
-#' it$get_value()  # iterator does not point at a value
-#' }
+#' try(it$get_value())  # iterator does not point at a value
 #'
 #' it$has_value()
 #' it$has_next()

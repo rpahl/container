@@ -60,9 +60,7 @@ Iterable <- R6::R6Class("Iterable",
 #' co$at(list("d", 2))
 #' co$at2(1)
 #'
-#' \dontrun{
-#' co$at(0:2)  # index must be > 0
-#' }
+#' try(co$at(0:2))  # index must be > 0
 #'
 #' co$peek_at(0:2)
 #' co$peek_at(0:2, default = 1)
@@ -72,17 +70,13 @@ Iterable <- R6::R6Class("Iterable",
 #' co$replace(9, 11)
 #' co$replace_at(1, -1)
 #'
-#' \dontrun{
-#' co$replace_at(11, 1) # index 11 exceeds length of Container
-#' }
+#' try(co$replace_at(11, 1)) # index 11 exceeds length of Container
 #'
 #' # Delete
 #' co$delete(-1)
 #' co$delete_at(3)
 #'
-#' \dontrun{
-#' co$delete_at(3)     # index 3 exceeds length of Container
-#' }
+#' try(co$delete_at(3))     # index 3 exceeds length of Container
 #'
 #' co$discard(3)
 #'

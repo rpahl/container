@@ -34,9 +34,9 @@ ref_replace <- function(.x, ...) UseMethod("ref_replace")
 #' co = container("x", 9)
 #' replace(co, 9, 0)
 #' replace(co, "x", 0)
-#' \dontrun{
+#' try({
 #' replace(co, "z", 0)              # old element ("z") is not in Container
-#' }
+#' })
 #' replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 #'
 #' @export
@@ -57,9 +57,9 @@ replace.Container <- function(.x, old, new, add = FALSE, ...)
 #' co = container("x", 9)
 #' replace(co, 9, 0)
 #' replace(co, "x", 0)
-#' \dontrun{
+#' try({
 #' replace(co, "z", 0)              # old element ("z") is not in Container
-#' }
+#' })
 #' replace(co, "z", 0, add = TRUE)  # ok, adds the element
 NULL
 
@@ -80,9 +80,9 @@ ref_replace.Container <- function(.x, old, new, add = FALSE, ...)
 #' replace(d, 1, 1:5)
 #' replace(d, "z", "a")
 #'
-#' \dontrun{
+#' try({
 #' replace(d, "a", 2)              # old element ("a") is not in Dict
-#' }
+#' })
 #' @export
 replace.Dict <- function(.x, old, new, ...)
 {
@@ -108,8 +108,8 @@ ref_replace.Dict <- function(.x, old, new, ...)
 #' replace(d, 1, 1:5)
 #' replace(d, "z", "a")
 #'
-#' \dontrun{
+#' try({
 #' replace(d, "a", 2)              # old element ("a") is not in Dict
-#' }
+#' })
 NULL
 

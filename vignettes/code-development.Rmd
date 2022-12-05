@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
     cache = FALSE,
  collapse = TRUE
 )
-options(width = 100L)
+old <- options(width = 100L)
 ```
 
 ## Container operations
@@ -234,6 +234,9 @@ update(l2, l1)
 
 
 
+```{r, include = FALSE}
+options(old)
+```
 
 
 
