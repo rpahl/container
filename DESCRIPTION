@@ -2,7 +2,7 @@ Package: container
 Type: Package
 Title: Extending Base 'R' Lists
 Version: 1.0.4
-Date: 2022-12-05
+Date: 2022-12-11
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
