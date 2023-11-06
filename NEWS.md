@@ -1,3 +1,8 @@
+# container 1.0.4
+
+* fix "don't run" examples
+* fix Rd files regarding tidy HTML
+
 # container 1.0.1
 
 * prevent duplicated column names when renaming dict.tables
