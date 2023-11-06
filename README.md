@@ -5,7 +5,7 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
 [![dependencies](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
 [![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
-[![R-CMD-check](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
+[![R-CMD-check](https://github.com/rpahl/container/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/rpahl/container/actions/workflows/check-standard.yaml)
 [![downloads](https://cranlogs.r-pkg.org/badges/container?color=3aa9e8)](https://www.r-pkg.org:443/pkg/container)
 [![total-downloads](http://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
 [![last-commit](https://img.shields.io/github/last-commit/rpahl/container)](https://cran.r-project.org/package=container)
@@ -43,7 +43,6 @@ install.packages("container")
 # Install development version from GitHub
 devtools::install_github("rpahl/container")
 ```
-
 
 ### Usage
 
