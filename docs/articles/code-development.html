@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">container</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
       </span>
     </div>
 
@@ -61,7 +63,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,7 +76,8 @@
       <a href="../articles/index.html">Overview</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Get started</li>
+    </li>
+<li class="dropdown-header">Get started</li>
     <li>
       <a href="../articles/container.html">Introduction to container</a>
     </li>
@@ -88,7 +91,8 @@
       <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Other</li>
+    </li>
+<li class="dropdown-header">Other</li>
     <li>
       <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
     </li>
@@ -98,17 +102,17 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     My packages
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://rpahl.github.io/container/">container</a>
+      <a href="https://rpahl.github.io/container/" class="external-link">container</a>
     </li>
     <li>
-      <a href="https://rpahl.github.io/GroupSeq/">GroupSeq</a>
+      <a href="https://rpahl.github.io/GroupSeq/" class="external-link">GroupSeq</a>
     </li>
   </ul>
 </li>
@@ -121,19 +125,19 @@
   </a>
 </li>
 <li>
-  <a href="https://stackoverflow.com/users/8120617/rpahl">
+  <a href="https://stackoverflow.com/users/8120617/rpahl" class="external-link">
     <span class="fab fa-stack-overflow"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/romanpahl">
+  <a href="https://twitter.com/romanpahl" class="external-link">
     <span class="fab fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://rpahl.github.io/r-some-blog/">
+  <a href="https://rpahl.github.io/r-some-blog/" class="external-link">
     <span class="fas fa-blog"></span>
      
   </a>
@@ -148,240 +152,240 @@
 
       
 
-      </header><script src="code-development_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Container operations for robust code</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/code-development.Rmd"><code>vignettes/code-development.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/HEAD/vignettes/code-development.Rmd"><code>vignettes/code-development.Rmd</code></a></small>
       <div class="hidden name"><code>code-development.Rmd</code></div>
 
     </div>
 
     
     
-<div id="container-operations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#container-operations" class="anchor"></a>Container operations</h2>
+<div class="section level2">
+<h2 id="container-operations">Container operations<a class="anchor" aria-label="anchor" href="#container-operations"></a>
+</h2>
 <p>Since R has always been used as an interactive tool, base R list operations are generous with respect to errors, which can lead to undetected bugs when developing code. In contrast, the container package provides additional functions for all basic operations that allow for fine control to avoid many pitfalls that can happen with lists and will usually result in more robust code.</p>
-<div id="add-elements" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-elements" class="anchor"></a>Add elements</h3>
+<div class="section level3">
+<h3 id="add-elements">Add elements<a class="anchor" aria-label="anchor" href="#add-elements"></a>
+</h3>
 <p>New elements can be added “as usual” by concatenation or name.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">2</span><span class="op">)</span>
-<span class="va">co</span>
-<span class="co"># [x = 1, 2]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 1, 2]</span></span></code></pre></div>
 <p>In addition, the container package provides <em>add</em>, which allows to add new elements by name even if that name exists already.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">co</span>, x <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>  <span class="co"># same as c(co, container(x = 3))</span>
-<span class="va">co</span>
-<span class="co"># [x = 1, 2, x = 3]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">co</span>, x <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>  <span class="co"># same as c(co, container(x = 3))</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 1, 2, x = 3]</span></span></code></pre></div>
 </div>
-<div id="replace-elements" class="section level3">
-<h3 class="hasAnchor">
-<a href="#replace-elements" class="anchor"></a>Replace elements</h3>
+<div class="section level3">
+<h3 id="replace-elements">Replace elements<a class="anchor" aria-label="anchor" href="#replace-elements"></a>
+</h3>
 <p>Basic replacement again can be done “as usual” by name or position.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
-<span class="va">co</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">12</span>
-<span class="va">co</span>
-<span class="co"># [x = 0, 12, x = 3]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">co</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">12</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 0, 12, x = 3]</span></span></code></pre></div>
 <p>In contrast to base <em>lists</em>, the container will not allow to add elements at positions longer than the length of the object.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span>
-<span class="co"># Error: index out of range (length = 3): 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
+<span><span class="co"># Error: index out of range (length = 3): 4</span></span></code></pre></div>
 <p>If the name does not exist, the element is appended as known from base lists.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"y"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span>
-<span class="va">co</span>
-<span class="co"># [x = 0, 12, x = 3, y = 4]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="st">"y"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 0, 12, x = 3, y = 4]</span></span></code></pre></div>
 <p>If you want to make sure that something is replaced, <em>container</em> provides the function <em>replace_at</em>, which will only replace elements if at names or positions that exist. The following statements are all equal and show the different possibilities on how to use <em>replace_at</em>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, x <span class="op">=</span> <span class="fl">10</span>, y <span class="op">=</span> <span class="fl">13</span><span class="op">)</span>            <span class="co"># name = value pairs</span>
-<span class="co"># [x = 10, 12, x = 3, y = 13]</span>
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>,  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># names followed by values</span>
-<span class="co"># [x = 10, 12, x = 3, y = 13]</span>
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>,      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># positions followed by values</span>
-<span class="co"># [x = 10, 12, x = 3, y = 13]</span>
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"y"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># mixed names/positions followed by values</span>
-<span class="co"># [x = 10, 12, x = 3, y = 13]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, x <span class="op">=</span> <span class="fl">10</span>, y <span class="op">=</span> <span class="fl">13</span><span class="op">)</span>            <span class="co"># name = value pairs</span></span>
+<span><span class="co"># [x = 10, 12, x = 3, y = 13]</span></span>
+<span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>,  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># names followed by values</span></span>
+<span><span class="co"># [x = 10, 12, x = 3, y = 13]</span></span>
+<span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span>,      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># positions followed by values</span></span>
+<span><span class="co"># [x = 10, 12, x = 3, y = 13]</span></span>
+<span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"y"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>   <span class="co"># mixed names/positions followed by values</span></span>
+<span><span class="co"># [x = 10, 12, x = 3, y = 13]</span></span></code></pre></div>
 <p>Now see how invalid indices are signaled.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, z <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="co"># Error: names(s) not found: 'z'</span>
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"z"</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="co"># Error: names(s) not found: 'z'</span>
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="co"># Error: index out of range (length = 4): 5</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, z <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># Error: names(s) not found: 'z'</span></span>
+<span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"z"</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># Error: names(s) not found: 'z'</span></span>
+<span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># Error: index out of range (length = 4): 5</span></span></code></pre></div>
 <p>If you instead want elements at new names to be added, set <code>.add = TRUE</code>. Invalid positional indices are still signaled.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, z <span class="op">=</span> <span class="fl">10</span>, .add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">7</span>, <span class="fl">10</span>, .add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co"># Error: index out of range (length = 5): 7</span>
-<span class="va">co</span>
-<span class="co"># [x = 0, 12, x = 3, y = 4, z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, z <span class="op">=</span> <span class="fl">10</span>, .add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">7</span>, <span class="fl">10</span>, .add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># Error: index out of range (length = 5): 7</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 0, 12, x = 3, y = 4, z = 10]</span></span></code></pre></div>
 <p>It is also possible to <em>replace</em> elements by value, that is, you specify the value (not the index) that should be replaced. Let’s replace the 12 by “foo” and then 4 by <code>1:4</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace.html">replace</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">12</span>, <span class="st">"foo"</span><span class="op">)</span>
-<span class="va">co</span>
-<span class="co"># [x = 0, "foo", x = 3, y = 4, z = 10]</span>
-<span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace.html">replace</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
-<span class="va">co</span>
-<span class="co"># [x = 0, "foo", x = 3, y = (1L 2L 3L 4L), z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace.html">replace</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">12</span>, <span class="st">"foo"</span><span class="op">)</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 0, "foo", x = 3, y = 4, z = 10]</span></span>
+<span><span class="va">co</span> <span class="op">=</span> <span class="fu"><a href="../reference/replace.html">replace</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 0, "foo", x = 3, y = (1L 2L 3L 4L), z = 10]</span></span></code></pre></div>
 <p>In an interactive R session you may want to apply the notation using curly braces.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>
-<span class="va">co</span>
-<span class="co"># [x = 0, "foo", x = 3, y = (1L 2L), z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = 0, "foo", x = 3, y = (1L 2L), z = 10]</span></span></code></pre></div>
 </div>
-<div id="extract-elements" class="section level3">
-<h3 class="hasAnchor">
-<a href="#extract-elements" class="anchor"></a>Extract elements</h3>
+<div class="section level3">
+<h3 id="extract-elements">Extract elements<a class="anchor" aria-label="anchor" href="#extract-elements"></a>
+</h3>
 <p>First of all, standard extract operators apply as expected.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co"># [1] 0</span>
-<span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span>
-<span class="co"># [1] 0</span>
-<span class="va">co</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
-<span class="co"># [x = 3, y = (1L 2L), z = 10]</span>
-<span class="va">co</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">]</span>
-<span class="co"># [x = 0, y = (1L 2L), z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co"># [1] 0</span></span>
+<span><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co"># [1] 0</span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co"># [x = 3, y = (1L 2L), z = 10]</span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># [x = 0, y = (1L 2L), z = 10]</span></span></code></pre></div>
 <p>Programmatically, the corresponding functions to select one or multiple elements are named <em>at2</em> and <em>at</em>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="co"># [1] 0</span>
-<span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co"># [1] 0</span>
-<span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>
-<span class="co"># [x = 3, y = (1L 2L), z = 10]</span>
-<span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># [x = 0, y = (1L 2L), z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co"># [1] 0</span></span>
+<span><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"x"</span><span class="op">)</span></span>
+<span><span class="co"># [1] 0</span></span>
+<span><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="co"># [x = 3, y = (1L 2L), z = 10]</span></span>
+<span><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># [x = 0, y = (1L 2L), z = 10]</span></span></code></pre></div>
 <p>As before you can specify mixed indices via lists.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">indices</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span>, <span class="st">"z"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">indices</span><span class="op">)</span>
-<span class="co"># [x = 0, y = (1L 2L), z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">indices</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span>, <span class="st">"z"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="va">indices</span><span class="op">)</span></span>
+<span><span class="co"># [x = 0, y = (1L 2L), z = 10]</span></span></code></pre></div>
 <p>Again, accessing non-existent names or positions is signaled with an error.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="co"># Error: index 10 exceeds length of Container, which is 5</span>
-<span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co"># Error: index 'a' not found</span>
-<span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>
-<span class="co"># Error: index 6 exceeds length of Container, which is 5</span>
-<span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"a"</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># Error: index 'a' not found</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># Error: index 10 exceeds length of Container, which is 5</span></span>
+<span><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span><span class="op">)</span></span>
+<span><span class="co"># Error: index 'a' not found</span></span>
+<span><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co"># Error: index 6 exceeds length of Container, which is 5</span></span>
+<span><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"a"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Error: index 'a' not found</span></span></code></pre></div>
 <p>With base R lists non-existent indices usually yield <code>NULL</code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">l</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span>
-<span class="co"># NULL</span>
-<span class="va">l</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co"># [[1]]</span>
-<span class="co"># NULL</span>
-<span class="co"># </span>
-<span class="co"># [[2]]</span>
-<span class="co"># NULL</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">l</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co"># NULL</span></span>
+<span><span class="va">l</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co"># [[1]]</span></span>
+<span><span class="co"># NULL</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># [[2]]</span></span>
+<span><span class="co"># NULL</span></span></code></pre></div>
 <p>If needed, the (less strict) <em>list</em> access can be mimicked with <em>peek_at</em> and <em>peek_at2</em>.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/peek_at2.html">peek_at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co"># NULL</span>
-<span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">10</span>, <span class="fl">11</span><span class="op">)</span>
-<span class="co"># []</span>
-<span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
-<span class="co"># [z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/peek_at2.html">peek_at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span><span class="op">)</span></span>
+<span><span class="co"># NULL</span></span>
+<span><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">10</span>, <span class="fl">11</span><span class="op">)</span></span>
+<span><span class="co"># []</span></span>
+<span><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># [z = 10]</span></span></code></pre></div>
 <p>As you see, one important difference is multiple access via <em>peek_at</em> will not insert <code>NULL</code> values by default. However, both functions in fact allow to specify the default value that is returned if the index does not exist.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/peek_at2.html">peek_at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span>, default <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="co"># [1] -1</span>
-
-<span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"z"</span>, <span class="st">"a"</span>, .default <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>
-<span class="co"># [z = 10, a = -1]</span>
-<span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">8</span>, .default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
-<span class="co"># [y = (1L 2L), z = 10, NA, NA, NA]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/peek_at2.html">peek_at2</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span>, default <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co"># [1] -1</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"z"</span>, <span class="st">"a"</span>, .default <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co"># [z = 10, a = -1]</span></span>
+<span><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">8</span>, .default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="co"># [y = (1L 2L), z = 10, NA, NA, NA]</span></span></code></pre></div>
 </div>
-<div id="remove-elements" class="section level3">
-<h3 class="hasAnchor">
-<a href="#remove-elements" class="anchor"></a>Remove elements</h3>
+<div class="section level3">
+<h3 id="remove-elements">Remove elements<a class="anchor" aria-label="anchor" href="#remove-elements"></a>
+</h3>
 <p>To remove elements in lists, they have to be replaced by <code>NULL</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">l</span>
-<span class="co"># $a</span>
-<span class="co"># [1] 1</span>
-<span class="va">l</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
-<span class="va">l</span>
-<span class="co"># named list()</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">l</span></span>
+<span><span class="co"># $a</span></span>
+<span><span class="co"># [1] 1</span></span>
+<span><span class="va">l</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="va">l</span></span>
+<span><span class="co"># named list()</span></span></code></pre></div>
 <p>With the container package this is done differently, as replacing by <code>NULL</code> will not delete the element but literally replace it by <code>NULL</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
-<span class="va">co</span>
-<span class="co"># [x = NULL, "foo", x = 3, y = (1L 2L), z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [x = NULL, "foo", x = 3, y = (1L 2L), z = 10]</span></span></code></pre></div>
 <p>Instead, elements can be deleted by index (<em>delete_at</em>) or value (<em>delete</em>) as follows.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span>
-<span class="co"># ["foo", x = 3]</span>
-<span class="fu"><a href="../reference/delete.html">delete</a></span><span class="op">(</span><span class="va">co</span>, <span class="cn">NULL</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span>   <span class="co"># same but remove by value</span>
-<span class="co"># ["foo", x = 3]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span></span>
+<span><span class="co"># ["foo", x = 3]</span></span>
+<span><span class="fu"><a href="../reference/delete.html">delete</a></span><span class="op">(</span><span class="va">co</span>, <span class="cn">NULL</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span>   <span class="co"># same but remove by value</span></span>
+<span><span class="co"># ["foo", x = 3]</span></span></code></pre></div>
 <p>As before, invalid indices or missing values are signaled.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co"># Error: names(s) not found: 'a'</span>
-<span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="co"># Error: index out of range (length = 5): 10</span>
-
-<span class="fu"><a href="../reference/delete.html">delete</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>
-<span class="co"># Error: (1L 2L 3L) is not in Container</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"a"</span><span class="op">)</span></span>
+<span><span class="co"># Error: names(s) not found: 'a'</span></span>
+<span><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co"># Error: index out of range (length = 5): 10</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/delete.html">delete</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co"># Error: (1L 2L 3L) is not in Container</span></span></code></pre></div>
 <p>If you need a less strict delete operation, use the <em>discard</em> functions, which delete all valid indices/values and ignore the rest.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co"># ["foo", x = 3, y = (1L 2L), z = 10]</span>
-<span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span>
-<span class="co"># []</span>
-
-<span class="fu"><a href="../reference/discard.html">discard</a></span><span class="op">(</span><span class="va">co</span>, <span class="cn">NULL</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
-<span class="co"># ["foo", x = 3, z = 10]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span>, <span class="st">"a"</span><span class="op">)</span></span>
+<span><span class="co"># ["foo", x = 3, y = (1L 2L), z = 10]</span></span>
+<span><span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="co"># []</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/discard.html">discard</a></span><span class="op">(</span><span class="va">co</span>, <span class="cn">NULL</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co"># ["foo", x = 3, z = 10]</span></span></code></pre></div>
 </div>
-<div id="combine-containers" class="section level3">
-<h3 class="hasAnchor">
-<a href="#combine-containers" class="anchor"></a>Combine containers</h3>
+<div class="section level3">
+<h3 id="combine-containers">Combine containers<a class="anchor" aria-label="anchor" href="#combine-containers"></a>
+</h3>
 <p>The <em>update</em> function is used to combine/merge two containers.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">c1</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">c2</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span>   b <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">c1</span>, <span class="va">c2</span><span class="op">)</span>
-<span class="co"># [1, b = 0, c = 3]</span>
-<span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">c2</span>, <span class="va">c1</span><span class="op">)</span>
-<span class="co"># [b = 2, c = 3, 1]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">c1</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span><span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">c2</span> <span class="op">=</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span>   b <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">c1</span>, <span class="va">c2</span><span class="op">)</span></span>
+<span><span class="co"># [1, b = 0, c = 3]</span></span>
+<span><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">c2</span>, <span class="va">c1</span><span class="op">)</span></span>
+<span><span class="co"># [b = 2, c = 3, 1]</span></span></code></pre></div>
 <p>With the container package this function is also provided for base R lists.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">l1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">l2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>   b <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">l1</span>, <span class="va">l2</span><span class="op">)</span>
-<span class="co"># [[1]]</span>
-<span class="co"># [1] 1</span>
-<span class="co"># </span>
-<span class="co"># $b</span>
-<span class="co"># [1] 0</span>
-<span class="co"># </span>
-<span class="co"># $c</span>
-<span class="co"># [1] 3</span>
-<span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">l2</span>, <span class="va">l1</span><span class="op">)</span>
-<span class="co"># $b</span>
-<span class="co"># [1] 2</span>
-<span class="co"># </span>
-<span class="co"># $c</span>
-<span class="co"># [1] 3</span>
-<span class="co"># </span>
-<span class="co"># [[3]]</span>
-<span class="co"># [1] 1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">l1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">l2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>   b <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">l1</span>, <span class="va">l2</span><span class="op">)</span></span>
+<span><span class="co"># [[1]]</span></span>
+<span><span class="co"># [1] 1</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $b</span></span>
+<span><span class="co"># [1] 0</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $c</span></span>
+<span><span class="co"># [1] 3</span></span>
+<span><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">l2</span>, <span class="va">l1</span><span class="op">)</span></span>
+<span><span class="co"># $b</span></span>
+<span><span class="co"># [1] 2</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># $c</span></span>
+<span><span class="co"># [1] 3</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># [[3]]</span></span>
+<span><span class="co"># [1] 1</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -397,11 +401,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://rpahl.github.io/r-some-blog/about.html">Roman Pahl</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://rpahl.github.io/r-some-blog/about.html" class="external-link">Roman Pahl</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -409,6 +415,8 @@
 
   
 
+
+  
 
   </body>
 </html>
