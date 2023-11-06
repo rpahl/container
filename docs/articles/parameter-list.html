@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Manage parameter lists with dict">
-<meta property="og:description" content="The original motivation for the development of this package was  that the author found himself writing countless checks and helper code over and over again when managing parameter lists. This vignette describes how to use the dictionary to manage parameter lists safely and with ease.
+<meta property="og:description" content="The original motivation for the development of this package was that the author found himself writing countless checks and helper code over and over again when managing parameter lists. This vignette describes how to use the dictionary to manage parameter lists safely and with ease.
 ">
 <meta property="og:image" content="https://github.com/rpahl/container/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -27,6 +27,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">container</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
       </span>
     </div>
 
@@ -61,7 +63,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,7 +76,8 @@
       <a href="../articles/index.html">Overview</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Get started</li>
+    </li>
+<li class="dropdown-header">Get started</li>
     <li>
       <a href="../articles/container.html">Introduction to container</a>
     </li>
@@ -88,7 +91,8 @@
       <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Other</li>
+    </li>
+<li class="dropdown-header">Other</li>
     <li>
       <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
     </li>
@@ -98,17 +102,17 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     My packages
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="https://rpahl.github.io/container/">container</a>
+      <a href="https://rpahl.github.io/container/" class="external-link">container</a>
     </li>
     <li>
-      <a href="https://rpahl.github.io/GroupSeq/">GroupSeq</a>
+      <a href="https://rpahl.github.io/GroupSeq/" class="external-link">GroupSeq</a>
     </li>
   </ul>
 </li>
@@ -121,19 +125,19 @@
   </a>
 </li>
 <li>
-  <a href="https://stackoverflow.com/users/8120617/rpahl">
+  <a href="https://stackoverflow.com/users/8120617/rpahl" class="external-link">
     <span class="fab fa-stack-overflow"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/romanpahl">
+  <a href="https://twitter.com/romanpahl" class="external-link">
     <span class="fab fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://rpahl.github.io/r-some-blog/">
+  <a href="https://rpahl.github.io/r-some-blog/" class="external-link">
     <span class="fas fa-blog"></span>
      
   </a>
@@ -148,148 +152,148 @@
 
       
 
-      </header><script src="parameter-list_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Manage parameter lists with dict</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/master/vignettes/parameter-list.Rmd"><code>vignettes/parameter-list.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/HEAD/vignettes/parameter-list.Rmd"><code>vignettes/parameter-list.Rmd</code></a></small>
       <div class="hidden name"><code>parameter-list.Rmd</code></div>
 
     </div>
 
     
     
-<div id="motivation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#motivation" class="anchor"></a>Motivation</h2>
+<div class="section level2">
+<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+</h2>
 <p>The original motivation for the development of this package actually was that the author found himself writing countless checks and helper code over and over again when managing parameter lists. It became apparent that something similar to python’s dictionary would make life easier and so the idea of the container package was born.</p>
 <p>The package has undergone some changes since it’s initial version, but the <em>dict</em> as a use-case for parameter lists remains very valid. So without further ado, let’s see how this works out in practice.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container/">container</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># Define some parameters</span>
-<span class="va">params</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="st">"foo"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container/" class="external-link">container</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define some parameters</span></span>
+<span><span class="va">params</span> <span class="op">=</span> <span class="fu"><a href="../reference/dictS3.html">dict</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, b <span class="op">=</span> <span class="st">"foo"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="add-or-replace" class="section level2">
-<h2 class="hasAnchor">
-<a href="#add-or-replace" class="anchor"></a>Add or Replace</h2>
+<div class="section level2">
+<h2 id="add-or-replace">Add or Replace<a class="anchor" aria-label="anchor" href="#add-or-replace"></a>
+</h2>
 <p>With a <em>dict</em> the problem of accidentally overriding an existing parameter value is solved out of the box using the <code>add</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">params</span> <span class="op">=</span> <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co"># Error: name 'a' exists already</span>
-
-<span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="co"># ok</span>
-<span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">params</span> <span class="op">=</span> <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co"># Error: name 'a' exists already</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="co"># ok</span></span>
+<span><span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></span></code></pre></div>
 <p>Of course, it’s also possible to indeed override a parameter.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co"># {a = 0, b = "foo"}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co"># {a = 0, b = "foo"}</span></span></code></pre></div>
 <p>What if you intend to replace something, but there is nothing to replace?</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co"># Error: names(s) not found: 'x'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co"># Error: names(s) not found: 'x'</span></span></code></pre></div>
 <p>Now you might wonder, what if <em>‘I don’t care if it is replaced or added’</em>. That’s easy.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="co"># {a = 0, b = "foo"}</span>
-
-<span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
-<span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, a <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># {a = 0, b = "foo"}</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">params</span>, x <span class="op">=</span> <span class="fl">0</span>, .add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># {a = (1L 2L 3L 4L ...), b = "foo", x = 0}</span></span></code></pre></div>
 <p>That is, using <code>.add = TRUE</code> basically means, <em>‘replace it, or, if it is not there, just add it’</em></p>
 <p>Maybe you agree that even these simple use-cases already require some effort when using base R lists.</p>
 </div>
-<div id="extract" class="section level2">
-<h2 class="hasAnchor">
-<a href="#extract" class="anchor"></a>Extract</h2>
+<div class="section level2">
+<h2 id="extract">Extract<a class="anchor" aria-label="anchor" href="#extract"></a>
+</h2>
 <p>When extracting a parameter, you might want to be sure it exists and signal an error otherwise.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co"># Error: index 'x' not found</span>
-
-<span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>
-<span class="co"># {a = (1L 2L 3L 4L ...), b = "foo"}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span></span>
+<span><span class="co"># Error: index 'x' not found</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/at.html">at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span></span>
+<span><span class="co"># {a = (1L 2L 3L 4L ...), b = "foo"}</span></span></code></pre></div>
 <p>To extract a single raw element, use <code>at2</code></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span><span class="op">)</span>
-<span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/at2.html">at2</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span><span class="op">)</span></span>
+<span><span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></span></code></pre></div>
 <p>Alternatively, you could use the standard access operators, which behave like base R list and therefore return an empty <em>dict</em> (or <code>NULL</code>) if the index is not found.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">params</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span>
-<span class="co"># {}</span>
-
-<span class="va">params</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span>
-<span class="co"># NULL</span>
-
-<span class="va">params</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span>
-<span class="co"># {a = (1L 2L 3L 4L ...)}</span>
-
-<span class="va">params</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></code></pre></div>
-<div id="default-values" class="section level3">
-<h3 class="hasAnchor">
-<a href="#default-values" class="anchor"></a>Default values</h3>
+<code class="sourceCode R"><span><span class="va">params</span><span class="op">[</span><span class="st">"x"</span><span class="op">]</span></span>
+<span><span class="co"># {}</span></span>
+<span></span>
+<span><span class="va">params</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co"># NULL</span></span>
+<span></span>
+<span><span class="va">params</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co"># {a = (1L 2L 3L 4L ...)}</span></span>
+<span></span>
+<span><span class="va">params</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#  [1]  1  2  3  4  5  6  7  8  9 10</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="default-values">Default values<a class="anchor" aria-label="anchor" href="#default-values"></a>
+</h3>
 <p>A nice property of the <em>dict</em> is that it provides an easy and flexible way to manage default values.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co"># {}</span>
-
-<span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span>, .default <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co"># {x = (3L 2L 1L)}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span></span>
+<span><span class="co"># {}</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span>, .default <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co"># {x = (3L 2L 1L)}</span></span></code></pre></div>
 <p>That is, if you <em>peek</em> at a non-existing parameter, by default an empty <em>dict</em> is returned, but with the option to explicitly set the default. This also works for multiple peeks.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, .default <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span>
-<span class="co"># {a = (1L 2L 3L 4L ...), x = (3L 2L 1L), y = (3L 2L 1L)}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/peek_at.html">peek_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, .default <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co"># {a = (1L 2L 3L 4L ...), x = (3L 2L 1L), y = (3L 2L 1L)}</span></span></code></pre></div>
 </div>
 </div>
-<div id="remove" class="section level2">
-<h2 class="hasAnchor">
-<a href="#remove" class="anchor"></a>Remove</h2>
+<div class="section level2">
+<h2 id="remove">Remove<a class="anchor" aria-label="anchor" href="#remove"></a>
+</h2>
 <p>Similar to the above examples, the user can control how removal of existing/non-existing parameters is handled. If you expect a parameter and want to be signaled if it was not there, use <code>delete</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co"># Error: names(s) not found: 'x'</span>
-
-<span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span><span class="op">)</span> <span class="co"># ok</span>
-<span class="co"># {b = "foo"}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"x"</span><span class="op">)</span></span>
+<span><span class="co"># Error: names(s) not found: 'x'</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span><span class="op">)</span> <span class="co"># ok</span></span>
+<span><span class="co"># {b = "foo"}</span></span></code></pre></div>
 <p>Otherwise to loosely delete a parameter, regardless of whether it exists or not, use <code>discard</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"x"</span><span class="op">)</span>
-<span class="co"># {b = "foo"}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="va">params</span>, <span class="st">"a"</span>, <span class="st">"x"</span><span class="op">)</span></span>
+<span><span class="co"># {b = "foo"}</span></span></code></pre></div>
 <p>It’s important to note, that the “base R list way” to delete elements does not work, because it just inserts a <code>NULL</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">params</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
-
-<span class="va">params</span>
-<span class="co"># {a = NULL, b = "foo"}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">params</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span></span>
+<span><span class="va">params</span></span>
+<span><span class="co"># {a = NULL, b = "foo"}</span></span></code></pre></div>
 </div>
-<div id="merge" class="section level2">
-<h2 class="hasAnchor">
-<a href="#merge" class="anchor"></a>Merge</h2>
+<div class="section level2">
+<h2 id="merge">Merge<a class="anchor" aria-label="anchor" href="#merge"></a>
+</h2>
 <p>Last but not least, <em>dict</em> allows to easily merge and/or update parameter lists.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">par1</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"foo"</span><span class="op">)</span>
-<span class="va">par2</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>b <span class="op">=</span> <span class="st">"bar"</span>, x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">par1</span>, <span class="va">par2</span><span class="op">)</span>
-<span class="co"># {a = 1, b = "bar", x = 2, y = 3}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">par1</span> <span class="op">=</span> <span class="fu"><a href="../reference/dictS3.html">dict</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"foo"</span><span class="op">)</span></span>
+<span><span class="va">par2</span> <span class="op">=</span> <span class="fu"><a href="../reference/dictS3.html">dict</a></span><span class="op">(</span>b <span class="op">=</span> <span class="st">"bar"</span>, x <span class="op">=</span> <span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">par1</span>, <span class="va">par2</span><span class="op">)</span></span>
+<span><span class="co"># {a = 1, b = "bar", x = 2, y = 3}</span></span></code></pre></div>
 <p>As can be seen, existing parameters are updated and new parameters added. Using <code>as.dict</code> you can also do this with ordinary lists.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">par1</span>, <span class="fu"><a href="../reference/DictS3.html">as.dict</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>b <span class="op">=</span> <span class="st">"my b"</span>, x <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># {a = 1, b = "my b", x = 100}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/update.html">update</a></span><span class="op">(</span><span class="va">par1</span>, <span class="fu"><a href="../reference/dictS3.html">as.dict</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b <span class="op">=</span> <span class="st">"my b"</span>, x <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># {a = 1, b = "my b", x = 100}</span></span></code></pre></div>
 <p>That’s it. I hope, it will free you some time and safe some bugs next time you need to manage parameter lists.</p>
 <p>As a very last note, keep in mind that since container version 1.0.0, <em>dict</em> elements are always sorted by their name, while you are still able to access elements by position (based on the sorted values).</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="../reference/DictS3.html">dict</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">2</span>, a <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="va">d</span>
-<span class="co"># {a = 3, x = 1, z = 2}</span>
-
-<span class="va">d</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="co"># [1] 3</span>
-
-<span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co"># {x = 1, z = 2}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">=</span> <span class="fu"><a href="../reference/dictS3.html">dict</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, z <span class="op">=</span> <span class="fl">2</span>, a <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">d</span></span>
+<span><span class="co"># {a = 3, x = 1, z = 2}</span></span>
+<span></span>
+<span><span class="va">d</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co"># [1] 3</span></span>
+<span></span>
+<span><span class="va">d</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co"># {x = 1, z = 2}</span></span></code></pre></div>
 </div>
   </div>
 
@@ -304,11 +308,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://rpahl.github.io/r-some-blog/about.html">Roman Pahl</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://rpahl.github.io/r-some-blog/about.html" class="external-link">Roman Pahl</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -316,6 +322,8 @@
 
   
 
+
+  
 
   </body>
 </html>

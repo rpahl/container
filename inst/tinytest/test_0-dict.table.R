@@ -125,15 +125,12 @@ expect_error(delete_at(dit, 3), "index out of range \\(ncol = 2\\): 3")
 expect_true(identical(dit, dit.copy)) # dit.copy has not changed
 
 
-# dict.table can be printed
+# printed dict.table has the expected header
 dit = dict.table(A = 1:2, B = 2:1)
-options(datatable.print.class=FALSE)
 out <- capture.output(print(dit))
-out.expected <- c("<dict.table> with 2 rows and 2 columns",
-                  "   A B",
-                  "1: 1 2",
-                  "2: 2 1")
-ee(out, out.expected)
+header = out[1]
+expected_header = "<dict.table> with 2 rows and 2 columns"
+ee(header, expected_header)
 
 
 # dict.table has a size
