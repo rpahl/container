@@ -6,6 +6,7 @@ container.Rproj
 vignettes/*.html
 tags
 
+check
 /doc/
 /Meta/
 

@@ -166,7 +166,7 @@ navbar:
 
     github:
       icon: fab fa-github
-      href: https://github.com/rpahl/pipeflow/
+      href: https://github.com/rpahl/container/
       aria-label: github
     stackoverflow:
       icon: fab fa-stack-overflow
