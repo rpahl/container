@@ -25,7 +25,8 @@ old <- options(width = 100L)
 `r badge_cran_release()`
 [![dependencies](https://tinyverse.netlify.app/badge/container)](https://CRAN.R-project.org/package=container)
 `r badge_codecov(branch = "master")`
-`r badge_github_actions()`
+`r badge_github_actions(action = "R-CMD-check")`
+`r badge_github_actions(action = "test-coverage")`
 `r badge_cran_checks()`
 `r badge_cran_download("container", "last-month")`
 `r badge_cran_download("container", "grand-total")`

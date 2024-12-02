@@ -8,6 +8,8 @@
 [![](https://codecov.io/gh/rpahl/container/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpahl/container)
 [![R build
 status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
+[![R build
+status](https://github.com/rpahl/container/workflows/test-coverage/badge.svg)](https://github.com/rpahl/container/actions)
 [![CRAN
 checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
 [![](http://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
