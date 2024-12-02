@@ -27,7 +27,7 @@ s1$diff(s1)
 s1
 }
 \seealso{
-\link{Container}, \code{\link[=set]{set()}}
+\link{Container}, \code{\link[=setnew]{setnew()}}
 }
 \section{Super classes}{
 \code{\link[container:Iterable]{container::Iterable}} -> \code{\link[container:Container]{container::Container}} -> \code{Set}

@@ -43,7 +43,7 @@
 #' @seealso [dict], [data.table](https://CRAN.R-project.org/package=data.table)
 #' @examples
 #' # Some basic examples using some typical data.table and dict operations.
-#' # The constructor can take the 'key' argument known from data.table():
+#' # The constructor can take the 'key' argument known from data.table:
 #' require(data.table)
 #' dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
 #' print(dit)
@@ -91,7 +91,7 @@ as.dict.table <- function(x, ...)
 }
 
 #' @rdname dict.table
-#' @param copy if `TRUE` creates a copy of the [data.table] object otherwise
+#' @param copy if `TRUE` creates a copy of the `data.table` object otherwise
 #' works on the passed object by reference.
 #' @examples
 #'
