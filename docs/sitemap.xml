@@ -1,192 +1,65 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://github.com/rpahl/container/404.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/code-development.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/container.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/deque-set-dict.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/manage-data-columns.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/parameter-list.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/articles/reference-semantics.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/add.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/addleft.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/at.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/at2.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/clear.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/clone.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/container-deprecated.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/container-pkg.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/Container.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/ContainerS3.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/container_options.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/count.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/delete.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/delete_at.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/deprecated.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/Deque.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/dequeS3.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/Dict.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/dict.table.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/dictS3.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/dicttable.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/discard.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/discard_at.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/get_label.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/has.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/has_name.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/is.subsettable.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/is_empty.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/Iterable.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/Iterator.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/iterS3.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/OpsArithmetic.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/OpsCompare.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/OpsExtract.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/OpsLogic.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/OpsReplace.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/OrderedSet.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/peek.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/peekleft.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/peek_at.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/peek_at2.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/pop.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/rename.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/replace.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/replace_at.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/rev.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/rotate.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/Set.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/setS3.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/unpack.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/container/reference/update.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://github.com/rpahl/container/404.html</loc></url>
+<url><loc>https://github.com/rpahl/container/articles/code-development.html</loc></url>
+<url><loc>https://github.com/rpahl/container/articles/container.html</loc></url>
+<url><loc>https://github.com/rpahl/container/articles/deque-set-dict.html</loc></url>
+<url><loc>https://github.com/rpahl/container/articles/index.html</loc></url>
+<url><loc>https://github.com/rpahl/container/articles/manage-data-columns.html</loc></url>
+<url><loc>https://github.com/rpahl/container/articles/parameter-list.html</loc></url>
+<url><loc>https://github.com/rpahl/container/articles/reference-semantics.html</loc></url>
+<url><loc>https://github.com/rpahl/container/authors.html</loc></url>
+<url><loc>https://github.com/rpahl/container/index.html</loc></url>
+<url><loc>https://github.com/rpahl/container/news/index.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/add.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/addleft.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/at.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/at2.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/clear.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/clone.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/container-deprecated.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/container-pkg.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/Container.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/ContainerS3.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/container_options.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/count.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/delete.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/delete_at.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/deprecated.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/Deque.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/dequeS3.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/Dict.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/dict.table.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/dictS3.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/dicttable.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/discard.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/discard_at.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/get_label.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/has.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/has_name.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/index.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/is.subsettable.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/is_empty.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/Iterable.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/Iterator.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/iterS3.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/OpsArithmetic.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/OpsCompare.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/OpsExtract.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/OpsLogic.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/OpsReplace.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/OrderedSet.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/peek.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/peek_at.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/peek_at2.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/pop.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/rename.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/replace.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/replace_at.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/rev.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/rotate.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/Set.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/setS3.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/unpack.html</loc></url>
+<url><loc>https://github.com/rpahl/container/reference/update.html</loc></url>
 </urlset>
+

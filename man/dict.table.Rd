@@ -30,7 +30,7 @@ arguments to be passed on.}
 
 \item{x}{any \code{R} object or a \link{dict.table} object.}
 
-\item{copy}{if \code{TRUE} creates a copy of the \link{data.table} object otherwise
+\item{copy}{if \code{TRUE} creates a copy of the \code{data.table} object otherwise
 works on the passed object by reference.}
 }
 \description{
@@ -145,7 +145,7 @@ that are not yet in \code{object} and replaces the values at existing columns.
 }
 \examples{
 # Some basic examples using some typical data.table and dict operations.
-# The constructor can take the 'key' argument known from data.table():
+# The constructor can take the 'key' argument known from data.table:
 require(data.table)
 dit = dict.table(x = rep(c("b","a","c"), each = 3), y = c(1,3,6), key = "y")
 print(dit)

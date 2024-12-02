@@ -195,7 +195,7 @@ head(cars)
 ```
 
 For the benchmark, we add, replace and finally delete a column.
-```{r benchmark1, warning = FALSE, message = FALSE, cache=TRUE}
+```{r benchmark1, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark1"}
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
     dict.table =
@@ -222,7 +222,7 @@ autoplot(bm) + theme_bw()
 While `dict.table` and `data.table` performed nearly the same there is
 some distance to `dplyr` (about 10x). Let's examine each operation in more detail.
 
-```{r benchmark2, warning = FALSE, message = FALSE, cache=TRUE}
+```{r benchmark2, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark2"}
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
@@ -257,7 +257,7 @@ Having said that, of course, the [data.table](https://CRAN.R-project.org/package
 code can be further improved by avoiding the overhead and instead use reference semantics
 via the `data.table` built-in `set` function.
 
-```{r benchmark3, warning = FALSE, message = FALSE, cache=TRUE}
+```{r benchmark3, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark3"}
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 

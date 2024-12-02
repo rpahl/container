@@ -2,12 +2,18 @@ url: https://github.com/rpahl/container
 
 
 template:
-  params:
-    bootswatch: cerulean
+  bootstrap: 5
+  bootswatch: cerulean
 
 authors:
   Roman Pahl:
     href: https://rpahl.github.io/r-some-blog/about.html
+
+home:
+  links:
+  - text: Visit my R blog
+    href: https://rpahl.github.io/r-some-blog/
+
 
 reference:
   - title: "Container"
@@ -111,31 +117,28 @@ articles:
     - reference-semantics
 
 
-home:
-  links:
-  - text: Visit my R blog
-    href: https://rpahl.github.io/r-some-blog/
-
 
 navbar:
-  title: "container"
-  left:
-    - icon: fa-home fa-lg
+  structure:
+    left: [home, getStarted, reference, articles, myPackages]
+    right: [github, stackoverflow, bluesky, blog]
+
+  components:
+    home:
+      icon: fa-home fa-lg
       href: index.html
-    - text: "Get started"
-      href: articles/container.html
-    - text: "Reference"
-      href: reference/index.html
-    - text: "Changelog"
-      href: news/index.html
-    - text: "Articles"
+      aria-label: home
+    getStarted:
+      text: "Get Started"
+      href: articles/get-started.html
+
+    articles:
+      text: "Articles"
       menu:
-        - title: "Overview"
         - text: "Overview"
           href: articles/index.html
-          
         - text: "---"
-        - text: "Get started"  
+        - text: "Get started"
         - text: "Introduction to container"
           href: articles/container.html
         - text: "Container operations for robust code"
@@ -144,25 +147,36 @@ navbar:
           href: articles/parameter-list.html
         - text: "Manage data columns with dict.table"
           href: articles/manage-data-columns.html
-        
-        - text: "---"  
+        - text: "---"
         - text: "Other"
         - text: "Deque, Set, and Dict"
           href: articles/deque-set-dict.html
         - text: "Reference semantics"
           href: articles/reference-semantics.html
-    - text: "My packages"
+
+    myPackages:
+      text: "My Packages"
       menu:
-        - text: "container"
-          href: https://rpahl.github.io/container/
-        - text: "GroupSeq"
-          href: https://rpahl.github.io/GroupSeq/
-  right:
-    - icon: fab fa-github
+      - text: "container"
+        href: https://rpahl.github.io/container/
+      - text: "GroupSeq"
+        href: https://rpahl.github.io/GroupSeq/
+      - text: "pipeflow"
+        href: https://rpahl.github.io/pipeflow/
+
+    github:
+      icon: fab fa-github
       href: https://github.com/rpahl/container/
-    - icon: fab fa-stack-overflow
+      aria-label: github
+    stackoverflow:
+      icon: fab fa-stack-overflow
       href: https://stackoverflow.com/users/8120617/rpahl
-    - icon: fab fa-twitter
-      href: https://twitter.com/romanpahl
-    - icon: fas fa-blog
+      aria-label: stackoverflow
+    bluesky:
+      icon: fab fa-bluesky
+      href: https://bsky.app/profile/rpahl.bsky.social
+      aria-label: bluesky
+    blog:
+      icon: fas fa-blog
       href: https://rpahl.github.io/r-some-blog/
+      aria-label: blog

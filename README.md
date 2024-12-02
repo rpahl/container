@@ -1,19 +1,25 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
-[![dependencies](https://tinyverse.netlify.com/badge/container)](https://CRAN.R-project.org/package=container)
-[![codecov.io](https://codecov.io/github/rpahl/container/coverage.svg?branch=master)](https://codecov.io/github/rpahl/container?branch=master)
-[![R-CMD-check](https://github.com/rpahl/container/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/rpahl/container/actions/workflows/check-standard.yaml)
-[![downloads](https://cranlogs.r-pkg.org/badges/container?color=3aa9e8)](https://www.r-pkg.org:443/pkg/container)
-[![total-downloads](http://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
-[![last-commit](https://img.shields.io/github/last-commit/rpahl/container)](https://cran.r-project.org/package=container)
-[![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=container)
+[![](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
+[![dependencies](https://tinyverse.netlify.app/badge/container)](https://CRAN.R-project.org/package=container)
+[![](https://codecov.io/gh/rpahl/container/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpahl/container)
+[![R build
+status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
+[![R build
+status](https://github.com/rpahl/container/workflows/test-coverage/badge.svg)](https://github.com/rpahl/container/actions)
+[![CRAN
+checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
+[![](http://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
+[![](https://img.shields.io/github/last-commit/rpahl/container.svg)](https://github.com/rpahl/container/commits/master)
+[![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
 <!-- badges: end -->
 
-# container <img src="man/figures/logo.png" align="right" width="163" height="104"/>
+# container <img src="man/figures/logo.png" alt="logo" align="right" width="163" height="104"/>
 
 `container` provides an enhanced version of base R’s `list` with a
 carefully designed set of extract, replace, and remove operations that
@@ -21,12 +27,12 @@ make it easier and safer to work with list-like data structures.
 
 ### Why `container`?
 
--   safe and flexible operations to
-    -   extract (built-in default values, no unintended `NULL`)
-    -   add and replace (mixed indices, no unintended overrides)
-    -   remove (loose or strict deletion, remove by index or value)
--   compact printing
--   optional reference semantics
+- safe and flexible operations to
+  - extract (built-in default values, no unintended `NULL`)
+  - add and replace (mixed indices, no unintended overrides)
+  - remove (loose or strict deletion, remove by index or value)
+- compact printing
+- optional reference semantics
 
 In addition, this package provides specialized data structures *Deque*,
 *Set* and *Dict* and a *special* class `dict.table`, designed to extend
@@ -100,11 +106,11 @@ co
 
 ### Getting Started
 
--   [Introduction to
-    container](https://rpahl.github.io/container/articles/container.html)
--   [Container operations for robust
-    code](https://rpahl.github.io/container/articles/code-development.html)
--   [Manage parameter lists with
-    dict](https://rpahl.github.io/container/articles/parameter-list.html)
--   [Manage data columns with
-    dict.table](https://rpahl.github.io/container/articles/manage-data-columns.html)
+- [Introduction to
+  container](https://rpahl.github.io/container/articles/container.html)
+- [Container operations for robust
+  code](https://rpahl.github.io/container/articles/code-development.html)
+- [Manage parameter lists with
+  dict](https://rpahl.github.io/container/articles/parameter-list.html)
+- [Manage data columns with
+  dict.table](https://rpahl.github.io/container/articles/manage-data-columns.html)

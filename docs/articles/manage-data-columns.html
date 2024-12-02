@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Manage data columns with dict.table • container</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -12,155 +12,84 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Manage data columns with dict.table">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Manage data columns with dict.table">
+<meta name="description" content="The dict.table as a mix of data.table and Dict extends the data.table by functions to enhance data column management. This vignette compares basic dplyr and dict.table data column operations and shows how both frameworks can be easily combined.
+">
 <meta property="og:description" content="The dict.table as a mix of data.table and Dict extends the data.table by functions to enhance data column management. This vignette compares basic dplyr and dict.table data column operations and shows how both frameworks can be easily combined.
 ">
 <meta property="og:image" content="https://github.com/rpahl/container/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">container</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.4</span>
-      </span>
-    </div>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/container.html">Get started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a></a>
-    </li>
-    <li>
-      <a href="../articles/index.html">Overview</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Get started</li>
-    <li>
-      <a href="../articles/container.html">Introduction to container</a>
-    </li>
-    <li>
-      <a href="../articles/code-development.html">Container operations for robust code</a>
-    </li>
-    <li>
-      <a href="../articles/parameter-list.html">Manage parameter lists with dict</a>
-    </li>
-    <li>
-      <a href="../articles/manage-data-columns.html">Manage data columns with dict.table</a>
-    </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">Other</li>
-    <li>
-      <a href="../articles/deque-set-dict.html">Deque, Set, and Dict</a>
-    </li>
-    <li>
-      <a href="../articles/reference-semantics.html">Reference semantics</a>
-    </li>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
+    <a class="navbar-brand me-2" href="../index.html">container</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../index.html" aria-label="home"><span class="fa fa-home fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="../articles/get-started.html">Get Started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/index.html">Overview</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Get started</h6></li>
+    <li><a class="dropdown-item" href="../articles/container.html">Introduction to container</a></li>
+    <li><a class="dropdown-item" href="../articles/code-development.html">Container operations for robust code</a></li>
+    <li><a class="dropdown-item" href="../articles/parameter-list.html">Manage parameter lists with dict</a></li>
+    <li><a class="dropdown-item" href="../articles/manage-data-columns.html">Manage data columns with dict.table</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Other</h6></li>
+    <li><a class="dropdown-item" href="../articles/deque-set-dict.html">Deque, Set, and Dict</a></li>
+    <li><a class="dropdown-item" href="../articles/reference-semantics.html">Reference semantics</a></li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    My packages
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="https://rpahl.github.io/container/" class="external-link">container</a>
-    </li>
-    <li>
-      <a href="https://rpahl.github.io/GroupSeq/" class="external-link">GroupSeq</a>
-    </li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-my-packages" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">My Packages</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-my-packages">
+<li><a class="external-link dropdown-item" href="https://rpahl.github.io/container/">container</a></li>
+    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/GroupSeq/">GroupSeq</a></li>
+    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/pipeflow/">pipeflow</a></li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/rpahl/container/">
-    <span class="fab fa-github"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://stackoverflow.com/users/8120617/rpahl" class="external-link">
-    <span class="fab fa-stack-overflow"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://twitter.com/romanpahl" class="external-link">
-    <span class="fab fa-twitter"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://rpahl.github.io/r-some-blog/" class="external-link">
-    <span class="fas fa-blog"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="https://github.com/rpahl/container/" aria-label="github"><span class="fa fab fa-github"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://stackoverflow.com/users/8120617/rpahl" aria-label="stackoverflow"><span class="fa fab fa-stack-overflow"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://bsky.app/profile/rpahl.bsky.social" aria-label="bluesky"><span class="fa fab fa-bluesky"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://rpahl.github.io/r-some-blog/" aria-label="blog"><span class="fa fas fa-blog"></span></a></li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Manage data columns with dict.table</h1>
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Manage data columns with dict.table</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/rpahl/container/blob/HEAD/vignettes/manage-data-columns.Rmd"><code>vignettes/manage-data-columns.Rmd</code></a></small>
-      <div class="hidden name"><code>manage-data-columns.Rmd</code></div>
-
+      <div class="d-none name"><code>manage-data-columns.Rmd</code></div>
     </div>
 
     
@@ -168,9 +97,24 @@
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<p>The <a href="https://CRAN.R-project.org/package=dplyr" class="external-link">dplyr</a> functions <code>select</code> and <code>mutate</code> are widely used to manage data <code>data.frame</code> (or <code>tibble</code>) columns. They cover a wide range of use cases and are applied in quick data exploration as well as in data analysis pipelines. On the other hand, when implementing critical code or building R packages, developers may revert to base R to minimize errors and code dependencies. At least, both <code>mutate</code> and <code>select</code> may require additional checking, for example, to catch column name clashes.</p>
-<p>The <a href="https://CRAN.R-project.org/package=container" class="external-link">container</a> package in parts was developed to close this gap. With version 1.0.0, it provides <code>dict.table</code>, which can be considered a <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a> with an extended set of functions to add, extract, remove and replace data columns with minimal required additional checking, hopefully resulting in lean and robust code.</p>
-<p>This vignette compares basic <code>dplyr</code> and <code>dict.table</code> data column operations and at the end shows that both frameworks can be easily combined.</p>
+<p>The <a href="https://CRAN.R-project.org/package=dplyr" class="external-link">dplyr</a>
+functions <code>select</code> and <code>mutate</code> are widely used to
+manage data <code>data.frame</code> (or <code>tibble</code>) columns.
+They cover a wide range of use cases and are applied in quick data
+exploration as well as in data analysis pipelines. On the other hand,
+when implementing critical code or building R packages, developers may
+revert to base R to minimize errors and code dependencies. At least,
+both <code>mutate</code> and <code>select</code> may require additional
+checking, for example, to catch column name clashes.</p>
+<p>The <a href="https://CRAN.R-project.org/package=container" class="external-link">container</a>
+package in parts was developed to close this gap. With version 1.0.0, it
+provides <code>dict.table</code>, which can be considered a <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a> with
+an extended set of functions to add, extract, remove and replace data
+columns with minimal required additional checking, hopefully resulting
+in lean and robust code.</p>
+<p>This vignette compares basic <code>dplyr</code> and
+<code>dict.table</code> data column operations and at the end shows that
+both frameworks can be easily combined.</p>
 </div>
 <div class="section level2">
 <h2 id="column-operations">Column operations<a class="anchor" aria-label="anchor" href="#column-operations"></a>
@@ -183,9 +127,10 @@
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dict.table.html">dict.table</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.5</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">data</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span></span>
-<span><span class="co">#      x y</span></span>
-<span><span class="co"># 1: 0.2 a</span></span>
-<span><span class="co"># 2: 0.5 b</span></span></code></pre></div>
+<span><span class="co">#        x      y</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;char&gt;</span></span>
+<span><span class="co"># 1:   0.2      a</span></span>
+<span><span class="co"># 2:   0.5      b</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="add">Add<a class="anchor" aria-label="anchor" href="#add"></a>
 </h3>
@@ -194,26 +139,36 @@
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, z <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 4 columns</span></span>
-<span><span class="co">#      x y ID z</span></span>
-<span><span class="co"># 1: 0.2 a  1 1</span></span>
-<span><span class="co"># 2: 0.5 b  2 1</span></span></code></pre></div>
-<p>For someone not familar with the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a>, this code block might read somewhat odd as the column is added and <em>not</em> mutated. To add a column via <code>dict.table</code> use <code>add</code>.</p>
+<span><span class="co">#        x      y    ID     z</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;char&gt; &lt;int&gt; &lt;num&gt;</span></span>
+<span><span class="co"># 1:   0.2      a     1     1</span></span>
+<span><span class="co"># 2:   0.5      b     2     1</span></span></code></pre></div>
+<p>For someone not familar with the <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a>, this code block might
+read somewhat odd as the column is added and <em>not</em> mutated. To
+add a column via <code>dict.table</code> use <code>add</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, z <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 4 columns</span></span>
-<span><span class="co">#      x y ID z</span></span>
-<span><span class="co"># 1: 0.2 a  1 1</span></span>
-<span><span class="co"># 2: 0.5 b  2 1</span></span></code></pre></div>
-<p>The intend to <em>add</em> a column thus is stated more clearly. Next, instead of ID, let’s add another numeric column <code>y</code>, which happens to “name-clash” with the already existing column.</p>
+<span><span class="co">#        x      y    ID     z</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;char&gt; &lt;int&gt; &lt;num&gt;</span></span>
+<span><span class="co"># 1:   0.2      a     1     1</span></span>
+<span><span class="co"># 2:   0.5      b     2     1</span></span></code></pre></div>
+<p>The intend to <em>add</em> a column thus is stated more clearly.
+Next, instead of ID, let’s add another numeric column <code>y</code>,
+which happens to “name-clash” with the already existing column.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span></span>
-<span><span class="co">#      x y</span></span>
-<span><span class="co"># 1: 0.2 1</span></span>
-<span><span class="co"># 2: 0.5 1</span></span></code></pre></div>
-<p>Of course, the initial y-column has been overwritten. While this was easy to see here, it may not if the data has a lot of columns or if column names are created dynamically during runtime. To catch this, usually some overhead is required.</p>
+<span><span class="co">#        x     y</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;num&gt;</span></span>
+<span><span class="co"># 1:   0.2     1</span></span>
+<span><span class="co"># 2:   0.5     1</span></span></code></pre></div>
+<p>Of course, the initial y-column has been overwritten. While this was
+easy to see here, it may not if the data has a lot of columns or if
+column names are created dynamically during runtime. To catch this,
+usually some overhead is required.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"y"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"column y already exists"</span><span class="op">)</span></span>
@@ -221,34 +176,42 @@
 <span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co"># Error in eval(expr, envir, enclos): column y already exists</span></span></code></pre></div>
+<span><span class="co"># Error: column y already exists</span></span></code></pre></div>
 <p>Let’s see the <code>dict.table</code>-operation in comparison.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/add.html">add</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># Error: name 'y' exists already</span></span></code></pre></div>
-<p>The name clash is caught by default and therefore requires no additional checking.</p>
+<p>The name clash is caught by default and therefore requires no
+additional checking.</p>
 </div>
 <div class="section level3">
 <h3 id="modify">Modify<a class="anchor" aria-label="anchor" href="#modify"></a>
 </h3>
-<p>If the intend was indeed to overwrite the value, the <code>dict.table</code> function <code>replace_at</code> can be used.</p>
+<p>If the intend was indeed to overwrite the value, the
+<code>dict.table</code> function <code>replace_at</code> can be
+used.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span></span>
-<span><span class="co">#      x y</span></span>
-<span><span class="co"># 1: 0.2 1</span></span>
-<span><span class="co"># 2: 0.5 1</span></span>
+<span><span class="co">#        x      y</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;char&gt;</span></span>
+<span><span class="co"># 1:   0.2      1</span></span>
+<span><span class="co"># 2:   0.5      1</span></span>
 <span></span>
 <span><span class="co"># or programmatically</span></span>
 <span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span></span>
-<span><span class="co">#      x y</span></span>
-<span><span class="co"># 1: 0.2 1</span></span>
-<span><span class="co"># 2: 0.5 1</span></span></code></pre></div>
-<p>As we saw above, if a column does not exist, <code>mutate</code> silently creates it for you. If this is not what you want, which means, you want to make sure something is overwritten, again, a workaround is needed.</p>
+<span><span class="co">#        x      y</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;char&gt;</span></span>
+<span><span class="co"># 1:   0.2      1</span></span>
+<span><span class="co"># 2:   0.5      1</span></span></code></pre></div>
+<p>As we saw above, if a column does not exist, <code>mutate</code>
+silently creates it for you. If this is not what you want, which means,
+you want to make sure something is overwritten, again, a workaround is
+needed.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"ID"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -256,71 +219,89 @@
 <span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop</a></span><span class="op">(</span><span class="st">"column ID not in data.frame"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co"># Error in eval(expr, envir, enclos): column ID not in data.frame</span></span></code></pre></div>
-<p>Once again, the workaround is already “built-in” in the <code>dict.table</code>-framework,</p>
+<span><span class="co"># Error: column ID not in data.frame</span></span></code></pre></div>
+<p>Once again, the workaround is already “built-in” in the
+<code>dict.table</code>-framework,</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co"># Error: column(s) not found: 'ID'</span></span></code></pre></div>
 <p>that is, <code>replace_at</code> expects the column to exist.</p>
-<p>If we were to paraphrase the intend of the <code>mutate</code> function, it probably would be something like <em>“Replace a column or, if it does not exist, add it.”</em>. As you may already have guessed, this can also be expressed within the <code>dict.table</code>-framework.</p>
+<p>If we were to paraphrase the intend of the <code>mutate</code>
+function, it probably would be something like <em>“Replace a column or,
+if it does not exist, add it.”</em>. As you may already have guessed,
+this can also be expressed within the
+<code>dict.table</code>-framework.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, .add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 3 columns</span></span>
-<span><span class="co">#      x y ID</span></span>
-<span><span class="co"># 1: 0.2 a  1</span></span>
-<span><span class="co"># 2: 0.5 b  2</span></span></code></pre></div>
+<span><span class="co">#        x      y    ID</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;char&gt; &lt;int&gt;</span></span>
+<span><span class="co"># 1:   0.2      a     1</span></span>
+<span><span class="co"># 2:   0.5      b     2</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="remove">Remove<a class="anchor" aria-label="anchor" href="#remove"></a>
 </h3>
-<p>A common <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a> approach to remove a column is based on the <code>select</code> function. One corresponding <code>dict.table</code>-function is <code>delete</code>.</p>
+<p>A common <a href="https://www.tidyverse.org/" class="external-link">tidyverse</a> approach
+to remove a column is based on the <code>select</code> function. One
+corresponding <code>dict.table</code>-function is
+<code>delete</code>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="st">"y"</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 1 column</span></span>
-<span><span class="co">#      x</span></span>
-<span><span class="co"># 1: 0.2</span></span>
-<span><span class="co"># 2: 0.5</span></span>
+<span><span class="co">#        x</span></span>
+<span><span class="co">#    &lt;num&gt;</span></span>
+<span><span class="co"># 1:   0.2</span></span>
+<span><span class="co"># 2:   0.5</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 1 column</span></span>
-<span><span class="co">#      x</span></span>
-<span><span class="co"># 1: 0.2</span></span>
-<span><span class="co"># 2: 0.5</span></span></code></pre></div>
-<p>Let’s see what happens if the column does not exist in the first place.</p>
+<span><span class="co">#        x</span></span>
+<span><span class="co">#    &lt;num&gt;</span></span>
+<span><span class="co"># 1:   0.2</span></span>
+<span><span class="co"># 2:   0.5</span></span></code></pre></div>
+<p>Let’s see what happens if the column does not exist in the first
+place.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="st">"ID"</span><span class="op">)</span></span>
 <span><span class="co"># <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co"># <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co"># <span style="color: #BB0000;">x</span> Column `ID` doesn't exist.</span></span>
+<span><span class="co"># <span style="color: #BBBB00;">!</span> Can't select columns that don't exist.</span></span>
+<span><span class="co"># <span style="color: #BB0000;">✖</span> Column `ID` doesn't exist.</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="st">"ID"</span><span class="op">)</span></span>
 <span><span class="co"># Error: column(s) not found: 'ID'</span></span></code></pre></div>
-<p>So in this case, both frameworks will complain. Now assume we want the column to be removed if it exist but otherwise silently ignore the command, for example:</p>
+<p>So in this case, both frameworks will complain. Now assume we want
+the column to be removed if it exist but otherwise silently ignore the
+command, for example:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"ID"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="st">"ID"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>The <code>dict.table</code> provides a straight-forward solution via the <code>discard</code> function:</p>
+<p>The <code>dict.table</code> provides a straight-forward solution via
+the <code>discard</code> function:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/discard_at.html">discard_at</a></span><span class="op">(</span><span class="st">"ID"</span><span class="op">)</span></span>
 <span><span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span></span>
-<span><span class="co">#      x y</span></span>
-<span><span class="co"># 1: 0.2 a</span></span>
-<span><span class="co"># 2: 0.5 b</span></span></code></pre></div>
+<span><span class="co">#        x      y</span></span>
+<span><span class="co">#    &lt;num&gt; &lt;char&gt;</span></span>
+<span><span class="co"># 1:   0.2      a</span></span>
+<span><span class="co"># 2:   0.5      b</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="benchmark">Benchmark<a class="anchor" aria-label="anchor" href="#benchmark"></a>
 </h2>
-<p>To compare the performance of both frameworks, we benchmark some column operations using the standard ‘cars’ data set. As a hallmark reference we use <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a>.</p>
+<p>To compare the performance of both frameworks, we benchmark some
+column operations using the standard ‘cars’ data set. As a hallmark
+reference we use <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/" class="external-link">microbenchmark</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -347,7 +328,7 @@
 <span>        <span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="st">"speed"</span><span class="op">)</span>,</span>
 <span></span>
 <span>    `data.table[` <span class="op">=</span></span>
-<span>        <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span></span>
 <span>        <span class="op">]</span><span class="op">[</span>, <span class="va">time</span> <span class="op">:=</span> <span class="va">dist</span> <span class="op">/</span> <span class="va">speed</span></span>
 <span>        <span class="op">]</span><span class="op">[</span>, <span class="va">dist</span> <span class="op">:=</span> <span class="fl">0</span></span>
 <span>        <span class="op">]</span><span class="op">[</span>, <span class="va">speed</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span>,</span>
@@ -359,8 +340,10 @@
 <span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">speed</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="manage-data-columns_files/figure-html/benchmark1-1.png" width="672"></p>
-<p>While <code>dict.table</code> and <code>data.table</code> performed nearly the same there is some distance to <code>dplyr</code> (about 10x). Let’s examine each operation in more detail.</p>
+<p><img src="manage-data-columns_files/figure-html/benchmark1-1.png" alt="Benchmark1" width="672"></p>
+<p>While <code>dict.table</code> and <code>data.table</code> performed
+nearly the same there is some distance to <code>dplyr</code> (about
+10x). Let’s examine each operation in more detail.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">=</span> <span class="va">cars</span></span>
 <span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>order<span class="op">=</span><span class="st">"inorder"</span><span class="op">)</span>, times <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -370,7 +353,7 @@
 <span>    <span class="va">dit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/replace_at.html">replace_at</a></span><span class="op">(</span><span class="va">dit</span>, dist <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>    <span class="va">dit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/delete_at.html">delete_at</a></span><span class="op">(</span><span class="va">dit</span>, <span class="st">"speed"</span><span class="op">)</span>,</span>
 <span></span>
-<span>    <span class="va">dat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
+<span>    <span class="va">dat</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
 <span>    <span class="va">dat</span><span class="op">[</span>, <span class="va">time</span> <span class="op">:=</span> <span class="va">dist</span> <span class="op">/</span> <span class="va">speed</span><span class="op">]</span>,</span>
 <span>    <span class="va">dat</span><span class="op">[</span>, <span class="va">dist</span> <span class="op">:=</span> <span class="fl">0</span><span class="op">]</span>,</span>
 <span>    <span class="va">dat</span><span class="op">[</span>, <span class="va">speed</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span>,</span>
@@ -381,9 +364,19 @@
 <span>    <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tbl</span>, <span class="op">-</span><span class="va">speed</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="manage-data-columns_files/figure-html/benchmark2-1.png" width="672"></p>
-<p>Apparently, the mutate and select operations are the slowest in comparison, which for the most part should be a result of these functions providing non-standard evaluation (NSE) and generally a wide range of ways to specify the desired operation. Unsurprisingly such flexibility comes at a cost.</p>
-<p>Since the <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a> expressions also involve NSE terms and some overhead, in this benchmark the <code>dict.table</code> performs even best. Having said that, of course, the <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a> code can be further improved by avoiding the overhead and instead use reference semantics via the <code>data.table</code> built-in <code>set</code> function.</p>
+<p><img src="manage-data-columns_files/figure-html/benchmark2-1.png" alt="Benchmark2" width="672"></p>
+<p>Apparently, the mutate and select operations are the slowest in
+comparison, which for the most part should be a result of these
+functions providing non-standard evaluation (NSE) and generally a wide
+range of ways to specify the desired operation. Unsurprisingly such
+flexibility comes at a cost.</p>
+<p>Since the <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a>
+expressions also involve NSE terms and some overhead, in this benchmark
+the <code>dict.table</code> performs even best. Having said that, of
+course, the <a href="https://CRAN.R-project.org/package=data.table" class="external-link">data.table</a> code
+can be further improved by avoiding the overhead and instead use
+reference semantics via the <code>data.table</code> built-in
+<code>set</code> function.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">=</span> <span class="va">cars</span></span>
 <span><span class="va">bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span>control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>order<span class="op">=</span><span class="st">"inorder"</span><span class="op">)</span>, times <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -401,26 +394,32 @@
 <span>        <span class="fu"><a href="../reference/delete_at.html">ref_delete_at</a></span><span class="op">(</span><span class="st">"speed"</span><span class="op">)</span>,</span>
 <span></span>
 <span>    `data.table[` <span class="op">=</span></span>
-<span>        <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">[</span></span>
 <span>        <span class="op">]</span><span class="op">[</span>, <span class="va">time</span> <span class="op">:=</span> <span class="va">dist</span> <span class="op">/</span> <span class="va">speed</span></span>
 <span>        <span class="op">]</span><span class="op">[</span>, <span class="va">dist</span> <span class="op">:=</span> <span class="fl">0</span></span>
 <span>        <span class="op">]</span><span class="op">[</span>, <span class="va">speed</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span>,</span>
 <span></span>
 <span>    set_data.table <span class="op">=</span></span>
-<span>        <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/assign.html" class="external-link">set</a></span><span class="op">(</span>j <span class="op">=</span> <span class="st">"ID"</span>, value <span class="op">=</span> <span class="va">.</span><span class="op">[[</span><span class="st">"dist"</span><span class="op">]</span><span class="op">]</span> <span class="op">/</span> <span class="va">.</span><span class="op">[[</span><span class="st">"speed"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/assign.html" class="external-link">set</a></span><span class="op">(</span>j <span class="op">=</span> <span class="st">"dist"</span>, value <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>        <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/assign.html" class="external-link">set</a></span><span class="op">(</span>j <span class="op">=</span> <span class="st">"speed"</span>, value <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/as.data.table.html" class="external-link">as.data.table</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/assign.html" class="external-link">set</a></span><span class="op">(</span>j <span class="op">=</span> <span class="st">"ID"</span>, value <span class="op">=</span> <span class="va">.</span><span class="op">[[</span><span class="st">"dist"</span><span class="op">]</span><span class="op">]</span> <span class="op">/</span> <span class="va">.</span><span class="op">[[</span><span class="st">"speed"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/assign.html" class="external-link">set</a></span><span class="op">(</span>j <span class="op">=</span> <span class="st">"dist"</span>, value <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/assign.html" class="external-link">set</a></span><span class="op">(</span>j <span class="op">=</span> <span class="st">"speed"</span>, value <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="manage-data-columns_files/figure-html/benchmark3-1.png" width="672"></p>
-<p>This puts things back into perspective. We also provided a <code>dict.table</code> version using reference semantic, which is also <code>built-in</code> and results in a slight speed improvement over the standard version. As a result, <code>data.table</code> remains the way to go when speed is key.</p>
+<p><img src="manage-data-columns_files/figure-html/benchmark3-1.png" alt="Benchmark3" width="672"></p>
+<p>This puts things back into perspective. We also provided a
+<code>dict.table</code> version using reference semantic, which is also
+<code>built-in</code> and results in a slight speed improvement over the
+standard version. As a result, <code>data.table</code> remains the way
+to go when speed is key.</p>
 </div>
 <div class="section level2">
 <h2 id="combine-dplyr-and-dict-table">Combine dplyr and dict.table<a class="anchor" aria-label="anchor" href="#combine-dplyr-and-dict-table"></a>
 </h2>
-<p>Since a <code>dict.table</code> is fully compatible with <code>dplyr</code> and <code>data.table</code>, all of the presented frameworks can be easily combined in any order.</p>
+<p>Since a <code>dict.table</code> is fully compatible with
+<code>dplyr</code> and <code>data.table</code>, all of the presented
+frameworks can be easily combined in any order.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">=</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="va">as.dict.table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -431,37 +430,34 @@
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p>In critical code, it is usually of high priority to avoid unintended data column operations. For this, usually additional code is required to check for the existence or absence of columns. The <code>dict.table</code> framework provides a set of column operations with built-in checking, thereby yielding safer and leaner code out of the box and ultimately freeing the developer from writing some annoying checks over and over again.</p>
+<p>In critical code, it is usually of high priority to avoid unintended
+data column operations. For this, usually additional code is required to
+check for the existence or absence of columns. The
+<code>dict.table</code> framework provides a set of column operations
+with built-in checking, thereby yielding safer and leaner code out of
+the box and ultimately freeing the developer from writing some annoying
+checks over and over again.</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
-</div>
-
-
-
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by <a href="https://rpahl.github.io/r-some-blog/about.html" class="external-link">Roman Pahl</a>.</p>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+
+
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by <a href="https://rpahl.github.io/r-some-blog/about.html" class="external-link">Roman Pahl</a>.</p>
 </div>
 
-      </footer>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
-  
+    </footer>
+</div>
 
 
-  
+
+
 
   </body>
 </html>
