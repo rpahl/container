@@ -1,7 +1,7 @@
 Package: container
 Type: Package
 Title: Extending Base 'R' Lists
-Version: 1.0.4
+Version: 1.0.5
 Date: 2022-12-11
 Authors@R:
     person("Roman", "Pahl",
@@ -24,7 +24,7 @@ Suggests:
     dplyr,
     tibble,
     testthat (>= 3.0.0)
-URL: https://rpahl.github.io/container/
+URL: https://rpahl.github.io/container/, https://github.com/rpahl/container
 BugReports: https://github.com/rpahl/container/issues
 NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
