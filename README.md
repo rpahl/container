@@ -3,19 +3,25 @@
 
 <!-- badges: start -->
 
-[![](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
-[![dependencies](https://tinyverse.netlify.app/badge/container)](https://CRAN.R-project.org/package=container)
-[![](https://codecov.io/gh/rpahl/container/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpahl/container)
-[![R build
+[![CRAN
+release](https://www.r-pkg.org/badges/version/container)](https://cran.r-project.org/package=container)
+[![Dependencies](https://tinyverse.netlify.app/badge/container)](https://CRAN.R-project.org/package=container)
+[![Code
+coverage](https://codecov.io/gh/rpahl/container/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpahl/container)
+[![R-CMD-check
 status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
-[![R build
+[![Test coverage
 status](https://github.com/rpahl/container/workflows/test-coverage/badge.svg)](https://github.com/rpahl/container/actions)
 [![CRAN
 checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
-[![](http://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
-[![](https://img.shields.io/github/last-commit/rpahl/container.svg)](https://github.com/rpahl/container/commits/master)
-[![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Downloads per
+month](http://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
+[![Downloads
+total](http://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
+[![Last
+commit](https://img.shields.io/github/last-commit/rpahl/container.svg)](https://github.com/rpahl/container/commits/master)
+[![Lifecycle
+status](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
 <!-- badges: end -->
 

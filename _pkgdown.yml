@@ -106,17 +106,6 @@ reference:
     contents:
     - "deprecated"
 
-articles:
-  - title: "Overview"
-    contents:
-    - container
-    - code-development
-    - parameter-list
-    - manage-data-columns
-    - deque-set-dict
-    - reference-semantics
-
-
 
 navbar:
   structure:
@@ -130,7 +119,7 @@ navbar:
       aria-label: home
     getStarted:
       text: "Get Started"
-      href: articles/get-started.html
+      href: articles/container.html
 
     articles:
       text: "Articles"
