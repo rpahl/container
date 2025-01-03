@@ -15,9 +15,9 @@ status](https://github.com/rpahl/container/workflows/test-coverage/badge.svg)](h
 [![CRAN
 checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
 [![Downloads per
-month](http://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
+month](https://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
 [![Downloads
-total](http://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
+total](https://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
 [![Last
 commit](https://img.shields.io/github/last-commit/rpahl/container.svg)](https://github.com/rpahl/container/commits/master)
 [![Lifecycle
