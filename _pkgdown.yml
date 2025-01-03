@@ -107,10 +107,14 @@ reference:
     contents:
     - "deprecated"
 
+news:
+  releases:
+  - text: "Version 1.0.0"
+    href: https://rpahl.github.io/r-some-blog/posts/container1.0/
 
 navbar:
   structure:
-    left: [home, getStarted, reference, articles, myPackages]
+    left: [home, getStarted, reference, news, articles]
     right: [github, stackoverflow, bluesky, blog]
 
   components:

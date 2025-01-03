@@ -1,3 +1,16 @@
+# container (development version)
+
+* add News menu including this Changelog to package site
+* link to other packges via [my R universe](https://rpahl.r-universe.dev/packages)
+
+# container 1.0.5
+
+* Update pages to bootstrap 5 and github action pipelines (#26)
+    * upgrade pages to use bootstrap 5
+    * update README
+    * remove Date field in DESCRIPTION file
+    * fix documentation signaled by CRAN devel checks
+
 # container 1.0.4
 
 * fix "don't run" examples
