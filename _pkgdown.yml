@@ -13,7 +13,8 @@ home:
   links:
   - text: Visit my R blog
     href: https://rpahl.github.io/r-some-blog/
-
+  - text: Visit my R packages universe
+    href: https://rpahl.r-universe.dev/packages/
 
 reference:
   - title: "Container"
@@ -142,16 +143,6 @@ navbar:
           href: articles/deque-set-dict.html
         - text: "Reference semantics"
           href: articles/reference-semantics.html
-
-    myPackages:
-      text: "My Packages"
-      menu:
-      - text: "container"
-        href: https://rpahl.github.io/container/
-      - text: "GroupSeq"
-        href: https://rpahl.github.io/GroupSeq/
-      - text: "pipeflow"
-        href: https://rpahl.github.io/pipeflow/
 
     github:
       icon: fab fa-github
