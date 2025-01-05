@@ -5,9 +5,8 @@ output:
     toc: true
     toc_depth: 4
 description: >
-  Start here if this is your first time using container. This vignette
-  describes when and when not to use container, and gives a brief introduction
-  on basic container operations.
+  A starting point for new users, this vignette introduces the basic functionality
+  of {container}. It provides guidance on when to use the package, explains key operations, and illustrates how {container} improves upon base R lists.
 vignette: >
   %\VignetteIndexEntry{Introduction to container}
   %\VignetteEngine{knitr::rmarkdown}

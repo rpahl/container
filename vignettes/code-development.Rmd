@@ -9,6 +9,11 @@ description: >
     to make it safer and easier to work with list-like data structures.
     It describes the different methods to add, extract, replace, and remove
     elements and their nuances.
+    This vignette demonstrates how {container} enhances the robustness of
+    code by providing strict validation and clear, intent-driven operations
+    for adding, extracting, replacing, and removing elements.
+    It highlights features that minimize errors and streamline development
+    workflows.
 vignette: >
   %\VignetteIndexEntry{Container operations for robust code}
   %\VignetteEngine{knitr::rmarkdown}

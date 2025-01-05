@@ -5,8 +5,11 @@ output:
     toc: true
     toc_depth: 4
 description: >
-    Gives a brief overview about the reference semantic functionality provided
-    by the container package.
+    Provides an overview of reference semantics in {container}, where
+    operations like ref_add() modify objects directly. While potentially
+    useful for optimizing performance or reducing code verbosity, this
+    vignette advises cautious use to avoid unnecessary coupling or
+    unintended side effects.
 vignette: >
   %\VignetteIndexEntry{Reference semantics}
   %\VignetteEngine{knitr::rmarkdown}

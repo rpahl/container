@@ -5,7 +5,13 @@ output:
     toc: true
     toc_depth: 4
 description: >
-    Presents the specialized data structures Deque, Set, and Dict.
+    Explore the specialized data structures provided by {container}.
+    These are,
+    Deque for efficient double-ended queue operations,
+    Set for unique elements with basic set operations and order-sensitive
+    behavior, and
+    Dict, a dictionary-like structure, offering ordered key-value pairs
+    and safe operations for managing named elements.
 vignette: >
   %\VignetteIndexEntry{Deque, Set, and Dict}
   %\VignetteEngine{knitr::rmarkdown}
