@@ -1,5 +1,5 @@
 ---
-title: "Introduction to container"
+title: "Use container in interactive session"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -8,7 +8,7 @@ description: >
   A starting point for new users, this vignette introduces the basic functionality
   of {container}. It provides guidance on when to use the package, explains key operations, and illustrates how {container} improves upon base R lists.
 vignette: >
-  %\VignetteIndexEntry{Introduction to container}
+  %\VignetteIndexEntry{Use container in interactive session}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -227,7 +227,7 @@ the familiarity of base R list operations with additional features:
   preventing out-of-bounds additions.
 * Intuitive extraction using familiar operators, with safe handling of invalid indices.
 
-Next, see vignette [Container operations for robust code](code-development.html).
+Next, see vignette [Use container for code development](code-development.html).
 
 ```{r, include = FALSE}
 options(old)

@@ -1,5 +1,5 @@
 ---
-title: "Container operations for robust code"
+title: "Use container for code development"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -15,7 +15,7 @@ description: >
     It highlights features that minimize errors and streamline development
     workflows.
 vignette: >
-  %\VignetteIndexEntry{Container operations for robust code}
+  %\VignetteIndexEntry{Use container for code development}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
