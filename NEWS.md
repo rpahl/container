@@ -1,5 +1,8 @@
 # container (development version)
 
+# container 1.1.0
+
+## Documentation
 * rename vignettes to have desired order at CRAN (#33)
 * update README and vignettes (#30)
 * add News menu including this Changelog to package site
