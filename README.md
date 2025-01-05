@@ -13,7 +13,7 @@ status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](htt
 [![Test coverage
 status](https://github.com/rpahl/container/workflows/test-coverage/badge.svg)](https://github.com/rpahl/container/actions)
 [![CRAN
-checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
+checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_v01-interactive-usage.html)
 [![Downloads per
 month](https://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
 [![Downloads
@@ -43,11 +43,11 @@ that make it easier and safer to work with list-like data structures.
 - optional reference semantics
 
 In addition, {container} provides specialized data structures [Deque,
-Set, and Dict](articles/deque-set-dict.html) and a *special* class
+Set, and Dict](articles/v05-deque-set-dict.html) and a *special* class
 `dict.table`, designed to extend
 [data.table](https://CRAN.R-project.org/package=data.table) by container
 operations to safely [Manage data columns with
-dict.table](articles/manage-data-columns.html).
+dict.table](articles/v04-manage-data-columns.html).
 
 ### Installation
 
@@ -128,11 +128,11 @@ co
 
 ### Get started
 
-- [Use container in interactive session](articles/container.html)
-- [Use container for code development](articles/code-development.html)
-- [Manage parameter lists with dict](articles/parameter-list.html)
+- [Use container in interactive session](articles/v01-interactive-usage.html)
+- [Use container for code development](articles/v02-code-development.html)
+- [Manage parameter lists with dict](articles/v03-parameter-list.html)
 - [Manage data columns with
-  dict.table](articles/manage-data-columns.html)
+  dict.table](articles/v04-manage-data-columns.html)
 
 ### When *not* to use {container}
 

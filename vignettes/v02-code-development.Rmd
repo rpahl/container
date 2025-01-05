@@ -85,7 +85,7 @@ add(d, x = 3)
 ```
 
 For more details see the reference documentation or have a look at
-the [Deque, Set, and Dict](articles/deque-set-dict.html) vignette.
+the [Deque, Set, and Dict](articles/v05-deque-set-dict.html) vignette.
 Lastly, note that the base append function also works with containers.
 
 ```{r}
@@ -437,8 +437,8 @@ This vignette demonstrates how {container} enhances robust code development by p
 To see how some of the functions disussed here are applied with derived
 data structures, see:
 
-* [Manage parameter lists with dict](parameter-list.html)
-* [Manage data columns with dict.table](manage-data-columns.html)
+* [Manage parameter lists with dict](v03-parameter-list.html)
+* [Manage data columns with dict.table](v04-manage-data-columns.html)
 
 ```{r, include = FALSE}
 options(old)

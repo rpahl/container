@@ -2,13 +2,13 @@ pandoc: '3.5'
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  code-development: code-development.html
-  container: container.html
-  deque-set-dict: deque-set-dict.html
-  manage-data-columns: manage-data-columns.html
-  parameter-list: parameter-list.html
-  reference-semantics: reference-semantics.html
-last_built: 2025-01-05T16:59Z
+  v01-interactive-usage: v01-interactive-usage.html
+  v02-code-development: v02-code-development.html
+  v03-parameter-list: v03-parameter-list.html
+  v04-manage-data-columns: v04-manage-data-columns.html
+  v05-deque-set-dict: v05-deque-set-dict.html
+  v06-reference-semantics: v06-reference-semantics.html
+last_built: 2025-01-05T18:37Z
 urls:
   reference: https://github.com/rpahl/container/reference
   article: https://github.com/rpahl/container/articles

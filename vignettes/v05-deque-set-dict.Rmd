@@ -177,7 +177,7 @@ add(d, b = 3)[2:1]
 ```
 
 For more examples see the vignette
-[Manage parameter lists with dict](https://rpahl.github.io/container/articles/parameter-list.html).
+[Manage parameter lists with dict](https://rpahl.github.io/container/articles/v03-parameter-list.html).
 
 ```{r, include = FALSE}
 options(old)

@@ -227,7 +227,7 @@ the familiarity of base R list operations with additional features:
   preventing out-of-bounds additions.
 * Intuitive extraction using familiar operators, with safe handling of invalid indices.
 
-Next, see vignette [Use container for code development](code-development.html).
+Next, see vignette [Use container for code development](v02-code-development.html).
 
 ```{r, include = FALSE}
 options(old)
