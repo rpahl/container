@@ -26,18 +26,32 @@ NULL
 #' @export
 "[.Container" <- function(x, ...)
 {
-    dots = tryCatch(list(...), error = identity)
+    args <- as.list(match.call())
+    dots <- args[-(1:2)]
 
-    if (inherits(dots, "error"))
+    isEmpty = length(dots) == 1 && is.name(dots[[1]])
+    if (isEmpty) {
         return(x)
-
-    if (all(sapply(dots, is.logical))) {
-        v = rep(unlist(dots), length.out = length(x))
-        return(peek_at(x, which(v)))
     }
 
-    peek_at(x, ...)
+    selects <- sapply(
+        dots,
+        FUN = function(.) {
+            .eval_range_select(vars = names(x), select = eval(.))
+        },
+        simplify = FALSE
+    )
+
+    hasBooleanSelection = all(sapply(selects, is.logical))
+    if (hasBooleanSelection) {
+        mask = rep(unlist(selects), length.out = length(x))
+        indices = which(mask)
+        return(peek_at(x, indices))
+    }
+
+    do.call(peek_at, args = c(list(.x = x), selects))
 }
+
 
 #' @name ContainerS3
 #' @rdname ContainerS3
@@ -74,5 +88,3 @@ NULL
 #' co[["a"]]
 #' co[["x"]]
 NULL
-
-
