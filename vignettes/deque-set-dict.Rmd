@@ -125,7 +125,7 @@ os2
 os1 == os2
 ```
 
-Last but not least, the `container` package only covers a small range of sets
+Last but not least, the {container} package only covers a small range of sets
 and set functions. For a wide range of set functionality and data structures
 such as fuzzy sets, multisets, customizable sets and intervals, please refer
 to the [sets](https://CRAN.R-project.org/package=sets) package by David Meyer.
@@ -133,7 +133,7 @@ to the [sets](https://CRAN.R-project.org/package=sets) package by David Meyer.
 
 ## Dict
 
-In a dictionary, each element is mapped to a name. In the `container` package,
+In a dictionary, each element is mapped to a name. In the {container} package,
 dicts are always sorted by name, either after initialization ...
 
 ```{r}

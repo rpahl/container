@@ -74,7 +74,7 @@ very large objects to avoid copying. Although, these days R often is smart
 enough to only copy those parts of an objects, for which a copy is really
 needed (copy-on-modify).
 
-To summarize, the `container` package does provide reference semantics, but it
+To summarize, the {container} package does provide reference semantics, but it
 should be used with care.
 
 ```{r, include = FALSE}
