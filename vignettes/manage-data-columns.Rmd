@@ -5,10 +5,10 @@ output:
     toc: true
     toc_depth: 4
 description: >
-    The dict.table as a mix of data.table and Dict extends the data.table by
-    functions to enhance data column management. This vignette compares basic
-    dplyr and dict.table data column operations and shows how both frameworks
-    can be easily combined.
+    This vignette showcases dict.table, an extension of data.table with
+    enhanced column management functions. It compares workflows in dict.table
+    and dplyr, demonstrates built-in safeguards for common operations,
+    and highlights how the two frameworks can be seamlessly combined.
 vignette: >
   %\VignetteIndexEntry{Manage data columns with dict.table}
   %\VignetteEngine{knitr::rmarkdown}
@@ -23,7 +23,6 @@ library(ggplot2)
 library(data.table)
 library(tibble)
 
-
 knitr::opts_chunk$set(
   comment = "#",
   prompt = F,
@@ -33,10 +32,12 @@ knitr::opts_chunk$set(
   fig.width = 7
 )
 
+cacheBenchmarks <- FALSE
 old <- options(width = 100L)
 ```
 
 ## Motivation
+
 The [dplyr](https://CRAN.R-project.org/package=dplyr) functions `select` and
 `mutate` are widely used to manage data `data.frame` (or `tibble`) columns.
 They cover a wide range of use cases and are applied in quick data exploration
@@ -60,6 +61,7 @@ and at the end shows that both frameworks can be easily combined.
 ## Column operations
 
 To keep matters simple, we use a tiny data set.
+
 ```{r}
 library(container)
 library(dplyr)
@@ -70,25 +72,37 @@ data
 
 
 ### Add
+
 Let's add columns using `mutate`.
+
 ```{r}
 data %>%
     mutate(ID = 1:2, z = 1)
 ```
 
-For someone not familar with the [tidyverse](https://www.tidyverse.org/), this code block might read somewhat odd as the column is added and *not* mutated. To add a column via `dict.table` use `add`.
+For someone not familar with the [tidyverse](https://www.tidyverse.org/),
+this code block might read somewhat odd as the column is added and *not*
+mutated. To add a column via `dict.table` use `add`.
+
 ```{r}
 data %>%
     add(ID = 1:2, z = 1)
 ```
 
-The intend to *add* a column thus is stated more clearly. Next, instead of ID, let's add another numeric column `y`, which happens to "name-clash" with the already existing column.
+The intend to *add* a column thus is stated more clearly. Next, instead of
+ID, let's add another numeric column `y`, which happens to "name-clash"
+with the already existing column.
+
 ```{r}
 data %>%
     mutate(y = 1)
 ```
 
-Of course, the initial y-column has been overwritten. While this was easy to see here, it may not if the data has a lot of columns or if column names are created dynamically during runtime. To catch this, usually some overhead is required.
+Of course, the initial y-column has been overwritten. While this was easy
+to see here, it may not if the data has a lot of columns or if column
+names are created dynamically during runtime. To catch this, usually some
+overhead is required.
+
 ```{r, error=TRUE}
 if ("y" %in% colnames(data)) {
     stop("column y already exists")
@@ -99,15 +113,20 @@ if ("y" %in% colnames(data)) {
 ```
 
 Let's see the `dict.table`-operation in comparison.
+
 ```{r, error=TRUE}
 data %>%
     add(y = 1)
 ```
+
 The name clash is caught by default and therefore requires no additional
 checking.
 
 ### Modify
-If the intend was indeed to overwrite the value, the `dict.table` function `replace_at` can be used.
+
+If the intend was indeed to overwrite the value, the `dict.table`
+function `replace_at` can be used.
+
 ```{r}
 data %>%
     replace_at(y = 1)
@@ -117,7 +136,10 @@ data %>%
     replace_at("y", 1)
 ```
 
-As we saw above, if a column does not exist, `mutate` silently creates it for you. If this is not what you want, which means, you want to make sure something is overwritten, again, a workaround is needed.
+As we saw above, if a column does not exist, `mutate` silently creates it for
+you. If this is not what you want, which means, you want to make sure something
+is overwritten, again, a workaround is needed.
+
 ```{r, error=TRUE}
 if ("ID" %in% colnames(data)) {
     data %>%
@@ -128,15 +150,19 @@ if ("ID" %in% colnames(data)) {
 ```
 
 Once again, the workaround is already "built-in" in the `dict.table`-framework,
+
 ```{r, error=TRUE}
 data %>%
     replace_at(ID = 1:2)
 ```
+
 that is, `replace_at` expects the column to exist.
 
-If we were to paraphrase the intend of the `mutate` function, it probably would be something
-like *"Replace a column or, if it does not exist, add it."*.
-As you may already have guessed, this can also be expressed within the `dict.table`-framework.
+If we were to paraphrase the intend of the `mutate` function, it probably
+would be something like
+*"Replace a column or, if it does not exist, add it."*.
+As you may already have guessed, this can also be expressed within the
+`dict.table`-framework.
 
 ```{r}
 data %>%
@@ -145,8 +171,11 @@ data %>%
 
 
 ### Remove
-A common [tidyverse](https://www.tidyverse.org/) approach to remove a column is based on
-the `select` function. One corresponding `dict.table`-function is `delete`.
+
+A common [tidyverse](https://www.tidyverse.org/) approach to remove a
+column is based on the `select` function.
+One corresponding `dict.table`-function is `delete`.
+
 ```{r}
 data %>%
   select(-"y")
@@ -156,6 +185,7 @@ data %>%
 ```
 
 Let's see what happens if the column does not exist in the first place.
+
 ```{r, error=TRUE}
 data %>%
     select(-"ID")
@@ -164,7 +194,10 @@ data %>%
     delete_at("ID")
 ```
 
-So in this case, both frameworks will complain. Now assume we want the column to be removed if it exist but otherwise silently ignore the command, for example:
+So in this case, both frameworks will complain. Now assume we want the
+column to be removed if it exist but otherwise silently ignore the
+command, for example:
+
 ```{r}
 if ("ID" %in% colnames(data)) {
     data %>%
@@ -172,7 +205,9 @@ if ("ID" %in% colnames(data)) {
 }
 ```
 
-The `dict.table` provides a straight-forward solution via the `discard` function:
+The `dict.table` provides a straight-forward solution via the `discard`
+function:
+
 ```{r}
 data %>%
     discard_at("ID")
@@ -181,7 +216,8 @@ data %>%
 ## Benchmark
 To compare the performance of both frameworks, we benchmark some column
 operations using the standard 'cars' data set.
-As a hallmark reference we use [data.table](https://CRAN.R-project.org/package=data.table).
+As a hallmark reference we use
+[data.table](https://CRAN.R-project.org/package=data.table).
 
 
 ```{r}
@@ -195,7 +231,8 @@ head(cars)
 ```
 
 For the benchmark, we add, replace and finally delete a column.
-```{r benchmark1, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark1"}
+
+```{r benchmark1, warning = FALSE, message = FALSE, cache=cacheBenchmarks, fig.alt="Benchmark1"}
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
     dict.table =
@@ -219,10 +256,17 @@ bm <- microbenchmark(control = list(order="inorder"), times = 100,
 autoplot(bm) + theme_bw()
 ```
 
-While `dict.table` and `data.table` performed nearly the same there is
-some distance to `dplyr` (about 10x). Let's examine each operation in more detail.
+```{r, include = FALSE, echo = FALSE}
+sbm <- summary(bm)
+rownames(sbm) <- sbm[, "expr"]
+ratio <- sbm["dplyr", "median"] / sbm["dict.table", "median"]
+```
 
-```{r benchmark2, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark2"}
+While `dict.table` and `data.table` performed nearly the same there is
+some distance to `dplyr` (about `r round(ratio)`x).
+Let's examine each operation in more detail.
+
+```{r benchmark2, warning = FALSE, message = FALSE, cache=cacheBenchmarks, fig.alt="Benchmark2"}
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
@@ -251,13 +295,14 @@ desired operation. Unsurprisingly such flexibility comes at a cost.
 
 Since the
 [data.table](https://CRAN.R-project.org/package=data.table) expressions also
-involve NSE terms and some overhead, in this benchmark the `dict.table` performs
-even best.
-Having said that, of course, the [data.table](https://CRAN.R-project.org/package=data.table)
-code can be further improved by avoiding the overhead and instead use reference semantics
-via the `data.table` built-in `set` function.
+involve NSE terms and some overhead, in this benchmark the `dict.table`
+performs even best.
+Having said that, of course, the
+[data.table](https://CRAN.R-project.org/package=data.table)
+code can be further improved by avoiding the overhead and instead use
+reference semantics via the `data.table` built-in `set` function.
 
-```{r benchmark3, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark3"}
+```{r benchmark3, warning = FALSE, message = FALSE, cache=cacheBenchmarks, fig.alt="Benchmark3"}
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 

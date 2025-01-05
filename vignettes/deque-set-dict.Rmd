@@ -5,7 +5,13 @@ output:
     toc: true
     toc_depth: 4
 description: >
-    Presents the specialized data structures Deque, Set, and Dict.
+    Explore the specialized data structures provided by {container}.
+    These are,
+    Deque for efficient double-ended queue operations,
+    Set for unique elements with basic set operations and order-sensitive
+    behavior, and
+    Dict, a dictionary-like structure, offering ordered key-value pairs
+    and safe operations for managing named elements.
 vignette: >
   %\VignetteIndexEntry{Deque, Set, and Dict}
   %\VignetteEngine{knitr::rmarkdown}
@@ -125,7 +131,7 @@ os2
 os1 == os2
 ```
 
-Last but not least, the `container` package only covers a small range of sets
+Last but not least, the {container} package only covers a small range of sets
 and set functions. For a wide range of set functionality and data structures
 such as fuzzy sets, multisets, customizable sets and intervals, please refer
 to the [sets](https://CRAN.R-project.org/package=sets) package by David Meyer.
@@ -133,7 +139,7 @@ to the [sets](https://CRAN.R-project.org/package=sets) package by David Meyer.
 
 ## Dict
 
-In a dictionary, each element is mapped to a name. In the `container` package,
+In a dictionary, each element is mapped to a name. In the {container} package,
 dicts are always sorted by name, either after initialization ...
 
 ```{r}

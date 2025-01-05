@@ -5,10 +5,10 @@ output:
     toc: true
     toc_depth: 4
 description: >
-    The original motivation for the development of this package was
-    that the author found himself writing countless checks and helper code over
-    and over again when managing parameter lists. This vignette describes how
-    to use the dictionary to manage parameter lists safely and with ease.
+    Focuses on how to simplify and safeguard parameter list management using
+    Dict. This vignette demonstrates intuitive operations for adding,
+    extracting, replacing, and merging parameters, eliminating the need for
+    repetitive checks and error handling.
 vignette: >
   %\VignetteIndexEntry{Manage parameter lists with dict}
   %\VignetteEngine{knitr::rmarkdown}

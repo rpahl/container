@@ -27,24 +27,27 @@ status](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 # container <img src="man/figures/logo.png" alt="logo" align="right" width="163" height="104"/>
 
-`container` provides an enhanced version of base R’s `list` with a
-carefully designed set of extract, replace, and remove operations that
-make it easier and safer to work with list-like data structures.
+The {container} package offers an enhanced version of base R’s `list`
+with a carefully designed set of extract, replace, and remove operations
+that make it easier and safer to work with list-like data structures.
 
-### Why `container`?
+### Why use {container}?
+
+{container} objects work similar to base R lists and on top provide
 
 - safe and flexible operations to
-  - extract (built-in default values, no unintended `NULL`)
+  - extract (custom default values, no unintended `NULL`)
   - add and replace (mixed indices, no unintended overrides)
   - remove (loose or strict deletion, remove by index or value)
 - compact printing
 - optional reference semantics
 
-In addition, this package provides specialized data structures *Deque*,
-*Set* and *Dict* and a *special* class `dict.table`, designed to extend
+In addition, {container} provides specialized data structures [Deque,
+Set, and Dict](articles/deque-set-dict.html) and a *special* class
+`dict.table`, designed to extend
 [data.table](https://CRAN.R-project.org/package=data.table) by container
 operations to safely [Manage data columns with
-dict.table](https://rpahl.github.io/container/articles/manage-data-columns.html).
+dict.table](articles/manage-data-columns.html).
 
 ### Installation
 
@@ -61,8 +64,21 @@ devtools::install_github("rpahl/container")
 ``` r
 library(container)
 co <- container(colors = c("Red", "Green"), numbers = c(1, 2, 3), data = cars)
+
 co
 # [colors = ("Red" "Green"), numbers = (1 2 3), data = <<data.frame(50x2)>>]
+```
+
+Use like a base R list
+
+``` r
+co[["colors"]] <- c("Blue", "Yellow")
+
+co[["colors"]]
+# [1] "Blue"   "Yellow"
+
+co[2:1]
+# [numbers = (1 2 3), colors = ("Blue" "Yellow")]
 ```
 
 Safe extract
@@ -72,7 +88,7 @@ at(co, "colours")   # oops
 # Error: index 'colours' not found
 
 at(co, "colors")
-# [colors = ("Red" "Green")]
+# [colors = ("Blue" "Yellow")]
 ```
 
 Safe remove
@@ -110,13 +126,23 @@ co
 # [numbers = (1L 2L 3L 4L ...), data = <<data.frame(50x2)>>]
 ```
 
-### Getting Started
+### Get started
 
-- [Introduction to
-  container](https://rpahl.github.io/container/articles/container.html)
-- [Container operations for robust
-  code](https://rpahl.github.io/container/articles/code-development.html)
-- [Manage parameter lists with
-  dict](https://rpahl.github.io/container/articles/parameter-list.html)
+- [Introduction to container](articles/container.html)
+- [Container operations for robust code](articles/code-development.html)
+- [Manage parameter lists with dict](articles/parameter-list.html)
 - [Manage data columns with
-  dict.table](https://rpahl.github.io/container/articles/manage-data-columns.html)
+  dict.table](articles/manage-data-columns.html)
+
+### When *not* to use {container}
+
+Don’t bother using the {container} framework when *speed* is of high
+importance. An exception is the `dict.table` class, which is very fast
+as it is based on
+[data.table](https://CRAN.R-project.org/package=data.table). Other than
+that, if computation speed is critical for your application, we refer
+you to using base R lists or packages that were optimized for
+performance, such as the
+[collections](https://CRAN.R-project.org/package=collections) or
+[cppcontainers](https://cran.r-project.org/package=cppcontainers)
+package.

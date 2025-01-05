@@ -5,8 +5,11 @@ output:
     toc: true
     toc_depth: 4
 description: >
-    Gives a brief overview about the reference semantic functionality provided
-    by the container package.
+    Provides an overview of reference semantics in {container}, where
+    operations like ref_add() modify objects directly. While potentially
+    useful for optimizing performance or reducing code verbosity, this
+    vignette advises cautious use to avoid unnecessary coupling or
+    unintended side effects.
 vignette: >
   %\VignetteIndexEntry{Reference semantics}
   %\VignetteEngine{knitr::rmarkdown}
@@ -74,7 +77,7 @@ very large objects to avoid copying. Although, these days R often is smart
 enough to only copy those parts of an objects, for which a copy is really
 needed (copy-on-modify).
 
-To summarize, the `container` package does provide reference semantics, but it
+To summarize, the {container} package does provide reference semantics, but it
 should be used with care.
 
 ```{r, include = FALSE}
