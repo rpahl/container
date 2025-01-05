@@ -29,6 +29,6 @@ NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3

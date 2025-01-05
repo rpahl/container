@@ -5,7 +5,7 @@
 #' @param x any `R` object.
 #' @details
 #' * [empty()]      [is_empty()] instead
-#' * `set`          [setnew()] instead
+#' * [set()]        [setnew()] instead
 #' * [size()]       use [length()] instead
 #' * [sortkey()]    keys of [Dict] objects are now always sorted
 #' * [remove()]     use [delete()] instead
@@ -83,9 +83,9 @@ keys <- function(x)
 }
 
 
+#' @rdname deprecated
+#' @export
 set <- function(...) {
     .Deprecated("setnew")
     setnew(...)
 }
-
-
