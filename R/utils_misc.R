@@ -40,3 +40,10 @@
 }
 
 
+
+.eval_range_select <- function(vars, select)
+{
+    nl <- as.list(seq_along(vars))
+    names(nl) <- vars
+    eval(substitute(select), envir = nl)
+}
