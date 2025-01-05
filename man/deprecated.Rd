@@ -12,6 +12,7 @@
 \alias{values.Container}
 \alias{values.dict.table}
 \alias{keys}
+\alias{set}
 \title{Deprecated Functions}
 \usage{
 empty(x)
@@ -33,6 +34,8 @@ values(x)
 \method{values}{dict.table}(x)
 
 keys(x)
+
+set(...)
 }
 \arguments{
 \item{x}{any \code{R} object.}
@@ -46,7 +49,7 @@ may be defunct as soon as the next release.
 \details{
 \itemize{
 \item \code{\link[=empty]{empty()}}      \code{\link[=is_empty]{is_empty()}} instead
-\item \code{set()}                       \code{\link[=setnew]{setnew()}} instead
+\item \code{\link[=set]{set()}}        \code{\link[=setnew]{setnew()}} instead
 \item \code{\link[=size]{size()}}       use \code{\link[=length]{length()}} instead
 \item \code{\link[=sortkey]{sortkey()}}    keys of \link{Dict} objects are now always sorted
 \item \code{\link[=remove]{remove()}}     use \code{\link[=delete]{delete()}} instead

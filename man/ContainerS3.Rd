@@ -55,7 +55,8 @@ class for \link{Deque}, \link{Set}, and \link{Dict} objects.
 \details{
 Methods that alter \link{Container} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and \code{\link[=ref_add]{ref_add()}}.
+\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and
+\code{\link[=ref_add]{ref_add()}}.
 
 \itemize{
 \item \code{container(...)} initializes and returns a \link{Container} object.

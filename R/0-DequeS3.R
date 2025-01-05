@@ -7,13 +7,14 @@
 #' @param ... initial elements put into the `Deque`.
 #' @param x `R` object of `ANY` type for [as.deque()] and [is.deque()]
 #' or of class `Deque` for the `S3` methods.
+#' @name DequeS3
 #' @seealso See [container()] for all inherited methods. For the full class
 #' documentation see [Deque()] and it's superclass [Container()].
-#' @name DequeS3
 #' @details
 #' Methods that alter [Deque] objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with
-#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
+#' `'ref_'` to note the reference semantic, for example, `add()` and
+#' `ref_add()`.
 #' @examples
 #' d = deque(1, 2, s = "a", v = 1:3)
 #' is.deque(d)

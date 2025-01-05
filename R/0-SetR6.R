@@ -4,7 +4,7 @@
 #' [Container], that is, elements are always unique in the [Container] and
 #' it provides typical set operations such as `union` and `intersect`.
 #' For the standard S3 interface, see [setnew()].
-#' @seealso [Container], [set()]
+#' @seealso [Container], [setnew()]
 #' @export
 #' @examples
 #' s1 = Set$new(1, 2)
