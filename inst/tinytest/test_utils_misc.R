@@ -105,6 +105,11 @@ local({
     err = expect_error
     err(f(vars, a:z), "object 'z' not found")
     err(f(vars, z:b), "object 'z' not found")
+
+    # Custom enclosing environment
+    e <- new.env()
+    e$z <- 3
+    ee(f(vars, a:z, enclos = e), 1:3)
 })
 
 
