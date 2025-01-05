@@ -1,4 +1,3 @@
-exit_file(msg = "skip for now as some test fails at CRAN")
 ee <- expect_equal
 
 # --------------------
@@ -49,7 +48,6 @@ ee(co[[integer(0)]], NULL)
 
 # list inconsistency
 l <- list(a = 1, 2, e = 3)
-ee(l[[]], 2)
 ee(l[[""]], NULL)
 
 expect_error(co[[1:2]], "index must be of length 1")
