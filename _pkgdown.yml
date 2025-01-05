@@ -124,7 +124,7 @@ navbar:
       aria-label: home
     getStarted:
       text: "Get Started"
-      href: articles/container.html
+      href: articles/v01-interactive-usage.html
 
     articles:
       text: "Articles"
@@ -133,20 +133,20 @@ navbar:
           href: articles/index.html
         - text: "---"
         - text: "Get started"
-        - text: "Introduction to container"
-          href: articles/container.html
-        - text: "Container operations for robust code"
-          href: articles/code-development.html
+        - text: "Use container in interactive session"
+          href: articles/v01-interactive-usage.html
+        - text: "Use container for code development"
+          href: articles/v02-code-development.html
         - text: "Manage parameter lists with dict"
-          href: articles/parameter-list.html
+          href: articles/v03-parameter-list.html
         - text: "Manage data columns with dict.table"
-          href: articles/manage-data-columns.html
+          href: articles/v04-manage-data-columns.html
         - text: "---"
         - text: "Other"
         - text: "Deque, Set, and Dict"
-          href: articles/deque-set-dict.html
+          href: articles/v05-deque-set-dict.html
         - text: "Reference semantics"
-          href: articles/reference-semantics.html
+          href: articles/v06-reference-semantics.html
 
     github:
       icon: fab fa-github

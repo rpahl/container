@@ -27,7 +27,7 @@ old <- options(width = 100L)
 [![Code coverage](https://codecov.io/gh/rpahl/container/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpahl/container)
 [![R-CMD-check status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
 [![Test coverage status](https://github.com/rpahl/container/workflows/test-coverage/badge.svg)](https://github.com/rpahl/container/actions)
-[![CRAN checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
+[![CRAN checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_v01-interactive-usage.html)
 [![Downloads per month](https://cranlogs.r-pkg.org/badges/last-month/container)](https://cran.r-project.org/package=container)
 [![Downloads total](https://cranlogs.r-pkg.org/badges/grand-total/container)](https://cran.r-project.org/package=container)
 [![Last commit](https://img.shields.io/github/last-commit/rpahl/container.svg)](https://github.com/rpahl/container/commits/master)
@@ -53,11 +53,11 @@ it easier and safer to work with list-like data structures.
 * optional reference semantics
 
 In addition, {container} provides specialized data structures
-[Deque, Set, and Dict]( articles/deque-set-dict.html)
+[Deque, Set, and Dict]( articles/v05-deque-set-dict.html)
 and a *special* class `dict.table`, designed to extend
 [data.table](https://CRAN.R-project.org/package=data.table) by
 container operations to safely
-[Manage data columns with dict.table](articles/manage-data-columns.html).
+[Manage data columns with dict.table](articles/v04-manage-data-columns.html).
 
 
 ### Installation
@@ -128,10 +128,10 @@ co
 
 ### Get started
 
-* [Introduction to container](articles/container.html)
-* [Container operations for robust code](articles/code-development.html)
-* [Manage parameter lists with dict](articles/parameter-list.html)
-* [Manage data columns with dict.table](articles/manage-data-columns.html)
+* [Use container in interactive session](articles/v01-interactive-usage.html)
+* [Use container for code development](articles/v02-code-development.html)
+* [Manage parameter lists with dict](articles/v03-parameter-list.html)
+* [Manage data columns with dict.table](articles/v04-manage-data-columns.html)
 
 
 ### When *not* to use {container}

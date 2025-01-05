@@ -1,5 +1,6 @@
 # container (development version)
 
+* rename vignettes to have desired order at CRAN (#33)
 * update README and vignettes (#30)
 * add News menu including this Changelog to package site
 * link to other packges via [my R universe](https://rpahl.r-universe.dev/packages)
