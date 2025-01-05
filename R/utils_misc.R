@@ -47,3 +47,9 @@
     names(nl) <- vars
     eval(substitute(select), envir = nl)
 }
+
+
+unlist1 = function(x, ...)
+{
+    unlist(x, recursive = FALSE, ...)
+}

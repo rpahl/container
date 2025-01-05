@@ -106,3 +106,15 @@ local({
     err(f(vars, a:z), "object 'z' not found")
     err(f(vars, z:b), "object 'z' not found")
 })
+
+
+local({
+    f <- unlist1
+
+    # unlist1 unravels a list by one level
+    l = list(a = list(x = list(1, 2)))
+
+    expect_equal(as.numeric(unlist(l)), 1:2)
+    expect_equal(f(l), list(a.x = list(1, 2)))
+    expect_equal(f(l, use.names = FALSE), list(list(1, 2)))
+})
