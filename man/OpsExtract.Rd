@@ -14,7 +14,15 @@
 \item{x}{\code{Container} object from which to extract elements.}
 
 \item{i, ...}{indices specifying elements to extract. Indices
-are \code{numeric} or \code{character} vectors or a \code{list} containing both.}
+can be \code{logical}, \code{numeric}, \code{character}, or a mix of these.
+They can be passed as a \code{vector}, a \code{list}, or as a comma-separated
+sequence.
+Non-existing indices are ignored, but will be set with a default
+value if provided (see \code{.default} parameter).
+Supports alpha-numeric range selection via non-standard evaluation
+(see Examples).}
+
+\item{.default}{value to be returned if peeked value does not exist.}
 }
 \description{
 Extract parts of a \code{Container} object similar
@@ -28,6 +36,15 @@ Non-existing indices are ignored.
 
 \code{[[} selects a single value using a \code{numeric} or \code{character} index.
 }
+\section{Warning}{
+
+Alpha-numeric range selection (e.g. \code{co[a:b]}) is intended for
+interactive use only, because the non-standard evaluation of the
+range arguments can have unanticipated consequences.
+For programming it is therefore better to use the standard subsetting
+indices (e.g. \code{co[1:2]} or co\link{c("a", "b")}).
+}
+
 \examples{
 co = container(a = 1, b = 2, c = 3, d = 4)
 co[1:2]
@@ -35,6 +52,20 @@ co[1, 4]
 co["d", 2]
 co[list("d", 2)]
 co[0:10]
+
+# Boolean selection
+
+# Custom default values
+co[1:2, 99, .default = 0]
+co[1:2, "z", .default = -1]
+co[1:2, "z", .default = 3:4]
+
+# Alpha-numeric range selection
+co[a:b]
+co[a:b, d:c]
+co[1:c]
+co[d:2]
+co[a:8, .default = a]
 
 co = container(a = 1, b = 2)
 co[[1]]

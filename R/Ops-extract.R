@@ -5,7 +5,15 @@
 #' @name OpsExtract
 #' @param x `Container` object from which to extract elements.
 #' @param i,...  indices specifying elements to extract. Indices
-#' are `numeric` or `character` vectors or a `list` containing both.
+#' can be `logical`, `numeric`, `character`, or a mix of these.
+#' They can be passed as `vector`, `list`, or comma-separated
+#' sequence.
+#' Non-existing indices are ignored, but can be substituted if a
+#' default value was provided (see `.default` parameter).
+#' Supports alpha-numeric range selection via non-standard evaluation
+#' (e.g., `co[a:b]` see Examples).
+#'
+#' @param .default value to be returned if peeked value does not exist.
 #' @details
 #' `[` selects multiple values. The indices can be `numeric` or
 #' `character` or both. They can be passed as a `vector` or `list` or,
@@ -13,6 +21,13 @@
 #' Non-existing indices are ignored.
 #'
 #' `[[` selects a single value using a `numeric` or `character` index.
+#'
+#' @section Warning:
+#' Alpha-numeric range selection (e.g. `co[a:b]`) is intended for
+#' interactive use only, because the non-standard evaluation of the
+#' range arguments can have unanticipated consequences.
+#' For programming it is therefore better to use the standard subsetting
+#' indices (e.g. `co[1:2]` or `co[c("a", "b")]`).
 NULL
 
 #' @rdname OpsExtract
@@ -23,33 +38,81 @@ NULL
 #' co["d", 2]
 #' co[list("d", 2)]
 #' co[0:10]
+#'
+#' # Boolean selection
+#'
+#' # Custom default values
+#' co[1:2, 99, .default = 0]
+#' co[1:2, "z", .default = -1]
+#' co[1:2, "z", .default = 3:4]
+#'
+#' # Alpha-numeric range selection
+#' co[a:b]
+#' co[a:b, d:c]
+#' co[1:c]
+#' co[d:2]
+#' co[a:8, .default = a]
 #' @export
 "[.Container" <- function(x, ...)
 {
     args <- as.list(match.call())
     dots <- args[-(1:2)]
 
-    isEmpty = length(dots) == 1 && is.name(dots[[1]])
-    if (isEmpty) {
-        return(x)
+    # Handle empty selection
+    if (length(dots) == 1) {
+        # Make sure empty selection returns x as is
+        hasName <- is.name(dots[[1]])
+        if (hasName) {
+            isEmpty <- nchar(dots[[1]]) == 0
+            if (isEmpty) {
+                return(x)
+            }
+        }
     }
 
-    selects <- sapply(
-        dots,
-        FUN = function(.) {
-            .eval_range_select(vars = names(x), select = eval(.))
-        },
-        simplify = FALSE
+    vars <- names(x)
+    nl <- as.list(seq_along(vars))
+    names(nl) <- vars
+    for (i in seq_along(dots)) {
+        dots[[i]] <- suppressWarnings(
+            # suppress warning about 'restarting interrupted promise evaluation'
+            tryCatch(
+                list(...)[[i]],
+                error = function(e) {
+                    # If we get here, we most likley have to handle non-standard
+                    # evaluation of alpha-numeric indices like co[a:d]
+                    call <- eval(substitute(dots[[i]]), envir = nl)
+                    dots[[i]] <- eval(call, envir = nl)
+                }
+            )
+        )
+    }
+
+    if (length(dots) == 0) {
+        return(peek_at(x, ...))
+    }
+
+    # Handle boolean selection
+    hasBooleans <- all(sapply(dots, is.logical)) && length(dots) > 0
+    if (hasBooleans) {
+        mask <- rep(unlist(dots), length.out = length(x))
+        indices <- which(mask)
+        if (length(indices) == 0) {
+            return(container())
+        }
+        return(peek_at(x, which(mask)))
+    }
+
+    res <- suppressWarnings(
+        # suppress warning about 'restarting interrupted promise evaluation'
+        try(peek_at(x, ...), silent = TRUE)
     )
-
-    hasBooleanSelection = all(sapply(selects, is.logical))
-    if (hasBooleanSelection) {
-        mask = rep(unlist(selects), length.out = length(x))
-        indices = which(mask)
-        return(peek_at(x, indices))
+    ok <- !inherits(res, "try-error")
+    if (ok) {
+        return(res)
     }
 
-    do.call(peek_at, args = c(list(.x = x), selects))
+    peek_at(x, dots)
 }
 
 

@@ -1,26 +1,35 @@
 ee = expect_equal
 
-# -----------------
-# peek_at.Container
-# -----------------
-co = container(a = 1, 2, b = 3, 4)
-ee(peek_at(co, 1), container(a = 1))
-ee(peek_at(co, 2), container(2))
-ee(peek_at(co, "a"), container(a = 1))
-ee(peek_at(container(), 1), container())
-ee(peek_at(container(), 1, .default = 0), container(0))
-ee(peek_at(co, "x"), container())
-ee(peek_at(co, "x", .default = 1), container(x = 1))
-ee(peek_at(co, "x", "y", .default = 1), container(x = 1, y = 1))
+local({
+    # -----------------
+    # peek_at.Container
+    # -----------------
+    co = container(a = 1, 2, b = 3, 4)
+    ee(peek_at(co, 1), container(a = 1))
+    ee(peek_at(co, 2), container(2))
+    ee(peek_at(co, "a"), container(a = 1))
+    ee(peek_at(container(), 1), container())
+    ee(peek_at(container(), 1, .default = 0), container(0))
+    ee(peek_at(co, "x"), container())
+    ee(peek_at(co, "x", .default = 1), container(x = 1))
+    ee(peek_at(co, "x", "y", .default = 1), container(x = 1, y = 1))
 
-ee(peek_at(co, "x", .default = 1:3), container(x = 1:3))
-ee(peek_at(co, 1, 2, "x", "b", .default = 1:3),
-   container(a = 1, 2, x = 1:3, b = 3))
+    ee(peek_at(co, "x", .default = 1:3), container(x = 1:3))
+    ee(peek_at(co, 1, 2, "x", "b", .default = 1:3),
+    container(a = 1, 2, x = 1:3, b = 3))
 
-ee(peek_at(co, 1:3), as.container(as.list(co)[1:3]))
+    ee(peek_at(co, 1:3), as.container(as.list(co)[1:3]))
 
-ee(peek_at(co), co)
-ee(peek_at(co, .default = 1), co)
+    ee(peek_at(co), co)
+    ee(peek_at(co, .default = 1), co)
+
+    # Edge cases
+    ee(peek_at(co, NA), container())
+    ee(peek_at(co, integer()), container())
+    ee(peek_at(co, TRUE), container())
+    ee(peek_at(co, NULL), container())
+})
+
 
 # -------------
 # peek_at.Dict
