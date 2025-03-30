@@ -41,14 +41,6 @@
 
 
 
-.eval_range_select <- function(vars, select, enclos = parent.frame())
-{
-    nl <- as.list(seq_along(vars))
-    names(nl) <- vars
-    eval(substitute(select), envir = nl, enclos = enclos)
-}
-
-
 unlist1 = function(x, ...)
 {
     unlist(x, recursive = FALSE, ...)
