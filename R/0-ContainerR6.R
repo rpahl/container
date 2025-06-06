@@ -249,8 +249,9 @@ Container <- R6::R6Class("Container",
             if (is.na(name))
                 stop("undefined name", call. = FALSE)
 
-            if (isTRUE(nchar(name) == 0))
-                stop("name must consist of at least one character", call. = F)
+            if (isTRUE(nchar(name) == 0)) {
+                stop("name string must not be empty", call. = FALSE)
+            }
 
             isTRUE(utils::hasName(self$values(), name))
         },
