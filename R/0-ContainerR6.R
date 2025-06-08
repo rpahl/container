@@ -346,8 +346,8 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Rename a `key` in the `Container`. An error is signaled,
-        #' if either the `old` key is not in the `Container` or the `new` key results
-        #' in a name-clash with an existing key.
+        #' if either the `old` key is not in the `Container` or the `new` key
+        #' results in a name-clash with an existing key.
         #' @param old `character` name of key to be renamed.
         #' @param new `character` new key name.
         #' @return the `Container` object
@@ -553,4 +553,3 @@ Container <- R6::R6Class("Container",
     ),
     lock_class = TRUE
 )
-
