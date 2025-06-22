@@ -335,6 +335,7 @@ describe(
 
     it("signals missing index",
     {
+        co <- Container$new(1)
         expect_error(co$discard_at(), "'index' is missing")
     })
 })
@@ -766,7 +767,7 @@ describe("rename",
     {
         expect_error(
             Container$new(A = 1, B = 2)$rename("Z", "B"),
-            "Items of 'old' not found in names: Z"
+            "Items of 'old' not found in names: 'Z'"
         )
     })
 
@@ -774,7 +775,7 @@ describe("rename",
     {
         expect_error(
             Container$new(x = 1, y = 2)$rename(c("x", "x2"), c("x2", "x3")),
-            "Items of 'old' not found in names: x2"
+            "Items of 'old' not found in names: 'x2'"
         )
     })
 })
