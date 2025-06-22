@@ -1,20 +1,44 @@
-.rename_check_names = function(.x, old, new)
+
+.rename_check_names <- function(.x, old, new)
 {
-    if (!is.character(old)) stop("'old' must be character")
-    if (!is.character(new)) stop("'new' must be character")
+    if (!is.character(old)) {
+        stop("'old' must be character", call. = FALSE)
+    }
 
-    if (length(old) != length(new))
-        stop("'old' and 'new' names must be of the same length")
+    if (!is.character(new)) {
+        stop("'new' must be character", call. = FALSE)
+    }
 
-    if (any(duplicated(old)))
-        stop("'old' has duplicated names: ", toString(old[duplicated(old)]))
+    if (length(old) != length(new)) {
+        stop("'old' and 'new' names must be of the same length", call. = FALSE)
+    }
 
-    if (any(duplicated(new)))
-        stop("'new' has duplicated names: ", toString(new[duplicated(new)]))
+    hasDupOld <- duplicated(old)
+    if (any(hasDupOld)) {
+        stop(
+            "'old' has duplicated names: ",
+            paste0("'", old[hasDupOld], "'", collapse = ", "),
+            call. = FALSE
+        )
+    }
 
-    if (any(!(utils::hasName(.x, old))))
-        stop("Items of 'old' not found in names: ",
-             toString(Filter(old, f = function(name) !utils::hasName(.x, name))))
+    hasDupNew <- duplicated(new)
+    if (any(hasDupNew)) {
+        stop(
+            "'new' has duplicated names: ",
+            paste0("'", new[hasDupNew], "'", collapse = ", "),
+            call. = FALSE
+        )
+    }
+
+    hasName <- utils::hasName(.x, old)
+    if (any(!hasName)) {
+        stop(
+            "Items of 'old' not found in names: ",
+            paste0("'", old[!hasName], "'", collapse = ", "),
+            call. = FALSE
+        )
+    }
 
     invisible()
 }
@@ -53,8 +77,9 @@ ref_rename <- function(.x, old, new)
 #' @name ContainerS3
 #' @rdname ContainerS3
 #' @details
-#' * `rename(.x, old, new)` and `ref_rename(.x, old, new)` rename one or more keys
-#' from `old` to `new`, respectively, by copy and in place (i.e. by reference).
+#' * `rename(.x, old, new)` and `ref_rename(.x, old, new)` rename one or more
+#' keys from `old` to `new`, respectively, by copy and in place (i.e. by
+#' reference).
 #' @examples
 #' co = container(a = 1, b = 2, 3)
 #' rename(co, c("a", "b"), c("a1", "y"))
@@ -156,4 +181,3 @@ rename.default <- function(.x, old, new)
     names(.x)[pos] <- new
     .x
 }
-

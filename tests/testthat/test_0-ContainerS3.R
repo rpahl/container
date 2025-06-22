@@ -365,26 +365,6 @@ describe(
 
 
 describe(
-    "names<-.Container",
-{
-    ee <- expect_equal
-
-    test_that("names can be set for containers",
-    {
-        co <- cont(a = 1, b = 2, c = 3)
-        names(co) <- LETTERS[1:3]
-        ee(names(co), LETTERS[1:3])
-
-        names(co)[3] <- "z"
-        ee(names(co), c("A", "B", "z"))
-
-        names(co)[1:2] <- c("x", "y")
-        ee(names(co), c("x", "y", "z"))
-    })
-})
-
-
-describe(
     "str.Container",
 {
     test_that("structure of a Container is printed as expected",
@@ -401,5 +381,55 @@ describe(
         )
 
         expect_equal(out, expected_out)
+    })
+})
+
+
+describe(
+    "names<-.Container",
+{
+    ee <- expect_equal
+
+    test_that("names can be set for containers",
+    {
+        co <- cont(a = 1, b = 2, c = 3)
+        names(co) <- LETTERS[1:3]
+        ee(names(co), LETTERS[1:3])
+
+        names(co)[3] <- "z"
+        ee(names(co), c("A", "B", "z"))
+
+        names(co)[1:2] <- c("x", "y")
+        ee(names(co), c("x", "y", "z"))
+    })
+
+    test_that("new names can be set on initially unnamed containers",
+    {
+        co <- cont(1, 2, 3)
+        names(co) <- letters[1:3]
+        ee(names(co), letters[1:3])
+    })
+
+    test_that("fully named containers can be unnamed",
+    {
+        co <- cont(a = 1, b = 2, c = 3)
+        names(co) <- NULL
+        ee(names(co), NULL)
+    })
+
+    test_that("setting new names that would lead to duplication is prevented",
+    {
+        co <- cont(a = 1, b = 2, c = 3)
+        expect_error(names(co)[2] <- "a", "has duplicated names: 'a'")
+        ee(names(co), c("a", "b", "c"))
+        expect_error(names(co) <- c("a", "b", "b"), "has duplicated names: 'b'")
+        ee(names(co), c("a", "b", "c"))
+    })
+
+    test_that("setting names partially is prevented if names of container
+        already are not uniquely distinguishable",
+    {
+        co <- cont(a = 1, 2, 3)
+        expect_error(names(co)[2] <- "b", "'old' has duplicated names: ''")
     })
 })

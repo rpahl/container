@@ -359,11 +359,16 @@ Container <- R6::R6Class("Container",
                 return(self)
             }
 
-            if (identical(old, new))
+            if (identical(old, new)) {
                 return(self)
+            }
 
-            if (new %in% names(self))
-                stop("name '", new, "' already in ", data.class(self))
+            if (new %in% names(self)) {
+                stop(
+                    "name '", new, "' already in ", data.class(self),
+                    call. = FALSE
+                )
+            }
 
             private$.rename(old, new)
             self

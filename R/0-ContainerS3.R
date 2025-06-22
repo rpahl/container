@@ -120,8 +120,16 @@ str.Container <- function(object, ...)
 #' @export
 "names<-.Container" <- function(x, value)
 {
-    x$rename(names(x), value)
+    # Enable renaming of unnamed containers or unnaming container
+    isUnnamed <- is.null(names(x)) || all(names(x) == "")
+    hasCompleteNewNames <- !is.null(value) && length(value) == length(x)
+    if ((isUnnamed && hasCompleteNewNames) || is.null(value)) {
+        l <- as.list(x)
+        names(l) <- value
+        return(as.container(l))
+    }
+
+    x$rename(as.character(names(x)), value)
 }
 
 # TODO: implement generic %in%
-
