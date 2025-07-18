@@ -38,7 +38,8 @@
 #' @details
 #' Methods that alter [dict.table] objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with
-#' `'ref_'` to note the reference semantic, for example, [add()] and [ref_add()].
+#' `'ref_'` to note the reference semantic, for example, [add()] and
+#' [ref_add()].
 #' @import data.table
 #' @seealso [dict], [data.table](https://CRAN.R-project.org/package=data.table)
 #' @examples
@@ -54,9 +55,9 @@
 #' (ref_discard_at(dit, "x"))                   # discard column 'x'
 #'
 #' try(at(dit, "x"))                            # index 'x' not found
-#' try(replace_at(dit, x = 0))                  # cannot be replaced, if it does not exist
+#' try(replace_at(dit, x = 0))                  # cannot replace non-existing x
 #'
-#' dit = replace_at(dit, x = 0, .add = TRUE)    # ok - re-adds column 'x' with all 0s
+#' dit = replace_at(dit, x = 0, .add = TRUE)    # re-adds column 'x' with all 0s
 #' peek_at(dit, "x")                            # glance at column 'x'
 #' has_name(dit, "x")                           # TRUE
 #' ref_pop(dit, "x")                            # get column and remove it
@@ -196,4 +197,3 @@ cbind.dict.table <- function(x, ...)
 
     .set_class(res)
 }
-
