@@ -134,7 +134,9 @@ Dict <- R6::R6Class("Dict",
         #' @param decr `logical` if `TRUE` sort in decreasing order.
         #' @return returns the `Dict`
         sort = function(decr = FALSE) {
-            .Deprecated(msg = "'sort' is deprecated - keys are now always sorted")
+            .Deprecated(
+                msg = "'sort' is deprecated - keys are now always sorted"
+            )
             self
         },
 
