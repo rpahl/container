@@ -17,7 +17,8 @@
 #' elements are sorted lexicographically by their keys.
 #' Methods that alter `Dict` objects usually come in two versions
 #' providing either copy or reference semantics where the latter start with
-#' `'ref_'` to note the reference semantic, for example, `add()` and `ref_add()`.
+#' `'ref_'` to note the reference semantic, for example, `add()` and
+#'  `ref_add()`.
 #' @examples
 #' d = dict(b = "one", a = 1, f = mean, na = NA)
 #' print(d)
@@ -57,11 +58,11 @@ is.dict <- function(x) inherits(x, "Dict")
 #' @export
 c.Dict <- function(..., recursive = FALSE)
 {
-    concat = c.Container(..., recursive = recursive, use.names = TRUE)
+    concat <- c.Container(..., recursive = recursive, use.names = TRUE)
 
-    if (recursive)
+    if (recursive) {
         concat
-    else
+    } else {
         as.dict(concat)
+    }
 }
-
