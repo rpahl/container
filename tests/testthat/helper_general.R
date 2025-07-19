@@ -14,3 +14,7 @@ expect_no_error = function(...) {
 expect_no_warning = function(...) {
     testthat::expect_warning(..., regexp = NA)
 }
+
+equals <- function(x, y, ...) {
+    isTRUE(all.equal(x, y, ...))
+}

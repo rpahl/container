@@ -276,25 +276,32 @@ Container <- R6::R6Class("Container",
         #' `index` is not found.
         #' @return `Container` object with the extracted elements.
         peek_at = function(index, default = NULL) {
-            if (missing(index))
+            if (missing(index)) {
                 return(self)
+            }
 
-            try_at = function(index)
-                as.list(tryCatch(self$at(index),
-                                 error = function(e) list(default)))
+            try_at <- function(index) {
+                as.list(
+                    tryCatch(
+                        self$at(index),
+                        error = function(e) list(default)
+                    )
+                )
+            }
 
-            l = lapply(index, try_at)
-            if (identical(l, list()))
+            l <- lapply(index, try_at)
+            if (identical(l, list())) {
                 return(methods::as(l, data.class(self)))
+            }
 
             # Determine positions where names need to be set
-            isChar = as.logical(sapply(index, is.character))
-            hasLen = as.logical(sapply(l, function(x) length(x) > 0))
-            pos = which(isChar & hasLen)
+            isChar <- as.logical(sapply(index, is.character))
+            hasLen <- as.logical(sapply(l, function(x) length(x) > 0))
+            pos <- which(isChar & hasLen)
 
-            ul = unlist(l, recursive = FALSE)
+            ul <- unlist(l, recursive = FALSE)
             names(ul)[pos] <- as.character(index[pos])
-            ul = Filter(ul, f = Negate(is.null))
+            ul <- Filter(ul, f = Negate(is.null))
 
             methods::as(ul, data.class(self))
         },
