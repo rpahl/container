@@ -21,7 +21,8 @@
 #' d$rotate()
 #' d$rotate(2)
 #' d$rotate(-3)
-Deque <- R6::R6Class("Deque",
+Deque <- R6::R6Class(
+    classname = "Deque",
     inherit = Container,
     public = list(
         #' @description Add element to left side of the `Deque`.
@@ -92,4 +93,3 @@ Deque <- R6::R6Class("Deque",
     ),
     lock_class = TRUE
 )
-

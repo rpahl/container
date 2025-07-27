@@ -9,7 +9,8 @@
 #' @docType class
 #' @importFrom R6 R6Class
 #' @seealso [Iterator] and [Container]
-Iterable <- R6::R6Class("Iterable",
+Iterable <- R6::R6Class(
+    classname = "Iterable",
     public = list(
 
         #' @description
@@ -26,8 +27,10 @@ Iterable <- R6::R6Class("Iterable",
             it
         }
     ),
-    private = list(create_iter = function()
-        stop("abstract method", call. = FALSE)),
+    private = list(
+        create_iter = function()
+        stop("abstract method", call. = FALSE)
+    ),
 
     lock_class=TRUE
 )
@@ -85,7 +88,8 @@ Iterable <- R6::R6Class("Iterable",
 #' co$update(co2)
 #' co$pop(1)
 #' co
-Container <- R6::R6Class("Container",
+Container <- R6::R6Class(
+    classname = "Container",
     inherit = Iterable,
     public = list(
         #' @description constructor
