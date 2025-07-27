@@ -3,7 +3,7 @@
     if (!is.function(.subset))
         stop("'.subset' argument must be a function", call. = FALSE)
 
-    res = tryCatch(.subset(x, 1), error = identity)
+    res <- tryCatch(.subset(x, 1), error = identity)
     !inherits(res, "error")
 }
 
@@ -11,8 +11,8 @@
 #' @title Iterator Class
 #'
 #' @description An `Iterator` is an object that allows to iterate over
-#'  sequences. It implements `next_iter` and `get_value` to iterate and retrieve the
-#'  value of the sequence it is associated with.
+#' sequences. It implements `next_iter` and `get_value` to iterate and
+#' retrieve the value of the sequence it is associated with.
 #' For the standard S3 interface, see [iter()].
 #' @author Roman Pahl
 #' @docType class
@@ -50,7 +50,8 @@
 #' it
 #' it$get_value()
 #' it$begin()
-Iterator <- R6::R6Class("Iterator",
+Iterator <- R6::R6Class(
+    classname = "Iterator",
     public = list(
 
         #' @description `Iterator` constructor
@@ -139,9 +140,10 @@ Iterator <- R6::R6Class("Iterator",
             self
         }
     ),
-    private = list(object = list(),
-                   .subset = NULL,
-                   i = 0L),
+    private = list(
+        object = list(),
+        .subset = NULL,
+        i = 0L
+    ),
     lock_class = TRUE
 )
-
