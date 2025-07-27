@@ -64,4 +64,3 @@ c.Deque <- function(..., recursive = FALSE, use.names = TRUE)
     else
         as.deque(concat)
 }
-

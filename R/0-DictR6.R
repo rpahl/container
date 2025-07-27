@@ -21,7 +21,8 @@
 #'
 #' d2 = Dict$new(a = 0, b = 1)
 #' d$update(d2)
-Dict <- R6::R6Class("Dict",
+Dict <- R6::R6Class(
+    classname = "Dict",
     inherit = Container,
     public = list(
         #' @description `Dict` constructor
@@ -185,4 +186,3 @@ Dict <- R6::R6Class("Dict",
     ),
     lock_class = TRUE,
 )
-
