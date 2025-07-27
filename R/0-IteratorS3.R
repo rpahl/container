@@ -1,13 +1,13 @@
 #' Iterate over Sequences
 #'
 #' @description An `Iterator` is an object that allows to iterate over
-#'  sequences. It implements [next_iter()] and [get_value()] to iterate and retrieve the
-#'  value of the sequence it is associated with.
+#' sequences. It implements [next_iter()] and [get_value()] to iterate and
+#' retrieve the value of the sequence it is associated with.
 #' For documentation of the methods see [Iterator].
 #'
 #' @param x an object of class [Iterable] or any other `R` object. In the
-#' latter case, `x` will always be coerced to a base `R` [list] prior to creating
-#' the [Iterator].
+#' latter case, `x` will always be coerced to a base `R` [list] prior to
+#' creating the [Iterator].
 #' @param ... other parameters passed to or from methods
 #' @param it `Iterator` object
 #' @name iterS3
@@ -110,6 +110,11 @@ has_value <- function(it)
 }
 
 #' @rdname iterS3
+#' @return `length` returns the number of elements that can be iterated over.
+#' @export
+length.Iterator <- function(x) x$length()
+
+#' @rdname iterS3
 #' @export
 pos <- function(it)
 {
@@ -132,9 +137,3 @@ reset_iter <- function(it)
     if (!is.iterator(it)) stop("arg must be an Iterator")
     it$reset_iter()
 }
-
-#' @rdname iterS3
-#' @return `length` returns the number of elements that can be iterated over.
-#' @export
-length.Iterator <- function(x) x$length()
-
