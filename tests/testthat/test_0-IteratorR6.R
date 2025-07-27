@@ -52,8 +52,8 @@ describe("initialize",
     it("signals if passed object is not subsettable",
     {
         expect_error(Iterator$new(list()), "x must be iterable or subsettable")
-        e = new.env()
-        e$a = 1
+        e <- new.env()
+        e$a <- 1
         expect_error(Iterator$new(e), "must be iterable or subsettable")
     })
 })
