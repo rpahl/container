@@ -226,3 +226,28 @@ describe("c.Deque",
     })
     # nolint end
 })
+
+
+describe("rev",
+{
+    ee <- expect_equal
+
+    test_that("it reverses the deque without modifying the original", {
+        v <- 1:5
+        d <- as.deque(v)
+        ee(unpack(d), v)
+
+        ee(unpack(rev(d)), rev(v))
+        d_was_changed <- !identical(unpack(d), v)
+        expect_false(d_was_changed)
+    })
+
+    test_that("ref_rev modifies the original deque in place", {
+        v <- 1:5
+        d <- as.deque(v)
+        ee(unpack(d), v)
+
+        ee(unpack(ref_rev(d)), rev(v))
+        ee(unpack(d), rev(v))
+    })
+})
