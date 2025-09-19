@@ -2,6 +2,13 @@
 
 # container 1.1.0
 
+## New features
+
+* multiple selection now supports alphanumeric indices (#35)
+
+## Fixes
+* allow setting names of initially unnamed containers
+
 ## Documentation
 * rename vignettes to have desired order at CRAN (#33)
 * update README and vignettes (#30)
