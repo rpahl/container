@@ -22,7 +22,8 @@
 #' s1$diff(s2)
 #' s1$diff(s1)
 #' s1
-Set <- R6::R6Class("Set",
+Set <- R6::R6Class(
+    classname = "Set",
     inherit = Container,
     public = list(
         #' @description `Set` constructor
@@ -71,7 +72,8 @@ Set <- R6::R6Class("Set",
 
         #' @description `Set` intersection
         #' @param s `Set` object to 'intersect'
-        #' @return the `Set` object as a result of the intersection of this and s.
+        #' @return the `Set` object as a result of the intersection of this
+        #' and s.
         intersect = function(s) {
             private$.verify_same_class(s)
             for (elem in self$values()) {
@@ -193,7 +195,8 @@ Set <- R6::R6Class("Set",
 #' @examples
 #' s1 = OrderedSet$new(2, 1)
 #' s1
-OrderedSet <- R6::R6Class("OrderedSet",
+OrderedSet <- R6::R6Class(
+    classname = "OrderedSet",
     inherit = Set,
     public = list(
         #' @description `OrderedSet` constructor
@@ -256,5 +259,3 @@ OrderedSet <- R6::R6Class("OrderedSet",
     ),
     lock_class = TRUE
 )
-
-
