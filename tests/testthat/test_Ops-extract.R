@@ -70,7 +70,6 @@ describe(
 
     test_that("Alphabetic range indices (NSE)",
     {
-        # TODO: suppress warnings 'restarting interrupted promise evaluation'
         co <- container(a = 1, b = 2, c = 3, d = 4)
         ee(co[a:d], co[1:4])
         ee(co[a:b], co[1:2])
