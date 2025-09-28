@@ -4,6 +4,7 @@ TODO
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
+^\.Rprofile$
 tags
 ^pkgdown$
 ^_pkgdown\.yml$
