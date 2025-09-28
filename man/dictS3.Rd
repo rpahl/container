@@ -35,7 +35,8 @@ Internally, all key-value pairs are stored in a hash-table and the
 elements are sorted lexicographically by their keys.
 Methods that alter \code{Dict} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{add()} and \code{ref_add()}.
+\code{'ref_'} to note the reference semantic, for example, \code{add()} and
+\code{ref_add()}.
 
 \itemize{
 \item \code{dict(...)} initializes and returns an object of class \code{Dict}

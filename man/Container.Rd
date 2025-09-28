@@ -512,8 +512,8 @@ invisibly returns the \code{Container} object
 \if{latex}{\out{\hypertarget{method-Container-rename}{}}}
 \subsection{Method \code{rename()}}{
 Rename a \code{key} in the \code{Container}. An error is signaled,
-if either the \code{old} key is not in the \code{Container} or the \code{new} key results
-in a name-clash with an existing key.
+if either the \code{old} key is not in the \code{Container} or the \code{new} key
+results in a name-clash with an existing key.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Container$rename(old, new)}\if{html}{\out{</div>}}
 }

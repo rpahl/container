@@ -160,7 +160,8 @@ between this and s.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-the \code{Set} object as a result of the intersection of this and s.
+the \code{Set} object as a result of the intersection of this
+and s.
 }
 }
 \if{html}{\out{<hr>}}
