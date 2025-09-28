@@ -18,7 +18,7 @@ describe(
             ee(update(co1, co2), container(A = 1, B = 2, C = 3, 99, 100, D = 4))
             ee(update(co2, co1), container(C = 12, D = 4, A = 1, B = 2, 99, 100))
 
-            d1_was_not_touched <- ee(co1, co1.copy)
+            d1_was_not_touched <- all.equal(co1, co1.copy)
             expect_true(d1_was_not_touched)
         })
 
@@ -27,8 +27,14 @@ describe(
             co1 <- container(A = 1, B = 2, C = 12, 99, 100)
             co2 <- container(              C = 3, D = 4)
             # Update by reference
-            ee(ref_update(co1, co2), container(A = 1, B = 2, C = 3, 99, 100, D = 4))
-            d1_was_changed_by_reference <- ee(co1, container(A = 1, B = 2, C = 3, 99, 100, D = 4))
+            ee(
+                ref_update(co1, co2),
+                container(A = 1, B = 2, C = 3, 99, 100, D = 4)
+            )
+            d1_was_changed_by_reference <- all.equal(
+                co1,
+                container(A = 1, B = 2, C = 3, 99, 100, D = 4)
+            )
             expect_true(d1_was_changed_by_reference)
         })
     })
@@ -47,7 +53,7 @@ describe(
             ee(update(dict(), d2), d2)
             ee(update(d1, d2), dict(A = 1, B = 2, C = 3, D = 4))
 
-            d1_was_not_touched <- ee(d1, d1.copy)
+            d1_was_not_touched <- all.equal(d1, d1.copy)
             expect_true(d1_was_not_touched)
         })
 
@@ -57,7 +63,10 @@ describe(
             d2 <- dict(              C = 3, D = 4)
             # Update by reference
             ee(ref_update(d1, d2), dict(A = 1, B = 2, C = 3, D = 4))
-            d1_was_changed_by_reference <- ee(d1, dict(A = 1, B = 2, C = 3, D = 4))
+            d1_was_changed_by_reference <- all.equal(
+                d1,
+                dict(A = 1, B = 2, C = 3, D = 4)
+            )
             expect_true(d1_was_changed_by_reference)
         })
     })
@@ -72,7 +81,7 @@ describe(
             dit2 <- dict.table(         b = 5:6, c = 8:9)
             ee(update(dit1, dit2), dict.table(a = 1:2, b = 5:6, c = 8:9))
 
-            dit1_was_not_touched <- ee(dit1, dit1.copy)
+            dit1_was_not_touched <- all.equal(dit1, dit1.copy)
             expect_true(dit1_was_not_touched)
         })
 
@@ -82,7 +91,10 @@ describe(
             dit2 <- dict.table(         b = 5:6, c = 8:9)
             # Update by reference
             ee(ref_update(dit1, dit2), dict.table(a = 1:2, b = 5:6, c = 8:9))
-            dit1_was_changed <- ee(dit1, dict.table(a = 1:2, b = 5:6, c = 8:9))
+            dit1_was_changed <- all.equal(
+                dit1,
+                dict.table(a = 1:2, b = 5:6, c = 8:9)
+            )
             expect_true(dit1_was_changed)
         })
 

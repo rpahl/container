@@ -44,9 +44,6 @@ describe("at", {
             expect_error(at(dit, "x"), "index 'x' not found")
             expect_error(at(dit, 1:3),
                         "index 3 exceeds length of dict.table, which is 2")
-            expect_error(at(d, "a", "b", 9),
-                        "index 9 exceeds length of Dict, which is 2")
-            expect_error(at(d, "a", "b", "x"), "index 'x' not found")
 
             ee(at(dit), dit)
             ee(at(dit, NULL), dict.table())

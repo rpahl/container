@@ -174,6 +174,7 @@ describe("delete",
 
     it("signals missing arg",
     {
+        d <- Dict$new(a = 1)
         expect_error(d$delete(), 'argument "elem" is missing, with no default')
     })
 
@@ -707,6 +708,7 @@ describe("update",
     test_that(
         "can be updated by another Container object if all elements are named",
     {
+        d <- Dict$new(A = 0)
         co <- Container$new(A = 1, B = 2)
         expect_equal(d$update(co), Dict$new(A = 1, B = 2))
 

@@ -7,7 +7,7 @@ describe("discard_at", {
             co2 <- clone(co)
             ee(discard_at(co), co2)
             ee(discard_at(co, "a"), container(b = 2, f = mean, 3))
-            original_was_not_touched <- ee(co, co2)
+            original_was_not_touched <- all.equal(co, co2)
             expect_true(original_was_not_touched)
 
             ee(discard_at(co, "a"), discard_at(co, 1))
@@ -39,7 +39,7 @@ describe("discard_at", {
             ee(d, d2)
 
             expect_silent(ref_discard_at(d, "x", 4, 11))
-            d_was_not_altered <- ee(d, d2)
+            d_was_not_altered <- all.equal(d, d2)
             expect_true(d_was_not_altered)
 
             ee(ref_discard_at(d, "b"), d2[, c(1, 3)])

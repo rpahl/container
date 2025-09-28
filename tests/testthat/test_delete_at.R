@@ -7,7 +7,7 @@ describe("delete_at", {
             co2 <- clone(co)
             ee(delete_at(co), co2)
             ee(delete_at(co, "a"), container(b = 2, f = mean, 3))
-            original_was_not_touched <- ee(co, co2)
+            original_was_not_touched <- all.equal(co, co2)
             expect_true(original_was_not_touched)
 
             ee(delete_at(co, "a"), delete_at(co, 1))
@@ -18,12 +18,18 @@ describe("delete_at", {
             ee(delete_at(co, "a", 1), delete_at(co, 1))
 
             expect_error(delete_at(co, "a", "x"), "names\\(s\\) not found: 'x'")
-            was_not_touched_on_error <- ee(co, co2)
+            was_not_touched_on_error <- all.equal(co, co2)
             expect_true(was_not_touched_on_error)
 
-            expect_error(delete_at(co, "a", "x", "y"), "names\\(s\\) not found: 'x', 'y'")
-            expect_error(delete_at(co, "a", 1, 5), "index out of range \\(length = 4\\): 5")
-            was_not_touched_on_error <- ee(co, co2)
+            expect_error(
+                delete_at(co, "a", "x", "y"),
+                "names\\(s\\) not found: 'x', 'y'"
+            )
+            expect_error(
+                delete_at(co, "a", 1, 5),
+                "index out of range \\(length = 4\\): 5"
+            )
+            was_not_touched_on_error <- all.equal(co, co2)
             expect_true(was_not_touched_on_error)
 
             ee(ref_delete_at(co, 1:4), container())
@@ -36,20 +42,23 @@ describe("delete_at", {
             d <- dict(a = 1, b = 2, f = mean)
             d2 <- clone(d)
             ee(delete_at(d, "a", "f", "b"), dict())
-            original_was_not_touched <- ee(d, d2)
+            original_was_not_touched <- all.equal(d, d2)
             expect_true(original_was_not_touched)
 
             # args as character vector
             expect_true(is_empty(delete_at(d, names(d))))
 
             ee(ref_delete_at(d, "a", "f", "b"), dict())
-            delete_was_done_on_original <- ee(d, dict())
+            delete_was_done_on_original <- all.equal(d, dict())
             expect_true(delete_was_done_on_original)
 
             d <- dict(a = 1, b = 2, f = mean)
             d2 <- clone(d)
-            expect_error(ref_delete_at(d, "a", "x", "y"), "names\\(s\\) not found: 'x', 'y'")
-            was_not_touched_on_error <- ee(d, d2)
+            expect_error(
+                ref_delete_at(d, "a", "x", "y"),
+                "names\\(s\\) not found: 'x', 'y'"
+            )
+            was_not_touched_on_error <- all.equal(d, d2)
             expect_true(was_not_touched_on_error)
         })
     })
@@ -75,7 +84,7 @@ describe("delete_at", {
             expect_error(ref_delete_at(d, "a", "z"),
                         "column\\(s\\) not found: 'z'")
 
-            d_was_not_altered <- ee(d, d2)
+            d_was_not_altered <- all.equal(d, d2)
             expect_true(d_was_not_altered)
 
             ee(ref_delete_at(d, "b"), d2[, c(1, 3)])

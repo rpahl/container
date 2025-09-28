@@ -176,11 +176,11 @@ describe("c.Deque",
 
     describe("recursive",
     {
+        cr <- function(...) c(..., recursive = TRUE)
+
         test_that(
             "recursive concatenation is consistent with list concatenation",
         {
-            cr <- function(...) c(..., recursive = TRUE)
-
             ee(cr(deque()), cr(list()))
             ee(cr(deque(1)), cr(list(1)))
             ee(cr(deque(NULL)), cr(list(NULL)))
