@@ -22,7 +22,7 @@ vignette: >
 require(container)
 knitr::opts_chunk$set(
   comment = "#",
-  prompt = F,
+  prompt = FALSE,
   tidy = FALSE,
   cache = FALSE,
   collapse = T

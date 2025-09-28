@@ -128,8 +128,10 @@ co
 
 ### Get started
 
-- [Use container in interactive session](articles/v01-interactive-usage.html)
-- [Use container for code development](articles/v02-code-development.html)
+- [Use container in interactive
+  session](articles/v01-interactive-usage.html)
+- [Use container for code
+  development](articles/v02-code-development.html)
 - [Manage parameter lists with dict](articles/v03-parameter-list.html)
 - [Manage data columns with
   dict.table](articles/v04-manage-data-columns.html)
