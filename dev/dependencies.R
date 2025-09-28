@@ -1,0 +1,10 @@
+
+# Developer & CI tools (not needed by end users)
+library(attachment)
+library(covr)
+library(devtools)
+library(DT)             # required for covr::report()
+library(fledge)
+library(htmltools)      # required for covr::report()
+library(lintr)
+library(rcmdcheck)
