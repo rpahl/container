@@ -10,7 +10,7 @@ require(badger)
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#",
-  prompt = F,
+  prompt = FALSE,
   fig.path = "images/README-",
   tidy = FALSE,
   cache = FALSE,

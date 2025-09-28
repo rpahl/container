@@ -25,10 +25,10 @@ library(tibble)
 
 knitr::opts_chunk$set(
   comment = "#",
-  prompt = F,
+  prompt = FALSE,
   tidy = FALSE,
   cache = FALSE,
-  collapse = T,
+  collapse = TRUE,
   fig.width = 7
 )
 
