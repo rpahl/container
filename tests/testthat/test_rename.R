@@ -11,11 +11,18 @@ describe(
             x <- container(A = 1, B = 2)
             expect_error(rename(x, 1, "C"), "'old' must be character")
             expect_error(rename(x, "A", 1), "'new' must be character")
-            expect_error(rename(x, "A", c("C", "D")), "must be of the same length")
+            expect_error(
+                rename(x, "A", c("C", "D")),
+                "must be of the same length"
+            )
             expect_error(rename(x, "A", "B"), "name 'B' already in Container")
-            expect_error(rename(x, "Z", "B"), "Items of 'old' not found in names: Z")
+            expect_error(
+                rename(x, "Z", "B"),
+                "Items of 'old' not found in names: 'Z'"
+            )
             expect_error(rename(x, c("A", "A"), c("a", "a")),
-                         "'old' has duplicated names: A")
+                         "'old' has duplicated names: 'A'"
+            )
         })
 
         test_that("rename works correctly with value semantics",
@@ -31,7 +38,7 @@ describe(
             x <- container(A = 1, B = 2)
             vals <- as.numeric(as.list(x))
             ref_rename(x, "A", "a")
-            ee(x, container(a = 1, B = 2))   # now names were changed by reference
+            ee(x, container(a = 1, B = 2)) # now names were changed by reference
 
             expect_true(has_name(x, "a"))
             expect_false(has_name(x, "A"))
@@ -49,7 +56,7 @@ describe(
             # Renaming same key multiple times is not possible
             x <- container(x = 1, y = 2)
             expect_error(rename(x, c("x", "x2"), c("x2", "x3")),
-                         "Items of 'old' not found in names: x2")
+                         "Items of 'old' not found in names: 'x2'")
         })
     })
 
@@ -74,27 +81,35 @@ describe(
             dit <- dict.table(y = 1:2, z = 2:1)
             # Multiple renames
             expect_error(rename(dit, c("y", "y2"), c("y2", "y3")),
-                         "Items of 'old' not found in names: y2")
+                         "Items of 'old' not found in names: 'y2'")
         })
 
         test_that("rename prevents duplicated column names",
         {
             dit <- dict.table(a = 1:2, b = 2:1)
-            expect_error(rename(dit, "a", "b"),
-                         "renaming not possible due to duplicated column names: b")
+            expect_error(
+                rename(dit, "a", "b"),
+                "renaming not possible due to duplicated column names: b"
+            )
 
             hasSameColumnNames <- isTRUE(all.equal(colnames(dit), c("a", "b")))
             expect_true(hasSameColumnNames)
 
-            expect_error(ref_rename(dit, "a", "b"),
-                         "renaming not possible due to duplicated column names: b")
+            expect_error(
+                ref_rename(dit, "a", "b"),
+                "renaming not possible due to duplicated column names: b"
+            )
             hasSameColumnNames <- isTRUE(all.equal(colnames(dit), c("a", "b")))
             expect_true(hasSameColumnNames)
 
             dit <- dict.table(a = 1, b = 2, c = 3, d = 4)
-            expect_error(ref_rename(dit, c("a", "b"), c("c", "d")),
-                         "renaming not possible due to duplicated column names: c, d")
-            hasSameColumnNames <- isTRUE(all.equal(colnames(dit), c("a", "b", "c", "d")))
+            expect_error(
+                ref_rename(dit, c("a", "b"), c("c", "d")),
+                "renaming not possible due to duplicated column names: c, d"
+            )
+            hasSameColumnNames <- isTRUE(
+                all.equal(colnames(dit), c("a", "b", "c", "d"))
+            )
             expect_true(hasSameColumnNames)
         })
     })
