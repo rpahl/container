@@ -15,12 +15,12 @@
 
 \item{i, ...}{indices specifying elements to extract. Indices
 can be \code{logical}, \code{numeric}, \code{character}, or a mix of these.
-They can be passed as a \code{vector}, a \code{list}, or as a comma-separated
+They can be passed as \code{vector}, \code{list}, or comma-separated
 sequence.
-Non-existing indices are ignored, but will be set with a default
-value if provided (see \code{.default} parameter).
+Non-existing indices are ignored, but can be substituted if a
+default value was provided (see \code{.default} parameter).
 Supports alpha-numeric range selection via non-standard evaluation
-(see Examples).}
+(e.g., \code{co[a:b]} see Examples).}
 
 \item{.default}{value to be returned if peeked value does not exist.}
 }
@@ -42,7 +42,7 @@ Alpha-numeric range selection (e.g. \code{co[a:b]}) is intended for
 interactive use only, because the non-standard evaluation of the
 range arguments can have unanticipated consequences.
 For programming it is therefore better to use the standard subsetting
-indices (e.g. \code{co[1:2]} or co\link{c("a", "b")}).
+indices (e.g. \code{co[1:2]} or \code{co[c("a", "b")]}).
 }
 
 \examples{

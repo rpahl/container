@@ -195,8 +195,9 @@ from the \code{container} object.
 }
 
 \itemize{
-\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more keys
-from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
+\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more
+keys from \code{old} to \code{new}, respectively, by copy and in place (i.e. by
+reference).
 }
 
 \itemize{

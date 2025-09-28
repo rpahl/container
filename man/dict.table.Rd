@@ -49,7 +49,8 @@ functions and operators at the same time.
 \details{
 Methods that alter \link{dict.table} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and \code{\link[=ref_add]{ref_add()}}.
+\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and
+\code{\link[=ref_add]{ref_add()}}.
 
 \itemize{
 \item \code{dict.table(...)} initializes and returns a \link{dict} object.
@@ -156,9 +157,9 @@ dit[y > 5]
 (ref_discard_at(dit, "x"))                   # discard column 'x'
 
 try(at(dit, "x"))                            # index 'x' not found
-try(replace_at(dit, x = 0))                  # cannot be replaced, if it does not exist
+try(replace_at(dit, x = 0))                  # cannot replace non-existing x
 
-dit = replace_at(dit, x = 0, .add = TRUE)    # ok - re-adds column 'x' with all 0s
+dit = replace_at(dit, x = 0, .add = TRUE)    # re-adds column 'x' with all 0s
 peek_at(dit, "x")                            # glance at column 'x'
 has_name(dit, "x")                           # TRUE
 ref_pop(dit, "x")                            # get column and remove it

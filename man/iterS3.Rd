@@ -12,10 +12,10 @@
 \alias{get_next}
 \alias{has_next}
 \alias{has_value}
+\alias{length.Iterator}
 \alias{pos}
 \alias{next_iter}
 \alias{reset_iter}
-\alias{length.Iterator}
 \title{Iterate over Sequences}
 \usage{
 iter(x, ...)
@@ -38,18 +38,18 @@ has_next(it)
 
 has_value(it)
 
+\method{length}{Iterator}(x)
+
 pos(it)
 
 next_iter(it)
 
 reset_iter(it)
-
-\method{length}{Iterator}(x)
 }
 \arguments{
 \item{x}{an object of class \link{Iterable} or any other \code{R} object. In the
-latter case, \code{x} will always be coerced to a base \code{R} \link{list} prior to creating
-the \link{Iterator}.}
+latter case, \code{x} will always be coerced to a base \code{R} \link{list} prior to
+creating the \link{Iterator}.}
 
 \item{...}{other parameters passed to or from methods}
 
@@ -60,8 +60,8 @@ the \link{Iterator}.}
 }
 \description{
 An \code{Iterator} is an object that allows to iterate over
-sequences. It implements \code{\link[=next_iter]{next_iter()}} and \code{\link[=get_value]{get_value()}} to iterate and retrieve the
-value of the sequence it is associated with.
+sequences. It implements \code{\link[=next_iter]{next_iter()}} and \code{\link[=get_value]{get_value()}} to iterate and
+retrieve the value of the sequence it is associated with.
 For documentation of the methods see \link{Iterator}.
 }
 \examples{
