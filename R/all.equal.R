@@ -35,4 +35,3 @@ all.equal.Container = function(target, current, ...)
     # TODO: construct messages for non-equality case
     FALSE
 }
-

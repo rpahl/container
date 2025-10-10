@@ -78,4 +78,3 @@ ref_clear.dict.table <- function(x)
 
     invisible(x)
 }
-

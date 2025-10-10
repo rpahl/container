@@ -75,4 +75,3 @@ for (type in c("matrix", "data.frame"))
 
 setMethod(".get_label", signature("logical"), .get_label.logical)
 setMethod(".get_label", signature("character"), .get_label.character)
-

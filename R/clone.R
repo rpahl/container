@@ -49,4 +49,3 @@ clone.dict.table <- function(x) (copy(x))
 #' ref_clear(d)
 #' print(d2)
 NULL
-

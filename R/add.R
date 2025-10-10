@@ -128,8 +128,8 @@ add.dict.table <- function(.x, ...)
 #' @name dict.table
 #' @rdname dict.table
 #' @details
-#' * `add(.x, ...)` and `ref_add(.x, ...)` add columns to `.x`. If the column name
-#' already exists, an error is given.
+#' * `add(.x, ...)` and `ref_add(.x, ...)` add columns to `.x`.
+#' If the column name already exists, an error is given.
 #' @examples
 #'
 #' dit = dict.table(a = 1:3)

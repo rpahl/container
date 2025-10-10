@@ -53,4 +53,3 @@ ref_discard.Container <- function(.x, ...)
 
     invisible(.x)
 }
-

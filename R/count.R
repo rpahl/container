@@ -36,5 +36,3 @@ NULL
 #' @rdname count
 #' @export
 count.Set <- function(x, elem) as.integer(x$has(elem))
-
-

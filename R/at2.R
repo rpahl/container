@@ -93,5 +93,3 @@ at2.dict.table <- function(x, index, ...)
 #' try(at2(dit, "x"))     # index 'x' not found
 #' try(at2(dit, 5))       # index 5 exceeds length of dict.table
 NULL
-
-
