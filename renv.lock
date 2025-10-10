@@ -3,6 +3,26 @@
     "Version": "4.5.1",
     "Repositories": [
       {
+        "Name": "BioCsoft",
+        "URL": "https://bioconductor.org/packages/3.21/bioc"
+      },
+      {
+        "Name": "BioCann",
+        "URL": "https://bioconductor.org/packages/3.21/data/annotation"
+      },
+      {
+        "Name": "BioCexp",
+        "URL": "https://bioconductor.org/packages/3.21/data/experiment"
+      },
+      {
+        "Name": "BioCworkflows",
+        "URL": "https://bioconductor.org/packages/3.21/workflows"
+      },
+      {
+        "Name": "BioCbooks",
+        "URL": "https://bioconductor.org/packages/3.21/books"
+      },
+      {
         "Name": "CRAN",
         "URL": "https://packagemanager.posit.co/cran/latest"
       }
@@ -4110,32 +4130,6 @@
       "NeedsCompilation": "yes",
       "Author": "Lionel Henry [aut, cre], Hadley Wickham [aut], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Lionel Henry <lionel@posit.co>",
-      "Repository": "CRAN"
-    },
-    "tinytest": {
-      "Package": "tinytest",
-      "Version": "1.4.1",
-      "Source": "Repository",
-      "Maintainer": "Mark van der Loo <mark.vanderloo@gmail.com>",
-      "License": "GPL-3",
-      "Title": "Lightweight and Feature Complete Unit Testing Framework",
-      "Type": "Package",
-      "LazyLoad": "yes",
-      "Authors@R": "c( person(\"Mark\", \"van der Loo\" , role    = c(\"aut\",\"cre\") , email   = \"mark.vanderloo@gmail.com\" , comment = c(ORCID=\"0000-0002-9807-4686\")) )",
-      "Description": "Provides a lightweight (zero-dependency) and easy to use  unit testing framework. Main features: install tests with  the package. Test results are treated as data that can be stored and  manipulated. Test files are R scripts interspersed with test commands, that can be programmed over. Fully automated build-install-test sequence for  packages. Skip tests when not run locally (e.g. on CRAN). Flexible and  configurable output printing. Compare computed output with output stored  with the package. Run tests in parallel. Extensible by other packages. Report side effects.",
-      "URL": "https://github.com/markvanderloo/tinytest",
-      "BugReports": "https://github.com/markvanderloo/tinytest/issues",
-      "Depends": [
-        "R (>= 3.0.0)"
-      ],
-      "Imports": [
-        "parallel",
-        "utils"
-      ],
-      "RoxygenNote": "7.2.1",
-      "Encoding": "UTF-8",
-      "NeedsCompilation": "no",
-      "Author": "Mark van der Loo [aut, cre] (<https://orcid.org/0000-0002-9807-4686>)",
       "Repository": "CRAN"
     },
     "tinytex": {
