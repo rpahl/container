@@ -1,7 +1,7 @@
 describe("Ops arithmetic", {
     describe("Container", {
         test_that("arithmetic operations work for Container objects", {
-            # x + y
+            # Addition
             co <- container(1, 2)
             expect_equal(co + container(), co)
             expect_equal(container() + co, co)
@@ -12,7 +12,7 @@ describe("Ops arithmetic", {
             expect_equal(1:3 + co, container(1, 2, 3, 1, 2))
             expect_equal(co + co, container(1, 2, 1, 2))
 
-            # x - y
+            # Subtraction
             co <- container(1L, 2L, 2L, 3L)
             expect_equal(co - container(), co)
             expect_equal(container() - co, container())
@@ -44,7 +44,7 @@ describe("Ops arithmetic", {
 
     describe("Set", {
         test_that("arithmetic operations work for Set objects", {
-            # x + y
+            # Addition
             x <- setnew(1, 2,    "1", "2")
             y <- setnew(   2, 3,      "2", "3")
             expect_equal(x + x, x)
@@ -54,7 +54,7 @@ describe("Ops arithmetic", {
             expect_equal(list() + x, x)
             expect_false((x + y) == (y + x))
 
-            # x - y
+            # Subtraction
             x <- setnew(1, 2,    "1", "2")
             y <- setnew(   2, 3,      "2", "3")
             expect_equal(x - x, setnew())

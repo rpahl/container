@@ -8,5 +8,7 @@ linters: linters_with_defaults(
     object_name_linter = NULL,
     spaces_left_parentheses_linter = NULL,
     spaces_inside_linter = NULL,
-    quotes_linter = NULL
+    quotes_linter = NULL,
+    object_usage_linter = NULL,
+    line_length_linter = NULL
   )

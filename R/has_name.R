@@ -80,4 +80,3 @@ has_name.dict.table <- function(x, name)
 #' has_name(dit, "a")    # TRUE
 #' has_name(dit, "x")    # FALSE
 NULL
-

@@ -72,4 +72,3 @@ Math.Set <- function(x, ...)
 {
     as.set(get(.Generic)(unpack(x), ...))
 }
-

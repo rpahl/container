@@ -104,4 +104,3 @@ peek_at.dict.table <- function(.x, ..., .default = NULL)
 #' peek_at(dit, "x", .default = 0)
 #' peek_at(dit, "a", "x", .default = 0)
 NULL
-

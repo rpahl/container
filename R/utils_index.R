@@ -84,4 +84,3 @@ setMethod(".has_index",
     .assert_index_arg(index)
     .has_index(x, index)
 }
-

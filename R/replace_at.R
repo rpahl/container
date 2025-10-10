@@ -181,4 +181,3 @@ ref_replace_at.dict.table <- function(.x, ..., .add = FALSE)
 #' })
 #' replace_at(dit, "b", 4:6, .add = TRUE)  # ok, adds column
 NULL
-

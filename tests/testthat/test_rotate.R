@@ -11,7 +11,7 @@ describe("rotate",
 
     test_that("ref_rotate.Deque modifies in place", {
         d <- deque(1, 2, 3, 4)
-        
+
         # by reference
         ref_rotate(d)
         ee(d, deque(4, 1, 2, 3))
