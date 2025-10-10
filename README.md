@@ -8,10 +8,6 @@ release](https://www.r-pkg.org/badges/version/container)](https://cran.r-project
 [![Dependencies](https://tinyverse.netlify.app/badge/container)](https://CRAN.R-project.org/package=container)
 [![Code
 coverage](https://codecov.io/gh/rpahl/container/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpahl/container)
-[![R-CMD-check
-status](https://github.com/rpahl/container/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/container/actions)
-[![Test coverage
-status](https://github.com/rpahl/container/workflows/test-coverage/badge.svg)](https://github.com/rpahl/container/actions)
 [![CRAN
 checks](https://badges.cranchecks.info/summary/container.svg)](https://cran.r-project.org/web/checks/check_results_v01-interactive-usage.html)
 [![Downloads per
