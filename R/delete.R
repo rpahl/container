@@ -65,5 +65,3 @@ ref_delete.Container <- function(.x, ...)
     lapply(elems, function(e) .x$delete(e))
     invisible(.x)
 }
-
-

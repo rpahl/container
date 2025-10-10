@@ -44,4 +44,3 @@ format.list <-
 function(x, ...) {
     .format_values(x, left = "list(", right = ")", ...)
 }
-

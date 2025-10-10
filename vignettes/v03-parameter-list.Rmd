@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
   prompt = FALSE,
   tidy = FALSE,
   cache = FALSE,
-  collapse = T
+  collapse = TRUE
 )
 
 old <- options(width = 100L)

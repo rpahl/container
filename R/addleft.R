@@ -49,5 +49,3 @@ ref_addleft.Deque <- function(.x, ...)
 
     invisible(.x)
 }
-
-

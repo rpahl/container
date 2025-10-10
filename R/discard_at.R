@@ -116,4 +116,3 @@ ref_discard_at.dict.table <- function(.x, ...)
 
     invisible(.x)
 }
-
