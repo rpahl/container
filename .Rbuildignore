@@ -1,19 +1,38 @@
+# Reproducibility / project infra (exclude from built package)
 ^renv$
 ^renv\.lock$
-.git
-.gitignore
-TODO
+^\.renvignore$
+^\.Rprofile$
+
+# RStudio / IDE project files
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
+# Development scratch directories
+^check$
+^dev$
+^data-raw$             # If/when you add data preparation scripts
+^tags$
+
+# CI / VCS / editor config
+^\.git$
 ^\.github$
-^\.Rprofile$
-tags
-^pkgdown$
-^_pkgdown\.yml$
-^docs$
-^doc$
+^\.vscode$
+^\.lintr$
+
+# Documentation/site generation (optional)
+^README\.md$
 ^README\.Rmd$
-^doc$
+^_pkgdown\.yml$
+^pkgdown$
+^docs$                 # If you publish pkgdown to docs/
+
+# Repository meta docs (optional to exclude; safe to keep if you prefer)
+^cran-comments\.md$
+^CODE_OF_CONDUCT\.md$
+^CONTRIBUTING\.md$
+^CHANGELOG\.md$
 ^Meta$
 
-^images$
+# Misc artifacts
+^workflows\.zip$
