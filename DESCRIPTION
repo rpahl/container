@@ -28,8 +28,7 @@ Suggests:
     microbenchmark,
     rmarkdown,
     testthat (>= 3.0.0),
-    tibble,
-    tinytest
+    tibble
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3
