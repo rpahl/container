@@ -112,4 +112,3 @@ ref_replace.Dict <- function(.x, old, new, ...)
 #' replace(d, "a", 2)              # old element ("a") is not in Dict
 #' })
 NULL
-

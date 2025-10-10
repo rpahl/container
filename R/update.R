@@ -123,4 +123,3 @@ update.list <- function(object, other, ...)
 
     as.list(as.container(object)$update(as.container(other)))
 }
-

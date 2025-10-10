@@ -97,4 +97,3 @@ getContainerOption = function(x, default = NULL)
     else
         default
 }
-

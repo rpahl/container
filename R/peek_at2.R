@@ -102,5 +102,3 @@ peek_at2.dict.table <- function(x, index, default = NULL)
 #' peek_at2(dit, "x")
 #' peek_at2(dit, "x", default = 0)
 NULL
-
-

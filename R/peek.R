@@ -53,4 +53,3 @@ peekleft.Deque <- function(x, default = NULL) x$peekleft(default)
 #' peek(deque(), default = 0)
 #' peekleft(deque(), default = 0)
 NULL
-

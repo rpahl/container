@@ -163,4 +163,3 @@ ref_add.dict.table <- function(.x, ...)
 
     invisible(.x)
 }
-

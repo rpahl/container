@@ -45,4 +45,3 @@ ref_rotate.Deque <- function(x, n = 1L)
 {
     invisible(x$rotate(n))
 }
-

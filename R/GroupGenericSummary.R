@@ -61,4 +61,3 @@ Summary.Set <- function(..., na.rm = FALSE)
 {
     get(.Generic)(unlist(lapply(..., unpack)), na.rm = na.rm)
 }
-

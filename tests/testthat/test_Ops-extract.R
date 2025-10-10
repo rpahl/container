@@ -131,6 +131,6 @@ describe(
         expect_error(co[[NA]], "index must not be 'NA'")
 
         skip("TODO: currently not equal (NULL vs 1)")
-        #ee(co[[TRUE]], l[[TRUE]])
+        #ee(co[[TRUE]], l[[TRUE]]) # nolint
     })
 })

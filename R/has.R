@@ -69,4 +69,3 @@ has.dict.table <- function(x, column, ...)
 #' has(dit, 4:6)            # FALSE
 #' has(dit, as.list(4:6))   # TRUE
 NULL
-
