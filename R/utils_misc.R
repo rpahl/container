@@ -45,3 +45,6 @@ unlist1 = function(x, ...)
 {
     unlist(x, recursive = FALSE, ...)
 }
+
+
+`%||%` <- function(a, b) if (is.null(a)) b else a
