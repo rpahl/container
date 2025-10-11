@@ -19,7 +19,6 @@ Imports:
     data.table,
     methods,
     R6,
-    tools,
     utils
 Suggests:
     dplyr,

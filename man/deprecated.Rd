@@ -41,6 +41,8 @@ set(...)
 \item{x}{any \code{R} object.}
 
 \item{decr}{\code{logical} sort decreasingly?}
+
+\item{...}{additional arguments.}
 }
 \description{
 These functions are provided for backwards-compatibility and
