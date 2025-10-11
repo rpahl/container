@@ -169,7 +169,6 @@ describe(
 
     test_that(".default argument",
     {
-        skip("not yet implemented")
         # Default values
         co <- container(a = 1, 2, b = 3, 4)
         ee(co[1, 99, .default = 0], container(a = 1, 0))

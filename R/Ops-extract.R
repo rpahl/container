@@ -1,5 +1,7 @@
 
 .is_call <- function(x, name) is.call(x) && identical(x[[1L]], as.name(name))
+.container_len <- length
+.container_names <- names
 
 # Expand an endpoint (symbol or number) to a 1-based position
 .container_endpoint_pos <- function(endp, nm, n, env, strict) {
@@ -29,74 +31,60 @@
 }
 
 # Turn a single token (language/object) into positions + negate flag
-.container_token_to_positions <- function(tok, nm, n, env, strict) {
-    # Return list(pos = integer(), negate = FALSE)
-    res <- list(pos = integer(0L), negate = FALSE)
+.container_token_to_positions <- function(tok, nm, n, env, strict, keep_raw) {
+  res <- list(pos = integer(0L), raw = NULL, negate = FALSE)
+  if (is.null(tok)) return(res)
 
-    if (is.null(tok)) return(res)
+  if (is.call(tok) && identical(tok[[1L]], as.name("list"))) {
+    args <- as.list(tok)[-1L]
+    out <- lapply(args, .container_token_to_positions, nm = nm, n = n, env = env, strict = strict, keep_raw = keep_raw)
+    return(list(pos = out, raw = NULL, negate = "LIST"))
+  }
 
-    # list(...) inside the index should behave like comma-sugar
-    if (is.call(tok) && identical(tok[[1L]], as.name("list"))) {
-        args <- as.list(tok)[-1L]
-        out <- lapply(
-            args,
-            FUN = .container_token_to_positions,
-            nm = nm, n = n, env = env, strict = strict
-        )
-        # concatenate respecting negation rules later
-        return(list(pos = out, negate = "LIST"))
+  if (is.call(tok) && identical(tok[[1L]], as.name("-"))) {
+    inner <- .container_token_to_positions(tok[[2L]], nm, n, env, strict, keep_raw = FALSE)
+    if (identical(inner$negate, "LIST")) {
+      inner_flat <- .container_flatten_list_nodes(inner$pos, nm, n, env, strict, keep_raw = FALSE)
+      inner <- list(pos = inner_flat$pos, raw = NULL, negate = FALSE)
     }
+    inner$negate <- !isTRUE(inner$negate)
+    return(inner)
+  }
 
-    # unary minus: -(a:b), -1, -c(1, 2), -c("a", "b")
-    if (is.call(tok) && identical(tok[[1L]], as.name("-"))) {
-        inner <- .container_token_to_positions(tok[[2L]], nm, n, env, strict)
-        # If LIST, flatten first
-        if (identical(inner$negate, "LIST")) {
-            inner_flat <- .container_flatten_list_nodes(inner$pos, nm, n, env, strict)
-            inner <- list(pos = inner_flat$pos, negate = FALSE)
-        }
-        inner$negate <- !isTRUE(inner$negate)
-        return(inner)
+  if (is.call(tok) && identical(tok[[1L]], as.name(":"))) {
+    lhs <- tok[[2L]]; rhs <- tok[[3L]]
+    L <- .container_endpoint_pos(lhs, nm, n, env, strict)
+    R <- .container_endpoint_pos(rhs, nm, n, env, strict)
+    if (anyNA(c(L, R))) {
+      if (strict) stop("Range endpoints could not be resolved.", call. = FALSE)
+    } else {
+      rng <- if (L <= R) seq.int(L, R) else seq.int(L, R, by = -1L)
+      res$pos <- as.integer(rng)
+      if (keep_raw) res$raw <- as.list(as.integer(rng))  # numeric raw tokens
     }
+    return(res)
+  }
 
-    # range operator :
-    if (is.call(tok) && identical(tok[[1L]], as.name(":"))) {
-        lhs <- tok[[2L]]; rhs <- tok[[3L]]
-        L <- .container_endpoint_pos(lhs, nm, n, env, strict)
-        R <- .container_endpoint_pos(rhs, nm, n, env, strict)
-        if (anyNA(c(L, R))) {
-        if (strict) stop("Range endpoints could not be resolved.", call. = FALSE)
-        return(res)
-        }
-        rng <- if (L <= R) seq.int(L, R) else seq.int(L, R, by = -1L)
-        res$pos <- as.integer(rng)
-        return(res)
+  if (is.symbol(tok)) {
+    key <- as.character(tok)
+    if (key %in% nm) {
+      res$pos <- match(key, nm)
+      if (keep_raw) res$raw <- list(key)                 # name token as character
+      return(res)
     }
+  }
 
-    # bare name -> treat as container name if present, otherwise evaluate
-    if (is.symbol(tok)) {
-        key <- as.character(tok)
-        if (key %in% nm) {
-        res$pos <- match(key, nm)
-        return(res)
-        }
-        # allow TRUE/FALSE as symbols to fall through to eval
-    }
-
-    # c(...) : evaluate normally; but we still want to support mixed types
-    if (is.call(tok) && identical(tok[[1L]], as.name("c"))) {
-        val <- try(suppressWarnings(eval(tok, env)), silent = TRUE)
-        return(.container_value_to_positions(val, nm, n, strict))
-    }
-
-    # default: evaluate the token and map to positions
+  if (is.call(tok) && identical(tok[[1L]], as.name("c"))) {
     val <- try(suppressWarnings(eval(tok, env)), silent = TRUE)
-    .container_value_to_positions(val, nm, n, strict)
+    return(.container_value_to_positions(val, nm, n, strict, keep_raw))
+  }
+
+  val <- try(suppressWarnings(eval(tok, env)), silent = TRUE)
+  .container_value_to_positions(val, nm, n, strict, keep_raw)
 }
 
-# Convert an already-evaluated value (numeric/character/logical) to positions
-.container_value_to_positions <- function(val, nm, n, strict) {
-  res <- list(pos = integer(0L), negate = FALSE)
+.container_value_to_positions <- function(val, nm, n, strict, keep_raw) {
+  res <- list(pos = integer(0L), raw = NULL, negate = FALSE)
   if (is.null(val)) return(res)
 
   if (is.logical(val)) {
@@ -113,62 +101,129 @@
 
   if (is.numeric(val)) {
     v <- as.integer(val)
-    v <- v[v != 0L]  # ignore zeros
-    has_pos <- any(v > 0L, na.rm = TRUE)
-    has_neg <- any(v < 0L, na.rm = TRUE)
-    if (has_pos && has_neg)
-      stop("Cannot mix positive and negative indices.", call. = FALSE)
-    if (has_neg) return(list(pos = abs(v), negate = TRUE))
+    v <- v[v != 0L & !is.na(v)]
+    has_pos <- any(v > 0L); has_neg <- any(v < 0L)
+    if (has_pos && has_neg) stop("Cannot mix positive and negative indices.", call. = FALSE)
+    if (has_neg) return(list(pos = abs(v), raw = NULL, negate = TRUE))
     res$pos <- v
+    if (keep_raw) res$raw <- lapply(v, identity)        # list of integers
     return(res)
   }
 
   if (is.character(val)) {
-    pos <- match(val, nm, nomatch = NA_integer_)
-    if (anyNA(pos)) {
-      missing <- unique(val[is.na(pos)])
-      if (strict)
-        stop(sprintf("Unknown names in index: %s", paste0(dQuote(missing), collapse = ", ")), call. = FALSE)
-      pos <- pos[!is.na(pos)]
+    if (keep_raw) {
+      res$raw <- lapply(as.list(val), identity)         # list of names
+      known <- match(val, nm, nomatch = NA_integer_)
+      res$pos <- known[!is.na(known)]
+      return(res)
+    } else {
+      pos <- match(val, nm, nomatch = NA_integer_)
+      if (anyNA(pos)) {
+        missing <- unique(val[is.na(pos)])
+        if (strict) stop(sprintf("Unknown names in index: %s", paste0(dQuote(missing), collapse = ", ")), call. = FALSE)
+        pos <- pos[!is.na(pos)]
+      }
+      res$pos <- as.integer(pos)
+      return(res)
     }
-    res$pos <- as.integer(pos)
-    return(res)
   }
 
   if (is.list(val)) {
-    parts <- lapply(val, .container_value_to_positions, nm = nm, n = n, strict = strict)
-    return(list(pos = parts, negate = "LIST"))
+    parts <- lapply(val, .container_value_to_positions, nm = nm, n = n, strict = strict, keep_raw = keep_raw)
+    return(list(pos = parts, raw = NULL, negate = "LIST"))
   }
 
   if (strict) stop(sprintf("Unsupported index type: %s", class(val)[1]), call. = FALSE)
   res
 }
 
-# Flatten a list of node results produced by list(...) or commas
-.container_flatten_list_nodes <- function(nodes, nm, n, env, strict) {
-  # nodes is a list of lists {pos, negate} possibly with nested LIST markers
-  out_pos <- list()
-  out_neg <- logical()
+.container_flatten_list_nodes <- function(nodes, nm, n, env, strict, keep_raw) {
+  out_pos <- list(); out_raw <- list(); out_neg <- logical()
   for (node in nodes) {
     if (identical(node$negate, "LIST")) {
-      inner <- .container_flatten_list_nodes(node$pos, nm, n, env, strict)
+      inner <- .container_flatten_list_nodes(node$pos, nm, n, env, strict, keep_raw)
       out_pos <- c(out_pos, list(list(pos = inner$pos, negate = FALSE)))
+      out_raw <- c(out_raw, inner$raw)
       out_neg <- c(out_neg, FALSE)
     } else {
       out_pos <- c(out_pos, list(node))
+      if (!is.null(node$raw)) out_raw <- c(out_raw, node$raw)  # node$raw is already a list of scalars
       out_neg <- c(out_neg, isTRUE(node$negate))
     }
   }
-  if (length(out_pos) == 0L) return(list(pos = integer(0L), any_neg = FALSE, all_neg = FALSE))
   list(
     pos     = unlist(lapply(out_pos, `[[`, "pos"), use.names = FALSE),
+    raw     = out_raw,   # keep as list (no unlist!)
     any_neg = any(out_neg),
     all_neg = all(out_neg)
   )
 }
 
+
 # Top-level resolver: returns final positive positions (1-based, duplicates allowed)
-.container_resolve_indices <- function(x, i_expr, dots_exprs, env, strict) {
+.container_resolve_indices <- function(x, i_expr, dots_exprs, env, strict, keep_raw) {
+  n  <- .container_len(x)
+  nm <- .container_names(x) %||% rep.int("", n)
+
+  toks <- c(if (!is.null(i_expr)) list(i_expr) else list(), dots_exprs)
+  if (length(toks) == 1L && .is_call(toks[[1L]], "list")) toks <- as.list(toks[[1L]])[-1L]
+
+  all_logical <- length(toks) > 1L && all(vapply(toks, function(e) {
+    v <- try(suppressWarnings(eval(e, env)), silent = TRUE)
+    is.logical(v)
+  }, logical(1)))
+
+  if (all_logical) {
+    v <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
+    nodes <- list(.container_value_to_positions(v, nm, n, strict, keep_raw = FALSE))
+  } else {
+    nodes <- lapply(toks, .container_token_to_positions,
+                    nm = nm, n = n, env = env, strict = strict, keep_raw = keep_raw)
+  }
+
+  # flatten any LIST markers
+  if (any(vapply(nodes, function(z) identical(z$negate, "LIST"), logical(1)))) {
+    flat <- .container_flatten_list_nodes(
+      lapply(nodes, function(z) if (identical(z$negate, "LIST")) z$pos else z),
+      nm, n, env, strict, keep_raw
+    )
+    nodes <- list(list(pos = flat$pos, raw = flat$raw, negate = FALSE))
+  }
+
+  vals      <- lapply(nodes, `[[`, "pos")
+  raws      <- lapply(nodes, `[[`, "raw")
+  negatives <- vapply(nodes, function(z) isTRUE(z$negate), logical(1))
+
+  if (any(negatives)) {
+    if (!all(negatives)) stop("Cannot mix positive and negative indices.", call. = FALSE)
+    drop_pos <- as.integer(unlist(vals, use.names = FALSE))
+    if (strict && any(drop_pos < 1L | drop_pos > n, na.rm = TRUE)) {
+      bad <- unique(drop_pos[drop_pos < 1L | drop_pos > n])
+      stop(sprintf("Out-of-bounds negative indices: %s", paste(bad, collapse = ", ")), call. = FALSE)
+    }
+    drop_pos <- unique(drop_pos[drop_pos >= 1L & drop_pos <= n & !is.na(drop_pos)])
+    sel <- setdiff(seq_len(n), drop_pos)
+    return(list(mode = "negative", pos = as.integer(sel)))
+  }
+
+  if (keep_raw) {
+    # concatenate lists of scalar tokens, preserving types
+    raw_tokens <- list()
+    for (r in raws) if (!is.null(r)) raw_tokens <- c(raw_tokens, r)
+    return(list(mode = "positive", raw_tokens = raw_tokens))
+  } else {
+    sel <- as.integer(unlist(vals, use.names = FALSE))
+    if (strict && any(sel < 1L | sel > n, na.rm = TRUE)) {
+      bad <- unique(sel[sel < 1L | sel > n])
+      stop(sprintf("Out-of-bounds indices: %s", paste(bad, collapse = ", ")), call. = FALSE)
+    }
+    sel <- sel[sel >= 1L & sel <= n & !is.na(sel)]
+    return(list(mode = "positive", pos = sel))
+  }
+}
+
+
+old.container_resolve_indices <- function(x, i_expr, dots_exprs, env, strict) {
   n  <- length(x)
   nm <- names(x) %||% rep.int("", n)
 
@@ -317,11 +372,12 @@ NULL
 #' co[a:8, .default = a]
 #' @export
 `[.Container` <- function(
-    x, i, ...,
-    strict = getOption("container.strict_index", FALSE)
+  x, i, ...,
+  .default = NULL,
+  strict = getOption("container.strict_index", FALSE)
 ) {
-    i_expr     <- if (missing(i)) NULL else substitute(i)
-    dots_exprs <- as.list(substitute(list(...)))[-1L]
+  i_expr     <- if (missing(i)) NULL else substitute(i)
+  dots_exprs <- as.list(substitute(list(...)))[-1L]
 
     if (!missing(i) && is.null(i_expr)) {
         return(x[0])
@@ -332,24 +388,28 @@ NULL
         return(x)
     }
 
-    pos <- .container_resolve_indices(
-        x, i_expr, dots_exprs,
-        env = parent.frame(),
-        strict = strict
-    )
+  keep_raw <- (!strict) && !is.null(.default)
 
-    # ---- apply selection to your Container ----
-    # Replace this with your class-specific subsetter:
-    #   - Keep order and duplicates in 'pos'
-    #   - Preserve names
-    #   - Return a Container, not a base list
-    out <- peek_at(x, pos)
+  idx <- .container_resolve_indices(
+    x, i_expr, dots_exprs,
+    env = parent.frame(),
+    strict = strict,
+    keep_raw = keep_raw
+  )
 
-    # Ensure class stays "Container" (if x[pos] drops it)
-    class(out) <- class(x)
-    out
+  if (identical(idx$mode, "negative")) {
+    out <- x[idx$pos]
+  } else if (keep_raw) {
+    args <- c(list(x), idx$raw_tokens)           # list of scalars, types preserved
+    args[[".default"]] <- .default
+    out <- do.call(peek_at, args)
+  } else {
+    out <- peek_at(x, idx$pos)
+  }
+
+  class(out) <- class(x)
+  out
 }
-
 
 
 #' @name ContainerS3
