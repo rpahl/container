@@ -350,68 +350,6 @@ NULL
 }
 
 
-"old_[.Container" <- function(x, ..., .default = NULL)
-{
-    args <- as.list(match.call())
-    dots <- args[-(1:2)]
-
-    # Handle empty selection
-    if (length(dots) == 1) {
-        # Make sure empty selection returns x as is
-        hasName <- is.name(dots[[1]])
-        if (hasName) {
-            isEmpty <- nchar(dots[[1]]) == 0
-            if (isEmpty) {
-                return(x)
-            }
-        }
-    }
-
-    vars <- names(x)
-    nl <- as.list(seq_along(vars))
-    names(nl) <- vars
-    for (i in seq_along(dots)) {
-        dots[[i]] <- suppressWarnings(
-            # suppress warning about 'restarting interrupted promise evaluation'
-            tryCatch(
-                list(...)[[i]],
-                error = function(e) {
-                    # If we get here, we most likley have to handle non-standard
-                    # evaluation of alpha-numeric indices like co[a:d]
-                    call <- eval(substitute(dots[[i]]), envir = nl)
-                    dots[[i]] <- eval(call, envir = nl)
-                }
-            )
-        )
-    }
-
-    if (length(dots) == 0) {
-        return(peek_at(x, ...))
-    }
-
-    # Handle boolean selection
-    hasBooleans <- all(sapply(dots, is.logical)) && length(dots) > 0
-    if (hasBooleans) {
-        mask <- rep(unlist(dots), length.out = length(x))
-        indices <- which(mask)
-        if (length(indices) == 0) {
-            return(container())
-        }
-        return(peek_at(x, which(mask)))
-    }
-
-    res <- suppressWarnings(
-        # suppress warning about 'restarting interrupted promise evaluation'
-        try(peek_at(x, ...), silent = TRUE)
-    )
-    ok <- !inherits(res, "try-error")
-    if (ok) {
-        return(res)
-    }
-
-    peek_at(x, dots)
-}
-
 
 #' @name ContainerS3
 #' @rdname ContainerS3
