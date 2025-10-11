@@ -6,12 +6,14 @@
 \alias{[[.Container}
 \title{Extract Parts of a Container Object}
 \usage{
-\method{[}{Container}(x, ...)
+\method{[}{Container}(x, ..., .default = NULL)
 
 \method{[[}{Container}(x, i)
 }
 \arguments{
 \item{x}{\code{Container} object from which to extract elements.}
+
+\item{.default}{value to be returned if peeked value does not exist.}
 
 \item{i, ...}{indices specifying elements to extract. Indices
 can be \code{logical}, \code{numeric}, \code{character}, or a mix of these.
@@ -21,8 +23,6 @@ Non-existing indices are ignored, but can be substituted if a
 default value was provided (see \code{.default} parameter).
 Supports alpha-numeric range selection via non-standard evaluation
 (e.g., \code{co[a:b]} see Examples).}
-
-\item{.default}{value to be returned if peeked value does not exist.}
 }
 \description{
 Extract parts of a \code{Container} object similar

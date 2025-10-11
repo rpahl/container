@@ -14,32 +14,38 @@ function(x, left = "(", right = ")", ...)
 }
 
 
+#' @export
 format.Container <-
 function(x, ...) {
     .format_values(x$values(), left = "[", right = "]", ...)
 }
 
+#' @export
 format.Deque <-
 function(x, ...) {
     .format_values(x$values(), left = "|", right = "|", ...)
 }
 
+#' @export
 format.Dict <-
 function(x, ...) {
     .format_values(x$values(), left = "{", right = "}", ...)
 }
 
+#' @export
 format.Set <-
 function(x, ...) {
     .format_values(x$values(), left = "{", right = "}", ...)
 }
 
+#' @export
 format.OrderedSet <-
 function(x, ...) {
     .format_values(x$values(), left = "{", right = "}", ...)
 }
 
 
+#' @export
 format.list <-
 function(x, ...) {
     .format_values(x, left = "list(", right = ")", ...)

@@ -37,7 +37,8 @@ typical set operations such as \code{union} and \code{intersect}.
 \details{
 Methods that alter \link{Set} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and \code{\link[=ref_add]{ref_add()}}.
+\code{'ref_'} to note the reference semantic, for example,
+\code{\link[=add]{add()}} and \code{\link[=ref_add]{ref_add()}}.
 
 \itemize{
 \item \code{setnew(...)} initializes and returns a \code{\link[=Set]{Set()}} object.

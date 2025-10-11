@@ -65,8 +65,8 @@ providing either copy or reference semantics where the latter start with
 }
 
 \itemize{
-\item \code{add(.x, ...)} and \code{ref_add(.x, ...)} add columns to \code{.x}. If the column name
-already exists, an error is given.
+\item \code{add(.x, ...)} and \code{ref_add(.x, ...)} add columns to \code{.x}.
+If the column name already exists, an error is given.
 }
 
 \itemize{
@@ -88,8 +88,9 @@ an error if not found.
 }
 
 \itemize{
-\item \code{delete_at(.x, ...)} and \code{ref_delete_at(.x, ...)} find and remove columns either by
-name or index (or both). If one or more columns don't exist, an error is signaled.
+\item \code{delete_at(.x, ...)} and \code{ref_delete_at(.x, ...)} find and remove columns
+either by name or index (or both). If one or more columns don't exist, an
+error is signaled.
 }
 
 \itemize{

@@ -53,7 +53,7 @@ NULL
 #' co[d:2]
 #' co[a:8, .default = a]
 #' @export
-"[.Container" <- function(x, ...)
+"[.Container" <- function(x, ..., .default = NULL)
 {
     args <- as.list(match.call())
     dots <- args[-(1:2)]

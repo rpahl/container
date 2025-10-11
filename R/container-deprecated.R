@@ -3,6 +3,7 @@
 #' @description These functions are provided for backwards-compatibility and
 #' may be defunct as soon as the next release.
 #' @param x any `R` object.
+#' @param ... additional arguments.
 #' @details
 #' * [empty()]      [is_empty()] instead
 #' * [set()]        [setnew()] instead
