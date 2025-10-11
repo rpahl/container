@@ -1,14 +1,5 @@
-# ---- helpers ---------------------------------------------------------------
 
-.container_len <- function(x) {
-  # replace with the true length accessor for your class if needed
-  length(x)
-}
-
-.container_names <- function(x) {
-  # replace with the true names accessor for your class if needed
-  names(x)
-}
+.is_call <- function(x, name) is.call(x) && identical(x[[1L]], as.name(name))
 
 # Expand an endpoint (symbol or number) to a 1-based position
 .container_endpoint_pos <- function(endp, nm, n, env, strict) {
@@ -61,8 +52,8 @@
         inner <- .container_token_to_positions(tok[[2L]], nm, n, env, strict)
         # If LIST, flatten first
         if (identical(inner$negate, "LIST")) {
-        inner_flat <- .container_flatten_list_nodes(inner$pos, nm, n, env, strict)
-        inner <- list(pos = inner_flat$pos, negate = FALSE)
+            inner_flat <- .container_flatten_list_nodes(inner$pos, nm, n, env, strict)
+            inner <- list(pos = inner_flat$pos, negate = FALSE)
         }
         inner$negate <- !isTRUE(inner$negate)
         return(inner)
@@ -106,51 +97,44 @@
 # Convert an already-evaluated value (numeric/character/logical) to positions
 .container_value_to_positions <- function(val, nm, n, strict) {
   res <- list(pos = integer(0L), negate = FALSE)
-
   if (is.null(val)) return(res)
 
-  # logical -> which after recycling
   if (is.logical(val)) {
     L <- length(val)
     if (L == 0L) return(res)
-    if ((n %% L) != 0L) warning(sprintf("Logical index of length %d is not a multiple of %d; recycling.", L, n), call. = FALSE)
+    if ((n %% L) != 0L)
+      warning(sprintf("Logical index of length %d is not a multiple of %d; recycling.", L, n), call. = FALSE)
     idx <- rep_len(val, n)
-    # NA in logical → treat as FALSE (warn)
     if (anyNA(idx)) warning("Logical index contains NA; treating NA as FALSE.", call. = FALSE)
     idx[is.na(idx)] <- FALSE
     res$pos <- which(idx)
     return(res)
   }
 
-  # numeric
   if (is.numeric(val)) {
     v <- as.integer(val)
-    if (any(v == 0L, na.rm = TRUE)) {
-      # 0s are ignored in base; we'll just drop them
-      v <- v[v != 0L]
-    }
-    if (length(v) && any(v < 0L, na.rm = TRUE)) {
-      # negative numeric means "negate mode" for this token
-      return(list(pos = as.integer(abs(v)), negate = TRUE))
-    }
+    v <- v[v != 0L]  # ignore zeros
+    has_pos <- any(v > 0L, na.rm = TRUE)
+    has_neg <- any(v < 0L, na.rm = TRUE)
+    if (has_pos && has_neg)
+      stop("Cannot mix positive and negative indices.", call. = FALSE)
+    if (has_neg) return(list(pos = abs(v), negate = TRUE))
     res$pos <- v
     return(res)
   }
 
-  # character -> match to names
   if (is.character(val)) {
     pos <- match(val, nm, nomatch = NA_integer_)
     if (anyNA(pos)) {
       missing <- unique(val[is.na(pos)])
-      if (strict) stop(sprintf("Unknown names in index: %s", paste0(dQuote(missing), collapse = ", ")), call. = FALSE)
-      # silently drop unknowns (current {container} behavior)
+      if (strict)
+        stop(sprintf("Unknown names in index: %s", paste0(dQuote(missing), collapse = ", ")), call. = FALSE)
       pos <- pos[!is.na(pos)]
     }
     res$pos <- as.integer(pos)
     return(res)
   }
 
-  # list: allow list of mixed things (e.g., list(1, "d"))
   if (is.list(val)) {
     parts <- lapply(val, .container_value_to_positions, nm = nm, n = n, strict = strict)
     return(list(pos = parts, negate = "LIST"))
@@ -184,59 +168,71 @@
 }
 
 # Top-level resolver: returns final positive positions (1-based, duplicates allowed)
-.container_resolve_indices <- function(
-    x, i_expr, dots_exprs, env, strict
-) {
-    n  <- .container_len(x)
-    nm <- .container_names(x) %||% rep.int("", n)
+.container_resolve_indices <- function(x, i_expr, dots_exprs, env, strict) {
+  n  <- length(x)
+  nm <- names(x) %||% rep.int("", n)
 
-    # Build a single list of tokens from i and ...
-    toks <- c(if (!is.null(i_expr)) list(i_expr) else list(), dots_exprs)
+  # Build token list: i + ...
+  toks <- c(if (!is.null(i_expr)) list(i_expr) else list(), dots_exprs)
 
-    # Fast path: empty index -> select all
-    if (length(toks) == 0L) return(seq_len(n))
+  # list(...) in i -> treat as comma-sugar
+  if (length(toks) == 1L && .is_call(toks[[1L]], "list")) {
+    toks <- as.list(toks[[1L]])[-1L]
+  }
 
-    # Map each token to positions/negation
-    nodes <- lapply(
-        toks,
-        .container_token_to_positions,
-        nm = nm, n = n, env = env, strict = strict
-    )
+  # if all tokens evaluate to logical, concatenate first
+  all_logical <- length(toks) > 1L && all(vapply(toks, function(e) {
+    v <- try(suppressWarnings(eval(e, env)), silent = TRUE)
+    is.logical(v)
+  }, logical(1)))
 
-    # If any node is a LIST marker, flatten deeply
-    hasLISTs <- vapply(nodes, function(z) identical(z$negate, "LIST"), logical(1))
-    if (any(hasLISTs)) {
-        nodes <- list(
-            list(
-                pos = .container_flatten_list_nodes(lapply(nodes, function(z) if (identical(z$negate, "LIST")) z$pos else z), nm, n, env, strict)$pos,
-                negate = FALSE
-            )
-        )
-    }
+  if (all_logical) {
+    v <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
+    nodes <- list(.container_value_to_positions(v, nm, n, strict))
+  } else {
+    nodes <- lapply(toks, .container_token_to_positions,
+                    nm = nm, n = n, env = env, strict = strict)
+  }
 
-    # Gather results
-    vals      <- lapply(nodes, `[[`, "pos")
-    negatives <- vapply(nodes, function(z) isTRUE(z$negate), logical(1))
+  # Flatten any LIST markers (keep your existing block)
+  if (any(vapply(nodes, function(z) identical(z$negate, "LIST"), logical(1)))) {
+    nodes <- list(list(
+      pos    = .container_flatten_list_nodes(
+                 lapply(nodes, function(z) if (identical(z$negate, "LIST")) z$pos else z),
+                 nm, n, env, strict
+               )$pos,
+      negate = FALSE
+    ))
+  }
 
-    # Determine mode (positive vs negative)
-    if (any(negatives)) {
-        if (!all(negatives)) stop("Cannot mix positive and negative indices.", call. = FALSE)
-        drop_pos <- as.integer(unlist(vals, use.names = FALSE))
-        drop_pos <- drop_pos[drop_pos > 0L & drop_pos <= n]
-        drop_pos <- unique(drop_pos)
-        sel <- setdiff(seq_len(n), drop_pos)
-        return(as.integer(sel))
-    }
+  vals      <- lapply(nodes, `[[`, "pos")
+  negatives <- vapply(nodes, function(z) isTRUE(z$negate), logical(1))
 
-    # positive mode
-    sel <- as.integer(unlist(vals, use.names = FALSE))
-    # keep only in-range; ignore OOB unless strict
-    if (strict && any(sel < 1L | sel > n, na.rm = TRUE)) {
-        bad <- unique(sel[sel < 1L | sel > n])
-        stop(sprintf("Out-of-bounds indices: %s", paste(bad, collapse = ", ")), call. = FALSE)
-    }
-    sel <- sel[sel >= 1L & sel <= n & !is.na(sel)]
-    sel
+if (any(negatives)) {
+  if (!all(negatives)) stop("Cannot mix positive and negative indices.", call. = FALSE)
+
+  drop_pos <- as.integer(unlist(vals, use.names = FALSE))
+
+  # STRICT: complain about any out-of-bounds negatives
+  if (strict && any(drop_pos < 1L | drop_pos > n, na.rm = TRUE)) {
+    bad <- unique(drop_pos[drop_pos < 1L | drop_pos > n])
+    stop(sprintf("Out-of-bounds negative indices: %s", paste(bad, collapse = ", ")), call. = FALSE)
+  }
+
+  # NON-STRICT: ignore OOB negatives entirely (base R semantics)
+  drop_pos <- unique(drop_pos[drop_pos >= 1L & drop_pos <= n & !is.na(drop_pos)])
+
+  sel <- setdiff(seq_len(n), drop_pos)
+  return(as.integer(sel))
+}
+
+  sel <- as.integer(unlist(vals, use.names = FALSE))
+  if (strict && any(sel < 1L | sel > n, na.rm = TRUE)) {
+    bad <- unique(sel[sel < 1L | sel > n])
+    stop(sprintf("Out-of-bounds indices: %s", paste(bad, collapse = ", ")), call. = FALSE)
+  }
+  sel <- sel[sel >= 1L & sel <= n & !is.na(sel)]
+  sel
 }
 
 
@@ -329,6 +325,11 @@ NULL
 
     if (!missing(i) && is.null(i_expr)) {
         return(x[0])
+    }
+
+    if (length(i_expr) == 0L && length(dots_exprs) == 0L) {
+        # No indices: return all
+        return(x)
     }
 
     pos <- .container_resolve_indices(

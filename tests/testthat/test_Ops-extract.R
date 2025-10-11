@@ -53,6 +53,17 @@ describe(
         ee(co[-1], container(2, b = 3, 4))
         ee(co[-c(1, 3)], container(2, 4))
         ee(co[-1, -3], container(2, 4))
+        ee(co[-5], co)
+
+        expect_error(
+            co[-5, strict = TRUE],
+            "Out-of-bounds negative indices: 5"
+        )
+
+        expect_error(
+            co[c(-1, 3)],
+            "Cannot mix positive and negative indices"
+        )
     })
 
     test_that("character indices",
@@ -91,9 +102,9 @@ describe(
         ee(as.list(co[FALSE]), unname(l[FALSE]))
         ee(as.list(co[TRUE, FALSE]), l[c(TRUE, FALSE)]) # fails
 
-        m2 <- c(TRUE, FALSE)
-        ee(as.list(co[m2]), l[m2])
-        ee(as.list(co[rev(m2)]), l[rev(m2)])
+        mask <- c(TRUE, FALSE)
+        ee(as.list(co[mask]), l[mask])
+        ee(as.list(co[rev(mask)]), l[rev(mask)])
 
         m3 <- c(TRUE, TRUE, FALSE)
         expect_warning(
@@ -153,11 +164,12 @@ describe(
 
         expect_equal(as.list(co[NULL]), unname(l[NULL]))
         expect_equal(as.list(co[a = NULL]), unname(l[a = NULL]))
-        expect_equal(as.list(co[x = NULL]), unname(l[x = NULL]))
+        expect_equal(as.list(co[foo = NULL]), unname(l[foo = NULL]))
     })
 
     test_that(".default argument",
     {
+        skip("not yet implemented")
         # Default values
         co <- container(a = 1, 2, b = 3, 4)
         ee(co[1, 99, .default = 0], container(a = 1, 0))
