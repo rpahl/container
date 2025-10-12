@@ -36,7 +36,7 @@ describe(
         ee(co[0, strict = TRUE], container())
         ee(co[1], container(a = 1))
         ee(co[2], container(2))
-        ee(co[6], container())
+        ee(co[5], container())
         expect_error(co[6, strict = TRUE], "Out-of-bounds indices: 6")
 
         # Multiple
@@ -62,7 +62,7 @@ describe(
 
         expect_error(
             co[c(-1, 3)],
-            "Cannot mix positive and negative indices"
+            "cannot mix positive and negative indices"
         )
     })
 
@@ -78,7 +78,9 @@ describe(
         expect_error(co["x", strict = TRUE], "Unknown names in index: \"x\"")
 
         # Multiple
+        ee(co[letters[1:5]], container(a = 1, b = 3))
         ee(co[c("a", "b")], container(a = 1, b = 3))
+        ee(co["a", "b"], container(a = 1, b = 3))
         ee(co[c("a", "x")], container(a = 1))
 
         # Duplicates

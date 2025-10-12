@@ -6,14 +6,18 @@
 \alias{[[.Container}
 \title{Extract Parts of a Container Object}
 \usage{
-\method{[}{Container}(x, ..., .default = NULL)
+\method{[}{Container}(
+  x,
+  i,
+  ...,
+  .default = NULL,
+  strict = getOption("container.strict_index", FALSE)
+)
 
 \method{[[}{Container}(x, i)
 }
 \arguments{
 \item{x}{\code{Container} object from which to extract elements.}
-
-\item{.default}{value to be returned if peeked value does not exist.}
 
 \item{i, ...}{indices specifying elements to extract. Indices
 can be \code{logical}, \code{numeric}, \code{character}, or a mix of these.
@@ -23,6 +27,8 @@ Non-existing indices are ignored, but can be substituted if a
 default value was provided (see \code{.default} parameter).
 Supports alpha-numeric range selection via non-standard evaluation
 (e.g., \code{co[a:b]} see Examples).}
+
+\item{.default}{value to be returned if peeked value does not exist.}
 }
 \description{
 Extract parts of a \code{Container} object similar
@@ -46,26 +52,52 @@ indices (e.g. \code{co[1:2]} or \code{co[c("a", "b")]}).
 }
 
 \examples{
-co = container(a = 1, b = 2, c = 3, d = 4)
-co[1:2]
-co[1, 4]
-co["d", 2]
-co[list("d", 2)]
-co[0:10]
+co <- container(a = 1, b = 2, c = 3, d = 4)
 
-# Boolean selection
+# Numeric
+co[c(1, 4)]                          # [a = 1, d = 4]
+co[1, 4]                             # same
+co[0:5]                              # [a = 1, b = 2, c = 3, d = 4]
+co[5]                                # []
 
-# Custom default values
-co[1:2, 99, .default = 0]
-co[1:2, "z", .default = -1]
-co[1:2, "z", .default = 3:4]
+# Negative numeric
+co[-c(1:2)]                          # [c = 3, d = 4]
+co[-1, -4]                           # [b = 2, c = 3]
+try(co[-1, 3])                       # cannot mix positive and negative indices
 
-# Alpha-numeric range selection
-co[a:b]
-co[a:b, d:c]
-co[1:c]
-co[d:2]
-co[a:8, .default = a]
+# Character
+co[c("a", "d")]                      # [a = 1, d = 4]
+co["a", "d"]                         # same
+co[letters[1:5]]                     # [a = 1, b = 2, c = 3, d = 4]
+co["x"]                              # []
+
+# Negative character
+co[-c("a", "d")]                      # [b = 2, c = 3]
+co[-"a", -"d"]                        # [b = 2, c = 3]
+
+# Boolean
+co[c(TRUE, FALSE, TRUE, FALSE)]      # [a = 1, c = 3]
+co[TRUE, FALSE, TRUE, FALSE]         # same
+
+# Partial boolean (recycling)
+co[c(TRUE, FALSE)]                   # [a = 1, c = 3]
+co[TRUE, FALSE]                      # same
+
+# Mixed numeric and character
+co[list(1, "d")]                     # [a = 1, d = 4]
+co[1, "d"]                           # same
+
+# Alpha-numeric ranges (non-standard evaluation)
+co[a:b]                              # [a = 1, b = 2]
+co[a:b, d:c]                         # [a = 1, b = 2, d = 4, c = 3]
+co[1:c]                              # [a = 1, b = 2, c = 3]
+co[d:2]                              # [d = 4, c = 3]
+
+# Default values
+co[1:5, 0, .default = 0]             # [a = 1, b = 2, c = 3, d = 4, 0]
+co["a", "b", "z", .default = 0]      # [a = 1, b = 2, z = 0]
+co[1:2, "z", .default = 3:4]         # [a = 1, b = 2, z = (3L 4L)]
+
 
 co = container(a = 1, b = 2)
 co[[1]]
