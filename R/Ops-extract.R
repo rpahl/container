@@ -132,7 +132,7 @@
         has_pos <- any(v > 0L)
         has_neg <- any(v < 0L)
         if (has_pos && has_neg) {
-            stop("Cannot mix positive and negative indices.", call. = FALSE)
+            stop("cannot mix positive and negative indices.", call. = FALSE)
         }
         if (has_neg) return(list(pos = abs(v), raw = NULL, negate = TRUE))
         res$pos <- v
@@ -252,7 +252,7 @@
 
     if (any(negatives)) {
         if (!all(negatives)) {
-            stop("Cannot mix positive and negative indices.", call. = FALSE)
+            stop("cannot mix positive and negative indices.", call. = FALSE)
         }
         drop_pos <- as.integer(unlist(vals, use.names = FALSE))
         if (strict && any(drop_pos < 1L | drop_pos > n, na.rm = TRUE)) {
@@ -321,51 +321,52 @@ NULL
 
 #' @rdname OpsExtract
 #' @examples
-#' co = container(a = 1, b = 2, c = 3, d = 4)
+#' co <- container(a = 1, b = 2, c = 3, d = 4)
 #'
-#' # Numeric index
+#' # Numeric
 #' co[c(1, 4)]                          # [a = 1, d = 4]
 #' co[1, 4]                             # same
+#' co[0:5]                              # [a = 1, b = 2, c = 3, d = 4]
+#' co[5]                                # []
 #'
-#' # Boolean index
+#' # Negative numeric
+#' co[-c(1:2)]                          # [c = 3, d = 4]
+#' co[-1, -4]                           # [b = 2, c = 3]
+#' try(co[-1, 3])                       # cannot mix positive and negative indices
+#'
+#' # Character
+#' co[c("a", "d")]                      # [a = 1, d = 4]
+#' co["a", "d"]                         # same
+#' co[letters[1:5]]                     # [a = 1, b = 2, c = 3, d = 4]
+#' co["x"]                              # []
+#'
+#' # Negative character
+#' co[-c("a", "d")]                      # [b = 2, c = 3]
+#' co[-"a", -"d"]                        # [b = 2, c = 3]
+#'
+#' # Boolean
 #' co[c(TRUE, FALSE, TRUE, FALSE)]      # [a = 1, c = 3]
 #' co[TRUE, FALSE, TRUE, FALSE]         # same
 #'
-#' # Mixed numeric and character index
-#' co[list(1, "d")]                     # [a = 1, d = 4]
-#' co[1, "d"]
-#'
-#' # Partial Boolean index (recycled)
+#' # Partial boolean (recycling)
 #' co[c(TRUE, FALSE)]                   # [a = 1, c = 3]
 #' co[TRUE, FALSE]                      # same
 #'
-#' # Negative numeric index
-#' co[-c(1:2)]                          # [c = 3, d = 4]
-#' co[-1, -4]                           # [b = 2, c = 3]
+#' # Mixed numeric and character
+#' co[list(1, "d")]                     # [a = 1, d = 4]
+#' co[1, "d"]                           # same
 #'
-#' # Alpha-numeric range selection (non-standard evaluation)
+#' # Alpha-numeric ranges (non-standard evaluation)
 #' co[a:b]                              # [a = 1, b = 2]
 #' co[a:b, d:c]                         # [a = 1, b = 2, d = 4, c = 3]
 #' co[1:c]                              # [a = 1, b = 2, c = 3]
 #' co[d:2]                              # [d = 4, c = 3]
 #'
-#' # Negative indices
-#' co[-(1:2)]                           # [c = 3, d = 4]
-#' co[-1, -4]                           # [b = 2, d = 4]
+#' # Default values
+#' co[1:5, 0, .default = 0]             # [a = 1, b = 2, c = 3, d = 4, 0]
+#' co["a", "b", "z", .default = 0]      # [a = 1, b = 2, z = 0]
+#' co[1:2, "z", .default = 3:4]         # [a = 1, b = 2, z = (3L 4L)]
 #'
-#' # Boolean selection
-#'
-#' # Custom default values
-#' co[1:2, 99, .default = 0]
-#' co[1:2, "z", .default = -1]
-#' co[1:2, "z", .default = 3:4]
-#'
-#' # Alpha-numeric range selection
-#' co[a:b]
-#' co[a:b, d:c]
-#' co[1:c]
-#' co[d:2]
-#' co[a:8, .default = a]
 #' @export
 `[.Container` <- function(
     x, i, ...,
