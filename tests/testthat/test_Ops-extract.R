@@ -33,11 +33,9 @@ describe(
 
         # Single
         ee(co[0], container())
-        ee(co[0, strict = TRUE], container())
         ee(co[1], container(a = 1))
         ee(co[2], container(2))
         ee(co[5], container())
-        expect_error(co[6, strict = TRUE], "Out-of-bounds indices: 6")
 
         # Multiple
         ee(co[0:5], co)
@@ -56,11 +54,6 @@ describe(
         ee(co[-5], co)
 
         expect_error(
-            co[-5, strict = TRUE],
-            "Out-of-bounds negative indices: 5"
-        )
-
-        expect_error(
             co[c(-1, 3)],
             "cannot mix positive and negative indices"
         )
@@ -75,7 +68,6 @@ describe(
         ee(co["a"], container(a = 1))
         ee(co["b"], container(b = 3))
         ee(co["x"], container())
-        expect_error(co["x", strict = TRUE], "Unknown names in index: \"x\"")
 
         # Multiple
         ee(co[letters[1:5]], container(a = 1, b = 3))

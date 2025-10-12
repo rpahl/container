@@ -2,26 +2,21 @@
 .is_call <- function(x, name) is.call(x) && identical(x[[1L]], as.name(name))
 
 # Expand an endpoint (symbol or number) to a 1-based position
-.get_endpoint_pos <- function(endp, nm, n, env, strict)
+.get_endpoint_pos <- function(endp, nm, n, env)
 {
     if (is.symbol(endp)) {
         key <- as.character(endp)
         pos <- match(key, nm, nomatch = NA_integer_)
         if (is.na(pos)) {
-            if (strict) {
-                stop(sprintf("Unknown name in range: %s", key),
-                     call. = FALSE)
-            }
-
             # fall back to evaluating the symbol (allows 1:c where c is a
             # variable)
             val <- try(suppressWarnings(eval(endp, env)), silent = TRUE)
 
-            if (is.numeric(val) && length(val) == 1L && is.finite(val)) {
-                pos <- as.integer(val)
+            pos <- if (is.numeric(val) && length(val) == 1L && is.finite(val)) {
+                as.integer(val)
             } else {
-                # ignore silently if non-strict
-                pos <- NA_integer_
+                # ignore silently
+                NA_integer_
             }
         }
         return(pos)
@@ -30,35 +25,32 @@
     # numeric literal / expression
     val <- try(suppressWarnings(eval(endp, env)), silent = TRUE)
     if (!is.numeric(val) || length(val) != 1L || !is.finite(val)) {
-        if (strict) {
-            stop(
-                "Range endpoints must resolve to single finite numbers or names.",
-                call. = FALSE
-            )
-        }
         return(NA_integer_)
     }
     as.integer(val)
 }
 
 # Turn a single token (language/object) into positions + negate flag
-.token_to_pos <- function(tok, nm, n, env, strict, keep_raw)
+.token_to_pos <- function(tok, nm, n, env, keep_raw)
 {
     res <- list(pos = integer(0L), raw = NULL, negate = FALSE)
     if (is.null(tok)) return(res)
 
     if (is.call(tok) && identical(tok[[1L]], as.name("list"))) {
         args <- as.list(tok)[-1L]
-        out <- lapply(args, .token_to_pos, nm = nm, n = n,
-                      env = env, strict = strict, keep_raw = keep_raw)
+        out <- lapply(
+            args,
+            FUN = .token_to_pos,
+            nm = nm, n = n, env = env, keep_raw = keep_raw
+        )
         return(list(pos = out, raw = NULL, negate = "LIST"))
     }
 
     if (is.call(tok) && identical(tok[[1L]], as.name("-"))) {
-        inner <- .token_to_pos(tok[[2L]], nm, n, env, strict, keep_raw = FALSE)
+        inner <- .token_to_pos(tok[[2L]], nm, n, env, keep_raw = FALSE)
         if (identical(inner$negate, "LIST")) {
             inner_flat <- .flatten_list_nodes(
-                inner$pos, nm, n, env, strict, keep_raw = FALSE
+                inner$pos, nm, n, env, keep_raw = FALSE
             )
             inner <- list(pos = inner_flat$pos, raw = NULL, negate = FALSE)
         }
@@ -69,18 +61,12 @@
     if (is.call(tok) && identical(tok[[1L]], as.name(":"))) {
         lhs <- tok[[2L]]
         rhs <- tok[[3L]]
-        L <- .get_endpoint_pos(lhs, nm, n, env, strict)
-        R <- .get_endpoint_pos(rhs, nm, n, env, strict)
-        if (anyNA(c(L, R))) {
-            if (strict) {
-                stop("Range endpoints could not be resolved.", call. = FALSE)
-            }
-        } else {
-            rng <- if (L <= R) seq.int(L, R) else seq.int(L, R, by = -1L)
-            res$pos <- as.integer(rng)
-            # numeric raw tokens
-            if (keep_raw) res$raw <- as.list(as.integer(rng))
-        }
+        L <- .get_endpoint_pos(lhs, nm, n, env)
+        R <- .get_endpoint_pos(rhs, nm, n, env)
+        rng <- if (L <= R) seq.int(L, R) else seq.int(L, R, by = -1L)
+        res$pos <- as.integer(rng)
+        # numeric raw tokens
+        if (keep_raw) res$raw <- as.list(as.integer(rng))
         return(res)
     }
 
@@ -96,14 +82,14 @@
 
     if (is.call(tok) && identical(tok[[1L]], as.name("c"))) {
         val <- try(suppressWarnings(eval(tok, env)), silent = TRUE)
-        return(.value_to_pos(val, nm, n, strict, keep_raw))
+        return(.value_to_pos(val, nm, n, keep_raw))
     }
 
     val <- try(suppressWarnings(eval(tok, env)), silent = TRUE)
-    .value_to_pos(val, nm, n, strict, keep_raw)
+    .value_to_pos(val, nm, n, keep_raw)
 }
 
-.value_to_pos <- function(val, nm, n, strict, keep_raw)
+.value_to_pos <- function(val, nm, n, keep_raw)
 {
     res <- list(pos = integer(0L), raw = NULL, negate = FALSE)
     if (is.null(val)) return(res)
@@ -152,11 +138,6 @@
             pos <- match(val, nm, nomatch = NA_integer_)
             if (anyNA(pos)) {
                 missing <- unique(val[is.na(pos)])
-                if (strict) {
-                    stop(sprintf("Unknown names in index: %s",
-                                 paste0(dQuote(missing), collapse = ", ")),
-                         call. = FALSE)
-                }
                 pos <- pos[!is.na(pos)]
             }
             res$pos <- as.integer(pos)
@@ -165,26 +146,21 @@
     }
 
     if (is.list(val)) {
-        parts <- lapply(val, .value_to_pos, nm = nm, n = n,
-                        strict = strict, keep_raw = keep_raw)
+        parts <- lapply(val, .value_to_pos, nm = nm, n = n, keep_raw = keep_raw)
         return(list(pos = parts, raw = NULL, negate = "LIST"))
     }
 
-    if (strict) {
-        stop(sprintf("Unsupported index type: %s", class(val)[1]),
-             call. = FALSE)
-    }
     res
 }
 
-.flatten_list_nodes <- function(nodes, nm, n, env, strict, keep_raw)
+.flatten_list_nodes <- function(nodes, nm, n, env, keep_raw)
 {
     out_pos <- list()
     out_raw <- list()
     out_neg <- logical()
     for (node in nodes) {
         if (identical(node$negate, "LIST")) {
-            inner <- .flatten_list_nodes(node$pos, nm, n, env, strict, keep_raw)
+            inner <- .flatten_list_nodes(node$pos, nm, n, env, keep_raw)
             out_pos <- c(out_pos, list(list(pos = inner$pos, negate = FALSE)))
             out_raw <- c(out_raw, inner$raw)
             out_neg <- c(out_neg, FALSE)
@@ -207,7 +183,7 @@
 # Top-level resolver: returns final positive positions
 # (1-based, duplicates allowed)
 .resolve_indices <- function(
-    x, i_expr, dots_exprs, env, strict, keep_raw
+    x, i_expr, dots_exprs, env, keep_raw
 ) {
     n  <- length(x)
     nm <- names(x) %||% rep.int("", n)
@@ -224,12 +200,12 @@
 
     if (all_logical) {
         v <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
-        nodes <- list(.value_to_pos(v, nm, n, strict, keep_raw = FALSE))
+        nodes <- list(.value_to_pos(v, nm, n, keep_raw = FALSE))
     } else {
         nodes <- lapply(
             toks,
             FUN = .token_to_pos,
-            nm = nm, n = n, env = env, strict = strict, keep_raw = keep_raw
+            nm = nm, n = n, env = env, keep_raw = keep_raw
 
         )
     }
@@ -241,7 +217,7 @@
             lapply(nodes, function(z) {
                 if (identical(z$negate, "LIST")) z$pos else z
             }),
-            nm, n, env, strict, keep_raw
+            nm, n, env, keep_raw
         )
         nodes <- list(list(pos = flat$pos, raw = flat$raw, negate = FALSE))
     }
@@ -255,13 +231,9 @@
             stop("cannot mix positive and negative indices.", call. = FALSE)
         }
         drop_pos <- as.integer(unlist(vals, use.names = FALSE))
-        if (strict && any(drop_pos < 1L | drop_pos > n, na.rm = TRUE)) {
-            bad <- unique(drop_pos[drop_pos < 1L | drop_pos > n])
-            stop(sprintf("Out-of-bounds negative indices: %s",
-                         paste(bad, collapse = ", ")), call. = FALSE)
-        }
-        drop_pos <- unique(drop_pos[drop_pos >= 1L & drop_pos <= n &
-                                   !is.na(drop_pos)])
+        drop_pos <- unique(
+            drop_pos[drop_pos >= 1L & drop_pos <= n & !is.na(drop_pos)]
+        )
         sel <- setdiff(seq_len(n), drop_pos)
         return(list(mode = "negative", pos = as.integer(sel)))
     }
@@ -273,13 +245,6 @@
         return(list(mode = "positive", raw_tokens = raw_tokens))
     } else {
         sel <- as.integer(unlist(vals, use.names = FALSE))
-        if (strict && any(sel < 1L | sel > n, na.rm = TRUE)) {
-            bad <- unique(sel[sel < 1L | sel > n])
-            stop(sprintf(
-                "Out-of-bounds indices: %s", paste(bad, collapse = ", ")),
-                call. = FALSE
-            )
-        }
         sel <- sel[sel >= 1L & sel <= n & !is.na(sel)]
         return(list(mode = "positive", pos = sel))
     }
@@ -370,8 +335,7 @@ NULL
 #' @export
 `[.Container` <- function(
     x, i, ...,
-    .default = NULL,
-    strict = getOption("container.strict_index", FALSE)
+    .default = NULL
 ) {
     i_expr     <- if (missing(i)) NULL else substitute(i)
     dots_exprs <- as.list(substitute(list(...)))[-1L]
@@ -385,12 +349,11 @@ NULL
         return(x)
     }
 
-    keep_raw <- (!strict) && !is.null(.default)
+    keep_raw <- !is.null(.default)
 
     idx <- .resolve_indices(
         x, i_expr, dots_exprs,
         env = parent.frame(),
-        strict = strict,
         keep_raw = keep_raw
     )
 
