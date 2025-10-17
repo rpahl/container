@@ -1,28 +1,84 @@
 
-.is_call <- function(x, name) is.call(x) && identical(x[[1L]], as.name(name))
+`%||%` <- function(a, b) if (is.null(a)) b else a
 
-# Expand an endpoint (symbol or number) to a 1-based position
-.get_endpoint_pos <- function(endp, nm, n, env)
-{
+.is_call <- function(x, name) {
+    is.call(x) && identical(x[[1L]], as.name(name))
+}
+
+
+.idx_char <- function(chr, nm, keep_raw = FALSE) {
+    pos <- match(chr, nm, nomatch = NA_integer_)
+    list(
+        mode = "positive",
+        pos = as.integer(pos[!is.na(pos)]),
+        raw = if (keep_raw) lapply(as.list(chr), identity) else NULL
+    )
+}
+
+
+.idx_bool <- function(lgl, n, keep_raw = FALSE) {
+    if (length(lgl) == 0L) {
+        return(list(mode = "positive", pos = integer(), raw = NULL))
+    }
+    if ((n %% length(lgl)) != 0L) {
+        warning(
+            sprintf(
+                "Logical index of length %d is not a multiple of %d; recycling.",
+                length(lgl), n
+            ),
+            call. = FALSE
+        )
+    }
+    idx <- rep_len(lgl, n)
+    if (anyNA(idx)) {
+        warning(
+            "Logical index contains NA; treating NA as FALSE.",
+            call. = FALSE
+        )
+        idx[is.na(idx)] <- FALSE
+    }
+    pos <- which(idx)
+    list(
+        mode = "positive",
+        pos = pos,
+        raw = if (keep_raw) lapply(as.list(pos), identity) else NULL
+    )
+}
+
+
+.idx_num <- function(num, n, keep_raw = FALSE) {
+    v <- as.integer(num)
+    v <- v[v != 0L & !is.na(v)]
+    if (!length(v)) {
+        return(list(mode = "positive", pos = integer(), raw = NULL))
+    }
+    has_pos <- any(v > 0L)
+    has_neg <- any(v < 0L)
+    if (has_pos && has_neg) {
+        stop("cannot mix positive and negative indices.", call. = FALSE)
+    }
+    if (has_neg) {
+        return(list(mode = "negative", pos = abs(v), raw = NULL))
+    }
+    list(
+        mode = "positive",
+        pos = v,
+        raw = if (keep_raw) lapply(as.list(v), identity) else NULL
+    )
+}
+
+
+.endp_pos <- function(endp, nm, n, env) {
     if (is.symbol(endp)) {
         key <- as.character(endp)
         pos <- match(key, nm, nomatch = NA_integer_)
-        if (is.na(pos)) {
-            # fall back to evaluating the symbol (allows 1:c where c is a
-            # variable)
-            val <- try(suppressWarnings(eval(endp, env)), silent = TRUE)
-
-            pos <- if (is.numeric(val) && length(val) == 1L && is.finite(val)) {
-                as.integer(val)
-            } else {
-                # ignore silently
-                NA_integer_
-            }
+        if (!is.na(pos)) return(pos)
+        val <- try(suppressWarnings(eval(endp, env)), silent = TRUE)
+        if (is.numeric(val) && length(val) == 1L && is.finite(val)) {
+            return(as.integer(val))
         }
-        return(pos)
+        return(NA_integer_)
     }
-
-    # numeric literal / expression
     val <- try(suppressWarnings(eval(endp, env)), silent = TRUE)
     if (!is.numeric(val) || length(val) != 1L || !is.finite(val)) {
         return(NA_integer_)
@@ -30,226 +86,100 @@
     as.integer(val)
 }
 
-# Turn a single token (language/object) into positions + negate flag
-.token_to_pos <- function(tok, nm, n, env, keep_raw)
-{
-    res <- list(pos = integer(0L), raw = NULL, negate = FALSE)
-    if (is.null(tok)) return(res)
 
-    if (is.call(tok) && identical(tok[[1L]], as.name("list"))) {
+.value_to_pieces <- function(val, nm, n, keep_raw) {
+    if (is.null(val)) {
+        return(list(list(mode = "positive", pos = integer(), raw = NULL)))
+    }
+    if (is.logical(val)) {
+        return(list(.idx_bool(val, n, keep_raw)))
+    }
+    if (is.numeric(val)) {
+        return(list(.idx_num(val, n, keep_raw)))
+    }
+    if (is.character(val)) {
+        return(list(.idx_char(val, nm, keep_raw)))
+    }
+    if (is.list(val)) {
+        return(unlist(
+            lapply(val, .value_to_pieces, nm = nm, n = n, keep_raw = keep_raw),
+            recursive = FALSE
+        ))
+    }
+    list(list(mode = "positive", pos = integer(), raw = NULL))  # ignore other types
+}
+
+
+.token_to_piece <- function(tok, nm, n, env, keep_raw) {
+    if (.is_call(tok, "list")) {
         args <- as.list(tok)[-1L]
-        out <- lapply(
-            args,
-            FUN = .token_to_pos,
-            nm = nm, n = n, env = env, keep_raw = keep_raw
-        )
-        return(list(pos = out, raw = NULL, negate = "LIST"))
+        return(unlist(
+            lapply(args, .token_to_piece, nm = nm, n = n, env = env, keep_raw = keep_raw),
+            recursive = FALSE
+        ))
     }
 
-    if (is.call(tok) && identical(tok[[1L]], as.name("-"))) {
-        inner <- .token_to_pos(tok[[2L]], nm, n, env, keep_raw = FALSE)
-        if (identical(inner$negate, "LIST")) {
-            inner_flat <- .flatten_list_nodes(
-                inner$pos, nm, n, env, keep_raw = FALSE
-            )
-            inner <- list(pos = inner_flat$pos, raw = NULL, negate = FALSE)
+    if (.is_call(tok, "-")) {
+        inner <- .token_to_piece(tok[[2L]], nm, n, env, keep_raw = FALSE)
+        return(lapply(inner, function(p) {
+            p$mode <- if (p$mode == "negative") "positive" else "negative"
+            p$raw <- NULL
+            p
+        }))
+    }
+
+    if (.is_call(tok, ":")) {
+        L <- .endp_pos(tok[[2L]], nm, n, env)
+        R <- .endp_pos(tok[[3L]], nm, n, env)
+        if (anyNA(c(L, R))) {
+            return(list(list(mode = "positive", pos = integer(), raw = NULL)))
         }
-        inner$negate <- !isTRUE(inner$negate)
-        return(inner)
-    }
-
-    if (is.call(tok) && identical(tok[[1L]], as.name(":"))) {
-        lhs <- tok[[2L]]
-        rhs <- tok[[3L]]
-        L <- .get_endpoint_pos(lhs, nm, n, env)
-        R <- .get_endpoint_pos(rhs, nm, n, env)
         rng <- if (L <= R) seq.int(L, R) else seq.int(L, R, by = -1L)
-        res$pos <- as.integer(rng)
-        # numeric raw tokens
-        if (keep_raw) res$raw <- as.list(as.integer(rng))
-        return(res)
+        return(list(.idx_num(rng, n, keep_raw = keep_raw)))
     }
 
     if (is.symbol(tok)) {
         key <- as.character(tok)
         if (key %in% nm) {
-            res$pos <- match(key, nm)
-            # name token as character
-            if (keep_raw) res$raw <- list(key)
-            return(res)
+            return(list(.idx_char(key, nm, keep_raw)))
         }
-    }
-
-    if (is.call(tok) && identical(tok[[1L]], as.name("c"))) {
         val <- try(suppressWarnings(eval(tok, env)), silent = TRUE)
-        return(.value_to_pos(val, nm, n, keep_raw))
+        return(.value_to_pieces(val, nm, n, keep_raw))
     }
 
     val <- try(suppressWarnings(eval(tok, env)), silent = TRUE)
-    .value_to_pos(val, nm, n, keep_raw)
-}
-
-.value_to_pos <- function(val, nm, n, keep_raw)
-{
-    res <- list(pos = integer(0L), raw = NULL, negate = FALSE)
-    if (is.null(val)) return(res)
-
-    if (is.logical(val)) {
-        L <- length(val)
-        if (L == 0L) return(res)
-        if ((n %% L) != 0L) {
-            warning(sprintf(
-                "Logical index of length %d is not a multiple of %d; recycling.",
-                L, n), call. = FALSE)
-        }
-        idx <- rep_len(val, n)
-        if (anyNA(idx)) {
-            warning("Logical index contains NA; treating NA as FALSE.",
-                    call. = FALSE)
-        }
-        idx[is.na(idx)] <- FALSE
-        res$pos <- which(idx)
-        return(res)
-    }
-
-    if (is.numeric(val)) {
-        v <- as.integer(val)
-        v <- v[v != 0L & !is.na(v)]
-        has_pos <- any(v > 0L)
-        has_neg <- any(v < 0L)
-        if (has_pos && has_neg) {
-            stop("cannot mix positive and negative indices.", call. = FALSE)
-        }
-        if (has_neg) return(list(pos = abs(v), raw = NULL, negate = TRUE))
-        res$pos <- v
-        # list of integers
-        if (keep_raw) res$raw <- lapply(v, identity)
-        return(res)
-    }
-
-    if (is.character(val)) {
-        if (keep_raw) {
-            # list of names
-            res$raw <- lapply(as.list(val), identity)
-            known <- match(val, nm, nomatch = NA_integer_)
-            res$pos <- known[!is.na(known)]
-            return(res)
-        } else {
-            pos <- match(val, nm, nomatch = NA_integer_)
-            if (anyNA(pos)) {
-                missing <- unique(val[is.na(pos)])
-                pos <- pos[!is.na(pos)]
-            }
-            res$pos <- as.integer(pos)
-            return(res)
-        }
-    }
-
-    if (is.list(val)) {
-        parts <- lapply(val, .value_to_pos, nm = nm, n = n, keep_raw = keep_raw)
-        return(list(pos = parts, raw = NULL, negate = "LIST"))
-    }
-
-    res
-}
-
-.flatten_list_nodes <- function(nodes, nm, n, env, keep_raw)
-{
-    out_pos <- list()
-    out_raw <- list()
-    out_neg <- logical()
-    for (node in nodes) {
-        if (identical(node$negate, "LIST")) {
-            inner <- .flatten_list_nodes(node$pos, nm, n, env, keep_raw)
-            out_pos <- c(out_pos, list(list(pos = inner$pos, negate = FALSE)))
-            out_raw <- c(out_raw, inner$raw)
-            out_neg <- c(out_neg, FALSE)
-        } else {
-            out_pos <- c(out_pos, list(node))
-            # node$raw is already a list of scalars
-            if (!is.null(node$raw)) out_raw <- c(out_raw, node$raw)
-            out_neg <- c(out_neg, isTRUE(node$negate))
-        }
-    }
-    list(
-        pos     = unlist(lapply(out_pos, `[[`, "pos"), use.names = FALSE),
-        raw     = out_raw,   # keep as list (no unlist!)
-        any_neg = any(out_neg),
-        all_neg = all(out_neg)
-    )
+    .value_to_pieces(val, nm, n, keep_raw)
 }
 
 
-# Top-level resolver: returns final positive positions
-# (1-based, duplicates allowed)
-.resolve_indices <- function(
-    x, i_expr, dots_exprs, env, keep_raw
-) {
-    n  <- length(x)
-    nm <- names(x) %||% rep.int("", n)
-
-    toks <- c(if (!is.null(i_expr)) list(i_expr) else list(), dots_exprs)
-    if (length(toks) == 1L && .is_call(toks[[1L]], "list")) {
-        toks <- as.list(toks[[1L]])[-1L]
+.combine_pieces <- function(pieces, n, keep_raw) {
+    if (length(pieces) == 0L) {
+        return(list(mode = "positive", pos = seq_len(n)))  # safety
     }
 
-    all_logical <- length(toks) > 1L && all(vapply(toks, function(e) {
-        v <- try(suppressWarnings(eval(e, env)), silent = TRUE)
-        is.logical(v)
-    }, logical(1)))
-
-    if (all_logical) {
-        v <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
-        nodes <- list(.value_to_pos(v, nm, n, keep_raw = FALSE))
-    } else {
-        nodes <- lapply(
-            toks,
-            FUN = .token_to_pos,
-            nm = nm, n = n, env = env, keep_raw = keep_raw
-
-        )
+    modes <- vapply(pieces, `[[`, "", "mode")
+    if (any(modes == "negative") && any(modes == "positive")) {
+        stop("cannot mix positive and negative indices.", call. = FALSE)
     }
 
-    # flatten any LIST markers
-    if (any(vapply(nodes, function(z) identical(z$negate, "LIST"),
-                   logical(1)))) {
-        flat <- .flatten_list_nodes(
-            lapply(nodes, function(z) {
-                if (identical(z$negate, "LIST")) z$pos else z
-            }),
-            nm, n, env, keep_raw
-        )
-        nodes <- list(list(pos = flat$pos, raw = flat$raw, negate = FALSE))
-    }
-
-    vals      <- lapply(nodes, `[[`, "pos")
-    raws      <- lapply(nodes, `[[`, "raw")
-    negatives <- vapply(nodes, function(z) isTRUE(z$negate), logical(1))
-
-    if (any(negatives)) {
-        if (!all(negatives)) {
-            stop("cannot mix positive and negative indices.", call. = FALSE)
-        }
-        drop_pos <- as.integer(unlist(vals, use.names = FALSE))
-        drop_pos <- unique(
-            drop_pos[drop_pos >= 1L & drop_pos <= n & !is.na(drop_pos)]
-        )
-        sel <- setdiff(seq_len(n), drop_pos)
-        return(list(mode = "negative", pos = as.integer(sel)))
+    if (any(modes == "negative")) {
+        drop_pos <- unique(unlist(lapply(pieces, `[[`, "pos"), use.names = FALSE))
+        drop_pos <- drop_pos[drop_pos >= 1L & drop_pos <= n & !is.na(drop_pos)]
+        return(list(mode = "negative", pos = setdiff(seq_len(n), drop_pos)))
     }
 
     if (keep_raw) {
-        # concatenate lists of scalar tokens, preserving types
-        raw_tokens <- list()
-        for (r in raws) if (!is.null(r)) raw_tokens <- c(raw_tokens, r)
-        return(list(mode = "positive", raw_tokens = raw_tokens))
-    } else {
-        sel <- as.integer(unlist(vals, use.names = FALSE))
-        sel <- sel[sel >= 1L & sel <= n & !is.na(sel)]
-        return(list(mode = "positive", pos = sel))
+        raw <- list()
+        for (p in pieces) {
+            if (!is.null(p$raw)) raw <- c(raw, p$raw)
+        }
+        return(list(mode = "positive", raw_tokens = raw))
     }
-}
 
+    pos <- unlist(lapply(pieces, `[[`, "pos"), use.names = FALSE)
+    pos <- pos[pos >= 1L & pos <= n & !is.na(pos)]
+    list(mode = "positive", pos = as.integer(pos))
+}
 
 
 #' Extract Parts of a Container Object
@@ -333,45 +263,67 @@ NULL
 #' co[1:2, "z", .default = 3:4]         # [a = 1, b = 2, z = (3L 4L)]
 #'
 #' @export
-`[.Container` <- function(
-    x, i, ...,
-    .default = NULL
-) {
-    i_expr     <- if (missing(i)) NULL else substitute(i)
-    dots_exprs <- as.list(substitute(list(...)))[-1L]
-
-    if (!missing(i) && is.null(i_expr)) {
-        return(x[0])
+`[.Container` <- function(x, i, ..., .default = NULL)
+{
+    # 1) collect raw tokens (exclude named dots like .default)
+    i_expr <- if (missing(i)) NULL else substitute(i)
+    dots <- as.list(substitute(list(...)))[-1L]
+    if (length(dots) > 0L) {
+        nms <- names(dots)
+        if (!is.null(nms)) dots <- dots[is.na(nms) | nms == ""]
     }
-
-    if (length(i_expr) == 0L && length(dots_exprs) == 0L) {
-        # No indices: return all
+    toks <- c(if (!is.null(i_expr)) list(i_expr) else NULL, dots)
+    if (length(toks) == 0L) {
+        if (!missing(i) || !missing(...)) {
+            return(x[0])
+        }
         return(x)
     }
+    if (length(toks) == 1L && .is_call(toks[[1L]], "list")) {
+        toks <- as.list(toks[[1L]])[-1L]
+    }
 
+    n <- length(x)
+    nm <- names(x) %||% rep.int("", n)
+    env <- parent.frame()
     keep_raw <- !is.null(.default)
 
-    idx <- .resolve_indices(
-        x, i_expr, dots_exprs,
-        env = parent.frame(),
-        keep_raw = keep_raw
-    )
+    # 2) special case: all tokens are logical -> concatenate, then index once
+    all_logical <- length(toks) > 1L && {
+        vals <- lapply(
+            toks,
+            FUN = function(e) try(suppressWarnings(eval(e, env)), silent = TRUE)
+        )
+        all(vapply(vals, is.logical, logical(1)))
+    }
+    pieces <- if (all_logical) {
+        lgl <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
+        list(.idx_bool(lgl, n, keep_raw = keep_raw))
+    } else {
+        unlist(
+            lapply(
+                toks, FUN = .token_to_piece,
+                nm = nm, n = n, env = env, keep_raw = keep_raw
+            ),
+            recursive = FALSE
+        )
+    }
 
-    if (identical(idx$mode, "negative")) {
-        out <- x[idx$pos]
+    # 3) get combine indices and defer to peek_at
+    indices <- .combine_pieces(pieces, n, keep_raw)
+    if (identical(indices$mode, "negative")) {
+        out <- x[indices$pos]
     } else if (keep_raw) {
-        # list of scalars, types preserved
-        args <- c(list(x), idx$raw_tokens)
+        args <- c(list(x), indices$raw_tokens)
         args[[".default"]] <- .default
         out <- do.call(peek_at, args)
     } else {
-        out <- peek_at(x, idx$pos)
+        out <- peek_at(x, indices$pos)
     }
 
     class(out) <- class(x)
     out
 }
-
 
 #' @name ContainerS3
 #' @rdname ContainerS3
@@ -384,7 +336,6 @@ NULL
 #' co[list("d", 2)]
 #' co[0:10]
 NULL
-
 
 #' @rdname OpsExtract
 #' @examples
