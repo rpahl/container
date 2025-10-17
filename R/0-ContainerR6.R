@@ -323,6 +323,9 @@ Container <- R6::R6Class(
 
             .assert_index_arg(index)
 
+            if (is.logical(index)) {
+                index <- as.numeric(index)
+            }
             tryCatch(self$at2(index), error = function(e) default)
         },
 
