@@ -182,37 +182,62 @@
 }
 
 
-#' Extract Parts of a Container Object
+#' Extract Parts of a Container
 #'
-#' @description Extract parts of a `Container` object similar
-#' to R's base extract operators on lists.
+#' @description
+#' Operators that extract parts of a `Container`. The behavior is similar to
+#' base R lists and includes convenient extensions for interactive work.
+#'
+#' @usage
+#' x[i, ..., .default = NULL]
+#' x[[i]]
+#' x$name
+#'
 #' @name OpsExtract
-#' @param x `Container` object from which to extract elements.
-#' @param i,...  indices specifying elements to extract. Indices
-#' can be `logical`, `numeric`, `character`, or a mix of these.
-#' They can be passed as `vector`, `list`, or comma-separated
-#' sequence.
-#' Non-existing indices are ignored, but can be substituted if a
-#' default value was provided (see `.default` parameter).
-#' Supports alpha-numeric range selection via non-standard evaluation
-#' (e.g., `co[a:b]` see Examples).
 #'
-#' @param .default value to be returned if peeked value does not exist.
+#' @param x A `Container` from which to extract elements.
+#' @param i,... Indices specifying elements to extract. Indices may be numeric,
+#'   character, logical, `NULL`, or empty. Logical vectors are recycled as needed.
+#'   Negative integers drop by position. Negative character indices drop by name.
+#'   Range expressions such as `a:b`, `1:c`, or `d:2` are supported for
+#'   convenience and are resolved in the calling environment.
+#' @param .default A value used to fill missing items when extracting. If given,
+#'   unknown names and out-of-bounds positive indices are kept and filled with
+#'   this value.
+#' @param name A literal name for `$` extraction.
+#'
 #' @details
-#' `[` selects multiple values. The indices can be `numeric` or
-#' `character` or both. They can be passed as a `vector` or `list` or,
-#' for convenience, just as a comma-separated sequence (see Examples).
-#' Non-existing indices are ignored.
+#' The `[` operator selects one or more elements and returns a `Container`.
+#' Order is preserved and duplicates are kept. Logical indices recycle to the
+#' container length with a warning when lengths do not match. `NA` in logical
+#' indices is treated as `FALSE` with a warning. Positive and negative numeric
+#' indices cannot be mixed in a single call and will raise an error.
+#' Out-of-bounds negative indices are ignored. Character indices match names.
+#' Unknown names are ignored unless `.default` is supplied, in which case they
+#' are kept and filled. Comma-separated indices and `list(...)` are accepted and
+#' behave like a single combined index. `x[]` returns all elements, while
+#' `x[NULL]`, `x[i = NULL]`, and `x[foo = NULL]` return an empty container.
 #'
-#' `[[` selects a single value using a `numeric` or `character` index.
+#' The `[[` operator selects a single element and returns the value or `NULL`
+#' if the element is not present.
 #'
-#' @section Warning:
-#' Alpha-numeric range selection (e.g. `co[a:b]`) is intended for
-#' interactive use only, because the non-standard evaluation of the
-#' range arguments can have unanticipated consequences.
-#' For programming it is therefore better to use the standard subsetting
-#' indices (e.g. `co[1:2]` or `co[c("a", "b")]`).
+#' The `$` operator extracts by name and does not accept computed indices.
+#'
+#' Range expressions such as `x[a:b]` are intended for interactive use. The
+#' endpoints are first matched to names and otherwise evaluated as numeric
+#' scalars in the calling environment.
+#'
+#' @return
+#' For `[` a `Container`. For `[[` the extracted value or `NULL`. For `$` the
+#' extracted value or `NULL`.
+#'
+#' @seealso
+#' \code{\link{peek_at}} for lenient extraction with defaults,
+#' \code{\link{at}} and \code{\link{at2}} for strict programmatic access,
+#' and base \code{\link[base:Extract]{[}}, \code{\link[base:Extract]{[[}}, and
+#' \code{\link[base:Extract]{$}} for general indexing semantics.
 NULL
+
 
 #' @rdname OpsExtract
 #' @examples
@@ -220,44 +245,44 @@ NULL
 #'
 #' # Numeric
 #' co[c(1, 4)]                          # [a = 1, d = 4]
-#' co[1, 4]                             # same
-#' co[0:5]                              # [a = 1, b = 2, c = 3, d = 4]
-#' co[5]                                # []
+#' co[1, 4]                             # same (comma-sugar)
+#' co[1, 1]                             # duplicates kept -> [a = 1, a = 1]
+#' co[0:5]                              # unknowns ignored -> [a = 1, b = 2, c = 3, d = 4]
+#' co[5]                                # [] (unknown positive index)
 #'
 #' # Negative numeric
 #' co[-c(1:2)]                          # [c = 3, d = 4]
 #' co[-1, -4]                           # [b = 2, c = 3]
-#' try(co[-1, 3])                       # cannot mix positive and negative indices
+#' try(co[-1, 3])                       # error: cannot mix positive & negative
+#' co[-5]                               # out-of-bounds negatives ignored -> full container
 #'
 #' # Character
 #' co[c("a", "d")]                      # [a = 1, d = 4]
 #' co["a", "d"]                         # same
-#' co[letters[1:5]]                     # [a = 1, b = 2, c = 3, d = 4]
+#' co[letters[1:5]]                     # unknown names dropped -> [a = 1, b = 2, c = 3, d = 4]
 #' co["x"]                              # []
 #'
-#' # Negative character
-#' co[-c("a", "d")]                      # [b = 2, c = 3]
-#' co[-"a", -"d"]                        # [b = 2, c = 3]
+#' # Negative character (drop by name)
+#' co[-c("a", "d")]                     # [b = 2, c = 3]
+#' co[-"a", -"d"]                       # [b = 2, c = 3]
 #'
-#' # Boolean
+#' # Logical
 #' co[c(TRUE, FALSE, TRUE, FALSE)]      # [a = 1, c = 3]
-#' co[TRUE, FALSE, TRUE, FALSE]         # same
-#'
-#' # Partial boolean (recycling)
-#' co[c(TRUE, FALSE)]                   # [a = 1, c = 3]
-#' co[TRUE, FALSE]                      # same
+#' co[TRUE, FALSE]                      # [a = 1, c = 3] (recycled)
+#' co[c(TRUE, NA)]                      # [a = 1, c = 3] (NA -> FALSE, warning)
 #'
 #' # Mixed numeric and character
 #' co[list(1, "d")]                     # [a = 1, d = 4]
 #' co[1, "d"]                           # same
 #'
-#' # Alpha-numeric ranges (non-standard evaluation)
+#' # Alphanumeric ranges (NSE)
 #' co[a:b]                              # [a = 1, b = 2]
 #' co[a:b, d:c]                         # [a = 1, b = 2, d = 4, c = 3]
 #' co[1:c]                              # [a = 1, b = 2, c = 3]
-#' co[d:2]                              # [d = 4, c = 3]
+#' co[d:2]                              # [d = 4, c = 3, b = 2]
+#' co[-(a:c)]                           # [d = 4] # TODO
 #'
-#' # Default values
+#' # Default-filling of missing items
 #' co[1:5, 0, .default = 0]             # [a = 1, b = 2, c = 3, d = 4, 0]
 #' co["a", "b", "z", .default = 0]      # [a = 1, b = 2, z = 0]
 #' co[1:2, "z", .default = 3:4]         # [a = 1, b = 2, z = (3L 4L)]
