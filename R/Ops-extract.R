@@ -359,12 +359,16 @@ NULL
 #' @rdname ContainerS3
 #' @examples
 #' # Extract or replace
-#' co = container(a = 1, b = 2, c = 3, d = 4)
-#' co[1:2]
-#' co[1, 4]
-#' co["d", 2]
-#' co[list("d", 2)]
-#' co[0:10]
+#' co <- container(a = 1, b = 2, c = 3, d = 4)
+#' co[1:2]              # [a = 1, b = 2]
+#' co[1, 4]             # [a = 1, d = 4]
+#' co[0:10]             # [a = 1, b = 2, c = 3, d = 4]
+#' co[list(1, "d")]     # [a = 1, d = 4]
+#' co["d", 2]           # same
+#' co[-c(1:2)]          # [c = 3, d = 4]
+#' co[-1, -4]           # [b = 2, c = 3]
+#' co[-"a", -"d"]       # [b = 2, c = 3]
+#' co[a:b]              # [a = 1, b = 2]
 NULL
 
 #' @rdname OpsExtract
