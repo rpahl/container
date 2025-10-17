@@ -6,10 +6,6 @@
 \alias{[[.Container}
 \title{Extract Parts of a Container}
 \usage{
-x[i, ..., .default = NULL]
-x[[i]]
-x$name
-
 \method{[}{Container}(x, i, ..., .default = NULL)
 
 \method{[[}{Container}(x, i)
@@ -26,8 +22,6 @@ convenience and are resolved in the calling environment.}
 \item{.default}{A value used to fill missing items when extracting. If given,
 unknown names and out-of-bounds positive indices are kept and filled with
 this value.}
-
-\item{name}{A literal name for \code{$} extraction.}
 }
 \value{
 For \code{[} a \code{Container}. For \code{[[} the extracted value or \code{NULL}. For \code{$} the
@@ -51,8 +45,6 @@ behave like a single combined index. \code{x[]} returns all elements, while
 
 The \code{[[} operator selects a single element and returns the value or \code{NULL}
 if the element is not present.
-
-The \code{$} operator extracts by name and does not accept computed indices.
 
 Range expressions such as \code{x[a:b]} are intended for interactive use. The
 endpoints are first matched to names and otherwise evaluated as numeric

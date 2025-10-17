@@ -193,11 +193,6 @@
 #' Operators that extract parts of a `Container`. The behavior is similar to
 #' base R lists and includes convenient extensions for interactive work.
 #'
-#' @usage
-#' x[i, ..., .default = NULL]
-#' x[[i]]
-#' x$name
-#'
 #' @name OpsExtract
 #'
 #' @param x A `Container` from which to extract elements.
@@ -209,7 +204,6 @@
 #' @param .default A value used to fill missing items when extracting. If given,
 #'   unknown names and out-of-bounds positive indices are kept and filled with
 #'   this value.
-#' @param name A literal name for `$` extraction.
 #'
 #' @details
 #' The `[` operator selects one or more elements and returns a `Container`.
@@ -225,8 +219,6 @@
 #'
 #' The `[[` operator selects a single element and returns the value or `NULL`
 #' if the element is not present.
-#'
-#' The `$` operator extracts by name and does not accept computed indices.
 #'
 #' Range expressions such as `x[a:b]` are intended for interactive use. The
 #' endpoints are first matched to names and otherwise evaluated as numeric
