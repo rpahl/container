@@ -111,6 +111,11 @@
 
 
 .token_to_piece <- function(tok, nm, n, env, keep_raw) {
+    if (.is_call(tok, "(")) {
+        return(
+            .token_to_piece(tok[[2L]], nm = nm, n = n, env = env, keep_raw = keep_raw)
+        )
+    }
     if (.is_call(tok, "list")) {
         args <- as.list(tok)[-1L]
         return(unlist(
@@ -280,7 +285,7 @@ NULL
 #' co[a:b, d:c]                         # [a = 1, b = 2, d = 4, c = 3]
 #' co[1:c]                              # [a = 1, b = 2, c = 3]
 #' co[d:2]                              # [d = 4, c = 3, b = 2]
-#' co[-(a:c)]                           # [d = 4] # TODO
+#' co[-(a:c)]                           # [d = 4]
 #'
 #' # Default-filling of missing items
 #' co[1:5, 0, .default = 0]             # [a = 1, b = 2, c = 3, d = 4, 0]
