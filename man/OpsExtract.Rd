@@ -98,7 +98,7 @@ co[a:b]                              # [a = 1, b = 2]
 co[a:b, d:c]                         # [a = 1, b = 2, d = 4, c = 3]
 co[1:c]                              # [a = 1, b = 2, c = 3]
 co[d:2]                              # [d = 4, c = 3, b = 2]
-co[-(a:c)]                           # [d = 4] # TODO
+co[-(a:c)]                           # [d = 4]
 
 # Default-filling of missing items
 co[1:5, 0, .default = 0]             # [a = 1, b = 2, c = 3, d = 4, 0]

@@ -157,6 +157,14 @@ describe(
         ee(co[a:3], co[1:3])
         ee(co[a:b, 4:3], co[1:2, 4:3])
         ee(co[a:2, 4:c], co[1:2, 4:3])
+
+        # Negative ranges
+        co <- container(a = 1, b = 2, c = 3, d = 4)
+        ee(co[-(a:c)],co[-(1:3)])
+        ee(co[-(4:c)], co[-(4:3)])
+
+        co <- container("a 1" = 1, 2, "a 2" = 3, d = 4)
+        ee(co[-(`a 1`:`a 2`)], co[-(1:3)])
     })
 
     test_that(".default argument",
