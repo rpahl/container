@@ -1,10 +1,5 @@
-# container (development version)
 
-# container 1.1.0
-
-## New features
-
-* multiple selection now supports alphanumeric indices (#35)
+# container 1.0.5.9001
 
 ## Fixes
 * allow setting names of initially unnamed containers
