@@ -160,7 +160,7 @@ describe(
 
         # Negative ranges
         co <- container(a = 1, b = 2, c = 3, d = 4)
-        ee(co[-(a:c)],co[-(1:3)])
+        ee(co[-(a:c)], co[-(1:3)])
         ee(co[-(4:c)], co[-(4:3)])
 
         co <- container("a 1" = 1, 2, "a 2" = 3, d = 4)
