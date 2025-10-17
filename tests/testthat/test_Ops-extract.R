@@ -2,7 +2,9 @@
 describe(
     "[ operator",
 {
-    ee <- function(...) expect_true(isTRUE(all.equal(..., check.attributes = FALSE)))
+    ee <- function(...) {
+        expect_true(isTRUE(all.equal(..., check.attributes = FALSE)))
+    }
 
     test_that("empty or undefined indices",
     {
@@ -11,7 +13,6 @@ describe(
         ee(co[], co)
         ee(co[""], container())
         ee(container()[1], container())
-        ee(co[NULL], container())   #fails
 
         ee(co[integer()], container())
         ee(co[numeric()], container())
@@ -24,6 +25,13 @@ describe(
             ee(co[NA], container()),
             "Logical index contains NA; treating NA as FALSE."
         )
+
+        # consistency to list behavior for NULL index
+        l <- as.list(co)
+
+        expect_equal(as.list(co[NULL]), unname(l[NULL]))
+        expect_equal(as.list(co[i = NULL]), unname(l[i = NULL]))
+        expect_equal(as.list(co[foo = NULL]), unname(l[foo = NULL]))
     })
 
 
@@ -149,16 +157,6 @@ describe(
         ee(co[a:3], co[1:3])
         ee(co[a:b, 4:3], co[1:2, 4:3])
         ee(co[a:2, 4:c], co[1:2, 4:3])
-    })
-
-    test_that("consistency to list behavior for NULL index",
-    {
-        co <- container(a = 1, b = 2)
-        l <- as.list(co)
-
-        expect_equal(as.list(co[NULL]), unname(l[NULL]))
-        expect_equal(as.list(co[a = NULL]), unname(l[a = NULL]))
-        expect_equal(as.list(co[foo = NULL]), unname(l[foo = NULL]))
     })
 
     test_that(".default argument",
