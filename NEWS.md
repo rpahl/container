@@ -1,10 +1,12 @@
 
-# container 1.0.5.9001
+# container 1.0.5.9000
 
 ## Fixes
+
 * allow setting names of initially unnamed containers
 
 ## Documentation
+
 * rename vignettes to have desired order at CRAN (#33)
 * update README and vignettes (#30)
 * add News menu including this Changelog to package site
@@ -13,10 +15,10 @@
 # container 1.0.5
 
 * Update pages to bootstrap 5 and github action pipelines (#26)
-    * upgrade pages to use bootstrap 5
-    * update README
-    * remove Date field in DESCRIPTION file
-    * fix documentation signaled by CRAN devel checks
+  * upgrade pages to use bootstrap 5
+  * update README
+  * remove Date field in DESCRIPTION file
+  * fix documentation signaled by CRAN devel checks
 
 # container 1.0.4
 
@@ -69,7 +71,6 @@ List of changes
 * the S3 method interface now by default provides copy semantics. For reference
   semantics, functions starting with `ref_` are used.
 
-
 ## New features
 
 * new classes `OrderedSet` and `dict.table`
@@ -87,7 +88,6 @@ List of changes
 * comparison operators that compare containers *lexicographically*
 * arithmetic operators
 * group generic functions for Math and Summary
-
 
 ## Deprecated Functions
 
