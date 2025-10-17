@@ -190,18 +190,18 @@ describe(
         ee(co[[6]], NULL)
         ee(co[[NULL]], NULL)
         ee(co[[integer(0)]], NULL)
+        ee(co[[FALSE]], NULL)
     })
 
     test_that("consistency to list behavior for certain edge cases",
     {
-        co = container(a = 1, b = 2)
-        l = as.list(co)
+        co <- container(a = 1, b = 2)
+        l <- as.list(co)
         ee(co[[""]], l[[""]])
         expect_error(co[[1:2]], "index must be of length 1")
         expect_error(co[[c("a", "b")]], "index must be of length 1")
         expect_error(co[[NA]], "index must not be 'NA'")
 
-        skip("TODO: currently not equal (NULL vs 1)")
-        #ee(co[[TRUE]], l[[TRUE]]) # nolint
+        ee(co[[TRUE]], l[[TRUE]])
     })
 })
