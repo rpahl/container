@@ -197,11 +197,11 @@ describe("as.list.Container",
         ee(as.list(cont(a = 1, b = cont(2, 3))), list(a = 1, b = cont(2, 3)))
     })
 
-    test_that("nested containers are always converted as copies",
+    test_that("nested containers are converted as copies by default",
     {
         c1 <- cont(1)
-        cc1 <- cont(c1)
-        ccc1 <- cont(cc1)
+        cc1 <- Container$new(c1)
+        ccc1 <- Container$new(cc1)
 
         l <- as.list(ccc1)
         ee(l, list(cont(cont(1))))
@@ -209,8 +209,25 @@ describe("as.list.Container",
         c1$add(2)
         cc1$add(2)
 
-        ee(ccc1, cont(cont(cont(1))))
-        ee(l, list(cont(cont(1))))  # not changed
+        expect_true(all.equal(ccc1, cont(cont(cont(1, 2), 2))))
+        # Containers in list were copied and thus are not changed
+        expect_true(all.equal(l, list(cont(cont(1)))))
+    })
+
+    test_that("nested containers can be converted as shallow copies",
+    {
+        c1 <- cont(1)
+        cc1 <- Container$new(c1)
+        ccc1 <- Container$new(cc1)
+
+        l <- as.list(ccc1, deep = FALSE)
+        ee(l, list(cont(cont(1))))
+
+        c1$add(2)
+        cc1$add(2)
+
+        # Containers in list are updated
+        expect_true(all.equal(l, list(cont(cont(1, 2), 2))))
     })
 })
 
@@ -431,5 +448,121 @@ describe(
     {
         co <- cont(a = 1, 2, 3)
         expect_error(names(co)[2] <- "b", "'old' has duplicated names: ''")
+    })
+})
+
+
+describe("%in% with Container",
+{
+    co <- container(a = 1, 2, b = 3)
+    li <- as.list(co)
+
+    describe("Container on RHS",
+    {
+        test_that("unnamed vectors match with base R",
+        {
+            expect_equal(1 %in% container(), 1 %in% list())
+            expect_equal(1 %in% co, 1 %in% li)
+            expect_equal(4 %in% co, 4 %in% li)
+            v <- c(1, 3, 5, 2)
+            expect_equal(v %in% co, v %in% li)
+            expect_equal("a" %in% co, "a" %in% li)
+        })
+
+        test_that("named vectors keep names in contrast to base R",
+        {
+            v <- c(x = 1, y = 2, z = 9)
+            expect_equal(v %in% co, c(x = TRUE, y = TRUE, z = FALSE))
+            expect_equal(unname(v %in% co), v %in% li)
+        })
+
+        test_that(
+            "unnamed list elements match with base R",
+        {
+            l <- list(1, 2, 9)
+            expect_equal(l %in% co, c(TRUE, TRUE, FALSE))
+            expect_equal(l %in% co, l %in% li)
+
+            expect_equal(
+                list(x = 1, y = 2, z = 9) %in% co,
+                c(x = TRUE, y = TRUE, z = FALSE)
+            )
+            expect_equal(
+                unname(list(x = 1, y = 2, z = 9) %in% co),
+                list(x = 1, y = 2, z = 9) %in% lapply(li, as.character)
+            )
+        })
+
+        test_that("named lists keep names in contrast to base R",
+        {
+            l <- list(x = 1, y = 2, z = 9)
+            expect_equal(l %in% co, c(x = TRUE, y = TRUE, z = FALSE))
+            expect_equal(unname(l %in% co), l %in% li)
+        })
+
+        test_that("NA handling matches base R for unnamed vectors",
+        {
+            co2 <- container(a = NA_real_, b = 2)
+            li2 <- as.list(co2)
+
+            expect_true(NA_real_ %in% co2)
+            expect_false(NA_real_ %in% li2)
+            expect_equal(NA_real_ %in% co2, NA_real_ %in% unlist(li2))
+
+            v <- c(1, NA_real_, 2)
+            expect_equal(v %in% co2, c(FALSE, TRUE, TRUE))
+            expect_equal(v %in% li2, c(FALSE, FALSE, TRUE))
+            expect_equal(v %in% co2, v %in% unlist(li2))
+
+            v <- c(x = 1, y = NA_real_, z = 2)
+            expect_equal(v %in% co2, c(x = FALSE, y = TRUE, z = TRUE))
+            expect_equal(v %in% li2, c(FALSE, FALSE, TRUE))
+            expect_equal(unname(v %in% co2), v %in% unlist(li2))
+        })
+    })
+
+    describe("Container on LHS",
+    {
+        test_that("standard cases",
+        {
+            expect_equal(co %in% c(), c("a" = FALSE, FALSE, "b" = FALSE))
+            expect_equal(co %in% 1:4, c("a" = TRUE, TRUE, "b" = TRUE))
+            expect_equal(co %in% 2:5, c("a" = FALSE, TRUE, "b" = TRUE))
+        })
+    })
+
+
+    describe("Container vs Container",
+    {
+        test_that("standard cases",
+        {
+            expect_equal(co %in% co, c("a" = TRUE, TRUE, "b" = TRUE))
+            expect_equal(
+                co %in% container(a = 2, b = 1),
+                c("a" = TRUE, TRUE, "b" = FALSE)
+            )
+            expect_equal(
+                co %in% container(a = 5, b = 6),
+                c("a" = FALSE, FALSE, "b" = FALSE)
+            )
+        })
+
+        test_that("Deep equality for nested container elements",
+        {
+            coli <- container(a = list(x = 1), b = list(x = 2))
+            coco <- container(a = container(x = 1), b = container(x = 2))
+
+            expect_true(1 %in% coli)
+            expect_false(1 %in% coco)
+
+            expect_true(list(x = 1) %in% coli)
+            expect_false(list(x = 1) %in% coco)
+
+            expect_true(container(list(x = 1)) %in% coli)
+            expect_false(container(list(x = 1)) %in% coco)
+
+            expect_true(container(container(x = 1)) %in% coco)
+            expect_equal(coco %in% coco, c("a" = TRUE, "b" = TRUE))
+        })
     })
 })

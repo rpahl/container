@@ -28,7 +28,7 @@ as.cont(x)
 
 is.container(x)
 
-\method{as.list}{Container}(x, ...)
+\method{as.list}{Container}(x, deep = TRUE, ...)
 
 \method{length}{Container}(x)
 
@@ -42,6 +42,9 @@ is.container(x)
 
 \item{x}{\code{R} object of \code{ANY} type for \link{as.container} and \link{is.container}
 or of class \link{Container} for the \code{S3} methods.}
+
+\item{deep}{\code{logical(1)} indicating whether a deep copy of the elements
+should be made when converting to a list.}
 
 \item{value}{\code{character} vector of names.}
 }
@@ -75,8 +78,9 @@ providing either copy or reference semantics where the latter start with
 }
 
 \itemize{
-\item \code{as.list(x)} converts container \code{x} to a base R \link{list}. All of
-the container's elements are copied (deeply) during the conversion.
+\item \code{as.list(x)} converts container \code{x} to a base R \link{list}. If
+\code{deep} is \code{TRUE}, all of the container's elements are copied (deeply)
+during the conversion.
 }
 
 \itemize{

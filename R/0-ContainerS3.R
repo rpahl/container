@@ -70,10 +70,15 @@ is.container <- function(x) inherits(x, "Container")
 
 
 #' @rdname ContainerS3
-#' @details * `as.list(x)` converts container `x` to a base R [list]. All of
-#' the container's elements are copied (deeply) during the conversion.
+#' @param deep `logical(1)` indicating whether a deep copy of the elements
+#' should be made when converting to a list.
+#' @details * `as.list(x)` converts container `x` to a base R [list]. If
+#' `deep` is `TRUE`, all of the container's elements are copied (deeply)
+#' during the conversion.
 #' @export
-`as.list.Container` <- function(x, ...) x$clone(deep = TRUE)$values()
+`as.list.Container` <- function(x, deep = TRUE, ...) {
+    x$clone(deep = deep)$values()
+}
 
 
 #' @export
@@ -132,4 +137,75 @@ str.Container <- function(object, ...)
     x$rename(as.character(names(x)), value)
 }
 
-# TODO: implement generic %in%
+
+#' @title S4 methods for Container
+#'
+#' @rdname ContainerS4
+#' @name ContainerS4
+#' @docType methods
+NULL
+
+#' @rdname ContainerS4
+#' @description Membership operator for Container
+#' @return A `logical` vector indicating if each element of `x` is found
+#'
+#' @examples
+#' co <- container(a = 1, 2, b = 3)
+#' c(1, 3, 5) %in% co                       # TRUE TRUE FALSE
+#' c(x = 1, y = 2, z = 9) %in% co           # c(x = TRUE, y = TRUE, z = FALSE)
+#' list(x = 1, y = 2, z = 9) %in% co        # c(x = TRUE, y = TRUE, z = FALSE)
+#'
+#' co2 <- container(a = NA, b = 2)
+#' v <- c(x = 1, y = NA_real_, z = 2)
+#' v %in% co2                               # c(x = FALSE, y = FALSE, z = TRUE)
+#' co2 %in% v                               # c(a = FALSE, b = TRUE)
+#' @export
+methods::setGeneric("%in%", function(x, table) standardGeneric("%in%"),
+    useAsDefault = function(x, table) base::`%in%`(x, table)
+)
+
+.eq_deep_ <- function(a, b) isTRUE(all.equal(a, b, check.attributes = FALSE))
+
+.any_match_top_ <- function(el, table_list) {
+    any(vapply(table_list, .eq_deep_, b = el, FUN.VALUE = logical(1)))
+}
+
+#' @rdname ContainerS4
+#' @aliases ANY,Container
+#' @param x `ANY` value
+#' @param table ``Container` object
+#' @export
+methods::setMethod("%in%",
+    signature(x = "ANY", table = "Container"),
+    function(x, table) {
+        vals <- as.list(table)                # list of top-level values
+        xl <- if (is.list(x)) x else as.list(x)
+        vapply(xl, .any_match_top_, table_list = vals, FUN.VALUE = logical(1))
+    }
+)
+
+#' @rdname ContainerS4
+#' @aliases Container,ANY
+#' @param x `Container` objects
+#' @param table `ANY` value
+#' @export
+methods::setMethod("%in%", signature(x = "Container", table = "ANY"),
+    function(x, table) {
+        left <- as.list(x)
+        right <- if (is.list(table)) table else as.list(table)
+        vapply(left, .any_match_top_, table_list = right, FUN.VALUE = logical(1))
+    }
+)
+
+#' @rdname ContainerS4
+#' @aliases Container,Container
+#' @param x `Container` objects
+#' @param table `Container` objects
+#' @export
+methods::setMethod("%in%", signature(x = "Container", table = "Container"),
+    function(x, table) {
+        left <- as.list(x)
+        right <- as.list(table)
+        vapply(left, .any_match_top_, table_list = right, FUN.VALUE = logical(1))
+    }
+)
