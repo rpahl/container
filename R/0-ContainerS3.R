@@ -70,10 +70,15 @@ is.container <- function(x) inherits(x, "Container")
 
 
 #' @rdname ContainerS3
-#' @details * `as.list(x)` converts container `x` to a base R [list]. All of
-#' the container's elements are copied (deeply) during the conversion.
+#' @param deep `logical(1)` indicating whether a deep copy of the elements
+#' should be made when converting to a list.
+#' @details * `as.list(x)` converts container `x` to a base R [list]. If
+#' `deep` is `TRUE`, all of the container's elements are copied (deeply)
+#' during the conversion.
 #' @export
-`as.list.Container` <- function(x, ...) x$clone(deep = TRUE)$values()
+`as.list.Container` <- function(x, deep = TRUE, ...) {
+    x$clone(deep = deep)$values()
+}
 
 
 #' @export

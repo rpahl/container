@@ -197,11 +197,11 @@ describe("as.list.Container",
         ee(as.list(cont(a = 1, b = cont(2, 3))), list(a = 1, b = cont(2, 3)))
     })
 
-    test_that("nested containers are always converted as copies",
+    test_that("nested containers are converted as copies by default",
     {
         c1 <- cont(1)
-        cc1 <- cont(c1)
-        ccc1 <- cont(cc1)
+        cc1 <- Container$new(c1)
+        ccc1 <- Container$new(cc1)
 
         l <- as.list(ccc1)
         ee(l, list(cont(cont(1))))
@@ -209,8 +209,25 @@ describe("as.list.Container",
         c1$add(2)
         cc1$add(2)
 
-        ee(ccc1, cont(cont(cont(1))))
-        ee(l, list(cont(cont(1))))  # not changed
+        expect_true(all.equal(ccc1, cont(cont(cont(1, 2), 2))))
+        # Containers in list were copied and thus are not changed
+        expect_true(all.equal(l, list(cont(cont(1)))))
+    })
+
+    test_that("nested containers can be converted as shallow copies",
+    {
+        c1 <- cont(1)
+        cc1 <- Container$new(c1)
+        ccc1 <- Container$new(cc1)
+
+        l <- as.list(ccc1, deep = FALSE)
+        ee(l, list(cont(cont(1))))
+
+        c1$add(2)
+        cc1$add(2)
+
+        # Containers in list are updated
+        expect_true(all.equal(l, list(cont(cont(1, 2), 2))))
     })
 })
 
