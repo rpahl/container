@@ -25,7 +25,7 @@ describe("dict",
         d1 <- dict(a = 1)
         d2 <- dict(d = d1)
         d1$clear()
-        d2 |> equals(dict(d = dict(a = 1))) |> expect_true()
+        expect_true(equals(d2, dict(d = dict(a = 1))))
     })
 })
 
