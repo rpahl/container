@@ -211,7 +211,7 @@ describe("dict.table",
         expect_equal(dit[["A"]], 3:4)
     })
 
-    test_that("a column can only bet set if already
+    test_that("a column can only be set if already
         existing unless declared to be added",
     {
         dit <- dict.table(A = 1:2)
