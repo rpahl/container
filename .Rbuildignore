@@ -26,6 +26,7 @@
 ^_pkgdown\.yml$
 ^pkgdown$
 ^docs$                 # If you publish pkgdown to docs/
+^doc$
 
 # Repository meta docs (optional to exclude; safe to keep if you prefer)
 ^cran-comments\.md$
