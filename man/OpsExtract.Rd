@@ -24,8 +24,7 @@ unknown names and out-of-bounds positive indices are kept and filled with
 this value.}
 }
 \value{
-For \code{[} a \code{Container}. For \code{[[} the extracted value or \code{NULL}. For \code{$} the
-extracted value or \code{NULL}.
+For \code{[} a \code{Container}. For \code{[[} the extracted value or \code{NULL}.
 }
 \description{
 Operators that extract parts of a \code{Container}. The behavior is similar to
@@ -40,16 +39,20 @@ indices cannot be mixed in a single call and will raise an error.
 Out-of-bounds negative indices are ignored. Character indices match names.
 Unknown names are ignored unless \code{.default} is supplied, in which case they
 are kept and filled. Comma-separated indices and \code{list(...)} are accepted and
-behave like a single combined index. \code{x[]} returns all elements, while
-\code{x[NULL]}, \code{x[i = NULL]}, and \code{x[foo = NULL]} return an empty container.
+behave like a single combined index.
 
 The \code{[[} operator selects a single element and returns the value or \code{NULL}
 if the element is not present.
-
-Range expressions such as \code{x[a:b]} are intended for interactive use. The
-endpoints are first matched to names and otherwise evaluated as numeric
-scalars in the calling environment.
 }
+\section{Warning}{
+
+Range expressions such as \code{x[a:b]} are intended for interactive use, where
+the resulting indices can be easily inspected and corrected by the user.
+They are convenient for quick exploration and data analysis, but \emph{not}
+intended for programming, where explicit indices should be used instead
+to avoid unexpected results.
+}
+
 \examples{
 co <- container(a = 1, b = 2, c = 3, d = 4)
 

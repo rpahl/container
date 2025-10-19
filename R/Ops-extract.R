@@ -214,19 +214,20 @@
 #' Out-of-bounds negative indices are ignored. Character indices match names.
 #' Unknown names are ignored unless `.default` is supplied, in which case they
 #' are kept and filled. Comma-separated indices and `list(...)` are accepted and
-#' behave like a single combined index. `x[]` returns all elements, while
-#' `x[NULL]`, `x[i = NULL]`, and `x[foo = NULL]` return an empty container.
+#' behave like a single combined index.
 #'
 #' The `[[` operator selects a single element and returns the value or `NULL`
 #' if the element is not present.
 #'
-#' Range expressions such as `x[a:b]` are intended for interactive use. The
-#' endpoints are first matched to names and otherwise evaluated as numeric
-#' scalars in the calling environment.
+#' @section Warning:
+#' Range expressions such as `x[a:b]` are intended for interactive use, where
+#' the resulting indices can be easily inspected and corrected by the user.
+#' They are convenient for quick exploration and data analysis, but *not*
+#' intended for programming, where explicit indices should be used instead
+#' to avoid unexpected results.
 #'
 #' @return
-#' For `[` a `Container`. For `[[` the extracted value or `NULL`. For `$` the
-#' extracted value or `NULL`.
+#' For `[` a `Container`. For `[[` the extracted value or `NULL`.
 #'
 #' @seealso
 #' \code{\link{peek_at}} for lenient extraction with defaults,
