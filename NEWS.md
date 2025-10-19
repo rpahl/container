@@ -2,7 +2,50 @@
 
 # container 1.0.5.9002
 
-- Same as previous version.
+## Breaking Changes
+
+* Extract operator is now always non-strict (the strict option has been dropped)
+
+## New Features
+
+* Added generic `%in%` operator for containers (#36)
+  * Enables membership testing: `x %in% container_obj`
+  * Works with all container types (Container, Deque, Set, Dict)
+  
+* Extract operator enhancements
+  * Support for non-standard evaluation (NSE): `co[a:d]` to extract named ranges
+  * Support for negative indices in NSE ranges
+  * Support for alpha-numeric range selection in extract operator
+  * `co[[TRUE]]` now aligns with base R to return first element
+  * Added `.default` argument to multiple extract operations
+  * Improved boolean extract with recycling and list index support
+  
+* Added option for shallow copy when converting container to list via `as.list()`
+  * New parameter to control copy behavior for better performance when needed
+
+## Fixes
+
+* Fixed negative NSE range extraction that was not working correctly
+* Fixed failing unit tests after migration to testthat
+* Allow setting names on initially unnamed containers
+
+## Testing
+
+* Complete migration from tinytest to testthat framework
+  * Migrated all test files to testthat format
+  * Removed tinytest from package dependencies
+  * Updated test configuration to use testthat edition 3
+  * Enabled parallel testing
+
+## Internal/Development
+
+* Setup renv for reproducible development environment
+* Updated CI/CD workflows
+* Added lintr configuration and fixed linting issues
+* Cleanup and reformat of source code
+* Updated documentation to pass R CMD check
+* Added attachment config for development
+* Updated .Rbuildignore and added .renvignore
 
 
 
