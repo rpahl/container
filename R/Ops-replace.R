@@ -6,6 +6,10 @@
 #' @param x `Container` object in which to replace elements.
 #' @param i  indices specifying elements to replace. Indices
 #' are `numeric` or `character` vectors or a `list` containing both.
+#' @param ... additional indices (comma-separated) supporting the same
+#'   options as extraction: numeric, character, logical, list(...),
+#'   ranges (e.g., a:b, 1:c, d:2), unary minus for negative (drop) selection,
+#'   and parentheses for grouping.
 #' @param name `character` string (possibly backtick quoted)
 #' @param value the replacing value of `ANY` type
 #' @details
@@ -32,18 +36,71 @@ NULL
 #' co[3] <- 3 # index out of range
 #' })
 #' (co[list(1, "b")] <- 3:4)   # mixed numeric/character index
+#' co[-(1:2)] <- 0             # negative (complement) selection
+#' co[a:b] <- list(7, 8)       # range by names (NSE)
+#' co["x"] <- 9                # add by new character name
 #'
 #' @export
-"[<-.Container" = function(x, i, value)
+"[<-.Container" = function(x, i, ..., value)
 {
-    lenv = length(value)
-    leni = length(i)
+    # 1) collect raw tokens (exclude named dots like .default)
+    i_expr <- if (missing(i)) NULL else substitute(i)
+    dots <- as.list(substitute(list(...)))[-1L]
+    if (length(dots) > 0L) {
+        nms <- names(dots)
+        if (!is.null(nms)) dots <- dots[is.na(nms) | nms == ""]
+    }
+    toks <- c(if (!is.null(i_expr)) list(i_expr) else NULL, dots)
+    #if (length(toks) == 0L) {
+    #    if (!missing(i) || !missing(...)) {
+    #        return(x[0])
+    #    }
+    #    return(x)
+    #}
+    if (length(toks) == 1L && .is_call(toks[[1L]], "list")) {
+        toks <- as.list(toks[[1L]])[-1L]
+    }
+
+    n <- length(x)
+    nm <- names(x) %||% rep.int("", n)
+    env <- parent.frame()
+    keep_raw <- TRUE
+
+    # 2) special case: all tokens are logical -> concatenate, then index once
+    all_logical <- length(toks) > 1L && {
+        vals <- lapply(
+            toks,
+            FUN = function(e) try(suppressWarnings(eval(e, env)), silent = TRUE)
+        )
+        all(vapply(vals, is.logical, logical(1)))
+    }
+    pieces <- if (all_logical) {
+        lgl <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
+        list(.idx_bool(lgl, n, keep_raw = keep_raw))
+    } else {
+        unlist(
+            lapply(
+                toks, FUN = .token_to_piece,
+                nm = nm, n = n, env = env, keep_raw = keep_raw
+            ),
+            recursive = FALSE
+        )
+    }
+
+    # 3) get combine indices and defer to peek_at
+    indices <- .combine_pieces(pieces, n, keep_raw)
+    #pos <- indices$pos
+    pos <- indices$raw_tokens
+    #browser()
+
+    lenv <- length(value)
+    leni <- length(pos)
     if (leni < lenv || leni %% lenv != 0)
         warning("number of items to replace (", leni,
                 ") is not a multiple of replacement length (", lenv, ")")
 
-    value = rep(value, length.out = length(i))
-    ref_replace_at(x, i, value, .add = TRUE)
+    value <- rep(value, length.out = length(pos))
+    ref_replace_at(x, pos, value, .add = TRUE)
 }
 
 #' @name ContainerS3
