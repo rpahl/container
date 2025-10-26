@@ -334,14 +334,13 @@ NULL
 
     # 3) get combine indices and defer to peek_at
     indices <- .combine_pieces(pieces, n, keep_raw)
-    if (identical(indices$mode, "negative")) {
-        out <- x[indices$pos]
-    } else if (keep_raw) {
+
+    out <- if (keep_raw) {
         args <- c(list(x), indices$raw_tokens)
         args[[".default"]] <- .default
-        out <- do.call(peek_at, args)
+        do.call(peek_at, args)
     } else {
-        out <- peek_at(x, indices$pos)
+        peek_at(x, indices$pos)
     }
 
     class(out) <- class(x)
