@@ -187,6 +187,62 @@
 }
 
 
+# Internal helper to compute positional indices from NSE tokens
+# Returns a list either of the form list(mode = "positive", pos = <int>)
+# or, when keep_raw = TRUE and all tokens are non-negative, list(mode = "positive", raw_tokens = <list>)
+# or for pure negative indexing, list(mode = "negative", pos = <int>) where pos are indices to keep
+
+.get_pos_indices <- function(x, i, ..., keep_raw = FALSE, .env = parent.frame(), .toks = NULL) {
+    # Prefer tokens captured by the caller to preserve NSE semantics reliably
+    if (is.null(.toks)) {
+        # Fallback: reconstruct tokens locally (may lose some NSE fidelity)
+        i_expr <- if (missing(i)) NULL else substitute(i)
+        dots <- as.list(substitute(list(...)))[-1L]
+        if (length(dots) > 0L) {
+            nms <- names(dots)
+            if (!is.null(nms)) dots <- dots[is.na(nms) | nms == ""]
+        }
+        toks <- c(if (!is.null(i_expr)) list(i_expr) else NULL, dots)
+        if (length(toks) == 1L && .is_call(toks[[1L]], "list")) {
+            toks <- as.list(toks[[1L]])[-1L]
+        }
+    } else {
+        toks <- .toks
+    }
+
+    n <- length(x)
+    nm <- names(x) %||% rep.int("", n)
+    env <- .env
+
+    # Special case: all tokens are logical -> concatenate, then index once
+    all_logical <- length(toks) > 1L && {
+        vals <- lapply(
+            toks,
+            FUN = function(e) try(suppressWarnings(eval(e, env)), silent = TRUE)
+        )
+        all(vapply(vals, is.logical, logical(1)))
+    }
+
+    pieces <- if (length(toks) == 0L) {
+        # No tokens -> default to empty positive selection
+        list(list(mode = "positive", pos = integer(), raw = NULL))
+    } else if (all_logical) {
+        lgl <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
+        list(.idx_bool(lgl, n, keep_raw = keep_raw))
+    } else {
+        unlist(
+            lapply(
+                toks, FUN = .token_to_piece,
+                nm = nm, n = n, env = env, keep_raw = keep_raw
+            ),
+            recursive = FALSE
+        )
+    }
+
+    .combine_pieces(pieces, n, keep_raw)
+}
+
+
 #' Extract Parts of a Container
 #'
 #' @description
@@ -306,34 +362,11 @@ NULL
         toks <- as.list(toks[[1L]])[-1L]
     }
 
-    n <- length(x)
-    nm <- names(x) %||% rep.int("", n)
     env <- parent.frame()
     keep_raw <- !is.null(.default)
 
-    # 2) special case: all tokens are logical -> concatenate, then index once
-    all_logical <- length(toks) > 1L && {
-        vals <- lapply(
-            toks,
-            FUN = function(e) try(suppressWarnings(eval(e, env)), silent = TRUE)
-        )
-        all(vapply(vals, is.logical, logical(1)))
-    }
-    pieces <- if (all_logical) {
-        lgl <- unlist(lapply(toks, function(e) eval(e, env)), use.names = FALSE)
-        list(.idx_bool(lgl, n, keep_raw = keep_raw))
-    } else {
-        unlist(
-            lapply(
-                toks, FUN = .token_to_piece,
-                nm = nm, n = n, env = env, keep_raw = keep_raw
-            ),
-            recursive = FALSE
-        )
-    }
-
-    # 3) get combine indices and defer to peek_at
-    indices <- .combine_pieces(pieces, n, keep_raw)
+    # 2-3) compute indices from tokens via helper, passing captured tokens
+    indices <- .get_pos_indices(x, keep_raw = keep_raw, .env = env, .toks = toks)
 
     out <- if (keep_raw) {
         args <- c(list(x), indices$raw_tokens)
