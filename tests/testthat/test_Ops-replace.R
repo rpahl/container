@@ -70,8 +70,38 @@ describe(
             ee(co, container(a = 1, b = 9, c = 3, d = 10))
         })
 
-        test_that("works with al indices",
+        test_that("works with logical indices",
         {
+            co <- container(a = 1, b = 2, c = 3, d = 4)
+            co[c(TRUE, FALSE, TRUE, FALSE)] <- c(9, 8)
+            ee(co, container(a = 9, b = 2, c = 8, d = 4))
+
+            mask <- c(TRUE, FALSE)
+            co <- container(a = 1, b = 2, c = 3, d = 4)
+            co[mask] <- 5
+            ee(co, container(a = 5, b = 2, c = 5, d = 4))
+        })
+
+        test_that("works with NSE alphanumeric ranges",
+        {
+            co <- container(a = 1, b = "bar")
+            co[a:b] <- 3:4
+            ee(co, container(a = 3, b = 4))
+
+            co <- container(a = 1, 2, b = 3, d = 4)
+            co[a:2] <- 7:8
+            ee(co, container(a = 7, 8, b = 3, d = 4))
+
+            co <- container(a = 1, b = 2, c = 3, d = 4)
+            co[-(a:c)] <- 9
+            ee(co, container(a = 1, b = 2, c = 3, d = 9))
+        })
+
+        test_that("adds unknown character indices",
+        {
+            co <- container(a = 1, b = 2)
+            co["x"] <- 7
+            ee(co, container(a = 1, b = 2, x = 7))
         })
 
 
