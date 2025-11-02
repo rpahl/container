@@ -7,7 +7,7 @@
 \alias{$<-.Container}
 \title{Replace Parts of a Container}
 \usage{
-\method{[}{Container}(x, i) <- value
+\method{[}{Container}(x, i, ...) <- value
 
 \method{[[}{Container}(x, i) <- value
 
@@ -16,29 +16,37 @@
 \arguments{
 \item{x}{\code{Container} object in which to replace elements.}
 
-\item{i}{indices specifying elements to replace. Indices
-are \code{numeric} or \code{character} vectors or a \code{list} containing both.}
+\item{i, ...}{Indices specifying elements to replace. Indices may be numeric,
+character, logical, \code{NULL}, or empty. Logical vectors are recycled as needed.
+Negative integers and negative character tokens select the complement (i.e.,
+drop-by-position or drop-by-name) and the resulting kept positions are
+replaced. Range expressions such as \code{a:b}, \code{1:c}, or \code{d:2} are supported for
+convenience and are resolved in the calling environment (non-standard
+evaluation). Comma-separated indices and \code{list(...)} are accepted and behave
+like a single combined index.}
 
 \item{value}{the replacing value of \code{ANY} type}
 
 \item{name}{\code{character} string (possibly backtick quoted)}
 }
 \description{
-Replace parts of a \code{Container} object similar
-to R's base replace operators on lists.
+Replace parts of a \code{Container} object similar to R's base list
+replacement operators, with extended indexing options matching extraction.
 }
 \details{
-\verb{[<-} replaces multiple values. The indices can be \code{numeric} or
-\code{character} or both. They can be passed as a \code{vector} or \code{list}. Values can
-be added by 'replacing' at new indices, which only works for \code{character}
-indices.
-
-\verb{[[<-} replaces a single value at a given \code{numeric} or \code{character} index.
-Instead of an index, it is also possible to replace certain elements by
-passing the element in curly braces (see Examples), that is, the object is
-searched for the element and then the element is replaced by the value.
-
-\verb{$<-} replaces a single element at a given name.
+\itemize{
+\item \verb{[<-} replaces multiple values. Indices can be numeric, character, logical,
+or a list combining them, including NSE ranges as in extraction. Unknown
+character indices add new elements (equivalent to \code{.add = TRUE}). Numeric
+indices must be within bounds and will error if out of range. Using an empty
+index \code{x[] <- v} targets all positions. Zero-length selections (e.g.,
+\code{integer(0)}) perform no replacement.
+\item \verb{[[<-} replaces a single value at a given numeric or character index. Instead
+of an index, it is also possible to replace certain elements by passing the
+element in curly braces (see Examples), that is, the object is searched for
+the element and then the element is replaced by the value.
+\item \verb{$<-} replaces a single element at a given name.
+}
 }
 \examples{
 co = container(a = 1, b = "bar")
