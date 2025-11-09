@@ -128,6 +128,15 @@ co[1:2] <- 0
 co
 ```
 
+Note that assigning `NULL` does *not* remove the element, but just replaces its value with `NULL`.
+
+```{r}
+co[["A"]] <- NULL
+
+co
+
+```
+
 In contrast to base `list`, containers can take a mix of numeric and character
 indices.
 
@@ -148,7 +157,7 @@ co
 This works for any data type.
 
 ```{r}
-co[[{co2}]] <- 3
+co[[{co2}]] <- 4
 
 co
 ```
@@ -161,7 +170,8 @@ co
 The following standard access operators as known from base R can be applied.
 
 ```{r}
-co[["A"]]
+co <- container(a = 1, b = "b", c = 3, d = "d")
+co[["a"]]
 
 co[[1]]
 
@@ -178,14 +188,14 @@ co[-(1:3)]
 ```
 
 Due to {container} object under the hood being an environment, the `$` operator
-is not supported for extraction (it just usually yields `NULL`). As a workaround,
-you can always transform to a list first.
+is not supported for extraction (it usually just yields `NULL`). As a workaround,
+you could transform to a list first.
 
 ```{r}
-co$A
+co$a
 
 li <- as.list(co)
-li$A
+li$a
 ```
 
 
@@ -202,36 +212,48 @@ co[1, 3, 4]
 
 co[TRUE, FALSE]
 
-co["c", "b", "A"]
+co["c", "b", "a"]
 ```
 
-Second, indices can be mixed, in a list or again as separate arguments.
+Second, indices can be mixed, in a list or, again, as separate arguments.
 
 ```{r}
 co[list(1, "b", 4)]
 
 co[1, "b", 4]
-
-co[TRUE, FALSE, 3:4]
 ```
 
 
-In addition, non-standard evaluation was added in version 1.1.0, which allows
-easy range selection using numbers, unquoted names or both.
+##### Extract and replace ranges (since version 1.1.0)
+
+Since version 1.1.0, non-standard evaluation of indices is available, which allows
+easy definitions of ranges using numbers, unquoted names or both.
 
 ```{r}
-co[A:c]
+co[a:c]
 
-co[2:co2]
+co[2:d]
 
 co[-(b:c)]
 
-co[-c("A", "co2")]
+co[-c("a", "d")]
+```
+
+This also works for replacement operations.
+
+```{r}
+# Replace by NSE name range
+co[a:c] <- 0
+co
+
+# Replace complement via negative NSE range
+co[-(a:b)] <- 5:6
+co
 ```
 
 **Warning:** range expressions as shown above are truly intended for
 interactive use, where the result can be easily inspected and
-corrected by the user. They should *not* be used in serious programming,
+corrected by the user. They should *not* be used in serious programming
 where explicit indices are preferred to avoid unexpected results.
 
 ##### Default values
@@ -239,6 +261,8 @@ where explicit indices are preferred to avoid unexpected results.
 Invalid indices don't produce `NULL`s but are just ignored.
 
 ```{r}
+co <- container(a = 1, b = "b", c = 3, d = "d")
+
 co[0:10]
 
 co[1, "foo", "c", "bar"]
@@ -261,9 +285,10 @@ co[1, "foo", "c", "bar", .default = 1:3]
 Count the number of elements.
 
 ```{r}
+co <- container(a = 1, b = "foo", c = 1, d = "foo")
 count(co, 1)
 
-count(co, 3)
+count(co, "foo")
 ```
 
 
