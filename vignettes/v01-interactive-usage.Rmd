@@ -34,7 +34,7 @@ old <- options(width = 100L)
 
 ## Interactive usage
 
-In an interactive R session a container can be used similar to a base
+In an interactive R session a {container} can be used similar to a base
 R `list`, but also provides some extra features.
 For easier typing it's recommended to use the shorter `cont`.
 
@@ -43,7 +43,7 @@ library(container)
 co <- cont(a = 1, b = 1:10)  # same as co = container(a = 1, b = 1:10)
 ```
 
-The container print method is designed to be very compact.
+The {container} print method is designed to be very compact.
 
 ```{r}
 print(co)
@@ -73,7 +73,7 @@ names(co)[1] <- "A"
 co
 ```
 
-A container can also be constructed from a list.
+A {container} object can also be constructed from a list.
 
 ```{r}
 l <- list(x = (1:2)^1, y = (1:2)^2)
@@ -109,7 +109,7 @@ co[["co2"]] <- co2
 co
 ```
 
-In contrast to base R `list`, elements cannot be added via positional index
+In contrast to base R `list`, elements *cannot* be added via positional index
 if it exceeds the container's length.
 
 ```{r, error = TRUE}
@@ -126,6 +126,15 @@ co[[3]] <- 0
 co[1:2] <- 0
 
 co
+```
+
+Note that assigning `NULL` does *not* remove the element, but just replaces its value with `NULL`.
+
+```{r}
+co[["A"]] <- NULL
+
+co
+
 ```
 
 In contrast to base `list`, containers can take a mix of numeric and character
@@ -148,7 +157,7 @@ co
 This works for any data type.
 
 ```{r}
-co[[{co2}]] <- 3
+co[[{co2}]] <- 4
 
 co
 ```
@@ -156,63 +165,130 @@ co
 
 ### Extract
 
-The following standard access operators can be applied.
+#### Basic extraction
+
+The following standard access operators as known from base R can be applied.
 
 ```{r}
-co[["A"]]
+co <- container(a = 1, b = "b", c = 3, d = "d")
+co[["a"]]
 
 co[[1]]
 
 co[1:3]
 ```
 
-At this point, neither the `$` operator nor negative indices^[Negative indexing support
-is planned for the next version.] are supported.
-They just give empty results.
+
+Negative indices (since version 1.1.0) also work as expected.
 
 ```{r}
-co$A
-
 co[-1]
+
+co[-(1:3)]
 ```
 
-For now, a workaround for negative indexing is to temporarily convert to a list.
+Due to {container} object under the hood being an environment, the `$` operator
+is not supported for extraction (it usually just yields `NULL`). As a workaround,
+you could transform to a list first.
 
 ```{r}
-tmp <- as.list(co)
+co$a
 
-as.container(tmp[-1])
+li <- as.list(co)
+li$a
 ```
 
 
-As another option, you can pass any number of indices, possibly mixed as numeric
-and character.
+#### More extraction features
+
+The {container} package introduces a variety of additional extraction capabilities
+to make working with containers in interactive sessions even more user-friendly.
+
+First of all, multiple indices can be provided as separate arguments, that is,
+without having to wrap them in `c()`.
 
 ```{r}
-co[1, 3, "b"]
+co[1, 3, 4]
 
-co[2:1, "A"]
+co[TRUE, FALSE]
+
+co["c", "b", "a"]
 ```
+
+Second, indices can be mixed, in a list or, again, as separate arguments.
+
+```{r}
+co[list(1, "b", 4)]
+
+co[1, "b", 4]
+```
+
+
+##### Extract and replace ranges (since version 1.1.0)
+
+Since version 1.1.0, non-standard evaluation of indices is available, which allows
+easy definitions of ranges using numbers, unquoted names or both.
+
+```{r}
+co[a:c]
+
+co[2:d]
+
+co[-(b:c)]
+
+co[-c("a", "d")]
+```
+
+This also works for replacement operations.
+
+```{r}
+# Replace by NSE name range
+co[a:c] <- 0
+co
+
+# Replace complement via negative NSE range
+co[-(a:b)] <- 5:6
+co
+```
+
+**Warning:** range expressions as shown above are truly intended for
+interactive use, where the result can be easily inspected and
+corrected by the user. They should *not* be used in serious programming
+where explicit indices are preferred to avoid unexpected results.
+
+##### Default values
 
 Invalid indices don't produce `NULL`s but are just ignored.
 
 ```{r}
-co[1:33]
+co <- container(a = 1, b = "b", c = 3, d = "d")
 
-co[3:33]
+co[0:10]
 
-co[10:20]
+co[1, "foo", "c", "bar"]
 ```
 
+It is possible to provide a custom default value for unknown indices.
 
-### Inspect
+```{r}
+co[0:10, .default = 0]
+
+co[1, "foo", "c", "bar", .default = NA]
+
+co[1, "foo", "c", "bar", .default = "ups"]
+
+co[1, "foo", "c", "bar", .default = 1:3]
+```
+
+### Element inspection
 
 Count the number of elements.
 
 ```{r}
+co <- container(a = 1, b = "foo", c = 1, d = "foo")
 count(co, 1)
 
-count(co, 3)
+count(co, "foo")
 ```
 
 
@@ -225,7 +301,9 @@ the familiarity of base R list operations with additional features:
   via as.list() and str().
 * Flexible adding and replacing of elements, supporting mixed indices and
   preventing out-of-bounds additions.
-* Intuitive extraction using familiar operators, with safe handling of invalid indices.
+* Intuitive extraction using familiar operators as well as advanced features like
+  mixed indices, non-standard evaluation for range selection, and custom default
+  values for missing elements.
 
 Next, see vignette [Use container for code development](v02-code-development.html).
 

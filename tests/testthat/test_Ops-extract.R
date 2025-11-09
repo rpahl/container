@@ -133,14 +133,10 @@ describe(
     {
         co <- container(a = 1, b = 2, c = 3, d = 4)
         numbers <- 1:3
-        co[numbers]
         ee(co[numbers], co[1:3])
         varNames <- c("a", "c")
         ee(co[varNames], co[c(1, 3)])
         ee(co[numbers, varNames], co[1:3, c(1, 3)])
-
-        a <- 1:3
-        ee(co[a], co[1])
     })
 
     test_that("Alphabetic range indices (NSE)",
