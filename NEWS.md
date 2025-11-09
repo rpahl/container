@@ -26,41 +26,20 @@
   * Generic `%in%` operator added (#36).
   * Option for shallow copy when converting container to list.
 
+## Fixes
+
+* Allow setting names for initially unnamed containers.
+
 ## Internal / documentation
 
 * Refactored extract indexing into internal helper `.get_pos_indices` and reused it
   for replace to ensure consistent semantics.
 * Reworked and expanded tests; migrated legacy tests to testthat; improved docs and vignettes
   (interactive usage and replacement examples).
+* Renamed vignettes for CRAN ordering (#33); updated README and vignettes (#30).
+* Added News menu (this Changelog) to the package site and links to other packages via R universe.
+* Clarified OpsReplace documentation (indexing options, NULL assignment, NSE alphanumeric ranges).
 
-
-# container 1.0.5.9003
-
-* update vignette for interactive usage with added extract functionalities
-* test: enhance tests for Container replacement operations
-* test: enhance tests for logical indices and NSE alphanumeric ranges in Ops-replace
-* docs: update documentation for OpsReplace to clarify indexing options and usage
-* docs: enhance interactive usage vignette with additional examples for NULL assignment and non-standard evaluation
-
-
-# container 1.0.5.9002
-
-- Same as previous version.
-
-
-
-# container 1.0.5.9000
-
-## Fixes
-
-* allow setting names of initially unnamed containers
-
-## Documentation
-
-* rename vignettes to have desired order at CRAN (#33)
-* update README and vignettes (#30)
-* add News menu including this Changelog to package site
-* link to other packges via [my R universe](https://rpahl.r-universe.dev/packages)
 
 # container 1.0.5
 
