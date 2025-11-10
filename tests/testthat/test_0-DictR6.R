@@ -1,4 +1,3 @@
-
 describe("initialize",
 {
     d <- Dict$new()
@@ -354,38 +353,22 @@ describe("peek_at",
     it("can return a default value for non-existing index if index was
         a string or a named position",
     {
-        d$peek_at("z", default = "zvalue") |>
-            equals(Dict$new(z = "zvalue")) |>
-            expect_true()
+        expect_true(equals(d$peek_at("z", default = "zvalue"), Dict$new(z = "zvalue")))
 
-        d$peek_at(list("foo" = "z"), default = "zvalue") |>
-            equals(Dict$new(z = "zvalue")) |>
-            expect_true()
+        expect_true(equals(d$peek_at(list("foo" = "z"), default = "zvalue"), Dict$new(z = "zvalue")))
 
-        d$peek_at(list("foo" = 99), default = "zvalue") |>
-            equals(Dict$new(foo = "zvalue")) |>
-            expect_true()
+        expect_true(equals(d$peek_at(list("foo" = 99), default = "zvalue"), Dict$new(foo = "zvalue")))
 
 
-        d$peek_at(list("s1" = "a", "s2" = "x", "s3" = 9), default = -1) |>
-            equals(Dict$new(a = 1, s3 = -1, x = -1)) |>
-            expect_true()
+        expect_true(equals(d$peek_at(list("s1" = "a", "s2" = "x", "s3" = 9), default = -1), Dict$new(a = 1, s3 = -1, x = -1)))
 
-        d$peek_at(list(s1 = "a", s2 = "x", s3 = NULL, s4 = 9), default = 0) |>
-            equals(Dict$new(a = 1, x = 0, s4 = 0)) |>
-            expect_true()
+        expect_true(equals(d$peek_at(list(s1 = "a", s2 = "x", s3 = NULL, s4 = 9), default = 0), Dict$new(a = 1, x = 0, s4 = 0)))
 
-        d$peek_at(c(s1 = "a", s2 = "x"), default = -1) |>
-            equals(Dict$new(a = 1, x = -1)) |>
-            expect_true()
+        expect_true(equals(d$peek_at(c(s1 = "a", s2 = "x"), default = -1), Dict$new(a = 1, x = -1)))
 
-        d$peek_at(c(s1 = 1, s2 = 2, s3 = 9), default = -1) |>
-            equals(Dict$new(s1.a = 1, s2.b = 3, s3 = -1)) |>
-            expect_true()
+        expect_true(equals(d$peek_at(c(s1 = 1, s2 = 2, s3 = 9), default = -1), Dict$new(s1.a = 1, s2.b = 3, s3 = -1)))
 
-        d$peek_at(c(s1 = "a", s2 = 2, s3 = 9), default = -1) |>
-            equals(Dict$new(a = 1, "2" = -1, "9" = -1)) |>
-            expect_true()
+        expect_true(equals(d$peek_at(c(s1 = "a", s2 = 2, s3 = 9), default = -1), Dict$new(a = 1, "2" = -1, "9" = -1)))
     })
 
     test_that("for non-string indices, default value will not work",
@@ -563,26 +546,20 @@ describe("replace",
     test_that("can replace elements by value",
     {
         d <- Dict$new(a = 1, b = 2)
-        d$replace(1, 3) |> equals(Dict$new(a = 3, b = 2)) |> expect_true()
+        expect_true(equals(d$replace(1, 3), Dict$new(a = 3, b = 2)))
 
         d <- Dict$new(a = 1, b = "1")
-        d$replace(1, 0) |> equals(Dict$new(a = 0, b = "1")) |> expect_true()
+        expect_true(equals(d$replace(1, 0), Dict$new(a = 0, b = "1")))
     })
 
     test_that("works with special elements of basic type",
     {
         d <- Dict$new(a = NULL, b = numeric(0), c = list())
-        d$replace(NULL, 0) |>
-            equals(Dict$new(a = 0, b = numeric(), c = list())) |>
-            expect_true()
+        expect_true(equals(d$replace(NULL, 0), Dict$new(a = 0, b = numeric(), c = list())))
 
-        d$replace(numeric(0), 0) |>
-            equals(Dict$new(a = 0, b = 0, c = list())) |>
-            expect_true()
+        expect_true(equals(d$replace(numeric(0), 0), Dict$new(a = 0, b = 0, c = list())))
 
-        d$replace(list(), 0) |>
-            equals(Dict$new(a = 0, b = 0, c = 0)) |>
-            expect_true()
+        expect_true(equals(d$replace(list(), 0), Dict$new(a = 0, b = 0, c = 0)))
     })
 
     test_that("works with non-atomic values",
@@ -591,17 +568,11 @@ describe("replace",
         d2 <- Dict$new(a = 2, b = "2")
         co <- Container$new(NULL)
         d <- Dict$new(d1 = d1, d2 = d2, co = co)
-        d$replace(d1, 1) |>
-            equals(Dict$new(d1 = 1, d2 = d2, co = co)) |>
-            expect_true()
+        expect_true(equals(d$replace(d1, 1), Dict$new(d1 = 1, d2 = d2, co = co)))
 
-        d$replace(d2, 2) |>
-            equals(Dict$new(d1 = 1, d2 = 2, co = co)) |>
-            expect_true()
+        expect_true(equals(d$replace(d2, 2), Dict$new(d1 = 1, d2 = 2, co = co)))
 
-        d$replace(co, 0) |>
-            equals(Dict$new(d1 = 1, d2 = 2, co = 0)) |>
-            expect_true()
+        expect_true(equals(d$replace(co, 0), Dict$new(d1 = 1, d2 = 2, co = 0)))
     })
 
     test_that("signals an error if element is not in Dict",
@@ -628,26 +599,20 @@ describe("replace_at",
     test_that("replaces value at given key or position",
     {
         d <- Dict$new(a = 1, b = 2)
-        d$replace_at("a", 0) |> equals(Dict$new(a = 0, b = 2)) |> expect_true()
-        d$replace_at(1, 9) |> equals(Dict$new(a = 9, b = 2)) |> expect_true()
-        d$replace_at("b", 0) |> equals(Dict$new(a = 9, b = 0)) |> expect_true()
-        d$replace_at(2, 9) |> equals(Dict$new(a = 9, b = 9)) |> expect_true()
+        expect_true(equals(d$replace_at("a", 0), Dict$new(a = 0, b = 2)))
+        expect_true(equals(d$replace_at(1, 9), Dict$new(a = 9, b = 2)))
+        expect_true(equals(d$replace_at("b", 0), Dict$new(a = 9, b = 0)))
+        expect_true(equals(d$replace_at(2, 9), Dict$new(a = 9, b = 9)))
     })
 
     test_that("can replace by special elements of basic type",
     {
         d <- Dict$new(a = NULL, b = numeric(0))
-        d$replace_at("a", integer()) |>
-            equals(Dict$new(a = integer(), b = numeric(0))) |>
-            expect_true()
+        expect_true(equals(d$replace_at("a", integer()), Dict$new(a = integer(), b = numeric(0))))
 
-        d$replace_at(1, list()) |>
-            equals(Dict$new(a = list(), b = numeric(0))) |>
-            expect_true()
+        expect_true(equals(d$replace_at(1, list()), Dict$new(a = list(), b = numeric(0))))
 
-        d$replace_at(2, NULL) |>
-            equals(Dict$new(a = list(), b = NULL)) |>
-            expect_true()
+        expect_true(equals(d$replace_at(2, NULL), Dict$new(a = list(), b = NULL)))
     })
 
     test_that("if add == TRUE element is always added",
@@ -746,20 +711,16 @@ describe("clone",
         d2 <- Dict$new(d1 = d1)
 
         dd <- d2$clone()
-        dd |> equals(Dict$new(d1 = Dict$new(a = 1))) |> expect_true()
+        expect_true(equals(dd, Dict$new(d1 = Dict$new(a = 1))))
 
         d1$add("b", 2)   # since it was not a deep clone, this will affect dd
-        dd |> equals(Dict$new(d1 = Dict$new(a = 1, b = 2))) |> expect_true()
+        expect_true(equals(dd, Dict$new(d1 = Dict$new(a = 1, b = 2))))
 
         dd.deep <- d2$clone(deep = TRUE)
         d1$add("c", 3)   # this again affects dd but not dd.deep
-        dd |>
-            equals(Dict$new(d1 = Dict$new(a = 1, b = 2, c = 3))) |>
-            expect_true()
+        expect_true(equals(dd, Dict$new(d1 = Dict$new(a = 1, b = 2, c = 3))))
 
-        dd.deep |>
-            equals(Dict$new(d1 = Dict$new(a = 1, b = 2))) |>
-            expect_true()
+        expect_true(equals(dd.deep, Dict$new(d1 = Dict$new(a = 1, b = 2))))
     })
 
     test_that("The deep copy works for double-nested dict",
@@ -769,12 +730,8 @@ describe("clone",
         d3 <- Dict$new(d2 = d2)
         ddd.deep <- d3$clone(deep = TRUE)
         d1$add("d", 4)
-        d3 |>
-            equals(Dict$new(d2 = Dict$new(d1 = Dict$new(a = 1, d = 4)))) |>
-            expect_true()
+        expect_true(equals(d3, Dict$new(d2 = Dict$new(d1 = Dict$new(a = 1, d = 4)))))
 
-        ddd.deep |>
-            equals(Dict$new(d2 = Dict$new(d1 = Dict$new(a = 1)))) |>
-            expect_true()
+        expect_true(equals(ddd.deep, Dict$new(d2 = Dict$new(d1 = Dict$new(a = 1)))))
     })
 })
