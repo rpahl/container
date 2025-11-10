@@ -85,7 +85,7 @@ add(d, x = 3)
 ```
 
 For more details see the reference documentation or have a look at
-the [Deque, Set, and Dict](articles/v05-deque-set-dict.html) vignette.
+the [Deque, Set, and Dict](v05-deque-set-dict.html) vignette.
 Lastly, note that the base append function also works with containers.
 
 ```{r}
