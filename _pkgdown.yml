@@ -101,6 +101,7 @@ reference:
     - "+.Container"
     - "<.Container"
     - "&.Dict"
+    - "ContainerS4"
 
   - title: "Depecated"
     desc: "Deprecated functions."
