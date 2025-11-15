@@ -1,4 +1,3 @@
-
 describe("dict",
 {
     d <- dict()
@@ -34,35 +33,33 @@ describe("as.dict",
     test_that("a dict is returned as is",
     {
         d <- dict(a = 1, b = 2)
-        as.dict(d) |> equals(d) |> expect_true()
+        expect_true(equals(as.dict(d), d))
     })
 
     test_that("converts atomic objects as expected",
     {
-        as.dict(NULL) |> equals(dict()) |> expect_true()
+        expect_true(equals(as.dict(NULL), dict()))
 
-        as.dict(numeric()) |> equals(dict()) |> expect_true()
-        as.dict(c(a = 1)) |> equals(dict(a = 1)) |> expect_true()
+        expect_true(equals(as.dict(numeric()), dict()))
+        expect_true(equals(as.dict(c(a = 1)), dict(a = 1)))
 
-        as.dict(character()) |> equals(dict()) |> expect_true()
-        as.dict(c(a = "foo")) |> equals(dict(a = "foo")) |> expect_true()
+        expect_true(equals(as.dict(character()), dict()))
+        expect_true(equals(as.dict(c(a = "foo")), dict(a = "foo")))
 
-        as.dict(logical()) |> equals(dict()) |> expect_true()
-        as.dict(c(a = TRUE)) |> equals(dict(a = TRUE)) |> expect_true()
+        expect_true(equals(as.dict(logical()), dict()))
+        expect_true(equals(as.dict(c(a = TRUE)), dict(a = TRUE)))
     })
 
     test_that("converts a list as expected",
     {
-        as.dict(list()) |> equals(dict()) |> expect_true()
-        as.dict(list(a = 1, b = "foo")) |>
-            equals(dict(a = 1, b = "foo")) |>
-            expect_true()
+        expect_true(equals(as.dict(list()), dict()))
+        expect_true(equals(as.dict(list(a = 1, b = "foo")), dict(a = 1, b = "foo")))
     })
 
     test_that("a data frame can be converted to a dict",
     {
         df <- data.frame(A = 1:2, B = 3:4)
-        as.dict(df) |> equals(dict(A = 1:2, B = 3:4)) |> expect_true()
+        expect_true(equals(as.dict(df), dict(A = 1:2, B = 3:4)))
     })
 
     test_that("a dict can be converted to a list",
@@ -75,7 +72,7 @@ describe("as.dict",
         "a set can be converted to a dict if elements are uniquely named",
     {
         s <- setnew(a = 1, b = 2)
-        as.dict(s) |> equals(dict(a = 1, b = 2)) |> expect_true()
+        expect_true(equals(as.dict(s), dict(a = 1, b = 2)))
 
         s <- setnew(a = 1, a = 2)
         expect_error(as.dict(s), "duplicated keys are not allowed")
@@ -139,13 +136,9 @@ describe("c.Dict",
             c(list(a = 1), list(b = 2, l = list(a = 3)))
         )
 
-        as.list(c(dict(a = 1), d = dict(b = 2, d = dict(a = 3)))) |>
-            equals(c(list(a = 1), d = list(b = 2, d = dict(a = 3)))) |>
-            expect_true()
+        expect_true(equals(as.list(c(dict(a = 1), d = dict(b = 2, d = dict(a = 3)))), c(list(a = 1), d = list(b = 2, d = dict(a = 3)))))
 
-        c(dict(a = 1), dict(x = 2, b = dict(a = 3))) |>
-            equals(dict(a = 1, x = 2, b = dict(a = 3))) |>
-            expect_true()
+        expect_true(equals(c(dict(a = 1), dict(x = 2, b = dict(a = 3))), dict(a = 1, x = 2, b = dict(a = 3))))
     })
 
     test_that(

@@ -11,7 +11,7 @@
 # Development scratch directories
 ^check$
 ^dev$
-^data-raw$             # If/when you add data preparation scripts
+^data-raw$
 ^tags$
 
 # CI / VCS / editor config
@@ -25,7 +25,7 @@
 ^README\.Rmd$
 ^_pkgdown\.yml$
 ^pkgdown$
-^docs$                 # If you publish pkgdown to docs/
+^docs$
 ^doc$
 
 # Repository meta docs (optional to exclude; safe to keep if you prefer)

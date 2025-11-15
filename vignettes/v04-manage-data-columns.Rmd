@@ -80,7 +80,7 @@ data %>%
     mutate(ID = 1:2, z = 1)
 ```
 
-For someone not familar with the [tidyverse](https://www.tidyverse.org/),
+For someone not familar with the [tidyverse](https://tidyverse.org/),
 this code block might read somewhat odd as the column is added and *not*
 mutated. To add a column via `dict.table` use `add`.
 
@@ -172,7 +172,7 @@ data %>%
 
 ### Remove
 
-A common [tidyverse](https://www.tidyverse.org/) approach to remove a
+A common [tidyverse](https://tidyverse.org/) approach to remove a
 column is based on the `select` function.
 One corresponding `dict.table`-function is `delete`.
 

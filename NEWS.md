@@ -1,32 +1,45 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# container 1.0.5.9003
+# container 1.1.0
 
-* update vignette for interactive usage with added extract functionalities
-* test: enhance tests for Container replacement operations
-* test: enhance tests for logical indices and NSE alphanumeric ranges in Ops-replace
-* docs: update documentation for OpsReplace to clarify indexing options and usage
-* docs: enhance interactive usage vignette with additional examples for NULL assignment and non-standard evaluation
+## New features
 
+* Extraction (`[.Container`):
+  * Non-standard evaluation (NSE) for ranges and mixed endpoints, e.g. `x[a:b]`,
+    `x[1:c]`, `x[d:2]`, and negative ranges like `x[-(a:c)]`.
+  * Multiple indices as separate arguments and `list(...)` sugar: `x[1, "a", 3:5]`,
+    `x[list(1, "a")]`.
+  * Logical indexing improvements with safe recycling and informative warnings when
+    the mask length doesn’t divide the container length; `NA` treated as `FALSE` with a warning.
+  * `.default` argument supported to fill unknown/out-of-bounds positive indices
+    and unknown names while preserving order and duplicates.
+  * `x[[TRUE]]` now aligns with base R to return the first element.
 
-# container 1.0.5.9002
+* Replacement (`[<-.Container`):
+  * Supports the same extended indexing options as extraction, including NSE ranges,
+    mixed indices, logical masks, and negative (complement) selection.
+  * `x[] <- v` targets all positions; zero-length selections perform no replacement.
+  * Adds unknown names when replacing via character indices; numeric indices must be in-bounds.
+  * Replacement length is recycled with a warning when not a multiple of the target length.
 
-- Same as previous version.
-
-
-
-# container 1.0.5.9000
+* Operators & utilities:
+  * Generic `%in%` operator added (#36).
+  * Option for shallow copy when converting container to list.
 
 ## Fixes
 
-* allow setting names of initially unnamed containers
+* Allow setting names for initially unnamed containers.
 
-## Documentation
+## Internal / documentation
 
-* rename vignettes to have desired order at CRAN (#33)
-* update README and vignettes (#30)
-* add News menu including this Changelog to package site
-* link to other packges via [my R universe](https://rpahl.r-universe.dev/packages)
+* Refactored extract indexing into internal helper `.get_pos_indices` and reused it
+  for replace to ensure consistent semantics.
+* Reworked and expanded tests; migrated legacy tests to testthat; improved docs and vignettes
+  (interactive usage and replacement examples).
+* Renamed vignettes for CRAN ordering (#33); updated README and vignettes (#30).
+* Added News menu (this Changelog) to the package site and links to other packages via R universe.
+* Clarified OpsReplace documentation (indexing options, NULL assignment, NSE alphanumeric ranges).
+
 
 # container 1.0.5
 
