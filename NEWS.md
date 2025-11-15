@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# container 1.1.0.9001
+
+* docs: update interactive usage guide - cleanup old artifacts
+* docs: update pkg site; include %in% operator in reference index
+
+
 # container 1.1.0.9000
 
 - Same as previous version.
