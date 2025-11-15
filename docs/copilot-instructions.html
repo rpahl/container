@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">container</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,6 +21,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-news"><li><h6 class="dropdown-header" data-toc-skip>Releases</h6></li>
+    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/r-some-blog/posts/2025-11-15-container-v1.1.0-on-cran/">Version 1.1.0</a></li>
     <li><a class="external-link dropdown-item" href="https://rpahl.github.io/r-some-blog/posts/container1.0/">Version 1.0.0</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="news/index.html">Changelog</a></li>
@@ -58,39 +59,38 @@
 
 <div class="section level2">
 <h2 id="goal">Goal<a class="anchor" aria-label="anchor" href="#goal"></a></h2>
-<p>Maintain passing CI (lint, R CMD check, unit tests). Automatically fix failing tests and re-run until green.</p>
+<p>Maintain passing CI (lint, unit tests, R CMD check). Automatically fix failing tests and re-run until green.</p>
 </div>
 <div class="section level2">
 <h2 id="stack">Stack<a class="anchor" aria-label="anchor" href="#stack"></a></h2>
-<p>R (≥4.2.2), Shiny, renv, testthat (edition 3), lintr, covr, GitHub Actions.</p>
+<p>R (≥4.2.2), Shiny, renv, testthat (edition 3), lintr, GitHub Actions.</p>
 </div>
 <div class="section level2">
-<h2 id="key-commands">Key Commands<a class="anchor" aria-label="anchor" href="#key-commands"></a></h2>
-<p>devtools::load_all() devtools::test() lintr::lint_package() rcmdcheck::rcmdcheck(args=‘–no-manual’, error_on=‘warning’)</p>
-</div>
+<h2 id="code-and-naming-conventions">Code and Naming Conventions<a class="anchor" aria-label="anchor" href="#code-and-naming-conventions"></a></h2>
+<ul><li>Use native pipe |&gt;, line length ≤80 and indent of 4 spaces.</li>
+<li>Ideally, the body of a function/module fits within 50 lines and should rarely exceed 100 lines. If it does, consider refactoring.</li>
+<li>Document all functions with roxygen2 headers. The header should end with an @noRd tag unless they are @export ed.</li>
+<li>Maintain file naming consistent with existing structure.</li>
+</ul></div>
 <div class="section level2">
 <h2 id="test-practices">Test Practices<a class="anchor" aria-label="anchor" href="#test-practices"></a></h2>
-<ul><li>Name tests: tests/testthat/test_<source srcset="NA">.R</source></li>
+<ul><li>Add tests for new logic immediately.</li>
+<li>Name tests: tests/testthat/test_<source srcset="NA">.R</source></li>
+<li>Individual files can be tested via devtools::test(filter = <source srcset="NA">.R).</source></li>
 <li>Use mockery for external deps.</li>
-<li>Parallel-safe code.</li>
-<li>Add tests for new logic immediately.</li>
-<li>If a test fails: inspect, patch code or test, re-run devtools::test().</li>
-</ul></div>
-<div class="section level2">
-<h2 id="conventions">Conventions<a class="anchor" aria-label="anchor" href="#conventions"></a></h2>
-<ul><li>Use native pipe <code>|&gt;</code>, line length ≤80 and indent of 4 spaces.</li>
-<li>Ideally (if feasible), the body of a function/module fits within 50 lines, but should rarely exceed 100 lines. If it does, consider refactoring.</li>
-<li>Document all functions (roxygen2) with @noRd tag unless they are exported.</li>
-<li>Maintain consistent mod_/utils_/app_ file naming.</li>
-</ul></div>
-<div class="section level2">
-<h2 id="full-check-what-green-ci-means">Full check (what “green CI” means)<a class="anchor" aria-label="anchor" href="#full-check-what-green-ci-means"></a></h2>
-<p>When working on an issue, before pushing commits you MUST:</p>
-<ol style="list-style-type: decimal"><li>Run <code><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lintr::lint_package()</a></code> and fix all lints.</li>
-<li>Run <code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code> until all tests pass.</li>
-<li>Run <code>rcmdcheck::rcmdcheck(args='--no-manual', error_on='warning')</code> and fix any problems.</li>
-</ol><p>We want: 0 R CMD check errors/warnings (notes preferably 0).</p>
-<p>Only push changes when all of the above three points succeed, unless you get stuck, in which case just push the best version.</p>
+<li>If a test fails: inspect, patch code or tests, and re-run devtools::test(filter = <source srcset="NA">.R).</source></li>
+</ul><div class="section level4">
+<h4 id="full-check--green-ci-pipeline">Full check (= “green CI pipeline”)<a class="anchor" aria-label="anchor" href="#full-check--green-ci-pipeline"></a></h4>
+<p>When working on an issue, <em>before</em> creating a Pull Request, you MUST follow these steps:</p>
+<ol style="list-style-type: decimal"><li>
+<code><a href="https://lintr.r-lib.org/reference/lint.html" class="external-link">lintr::lint_package()</a></code> — fix all lints.</li>
+<li>
+<code><a href="https://devtools.r-lib.org/reference/test.html" class="external-link">devtools::test()</a></code> — fix failing tests.</li>
+<li>
+<code>rcmdcheck::rcmdcheck(args='--no-manual', error_on='warning')</code> — fix all errors/warnings.</li>
+</ol><p>Target in step 3: <strong>0 errors / 0 warnings</strong> (notes preferably 0).</p>
+<p>If you are unable to fix all issues within <strong>45 minutes</strong>, commit your latest changes, then stop, and do <em>not</em> open a PR.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="commit-messages">Commit Messages<a class="anchor" aria-label="anchor" href="#commit-messages"></a></h2>
