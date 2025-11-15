@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">container</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-news">
 <li><h6 class="dropdown-header" data-toc-skip>Releases</h6></li>
+    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/r-some-blog/posts/2025-11-15-container-v1.1.0-on-cran/">Version 1.1.0</a></li>
     <li><a class="external-link dropdown-item" href="https://rpahl.github.io/r-some-blog/posts/container1.0/">Version 1.0.0</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="../news/index.html">Changelog</a></li>
@@ -342,7 +343,7 @@ reference we use <a href="https://CRAN.R-project.org/package=data.table" class="
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">bm</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="v04-manage-data-columns_files/figure-html/benchmark1-1.png" alt="Benchmark1" width="672"></p>
 <p>While <code>dict.table</code> and <code>data.table</code> performed
-nearly the same there is some distance to <code>dplyr</code> (about 3x).
+nearly the same there is some distance to <code>dplyr</code> (about 4x).
 Let’s examine each operation in more detail.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">=</span> <span class="va">cars</span></span>
