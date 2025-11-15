@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# container 1.1.0.9000
+
+- Same as previous version.
+
+
 # container 1.1.0
 
 ## New features
