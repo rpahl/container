@@ -110,6 +110,8 @@ reference:
 
 news:
   releases:
+  - text: "Version 1.1.0"
+    href: https://rpahl.github.io/r-some-blog/posts/2025-11-15-container-v1.1.0-on-cran/
   - text: "Version 1.0.0"
     href: https://rpahl.github.io/r-some-blog/posts/container1.0/
 
