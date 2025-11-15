@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Use container in interactive session • container</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -31,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">container</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,13 +97,13 @@
 <div class="section level2">
 <h2 id="interactive-usage">Interactive usage<a class="anchor" aria-label="anchor" href="#interactive-usage"></a>
 </h2>
-<p>In an interactive R session a container can be used similar to a base
-R <code>list</code>, but also provides some extra features. For easier
-typing it’s recommended to use the shorter <code>cont</code>.</p>
+<p>In an interactive R session a {container} can be used similar to a
+base R <code>list</code>, but also provides some extra features. For
+easier typing it’s recommended to use the shorter <code>cont</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpahl.github.io/container/" class="external-link">container</a></span><span class="op">)</span></span>
 <span><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">cont</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>  <span class="co"># same as co = container(a = 1, b = 1:10)</span></span></code></pre></div>
-<p>The container print method is designed to be very compact.</p>
+<p>The {container} print method is designed to be very compact.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span></span>
 <span><span class="co"># [a = 1, b = (1L 2L 3L 4L ...)]</span></span></code></pre></div>
@@ -135,7 +134,7 @@ typing it’s recommended to use the shorter <code>cont</code>.</p>
 <span></span>
 <span><span class="va">co</span></span>
 <span><span class="co"># [A = 1, b = (1L 2L 3L 4L ...)]</span></span></code></pre></div>
-<p>A container can also be constructed from a list.</p>
+<p>A {container} object can also be constructed from a list.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">1</span>, y <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">as.container</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span></span>
@@ -164,8 +163,8 @@ typing it’s recommended to use the shorter <code>cont</code>.</p>
 <span></span>
 <span><span class="va">co</span></span>
 <span><span class="co"># [A = 1, b = (1L 2L 3L 4L ...), c = 3, co2 = [x = (1 2), y = (1 4)]]</span></span></code></pre></div>
-<p>In contrast to base R <code>list</code>, elements cannot be added via
-positional index if it exceeds the container’s length.</p>
+<p>In contrast to base R <code>list</code>, elements <em>cannot</em> be
+added via positional index if it exceeds the container’s length.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="co"># Error: index out of range (length = 4): 5</span></span></code></pre></div>
@@ -180,85 +179,170 @@ positional index if it exceeds the container’s length.</p>
 <span></span>
 <span><span class="va">co</span></span>
 <span><span class="co"># [A = 0, b = 0, c = 0, co2 = [x = (1 2), y = (1 4)]]</span></span></code></pre></div>
+<p>Note that assigning <code>NULL</code> does <em>not</em> remove the
+element, but just replaces its value with <code>NULL</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="st">"A"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [A = NULL, b = 0, c = 0, co2 = [x = (1 2), y = (1 4)]]</span></span></code></pre></div>
 <p>In contrast to base <code>list</code>, containers can take a mix of
 numeric and character indices.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="fl">2</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="st">"three"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">co</span></span>
 <span><span class="co"># [A = 1, b = 2, c = "three", co2 = [x = (1 2), y = (1 4)]]</span></span></code></pre></div>
 <p>Another option is to replace <em>by value</em>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="st">"three"</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span></span>
 <span><span class="va">co</span></span>
 <span><span class="co"># [A = 1, b = 2, c = 3, co2 = [x = (1 2), y = (1 4)]]</span></span></code></pre></div>
 <p>This works for any data type.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">co2</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="op">{</span><span class="va">co2</span><span class="op">}</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span></span>
 <span></span>
 <span><span class="va">co</span></span>
-<span><span class="co"># [A = 1, b = 2, c = 3, co2 = 3]</span></span></code></pre></div>
+<span><span class="co"># [A = 1, b = 2, c = 3, co2 = 4]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="extract">Extract<a class="anchor" aria-label="anchor" href="#extract"></a>
 </h3>
-<p>The following standard access operators can be applied.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">co</span><span class="op">[[</span><span class="st">"A"</span><span class="op">]</span><span class="op">]</span></span>
+<div class="section level4">
+<h4 id="basic-extraction">Basic extraction<a class="anchor" aria-label="anchor" href="#basic-extraction"></a>
+</h4>
+<p>The following standard access operators as known from base R can be
+applied.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">container</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"b"</span>, c <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="st">"d"</span><span class="op">)</span></span>
+<span><span class="va">co</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co"># [1] 1</span></span>
 <span></span>
 <span><span class="va">co</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co"># [1] 1</span></span>
 <span></span>
 <span><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
-<span><span class="co"># [A = 1, b = 2, c = 3]</span></span></code></pre></div>
-<p>At this point, neither the <code>$</code> operator nor negative
-indices<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;Negative indexing support is planned for the next
-version.&lt;/p&gt;"><sup>1</sup></a>
-are supported. They just give empty results.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">co</span><span class="op">$</span><span class="va">A</span></span>
+<span><span class="co"># [a = 1, b = "b", c = 3]</span></span></code></pre></div>
+<p>Negative indices (since version 1.1.0) also work as expected.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co"># [b = "b", c = 3, d = "d"]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># [d = "d"]</span></span></code></pre></div>
+<p>Due to {container} object under the hood being an environment, the
+<code>$</code> operator is not supported for extraction (it usually just
+yields <code>NULL</code>). As a workaround, you could transform to a
+list first.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">$</span><span class="va">a</span></span>
 <span><span class="co"># NULL</span></span>
 <span></span>
-<span><span class="va">co</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
-<span><span class="co"># []</span></span></code></pre></div>
-<p>For now, a workaround for negative indexing is to temporarily convert
-to a list.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span></span>
+<span><span class="va">li</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">co</span><span class="op">)</span></span>
+<span><span class="va">li</span><span class="op">$</span><span class="va">a</span></span>
+<span><span class="co"># [1] 1</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="more-extraction-features">More extraction features<a class="anchor" aria-label="anchor" href="#more-extraction-features"></a>
+</h4>
+<p>The {container} package introduces a variety of additional extraction
+capabilities to make working with containers in interactive sessions
+even more user-friendly.</p>
+<p>First of all, multiple indices can be provided as separate arguments,
+that is, without having to wrap them in <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, c = 3, d = "d"]</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/ContainerS3.html">as.container</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co"># [b = 2, c = 3, co2 = 3]</span></span></code></pre></div>
-<p>As another option, you can pass any number of indices, possibly mixed
-as numeric and character.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="st">"b"</span><span class="op">]</span></span>
-<span><span class="co"># [A = 1, c = 3, b = 2]</span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, c = 3]</span></span>
 <span></span>
-<span><span class="va">co</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">1</span>, <span class="st">"A"</span><span class="op">]</span></span>
-<span><span class="co"># [b = 2, A = 1, A = 1]</span></span></code></pre></div>
+<span><span class="va">co</span><span class="op">[</span><span class="st">"c"</span>, <span class="st">"b"</span>, <span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co"># [c = 3, b = "b", a = 1]</span></span></code></pre></div>
+<p>Second, indices can be mixed, in a list or, again, as separate
+arguments.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"b"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, b = "b", d = "d"]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"b"</span>, <span class="fl">4</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, b = "b", d = "d"]</span></span></code></pre></div>
+<div class="section level5">
+<h5 id="extract-and-replace-ranges-since-version-1-1-0">Extract and replace ranges (since version 1.1.0)<a class="anchor" aria-label="anchor" href="#extract-and-replace-ranges-since-version-1-1-0"></a>
+</h5>
+<p>Since version 1.1.0, non-standard evaluation of indices is available,
+which allows easy definitions of ranges using numbers, unquoted names or
+both.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="va">a</span><span class="op">:</span><span class="va">c</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, b = "b", c = 3]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="va">d</span><span class="op">]</span></span>
+<span><span class="co"># [b = "b", c = 3, d = "d"]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="va">b</span><span class="op">:</span><span class="va">c</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, d = "d"]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"d"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># [b = "b", c = 3]</span></span></code></pre></div>
+<p>This also works for replacement operations.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Replace by NSE name range</span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="va">a</span><span class="op">:</span><span class="va">c</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [a = 0, b = 0, c = 0, d = "d"]</span></span>
+<span></span>
+<span><span class="co"># Replace complement via negative NSE range</span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="va">a</span><span class="op">:</span><span class="va">b</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">6</span></span>
+<span><span class="va">co</span></span>
+<span><span class="co"># [a = 0, b = 0, c = 5L, d = 6L]</span></span></code></pre></div>
+<p><strong>Warning:</strong> range expressions as shown above are truly
+intended for interactive use, where the result can be easily inspected
+and corrected by the user. They should <em>not</em> be used in serious
+programming where explicit indices are preferred to avoid unexpected
+results.</p>
+</div>
+<div class="section level5">
+<h5 id="default-values">Default values<a class="anchor" aria-label="anchor" href="#default-values"></a>
+</h5>
 <p>Invalid indices don’t produce <code>NULL</code>s but are just
 ignored.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span></span>
-<span><span class="co"># [A = 1, b = 2, c = 3, co2 = 3]</span></span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">cont</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"b"</span>, c <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="st">"d"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">co</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">33</span><span class="op">]</span></span>
-<span><span class="co"># [c = 3, co2 = 3]</span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, b = "b", c = 3, d = "d"]</span></span>
 <span></span>
-<span><span class="va">co</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span></span>
-<span><span class="co"># []</span></span></code></pre></div>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"foo"</span>, <span class="st">"c"</span>, <span class="st">"bar"</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, c = 3]</span></span></code></pre></div>
+<p>It is possible to provide a custom default value for unknown
+indices.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">10</span>, .default <span class="op">=</span> <span class="fl">0</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, b = "b", c = 3, d = "d", 0, 0, 0, 0, 0, 0]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"foo"</span>, <span class="st">"c"</span>, <span class="st">"bar"</span>, .default <span class="op">=</span> <span class="cn">NA</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, foo = NA, c = 3, bar = NA]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"foo"</span>, <span class="st">"c"</span>, <span class="st">"bar"</span>, .default <span class="op">=</span> <span class="st">"ups"</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, foo = "ups", c = 3, bar = "ups"]</span></span>
+<span></span>
+<span><span class="va">co</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"foo"</span>, <span class="st">"c"</span>, <span class="st">"bar"</span>, .default <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co"># [a = 1, foo = (1L 2L 3L), c = 3, bar = (1L 2L 3L)]</span></span></code></pre></div>
+</div>
+</div>
 </div>
 <div class="section level3">
-<h3 id="inspect">Inspect<a class="anchor" aria-label="anchor" href="#inspect"></a>
+<h3 id="element-inspection">Element inspection<a class="anchor" aria-label="anchor" href="#element-inspection"></a>
 </h3>
 <p>Count the number of elements.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co"># [1] 1</span></span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">co</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ContainerS3.html">cont</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"foo"</span>, c <span class="op">=</span> <span class="fl">1</span>, d <span class="op">=</span> <span class="st">"foo"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co"># [1] 2</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">co</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/count.html">count</a></span><span class="op">(</span><span class="va">co</span>, <span class="st">"foo"</span><span class="op">)</span></span>
 <span><span class="co"># [1] 2</span></span></code></pre></div>
 </div>
 </div>
@@ -273,13 +357,13 @@ additional features:</p>
 inspection via as.list() and str().</li>
 <li>Flexible adding and replacing of elements, supporting mixed indices
 and preventing out-of-bounds additions.</li>
-<li>Intuitive extraction using familiar operators, with safe handling of
-invalid indices.</li>
+<li>Intuitive extraction using familiar operators as well as advanced
+features like mixed indices, non-standard evaluation for range
+selection, and custom default values for missing elements.</li>
 </ul>
 <p>Next, see vignette <a href="v02-code-development.html">Use container
 for code development</a>.</p>
 </div>
-
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
@@ -291,7 +375,7 @@ for code development</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

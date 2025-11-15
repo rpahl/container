@@ -261,7 +261,7 @@ where explicit indices are preferred to avoid unexpected results.
 Invalid indices don't produce `NULL`s but are just ignored.
 
 ```{r}
-co <- container(a = 1, b = "b", c = 3, d = "d")
+co <- cont(a = 1, b = "b", c = 3, d = "d")
 
 co[0:10]
 
@@ -285,7 +285,7 @@ co[1, "foo", "c", "bar", .default = 1:3]
 Count the number of elements.
 
 ```{r}
-co <- container(a = 1, b = "foo", c = 1, d = "foo")
+co <- cont(a = 1, b = "foo", c = 1, d = "foo")
 count(co, 1)
 
 count(co, "foo")
