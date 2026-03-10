@@ -25,7 +25,7 @@
     TRUE
 }
 
-
+#' @method all.equal Container
 #' @export
 all.equal.Container = function(target, current, ...)
 {
