@@ -2215,7 +2215,7 @@
     },
     "later": {
       "Package": "later",
-      "Version": "1.4.4",
+      "Version": "1.4.8",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Utilities for Scheduling Functions to Execute Later with Event Loops",
@@ -2505,7 +2505,7 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.3.3",
+      "Version": "2.5.0",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Toolkit for Encryption, Signatures and Certificates Based on OpenSSL",
