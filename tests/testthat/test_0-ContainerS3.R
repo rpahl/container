@@ -397,6 +397,10 @@ describe(
             "  ..$ : num 1"
         )
 
+        # R-devel (4.7.0) now consistently puts a space after ":" (PR#18719)
+        out <- gsub(": ", ":", out)
+        expected_out <- gsub(": ", ":", expected_out)
+
         expect_equal(out, expected_out)
     })
 })
