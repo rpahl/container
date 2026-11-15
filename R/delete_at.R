@@ -15,7 +15,7 @@ ref_delete_at <- function(.x, ...) UseMethod("ref_delete_at")
 
 .has_valid_num_indices.Container <- function(.x, indices)
 {
-    bad_indices = setdiff(indices, seq_len(length(.x)))
+    bad_indices = setdiff(indices, seq_along(.x))
 
     allValid = length(bad_indices) == 0
     if (allValid)

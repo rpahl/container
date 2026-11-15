@@ -10,5 +10,6 @@ linters: linters_with_defaults(
     spaces_inside_linter = NULL,
     quotes_linter = NULL,
     object_usage_linter = NULL,
+    pipe_consistency_linter = pipe_consistency_linter(pipe = "auto"),
     line_length_linter = NULL
   )

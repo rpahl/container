@@ -57,7 +57,7 @@ ref_discard_at.Container <- function(.x, ...)
 
     # Transform all into numeric indices and start discarding from the end
     num_indices = unique(c(num_indices, match(char_indices, names(.x))))
-    valid_indices = intersect(num_indices, seq_len(length(.x)))
+    valid_indices = intersect(num_indices, seq_along(.x))
     lapply(sort(valid_indices, decreasing = TRUE), function(i) .x$discard_at(i))
 
     invisible(.x)
@@ -103,7 +103,7 @@ ref_discard_at.dict.table <- function(.x, ...)
 
     # Indices
     indices = as.integer(unlist(Filter(args, f = is.numeric)))
-    valid_indices = intersect(indices, seq_len(length(.x)))
+    valid_indices = intersect(indices, seq_along(.x))
     valid_names = names(.x)[valid_indices]
 
     # Names
