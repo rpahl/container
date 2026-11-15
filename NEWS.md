@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# container 1.1.1
+
+* Fix CRAN check failure on R-devel caused by the changed `str()` spacing (PR#18719).
+* Align man page filenames with roxygen2 output.
+
+
 # container 1.1.0.9003
 
 - Same as previous version.
